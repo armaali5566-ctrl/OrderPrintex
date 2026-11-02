@@ -1,0 +1,119 @@
+/* ==========================================================================
+   ORDERPRINTEX — Native CSS Animations & Keyframes
+   Strictly Native CSS — Zero external JS/CSS dependencies
+   ========================================================================== */
+
+/* Infinite Continuous Marquee */
+@keyframes marqueeRoll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Subtle Floating Badge */
+@keyframes floatBadge {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.floating-badge {
+  animation: floatBadge 4.5s ease-in-out infinite;
+}
+
+/* Pulse Glow for Dropzone Hover */
+@keyframes pulseBorder {
+  0% {
+    box-shadow: 0 0 0 0 rgba(185, 154, 97, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(185, 154, 97, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(185, 154, 97, 0);
+  }
+}
+
+.dropzone-container.dragover {
+  animation: pulseBorder 1.5s infinite;
+}
+
+/* Shimmer Highlight */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* IntersectionObserver Scroll Reveals */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.slide-up {
+  transform: translateY(32px);
+}
+
+.reveal.slide-left {
+  transform: translateX(36px);
+}
+
+.reveal.slide-right {
+  transform: translateX(-36px);
+}
+
+.reveal.scale-in {
+  transform: scale(0.94);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+/* Stagger delay helpers for cards */
+.stagger-1 { transition-delay: 0.08s; }
+.stagger-2 { transition-delay: 0.16s; }
+.stagger-3 { transition-delay: 0.24s; }
+.stagger-4 { transition-delay: 0.32s; }
+.stagger-5 { transition-delay: 0.40s; }
+
+/* Micro-interaction on card hover */
+.service-card, .product-card, .timeline-step {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+}
+
+/* Accessibility: Respect Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .floating-badge {
+    animation: none !important;
+  }
+}

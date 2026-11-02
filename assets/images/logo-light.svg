@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 52" width="260" height="52" fill="none">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="pGrad1Light" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#101B30" />
+      <stop offset="100%" stop-color="#1A2D50" />
+    </linearGradient>
+    <linearGradient id="pGrad2Light" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3159A6" />
+      <stop offset="100%" stop-color="#5584DB" />
+    </linearGradient>
+    <linearGradient id="pGradGoldLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B99A61" />
+      <stop offset="100%" stop-color="#8C6E38" />
+    </linearGradient>
+    <linearGradient id="pGradAccentLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A83E3C" />
+      <stop offset="100%" stop-color="#C94846" />
+    </linearGradient>
+  </defs>
+
+  <!-- P-Symbol (Precision Print Monogram) -->
+  <g transform="translate(6, 6)">
+    <!-- Base Layer: Print Spine / Vertical Roller -->
+    <rect x="0" y="2" width="8" height="36" rx="4" fill="url(#pGrad1Light)" />
+    
+    <!-- Secondary Offset Transfer Layer (DTF Film Sheer) -->
+    <path d="M6 6 C6 3.5 8.5 1 11.5 1 L24 1 C30.5 1 36 6.5 36 13 C36 19.5 30.5 25 24 25 L8 25" 
+          stroke="url(#pGrad2Light)" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.95" />
+    
+    <!-- Primary Transfer Loop (Top Coated Film) -->
+    <path d="M6 10 C6 7.8 8.2 6 10.5 6 L22 6 C26.4 6 30 9.6 30 14 C30 18.4 26.4 22 22 22 L8 22" 
+          stroke="url(#pGradGoldLight)" stroke-width="3.5" stroke-linecap="round" fill="none" />
+
+    <!-- Precision Registration Cross / Diamond -->
+    <path d="M19 11 L22 14 L19 17 L16 14 Z" fill="url(#pGradAccentLight)" />
+    <circle cx="19" cy="14" r="1" fill="#FFFFFF" />
+
+    <!-- Corner Print Alignment Tick -->
+    <line x1="33" y1="2" x2="37" y2="2" stroke="#B99A61" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <line x1="37" y1="2" x2="37" y2="6" stroke="#B99A61" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+  </g>
+
+  <!-- Wordmark: PRINTEX (Light Background Variation - Midnight Navy & Champagne Gold) -->
+  <g transform="translate(56, 12)">
+    <!-- Brand Name -->
+    <text x="0" y="22" 
+          font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Playfair Display', sans-serif" 
+          font-weight="900" 
+          font-size="24" 
+          letter-spacing="4" 
+          fill="#101B30">PRINTEX</text>
+    
+    <!-- Verified Sub-headline -->
+    <text x="1" y="34" 
+          font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+          font-weight="700" 
+          font-size="7.5" 
+          letter-spacing="2.8" 
+          fill="#B99A61">HIGH PRECISION TRANSFERS</text>
+  </g>
+</svg>

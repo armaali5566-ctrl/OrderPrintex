@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <defs>
+    <linearGradient id="symGradGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B99A61" />
+      <stop offset="100%" stop-color="#E2C78E" />
+    </linearGradient>
+    <linearGradient id="symGradBlue" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3159A6" />
+      <stop offset="100%" stop-color="#5584DB" />
+    </linearGradient>
+    <linearGradient id="symGradCrimson" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A83E3C" />
+      <stop offset="100%" stop-color="#E05B58" />
+    </linearGradient>
+  </defs>
+
+  <!-- Dark Base Rounded Background -->
+  <rect width="48" height="48" rx="10" fill="#101B30"/>
+  <rect x="0.5" y="0.5" width="47" height="47" rx="9.5" stroke="rgba(185, 154, 97, 0.4)" stroke-width="1"/>
+
+  <g transform="translate(6, 6)">
+    <!-- Base Layer: Print Spine / Vertical Roller -->
+    <rect x="0" y="2" width="7" height="32" rx="3.5" fill="url(#symGradGold)" />
+    
+    <!-- Secondary Offset Transfer Layer (DTF Film Sheer) -->
+    <path d="M5 5 C5 3 7 1 9.5 1 L21 1 C26.5 1 31 5.5 31 11 C31 16.5 26.5 21 21 21 L7 21" 
+          stroke="url(#symGradBlue)" stroke-width="4.5" stroke-linecap="round" fill="none" opacity="0.95" />
+    
+    <!-- Primary Transfer Loop (Top Coated Film) -->
+    <path d="M5 8 C5 6.2 7 4.5 9 4.5 L19 4.5 C22.6 4.5 25.5 7.4 25.5 11 C25.5 14.6 22.6 17.5 19 17.5 L7 17.5" 
+          stroke="url(#symGradGold)" stroke-width="3" stroke-linecap="round" fill="none" />
+
+    <!-- Precision Registration Cross / Diamond -->
+    <path d="M16 9 L18.5 11.5 L16 14 L13.5 11.5 Z" fill="url(#symGradCrimson)" />
+    <circle cx="16" cy="11.5" r="1" fill="#FFFFFF" />
+  </g>
+</svg>

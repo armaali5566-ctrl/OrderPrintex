@@ -1,0 +1,8 @@
+# Deny execution of PHP or executable scripts in uploads folder
+<FilesMatch "\.(php|php3|php4|php5|phtml|pl|py|cgi|sh|exe)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Disable directory browsing
+Options -Indexes

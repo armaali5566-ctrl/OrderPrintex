@@ -1,0 +1,19 @@
+# OrderPrintex Robots.txt
+# Optimized for Googlebot and standard web crawlers
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /account/
+Disallow: /api/
+Disallow: /uploads/artwork/
+Disallow: /uploads/proofs/
+Disallow: /test_*.php
+Disallow: /schema.sql
+Disallow: /*.sql$
+
+# Host
+Host: https://orderprintex.com
+
+# Sitemaps
+Sitemap: https://orderprintex.com/sitemap.xml
