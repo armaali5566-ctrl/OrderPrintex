@@ -134,30 +134,74 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'dtf-printing'");
 
             <div class="file-preview-area"></div>
 
-            <div style="background:var(--bg-surface-elevated); padding:1.25rem; border-radius:var(--radius-sm); margin-top:1.25rem; border:1px solid var(--border-color);">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-size:0.85rem; font-weight:700; color:var(--text-primary);">Calculated Print Footprint:</span>
-                <strong class="sq-inches-display text-navy" style="font-size:1.15rem; color:var(--primary-gold);">—</strong>
+            <!-- Interactive Live Calculated Gang Sheet Result Box -->
+            <div class="dtf-calc-result-box" style="background:#111111; border:1.5px solid #40351E; border-radius:10px; padding:1.25rem; margin-top:1.25rem;">
+              <div style="font-size:0.8rem; font-weight:800; color:#D4AF37; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.75rem;">
+                Estimated Print Summary
               </div>
-              <small style="color:var(--text-muted); display:block; margin-top:4px; font-size:0.78rem;">
-                Standard roll width is 22 inches printable. Specify total height/length in inches.
-              </small>
+
+              <div class="dtf-calc-metrics">
+                <div class="dtf-metric-item">
+                  <span class="dtf-metric-label">Total Area</span>
+                  <span class="dtf-metric-value" id="calcAreaDisplay">264 sq in (1.83 sq ft)</span>
+                </div>
+                <div class="dtf-metric-item">
+                  <span class="dtf-metric-label">Unit Rate</span>
+                  <span class="dtf-metric-value" id="calcUnitRateDisplay">₹249.00</span>
+                </div>
+                <div class="dtf-metric-item">
+                  <span class="dtf-metric-label">Wholesale Tier</span>
+                  <span class="dtf-metric-value" id="calcTierDisplay" style="color:#4ade80; font-size:1rem;">Standard</span>
+                </div>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; align-items:baseline; padding-top:0.75rem; border-top:1px dashed #40351E;">
+                <div>
+                  <span style="font-weight:700; color:#F5F1E8; font-size:1.05rem;">Estimated Total:</span>
+                  <div style="font-size:0.75rem; color:#B8B1A3;">(Estimated, incl. 18% GST)</div>
+                </div>
+                <div style="text-align:right;">
+                  <span class="dtf-metric-value highlight-gold" id="calcGrandTotalDisplay" style="font-size:1.6rem;">₹293.82</span>
+                </div>
+              </div>
+
+              <div style="background:rgba(212,175,55,0.08); border:1px solid #40351E; border-radius:6px; padding:0.6rem 0.85rem; margin-top:0.85rem; font-size:0.78rem; color:#FFD76A;">
+                ℹ <strong>Minimum Order:</strong> 1 Foot (12" linear length). All amounts are real estimates based on calibrated roll volume tiers.
+              </div>
             </div>
           </div>
 
           <div>
             <div class="form-grid">
               <div class="form-group">
-                <label class="form-label">Gang Sheet Width (Inches)</label>
-                <input type="number" step="0.1" name="width_inches" class="form-control" value="22" readonly>
+                <label class="form-label">Gang Sheet Width</label>
+                <select name="width_inches" id="calcWidthSelect" class="form-control" onchange="runDtfCalculation()">
+                  <option value="22" selected>22" Standard Industrial Roll</option>
+                  <option value="24">24" Ultra-Wide Commercial Roll</option>
+                </select>
               </div>
               <div class="form-group">
                 <label class="form-label">Length / Height (Inches) <span class="required">*</span></label>
-                <input type="number" step="0.1" name="height_inches" class="form-control" placeholder="e.g. 40 or 100" required>
+                <input type="number" step="1" name="height_inches" id="calcLengthInput" class="form-control" value="12" min="12" placeholder="Min. 12 inches" oninput="runDtfCalculation()" required>
+                <div style="display:flex; gap:0.4rem; margin-top:0.4rem;">
+                  <button type="button" class="btn btn-xs btn-outline" style="border-color:#40351E; color:#D4AF37; padding:2px 6px;" onclick="setDtfLength(12)">1 Ft (12")</button>
+                  <button type="button" class="btn btn-xs btn-outline" style="border-color:#40351E; color:#D4AF37; padding:2px 6px;" onclick="setDtfLength(24)">2 Ft (24")</button>
+                  <button type="button" class="btn btn-xs btn-outline" style="border-color:#40351E; color:#D4AF37; padding:2px 6px;" onclick="setDtfLength(39.37)">1m (39.4")</button>
+                  <button type="button" class="btn btn-xs btn-outline" style="border-color:#40351E; color:#D4AF37; padding:2px 6px;" onclick="setDtfLength(60)">5 Ft (60")</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Material / Film Grade</label>
+                <select name="film_material" id="calcMaterialSelect" class="form-control" onchange="runDtfCalculation()">
+                  <option value="cold_peel" data-extra="0" selected>Double-Matte Cold Peel PET (Standard)</option>
+                  <option value="hot_peel" data-extra="20">Hot Peel Instant Release Film (+₹20/ft)</option>
+                  <option value="reflective" data-extra="45">Reflective Silver DTF (+₹45/ft)</option>
+                  <option value="neon" data-extra="35">Fluorescent Neon CMYK+W (+₹35/ft)</option>
+                </select>
               </div>
               <div class="form-group">
                 <label class="form-label">Quantity (Rolls/Sheets) <span class="required">*</span></label>
-                <input type="number" name="quantity" class="form-control" value="1" min="1" required>
+                <input type="number" name="quantity" id="calcQtyInput" class="form-control" value="1" min="1" oninput="runDtfCalculation()" required>
               </div>
               <div class="form-group">
                 <label class="form-label">Your Name <span class="required">*</span></label>
@@ -188,6 +232,95 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'dtf-printing'");
           </div>
         </div>
       </form>
+    </div>
+  </div>
+</section>
+
+<script>
+function setDtfLength(inches) {
+  const input = document.getElementById('calcLengthInput');
+  if (input) {
+    input.value = inches;
+    runDtfCalculation();
+  }
+}
+
+function runDtfCalculation() {
+  const width = parseFloat(document.getElementById('calcWidthSelect')?.value) || 22;
+  const length = Math.max(12, parseFloat(document.getElementById('calcLengthInput')?.value) || 12);
+  const qty = Math.max(1, parseInt(document.getElementById('calcQtyInput')?.value, 10) || 1);
+  const matSelect = document.getElementById('calcMaterialSelect');
+  const matExtraPerFt = parseFloat(matSelect?.options[matSelect.selectedIndex]?.getAttribute('data-extra')) || 0;
+
+  // Real Area
+  const totalSqInches = width * length;
+  const totalSqFt = totalSqInches / 144;
+
+  // Linear Foot Count (min 1 foot)
+  const linearFeet = Math.max(1, length / 12);
+
+  // Base Pricing Rules directly from DTF database tiers:
+  // 1 ft = ₹249, 2 ft = ₹450, 1m (~3.28 ft) = ₹599, 5 ft = ₹1099
+  let ratePerFt = 249;
+  if (linearFeet >= 5) {
+    ratePerFt = 1099 / 5; // ~219.8 / ft
+  } else if (linearFeet >= 3.28) {
+    ratePerFt = 599 / 3.28; // ~182.6 / ft
+  } else if (linearFeet >= 2) {
+    ratePerFt = 450 / 2; // 225 / ft
+  } else {
+    ratePerFt = 249;
+  }
+
+  // Adjust for 24" roll (+9% area)
+  if (width > 22) {
+    ratePerFt = ratePerFt * (width / 22);
+  }
+
+  // Add material extra
+  ratePerFt += matExtraPerFt;
+
+  let unitBase = ratePerFt * linearFeet;
+
+  // Wholesale Quantity Tiers (from product_pricing_tiers):
+  // 1-4: 0%, 5-9: 8%, 10-24: 15%, 25+: 25%
+  let discountPct = 0;
+  let tierText = 'Standard (1-4)';
+  if (qty >= 25) {
+    discountPct = 25;
+    tierText = '25% Bulk Discount';
+  } else if (qty >= 10) {
+    discountPct = 15;
+    tierText = '15% Bulk Discount';
+  } else if (qty >= 5) {
+    discountPct = 8;
+    tierText = '8% Wholesale Discount';
+  }
+
+  const finalUnitPrice = unitBase * (1 - (discountPct / 100));
+  const subtotal = finalUnitPrice * qty;
+  const gst = subtotal * 0.18;
+  const grandTotal = subtotal + gst;
+
+  // Update DOM
+  const areaDisp = document.getElementById('calcAreaDisplay');
+  if (areaDisp) areaDisp.textContent = `${Math.round(totalSqInches)} sq in (${totalSqFt.toFixed(2)} sq ft)`;
+
+  const unitDisp = document.getElementById('calcUnitRateDisplay');
+  if (unitDisp) unitDisp.textContent = `₹${finalUnitPrice.toFixed(2)}`;
+
+  const tierDisp = document.getElementById('calcTierDisplay');
+  if (tierDisp) {
+    tierDisp.textContent = tierText;
+    tierDisp.style.color = discountPct > 0 ? '#4ade80' : '#FFD76A';
+  }
+
+  const grandDisp = document.getElementById('calcGrandTotalDisplay');
+  if (grandDisp) grandDisp.textContent = `₹${grandTotal.toFixed(2)}`;
+}
+
+document.addEventListener('DOMContentLoaded', runDtfCalculation);
+</script>
     </div>
   </div>
 </section>

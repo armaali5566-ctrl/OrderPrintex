@@ -164,10 +164,10 @@ $products = get_catalog_products();
     </div>
 
     <!-- Quick Wholesale Quote Banner -->
-    <div style="background:linear-gradient(135deg, var(--navy) 0%, #1e3a66 100%); border-radius:var(--radius-lg); padding:2.5rem; color:#FFFFFF; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem; box-shadow:0 8px 24px rgba(20,35,60,0.18);">
+    <div style="background:linear-gradient(135deg, #181818 0%, #221c1c 100%); border:1.5px solid #40351E; border-radius:12px; padding:2.5rem; color:#F5F1E8; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem; box-shadow:0 8px 24px rgba(0,0,0,0.85);">
       <div style="max-width:560px;">
-        <h3 style="color:#FFFFFF; font-size:1.5rem; font-weight:800; margin-bottom:0.5rem;">Need a Custom Corporate or Bulk Factory Quote?</h3>
-        <p style="margin:0; font-size:0.95rem; color:rgba(255,255,255,0.85); line-height:1.6;">
+        <h3 style="color:#FFD76A; font-size:1.5rem; font-weight:800; margin-bottom:0.5rem;">Need a Custom Corporate or Bulk Factory Quote?</h3>
+        <p style="margin:0; font-size:0.95rem; color:#B8B1A3; line-height:1.6;">
           Upload your print-ready vectors or talk to our prepress engineering desk in New Delhi for binding contract rates.
         </p>
       </div>

@@ -1217,7 +1217,7 @@ $products = db_fetch_all($sql, $params);
                 </td>
 
                 <td>
-                  <span style="font-weight:700; color:var(--navy); font-size:0.8rem; background:rgba(20,35,60,0.06); padding:3px 7px; border-radius:4px; letter-spacing:0.04em;">
+                  <span class="sku-badge">
                     <?= e($p['sku']) ?>
                   </span>
                 </td>

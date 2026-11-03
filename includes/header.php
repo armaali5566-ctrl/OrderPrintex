@@ -103,6 +103,6 @@ $canonical = $canonical ?? url($_SERVER['REQUEST_URI'] ?? '');
   }
   </script>
 </head>
-<body>
+<body<?= !empty($bodyClass) ? ' class="' . e($bodyClass) . '"' : '' ?>>
 <?php require __DIR__ . '/navbar.php'; ?>
 <div class="site-wrapper">

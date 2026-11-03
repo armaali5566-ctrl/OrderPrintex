@@ -35,14 +35,14 @@ $pageTitle = "My Account Dashboard | OrderPrintex";
 require_once __DIR__ . '/../includes/header.php';
 ?>
 
-<div style="background-color:#F8FAFC; padding:2.5rem 0; min-height:85vh;">
+<div style="background-color:#080808; padding:2.5rem 0; min-height:85vh;">
   <div class="container">
     <!-- Welcome Header -->
     <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem; margin-bottom:2.5rem;">
       <div>
-        <div class="section-label">Customer Portal</div>
-        <h1 style="font-size:2.2rem; color:var(--navy);">Welcome, <?= e($user['name']) ?></h1>
-        <p style="color:var(--slate); margin:0;">
+        <div class="section-label" style="color:#D4AF37;">Customer Portal</div>
+        <h1 style="font-size:2.2rem; color:#F5F1E8;">Welcome, <?= e($user['name']) ?></h1>
+        <p style="color:#B8B1A3; margin:0;">
           <?= e($user['company_name'] ? $user['company_name'] . ' &bull; ' : '') ?><?= e($user['email']) ?>
         </p>
       </div>
@@ -62,6 +62,7 @@ require_once __DIR__ . '/../includes/header.php';
       <a href="<?= account_url('enquiries') ?>" class="gallery-filter-btn">My Enquiries (<?= $totalEnquiries ?>)</a>
       <a href="<?= account_url('quotations') ?>" class="gallery-filter-btn">My Quotations (<?= $pendingQuotes ?> pending)</a>
       <a href="<?= account_url('orders') ?>" class="gallery-filter-btn">My Orders (<?= $activeOrders ?> active)</a>
+      <a href="<?= url('account/wishlist.php') ?>" class="gallery-filter-btn">My Wishlist</a>
       <a href="<?= account_url('profile') ?>" class="gallery-filter-btn">Settings</a>
     </div>
 
@@ -147,7 +148,7 @@ require_once __DIR__ . '/../includes/header.php';
                 <tr>
                   <td class="ref-cell"><?= e($ord['order_number']) ?></td>
                   <td><?= format_date($ord['created_at'], 'd M Y') ?></td>
-                  <td style="font-weight:700; color:var(--navy);"><?= format_currency($ord['total_amount']) ?></td>
+                  <td style="font-weight:700; color:#FFD76A; font-family:var(--font-mono);"><?= format_currency($ord['total_amount']) ?></td>
                   <td><?= get_status_badge($ord['payment_status']) ?></td>
                   <td><?= get_status_badge($ord['order_status']) ?></td>
                   <td>
@@ -200,7 +201,7 @@ require_once __DIR__ . '/../includes/header.php';
                 <tr>
                   <td class="ref-cell"><?= e($qt['quote_number']) ?></td>
                   <td><?= format_date($qt['created_at'], 'd M Y') ?></td>
-                  <td style="font-weight:700; color:var(--navy);"><?= format_currency($qt['grand_total']) ?></td>
+                  <td style="font-weight:700; color:#FFD76A; font-family:var(--font-mono);"><?= format_currency($qt['grand_total']) ?></td>
                   <td><?= get_status_badge($qt['status']) ?></td>
                   <td>
                     <?= $qt['valid_until'] ? 'Valid until ' . format_date($qt['valid_until'], 'd M Y') : '15 Days' ?>

@@ -145,22 +145,83 @@ document.addEventListener('DOMContentLoaded', function () {
       return div.innerHTML;
     }
 
-    // Dynamic Square Inches Calculation
-    function updateDimensions() {
-      if (!widthInput || !heightInput || !sqInchesDisplay) return;
-      const w = parseFloat(widthInput.value) || 0;
-      const h = parseFloat(heightInput.value) || 0;
-      if (w > 0 && h > 0) {
-        const sqInches = (w * h).toFixed(1);
-        sqInchesDisplay.textContent = `${sqInches} sq. in. (${w}" × ${h}")`;
-      } else {
-        sqInchesDisplay.textContent = '—';
+    // Dynamic Calculations: Square Inches & Estimated Price Range
+    const qtyInput = component.querySelector('input[name="quantity"]');
+    const serviceInput = component.querySelector('select[name="service_name"]');
+    const priceDisplay = component.querySelector('.price-range-display');
+
+    function updateCalculations() {
+      const w = parseFloat(widthInput ? widthInput.value : 0) || 0;
+      const h = parseFloat(heightInput ? heightInput.value : 0) || 0;
+      const qty = Math.max(1, parseInt(qtyInput ? qtyInput.value : 1, 10) || 1);
+      const svc = serviceInput ? serviceInput.value.toLowerCase() : '';
+
+      // Update sq inches display
+      if (sqInchesDisplay) {
+        if (w > 0 && h > 0) {
+          const sqInches = (w * h).toFixed(1);
+          sqInchesDisplay.textContent = `${sqInches} sq. in. (${w}" × ${h}")`;
+        } else {
+          sqInchesDisplay.textContent = '—';
+        }
+      }
+
+      // Update dynamic Estimated Price Range
+      if (priceDisplay) {
+        let baseLow = 249;
+        let baseHigh = 349;
+        const totalSqInches = (w > 0 && h > 0) ? (w * h) : 0;
+
+        if (svc.includes('uv')) {
+          // UV DTF Sticker / Decal Sheets
+          if (totalSqInches > 0) {
+            baseLow = Math.max(299, Math.round(totalSqInches * 0.14 * qty));
+            baseHigh = Math.max(399, Math.round(totalSqInches * 0.20 * qty));
+          } else {
+            baseLow = 349 * Math.min(qty, 3);
+            baseHigh = 449 * Math.min(qty, 3);
+          }
+        } else if (svc.includes('t-shirt') || svc.includes('tee') || svc.includes('apparel')) {
+          // Custom T-Shirts
+          baseLow = 389 * qty;
+          baseHigh = 549 * qty;
+        } else if (svc.includes('corporate') || svc.includes('gift')) {
+          // Corporate merchandise
+          baseLow = 450 * qty;
+          baseHigh = 850 * qty;
+        } else {
+          // DTF Printing / Gang Sheets (default)
+          if (totalSqInches > 0) {
+            baseLow = Math.max(199, Math.round(totalSqInches * 0.08 * qty));
+            baseHigh = Math.max(299, Math.round(totalSqInches * 0.12 * qty));
+          } else {
+            baseLow = 249 * Math.min(qty, 3);
+            baseHigh = 349 * Math.min(qty, 3);
+          }
+        }
+
+        // Apply wholesale tier discounting for higher quantities
+        if (qty >= 20) {
+          baseLow = Math.round(baseLow * 0.85);
+          baseHigh = Math.round(baseHigh * 0.85);
+        } else if (qty >= 10) {
+          baseLow = Math.round(baseLow * 0.90);
+          baseHigh = Math.round(baseHigh * 0.90);
+        }
+
+        priceDisplay.textContent = `₹${baseLow.toLocaleString('en-IN')} – ₹${baseHigh.toLocaleString('en-IN')}`;
       }
     }
 
-    if (widthInput && heightInput) {
-      widthInput.addEventListener('input', updateDimensions);
-      heightInput.addEventListener('input', updateDimensions);
+    if (widthInput) widthInput.addEventListener('input', updateCalculations);
+    if (heightInput) heightInput.addEventListener('input', updateCalculations);
+    if (qtyInput) {
+      qtyInput.addEventListener('input', updateCalculations);
+      qtyInput.addEventListener('change', updateCalculations);
     }
+    if (serviceInput) serviceInput.addEventListener('change', updateCalculations);
+
+    // Initial run
+    updateCalculations();
   });
 });

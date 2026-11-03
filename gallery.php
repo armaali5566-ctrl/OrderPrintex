@@ -251,8 +251,8 @@ $curatedGallery = [
           <a href="<?= url('get-quote.php') ?>" class="btn btn-primary" id="spotlightQuoteBtn">
             Request Similar Custom Print &rarr;
           </a>
-          <button type="button" class="btn btn-outline" style="border-color:var(--border-beige); color:var(--navy); background:var(--white);" onclick="openActiveModal()">
-            Inspect Fullscreen Lightbox ⛶
+          <button type="button" class="btn btn-outline" style="border-color:#40351E; color:#D4AF37; background:#181818;" onclick="openActiveModal()">
+            Inspect Fullscreen Lightbox &rarr;
           </button>
         </div>
       </div>
@@ -284,23 +284,23 @@ $curatedGallery = [
      FULL-SIZE IMAGE LIGHTBOX MODAL (Properly Centered, Styled, and Dismissible)
      ========================================================================= -->
 <div class="modal-backdrop" id="galleryModal" role="dialog" aria-modal="true" aria-labelledby="modalImageTitle" onclick="handleBackdropClick(event)">
-  <div class="modal-dialog" style="max-width:860px; background-color:var(--navy-dark); color:#fff; border-color:rgba(237,225,210,0.3); box-shadow:0 25px 60px rgba(0,0,0,0.7);">
-    <div class="modal-header" style="border-bottom-color:rgba(255,255,255,0.12); padding:1.25rem 1.75rem;">
+  <div class="modal-dialog" style="max-width:860px; background-color:#181818; color:#F5F1E8; border:1.5px solid #40351E; box-shadow:0 25px 60px rgba(0,0,0,0.9);">
+    <div class="modal-header" style="border-bottom:1px solid #40351E; padding:1.25rem 1.75rem;">
       <div>
-        <span id="modalImageCategory" style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; font-weight:700; color:var(--beige); display:block; margin-bottom:0.25rem;"></span>
-        <h3 class="modal-title" id="modalImageTitle" style="color:#FFFFFF; font-size:1.25rem; margin:0; font-weight:800;"></h3>
+        <span id="modalImageCategory" style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; font-weight:700; color:#D4AF37; display:block; margin-bottom:0.25rem;"></span>
+        <h3 class="modal-title" id="modalImageTitle" style="color:#F5F1E8; font-size:1.25rem; margin:0; font-weight:800;"></h3>
       </div>
-      <button type="button" class="modal-close" onclick="closeImageModal()" aria-label="Close modal">&times;</button>
+      <button type="button" class="modal-close" onclick="closeImageModal()" aria-label="Close modal" style="color:#D4AF37;">&times;</button>
     </div>
     <div class="modal-body" style="padding:1.5rem; text-align:center;">
-      <div style="max-height:550px; overflow:hidden; border-radius:var(--radius-sm); border:1px solid rgba(255,255,255,0.1); background:#070d18; display:flex; align-items:center; justify-content:center;">
+      <div style="max-height:550px; overflow:hidden; border-radius:8px; border:1px solid #40351E; background:#111111; display:flex; align-items:center; justify-content:center;">
         <img src="" id="modalImageSrc" alt="Full Preview" style="max-height:520px; width:auto; max-width:100%; margin:0 auto; object-fit:contain; display:block;">
       </div>
-      <p id="modalImageDesc" style="margin-top:1.25rem; color:rgba(237,225,210,0.9); font-size:0.925rem; max-width:700px; margin-left:auto; margin-right:auto; line-height:1.6;"></p>
+      <p id="modalImageDesc" style="margin-top:1.25rem; color:#B8B1A3; font-size:0.925rem; max-width:700px; margin-left:auto; margin-right:auto; line-height:1.6;"></p>
     </div>
-    <div class="modal-footer" style="background-color:rgba(0,0,0,0.4); border-top-color:rgba(255,255,255,0.1); padding:1rem 1.75rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.75rem;">
-      <a href="<?= url('get-quote.php') ?>" class="btn btn-primary btn-sm">Request Similar Custom Print</a>
-      <button type="button" class="btn btn-outline" style="border-color:rgba(255,255,255,0.25); color:#fff; font-size:0.85rem; padding:0.55rem 1.25rem;" onclick="closeImageModal()">Close Lightbox</button>
+    <div class="modal-footer" style="background-color:#111111; border-top:1px solid #40351E; padding:1rem 1.75rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.75rem;">
+      <a href="<?= url('get-quote/') ?>" class="btn btn-primary btn-sm">Request Similar Custom Print</a>
+      <button type="button" class="btn btn-outline" style="border-color:#40351E; color:#F5F1E8; font-size:0.85rem; padding:0.55rem 1.25rem;" onclick="closeImageModal()">Close Lightbox</button>
     </div>
   </div>
 </div>

@@ -24,13 +24,13 @@ $pageTitle = "My Production Orders & Tracking | OrderPrintex";
 require_once __DIR__ . '/../includes/header.php';
 ?>
 
-<div style="background-color:#F8FAFC; padding:2.5rem 0; min-height:85vh;">
+<div style="background-color:#080808; padding:2.5rem 0; min-height:85vh;">
   <div class="container">
     <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem; margin-bottom:2rem;">
       <div>
-        <div class="section-label">Production Tracker</div>
-        <h1 style="font-size:2.2rem; color:var(--navy);">My Production Orders</h1>
-        <p style="color:var(--slate); margin:0;">
+        <div class="section-label" style="color:#D4AF37;">Production Tracker</div>
+        <h1 style="font-size:2.2rem; color:#F5F1E8;">My Production Orders</h1>
+        <p style="color:#B8B1A3; margin:0;">
           Live status milestones, tracking numbers, and proof approval for approved production jobs.
         </p>
       </div>
@@ -77,7 +77,7 @@ require_once __DIR__ . '/../includes/header.php';
                   <td class="ref-cell"><?= e($ord['order_number']) ?></td>
                   <td><?= format_date($ord['created_at'], 'd M Y') ?></td>
                   <td><strong><?= e($ord['service_name'] ?: 'Custom Printing') ?></strong></td>
-                  <td style="font-weight:700; color:var(--navy); font-family:var(--font-mono);">
+                  <td style="font-weight:700; color:#FFD76A; font-family:var(--font-mono);">
                     <?= format_currency($ord['total_amount']) ?>
                   </td>
                   <td><?= get_status_badge($ord['payment_status']) ?></td>

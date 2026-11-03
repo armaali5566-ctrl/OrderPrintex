@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // Click handler: on mobile, prevents navigation and toggles dropdown.
       // On desktop, click also toggles the open state smoothly.
       toggle.addEventListener('click', function (e) {
-        const isMobile = window.innerWidth <= 992;
+        const isMobile = window.innerWidth <= 1120;
         if (isMobile) {
           e.preventDefault();
           const isOpen = item.classList.toggle('dropdown-open');
@@ -334,5 +334,227 @@ document.addEventListener('DOMContentLoaded', function () {
 
     setTheme(getTheme());
   })();
+
+  // ==============================================================
+  // 8. GLOBAL WISHLIST MANAGER (Phase 8)
+  // ==============================================================
+  window.toggleWishlist = async function(productId, btn) {
+    if (!productId) return;
+    productId = parseInt(productId, 10);
+
+    let wishlisted = false;
+    let saved = [];
+    try {
+      saved = JSON.parse(localStorage.getItem('orderprintex_wishlist') || '[]');
+    } catch(e) {}
+
+    if (saved.includes(productId)) {
+      saved = saved.filter(id => id !== productId);
+      wishlisted = false;
+    } else {
+      saved.push(productId);
+      wishlisted = true;
+    }
+    localStorage.setItem('orderprintex_wishlist', JSON.stringify(saved));
+
+    document.querySelectorAll(`.btn-wishlist[data-product-id="${productId}"], button[onclick*="toggleWishlist(${productId}"]`).forEach(b => {
+      b.classList.toggle('is-active', wishlisted);
+      b.setAttribute('data-wishlisted', wishlisted ? 'true' : 'false');
+    });
+
+    try {
+      const formData = new FormData();
+      formData.append('action', 'toggle');
+      formData.append('product_id', productId);
+      await fetch('/api/wishlist.php', { method: 'POST', body: formData });
+    } catch(e) {}
+
+    const wishItem = document.getElementById('wishItem_' + productId);
+    if (wishItem && !wishlisted) {
+      wishItem.remove();
+      const container = document.getElementById('wishlistContainer');
+      const emptyState = document.getElementById('wishlistEmptyState');
+      if (container && container.children.length === 0 && emptyState) {
+        emptyState.style.display = 'block';
+      }
+    }
+  };
+
+  try {
+    const saved = JSON.parse(localStorage.getItem('orderprintex_wishlist') || '[]');
+    saved.forEach(id => {
+      document.querySelectorAll(`.btn-wishlist[data-product-id="${id}"], button[onclick*="toggleWishlist(${id}"]`).forEach(b => {
+        b.classList.add('is-active');
+        b.setAttribute('data-wishlisted', 'true');
+      });
+    });
+  } catch(e) {}
+
+  // ==============================================================
+  // 9. PRODUCT COMPARISON MANAGER (Phase 5)
+  // ==============================================================
+  let compareList = [];
+  try {
+    compareList = JSON.parse(localStorage.getItem('orderprintex_compare') || '[]');
+  } catch(e) {}
+
+  window.toggleCompareProduct = function(productId, cb) {
+    productId = parseInt(productId, 10);
+    if (cb.checked) {
+      if (compareList.length >= 3) {
+        alert('You can compare a maximum of 3 products at a time.');
+        cb.checked = false;
+        return;
+      }
+      if (!compareList.includes(productId)) {
+        compareList.push(productId);
+      }
+    } else {
+      compareList = compareList.filter(id => id !== productId);
+    }
+    localStorage.setItem('orderprintex_compare', JSON.stringify(compareList));
+    renderCompareTray();
+  };
+
+  window.removeCompareItem = function(productId) {
+    compareList = compareList.filter(id => id !== productId);
+    localStorage.setItem('orderprintex_compare', JSON.stringify(compareList));
+    document.querySelectorAll(`.opx-compare-cb[data-product-id="${productId}"]`).forEach(cb => cb.checked = false);
+    renderCompareTray();
+    if (document.getElementById('compareModalBackdrop')?.classList.contains('is-active')) {
+      openCompareModal();
+    }
+  };
+
+  window.clearCompareList = function() {
+    compareList = [];
+    localStorage.setItem('orderprintex_compare', JSON.stringify([]));
+    document.querySelectorAll('.opx-compare-cb').forEach(cb => cb.checked = false);
+    renderCompareTray();
+    closeCompareModal();
+  };
+
+  function renderCompareTray() {
+    let tray = document.getElementById('compareFloatingTray');
+    if (!tray) {
+      tray = document.createElement('div');
+      tray.id = 'compareFloatingTray';
+      tray.className = 'compare-floating-tray';
+      document.body.appendChild(tray);
+    }
+
+    if (compareList.length === 0) {
+      tray.classList.remove('is-active');
+      return;
+    }
+
+    tray.innerHTML = `
+      <div style="display:flex; align-items:center; gap:0.75rem;">
+        <span style="font-size:0.85rem; font-weight:700; color:#FFD76A;">Compare (${compareList.length}/3)</span>
+        <button type="button" class="btn btn-primary btn-xs" onclick="openCompareModal()" style="padding:0.35rem 0.85rem;">View</button>
+        <button type="button" class="btn btn-outline btn-xs" onclick="clearCompareList()" style="border-color:#40351E; color:#B8B1A3; padding:0.35rem 0.65rem;">Clear</button>
+      </div>
+    `;
+    tray.classList.add('is-active');
+
+    document.querySelectorAll('.opx-compare-cb').forEach(cb => {
+      const pid = parseInt(cb.getAttribute('data-product-id'), 10);
+      cb.checked = compareList.includes(pid);
+    });
+  }
+
+  window.openCompareModal = async function() {
+    if (compareList.length === 0) return;
+    let modal = document.getElementById('compareModalBackdrop');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'compareModalBackdrop';
+      modal.className = 'compare-modal-backdrop';
+      modal.onclick = function(e) { if (e.target === modal) closeCompareModal(); };
+      document.body.appendChild(modal);
+    }
+
+    modal.innerHTML = `
+      <div class="compare-modal-box">
+        <div class="compare-modal-header">
+          <h3 style="margin:0; font-size:1.25rem; color:#FFD76A; font-weight:800;">Product Comparison (${compareList.length} Selected)</h3>
+          <button type="button" class="lightbox-btn" onclick="closeCompareModal()" style="position:static; width:36px; height:36px; font-size:1rem;">✕</button>
+        </div>
+        <div class="compare-modal-body" id="compareModalContent">
+          <div style="text-align:center; padding:3rem; color:#B8B1A3;">Loading product specifications...</div>
+        </div>
+      </div>
+    `;
+    modal.classList.add('is-active');
+    document.body.style.overflow = 'hidden';
+
+    try {
+      const res = await fetch('/api/compare_products.php?ids=' + compareList.join(','));
+      const data = await res.json();
+      if (data.success && data.products.length > 0) {
+        const prods = data.products;
+        const content = document.getElementById('compareModalContent');
+        content.innerHTML = `
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th style="width:160px;">Attribute</th>
+                ${prods.map(p => `
+                  <th style="text-align:center;">
+                    <div style="position:relative; padding-top:10px;">
+                      <button type="button" onclick="removeCompareItem(${p.id})" style="position:absolute; top:-6px; right:0; background:none; border:none; color:#f87171; cursor:pointer; font-size:1rem;" title="Remove">✕</button>
+                      <img src="${p.image_url}" alt="${p.title}" style="height:110px; width:100%; object-fit:contain; margin-bottom:0.5rem;">
+                      <div style="font-weight:700; color:#F5F1E8; font-size:0.95rem; margin-bottom:0.25rem;">${p.title}</div>
+                      <span class="sku-badge" style="font-size:0.75rem;">SKU: ${p.sku}</span>
+                    </div>
+                  </th>
+                `).join('')}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Category</th>
+                ${prods.map(p => `<td>${p.category_name}</td>`).join('')}
+              </tr>
+              <tr>
+                <th>Base Price</th>
+                ${prods.map(p => `<td style="color:#FFD76A; font-weight:800; font-size:1.1rem;">${p.starting_price} <span style="font-size:0.8rem; color:#B8B1A3; font-weight:400;">${p.price_unit}</span></td>`).join('')}
+              </tr>
+              <tr>
+                <th>Min. Order</th>
+                ${prods.map(p => `<td>${p.min_order}</td>`).join('')}
+              </tr>
+              <tr>
+                <th>Specifications</th>
+                ${prods.map(p => `<td style="font-size:0.85rem; line-height:1.5;">${p.specifications}</td>`).join('')}
+              </tr>
+              <tr>
+                <th>Action</th>
+                ${prods.map(p => `
+                  <td>
+                    <a href="${p.url}" class="btn btn-primary btn-sm" style="width:100%; text-align:center;">
+                      View &amp; Order
+                    </a>
+                  </td>
+                `).join('')}
+              </tr>
+            </tbody>
+          </table>
+        `;
+      }
+    } catch(e) {
+      document.getElementById('compareModalContent').innerHTML = '<div style="text-align:center; padding:2rem; color:#f87171;">Failed to load comparison data.</div>';
+    }
+  };
+
+  window.closeCompareModal = function() {
+    const modal = document.getElementById('compareModalBackdrop');
+    if (modal) {
+      modal.classList.remove('is-active');
+      document.body.style.overflow = '';
+    }
+  };
+
+  renderCompareTray();
 });
 

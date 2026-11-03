@@ -55,14 +55,14 @@ $cartItems = $_SESSION['cart'] ?? [];
       </div>
     <?php else: ?>
       <!-- Cart Table & Checkout Summary -->
-      <div style="display:grid; grid-template-columns:2fr 1fr; gap:2rem; align-items:flex-start;">
-        <div class="card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.75rem; box-shadow: var(--shadow-card);">
-          <h3 style="font-size:1.15rem; color:var(--navy); font-weight:700; margin-bottom:1rem;">Selected Print Products</h3>
+      <div class="cart-layout-grid">
+        <div class="card" style="background:#181818; border:1px solid #40351E; border-radius:10px; padding:1.75rem; box-shadow: 0 8px 24px rgba(0,0,0,0.7);">
+          <h3 style="font-size:1.15rem; color:#F5F1E8; font-weight:700; margin-bottom:1rem;">Selected Print Products</h3>
           <!-- Items List -->
         </div>
 
-        <div class="card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.75rem; box-shadow: var(--shadow-card);">
-          <h3 style="font-size:1.15rem; color:var(--navy); font-weight:700; margin-bottom:1rem;">Order Summary</h3>
+        <div class="card" style="background:#181818; border:1px solid #40351E; border-radius:10px; padding:1.75rem; box-shadow: 0 8px 24px rgba(0,0,0,0.7);">
+          <h3 style="font-size:1.15rem; color:#F5F1E8; font-weight:700; margin-bottom:1rem;">Order Summary</h3>
           <a href="<?= checkout_url() ?>" class="btn btn-primary btn-block" style="text-align:center; justify-content:center;">
             Proceed to Checkout &rarr;
           </a>

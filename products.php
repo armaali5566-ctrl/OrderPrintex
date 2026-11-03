@@ -155,17 +155,22 @@ $products = get_catalog_products($categorySlug, $searchTerm);
           $badgeText = $prod['badge'] ?? $prod['category_name'];
         ?>
           <article class="product-card reveal slide-up stagger-<?= ($idx % 4) + 1 ?>">
-            <div class="product-media">
+            <div class="product-media" style="position:relative;">
               <span class="product-badge-tag <?= e($badgeClass) ?>">
                 <?= e($badgeText) ?>
               </span>
+              <button type="button" class="btn-wishlist" onclick="event.stopPropagation(); toggleWishlist(<?= $prod['id'] ?>, this)" title="Save to Wishlist" style="position:absolute; top:12px; right:12px; z-index:5;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </button>
               <img src="<?= url(e($prod['image_url'])) ?>" alt="<?= e($prod['title']) ?> - Industrial Commercial Printing" loading="lazy">
             </div>
             <div class="product-body">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.35rem;">
                 <span class="product-category-label"><?= e($prod['category_name']) ?></span>
                 <?php if (!empty($prod['sku'])): ?>
-                  <span style="font-size:0.75rem; font-weight:700; color:var(--gold); background:rgba(185,154,97,0.12); padding:2px 8px; border-radius:4px; letter-spacing:0.04em;">
+                  <span class="sku-badge">
                     SKU: <?= e($prod['sku']) ?>
                   </span>
                 <?php endif; ?>
@@ -195,6 +200,13 @@ $products = get_catalog_products($categorySlug, $searchTerm);
                 <?php endif; ?>
               </div>
 
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.6rem; margin-bottom:0.6rem; padding-top:0.5rem; border-top:1px solid #28221b;">
+                <label class="compare-checkbox-label">
+                  <input type="checkbox" class="opx-compare-cb" data-product-id="<?= $prod['id'] ?>" onchange="toggleCompareProduct(<?= $prod['id'] ?>, this)">
+                  Compare
+                </label>
+              </div>
+
               <div class="product-card-actions">
                 <a href="<?= product_url($prod['slug']) ?>" class="btn btn-outline" aria-label="View details for <?= e($prod['title']) ?>">
                   View Details
@@ -209,9 +221,9 @@ $products = get_catalog_products($categorySlug, $searchTerm);
       </div>
     <?php endif; ?>
 
-    <!-- Illustrative Demo Disclaimer -->
-    <div style="margin-top:3.5rem; padding:1.25rem 1.65rem; background-color:var(--ivory); border-radius:var(--radius-sm); border-left:3px solid var(--crimson); font-size:0.86rem; color:var(--slate);">
-      <strong>Commercial Notice:</strong> Displayed catalog items, custom packaging representations, and material specifications illustrate commercial capabilities at our New Delhi printing facility. Final volume quotations, minimum quantities, and turnarounds are confirmed upon artwork proof approval.
+    <!-- Commercial Notice -->
+    <div style="margin-top:3.5rem; padding:1.25rem 1.65rem; background-color:#181818; border-radius:8px; border:1px solid #40351E; border-left:3px solid #D4AF37; font-size:0.86rem; color:#B8B1A3;">
+      <strong style="color:#FFD76A;">Commercial Notice:</strong> Displayed catalog items, custom packaging representations, and material specifications illustrate commercial capabilities at our New Delhi printing facility. Final volume quotations, minimum quantities, and turnarounds are confirmed upon artwork proof approval.
     </div>
   </div>
 </section>

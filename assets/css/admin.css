@@ -511,3 +511,50 @@
     display: block;
   }
 }
+
+
+/* Admin Mobile Responsive Overhaul */
+@media (max-width: 768px) {
+  .dashboard-topbar {
+    padding: 0.75rem 1rem !important;
+  }
+  .topbar-title {
+    font-size: 1.1rem !important;
+  }
+  .metrics-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .dashboard-content {
+    padding: 1.25rem 1rem !important;
+  }
+  .panel-card {
+    border-radius: 8px !important;
+  }
+  .panel-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+    padding: 1rem 1.25rem !important;
+  }
+  .table-responsive {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .data-table th,
+  .data-table td {
+    white-space: nowrap !important;
+    padding: 0.65rem 0.85rem !important;
+    font-size: 0.825rem !important;
+  }
+  .form-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  .form-actions .btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
