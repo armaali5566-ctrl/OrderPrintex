@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($user['role'] === 'admin') {
                     header('Location: ' . url('admin/dashboard.php'));
                 } else {
-                    header('Location: ' . url('account/dashboard.php'));
+                    header('Location: ' . account_url());
                 }
             }
             exit;
@@ -77,7 +77,7 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
       <?php endif; ?>
 
-      <form action="<?= url('account/login.php') ?>" method="POST">
+      <form action="<?= account_url('login') ?>" method="POST">
         <?= csrf_field() ?>
 
         <div class="form-grid" style="margin-top:0;">
@@ -99,7 +99,7 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
 
         <div class="text-center" style="margin-top:1.5rem; font-size:0.88rem; color:var(--slate);">
-          Don't have an account yet? <a href="<?= url('account/register.php') ?>" class="text-gold" style="font-weight:600;">Register here</a>
+          Don't have an account yet? <a href="<?= account_url('register') ?>" class="text-gold" style="font-weight:600;">Register here</a>
         </div>
       </form>
     </div>

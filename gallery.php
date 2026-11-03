@@ -124,14 +124,20 @@ $curatedGallery = [
 ];
 ?>
 
-<!-- Hero Section with Red & Beige Palette -->
-<section class="section section-navy" style="padding-top:4.5rem; padding-bottom:4.5rem; border-bottom:1px solid rgba(237,225,210,0.15);">
-  <div class="container text-center reveal slide-up">
-    <div class="section-label" style="justify-content:center; color:var(--beige);">Factory Portfolio &amp; Specimen Showcase</div>
-    <h1 style="font-size:clamp(2.1rem, 3.8vw, 3.2rem); margin-bottom:1rem; color:#FFFFFF;">Commercial Print Showcase &amp; Production Gallery</h1>
-    <p class="section-subtitle" style="color:rgba(237, 225, 210, 0.88); margin:0 auto; max-width:760px;">
-      Explore real factory runs and illustrative demonstration specimens manufactured for apparel brands, promotional agencies, and corporate enterprises across India.
-    </p>
+<!-- Hero Section with Standardized Page Intro -->
+<section class="page-intro-header">
+  <div class="container">
+    <div class="page-intro-box">
+      <div class="page-intro-eyebrow">
+        <span class="page-intro-dot"></span>
+        <span>Factory Portfolio &amp; Specimen Showcase</span>
+      </div>
+      <h1 class="page-intro-title">Commercial Print Showcase &amp; Production Gallery</h1>
+      <div class="page-intro-divider"></div>
+      <p class="page-intro-desc">
+        Explore real factory runs and illustrative demonstration specimens manufactured for apparel brands, promotional agencies, and corporate enterprises across India.
+      </p>
+    </div>
   </div>
 </section>
 

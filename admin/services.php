@@ -240,7 +240,7 @@ $services = db_fetch_all("
                             <td>
                                 <strong style="color: var(--color-navy);"><?= e($srv['title']) ?></strong>
                                 <div style="font-size: 0.75rem; color: var(--color-text-muted);">
-                                    <a href="<?= url('services/' . $srv['slug'] . '.php') ?>" target="_blank" style="color: var(--color-royal);">
+                                    <a href="<?= service_url($srv['slug']) ?>" target="_blank" style="color: var(--color-royal);">
                                         View Page &rarr;
                                     </a>
                                 </div>

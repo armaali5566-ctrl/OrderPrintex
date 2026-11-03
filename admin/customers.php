@@ -152,7 +152,7 @@ if ($selectedCustomerId) {
                                 <td style="font-weight: 600; text-align: center;"><?= $c['enquiries_count'] ?></td>
                                 <td style="font-weight: 600; text-align: center;"><?= $c['quotations_count'] ?></td>
                                 <td style="font-weight: 600; text-align: center;"><?= $c['orders_count'] ?></td>
-                                <td style="font-weight: 600; color: var(--color-navy);"><?= format_price($c['total_spend']) ?></td>
+                                <td style="font-weight: 600; color: var(--color-navy);"><?= format_currency($c['total_spend']) ?></td>
                                 <td>
                                     <span class="badge <?= $c['status'] === 'active' ? 'badge-success' : 'badge-danger' ?>">
                                         <?= ucfirst($c['status']) ?>
@@ -229,7 +229,7 @@ if ($selectedCustomerId) {
                     <?php else: ?>
                         <div style="display: flex; flex-direction: column; gap: 8px;">
                             <?php foreach ($customerOrders as $ord): ?>
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: #fff; border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--color-surface, #181818); border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem;">
                                     <div>
                                         <a href="<?= url('admin/orders.php?order_id=' . $ord['id']) ?>" style="font-weight: 700; color: var(--color-royal);">
                                             <?= e($ord['order_number']) ?>
@@ -237,7 +237,7 @@ if ($selectedCustomerId) {
                                         <div style="font-size: 0.75rem; color: var(--color-text-muted);"><?= date('d M Y', strtotime($ord['created_at'])) ?></div>
                                     </div>
                                     <div style="text-align: right;">
-                                        <div style="font-weight: 600;"><?= format_price($ord['total_amount']) ?></div>
+                                        <div style="font-weight: 600;"><?= format_currency($ord['total_amount']) ?></div>
                                         <?= status_badge($ord['order_status']) ?>
                                     </div>
                                 </div>
@@ -256,7 +256,7 @@ if ($selectedCustomerId) {
                     <?php else: ?>
                         <div style="display: flex; flex-direction: column; gap: 8px;">
                             <?php foreach ($customerQuotations as $q): ?>
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: #fff; border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--color-surface, #181818); border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem;">
                                     <div>
                                         <a href="<?= url('admin/quotations.php?quote_id=' . $q['id']) ?>" style="font-weight: 700; color: var(--color-royal);">
                                             <?= e($q['quote_number']) ?>
@@ -264,7 +264,7 @@ if ($selectedCustomerId) {
                                         <div style="font-size: 0.75rem; color: var(--color-text-muted);"><?= date('d M Y', strtotime($q['created_at'])) ?></div>
                                     </div>
                                     <div style="text-align: right;">
-                                        <div style="font-weight: 600;"><?= format_price($q['grand_total']) ?></div>
+                                        <div style="font-weight: 600;"><?= format_currency($q['grand_total']) ?></div>
                                         <?= status_badge($q['status']) ?>
                                     </div>
                                 </div>
@@ -283,7 +283,7 @@ if ($selectedCustomerId) {
                     <?php else: ?>
                         <div style="display: flex; flex-direction: column; gap: 8px;">
                             <?php foreach ($customerEnquiries as $enq): ?>
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: #fff; border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--color-surface, #181818); border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem;">
                                     <div>
                                         <a href="<?= url('admin/enquiries.php?enquiry_id=' . $enq['id']) ?>" style="font-weight: 700; color: var(--color-royal);">
                                             <?= e($enq['ref_number']) ?>

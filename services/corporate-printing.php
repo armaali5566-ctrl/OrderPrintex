@@ -11,13 +11,19 @@ require_once __DIR__ . '/../includes/header.php';
 $service = db_fetch_one("SELECT * FROM services WHERE slug = 'corporate-printing'");
 ?>
 
-<section class="section section-navy" style="padding-top:4.5rem; padding-bottom:4.5rem;">
-  <div class="container text-center reveal slide-up">
-    <div class="section-label" style="justify-content:center;">B2B Promotional Solutions</div>
-    <h1 style="font-size:3.2rem; margin-bottom:1rem;">Corporate Printing &amp; Custom Merchandise</h1>
-    <p class="section-subtitle" style="color:rgba(255,255,255,0.75); margin:0 auto;">
-      Elevate your company's physical brand presence. We design and manufacture executive welcome kits, custom drinkware, premium stationery, and corporate event giveaways.
-    </p>
+<section class="page-intro-header">
+  <div class="container">
+    <div class="page-intro-box">
+      <div class="page-intro-eyebrow">
+        <span class="page-intro-dot"></span>
+        <span>B2B Promotional Solutions</span>
+      </div>
+      <h1 class="page-intro-title">Corporate Printing &amp; Custom Merchandise</h1>
+      <div class="page-intro-divider"></div>
+      <p class="page-intro-desc">
+        Elevate your company's physical brand presence. We design and manufacture executive welcome kits, custom drinkware, premium stationery, and corporate event giveaways.
+      </p>
+    </div>
   </div>
 </section>
 
@@ -124,9 +130,9 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'corporate-printing
 
             <div class="file-preview-area"></div>
 
-            <div style="background:var(--ivory); padding:1.25rem; border-radius:var(--radius-sm); margin-top:1.25rem; border:1px solid var(--border-light);">
-              <div style="font-size:0.85rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">B2B Project Standards</div>
-              <p style="font-size:0.8rem; color:var(--slate); margin:0;">
+            <div style="background:var(--bg-surface-elevated); padding:1.25rem; border-radius:var(--radius-sm); margin-top:1.25rem; border:1px solid var(--border-color);">
+              <div style="font-size:0.85rem; font-weight:700; color:var(--text-primary); margin-bottom:0.35rem;">B2B Project Standards</div>
+              <p style="font-size:0.8rem; color:var(--text-secondary); margin:0;">
                 All corporate production runs include digital 3D mockups for stakeholder review, official GST tax invoicing, and optional custom luxury packaging.
               </p>
             </div>

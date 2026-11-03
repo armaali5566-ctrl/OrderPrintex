@@ -13,45 +13,111 @@ ServerSignature Off
     # Custom 404 Error Document
     ErrorDocument 404 /404.php
 
-    # 1. 301 Canonical Redirect: Ugly product-details.php?slug=xxx -> /product/xxx/
+    # 1. 301 Canonical Redirect: Ugly query parameters -> Clean URLs
+    RewriteCond %{THE_REQUEST} \s/products\.php\?category=([a-zA-Z0-9_-]+)\s [NC]
+    RewriteRule ^ /product/category/%1/? [R=301,L]
+
     RewriteCond %{THE_REQUEST} \s/product-details\.php\?slug=([a-zA-Z0-9_-]+)\s [NC]
     RewriteRule ^ /product/%1/? [R=301,L]
 
-    # 2. 301 Redirect: Legacy /products/xxx -> /product/xxx/
+    RewriteCond %{THE_REQUEST} \s/blog-details\.php\?slug=([a-zA-Z0-9_-]+)\s [NC]
+    RewriteRule ^ /blog/%1/? [R=301,L]
+
+    # 2. 301 Canonical Redirect: Direct .php files to trailing-slash clean routes
+    RewriteCond %{THE_REQUEST} \s/products\.php(\s|\?) [NC]
+    RewriteRule ^products\.php$ /products/ [R=301,L]
+
+    RewriteCond %{THE_REQUEST} \s/pricing\.php(\s|\?) [NC]
+    RewriteRule ^pricing\.php$ /pricing/ [R=301,L]
+
+    RewriteCond %{THE_REQUEST} \s/cart\.php(\s|\?) [NC]
+    RewriteRule ^cart\.php$ /cart/ [R=301,L]
+
+    RewriteCond %{THE_REQUEST} \s/checkout\.php(\s|\?) [NC]
+    RewriteRule ^checkout\.php$ /checkout/ [R=301,L]
+
+    RewriteCond %{THE_REQUEST} \s/about\.php(\s|\?) [NC]
+    RewriteRule ^about\.php$ /about/ [R=301,L]
+
+    RewriteCond %{THE_REQUEST} \s/services\.php(\s|\?) [NC]
+    RewriteRule ^services\.php$ /services/ [R=301,L]
+
+    RewriteCond %{THE_REQUEST} \s/contact\.php(\s|\?) [NC]
+    RewriteRule ^contact\.php$ /contact/ [R=301,L]
+
+    RewriteCond %{THE_REQUEST} \s/blog\.php(\s|\?) [NC]
+    RewriteRule ^blog\.php$ /blog/ [R=301,L]
+
+    RewriteCond %{THE_REQUEST} \s/gallery\.php(\s|\?) [NC]
+    RewriteRule ^gallery\.php$ /gallery/ [R=301,L]
+
+    RewriteCond %{THE_REQUEST} \s/faq\.php(\s|\?) [NC]
+    RewriteRule ^faq\.php$ /faq/ [R=301,L]
+
+    RewriteCond %{THE_REQUEST} \s/get-quote\.php(\s|\?) [NC]
+    RewriteRule ^get-quote\.php$ /get-quote/ [R=301,L]
+
+    # 3. 301 Redirect: Legacy /products/{slug}/ -> /product/{slug}/
     RewriteRule ^products/([a-zA-Z0-9_-]+)/?$ /product/$1/ [R=301,L]
 
-    # 3. Clean Product URL: /product/xxx/ -> product-details.php?slug=xxx
+    # 4a. 301 Redirect: Legacy /category/{slug}/ -> /product/category/{slug}/
+    RewriteRule ^category/([a-zA-Z0-9_-]+)/?$ /product/category/$1/ [R=301,L]
+
+    # 4b. Clean Category URL: /product/category/{slug}/ -> products.php?category={slug}
+    RewriteRule ^product/category/([a-zA-Z0-9_-]+)/?$ products.php?category=$1 [L,QSA]
+
+    # 5. Clean Product URL: /product/{slug}/ -> product-details.php?slug={slug}
     RewriteRule ^product/([a-zA-Z0-9_-]+)/?$ product-details.php?slug=$1 [L,QSA]
 
-    # 4. Clean Products Catalog: /products or /products/ -> products.php
+    # 6. Clean Products Catalog: /products or /products/ -> products.php
     RewriteRule ^products/?$ products.php [L,QSA]
 
-    # 5. Clean Services Subpages: /services/xxx/ -> services/xxx.php
+    # 7. Clean Shopping Pages: /pricing/, /cart/, /checkout/
+    RewriteRule ^pricing/?$ pricing.php [L,QSA]
+    RewriteRule ^cart/?$ cart.php [L,QSA]
+    RewriteRule ^checkout/?$ checkout.php [L,QSA]
+
+    # 8. Clean Customer Account Pages: /account/, /account/orders/, etc.
+    RewriteRule ^account/orders/([0-9]+)/?$ account/order-details.php?id=$1 [L,QSA]
+    RewriteRule ^account/orders/?$ account/orders.php [L,QSA]
+    RewriteCond %{DOCUMENT_ROOT}/account/$1.php -f
+    RewriteRule ^account/([a-zA-Z0-9_-]+)/?$ account/$1.php [L,QSA]
+    RewriteRule ^account/?$ account/dashboard.php [L,QSA]
+
+    # 8b. Admin Panel Routing
+    RewriteRule ^admin/?$ admin/index.php [L,QSA]
+    RewriteCond %{DOCUMENT_ROOT}/admin/$1.php -f
+    RewriteRule ^admin/([a-zA-Z0-9_-]+)/?$ admin/$1.php [L,QSA]
+
+    # 9. Clean Services Subpages: /services/{slug}/ -> services/{slug}.php
     RewriteCond %{DOCUMENT_ROOT}/services/$1.php -f
     RewriteRule ^services/([a-zA-Z0-9_-]+)/?$ services/$1.php [L,QSA]
 
-    # 6. Clean Services Overview: /services or /services/ -> services.php
+    # 10. Clean Services Overview: /services or /services/ -> services.php
     RewriteRule ^services/?$ services.php [L,QSA]
 
-    # 7. Clean Blog Details: /blog/xxx/ -> blog-details.php?slug=xxx
+    # 11. Clean Blog Category: /blog/category/{slug}/ -> blog.php?category={slug}
+    RewriteRule ^blog/category/([a-zA-Z0-9_-]+)/?$ blog.php?category=$1 [L,QSA]
+
+    # 12. Clean Blog Details: /blog/{slug}/ -> blog-details.php?slug={slug}
     RewriteRule ^blog/([a-zA-Z0-9_-]+)/?$ blog-details.php?slug=$1 [L,QSA]
 
-    # 8. Clean Blog Listing: /blog or /blog/ -> blog.php
+    # 13. Clean Blog Listing: /blog or /blog/ -> blog.php
     RewriteRule ^blog/?$ blog.php [L,QSA]
 
-    # 9. Clean About Us: /about or /about/ -> about.php
+    # 13. Clean About Us: /about or /about/ -> about.php
     RewriteRule ^about/?$ about.php [L,QSA]
 
-    # 10. Clean Contact: /contact or /contact/ -> contact.php
+    # 14. Clean Contact: /contact or /contact/ -> contact.php
     RewriteRule ^contact/?$ contact.php [L,QSA]
 
-    # 11. Clean Gallery: /gallery or /gallery/ -> gallery.php
+    # 15. Clean Gallery: /gallery or /gallery/ -> gallery.php
     RewriteRule ^gallery/?$ gallery.php [L,QSA]
 
-    # 12. Clean Get Quote: /get-quote or /get-quote/ -> get-quote.php
+    # 16. Clean Get Quote: /get-quote or /get-quote/ -> get-quote.php
     RewriteRule ^get-quote/?$ get-quote.php [L,QSA]
 
-    # 13. Clean FAQ: /faq or /faq/ -> faq.php
+    # 17. Clean FAQ: /faq or /faq/ -> faq.php
     RewriteRule ^faq/?$ faq.php [L,QSA]
 </IfModule>
 

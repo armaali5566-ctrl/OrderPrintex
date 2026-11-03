@@ -11,13 +11,19 @@ require_once __DIR__ . '/../includes/header.php';
 $service = db_fetch_one("SELECT * FROM services WHERE slug = 'uv-dtf-printing'");
 ?>
 
-<section class="section section-navy" style="padding-top:4.5rem; padding-bottom:4.5rem;">
-  <div class="container text-center reveal slide-up">
-    <div class="section-label" style="justify-content:center;">Hard-Surface Decal Innovation</div>
-    <h1 style="font-size:3.2rem; margin-bottom:1rem;">Industrial UV DTF Printing in Delhi</h1>
-    <p class="section-subtitle" style="color:rgba(255,255,255,0.75); margin:0 auto;">
-      Instant transfer stickers with 3D embossed tactile varnish and industrial adhesion. Bonds permanently to glass, acrylic, stainless steel, wood, and plastic — zero heat press required.
-    </p>
+<section class="page-intro-header">
+  <div class="container">
+    <div class="page-intro-box">
+      <div class="page-intro-eyebrow">
+        <span class="page-intro-dot"></span>
+        <span>Hard-Surface Decal Innovation</span>
+      </div>
+      <h1 class="page-intro-title">Industrial UV DTF Printing in Delhi</h1>
+      <div class="page-intro-divider"></div>
+      <p class="page-intro-desc">
+        Instant transfer stickers with 3D embossed tactile varnish and industrial adhesion. Bonds permanently to glass, acrylic, stainless steel, wood, and plastic — zero heat press required.
+      </p>
+    </div>
   </div>
 </section>
 
@@ -124,12 +130,12 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'uv-dtf-printing'")
 
             <div class="file-preview-area"></div>
 
-            <div style="background:var(--ivory); padding:1.25rem; border-radius:var(--radius-sm); margin-top:1.25rem; border:1px solid var(--border-light);">
+            <div style="background:var(--bg-surface-elevated); padding:1.25rem; border-radius:var(--radius-sm); margin-top:1.25rem; border:1px solid var(--border-color);">
               <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-size:0.85rem; font-weight:700; color:var(--navy);">Calculated Decal Area:</span>
-                <strong class="sq-inches-display text-navy" style="font-size:1.15rem; color:var(--blue);">—</strong>
+                <span style="font-size:0.85rem; font-weight:700; color:var(--text-primary);">Calculated Decal Area:</span>
+                <strong class="sq-inches-display text-navy" style="font-size:1.15rem; color:var(--primary-gold);">—</strong>
               </div>
-              <small style="color:var(--slate-light); display:block; margin-top:4px; font-size:0.78rem;">
+              <small style="color:var(--text-muted); display:block; margin-top:4px; font-size:0.78rem;">
                 UV DTF decals are supplied pre-masked with carrier tape for peel, stick, and rub application.
               </small>
             </div>

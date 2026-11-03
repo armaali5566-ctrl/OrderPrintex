@@ -345,7 +345,7 @@ $countConverted = db_fetch_one("SELECT COUNT(*) as c FROM enquiries WHERE status
                                     $isImage = in_array(strtolower($file['file_extension']), ['jpg', 'jpeg', 'png', 'webp', 'gif']);
                                     $fileUrl = upload_url($file['stored_name']);
                                 ?>
-                                <div style="display: flex; align-items: center; gap: 14px; padding: 12px; border: 1px solid var(--color-border); border-radius: 6px; background: #fff;">
+                                <div style="display: flex; align-items: center; gap: 14px; padding: 12px; border: 1px solid var(--color-border); border-radius: 6px; background: var(--color-surface, #181818);">
                                     <?php if ($isImage): ?>
                                         <a href="<?= $fileUrl ?>" target="_blank" style="display: block; width: 64px; height: 64px; flex-shrink: 0; border: 1px solid var(--color-border); border-radius: 4px; overflow: hidden; background: #eee;">
                                             <img src="<?= $fileUrl ?>" alt="<?= e($file['original_name']) ?>" style="width: 100%; height: 100%; object-fit: cover;">

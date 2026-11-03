@@ -10,5 +10,5 @@ require_once __DIR__ . '/../includes/auth.php';
 
 auth_logout();
 set_flash('info', 'You have been logged out securely.');
-header('Location: ' . url('account/login.php'));
+header('Location: ' . account_url('login'));
 exit;

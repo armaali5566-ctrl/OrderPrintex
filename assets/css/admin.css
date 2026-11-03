@@ -1,18 +1,20 @@
 /* ==========================================================================
    ORDERPRINTEX — Admin & Customer Dashboard Styles
+   Luxury Black & Metallic Gold Design System
    ========================================================================== */
 
 .dashboard-layout {
   display: flex;
   min-height: 100vh;
-  background-color: #F8FAFC;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
 }
 
 /* Sidebar */
 .dashboard-sidebar {
   width: 270px;
-  background-color: var(--navy-dark);
-  color: var(--white);
+  background-color: var(--bg-footer);
+  color: var(--text-footer);
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -20,7 +22,7 @@
   bottom: 0;
   left: 0;
   z-index: 1020;
-  border-right: 1px solid rgba(185, 154, 97, 0.2);
+  border-right: 1px solid var(--border-color);
   transition: transform var(--transition);
 }
 
@@ -36,12 +38,12 @@
   font-family: var(--font-serif);
   font-size: 1.35rem;
   font-weight: 700;
-  color: var(--white);
+  color: #FFFFFF;
   letter-spacing: 0.02em;
 }
 
 .sidebar-brand span {
-  color: var(--gold);
+  color: var(--primary-gold);
 }
 
 .sidebar-nav {
@@ -57,7 +59,7 @@
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(245, 239, 230, 0.45);
   padding: 0.85rem 0.9rem 0.35rem;
   font-weight: 700;
 }
@@ -67,7 +69,7 @@
   align-items: center;
   gap: 0.85rem;
   padding: 0.75rem 0.9rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(245, 239, 230, 0.75);
   font-size: 0.9rem;
   font-weight: 500;
   border-radius: var(--radius-sm);
@@ -76,13 +78,13 @@
 
 .sidebar-link:hover,
 .sidebar-link.active {
-  color: var(--white);
-  background-color: rgba(185, 154, 97, 0.14);
+  color: #FFFFFF;
+  background-color: rgba(212, 175, 55, 0.16);
 }
 
 .sidebar-link.active {
-  border-left: 3px solid var(--gold);
-  color: var(--gold);
+  border-left: 3px solid var(--primary-gold);
+  color: var(--bright-gold);
 }
 
 .sidebar-link-icon {
@@ -93,8 +95,8 @@
 
 .sidebar-badge {
   margin-left: auto;
-  background-color: var(--gold);
-  color: var(--navy-dark);
+  background-color: var(--btn-primary-bg);
+  color: #FFFFFF;
   font-size: 0.72rem;
   font-weight: 700;
   padding: 0.15rem 0.5rem;
@@ -120,8 +122,8 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: var(--gold);
-  color: var(--navy-dark);
+  background-color: var(--btn-primary-bg);
+  color: #FFFFFF;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -137,7 +139,7 @@
 .user-name {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--white);
+  color: #FFFFFF;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -145,7 +147,7 @@
 
 .user-role {
   font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(245, 239, 230, 0.55);
   text-transform: capitalize;
 }
 
@@ -156,12 +158,14 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
 }
 
 .dashboard-topbar {
   height: 70px;
-  background-color: var(--white);
-  border-bottom: 1px solid var(--border-light);
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -169,6 +173,7 @@
   position: sticky;
   top: 0;
   z-index: 1010;
+  color: var(--text-primary);
 }
 
 .topbar-left {
@@ -180,7 +185,7 @@
 .dashboard-sidebar-toggle {
   display: none;
   background: none;
-  color: var(--navy);
+  color: var(--text-primary);
   font-size: 1.35rem;
   cursor: pointer;
 }
@@ -188,7 +193,7 @@
 .topbar-title {
   font-size: 1.35rem;
   font-weight: 600;
-  color: var(--navy);
+  color: var(--text-primary);
 }
 
 .topbar-right {
@@ -211,11 +216,11 @@
 }
 
 .metric-card {
-  background-color: var(--white);
-  border: 1px solid var(--border-light);
+  background-color: var(--bg-surface);
+  border: var(--border-card);
   border-radius: var(--radius-md);
   padding: 1.5rem;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-card);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -223,8 +228,8 @@
 }
 
 .metric-card:hover {
-  border-color: var(--border-gold);
-  box-shadow: var(--shadow-md);
+  border: var(--border-card-hover);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .metric-label {
@@ -232,14 +237,14 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--slate);
+  color: var(--text-secondary);
   margin-bottom: 0.35rem;
 }
 
 .metric-value {
   font-size: 1.9rem;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--text-primary);
   line-height: 1;
 }
 
@@ -250,23 +255,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--ivory);
-  color: var(--gold);
+  background-color: var(--bg-secondary);
+  color: var(--btn-primary-bg);
 }
 
 /* Card Container */
 .panel-card {
-  background-color: var(--white);
-  border: 1px solid var(--border-light);
+  background-color: var(--bg-surface);
+  border: var(--border-card);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
   margin-bottom: 2rem;
 }
 
 .panel-header {
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -277,7 +282,7 @@
 .panel-title {
   font-size: 1.15rem;
   font-weight: 600;
-  color: var(--navy);
+  color: var(--text-primary);
 }
 
 .panel-actions {
@@ -300,32 +305,33 @@
 }
 
 .data-table th {
-  background-color: #F8FAFC;
-  color: var(--slate);
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
   font-weight: 600;
   text-transform: uppercase;
   font-size: 0.72rem;
   letter-spacing: 0.05em;
   padding: 0.85rem 1.25rem;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-color);
   white-space: nowrap;
 }
 
 .data-table td {
   padding: 1rem 1.25rem;
-  border-bottom: 1px solid var(--border-light);
-  color: var(--charcoal);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
   vertical-align: middle;
 }
 
 .data-table tr:hover td {
-  background-color: #FAFAFA;
+  background-color: var(--bg-secondary);
 }
 
 .data-table .ref-cell {
   font-family: var(--font-mono);
   font-weight: 600;
-  color: var(--blue);
+  color: var(--btn-primary-bg);
+}
 }
 
 /* Search & Filters Toolbar */

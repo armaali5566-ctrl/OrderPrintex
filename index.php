@@ -10,7 +10,7 @@ $pageDesc  = "PRINTEX is India's leading bulk manufacturer of DTF garment transf
 
 require_once __DIR__ . '/includes/header.php';
 
-// Fetch dynamic products from database (exactly 4 featured products)
+// Fetch dynamic products from database (exactly 3 featured products for Commercial Showcase)
 $featuredProducts = db_fetch_all("
     SELECT p.id, p.sku, p.title, p.slug, p.short_desc, p.image_url, p.badge, 
            p.starting_price, p.price_unit, p.min_order, c.name as category_name 
@@ -18,7 +18,7 @@ $featuredProducts = db_fetch_all("
     LEFT JOIN categories c ON p.category_id = c.id 
     WHERE p.is_active = 1 
     ORDER BY p.is_featured DESC, p.display_order ASC 
-    LIMIT 4
+    LIMIT 3
 ");
 
 // Fetch 3 latest published blog posts
@@ -66,8 +66,8 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
               <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
             </svg>
           </a>
-          <a href="<?= url('services/') ?>" class="btn btn-navy btn-lg">
-            <span>Explore Services</span>
+          <a href="<?= url('products/') ?>" class="btn btn-navy btn-lg">
+            <span>Explore Products</span>
             <svg style="width:16px;height:16px;fill:currentColor;" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
             </svg>
@@ -269,7 +269,7 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
 </section>
 
 <!-- ========================================================================
-     SECTION 3: POPULAR PRINTING PRODUCTS (EXACTLY 4 FEATURED PRODUCTS)
+     SECTION 3: COMMERCIAL SHOWCASE / POPULAR PRINTING PRODUCTS (EXACTLY 3 PRODUCTS)
      ======================================================================== -->
 <section class="section section-ivory" id="products-showcase">
   <div class="container">
@@ -281,10 +281,10 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
       </p>
     </div>
 
-    <div class="products-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+    <div class="products-grid products-grid-3">
       <?php foreach ($featuredProducts as $idx => $prod): ?>
-        <article class="product-card reveal slide-up stagger-<?= ($idx % 4) + 1 ?>">
-          <div class="product-media" style="background:#ffffff; display:flex; align-items:center; justify-content:center; padding:1.25rem; height:260px;">
+        <article class="product-card reveal slide-up stagger-<?= ($idx % 3) + 1 ?>">
+          <div class="product-media" style="background:#121212; border-bottom:1px solid var(--border-color); display:flex; align-items:center; justify-content:center; padding:1.25rem; height:280px;">
             <?php if (!empty($prod['badge'])): ?>
               <span class="product-badge-tag"><?= e($prod['badge']) ?></span>
             <?php endif; ?>
@@ -296,7 +296,7 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
           <div class="product-body">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
               <span class="product-category-label"><?= e($prod['category_name'] ?? 'Printing Service') ?></span>
-              <span style="font-size:0.75rem; font-weight:700; color:var(--gold); background:rgba(185,154,97,0.12); padding:2px 8px; border-radius:4px; letter-spacing:0.04em;">
+              <span style="font-size:0.75rem; font-weight:700; color:var(--gold); background:rgba(212,175,55,0.14); border:1px solid rgba(212,175,55,0.3); padding:2px 8px; border-radius:4px; letter-spacing:0.04em;">
                 SKU: <?= e($prod['sku']) ?>
               </span>
             </div>
@@ -325,7 +325,7 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
               <a href="<?= product_url($prod['slug']) ?>" class="btn btn-outline" aria-label="View details for <?= e($prod['title']) ?>">
                 View Details
               </a>
-              <a href="<?= url('get-quote.php?service_name=' . urlencode($prod['category_name'] ?? 'DTF Printing')) ?>" class="btn btn-primary" aria-label="Order or request quote for <?= e($prod['title']) ?>">
+              <a href="<?= url('get-quote/?service_name=' . urlencode($prod['category_name'] ?? 'DTF Printing')) ?>" class="btn btn-primary" aria-label="Order or request quote for <?= e($prod['title']) ?>">
                 Order / Quote
               </a>
             </div>
@@ -336,7 +336,7 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
 
     <!-- Prominent "View All Products" Button -->
     <div style="text-align:center; margin-top:3.5rem;" class="reveal slide-up">
-      <a href="<?= url('products.php') ?>" class="btn btn-navy btn-lg" style="display:inline-flex; align-items:center; gap:0.75rem; padding:1.15rem 2.75rem; font-size:1.05rem;">
+      <a href="<?= url('products/') ?>" class="btn btn-outline btn-lg" style="display:inline-flex; align-items:center; gap:0.75rem; padding:1.15rem 2.75rem; font-size:1.05rem; border-color:var(--primary-gold); color:var(--bright-gold); background:var(--bg-surface);">
         <span>View All Products in Commercial Catalog</span>
         <svg style="width:18px;height:18px;" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -542,7 +542,7 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
 
     <!-- Prominent "View Full Portfolio" Button -->
     <div style="text-align:center; margin-top:3.25rem;" class="reveal slide-up">
-      <a href="<?= url('gallery.php') ?>" class="btn btn-outline btn-lg" style="display:inline-flex; align-items:center; gap:0.75rem; padding:1.15rem 2.75rem; font-size:1.05rem;">
+      <a href="<?= url('gallery/') ?>" class="btn btn-outline btn-lg" style="display:inline-flex; align-items:center; gap:0.75rem; padding:1.15rem 2.75rem; font-size:1.05rem;">
         <span>View Full Portfolio &amp; Specimen Gallery</span>
         <svg style="width:18px;height:18px;" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -553,39 +553,50 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
 </section>
 
 <!-- ========================================================================
-     SECTION 7: HOW TO ORDER (SHORT VERSION)
+     SECTION 7: FORWARD WORKFLOW
      ======================================================================== -->
-<section class="section section-ivory">
+<section class="section section-workflow" id="workflow">
   <div class="container">
     <div class="section-header text-center reveal slide-up">
-      <div class="section-label">Order Process</div>
-      <h2>How to Order in 3 Simple Steps</h2>
+      <div class="section-label" style="justify-content:center;">Process &amp; Fulfillment</div>
+      <h2>Forward Workflow</h2>
       <p class="section-subtitle">
-        Straightforward workflow from digital file to door-to-door delivery.
+        Forward workflow from digital file to door-to-door delivery.
       </p>
     </div>
 
-    <div class="timeline-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-      <div class="timeline-step reveal slide-up">
-        <div class="step-number">01</div>
-        <h3 class="step-title">Upload Your Artwork</h3>
-        <p class="step-desc">
+    <div class="workflow-grid">
+      <!-- 01 -->
+      <div class="workflow-card reveal slide-up stagger-1">
+        <div class="workflow-header">
+          <span class="workflow-num">01</span>
+          <div class="workflow-line"></div>
+        </div>
+        <h3 class="workflow-title">01 &mdash; Upload Your Artwork</h3>
+        <p class="workflow-desc">
           Drop your vector (AI, PDF) or 300 DPI transparent PNG into our online studio, or share details over WhatsApp.
         </p>
       </div>
 
-      <div class="timeline-step reveal slide-up" style="transition-delay:0.1s;">
-        <div class="step-number">02</div>
-        <h3 class="step-title">Review Proof &amp; Quote</h3>
-        <p class="step-desc">
+      <!-- 02 -->
+      <div class="workflow-card reveal slide-up stagger-2">
+        <div class="workflow-header">
+          <span class="workflow-num">02</span>
+          <div class="workflow-line"></div>
+        </div>
+        <h3 class="workflow-title">02 &mdash; Review Proof &amp; Quote</h3>
+        <p class="workflow-desc">
           Technicians inspect resolution and density, then send an itemized quote with GST and gang sheet proofs.
         </p>
       </div>
 
-      <div class="timeline-step reveal slide-up" style="transition-delay:0.2s;">
-        <div class="step-number">03</div>
-        <h3 class="step-title">Production &amp; Dispatch</h3>
-        <p class="step-desc">
+      <!-- 03 -->
+      <div class="workflow-card reveal slide-up stagger-3">
+        <div class="workflow-header">
+          <span class="workflow-num">03</span>
+        </div>
+        <h3 class="workflow-title">03 &mdash; Production &amp; Dispatch</h3>
+        <p class="workflow-desc">
           High-speed printing, curing, quality checks, and insured courier delivery to your doorstep anywhere in India.
         </p>
       </div>
@@ -608,10 +619,10 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
 
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:2rem;">
       <?php foreach ($latestBlogPosts as $idx => $post): ?>
-        <article class="reveal slide-up stagger-<?= $idx + 1 ?>" style="background:var(--ivory); border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border-light); display:flex; flex-direction:column; transition:transform 0.3s ease, box-shadow 0.3s ease;">
-          <div style="position:relative; height:200px; overflow:hidden;">
+        <article class="blog-card reveal slide-up stagger-<?= $idx + 1 ?>">
+          <div style="position:relative; height:200px; overflow:hidden; background:#121212;">
             <img src="<?= url($post['featured_image']) ?>" alt="<?= e($post['title']) ?>" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" loading="lazy">
-            <span style="position:absolute; top:12px; left:12px; background:var(--navy); color:var(--gold); font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:4px; text-transform:uppercase; letter-spacing:0.04em;">
+            <span style="position:absolute; top:12px; left:12px; background:var(--bg-card); color:var(--primary-gold); border:1px solid rgba(212,175,55,0.4); font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:4px; text-transform:uppercase; letter-spacing:0.04em;">
               <?= e($post['category_name'] ?? 'Guide') ?>
             </span>
           </div>

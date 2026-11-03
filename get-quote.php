@@ -22,13 +22,19 @@ if (empty($services)) {
 $currentUser = auth_user();
 ?>
 
-<section class="section section-navy" style="padding-top:4.5rem; padding-bottom:4.5rem;">
-  <div class="container text-center reveal slide-up">
-    <div class="section-label" style="justify-content:center;">Transparent B2B Pricing</div>
-    <h1 style="font-size:clamp(2.4rem, 4vw, 3.6rem); margin-bottom:1rem;">Request an Itemized Quotation</h1>
-    <p class="section-subtitle" style="color:rgba(255,255,255,0.78); margin:0 auto;">
-      Submit your printing specifications and artwork file. Our prepress team evaluates printability, resolution, and gang optimization to provide a prompt, binding commercial quotation within 24 hours.
-    </p>
+<section class="page-intro-header">
+  <div class="container">
+    <div class="page-intro-box">
+      <div class="page-intro-eyebrow">
+        <span class="page-intro-dot"></span>
+        <span>Transparent B2B Pricing</span>
+      </div>
+      <h1 class="page-intro-title">Request an Itemized Quotation</h1>
+      <div class="page-intro-divider"></div>
+      <p class="page-intro-desc">
+        Submit your printing specifications and artwork file. Our prepress team evaluates printability, resolution, and gang optimization to provide a prompt, binding commercial quotation within 24 hours.
+      </p>
+    </div>
   </div>
 </section>
 

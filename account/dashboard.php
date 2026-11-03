@@ -47,10 +47,10 @@ require_once __DIR__ . '/../includes/header.php';
         </p>
       </div>
       <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
-        <a href="<?= url('get-quote.php') ?>" class="btn btn-primary">
+        <a href="<?= url('get-quote/') ?>" class="btn btn-primary">
           <span>+ Upload New Design</span>
         </a>
-        <a href="<?= url('account/profile.php') ?>" class="btn btn-outline">Edit Profile</a>
+        <a href="<?= account_url('profile') ?>" class="btn btn-outline">Edit Profile</a>
       </div>
     </div>
 
@@ -58,11 +58,11 @@ require_once __DIR__ . '/../includes/header.php';
 
     <!-- Sub-navigation Tabs -->
     <div style="display:flex; gap:0.5rem; border-bottom:1px solid var(--border-light); margin-bottom:2rem; overflow-x:auto;">
-      <a href="<?= url('account/dashboard.php') ?>" class="gallery-filter-btn active">Overview</a>
-      <a href="<?= url('account/enquiries.php') ?>" class="gallery-filter-btn">My Enquiries (<?= $totalEnquiries ?>)</a>
-      <a href="<?= url('account/quotations.php') ?>" class="gallery-filter-btn">My Quotations (<?= $pendingQuotes ?> pending)</a>
-      <a href="<?= url('account/orders.php') ?>" class="gallery-filter-btn">My Orders (<?= $activeOrders ?> active)</a>
-      <a href="<?= url('account/profile.php') ?>" class="gallery-filter-btn">Settings</a>
+      <a href="<?= account_url() ?>" class="gallery-filter-btn active">Overview</a>
+      <a href="<?= account_url('enquiries') ?>" class="gallery-filter-btn">My Enquiries (<?= $totalEnquiries ?>)</a>
+      <a href="<?= account_url('quotations') ?>" class="gallery-filter-btn">My Quotations (<?= $pendingQuotes ?> pending)</a>
+      <a href="<?= account_url('orders') ?>" class="gallery-filter-btn">My Orders (<?= $activeOrders ?> active)</a>
+      <a href="<?= account_url('profile') ?>" class="gallery-filter-btn">Settings</a>
     </div>
 
     <!-- Metrics Grid -->
@@ -120,7 +120,7 @@ require_once __DIR__ . '/../includes/header.php';
     <div class="panel-card">
       <div class="panel-header">
         <h3 class="panel-title">Recent Production Orders</h3>
-        <a href="<?= url('account/orders.php') ?>" class="text-gold" style="font-size:0.85rem; font-weight:600;">View All Orders &rarr;</a>
+        <a href="<?= account_url('orders') ?>" class="text-gold" style="font-size:0.85rem; font-weight:600;">View All Orders &rarr;</a>
       </div>
       <div class="table-responsive">
         <table class="data-table">
@@ -158,7 +158,7 @@ require_once __DIR__ . '/../includes/header.php';
                     <?php endif; ?>
                   </td>
                   <td>
-                    <a href="<?= url('account/order-details.php?id=' . $ord['id']) ?>" class="btn btn-sm btn-outline">
+                    <a href="<?= url('account/orders/' . $ord['id'] . '/') ?>" class="btn btn-sm btn-outline">
                       Details &amp; Timeline
                     </a>
                   </td>

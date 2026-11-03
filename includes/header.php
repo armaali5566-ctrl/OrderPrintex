@@ -16,6 +16,18 @@ $canonical = $canonical ?? url($_SERVER['REQUEST_URI'] ?? '');
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('op_theme');
+        if (!t || t === 'light') {
+          t = 'dark';
+          localStorage.setItem('op_theme', 'dark');
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
   <title><?= e($pageTitle) ?></title>
   <meta name="description" content="<?= e($pageDesc) ?>">
   <link rel="canonical" href="<?= e($canonical) ?>">

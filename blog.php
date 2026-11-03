@@ -10,8 +10,37 @@ require_once __DIR__ . '/includes/functions.php';
 $categorySlug = trim($_GET['category'] ?? '');
 $searchQuery  = trim($_GET['q'] ?? '');
 
+$requestUri = $_SERVER['REQUEST_URI'] ?? '';
+if (!empty($categorySlug) && (strpos($requestUri, 'blog.php') !== false || strpos($requestUri, '?category=') !== false)) {
+    header('HTTP/1.1 301 Moved Permanently');
+    header('Location: ' . blog_category_url($categorySlug));
+    exit;
+}
+if (strpos($requestUri, 'blog.php') !== false) {
+    header('HTTP/1.1 301 Moved Permanently');
+    header('Location: ' . blog_url());
+    exit;
+}
+
 // Fetch Categories
 $categories = db_fetch_all("SELECT * FROM blog_categories ORDER BY id ASC");
+
+// Validate Category Slug if present
+$activeCategory = null;
+if (!empty($categorySlug)) {
+    foreach ($categories as $c) {
+        if ($c['slug'] === $categorySlug) {
+            $activeCategory = $c;
+            break;
+        }
+    }
+    if (!$activeCategory) {
+        http_response_code(404);
+        $pageTitle = "Blog Category Not Found - OrderPrintex";
+        require __DIR__ . '/404.php';
+        exit;
+    }
+}
 
 // Fetch Posts
 $sql = "SELECT p.*, c.name as category_name, c.slug as category_slug 
@@ -45,26 +74,28 @@ require_once __DIR__ . '/includes/header.php';
 ?>
 
 <!-- Blog Hero Header -->
-<section class="section section-navy" style="padding-top:4.5rem; padding-bottom:4rem;">
-  <div class="container text-center reveal slide-up">
-    <span class="section-badge" style="background:rgba(255,255,255,0.1); color:var(--gold); border:1px solid rgba(185,154,97,0.3);">
-      Industry Knowledge &amp; Prepress Guides
-    </span>
-    <h1 style="font-size:clamp(2.4rem, 4vw, 3.5rem); margin-top:0.75rem; margin-bottom:1rem; color:#FFFFFF;">
-      The OrderPrintex Knowledge Hub
-    </h1>
-    <p class="section-subtitle" style="color:rgba(255,255,255,0.8); margin:0 auto; max-width:680px;">
-      In-depth technical guides, material comparisons, and production insights written by commercial printing specialists and prepress engineers.
-    </p>
+<section class="page-intro-header">
+  <div class="container">
+    <div class="page-intro-box">
+      <div class="page-intro-eyebrow">
+        <span class="page-intro-dot"></span>
+        <span>Industry Knowledge &amp; Prepress Guides</span>
+      </div>
+      <h1 class="page-intro-title">The OrderPrintex Knowledge Hub</h1>
+      <div class="page-intro-divider"></div>
+      <p class="page-intro-desc">
+        In-depth technical guides, material comparisons, and production insights written by commercial printing specialists and prepress engineers.
+      </p>
 
-    <!-- Search Form -->
-    <div style="max-width:540px; margin:2.25rem auto 0;">
-      <form action="<?= blog_url() ?>" method="GET" style="display:flex; gap:0.5rem; background:#FFFFFF; padding:6px; border-radius:999px; box-shadow:0 8px 30px rgba(0,0,0,0.25);">
-        <input type="text" name="q" value="<?= e($searchQuery) ?>" placeholder="Search printing guides, DTF, paper stocks..." style="flex:1; border:none; outline:none; padding:0.6rem 1.25rem; font-size:0.95rem; border-radius:999px; color:var(--navy);">
-        <button type="submit" class="btn btn-primary btn-sm" style="border-radius:999px; padding:0.6rem 1.4rem;">
-          <span>Search</span>
-        </button>
-      </form>
+      <!-- Search Form -->
+      <div style="width:100%; max-width:540px; margin:2.25rem auto 0;">
+        <form action="<?= blog_url() ?>" method="GET" style="display:flex; gap:0.5rem; background:var(--bg-surface); padding:6px; border-radius:999px; box-shadow:0 8px 30px rgba(0,0,0,0.25);">
+          <input type="text" name="q" value="<?= e($searchQuery) ?>" placeholder="Search printing guides, DTF, paper stocks..." style="flex:1; border:none; outline:none; padding:0.6rem 1.25rem; font-size:0.95rem; border-radius:999px; color:var(--navy);">
+          <button type="submit" class="btn btn-primary btn-sm" style="border-radius:999px; padding:0.6rem 1.4rem;">
+            <span>Search</span>
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </section>
@@ -77,7 +108,7 @@ require_once __DIR__ . '/includes/header.php';
         All Articles (<?= count($posts) ?>)
       </a>
       <?php foreach ($categories as $cat): ?>
-        <a href="<?= blog_url() ?>?category=<?= urlencode($cat['slug']) ?>" class="btn btn-sm <?= ($categorySlug === $cat['slug']) ? 'btn-navy' : 'btn-outline' ?>" style="white-space:nowrap; border-radius:999px;">
+        <a href="<?= blog_category_url($cat['slug']) ?>" class="btn btn-sm <?= ($categorySlug === $cat['slug']) ? 'btn-navy' : 'btn-outline' ?>" style="white-space:nowrap; border-radius:999px;">
           <?= e($cat['name']) ?>
         </a>
       <?php endforeach; ?>
@@ -100,7 +131,7 @@ require_once __DIR__ . '/includes/header.php';
 
       <!-- Hero Featured Post (Only on main blog page when no category/search active) -->
       <?php if (empty($categorySlug) && empty($searchQuery) && $featuredPost): ?>
-        <article class="reveal slide-up" style="background:#FFFFFF; border-radius:var(--radius-lg); border:1px solid var(--border-light); box-shadow:var(--shadow-md); overflow:hidden; display:grid; grid-template-columns:1.2fr 1fr; gap:0; margin-bottom:3.5rem; transition:transform 0.3s ease, box-shadow 0.3s ease;">
+        <article class="reveal slide-up" style="background:var(--bg-surface); border-radius:var(--radius-lg); border:1px solid var(--border-color); box-shadow: 0 4px 14px rgba(15, 25, 45, 0.09), 0 16px 36px rgba(15, 25, 45, 0.12); overflow:hidden; display:grid; grid-template-columns:1.2fr 1fr; gap:0; margin-bottom:3.5rem; transition:transform 0.3s ease, box-shadow 0.3s ease;">
           <div style="position:relative; min-height:360px; overflow:hidden; background:#F8F5F0;">
             <img src="<?= url(e($featuredPost['featured_image'])) ?>" alt="<?= e($featuredPost['title']) ?>" style="width:100%; height:100%; object-fit:cover; display:block;">
             <span style="position:absolute; top:1.25rem; left:1.25rem; background:var(--navy); color:var(--gold); font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; padding:0.35rem 0.85rem; border-radius:999px; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
@@ -147,7 +178,7 @@ require_once __DIR__ . '/includes/header.php';
         $displayList = (empty($categorySlug) && empty($searchQuery) && $featuredPost) ? $gridPosts : $posts;
         foreach ($displayList as $idx => $post): 
         ?>
-          <article class="product-card reveal slide-up" style="display:flex; flex-direction:column; height:100%; border-radius:var(--radius-md); overflow:hidden; background:#FFFFFF; border:1px solid var(--border-light); box-shadow:var(--shadow-sm); transition:transform 0.3s ease, box-shadow 0.3s ease;">
+          <article class="product-card reveal slide-up" style="display:flex; flex-direction:column; height:100%; border-radius:var(--radius-md); overflow:hidden; background:var(--bg-surface); border:1px solid var(--border-color); box-shadow: 0 4px 12px rgba(15, 25, 45, 0.09), 0 12px 28px rgba(15, 25, 45, 0.10); transition:transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
             <div style="height:210px; overflow:hidden; position:relative; background:#F8F5F0;">
               <img src="<?= url(e($post['featured_image'])) ?>" alt="<?= e($post['title']) ?>" style="width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s ease;" loading="lazy">
               <span style="position:absolute; top:1rem; left:1rem; background:rgba(16,27,48,0.9); color:#FFFFFF; font-size:0.75rem; font-weight:700; padding:0.25rem 0.65rem; border-radius:999px;">

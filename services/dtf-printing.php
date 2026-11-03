@@ -11,13 +11,19 @@ require_once __DIR__ . '/../includes/header.php';
 $service = db_fetch_one("SELECT * FROM services WHERE slug = 'dtf-printing'");
 ?>
 
-<section class="section section-navy" style="padding-top:4.5rem; padding-bottom:4.5rem;">
-  <div class="container text-center reveal slide-up">
-    <div class="section-label" style="justify-content:center;">Apparel &amp; Textile Innovation</div>
-    <h1 style="font-size:3.2rem; margin-bottom:1rem;">Commercial DTF Printing (Direct-to-Film)</h1>
-    <p class="section-subtitle" style="color:rgba(255,255,255,0.75); margin:0 auto;">
-      High-density white underbase, vibrant textile pigments, and stretchable TPU adhesive for flawless pressing onto cotton, poly-blends, nylon, and performance wear.
-    </p>
+<section class="page-intro-header">
+  <div class="container">
+    <div class="page-intro-box">
+      <div class="page-intro-eyebrow">
+        <span class="page-intro-dot"></span>
+        <span>Apparel &amp; Textile Innovation</span>
+      </div>
+      <h1 class="page-intro-title">Commercial DTF Printing (Direct-to-Film)</h1>
+      <div class="page-intro-divider"></div>
+      <p class="page-intro-desc">
+        High-density white underbase, vibrant textile pigments, and stretchable TPU adhesive for flawless pressing onto cotton, poly-blends, nylon, and performance wear.
+      </p>
+    </div>
   </div>
 </section>
 
@@ -128,12 +134,12 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'dtf-printing'");
 
             <div class="file-preview-area"></div>
 
-            <div style="background:var(--ivory); padding:1.25rem; border-radius:var(--radius-sm); margin-top:1.25rem; border:1px solid var(--border-light);">
+            <div style="background:var(--bg-surface-elevated); padding:1.25rem; border-radius:var(--radius-sm); margin-top:1.25rem; border:1px solid var(--border-color);">
               <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-size:0.85rem; font-weight:700; color:var(--navy);">Calculated Print Footprint:</span>
-                <strong class="sq-inches-display text-navy" style="font-size:1.15rem; color:var(--blue);">—</strong>
+                <span style="font-size:0.85rem; font-weight:700; color:var(--text-primary);">Calculated Print Footprint:</span>
+                <strong class="sq-inches-display text-navy" style="font-size:1.15rem; color:var(--primary-gold);">—</strong>
               </div>
-              <small style="color:var(--slate-light); display:block; margin-top:4px; font-size:0.78rem;">
+              <small style="color:var(--text-muted); display:block; margin-top:4px; font-size:0.78rem;">
                 Standard roll width is 22 inches printable. Specify total height/length in inches.
               </small>
             </div>

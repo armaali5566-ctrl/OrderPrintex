@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         log_activity($user['id'], 'approve_quotation', "Customer approved quote {$quote['quote_number']} and generated order {$orderNum}");
 
         set_flash('success', "Quotation {$quote['quote_number']} accepted! Your new production order {$orderNum} is now active.");
-        header('Location: ' . url('account/order-details.php?id=' . $orderId));
+        header('Location: ' . url('account/orders/' . $orderId . '/'));
         exit;
 
     } elseif ($action === 'request_change') {
@@ -157,11 +157,11 @@ require_once __DIR__ . '/../includes/header.php';
       </div>
 
       <?php if ($singleQuote): ?>
-        <a href="<?= url('account/quotations.php') ?>" class="btn btn-outline">
+        <a href="<?= account_url('quotations') ?>" class="btn btn-outline">
           &larr; Back to All Quotations
         </a>
       <?php else: ?>
-        <a href="<?= url('get-quote.php') ?>" class="btn btn-primary">
+        <a href="<?= url('get-quote/') ?>" class="btn btn-primary">
           <span>+ Request New Quotation</span>
         </a>
       <?php endif; ?>
@@ -170,11 +170,11 @@ require_once __DIR__ . '/../includes/header.php';
     <?= render_flash() ?>
 
     <div style="display:flex; gap:0.5rem; border-bottom:1px solid var(--border-light); margin-bottom:2rem; overflow-x:auto;">
-      <a href="<?= url('account/dashboard.php') ?>" class="gallery-filter-btn">Overview</a>
-      <a href="<?= url('account/enquiries.php') ?>" class="gallery-filter-btn">My Enquiries</a>
-      <a href="<?= url('account/quotations.php') ?>" class="gallery-filter-btn active">My Quotations (<?= count($allQuotes) ?>)</a>
-      <a href="<?= url('account/orders.php') ?>" class="gallery-filter-btn">My Orders</a>
-      <a href="<?= url('account/profile.php') ?>" class="gallery-filter-btn">Settings</a>
+      <a href="<?= account_url() ?>" class="gallery-filter-btn">Overview</a>
+      <a href="<?= account_url('enquiries') ?>" class="gallery-filter-btn">My Enquiries</a>
+      <a href="<?= account_url('quotations') ?>" class="gallery-filter-btn active">My Quotations (<?= count($allQuotes) ?>)</a>
+      <a href="<?= account_url('orders') ?>" class="gallery-filter-btn">My Orders</a>
+      <a href="<?= account_url('profile') ?>" class="gallery-filter-btn">Settings</a>
     </div>
 
     <?php if ($singleQuote): ?>

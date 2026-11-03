@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderPrintex - Commercial Products Catalog
+ * OrderPrintex - Commercial Products Catalog & Category Workbench
  * Premium E-Commerce Style Showcase featuring industrial transfers, garments & merchandise.
  */
 
@@ -9,30 +9,89 @@ require_once __DIR__ . '/includes/database.php';
 require_once __DIR__ . '/includes/functions.php';
 require_once __DIR__ . '/includes/catalog_helper.php';
 
-$pageTitle = "Commercial Print Products & Transfers Catalog | OrderPrintex Delhi";
-$pageDesc  = "Explore OrderPrintex's commercial catalog: 22-inch DTF gang sheets, UV DTF decal transfers, bio-washed cotton tees, thermal drinkware, and luxury apparel packaging.";
-$canonical = url('products.php');
-
-require_once __DIR__ . '/includes/header.php';
-
 // Filter parameters
 $categorySlug = trim($_GET['category'] ?? '');
 $searchTerm = trim($_GET['search'] ?? '');
 
+// 301 Redirect legacy query strings to clean URLs
+$requestUri = $_SERVER['REQUEST_URI'] ?? '';
+if (strpos($requestUri, 'products.php') !== false) {
+    if (!empty($categorySlug)) {
+        header('HTTP/1.1 301 Moved Permanently');
+        header('Location: ' . category_url($categorySlug));
+        exit;
+    } elseif (empty($searchTerm)) {
+        header('HTTP/1.1 301 Moved Permanently');
+        header('Location: ' . url('products/'));
+        exit;
+    }
+}
+
 $categories = get_curated_catalog_categories();
+$currentCategory = null;
+
+// Validate category slug if provided
+if (!empty($categorySlug)) {
+    // 1. Check in curated categories
+    foreach ($categories as $cat) {
+        if (($cat['slug'] ?? '') === $categorySlug) {
+            $currentCategory = $cat;
+            break;
+        }
+    }
+
+    // 2. Check in database categories
+    if (!$currentCategory) {
+        $dbCat = db_fetch_one("SELECT * FROM categories WHERE slug = :s", ['s' => $categorySlug]);
+        if ($dbCat) {
+            $currentCategory = $dbCat;
+        }
+    }
+
+    // If still not found, return HTTP 404
+    if (!$currentCategory) {
+        http_response_code(404);
+        require __DIR__ . '/404.php';
+        exit;
+    }
+}
+
+// SEO Metadata
+if ($currentCategory) {
+    $pageTitle = e($currentCategory['name']) . " | Industrial Transfers & Printing Catalog | OrderPrintex";
+    $pageDesc  = !empty($currentCategory['description']) 
+        ? e($currentCategory['description']) 
+        : ("Explore high-precision " . e($currentCategory['name']) . " manufactured in New Delhi with express PAN-India delivery.");
+    $canonical = category_url($categorySlug);
+} else {
+    $pageTitle = "Commercial Print Products & Transfers Catalog | OrderPrintex Delhi";
+    $pageDesc  = "Explore OrderPrintex's commercial catalog: 22-inch DTF gang sheets, UV DTF decal transfers, bio-washed cotton tees, thermal drinkware, and luxury apparel packaging.";
+    $canonical = url('products/');
+}
+
+require_once __DIR__ . '/includes/header.php';
+
 $products = get_catalog_products($categorySlug, $searchTerm);
 ?>
 
 <!-- Hero Header -->
-<section class="section section-navy" style="padding-top:4.5rem; padding-bottom:4.5rem; position:relative; overflow:hidden;">
-  <div class="container text-center reveal slide-up" style="position:relative; z-index:2;">
-    <div class="section-label" style="justify-content:center; color:var(--beige);">Commercial Print Catalog</div>
-    <h1 style="font-size:clamp(2.4rem, 4.2vw, 3.4rem); margin-bottom:1rem; letter-spacing:-0.02em; color:#FFFFFF;">
-      Print Products &amp; Custom Transfers
-    </h1>
-    <p class="section-subtitle" style="color:rgba(237, 225, 210, 0.9); margin:0 auto; max-width:760px; font-size:1.1rem; line-height:1.7;">
-      Precision-manufactured DTF gang rolls, multi-surface UV decals, bio-washed apparel, and corporate merchandise engineered at our New Delhi facility.
-    </p>
+<section class="page-intro-header">
+  <div class="container">
+    <div class="page-intro-box">
+      <div class="page-intro-eyebrow">
+        <span class="page-intro-dot"></span>
+        <span><?= $currentCategory ? e($currentCategory['name']) : 'Commercial Print Catalog' ?></span>
+      </div>
+      <h1 class="page-intro-title">
+        <?= $currentCategory ? e($currentCategory['name']) : 'Print Products &amp; Custom Transfers' ?>
+      </h1>
+      <div class="page-intro-divider"></div>
+      <p class="page-intro-desc">
+        <?= $currentCategory && !empty($currentCategory['description']) 
+            ? e($currentCategory['description']) 
+            : 'Precision-manufactured DTF gang rolls, multi-surface UV decals, bio-washed apparel, and corporate merchandise engineered at our New Delhi facility.' ?>
+      </p>
+    </div>
   </div>
 </section>
 
@@ -42,16 +101,22 @@ $products = get_catalog_products($categorySlug, $searchTerm);
     <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem; border-bottom:1px solid var(--border-light); padding-bottom:2rem;">
       <!-- Category Badges -->
       <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+        <a href="<?= url('products/') ?>" 
+           class="gallery-filter-btn <?= empty($categorySlug) ? 'active' : '' ?>">
+          All Products
+        </a>
         <?php foreach ($categories as $cat): ?>
-          <a href="<?= empty($cat['slug']) ? url('products.php') : url('products.php?category=' . urlencode($cat['slug'])) ?>" 
-             class="gallery-filter-btn <?= ($categorySlug === $cat['slug']) ? 'active' : '' ?>">
-            <?= e($cat['name']) ?>
-          </a>
+          <?php if (!empty($cat['slug'])): ?>
+            <a href="<?= category_url($cat['slug']) ?>" 
+               class="gallery-filter-btn <?= ($categorySlug === $cat['slug']) ? 'active' : '' ?>">
+              <?= e($cat['name']) ?>
+            </a>
+          <?php endif; ?>
         <?php endforeach; ?>
       </div>
 
       <!-- Search Box -->
-      <form action="<?= url('products.php') ?>" method="GET" style="display:flex; gap:0.5rem; align-items:center;">
+      <form action="<?= url('products/') ?>" method="GET" style="display:flex; gap:0.5rem; align-items:center;">
         <?php if ($categorySlug): ?>
           <input type="hidden" name="category" value="<?= e($categorySlug) ?>">
         <?php endif; ?>
@@ -65,7 +130,7 @@ $products = get_catalog_products($categorySlug, $searchTerm);
         >
         <button type="submit" class="btn btn-sm btn-navy">Search</button>
         <?php if ($searchTerm || $categorySlug): ?>
-          <a href="<?= url('products.php') ?>" class="btn btn-sm btn-outline">Reset</a>
+          <a href="<?= url('products/') ?>" class="btn btn-sm btn-outline">Reset</a>
         <?php endif; ?>
       </form>
     </div>
@@ -77,11 +142,11 @@ $products = get_catalog_products($categorySlug, $searchTerm);
   <div class="container">
     <?php if (empty($products)): ?>
       <div class="text-center" style="padding:4.5rem 1.5rem; background-color:var(--ivory); border-radius:var(--radius-lg); border:1.5px dashed var(--border-gold);">
-        <h3 style="color:var(--navy); margin-bottom:0.75rem;">No products match your search</h3>
+        <h3 style="color:var(--navy); margin-bottom:0.75rem;">No products match your criteria</h3>
         <p style="color:var(--slate); max-width:480px; margin:0 auto 1.5rem;">
           Try clearing your search query or select another category to view available transfers and apparel.
         </p>
-        <a href="<?= url('products.php') ?>" class="btn btn-navy">View All Products</a>
+        <a href="<?= url('products/') ?>" class="btn btn-navy">View All Products</a>
       </div>
     <?php else: ?>
       <div class="products-grid">
@@ -134,7 +199,7 @@ $products = get_catalog_products($categorySlug, $searchTerm);
                 <a href="<?= product_url($prod['slug']) ?>" class="btn btn-outline" aria-label="View details for <?= e($prod['title']) ?>">
                   View Details
                 </a>
-                <a href="<?= url('get-quote.php?service_slug=' . urlencode($prod['service_slug'] ?? '')) ?>" class="btn btn-primary" aria-label="Request quote for <?= e($prod['title']) ?>">
+                <a href="<?= url('get-quote/?service_slug=' . urlencode($prod['service_slug'] ?? '')) ?>" class="btn btn-primary" aria-label="Request quote for <?= e($prod['title']) ?>">
                   Order / Quote
                 </a>
               </div>
@@ -162,7 +227,7 @@ $products = get_catalog_products($categorySlug, $searchTerm);
       We partner with commercial screen printers, DTG studios, corporate merchandisers, and clothing labels across India for ongoing wholesale roll supply with same-day prepress turnaround.
     </p>
     <div style="display:flex; justify-content:center; gap:1.25rem; flex-wrap:wrap;">
-      <a href="<?= url('contact.php') ?>" class="btn btn-primary btn-lg">
+      <a href="<?= url('contact/') ?>" class="btn btn-primary btn-lg">
         <span>Inquire About Wholesale Rates</span> &rarr;
       </a>
       <a href="https://wa.me/919354028199?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20wholesale%20gang%20roll%20supply." target="_blank" rel="noopener" class="btn btn-outline-white btn-lg">

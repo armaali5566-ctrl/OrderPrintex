@@ -34,7 +34,7 @@ require_once __DIR__ . '/../includes/header.php';
           Live status milestones, tracking numbers, and proof approval for approved production jobs.
         </p>
       </div>
-      <a href="<?= url('get-quote.php') ?>" class="btn btn-primary">
+      <a href="<?= url('get-quote/') ?>" class="btn btn-primary">
         <span>+ Place New Print Order</span>
       </a>
     </div>
@@ -42,11 +42,11 @@ require_once __DIR__ . '/../includes/header.php';
     <?= render_flash() ?>
 
     <div style="display:flex; gap:0.5rem; border-bottom:1px solid var(--border-light); margin-bottom:2rem; overflow-x:auto;">
-      <a href="<?= url('account/dashboard.php') ?>" class="gallery-filter-btn">Overview</a>
-      <a href="<?= url('account/enquiries.php') ?>" class="gallery-filter-btn">My Enquiries</a>
-      <a href="<?= url('account/quotations.php') ?>" class="gallery-filter-btn">My Quotations</a>
-      <a href="<?= url('account/orders.php') ?>" class="gallery-filter-btn active">My Orders (<?= count($orders) ?>)</a>
-      <a href="<?= url('account/profile.php') ?>" class="gallery-filter-btn">Settings</a>
+      <a href="<?= account_url() ?>" class="gallery-filter-btn">Overview</a>
+      <a href="<?= account_url('enquiries') ?>" class="gallery-filter-btn">My Enquiries</a>
+      <a href="<?= account_url('quotations') ?>" class="gallery-filter-btn">My Quotations</a>
+      <a href="<?= account_url('orders') ?>" class="gallery-filter-btn active">My Orders (<?= count($orders) ?>)</a>
+      <a href="<?= account_url('profile') ?>" class="gallery-filter-btn">Settings</a>
     </div>
 
     <div class="panel-card">
@@ -93,7 +93,7 @@ require_once __DIR__ . '/../includes/header.php';
                     <?php endif; ?>
                   </td>
                   <td>
-                    <a href="<?= url('account/order-details.php?id=' . $ord['id']) ?>" class="btn btn-sm btn-navy">
+                    <a href="<?= url('account/orders/' . $ord['id'] . '/') ?>" class="btn btn-sm btn-navy">
                       Track &amp; View
                     </a>
                   </td>

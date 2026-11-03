@@ -39,37 +39,105 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Mobile Dropdown Click Toggle
+  // 2b. Restored Printing Services Dropdown (Desktop Hover & Click + Mobile Tap-to-Open)
   const dropdownItems = document.querySelectorAll('.nav-item.has-dropdown');
   dropdownItems.forEach(item => {
-    const link = item.querySelector('.nav-link');
-    if (link) {
-      link.addEventListener('click', function (e) {
-        if (window.innerWidth <= 768) {
+    const toggle = item.querySelector('.dropdown-toggle, .nav-link');
+    const menu = item.querySelector('.dropdown-menu');
+
+    if (toggle) {
+      // Click handler: on mobile, prevents navigation and toggles dropdown.
+      // On desktop, click also toggles the open state smoothly.
+      toggle.addEventListener('click', function (e) {
+        const isMobile = window.innerWidth <= 992;
+        if (isMobile) {
           e.preventDefault();
-          item.classList.toggle('dropdown-open');
+          const isOpen = item.classList.toggle('dropdown-open');
+          toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        } else {
+          // On desktop, allow click to toggle open state
+          e.preventDefault();
+          const isOpen = item.classList.toggle('dropdown-open');
+          toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         }
+      });
+    }
+
+    // Desktop hover management for accessibility & smooth hover
+    item.addEventListener('mouseenter', function () {
+      if (window.innerWidth > 992 && toggle) {
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    item.addEventListener('mouseleave', function () {
+      if (window.innerWidth > 992) {
+        item.classList.remove('dropdown-open');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function (e) {
+    dropdownItems.forEach(item => {
+      if (!item.contains(e.target)) {
+        item.classList.remove('dropdown-open');
+        const toggle = item.querySelector('.dropdown-toggle, .nav-link');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  // Close dropdown on Escape key
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      dropdownItems.forEach(item => {
+        item.classList.remove('dropdown-open');
+        const toggle = item.querySelector('.dropdown-toggle, .nav-link');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
       });
     }
   });
 
-  // 3. Interactive FAQ Accordion
-  const faqItems = document.querySelectorAll('.faq-item');
-  faqItems.forEach(item => {
-    const trigger = item.querySelector('.faq-question-btn, .faq-trigger, .faq-question');
-    if (trigger) {
-      trigger.addEventListener('click', function () {
-        const isActive = item.classList.contains('active');
-        // Close siblings for accordion behavior
-        faqItems.forEach(sibling => sibling.classList.remove('active'));
-        if (!isActive) {
-          item.classList.add('active');
-        }
-      });
-    }
+  // Close mobile drawer when any navigation or dropdown link is clicked
+  const allNavLinks = document.querySelectorAll('.dropdown-link, .nav-menu .nav-link:not(.dropdown-toggle)');
+  allNavLinks.forEach(link => {
+    link.addEventListener('click', function () {
+      if (navMenu && navMenu.classList.contains('open')) {
+        navMenu.classList.remove('open');
+        if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+    });
   });
 
-  // 4. Gallery Category Filter Tabs
+  // 2c. Account User Dropdown (Hover on Desktop, Tap on Mobile & Click Outside)
+  const navUserDropdown = document.getElementById('navUserDropdown');
+  const navUserBtn = document.getElementById('navUserBtn');
+  if (navUserDropdown && navUserBtn) {
+    navUserBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      const isOpen = navUserDropdown.classList.toggle('is-open');
+      navUserBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!navUserDropdown.contains(e.target)) {
+        navUserDropdown.classList.remove('is-open');
+        navUserBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        navUserDropdown.classList.remove('is-open');
+        navUserBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // 3. Gallery Category Filter Tabs
   const filterButtons = document.querySelectorAll('.gallery-filter-btn');
   const galleryItems = document.querySelectorAll('.gallery-item');
   if (filterButtons.length && galleryItems.length) {
@@ -236,5 +304,35 @@ document.addEventListener('DOMContentLoaded', function () {
       }, 250);
     }
   };
+
+  // 7. Light / Dark Theme Switcher
+  (function initThemeSwitcher() {
+    function getTheme() {
+      return document.documentElement.getAttribute('data-theme') || 'light';
+    }
+
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      try {
+        localStorage.setItem('op_theme', theme);
+      } catch (e) {}
+
+      document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+        btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+        btn.setAttribute('title', theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme');
+      });
+    }
+
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.theme-toggle-btn');
+      if (btn) {
+        e.preventDefault();
+        const nextTheme = getTheme() === 'dark' ? 'light' : 'dark';
+        setTheme(nextTheme);
+      }
+    });
+
+    setTheme(getTheme());
+  })();
 });
 

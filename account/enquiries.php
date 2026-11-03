@@ -36,7 +36,7 @@ require_once __DIR__ . '/../includes/header.php';
           All custom print requests and uploaded artwork files submitted under your account.
         </p>
       </div>
-      <a href="<?= url('get-quote.php') ?>" class="btn btn-primary">
+      <a href="<?= url('get-quote/') ?>" class="btn btn-primary">
         <span>+ Submit New Artwork</span>
       </a>
     </div>
@@ -44,11 +44,11 @@ require_once __DIR__ . '/../includes/header.php';
     <?= render_flash() ?>
 
     <div style="display:flex; gap:0.5rem; border-bottom:1px solid var(--border-light); margin-bottom:2rem; overflow-x:auto;">
-      <a href="<?= url('account/dashboard.php') ?>" class="gallery-filter-btn">Overview</a>
-      <a href="<?= url('account/enquiries.php') ?>" class="gallery-filter-btn active">My Enquiries (<?= count($enquiries) ?>)</a>
-      <a href="<?= url('account/quotations.php') ?>" class="gallery-filter-btn">My Quotations</a>
-      <a href="<?= url('account/orders.php') ?>" class="gallery-filter-btn">My Orders</a>
-      <a href="<?= url('account/profile.php') ?>" class="gallery-filter-btn">Settings</a>
+      <a href="<?= account_url() ?>" class="gallery-filter-btn">Overview</a>
+      <a href="<?= account_url('enquiries') ?>" class="gallery-filter-btn active">My Enquiries (<?= count($enquiries) ?>)</a>
+      <a href="<?= account_url('quotations') ?>" class="gallery-filter-btn">My Quotations</a>
+      <a href="<?= account_url('orders') ?>" class="gallery-filter-btn">My Orders</a>
+      <a href="<?= account_url('profile') ?>" class="gallery-filter-btn">Settings</a>
     </div>
 
     <div class="panel-card">

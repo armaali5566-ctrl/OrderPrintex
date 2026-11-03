@@ -30,6 +30,17 @@ function product_url(string $slug): string {
 }
 
 /**
+ * Generate clean SEO category URL: /product/category/slug-name/ or /products/
+ */
+function category_url(?string $slug = null): string {
+    if (empty($slug)) {
+        return url('products/');
+    }
+    $cleanSlug = trim(trim($slug), '/');
+    return url('product/category/' . $cleanSlug . '/');
+}
+
+/**
  * Generate clean SEO blog URL: /blog/ or /blog/slug-name/
  */
 function blog_url(?string $slug = null): string {
@@ -41,11 +52,53 @@ function blog_url(?string $slug = null): string {
 }
 
 /**
+ * Generate clean SEO blog category URL: /blog/category/slug-name/
+ */
+function blog_category_url(string $slug): string {
+    $cleanSlug = trim(trim($slug), '/');
+    return url('blog/category/' . $cleanSlug . '/');
+}
+
+/**
  * Generate clean SEO service URL: /services/slug-name/
  */
 function service_url(string $slug): string {
     $cleanSlug = trim(trim($slug), '/');
     return url('services/' . $cleanSlug . '/');
+}
+
+/**
+ * Clean URLs for static and functional pages
+ */
+function page_url(string $page): string {
+    $clean = trim(trim($page), '/');
+    return url($clean . '/');
+}
+
+function cart_url(): string {
+    return url('cart/');
+}
+
+function checkout_url(): string {
+    return url('checkout/');
+}
+
+function pricing_url(): string {
+    return url('pricing/');
+}
+
+function account_url(string $subpath = ''): string {
+    if (empty($subpath)) {
+        return url('account/');
+    }
+    return url('account/' . trim(trim($subpath), '/') . '/');
+}
+
+/**
+ * Helper alias for static asset URLs
+ */
+function asset_url(string $path = ''): string {
+    return url($path);
 }
 
 /**
@@ -144,7 +197,7 @@ function set_setting(string $key, string $value, string $group = 'general'): boo
     $exists = db_fetch_one("SELECT id FROM site_settings WHERE setting_key = :k", ['k' => $key]);
     if ($exists) {
         db_update('site_settings', ['setting_value' => $value], 'setting_key = :k', ['k' => $key]);
-    } else {
+    } else {    
         db_insert('site_settings', [
             'setting_key' => $key,
             'setting_value' => $value,
@@ -159,6 +212,10 @@ function set_setting(string $key, string $value, string $group = 'general'): boo
  */
 function format_currency(float $amount): string {
     return '₹' . number_format($amount, 2, '.', ',');
+}
+
+function format_price(float $amount): string {
+    return format_currency($amount);
 }
 
 /**
@@ -232,6 +289,10 @@ function get_status_badge(string $status, string $context = 'order'): string {
 
     $info = $map[$status] ?? ['label' => ucfirst(str_replace('_', ' ', $status)), 'class' => 'badge-secondary'];
     return sprintf('<span class="status-badge %s">%s</span>', e($info['class']), e($info['label']));
+}
+
+function status_badge(string $status, string $context = 'order'): string {
+    return get_status_badge($status, $context);
 }
 
 /**

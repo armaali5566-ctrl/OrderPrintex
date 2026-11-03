@@ -1,26 +1,26 @@
 <?php
 /**
  * OrderPrintex - Admin Master Dashboard
- * Fully Database-Driven Real Metrics
+ * Fully Database-Driven Real Metrics & Fast Action Center
  */
 
 $adminTitle = "Dashboard Overview";
 require_once __DIR__ . '/header.php';
 
 // Actual Database-Driven Metrics
-$totalEnquiries   = db_fetch_one("SELECT COUNT(*) as cnt FROM enquiries")['cnt'] ?? 0;
-$pendingQuotes    = db_fetch_one("SELECT COUNT(*) as cnt FROM quotations WHERE status = 'sent'")['cnt'] ?? 0;
+$totalProducts    = db_fetch_one("SELECT COUNT(*) as cnt FROM products")['cnt'] ?? 0;
+$totalVariations  = db_fetch_one("SELECT COUNT(*) as cnt FROM product_variations")['cnt'] ?? 0;
 $totalOrders      = db_fetch_one("SELECT COUNT(*) as cnt FROM orders")['cnt'] ?? 0;
 $activeOrders     = db_fetch_one("SELECT COUNT(*) as cnt FROM orders WHERE order_status NOT IN ('delivered', 'cancelled')")['cnt'] ?? 0;
-$completedOrders  = db_fetch_one("SELECT COUNT(*) as cnt FROM orders WHERE order_status = 'delivered'")['cnt'] ?? 0;
-$totalCustomers   = db_fetch_one("SELECT COUNT(*) as cnt FROM users WHERE role = 'customer'")['cnt'] ?? 0;
 $totalRevenue     = db_fetch_one("SELECT SUM(total_amount) as rev FROM orders WHERE payment_status = 'paid'")['rev'] ?? 0.00;
+$totalEnquiries   = db_fetch_one("SELECT COUNT(*) as cnt FROM enquiries")['cnt'] ?? 0;
+$totalReviews     = db_fetch_one("SELECT COUNT(*) as cnt FROM product_reviews")['cnt'] ?? 0;
+$totalBlogs       = db_fetch_one("SELECT COUNT(*) as cnt FROM blog_posts")['cnt'] ?? 0;
 
 // Recent Enquiries
 $recentEnquiries = db_fetch_all("
-    SELECT e.*, ef.file_path, ef.original_name 
+    SELECT e.*
     FROM enquiries e 
-    LEFT JOIN enquiry_files ef ON ef.enquiry_id = e.id 
     ORDER BY e.created_at DESC LIMIT 5
 ");
 
@@ -41,93 +41,92 @@ $recentActivity = db_fetch_all("
 ");
 ?>
 
+<!-- Quick Action Shortcuts Bar -->
+<div style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.25rem 1.5rem; margin-bottom:1.75rem; box-shadow: var(--shadow-card); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+  <div>
+    <h3 style="font-size:1.05rem; color:var(--navy); font-weight:800; margin:0 0 0.25rem;">Quick Management Actions</h3>
+    <p style="margin:0; font-size:0.825rem; color:var(--slate);">Shortcuts to catalog updates, variation generator, media uploads, and website settings.</p>
+  </div>
+  <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+    <a href="<?= url('admin/products.php?action=new') ?>" class="btn btn-sm btn-primary">+ Add Product</a>
+    <a href="<?= url('admin/variations.php') ?>" class="btn btn-sm btn-outline">⇄ Variations Workbench</a>
+    <a href="<?= url('admin/attributes.php') ?>" class="btn btn-sm btn-outline">⚙ Attributes</a>
+    <a href="<?= url('admin/media.php') ?>" class="btn btn-sm btn-outline">📁 Media Library</a>
+    <a href="<?= url('admin/settings.php') ?>" class="btn btn-sm btn-navy">⚙ Site Settings</a>
+  </div>
+</div>
+
 <!-- Metrics Summary Grid -->
-<div class="metrics-grid">
-  <div class="metric-card">
+<div class="metrics-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:1.25rem; margin-bottom:2rem;">
+  
+  <div class="metric-card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.25rem; box-shadow:0 4px 12px rgba(15, 25, 45, 0.08); display:flex; justify-content:space-between; align-items:center;">
     <div>
-      <div class="metric-label">Total Enquiries</div>
-      <div class="metric-value"><?= (int)$totalEnquiries ?></div>
+      <div class="metric-label" style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:var(--slate);">Products Catalog</div>
+      <div class="metric-value" style="font-size:1.8rem; font-weight:800; color:var(--navy); margin-top:0.25rem;"><?= (int)$totalProducts ?></div>
+      <div style="font-size:0.75rem; color:var(--royal); font-weight:600; margin-top:2px;">
+        <a href="<?= url('admin/products.php') ?>" style="color:var(--royal); text-decoration:none;">View all products &rarr;</a>
+      </div>
     </div>
-    <div class="metric-icon-box">
-      <svg style="width:24px;height:24px;fill:currentColor;" viewBox="0 0 20 20">
-        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-      </svg>
-    </div>
+    <div style="font-size:2rem; color:var(--royal);">📦</div>
   </div>
 
-  <div class="metric-card">
+  <div class="metric-card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.25rem; box-shadow:0 4px 12px rgba(15, 25, 45, 0.08); display:flex; justify-content:space-between; align-items:center;">
     <div>
-      <div class="metric-label">Pending Quotations</div>
-      <div class="metric-value text-gold"><?= (int)$pendingQuotes ?></div>
+      <div class="metric-label" style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:var(--slate);">Active SKU Variations</div>
+      <div class="metric-value" style="font-size:1.8rem; font-weight:800; color:var(--navy); margin-top:0.25rem;"><?= (int)$totalVariations ?></div>
+      <div style="font-size:0.75rem; color:var(--royal); font-weight:600; margin-top:2px;">
+        <a href="<?= url('admin/variations.php') ?>" style="color:var(--royal); text-decoration:none;">Manage variations &rarr;</a>
+      </div>
     </div>
-    <div class="metric-icon-box">
-      <svg style="width:24px;height:24px;fill:currentColor;" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 8h3a1 1 0 110 2h-4a1 1 0 01-1-1V5a1 1 0 112 0v5z" clip-rule="evenodd"/>
-      </svg>
-    </div>
+    <div style="font-size:2rem; color:var(--gold);">⇄</div>
   </div>
 
-  <div class="metric-card">
+  <div class="metric-card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.25rem; box-shadow:0 4px 12px rgba(15, 25, 45, 0.08); display:flex; justify-content:space-between; align-items:center;">
     <div>
-      <div class="metric-label">Total Orders</div>
-      <div class="metric-value"><?= (int)$totalOrders ?></div>
+      <div class="metric-label" style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:var(--slate);">Orders Placed</div>
+      <div class="metric-value" style="font-size:1.8rem; font-weight:800; color:var(--navy); margin-top:0.25rem;"><?= (int)$totalOrders ?></div>
+      <div style="font-size:0.75rem; color:#059669; font-weight:600; margin-top:2px;">
+        <?= (int)$activeOrders ?> in production
+      </div>
     </div>
-    <div class="metric-icon-box">
-      <svg style="width:24px;height:24px;fill:currentColor;" viewBox="0 0 20 20">
-        <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
-        <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
-      </svg>
-    </div>
+    <div style="font-size:2rem; color:#059669;">🛍</div>
   </div>
 
-  <div class="metric-card">
+  <div class="metric-card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.25rem; box-shadow:0 4px 12px rgba(15, 25, 45, 0.08); display:flex; justify-content:space-between; align-items:center;">
     <div>
-      <div class="metric-label">Active in Production</div>
-      <div class="metric-value text-blue"><?= (int)$activeOrders ?></div>
+      <div class="metric-label" style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:var(--slate);">Customer Inquiries</div>
+      <div class="metric-value" style="font-size:1.8rem; font-weight:800; color:var(--navy); margin-top:0.25rem;"><?= (int)$totalEnquiries ?></div>
+      <div style="font-size:0.75rem; color:var(--royal); font-weight:600; margin-top:2px;">
+        <a href="<?= url('admin/enquiries.php') ?>" style="color:var(--royal); text-decoration:none;">View inquiries &rarr;</a>
+      </div>
     </div>
-    <div class="metric-icon-box">
-      <svg style="width:24px;height:24px;fill:currentColor;" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
-      </svg>
-    </div>
+    <div style="font-size:2rem; color:var(--royal);">✉</div>
   </div>
 
-  <div class="metric-card">
+  <div class="metric-card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.25rem; box-shadow:0 4px 12px rgba(15, 25, 45, 0.08); display:flex; justify-content:space-between; align-items:center;">
     <div>
-      <div class="metric-label">Completed Deliveries</div>
-      <div class="metric-value" style="color:#15803D;"><?= (int)$completedOrders ?></div>
+      <div class="metric-label" style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:var(--slate);">Customer Reviews</div>
+      <div class="metric-value" style="font-size:1.8rem; font-weight:800; color:var(--navy); margin-top:0.25rem;"><?= (int)$totalReviews ?></div>
+      <div style="font-size:0.75rem; color:var(--gold); font-weight:600; margin-top:2px;">
+        <a href="<?= url('admin/reviews.php') ?>" style="color:var(--navy); text-decoration:none;">Moderate reviews &rarr;</a>
+      </div>
     </div>
-    <div class="metric-icon-box">
-      <svg style="width:24px;height:24px;fill:currentColor;" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-      </svg>
-    </div>
+    <div style="font-size:2rem; color:#F59E0B;">★</div>
   </div>
 
-  <div class="metric-card">
-    <div>
-      <div class="metric-label">Registered Customers</div>
-      <div class="metric-value"><?= (int)$totalCustomers ?></div>
-    </div>
-    <div class="metric-icon-box">
-      <svg style="width:24px;height:24px;fill:currentColor;" viewBox="0 0 20 20">
-        <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
-      </svg>
-    </div>
-  </div>
 </div>
 
 <!-- Two-Column Grid: Recent Enquiries & Recent Orders -->
 <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:2rem;">
+  
   <!-- Recent Enquiries -->
-  <div class="panel-card" style="margin-bottom:0;">
-    <div class="panel-header">
-      <h3 class="panel-title">Latest Customer Enquiries</h3>
-      <a href="<?= url('admin/enquiries.php') ?>" class="text-gold" style="font-size:0.85rem; font-weight:600;">View All &rarr;</a>
+  <div class="admin-card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.5rem; box-shadow:0 4px 12px rgba(15, 25, 45, 0.08);">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1px solid rgba(20,35,60,0.08); padding-bottom:0.75rem;">
+      <h3 style="font-size:1.1rem; color:var(--navy); font-weight:800; margin:0;">Latest Customer Enquiries</h3>
+      <a href="<?= url('admin/enquiries.php') ?>" style="font-size:0.8rem; font-weight:700; color:var(--royal); text-decoration:none;">View All &rarr;</a>
     </div>
     <div class="table-responsive">
-      <table class="data-table">
+      <table class="data-table" style="width:100%; font-size:0.85rem;">
         <thead>
           <tr>
             <th>Ref #</th>
@@ -146,24 +145,24 @@ $recentActivity = db_fetch_all("
           <?php else: ?>
             <?php foreach ($recentEnquiries as $enq): ?>
               <tr>
-                <td class="ref-cell"><?= e($enq['ref_number']) ?></td>
+                <td style="font-weight:700; color:var(--navy);"><?= e($enq['ref_number']) ?></td>
                 <td>
                   <strong><?= e($enq['customer_name']) ?></strong><br>
                   <small style="color:var(--slate);"><?= e($enq['customer_phone']) ?></small>
                 </td>
                 <td><?= e($enq['service_name']) ?></td>
                 <td>
-                  <?php if ($enq['file_path']): ?>
-                    <a href="<?= url(e($enq['file_path'])) ?>" target="_blank" class="text-blue" download style="font-weight:600; font-size:0.8rem;">
+                  <?php if (!empty($enq['file_path'])): ?>
+                    <a href="<?= url(e($enq['file_path'])) ?>" target="_blank" download style="color:var(--royal); font-weight:700; font-size:0.75rem;">
                       Download File
                     </a>
                   <?php else: ?>
-                    <span class="text-muted">None</span>
+                    <span style="color:var(--text-muted); font-size:0.75rem;">None</span>
                   <?php endif; ?>
                 </td>
                 <td><?= get_status_badge($enq['status']) ?></td>
                 <td>
-                  <a href="<?= url('admin/quotations.php?action=create&enquiry_id=' . $enq['id']) ?>" class="btn btn-sm btn-primary" style="padding:0.35rem 0.65rem; font-size:0.75rem;">
+                  <a href="<?= url('admin/quotations.php?action=create&enquiry_id=' . $enq['id']) ?>" class="btn btn-xs btn-primary">
                     Quote
                   </a>
                 </td>
@@ -176,13 +175,13 @@ $recentActivity = db_fetch_all("
   </div>
 
   <!-- Recent Orders -->
-  <div class="panel-card" style="margin-bottom:0;">
-    <div class="panel-header">
-      <h3 class="panel-title">Active Production Orders</h3>
-      <a href="<?= url('admin/orders.php') ?>" class="text-gold" style="font-size:0.85rem; font-weight:600;">View All &rarr;</a>
+  <div class="admin-card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.5rem; box-shadow:0 4px 12px rgba(15, 25, 45, 0.08);">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1px solid rgba(20,35,60,0.08); padding-bottom:0.75rem;">
+      <h3 style="font-size:1.1rem; color:var(--navy); font-weight:800; margin:0;">Active Production Orders</h3>
+      <a href="<?= url('admin/orders.php') ?>" style="font-size:0.8rem; font-weight:700; color:var(--royal); text-decoration:none;">View All &rarr;</a>
     </div>
     <div class="table-responsive">
-      <table class="data-table">
+      <table class="data-table" style="width:100%; font-size:0.85rem;">
         <thead>
           <tr>
             <th>Order #</th>
@@ -200,17 +199,17 @@ $recentActivity = db_fetch_all("
           <?php else: ?>
             <?php foreach ($recentOrders as $ord): ?>
               <tr>
-                <td class="ref-cell"><?= e($ord['order_number']) ?></td>
+                <td style="font-weight:700; color:var(--navy);"><?= e($ord['order_number']) ?></td>
                 <td>
                   <strong><?= e($ord['customer_name']) ?></strong><br>
                   <small style="color:var(--slate);"><?= e($ord['city']) ?></small>
                 </td>
-                <td style="font-weight:700; color:var(--navy); font-family:var(--font-mono);">
+                <td style="font-weight:700; color:var(--navy);">
                   <?= format_currency($ord['total_amount']) ?>
                 </td>
                 <td><?= get_status_badge($ord['order_status']) ?></td>
                 <td>
-                  <a href="<?= url('admin/orders.php?order_id=' . $ord['id']) ?>" class="btn btn-sm btn-outline" style="padding:0.35rem 0.65rem; font-size:0.75rem;">
+                  <a href="<?= url('admin/orders.php?order_id=' . $ord['id']) ?>" class="btn btn-xs btn-outline">
                     Manage
                   </a>
                 </td>
@@ -221,15 +220,16 @@ $recentActivity = db_fetch_all("
       </table>
     </div>
   </div>
+
 </div>
 
 <!-- Recent Activity Logs Table -->
-<div class="panel-card">
-  <div class="panel-header">
-    <h3 class="panel-title">Security &amp; Production Activity Log</h3>
+<div class="admin-card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.5rem; box-shadow:0 4px 12px rgba(15, 25, 45, 0.08);">
+  <div style="margin-bottom:1rem; border-bottom:1px solid rgba(20,35,60,0.08); padding-bottom:0.75rem;">
+    <h3 style="font-size:1.1rem; color:var(--navy); font-weight:800; margin:0;">Security &amp; Production Activity Log</h3>
   </div>
   <div class="table-responsive">
-    <table class="data-table">
+    <table class="data-table" style="width:100%; font-size:0.85rem;">
       <thead>
         <tr>
           <th>Timestamp</th>
@@ -247,11 +247,11 @@ $recentActivity = db_fetch_all("
         <?php else: ?>
           <?php foreach ($recentActivity as $act): ?>
             <tr>
-              <td style="font-size:0.82rem; color:var(--slate-light);"><?= format_date($act['created_at'], 'd M Y, h:i:s A') ?></td>
+              <td style="color:var(--text-muted); font-size:0.8rem;"><?= format_date($act['created_at'], 'd M Y, h:i A') ?></td>
               <td><?= e($act['user_name'] ?: ($act['user_email'] ?: 'System Guest')) ?></td>
-              <td><span class="status-badge badge-secondary"><?= e($act['action']) ?></span></td>
-              <td style="font-size:0.85rem;"><?= e($act['details'] ?: '—') ?></td>
-              <td style="font-family:var(--font-mono); font-size:0.8rem;"><?= e($act['ip_address']) ?></td>
+              <td><span class="badge" style="background:rgba(20,35,60,0.06); color:var(--navy); font-weight:700;"><?= e($act['action']) ?></span></td>
+              <td style="font-size:0.825rem;"><?= e($act['details'] ?: '—') ?></td>
+              <td style="color:var(--text-muted); font-size:0.8rem; font-family:monospace;"><?= e($act['ip_address']) ?></td>
             </tr>
           <?php endforeach; ?>
         <?php endif; ?>

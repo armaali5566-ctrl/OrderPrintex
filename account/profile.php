@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             log_activity($user['id'], 'update_profile', 'Updated profile information.');
             set_flash('success', 'Your profile details have been updated successfully.');
         }
-        header('Location: ' . url('account/profile.php'));
+        header('Location: ' . account_url('profile'));
         exit;
 
     } elseif ($action === 'change_password') {
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             log_activity($user['id'], 'change_password', 'Password changed successfully.');
             set_flash('success', 'Your password has been changed successfully.');
         }
-        header('Location: ' . url('account/profile.php'));
+        header('Location: ' . account_url('profile'));
         exit;
     }
 }
@@ -87,18 +87,18 @@ require_once __DIR__ . '/../includes/header.php';
     <?= render_flash() ?>
 
     <div style="display:flex; gap:0.5rem; border-bottom:1px solid var(--border-light); margin-bottom:2rem; overflow-x:auto;">
-      <a href="<?= url('account/dashboard.php') ?>" class="gallery-filter-btn">Overview</a>
-      <a href="<?= url('account/enquiries.php') ?>" class="gallery-filter-btn">My Enquiries</a>
-      <a href="<?= url('account/quotations.php') ?>" class="gallery-filter-btn">My Quotations</a>
-      <a href="<?= url('account/orders.php') ?>" class="gallery-filter-btn">My Orders</a>
-      <a href="<?= url('account/profile.php') ?>" class="gallery-filter-btn active">Settings</a>
+      <a href="<?= account_url() ?>" class="gallery-filter-btn">Overview</a>
+      <a href="<?= account_url('enquiries') ?>" class="gallery-filter-btn">My Enquiries</a>
+      <a href="<?= account_url('quotations') ?>" class="gallery-filter-btn">My Quotations</a>
+      <a href="<?= account_url('orders') ?>" class="gallery-filter-btn">My Orders</a>
+      <a href="<?= account_url('profile') ?>" class="gallery-filter-btn active">Settings</a>
     </div>
 
     <!-- Edit Profile Card -->
     <div class="upload-card" style="margin-bottom:2rem;">
       <h3 style="margin-bottom:1.5rem; font-size:1.35rem;">Contact &amp; Shipping Profile</h3>
       
-      <form action="<?= url('account/profile.php') ?>" method="POST">
+      <form action="<?= account_url('profile') ?>" method="POST">
         <?= csrf_field() ?>
         <input type="hidden" name="action" value="update_profile">
 
@@ -123,30 +123,55 @@ require_once __DIR__ . '/../includes/header.php';
             <input type="text" name="company_name" id="profCompany" class="form-control" value="<?= e($user['company_name'] ?? '') ?>" placeholder="e.g. My Apparel Brand">
           </div>
 
-          <div class="form-group full-width">
-            <label class="form-label" for="profAddress">Default Delivery Address</label>
-            <input type="text" name="address" id="profAddress" class="form-control" value="<?= e($user['address'] ?? '') ?>" placeholder="Flat/House, Street, Area">
+        </div>
+
+        <!-- Saved Delivery Address Section -->
+        <div style="margin-top:2.25rem; border-top:1px solid var(--border-light); padding-top:1.5rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <h4 style="font-size:1.15rem; color:var(--navy); font-weight:700; margin:0;">Saved Delivery Address</h4>
+            <span class="badge" style="background:#ECFDF5; color:#065F46; font-weight:700;">Default Destination</span>
           </div>
 
-          <div class="form-group">
-            <label class="form-label" for="profCity">City</label>
-            <input type="text" name="city" id="profCity" class="form-control" value="<?= e($user['city'] ?? '') ?>">
-          </div>
+          <?php if (!empty($user['address'])): ?>
+            <div style="background:var(--ivory); border:1px solid var(--border-gold); border-radius:8px; padding:1.25rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:flex-start;">
+              <div>
+                <strong style="color:var(--navy); font-size:1rem; display:block; margin-bottom:0.25rem;"><?= e($user['name']) ?></strong>
+                <p style="margin:0; font-size:0.88rem; color:var(--charcoal); line-height:1.6;">
+                  <?= nl2br(e($user['address'])) ?><br>
+                  <?= e($user['city']) ?><?= !empty($user['state']) ? ', ' . e($user['state']) : '' ?> - <?= e($user['pincode']) ?><br>
+                  <span style="color:var(--slate);">Phone: <?= e($user['phone']) ?></span>
+                </p>
+              </div>
+              <span style="font-size:0.8rem; font-weight:700; color:var(--gold);">Active for Orders</span>
+            </div>
+          <?php endif; ?>
 
-          <div class="form-group">
-            <label class="form-label" for="profState">State</label>
-            <input type="text" name="state" id="profState" class="form-control" value="<?= e($user['state'] ?? '') ?>">
-          </div>
+          <div class="form-grid" style="margin-top:0;">
+            <div class="form-group full-width">
+              <label class="form-label" for="profAddress">Shipping Street Address</label>
+              <input type="text" name="address" id="profAddress" class="form-control" value="<?= e($user['address'] ?? '') ?>" placeholder="Flat/House, Street, Area">
+            </div>
 
-          <div class="form-group">
-            <label class="form-label" for="profPin">Pincode</label>
-            <input type="text" name="pincode" id="profPin" class="form-control" value="<?= e($user['pincode'] ?? '') ?>">
+            <div class="form-group">
+              <label class="form-label" for="profCity">City</label>
+              <input type="text" name="city" id="profCity" class="form-control" value="<?= e($user['city'] ?? '') ?>" placeholder="e.g. New Delhi">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="profState">State</label>
+              <input type="text" name="state" id="profState" class="form-control" value="<?= e($user['state'] ?? '') ?>" placeholder="e.g. Delhi">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="profPin">Pincode</label>
+              <input type="text" name="pincode" id="profPin" class="form-control" value="<?= e($user['pincode'] ?? '') ?>" placeholder="e.g. 110059">
+            </div>
           </div>
         </div>
 
         <div style="margin-top:2rem; text-align:right;">
           <button type="submit" class="btn btn-primary">
-            <span>Save Profile Changes</span>
+            <span>Save Profile &amp; Address</span>
           </button>
         </div>
       </form>
@@ -156,7 +181,7 @@ require_once __DIR__ . '/../includes/header.php';
     <div class="upload-card">
       <h3 style="margin-bottom:1.5rem; font-size:1.35rem;">Change Password</h3>
 
-      <form action="<?= url('account/profile.php') ?>" method="POST">
+      <form action="<?= account_url('profile') ?>" method="POST">
         <?= csrf_field() ?>
         <input type="hidden" name="action" value="change_password">
 

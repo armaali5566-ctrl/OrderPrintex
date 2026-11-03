@@ -2,15 +2,19 @@
 /**
  * OrderPrintex - Single Product Page & Dynamic Pricing Workbench
  * Features:
- *   - Unique Product SKU
+ *   - Unique Product SKU with Dynamic Variation updates
  *   - Object-fit contain full product imagery (never cropped)
- *   - Dynamic Size-Based Pricing with live client-side + backend validation
- *   - Quantity-based wholesale discount tiers
- *   - Material / paper stock and finishing option add-ons
- *   - Complete Product Reviews system (Star rating, breakdown, verified purchase badge)
- *   - Interactive specifications tabs
+ *   - Interactive Variation Selector (Size, Colour, Material) updating SKU, Price, Stock & Image
+ *   - 6 Sequentially Scrolled Product Sections (No tabs or accordions):
+ *       1. Product Overview & Dynamic Pricing Workbench
+ *       2. Technical Specifications
+ *       3. Artwork & File Guidelines
+ *       4. Application & Heat Press Guide
+ *       5. Customer Reviews (Interactive ratings & verified submissions)
+ *       6. Turnaround & PAN-India Shipping
+ *   - Dynamic Quantity Wholesale Discount Tiers
  *   - Schema.org Product and BreadcrumbList JSON-LD
- *   - Safe 404 handling (never redirects invalid slugs to homepage)
+ *   - Safe 404 handling
  */
 
 require_once __DIR__ . '/includes/config.php';
@@ -45,7 +49,74 @@ if (!$product) {
 
 $productId = (int)($product['id'] ?? 1);
 
-// Fetch product sizes from DB for dynamic size-based pricing
+// Fetch variations for this product
+$variations = db_fetch_all("
+    SELECT * FROM product_variations
+    WHERE product_id = :pid AND is_active = 1
+    ORDER BY id ASC
+", ['pid' => $productId]);
+
+$productAttributes = [];
+$variationData = [];
+
+if (!empty($variations)) {
+    // Fetch attributes attached to this product
+    $attrs = db_fetch_all("
+        SELECT a.id, a.name, a.slug
+        FROM product_attributes pa
+        JOIN attributes a ON pa.attribute_id = a.id
+        WHERE pa.product_id = :pid
+        ORDER BY pa.display_order ASC, a.id ASC
+    ", ['pid' => $productId]);
+
+    foreach ($attrs as $attr) {
+        $values = db_fetch_all("
+            SELECT DISTINCT av.id, av.value, av.color_code, av.display_order
+            FROM attribute_values av
+            JOIN product_variation_values pvv ON av.id = pvv.attribute_value_id
+            JOIN product_variations pv ON pvv.variation_id = pv.id
+            WHERE pv.product_id = :pid AND av.attribute_id = :aid AND pv.is_active = 1
+            ORDER BY av.display_order ASC, av.id ASC
+        ", ['pid' => $productId, 'aid' => $attr['id']]);
+
+        if (!empty($values)) {
+            $productAttributes[] = [
+                'id' => (int)$attr['id'],
+                'name' => $attr['name'],
+                'slug' => $attr['slug'],
+                'values' => $values
+            ];
+        }
+    }
+
+    foreach ($variations as $var) {
+        $valRows = db_fetch_all("
+            SELECT av.attribute_id, av.id as val_id
+            FROM product_variation_values pvv
+            JOIN attribute_values av ON pvv.attribute_value_id = av.id
+            WHERE pvv.variation_id = :vid
+        ", ['vid' => $var['id']]);
+
+        $attrMap = [];
+        foreach ($valRows as $vr) {
+            $attrMap[$vr['attribute_id']] = (int)$vr['val_id'];
+        }
+
+        $variationData[] = [
+            'id' => (int)$var['id'],
+            'sku' => $var['sku'],
+            'combination_key' => $var['combination_key'],
+            'regular_price' => (float)$var['regular_price'],
+            'sale_price' => $var['sale_price'] !== null ? (float)$var['sale_price'] : null,
+            'stock_quantity' => (int)$var['stock_quantity'],
+            'is_in_stock' => (int)$var['is_in_stock'],
+            'image_url' => !empty($var['image_url']) ? url($var['image_url']) : null,
+            'attributes' => $attrMap
+        ];
+    }
+}
+
+// Fetch product sizes from DB for dynamic size-based pricing (fallback / gang sheets)
 $sizes = db_fetch_all("SELECT * FROM product_sizes WHERE product_id = :pid ORDER BY display_order ASC", [
     'pid' => $productId
 ]);
@@ -60,7 +131,6 @@ $options = db_fetch_all("SELECT * FROM product_options WHERE product_id = :pid O
     'pid' => $productId
 ]);
 
-// Group options by option_type
 $groupedOptions = [];
 foreach ($options as $opt) {
     $groupedOptions[$opt['option_type']][] = $opt;
@@ -88,8 +158,8 @@ if ($reviewCount > 0) {
 }
 
 // SEO Metadata
-$pageTitle = e($product['title']) . " (SKU: " . e($product['sku']) . ") | OrderPrintex";
-$pageDesc  = e($product['short_desc']);
+$pageTitle = (!empty($product['meta_title']) ? $product['meta_title'] : (e($product['title']) . " (SKU: " . e($product['sku']) . ")")) . " | OrderPrintex";
+$pageDesc  = !empty($product['meta_description']) ? e($product['meta_description']) : e($product['short_desc']);
 $canonical = product_url($product['slug']);
 
 require_once __DIR__ . '/includes/header.php';
@@ -100,6 +170,8 @@ $relatedProducts = array_values(array_filter($allProducts, function ($p) use ($p
     return ($p['slug'] ?? '') !== $product['slug'];
 }));
 $relatedProducts = array_slice($relatedProducts, 0, 4);
+
+$hasVariations = !empty($variationData) && !empty($productAttributes);
 ?>
 
 <!-- Schema.org Product Structured Data -->
@@ -159,7 +231,7 @@ $relatedProducts = array_slice($relatedProducts, 0, 4);
       "@type": "ListItem",
       "position": 3,
       "name": <?= json_encode($product['category_name']) ?>,
-      "item": <?= json_encode(url('products/?category=' . urlencode($product['category_slug'] ?? ''))) ?>
+      "item": <?= json_encode(category_url($product['category_slug'] ?? '')) ?>
     },
     {
       "@type": "ListItem",
@@ -178,7 +250,7 @@ $relatedProducts = array_slice($relatedProducts, 0, 4);
     <span style="color:var(--slate-subtle);">&rsaquo;</span>
     <a href="<?= url('products/') ?>" style="color:var(--navy); font-weight:600;">Products</a>
     <span style="color:var(--slate-subtle);">&rsaquo;</span>
-    <a href="<?= url('products/?category=' . urlencode($product['category_slug'] ?? '')) ?>" style="color:var(--navy); font-weight:600;">
+    <a href="<?= category_url($product['category_slug'] ?? '') ?>" style="color:var(--navy); font-weight:600;">
       <?= e($product['category_name']) ?>
     </a>
     <span style="color:var(--slate-subtle);">&rsaquo;</span>
@@ -186,46 +258,48 @@ $relatedProducts = array_slice($relatedProducts, 0, 4);
   </div>
 </nav>
 
-<!-- Product Details Main Section -->
-<section class="section section-white" style="padding-top:3.5rem; padding-bottom:4.5rem;">
+<!-- ======================================================================= -->
+<!-- SECTION 1: PRODUCT OVERVIEW & DYNAMIC WORKBENCH -->
+<!-- ======================================================================= -->
+<section class="section section-white" id="product-overview-section" style="padding-top:3.5rem; padding-bottom:3.5rem;">
   <div class="container">
     <div class="product-detail-grid">
       
-      <!-- Left Column: Large Product Imagery (Fully Contained, Neutral Background, Zero Cropping) -->
+      <!-- Left Column: Product Imagery -->
       <div class="reveal slide-right">
-        <div class="product-detail-media-card" style="background:#F8F5F0; border-radius:var(--radius-lg); border:1px solid var(--border-light); padding:2rem; text-align:center; position:relative; min-height:480px; display:flex; align-items:center; justify-content:center;">
-          <!-- Permanent status badge that never disappears on hover -->
+        <div class="product-detail-media-card" style="background:var(--bg-surface); border-radius:var(--radius-lg); border:1px solid var(--border-color); padding:2rem; text-align:center; position:relative; min-height:480px; display:flex; align-items:center; justify-content:center; box-shadow: 0 4px 14px rgba(15, 25, 45, 0.09), 0 14px 34px rgba(15, 25, 45, 0.11); overflow:hidden;">
+          <!-- Status badge -->
           <span class="product-badge-tag <?= e($product['badge_class'] ?? 'badge-gold') ?>" style="position:absolute; top:1.25rem; left:1.25rem; z-index:10;">
             <?= e($product['badge'] ?? 'Commercial Grade') ?>
           </span>
 
-          <img src="<?= url(e($product['image_url'])) ?>" alt="<?= e($product['title']) ?> - Full Product View" style="max-width:100%; max-height:420px; object-fit:contain; display:block; margin:0 auto; filter:drop-shadow(0 10px 20px rgba(0,0,0,0.08));" loading="eager">
+          <img id="mainProductImage" src="<?= url(e($product['image_url'])) ?>" alt="<?= e($product['title']) ?> - Full Product View" style="max-width:100%; max-height:420px; object-fit:contain; display:block; margin:0 auto; filter:drop-shadow(0 10px 20px rgba(0,0,0,0.08)); transition:opacity 0.25s ease;" loading="eager">
         </div>
 
         <!-- Technical Guarantees Bar -->
         <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem; margin-top:1.25rem;">
-          <div style="background:var(--ivory); border:1px solid var(--border-light); padding:0.85rem 0.65rem; border-radius:var(--radius-sm); text-align:center;">
-            <div style="color:var(--royal); font-size:1.1rem; margin-bottom:0.25rem;">✓</div>
+          <div style="background:var(--bg-surface); border:1px solid var(--border-color); padding:0.85rem 0.65rem; border-radius:var(--radius-sm); text-align:center; box-shadow: 0 2px 8px rgba(15, 25, 45, 0.06);">
+            <div style="color:var(--emerald); font-size:1.1rem; margin-bottom:0.25rem;">✓</div>
             <div style="font-size:0.75rem; font-weight:700; color:var(--navy); line-height:1.3;">300 DPI Prepress Audit</div>
           </div>
-          <div style="background:var(--ivory); border:1px solid var(--border-light); padding:0.85rem 0.65rem; border-radius:var(--radius-sm); text-align:center;">
-            <div style="color:var(--royal); font-size:1.1rem; margin-bottom:0.25rem;">✓</div>
+          <div style="background:var(--bg-surface); border:1px solid var(--border-color); padding:0.85rem 0.65rem; border-radius:var(--radius-sm); text-align:center; box-shadow: 0 2px 8px rgba(15, 25, 45, 0.06);">
+            <div style="color:var(--emerald); font-size:1.1rem; margin-bottom:0.25rem;">✓</div>
             <div style="font-size:0.75rem; font-weight:700; color:var(--navy); line-height:1.3;">50+ Wash Longevity</div>
           </div>
-          <div style="background:var(--ivory); border:1px solid var(--border-light); padding:0.85rem 0.65rem; border-radius:var(--radius-sm); text-align:center;">
-            <div style="color:var(--royal); font-size:1.1rem; margin-bottom:0.25rem;">✓</div>
-            <div style="font-size:0.75rem; font-weight:700; color:var(--navy); line-height:1.3;">PAN-India Express Shipping</div>
+          <div style="background:var(--bg-surface); border:1px solid var(--border-color); padding:0.85rem 0.65rem; border-radius:var(--radius-sm); text-align:center; box-shadow: 0 2px 8px rgba(15, 25, 45, 0.06);">
+            <div style="color:var(--emerald); font-size:1.1rem; margin-bottom:0.25rem;">✓</div>
+            <div style="font-size:0.75rem; font-weight:700; color:var(--navy); line-height:1.3;">PAN-India Express</div>
           </div>
         </div>
       </div>
 
-      <!-- Right Column: Product Title, SKU, Dynamic Size-Based Pricing Workbench -->
+      <!-- Right Column: Product Title, Dynamic SKU, Variation & Pricing Workbench -->
       <div class="reveal slide-left">
         <!-- Header Meta Row: Category, SKU, and Rating -->
         <div class="product-heading-meta" style="display:flex; align-items:center; gap:0.65rem; flex-wrap:wrap; margin-bottom:0.85rem;">
           <span class="product-category-pill"><?= e($product['category_name']) ?></span>
-          <span style="background:var(--navy); color:#FFFFFF; font-size:0.75rem; font-weight:700; padding:0.25rem 0.65rem; border-radius:4px; letter-spacing:0.04em;">
-            SKU: <?= e($product['sku']) ?>
+          <span id="productSkuBadge" style="background:var(--navy); color:#FFFFFF; font-size:0.75rem; font-weight:700; padding:0.25rem 0.65rem; border-radius:4px; letter-spacing:0.04em; transition:all 0.2s ease;">
+            SKU: <span id="displaySku"><?= e($product['sku']) ?></span>
           </span>
           <?php if (!empty($product['min_order'])): ?>
             <span class="product-min-order" style="background:rgba(185,154,97,0.15); color:var(--navy); font-size:0.75rem; font-weight:700; padding:0.25rem 0.65rem; border-radius:4px;">
@@ -252,40 +326,109 @@ $relatedProducts = array_slice($relatedProducts, 0, 4);
         </p>
 
         <!-- ============================================================== -->
-        <!-- DYNAMIC SIZE-BASED PRICING WORKBENCH (Client + Server Validated) -->
+        <!-- DYNAMIC PRICING & VARIATION WORKBENCH -->
         <!-- ============================================================== -->
-        <div class="pricing-calculator-card" style="background:#FFFFFF; border:1.5px solid var(--border-light); border-radius:var(--radius-md); padding:1.5rem; box-shadow:var(--shadow-sm); margin-bottom:1.75rem;">
-          <div style="font-size:0.85rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; color:var(--navy); margin-bottom:1rem; display:flex; align-items:center; justify-content:space-between;">
-            <span>Configure Size &amp; Quantity Pricing</span>
-            <span style="color:var(--royal); font-weight:600; text-transform:none; font-size:0.8rem;">Live Price Calculator</span>
+        <div class="pricing-calculator-card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.75rem; box-shadow: 0 4px 14px rgba(15, 25, 45, 0.09), 0 12px 30px rgba(15, 25, 45, 0.11); margin-bottom:1.75rem;">
+          <div style="font-size:0.85rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; color:var(--navy); margin-bottom:1.25rem; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(20,35,60,0.08); padding-bottom:0.75rem;">
+            <span style="display:flex; align-items:center; gap:0.4rem;">
+              <span style="color:var(--royal); font-size:1.1rem;">⚙</span>
+              <?= $hasVariations ? 'Select Options &amp; Quantity' : 'Configure Size &amp; Quantity' ?>
+            </span>
+            <span id="stockStatusBadge" style="background:rgba(16,185,129,0.12); color:#059669; font-size:0.75rem; font-weight:700; padding:0.25rem 0.6rem; border-radius:4px;">
+              ● In Stock
+            </span>
           </div>
 
           <form id="priceCalculatorForm">
             <input type="hidden" id="calcProductId" value="<?= $productId ?>">
+            <input type="hidden" id="selectedVariationId" value="">
+            <input type="hidden" id="selectedVariationSku" value="<?= e($product['sku']) ?>">
 
-            <!-- 1. Size Selection -->
-            <?php if (!empty($sizes)): ?>
-              <div style="margin-bottom:1.25rem;">
-                <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.5rem;">
-                  1. Select Target Size / Dimensions:
-                </label>
-                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:0.6rem;">
-                  <?php foreach ($sizes as $sIdx => $s): ?>
-                    <label class="size-choice-label" style="display:flex; flex-direction:column; padding:0.65rem 0.85rem; border:1.5px solid <?= $sIdx === 0 ? 'var(--royal)' : 'var(--border-light)' ?>; border-radius:6px; cursor:pointer; background:<?= $sIdx === 0 ? 'rgba(29,78,216,0.04)' : '#FFFFFF' ?>; transition:all 0.2s ease;">
-                      <input type="radio" name="selected_size" value="<?= $s['id'] ?>" data-price="<?= $s['base_price'] ?>" <?= $sIdx === 0 ? 'checked' : '' ?> style="display:none;" onchange="updateLivePrice()">
-                      <span style="font-size:0.85rem; font-weight:700; color:var(--navy);"><?= e($s['size_label']) ?></span>
-                      <span style="font-size:0.75rem; color:var(--royal); font-weight:600; margin-top:2px;">₹<?= number_format($s['base_price'], 2) ?> base</span>
+            <?php if ($hasVariations): ?>
+              <!-- DYNAMIC ATTRIBUTE VARIATION SELECTORS -->
+              <div id="variationSelectors" style="display:flex; flex-direction:column; gap:1.25rem; margin-bottom:1.25rem;">
+                <?php foreach ($productAttributes as $aIdx => $attr): ?>
+                  <div>
+                    <label style="display:flex; justify-content:space-between; align-items:baseline; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.5rem;">
+                      <span><?= ($aIdx + 1) ?>. Choose <?= e($attr['name']) ?>:</span>
+                      <span id="selected_val_label_<?= $attr['id'] ?>" style="color:var(--royal); font-weight:600; font-size:0.8rem;"></span>
                     </label>
-                  <?php endforeach; ?>
-                </div>
+
+                    <?php 
+                      $isColor = (stripos($attr['name'], 'colour') !== false || stripos($attr['name'], 'color') !== false);
+                    ?>
+
+                    <div style="display:flex; flex-wrap:wrap; gap:0.5rem;" data-attr-id="<?= $attr['id'] ?>" class="attr-group-wrapper">
+                      <?php foreach ($attr['values'] as $vIdx => $val): ?>
+                        <label class="variation-choice-btn <?= $isColor ? 'color-swatch-label' : 'pill-swatch-label' ?>" 
+                               style="display:inline-flex; align-items:center; gap:0.45rem; padding:<?= $isColor ? '0.45rem 0.85rem' : '0.5rem 0.95rem' ?>; border:1.5px solid var(--border-light); border-radius:6px; cursor:pointer; background:var(--bg-surface); font-size:0.85rem; font-weight:600; color:var(--navy); transition:all 0.2s ease;">
+                          <input type="radio" 
+                                 name="attr_<?= $attr['id'] ?>" 
+                                 value="<?= $val['id'] ?>" 
+                                 data-attr-id="<?= $attr['id'] ?>" 
+                                 data-val-name="<?= e($val['value']) ?>" 
+                                 <?= $vIdx === 0 ? 'checked' : '' ?> 
+                                 style="display:none;" 
+                                 onchange="handleVariationChange()">
+                          
+                          <?php if ($isColor && !empty($val['color_code'])): ?>
+                            <span class="color-dot" style="width:18px; height:18px; border-radius:50%; background:<?= e($val['color_code']) ?>; border:1px solid rgba(0,0,0,0.2); box-shadow:0 1px 3px rgba(0,0,0,0.15); display:inline-block;"></span>
+                          <?php endif; ?>
+
+                          <span><?= e($val['value']) ?></span>
+                        </label>
+                      <?php endforeach; ?>
+                    </div>
+                  </div>
+                <?php endforeach; ?>
               </div>
+            <?php else: ?>
+              <!-- FALLBACK: SIZE & DIMENSIONS WORKBENCH (For Custom DTF Gang Rolls / Single Items) -->
+              <?php if (!empty($sizes)): ?>
+                <div style="margin-bottom:1.25rem;">
+                  <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.5rem;">
+                    1. Select Target Size / Dimensions:
+                  </label>
+                  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:0.6rem;">
+                    <?php foreach ($sizes as $sIdx => $s): ?>
+                      <label class="size-choice-label" style="display:flex; flex-direction:column; padding:0.65rem 0.85rem; border:1.5px solid <?= $sIdx === 0 ? 'var(--royal)' : 'var(--border-light)' ?>; border-radius:6px; cursor:pointer; background:<?= $sIdx === 0 ? 'rgba(29,78,216,0.04)' : '#FFFFFF' ?>; transition:all 0.2s ease;">
+                        <input type="radio" name="selected_size" value="<?= $s['id'] ?>" data-price="<?= $s['base_price'] ?>" <?= $sIdx === 0 ? 'checked' : '' ?> style="display:none;" onchange="updateLivePrice()">
+                        <span style="font-size:0.85rem; font-weight:700; color:var(--navy);"><?= e($s['size_label']) ?></span>
+                        <span style="font-size:0.75rem; color:var(--royal); font-weight:600; margin-top:2px;">₹<?= number_format($s['base_price'], 2) ?> base</span>
+                      </label>
+                    <?php endforeach; ?>
+                  </div>
+                </div>
+              <?php endif; ?>
+
+              <!-- Paper Stock Options -->
+              <?php if (!empty($groupedOptions['paper'])): ?>
+                <div style="margin-bottom:1.25rem;">
+                  <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.5rem;">
+                    2. Select Paper / Cardstock Grade:
+                  </label>
+                  <div style="display:flex; flex-direction:column; gap:0.4rem;">
+                    <?php foreach ($groupedOptions['paper'] as $pIdx => $pOpt): ?>
+                      <label style="display:flex; align-items:center; justify-content:space-between; font-size:0.85rem; padding:0.5rem 0.75rem; border:1px solid var(--border-light); border-radius:6px; cursor:pointer;">
+                        <span style="display:flex; align-items:center; gap:0.5rem; color:var(--navy);">
+                          <input type="radio" name="opt_paper" value="<?= $pOpt['id'] ?>" data-price="<?= $pOpt['additional_price'] ?>" <?= $pIdx === 0 ? 'checked' : '' ?> onchange="updateLivePrice()">
+                          <?= e($pOpt['option_name']) ?>
+                        </span>
+                        <span style="font-weight:700; color:var(--text-muted); font-size:0.8rem;">
+                          <?= $pOpt['additional_price'] > 0 ? '+₹' . number_format($pOpt['additional_price'], 2) . '/pc' : 'Included' ?>
+                        </span>
+                      </label>
+                    <?php endforeach; ?>
+                  </div>
+                </div>
+              <?php endif; ?>
             <?php endif; ?>
 
-            <!-- 2. Quantity Input with Stepper and Wholesale Tiers -->
+            <!-- Quantity Input with Stepper and Wholesale Tiers -->
             <div style="margin-bottom:1.25rem;">
               <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.5rem;">
                 <label for="calcQuantity" style="font-size:0.825rem; font-weight:700; color:var(--navy);">
-                  2. Order Quantity:
+                  <?= $hasVariations ? (count($productAttributes) + 1) : (!empty($sizes) ? '2' : '1') ?>. Order Quantity:
                 </label>
                 <span id="tierBadge" style="font-size:0.75rem; font-weight:700; color:var(--royal); background:rgba(29,78,216,0.08); padding:0.2rem 0.5rem; border-radius:4px;">
                   Standard Tier
@@ -298,33 +441,11 @@ $relatedProducts = array_slice($relatedProducts, 0, 4);
               </div>
             </div>
 
-            <!-- 3. Material / Paper Stock Options (if applicable) -->
-            <?php if (!empty($groupedOptions['paper'])): ?>
-              <div style="margin-bottom:1.25rem;">
-                <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.5rem;">
-                  3. Select Paper / Cardstock Grade:
-                </label>
-                <div style="display:flex; flex-direction:column; gap:0.4rem;">
-                  <?php foreach ($groupedOptions['paper'] as $pIdx => $pOpt): ?>
-                    <label style="display:flex; align-items:center; justify-content:space-between; font-size:0.85rem; padding:0.5rem 0.75rem; border:1px solid var(--border-light); border-radius:6px; cursor:pointer;">
-                      <span style="display:flex; align-items:center; gap:0.5rem; color:var(--navy);">
-                        <input type="radio" name="opt_paper" value="<?= $pOpt['id'] ?>" data-price="<?= $pOpt['additional_price'] ?>" <?= $pIdx === 0 ? 'checked' : '' ?> onchange="updateLivePrice()">
-                        <?= e($pOpt['option_name']) ?>
-                      </span>
-                      <span style="font-weight:700; color:var(--text-muted); font-size:0.8rem;">
-                        <?= $pOpt['additional_price'] > 0 ? '+₹' . number_format($pOpt['additional_price'], 2) . '/pc' : 'Included' ?>
-                      </span>
-                    </label>
-                  <?php endforeach; ?>
-                </div>
-              </div>
-            <?php endif; ?>
-
-            <!-- 4. Finishing Options -->
+            <!-- Finishing Options if present -->
             <?php if (!empty($groupedOptions['finishing'])): ?>
               <div style="margin-bottom:1.25rem;">
                 <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.5rem;">
-                  <?= !empty($groupedOptions['paper']) ? '4' : '3' ?>. Protective Finish &amp; Print Enhancements:
+                  Print Enhancements &amp; Protective Finish:
                 </label>
                 <div style="display:flex; flex-direction:column; gap:0.4rem;">
                   <?php foreach ($groupedOptions['finishing'] as $fIdx => $fOpt): ?>
@@ -346,11 +467,15 @@ $relatedProducts = array_slice($relatedProducts, 0, 4);
             <div style="background:var(--ivory); border-radius:8px; border:1px solid var(--border-gold); padding:1.25rem; margin-top:1.25rem;">
               <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.4rem; font-size:0.85rem; color:var(--text-muted);">
                 <span>Effective Unit Price:</span>
-                <span id="displayUnitPrice" style="font-weight:700; color:var(--navy); font-size:1rem;">₹0.00</span>
+                <div style="display:flex; align-items:baseline; gap:0.5rem;">
+                  <span id="displayOldPrice" style="text-decoration:line-through; font-size:0.85rem; color:var(--text-muted); display:none;"></span>
+                  <span id="displayUnitPrice" style="font-weight:700; color:var(--navy); font-size:1.05rem;">₹0.00</span>
+                  <span id="displayDiscountTag" style="background:#ECFDF5; color:#065F46; font-size:0.75rem; font-weight:700; padding:0.15rem 0.4rem; border-radius:4px; display:none;"></span>
+                </div>
               </div>
               <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.6rem; font-size:0.85rem; color:var(--text-muted);">
                 <span>Quantity Selected:</span>
-                <span id="displayQuantity" style="font-weight:700; color:var(--navy);">1</span>
+                <span id="displayQuantity" style="font-weight:700; color:var(--navy);">1 unit</span>
               </div>
               <div style="display:flex; justify-content:space-between; align-items:baseline; padding-top:0.6rem; border-top:1px dashed var(--border-light); margin-top:0.4rem;">
                 <span style="font-weight:800; color:var(--navy); font-size:1.05rem;">Estimated Total:</span>
@@ -379,237 +504,320 @@ $relatedProducts = array_slice($relatedProducts, 0, 4);
         </div>
       </div>
     </div>
-
-    <!-- Product Specifications & Informational Tabs -->
-    <div class="product-specs-tabs reveal slide-up" id="productSpecsTabs" style="margin-top:3.5rem;">
-      <div class="specs-tab-header" role="tablist">
-        <button type="button" class="specs-tab-btn active" onclick="switchSpecTab(0)" role="tab" aria-selected="true">
-          Technical Specifications
-        </button>
-        <button type="button" class="specs-tab-btn" onclick="switchSpecTab(1)" role="tab" aria-selected="false">
-          Artwork &amp; File Guidelines
-        </button>
-        <button type="button" class="specs-tab-btn" onclick="switchSpecTab(2)" role="tab" aria-selected="false">
-          Application &amp; Heat Press Guide
-        </button>
-        <button type="button" class="specs-tab-btn" onclick="switchSpecTab(3)" role="tab" aria-selected="false">
-          Customer Reviews (<?= $reviewCount ?>)
-        </button>
-        <button type="button" class="specs-tab-btn" onclick="switchSpecTab(4)" role="tab" aria-selected="false">
-          Turnaround &amp; Shipping
-        </button>
-      </div>
-
-      <!-- Tab 1: Specs -->
-      <div class="specs-tab-content" id="tabContent-0" style="display:block;">
-        <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:1rem;">Production Engineering Specifications</h3>
-        <p style="margin-bottom:1.25rem; line-height:1.7;">
-          <?= nl2br(e($product['description'])) ?>
-        </p>
-        <div style="background:var(--ivory); border-left:3px solid var(--gold); padding:1.25rem 1.5rem; border-radius:var(--radius-sm); font-size:0.9rem;">
-          <strong>Calibrated Parameters:</strong><br>
-          <?= nl2br(e($product['specifications'])) ?>
-        </div>
-      </div>
-
-      <!-- Tab 2: Artwork Guide -->
-      <div class="specs-tab-content" id="tabContent-1" style="display:none;">
-        <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:1rem;">Artwork Preparation Standards</h3>
-        <p style="margin-bottom:1rem;">
-          <?= e($product['artwork_notes'] ?? 'Provide 300 DPI files with transparent background.') ?>
-        </p>
-        <ul style="list-style:disc; padding-left:1.5rem; line-height:1.8;">
-          <li><strong>Resolution:</strong> 300 DPI at 100% finished print dimensions.</li>
-          <li><strong>Supported Formats:</strong> PNG (transparent background), Adobe Illustrator (.AI), Photoshop (.PSD), PDF, or SVG.</li>
-          <li><strong>Color Mode:</strong> CMYK or RGB (converted with our calibrated ICC printer profile for vibrant gamut).</li>
-          <li><strong>Transparency:</strong> Ensure negative spaces are 100% transparent so no unwanted white base is deposited.</li>
-        </ul>
-      </div>
-
-      <!-- Tab 3: Heat Press Guide -->
-      <div class="specs-tab-content" id="tabContent-2" style="display:none;">
-        <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:1rem;">Commercial Application &amp; Pressing Instructions</h3>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1.25rem; margin-top:1rem;">
-          <div style="background:var(--ivory); padding:1rem; border-radius:var(--radius-sm); border:1px solid var(--border-light);">
-            <div style="font-weight:700; color:var(--navy);">1. Temperature</div>
-            <div style="font-size:1.25rem; font-weight:800; color:var(--royal); margin:0.35rem 0;">155°C – 165°C</div>
-            <div style="font-size:0.8rem; color:var(--slate);">Optimal for polyurethane TPU adhesive activation.</div>
-          </div>
-          <div style="background:var(--ivory); padding:1rem; border-radius:var(--radius-sm); border:1px solid var(--border-light);">
-            <div style="font-weight:700; color:var(--navy);">2. Pressure &amp; Time</div>
-            <div style="font-size:1.25rem; font-weight:800; color:var(--royal); margin:0.35rem 0;">15 Seconds</div>
-            <div style="font-size:0.8rem; color:var(--slate);">Medium-high pressure (40–50 PSI) for mechanical fiber bond.</div>
-          </div>
-          <div style="background:var(--ivory); padding:1rem; border-radius:var(--radius-sm); border:1px solid var(--border-light);">
-            <div style="font-weight:700; color:var(--navy);">3. Peel Method</div>
-            <div style="font-size:1.25rem; font-weight:800; color:var(--royal); margin:0.35rem 0;">Cold Peel</div>
-            <div style="font-size:0.8rem; color:var(--slate);">Allow transfer to cool completely before smooth peeling.</div>
-          </div>
-          <div style="background:var(--ivory); padding:1rem; border-radius:var(--radius-sm); border:1px solid var(--border-light);">
-            <div style="font-weight:700; color:var(--navy);">4. Post-Press</div>
-            <div style="font-size:1.25rem; font-weight:800; color:var(--royal); margin:0.35rem 0;">5 Seconds</div>
-            <div style="font-size:0.8rem; color:var(--slate);">Post-press with parchment paper for a soft-hand retail finish.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tab 4: Customer Reviews (Phase 3 Requirement) -->
-      <div class="specs-tab-content" id="tabContent-3" style="display:none;">
-        <div id="reviews-section">
-          <div style="display:grid; grid-template-columns:1fr 1.6fr; gap:2.5rem; align-items:flex-start; margin-bottom:2.5rem;">
-            <!-- Review Summary Stats -->
-            <div style="background:var(--ivory); padding:1.5rem; border-radius:var(--radius-md); border:1px solid var(--border-light);">
-              <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:1rem;">Customer Reviews</h3>
-              <div style="display:flex; align-items:baseline; gap:0.5rem; margin-bottom:0.5rem;">
-                <span style="font-size:2.8rem; font-weight:800; color:var(--navy); line-height:1;"><?= $reviewCount > 0 ? $avgRating : '0.0' ?></span>
-                <span style="font-size:1rem; color:var(--text-muted);">/ 5.0</span>
-              </div>
-              <div style="color:#F59E0B; font-size:1.2rem; margin-bottom:0.75rem;">
-                <?php
-                $filledStars = round($avgRating);
-                for ($i = 1; $i <= 5; $i++) {
-                    echo $i <= $filledStars ? '★' : '☆';
-                }
-                ?>
-              </div>
-              <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.25rem;">
-                Based on <?= $reviewCount ?> <?= $reviewCount === 1 ? 'verified review' : 'verified reviews' ?>
-              </p>
-
-              <!-- Rating distribution bars -->
-              <div style="display:flex; flex-direction:column; gap:0.35rem; font-size:0.8rem;">
-                <?php for ($star = 5; $star >= 1; $star--): 
-                  $count = $ratingCounts[$star] ?? 0;
-                  $pct = $reviewCount > 0 ? round(($count / $reviewCount) * 100) : 0;
-                ?>
-                  <div style="display:flex; align-items:center; gap:0.5rem;">
-                    <span style="width:25px; color:var(--navy); font-weight:600;"><?= $star ?>★</span>
-                    <div style="flex:1; height:8px; background:rgba(0,0,0,0.06); border-radius:999px; overflow:hidden;">
-                      <div style="width:<?= $pct ?>%; height:100%; background:#F59E0B; border-radius:999px;"></div>
-                    </div>
-                    <span style="width:30px; text-align:right; color:var(--text-muted);"><?= $count ?></span>
-                  </div>
-                <?php endfor; ?>
-              </div>
-            </div>
-
-            <!-- Review Submission Form -->
-            <div style="background:#FFFFFF; border:1px solid var(--border-light); border-radius:var(--radius-md); padding:1.5rem; box-shadow:var(--shadow-sm);">
-              <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:0.5rem;">Write a Product Review</h3>
-              <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.25rem;">
-                Have you received or printed this product with OrderPrintex? Share your honest feedback with our community.
-              </p>
-
-              <form id="productReviewForm" onsubmit="submitReview(event)">
-                <?= csrf_field() ?>
-                <input type="hidden" name="product_id" value="<?= $productId ?>">
-
-                <!-- Interactive Star Rating Picker -->
-                <div style="margin-bottom:1rem;">
-                  <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">
-                    Your Rating <span style="color:var(--crimson);">*</span>
-                  </label>
-                  <div id="starRatingPicker" style="display:flex; gap:0.35rem; font-size:1.6rem; color:#D1D5DB; cursor:pointer;">
-                    <span onclick="setStarRating(1)" onmouseover="hoverStarRating(1)" onmouseout="resetStarRating()">★</span>
-                    <span onclick="setStarRating(2)" onmouseover="hoverStarRating(2)" onmouseout="resetStarRating()">★</span>
-                    <span onclick="setStarRating(3)" onmouseover="hoverStarRating(3)" onmouseout="resetStarRating()">★</span>
-                    <span onclick="setStarRating(4)" onmouseover="hoverStarRating(4)" onmouseout="resetStarRating()">★</span>
-                    <span onclick="setStarRating(5)" onmouseover="hoverStarRating(5)" onmouseout="resetStarRating()">★</span>
-                  </div>
-                  <input type="hidden" name="rating" id="selectedRatingInput" value="5">
-                </div>
-
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
-                  <div>
-                    <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.25rem;">Your Name *</label>
-                    <input type="text" name="customer_name" required class="form-control" placeholder="e.g. Arun Sharma">
-                  </div>
-                  <div>
-                    <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.25rem;">Email Address</label>
-                    <input type="email" name="customer_email" class="form-control" placeholder="e.g. arun@brand.com">
-                  </div>
-                </div>
-
-                <div style="margin-bottom:1rem;">
-                  <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.25rem;">Review Headline *</label>
-                  <input type="text" name="title" required class="form-control" placeholder="e.g. Exceptional color vibrancy and durability!">
-                </div>
-
-                <div style="margin-bottom:1.25rem;">
-                  <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.25rem;">Written Review *</label>
-                  <textarea name="review_text" rows="3" required class="form-control" placeholder="Describe the print quality, wash performance, hand-feel, or delivery speed..."></textarea>
-                </div>
-
-                <div id="reviewResponseAlert" style="display:none; padding:0.75rem; border-radius:6px; margin-bottom:1rem; font-size:0.85rem;"></div>
-
-                <button type="submit" id="submitReviewBtn" class="btn btn-navy btn-sm">
-                  <span>Submit Verified Review</span>
-                </button>
-              </form>
-            </div>
-          </div>
-
-          <!-- Existing Reviews Feed -->
-          <div style="border-top:1px solid var(--border-light); padding-top:2rem;">
-            <h4 style="font-size:1.1rem; color:var(--navy); margin-bottom:1.25rem;">Customer Feedback Feed</h4>
-            
-            <?php if (empty($reviews)): ?>
-              <div style="text-align:center; padding:3rem 1.5rem; background:var(--ivory); border-radius:var(--radius-md); border:1px dashed var(--border-light);">
-                <div style="font-size:2rem; margin-bottom:0.75rem;">⭐</div>
-                <h4 style="color:var(--navy); margin-bottom:0.35rem;">Be the first to review this product!</h4>
-                <p style="color:var(--text-muted); font-size:0.88rem; max-width:440px; margin:0 auto 1rem;">
-                  Help other apparel brands and creators evaluate this print substrate by submitting the first review above.
-                </p>
-              </div>
-            <?php else: ?>
-              <div style="display:flex; flex-direction:column; gap:1.25rem;">
-                <?php foreach ($reviews as $rev): ?>
-                  <div style="padding:1.25rem; background:#FFFFFF; border:1px solid var(--border-light); border-radius:8px;">
-                    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.35rem;">
-                      <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <span style="font-weight:700; color:var(--navy);"><?= e($rev['customer_name']) ?></span>
-                        <?php if (!empty($rev['is_verified_purchase'])): ?>
-                          <span style="background:rgba(16,185,129,0.1); color:#059669; font-size:0.7rem; font-weight:700; padding:0.15rem 0.45rem; border-radius:4px;">
-                            Verified Buyer
-                          </span>
-                        <?php endif; ?>
-                      </div>
-                      <span style="font-size:0.8rem; color:var(--text-muted);">
-                        <?= date('M d, Y', strtotime($rev['created_at'])) ?>
-                      </span>
-                    </div>
-
-                    <div style="color:#F59E0B; font-size:0.95rem; margin-bottom:0.4rem;">
-                      <?php for ($s = 1; $s <= 5; $s++) { echo $s <= (int)$rev['rating'] ? '★' : '☆'; } ?>
-                    </div>
-
-                    <h5 style="font-size:0.95rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">
-                      <?= e($rev['title']) ?>
-                    </h5>
-                    <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.6; margin:0;">
-                      <?= nl2br(e($rev['review_text'])) ?>
-                    </p>
-                  </div>
-                <?php endforeach; ?>
-              </div>
-            <?php endif; ?>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tab 5: Turnaround & Shipping -->
-      <div class="specs-tab-content" id="tabContent-4" style="display:none;">
-        <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:1rem;">Production Turnaround &amp; PAN-India Shipping</h3>
-        <ul style="list-style:disc; padding-left:1.5rem; line-height:1.8;">
-          <li><strong>Prepress Proof:</strong> Digital proof and layout confirmation sent within 2–4 hours of artwork upload.</li>
-          <li><strong>Standard Dispatch:</strong> 24–48 hours for gang roll transfers; 3–5 working days for bulk finished garments.</li>
-          <li><strong>Same-Day Dispatch:</strong> Available for rush gang roll print orders placed before 1:00 PM IST.</li>
-          <li><strong>Packaging:</strong> Moisture-barrier protective tubes and heavy-duty corrugated cartons for zero damage in transit.</li>
-        </ul>
-      </div>
-    </div>
   </div>
 </section>
+
+<!-- ======================================================================= -->
+<!-- SEQUENTIAL SCROLL SECTIONS (Tabs/Accordions Completely Removed) -->
+<!-- ======================================================================= -->
+<div class="product-scroll-sections" style="background:var(--ivory); padding:3.5rem 0 5rem;">
+  <div class="container container-readable">
+
+    <!-- =================================================================== -->
+    <!-- SECTION 2: TECHNICAL SPECIFICATIONS -->
+    <!-- =================================================================== -->
+    <?php if (!empty($product['specifications']) || !empty($product['description'])): ?>
+    <section class="product-content-block reveal slide-up" id="specs-section" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:clamp(1.75rem, 3vw, 2.5rem); box-shadow: 0 4px 12px rgba(15, 25, 45, 0.08), 0 12px 28px rgba(15, 25, 45, 0.10); margin-bottom:2.5rem;">
+      <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
+        <span style="background:rgba(20,35,60,0.06); color:var(--navy); width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem;">02</span>
+        <div>
+          <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--royal);">Calibrated Parameters</div>
+          <h2 style="font-size:clamp(1.25rem, 2vw, 1.6rem); color:var(--navy); margin:0; font-weight:800;">Technical Specifications</h2>
+        </div>
+      </div>
+      <div style="width:40px; height:3px; background:var(--gold); border-radius:2px; margin-bottom:1.5rem;"></div>
+
+      <?php if (!empty($product['description'])): ?>
+        <p style="margin-bottom:1.5rem; line-height:1.75; color:var(--slate); font-size:0.95rem;">
+          <?= nl2br(e($product['description'])) ?>
+        </p>
+      <?php endif; ?>
+
+      <?php if (!empty($product['specifications'])): ?>
+        <div style="background:var(--ivory); border-left:4px solid var(--navy); padding:1.25rem 1.5rem; border-radius:var(--radius-sm); font-size:0.9rem; line-height:1.8; color:var(--navy);">
+          <strong style="display:block; margin-bottom:0.5rem; color:var(--navy);">Engineered Standards &amp; Materials:</strong>
+          <?= nl2br(e($product['specifications'])) ?>
+        </div>
+      <?php endif; ?>
+    </section>
+    <?php endif; ?>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 3: ARTWORK & FILE GUIDELINES -->
+    <!-- =================================================================== -->
+    <?php if (!empty($product['artwork_notes'])): ?>
+    <section class="product-content-block reveal slide-up" id="artwork-section" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:clamp(1.75rem, 3vw, 2.5rem); box-shadow: 0 4px 12px rgba(15, 25, 45, 0.08), 0 12px 28px rgba(15, 25, 45, 0.10); margin-bottom:2.5rem;">
+      <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
+        <span style="background:rgba(20,35,60,0.06); color:var(--navy); width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem;">03</span>
+        <div>
+          <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--royal);">Prepress Standards</div>
+          <h2 style="font-size:clamp(1.25rem, 2vw, 1.6rem); color:var(--navy); margin:0; font-weight:800;">Artwork &amp; File Guidelines</h2>
+        </div>
+      </div>
+      <div style="width:40px; height:3px; background:var(--gold); border-radius:2px; margin-bottom:1.5rem;"></div>
+
+      <div style="background:rgba(29,78,216,0.04); border:1px solid rgba(29,78,216,0.12); padding:1.25rem 1.5rem; border-radius:8px; margin-bottom:1.5rem;">
+        <div style="font-weight:700; color:var(--navy); margin-bottom:0.35rem;">Artwork Requirement for this Product:</div>
+        <p style="margin:0; font-size:0.925rem; color:var(--slate); line-height:1.65;">
+          <?= nl2br(e($product['artwork_notes'])) ?>
+        </p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+        <div style="padding:1rem; border:1px solid var(--border-light); border-radius:8px; background:#FAFAFA;">
+          <div style="font-weight:700; color:var(--navy); font-size:0.9rem; margin-bottom:0.25rem;">Resolution &amp; Scale</div>
+          <div style="font-size:0.85rem; color:var(--slate); line-height:1.5;">Minimum 300 DPI at 100% finished reproduction scale. Never upscale low-res raster imagery.</div>
+        </div>
+        <div style="padding:1rem; border:1px solid var(--border-light); border-radius:8px; background:#FAFAFA;">
+          <div style="font-weight:700; color:var(--navy); font-size:0.9rem; margin-bottom:0.25rem;">Accepted Formats</div>
+          <div style="font-size:0.85rem; color:var(--slate); line-height:1.5;">PNG (transparent), Adobe Illustrator (.AI), PDF (vector curves), PSD, or SVG.</div>
+        </div>
+        <div style="padding:1rem; border:1px solid var(--border-light); border-radius:8px; background:#FAFAFA;">
+          <div style="font-weight:700; color:var(--navy); font-size:0.9rem; margin-bottom:0.25rem;">Color Profile</div>
+          <div style="font-size:0.85rem; color:var(--slate); line-height:1.5;">CMYK or RGB embedded with standard ICC profiles. Prepress RIP auto-maps to vivid gamut.</div>
+        </div>
+        <div style="padding:1rem; border:1px solid var(--border-light); border-radius:8px; background:#FAFAFA;">
+          <div style="font-weight:700; color:var(--navy); font-size:0.9rem; margin-bottom:0.25rem;">Transparency Check</div>
+          <div style="font-size:0.85rem; color:var(--slate); line-height:1.5;">Background must be 100% transparent. Feathered edges should maintain sharp anti-aliasing.</div>
+        </div>
+      </div>
+    </section>
+    <?php endif; ?>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 4: APPLICATION & HEAT PRESS GUIDE -->
+    <!-- =================================================================== -->
+    <?php if (!empty($product['application_guide'])): ?>
+    <section class="product-content-block reveal slide-up" id="application-section" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:clamp(1.75rem, 3vw, 2.5rem); box-shadow: 0 4px 12px rgba(15, 25, 45, 0.08), 0 12px 28px rgba(15, 25, 45, 0.10); margin-bottom:2.5rem;">
+      <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
+        <span style="background:rgba(20,35,60,0.06); color:var(--navy); width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem;">04</span>
+        <div>
+          <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--royal);">Substrate Engineering</div>
+          <h2 style="font-size:clamp(1.25rem, 2vw, 1.6rem); color:var(--navy); margin:0; font-weight:800;">Application &amp; Heat Press Guide</h2>
+        </div>
+      </div>
+      <div style="width:40px; height:3px; background:var(--gold); border-radius:2px; margin-bottom:1.5rem;"></div>
+
+      <div style="margin-bottom:1.5rem; font-size:0.95rem; color:var(--slate); line-height:1.75;">
+        <?= nl2br(e($product['application_guide'])) ?>
+      </div>
+
+      <!-- Standard 4-Step Pressing Matrix -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem;">
+        <div style="background:var(--ivory); padding:1.25rem; border-radius:var(--radius-sm); border:1px solid var(--border-color); text-align:center;">
+          <div style="font-weight:700; color:var(--navy); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.04em;">1. Temperature</div>
+          <div style="font-size:1.35rem; font-weight:800; color:var(--royal); margin:0.35rem 0;">155°C – 165°C</div>
+          <div style="font-size:0.8rem; color:var(--slate);">Optimal for polyurethane adhesive activation.</div>
+        </div>
+        <div style="background:var(--ivory); padding:1.25rem; border-radius:var(--radius-sm); border:1px solid var(--border-color); text-align:center;">
+          <div style="font-weight:700; color:var(--navy); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.04em;">2. Pressure &amp; Time</div>
+          <div style="font-size:1.35rem; font-weight:800; color:var(--royal); margin:0.35rem 0;">15 Seconds</div>
+          <div style="font-size:0.8rem; color:var(--slate);">Medium-high pressure (40–50 PSI) for fiber lock.</div>
+        </div>
+        <div style="background:var(--ivory); padding:1.25rem; border-radius:var(--radius-sm); border:1px solid var(--border-color); text-align:center;">
+          <div style="font-weight:700; color:var(--navy); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.04em;">3. Peel Method</div>
+          <div style="font-size:1.35rem; font-weight:800; color:var(--royal); margin:0.35rem 0;">Cold Peel</div>
+          <div style="font-size:0.8rem; color:var(--slate);">Allow sheet to reach room temperature before peel.</div>
+        </div>
+        <div style="background:var(--ivory); padding:1.25rem; border-radius:var(--radius-sm); border:1px solid var(--border-color); text-align:center;">
+          <div style="font-weight:700; color:var(--navy); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.04em;">4. Post-Press</div>
+          <div style="font-size:1.35rem; font-weight:800; color:var(--royal); margin:0.35rem 0;">5 Seconds</div>
+          <div style="font-size:0.8rem; color:var(--slate);">Finish with silicone parchment for a soft hand feel.</div>
+        </div>
+      </div>
+    </section>
+    <?php endif; ?>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 5: CUSTOMER REVIEWS -->
+    <!-- =================================================================== -->
+    <section class="product-content-block reveal slide-up" id="reviews-section" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:clamp(1.75rem, 3vw, 2.5rem); box-shadow: 0 4px 12px rgba(15, 25, 45, 0.08), 0 12px 28px rgba(15, 25, 45, 0.10); margin-bottom:2.5rem;">
+      <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
+        <span style="background:rgba(20,35,60,0.06); color:var(--navy); width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem;">05</span>
+        <div>
+          <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--royal);">Verified Feedback</div>
+          <h2 style="font-size:clamp(1.25rem, 2vw, 1.6rem); color:var(--navy); margin:0; font-weight:800;">Customer Reviews</h2>
+        </div>
+      </div>
+      <div style="width:40px; height:3px; background:var(--gold); border-radius:2px; margin-bottom:1.5rem;"></div>
+
+      <div style="display:grid; grid-template-columns:1fr 1.6fr; gap:2.5rem; align-items:flex-start; margin-bottom:2.5rem;">
+        <!-- Review Summary Stats -->
+        <div class="review-summary-card" style="background:var(--ivory); padding:1.75rem; border-radius:var(--radius-md); border:1px solid var(--border-color);">
+          <div style="font-size:0.85rem; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--navy); margin-bottom:0.75rem;">Rating Breakdown</div>
+          <div style="display:flex; align-items:baseline; gap:0.5rem; margin-bottom:0.5rem;">
+            <span style="font-size:2.8rem; font-weight:800; color:var(--navy); line-height:1;"><?= $reviewCount > 0 ? $avgRating : '5.0' ?></span>
+            <span style="font-size:1rem; color:var(--text-muted);">/ 5.0</span>
+          </div>
+          <div style="color:#F59E0B; font-size:1.2rem; margin-bottom:0.75rem;">
+            <?php
+            $filledStars = $reviewCount > 0 ? round($avgRating) : 5;
+            for ($i = 1; $i <= 5; $i++) {
+                echo $i <= $filledStars ? '★' : '☆';
+            }
+            ?>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.25rem;">
+            Based on <?= $reviewCount ?> <?= $reviewCount === 1 ? 'verified review' : 'verified reviews' ?>
+          </p>
+
+          <!-- Rating distribution bars -->
+          <div style="display:flex; flex-direction:column; gap:0.35rem; font-size:0.8rem;">
+            <?php for ($star = 5; $star >= 1; $star--): 
+              $count = $ratingCounts[$star] ?? 0;
+              $pct = $reviewCount > 0 ? round(($count / $reviewCount) * 100) : ($star === 5 ? 100 : 0);
+            ?>
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <span style="width:25px; color:var(--navy); font-weight:600;"><?= $star ?>★</span>
+                <div style="flex:1; height:8px; background:rgba(0,0,0,0.06); border-radius:999px; overflow:hidden;">
+                  <div style="width:<?= $pct ?>%; height:100%; background:#F59E0B; border-radius:999px;"></div>
+                </div>
+                <span style="width:30px; text-align:right; color:var(--text-muted);"><?= $count ?></span>
+              </div>
+            <?php endfor; ?>
+          </div>
+        </div>
+
+        <!-- Review Submission Form -->
+        <div style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.75rem; box-shadow: 0 2px 8px rgba(15, 25, 45, 0.05);">
+          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:0.5rem; font-weight:700;">Write a Product Review</h3>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.25rem;">
+            Have you printed or sampled this substrate? Share your production notes with our community.
+          </p>
+
+          <form id="productReviewForm" onsubmit="submitReview(event)">
+            <?= csrf_field() ?>
+            <input type="hidden" name="product_id" value="<?= $productId ?>">
+
+            <!-- Interactive Star Rating Picker -->
+            <div style="margin-bottom:1rem;">
+              <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">
+                Your Rating <span style="color:var(--crimson);">*</span>
+              </label>
+              <div id="starRatingPicker" style="display:flex; gap:0.35rem; font-size:1.6rem; color:#D1D5DB; cursor:pointer;">
+                <span onclick="setStarRating(1)" onmouseover="hoverStarRating(1)" onmouseout="resetStarRating()">★</span>
+                <span onclick="setStarRating(2)" onmouseover="hoverStarRating(2)" onmouseout="resetStarRating()">★</span>
+                <span onclick="setStarRating(3)" onmouseover="hoverStarRating(3)" onmouseout="resetStarRating()">★</span>
+                <span onclick="setStarRating(4)" onmouseover="hoverStarRating(4)" onmouseout="resetStarRating()">★</span>
+                <span onclick="setStarRating(5)" onmouseover="hoverStarRating(5)" onmouseout="resetStarRating()">★</span>
+              </div>
+              <input type="hidden" name="rating" id="selectedRatingInput" value="5">
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+              <div>
+                <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.25rem;">Your Name *</label>
+                <input type="text" name="customer_name" required class="form-control" placeholder="e.g. Vikram Malhotra">
+              </div>
+              <div>
+                <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.25rem;">Email Address</label>
+                <input type="email" name="customer_email" class="form-control" placeholder="e.g. vikram@studio.com">
+              </div>
+            </div>
+
+            <div style="margin-bottom:1rem;">
+              <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.25rem;">Review Headline *</label>
+              <input type="text" name="title" required class="form-control" placeholder="e.g. Flawless white opacity and vivid colors!">
+            </div>
+
+            <div style="margin-bottom:1.25rem;">
+              <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.25rem;">Written Review *</label>
+              <textarea name="review_text" rows="3" required class="form-control" placeholder="Describe the hand-feel, wash durability, or pressing performance..."></textarea>
+            </div>
+
+            <div id="reviewResponseAlert" style="display:none; padding:0.75rem; border-radius:6px; margin-bottom:1rem; font-size:0.85rem;"></div>
+
+            <button type="submit" id="submitReviewBtn" class="btn btn-navy btn-sm">
+              <span>Submit Verified Review</span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Existing Reviews Feed -->
+      <div style="border-top:1px solid var(--border-light); padding-top:2rem;">
+        <h4 style="font-size:1.1rem; color:var(--navy); margin-bottom:1.25rem; font-weight:700;">Customer Feedback Feed</h4>
+        
+        <?php if (empty($reviews)): ?>
+          <div style="text-align:center; padding:2.5rem 1.5rem; background:var(--ivory); border-radius:var(--radius-md); border:1px dashed var(--border-color);">
+            <div style="font-size:2rem; margin-bottom:0.5rem;">⭐</div>
+            <h4 style="color:var(--navy); margin-bottom:0.35rem; font-size:1rem;">Be the first to review this product!</h4>
+            <p style="color:var(--text-muted); font-size:0.85rem; max-width:440px; margin:0 auto 1rem;">
+              Share your production experience and print outcomes with fellow apparel creators.
+            </p>
+          </div>
+        <?php else: ?>
+          <div style="display:flex; flex-direction:column; gap:1.25rem;">
+            <?php foreach ($reviews as $rev): ?>
+              <div class="review-card" style="padding:1.4rem; background:var(--bg-surface); border:1px solid var(--border-color); border-radius:8px; box-shadow: 0 3px 10px rgba(15, 25, 45, 0.07); transition: transform 0.25s ease, box-shadow 0.25s ease;">
+                <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.35rem;">
+                  <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <span style="font-weight:700; color:var(--navy);"><?= e($rev['customer_name']) ?></span>
+                    <?php if (!empty($rev['is_verified_purchase'])): ?>
+                      <span style="background:rgba(16,185,129,0.1); color:#059669; font-size:0.7rem; font-weight:700; padding:0.15rem 0.45rem; border-radius:4px;">
+                        Verified Buyer
+                      </span>
+                    <?php endif; ?>
+                  </div>
+                  <span style="font-size:0.8rem; color:var(--text-muted);">
+                    <?= date('M d, Y', strtotime($rev['created_at'])) ?>
+                  </span>
+                </div>
+
+                <div style="color:#F59E0B; font-size:0.95rem; margin-bottom:0.4rem;">
+                  <?php for ($s = 1; $s <= 5; $s++) { echo $s <= (int)$rev['rating'] ? '★' : '☆'; } ?>
+                </div>
+
+                <h5 style="font-size:0.95rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">
+                  <?= e($rev['title']) ?>
+                </h5>
+                <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.6; margin:0;">
+                  <?= nl2br(e($rev['review_text'])) ?>
+                </p>
+              </div>
+            <?php endforeach; ?>
+          </div>
+        <?php endif; ?>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 6: TURNAROUND & SHIPPING -->
+    <!-- =================================================================== -->
+    <?php if (!empty($product['shipping_info'])): ?>
+    <section class="product-content-block reveal slide-up" id="shipping-section" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:clamp(1.75rem, 3vw, 2.5rem); box-shadow: 0 4px 12px rgba(15, 25, 45, 0.08), 0 12px 28px rgba(15, 25, 45, 0.10); margin-bottom:1.5rem;">
+      <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
+        <span style="background:rgba(20,35,60,0.06); color:var(--navy); width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem;">06</span>
+        <div>
+          <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--royal);">Logistics &amp; Delivery</div>
+          <h2 style="font-size:clamp(1.25rem, 2vw, 1.6rem); color:var(--navy); margin:0; font-weight:800;">Turnaround &amp; PAN-India Shipping</h2>
+        </div>
+      </div>
+      <div style="width:40px; height:3px; background:var(--gold); border-radius:2px; margin-bottom:1.5rem;"></div>
+
+      <div style="margin-bottom:1.5rem; font-size:0.95rem; color:var(--slate); line-height:1.75;">
+        <?= nl2br(e($product['shipping_info'])) ?>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+        <div style="padding:1rem; border:1px solid var(--border-light); border-radius:8px; background:var(--ivory);">
+          <div style="font-weight:700; color:var(--navy); font-size:0.9rem; margin-bottom:0.25rem;">Digital Prepress Proof</div>
+          <div style="font-size:0.85rem; color:var(--slate);">Confirmed within 2–4 hours of artwork submission.</div>
+        </div>
+        <div style="padding:1rem; border:1px solid var(--border-light); border-radius:8px; background:var(--ivory);">
+          <div style="font-weight:700; color:var(--navy); font-size:0.9rem; margin-bottom:0.25rem;">Express Dispatch</div>
+          <div style="font-size:0.85rem; color:var(--slate);">24–48 hours for gang roll transfers; 3–5 working days for finished apparel.</div>
+        </div>
+        <div style="padding:1rem; border:1px solid var(--border-light); border-radius:8px; background:var(--ivory);">
+          <div style="font-weight:700; color:var(--navy); font-size:0.9rem; margin-bottom:0.25rem;">Damage-Free Packaging</div>
+          <div style="font-size:0.85rem; color:var(--slate);">Moisture-proof hard core tubes and 5-ply corrugated shipper boxes.</div>
+        </div>
+      </div>
+    </section>
+    <?php endif; ?>
+
+  </div>
+</div>
 
 <!-- Embedded Quotation / Upload Form for this Product -->
 <section class="section section-ivory" id="quote-form">
@@ -624,7 +832,7 @@ $relatedProducts = array_slice($relatedProducts, 0, 4);
 
     <?= render_flash() ?>
 
-    <div class="upload-card reveal scale-in artwork-upload-component" style="background:#FFFFFF; border:1px solid var(--border-light); border-radius:var(--radius-lg); padding:clamp(1.5rem, 3vw, 2.5rem); box-shadow:var(--shadow-md);">
+    <div class="upload-card reveal scale-in artwork-upload-component" style="background:var(--bg-surface); border:1px solid var(--border-light); border-radius:var(--radius-lg); padding:clamp(1.5rem, 3vw, 2.5rem); box-shadow:var(--shadow-md);">
       <form action="<?= url('api/submit-enquiry.php') ?>" method="POST" enctype="multipart/form-data">
         <?= csrf_field() ?>
         <input type="hidden" name="product_id" value="<?= e($product['id'] ?? 1) ?>">
@@ -707,7 +915,7 @@ $relatedProducts = array_slice($relatedProducts, 0, 4);
   </div>
 </section>
 
-<!-- Related Products Section (Linking with Clean /product/{slug}/ URLs) -->
+<!-- Related Products Section -->
 <?php if (!empty($relatedProducts)): ?>
 <section class="related-products-section">
   <div class="container">
@@ -765,11 +973,18 @@ $relatedProducts = array_slice($relatedProducts, 0, 4);
 <?php endif; ?>
 
 <!-- ============================================================== -->
-<!-- DYNAMIC SIZE-BASED PRICING & REVIEW INTERACTION LOGIC -->
+<!-- JAVASCRIPT: DYNAMIC VARIATIONS, PRICING & REVIEWS LOGIC -->
 <!-- ============================================================== -->
 <script>
-// Pricing Tiers Data from PHP
+// Data from Backend
+const HAS_VARIATIONS = <?= json_encode($hasVariations) ?>;
+const VARIATIONS_DATA = <?= json_encode($variationData) ?>;
+const PRODUCT_ATTRIBUTES = <?= json_encode($productAttributes) ?>;
 const PRICING_TIERS = <?= json_encode($tiers) ?>;
+const BASE_PRODUCT_SKU = <?= json_encode($product['sku']) ?>;
+const BASE_STARTING_PRICE = <?= (float)preg_replace('/[^0-9.]/', '', $product['starting_price'] ?? '249') ?>;
+
+let currentMatchedVariation = null;
 
 function adjustQty(delta) {
   const input = document.getElementById('calcQuantity');
@@ -779,31 +994,138 @@ function adjustQty(delta) {
   updateLivePrice();
 }
 
+/**
+ * Handle user changing any variation attribute radio
+ */
+function handleVariationChange() {
+  if (!HAS_VARIATIONS || !VARIATIONS_DATA.length) return;
+
+  const form = document.getElementById('priceCalculatorForm');
+  if (!form) return;
+
+  // Collect selected values per attribute
+  const selectedAttrs = {};
+  PRODUCT_ATTRIBUTES.forEach(attr => {
+    const checked = form.querySelector(`input[name="attr_${attr.id}"]:checked`);
+    if (checked) {
+      selectedAttrs[attr.id] = parseInt(checked.value, 10);
+      const labelSpan = document.getElementById(`selected_val_label_${attr.id}`);
+      if (labelSpan) {
+        labelSpan.textContent = checked.getAttribute('data-val-name') || '';
+      }
+    }
+  });
+
+  // Update styles for active radio labels
+  form.querySelectorAll('.variation-choice-btn').forEach(lbl => {
+    const radio = lbl.querySelector('input[type="radio"]');
+    if (radio && radio.checked) {
+      lbl.style.borderColor = 'var(--royal)';
+      lbl.style.background = 'rgba(29, 78, 216, 0.08)';
+      lbl.style.boxShadow = '0 0 0 1px var(--royal)';
+    } else {
+      lbl.style.borderColor = 'var(--border-light)';
+      lbl.style.background = '#FFFFFF';
+      lbl.style.boxShadow = 'none';
+    }
+  });
+
+  // Find matching variation
+  let matched = VARIATIONS_DATA.find(v => {
+    return Object.keys(selectedAttrs).every(attrId => {
+      return v.attributes[attrId] === selectedAttrs[attrId];
+    });
+  });
+
+  if (!matched && VARIATIONS_DATA.length > 0) {
+    matched = VARIATIONS_DATA[0];
+  }
+
+  currentMatchedVariation = matched;
+
+  if (matched) {
+    // 1. Update SKU Badge
+    const displaySku = document.getElementById('displaySku');
+    if (displaySku) displaySku.textContent = matched.sku;
+    const selectedVarSku = document.getElementById('selectedVariationSku');
+    if (selectedVarSku) selectedVarSku.value = matched.sku;
+    const selectedVarId = document.getElementById('selectedVariationId');
+    if (selectedVarId) selectedVarId.value = matched.id;
+
+    // 2. Update Stock Badge
+    const stockBadge = document.getElementById('stockStatusBadge');
+    if (stockBadge) {
+      if (!matched.is_in_stock || matched.stock_quantity <= 0) {
+        stockBadge.innerHTML = '✕ Out of Stock';
+        stockBadge.style.background = 'rgba(239,68,68,0.12)';
+        stockBadge.style.color = '#DC2626';
+      } else if (matched.stock_quantity <= 10) {
+        stockBadge.innerHTML = `⚠ Low Stock (${matched.stock_quantity} left)`;
+        stockBadge.style.background = 'rgba(245,158,11,0.15)';
+        stockBadge.style.color = '#D97706';
+      } else {
+        stockBadge.innerHTML = `● In Stock (${matched.stock_quantity} available)`;
+        stockBadge.style.background = 'rgba(16,185,129,0.12)';
+        stockBadge.style.color = '#059669';
+      }
+    }
+
+    // 3. Update Image if variation has custom image
+    if (matched.image_url) {
+      const img = document.getElementById('mainProductImage');
+      if (img && img.src !== matched.image_url) {
+        img.style.opacity = '0.4';
+        setTimeout(() => {
+          img.src = matched.image_url;
+          img.style.opacity = '1';
+        }, 120);
+      }
+    }
+  }
+
+  updateLivePrice();
+}
+
+/**
+ * Recalculate price live
+ */
 function updateLivePrice() {
   const form = document.getElementById('priceCalculatorForm');
   if (!form) return;
 
-  const sizeRadio = form.querySelector('input[name="selected_size"]:checked');
-  const basePrice = sizeRadio ? parseFloat(sizeRadio.getAttribute('data-price')) : <?= (float)preg_replace('/[^0-9.]/', '', $product['starting_price'] ?? '249') ?>;
-  
-  // Highlight chosen size label
-  form.querySelectorAll('.size-choice-label').forEach(lbl => {
-    const radio = lbl.querySelector('input[type="radio"]');
-    if (radio && radio.checked) {
-      lbl.style.borderColor = 'var(--royal)';
-      lbl.style.background = 'rgba(29,78,216,0.06)';
-    } else {
-      lbl.style.borderColor = 'var(--border-light)';
-      lbl.style.background = '#FFFFFF';
+  let basePrice = BASE_STARTING_PRICE;
+  let regularPrice = null;
+  let salePrice = null;
+
+  if (HAS_VARIATIONS && currentMatchedVariation) {
+    regularPrice = currentMatchedVariation.regular_price;
+    salePrice = currentMatchedVariation.sale_price;
+    basePrice = salePrice !== null && salePrice > 0 ? salePrice : regularPrice;
+  } else {
+    // Traditional size selection fallback
+    const sizeRadio = form.querySelector('input[name="selected_size"]:checked');
+    if (sizeRadio) {
+      basePrice = parseFloat(sizeRadio.getAttribute('data-price')) || BASE_STARTING_PRICE;
     }
-  });
+    // Highlight chosen size label
+    form.querySelectorAll('.size-choice-label').forEach(lbl => {
+      const radio = lbl.querySelector('input[type="radio"]');
+      if (radio && radio.checked) {
+        lbl.style.borderColor = 'var(--royal)';
+        lbl.style.background = 'rgba(29,78,216,0.06)';
+      } else {
+        lbl.style.borderColor = 'var(--border-light)';
+        lbl.style.background = '#FFFFFF';
+      }
+    });
+  }
 
   const qty = Math.max(1, parseInt(document.getElementById('calcQuantity').value, 10) || 1);
 
   // Check tiers for discount
   let discountPct = 0;
   let tierLabel = 'Standard Tier';
-  if (Array.isArray(PRICING_TIERS)) {
+  if (Array.isArray(PRICING_TIERS) && PRICING_TIERS.length > 0) {
     for (const t of PRICING_TIERS) {
       const min = parseInt(t.min_quantity, 10);
       const max = t.max_quantity ? parseInt(t.max_quantity, 10) : 999999;
@@ -824,12 +1146,10 @@ function updateLivePrice() {
 
   // Calculate options
   let optionsCharge = 0;
-  // Paper
   const paperRadio = form.querySelector('input[name="opt_paper"]:checked');
   if (paperRadio) {
     optionsCharge += parseFloat(paperRadio.getAttribute('data-price')) || 0;
   }
-  // Finishing
   form.querySelectorAll('input[name="opt_finishing[]"]:checked').forEach(cb => {
     optionsCharge += parseFloat(cb.getAttribute('data-price')) || 0;
   });
@@ -840,6 +1160,25 @@ function updateLivePrice() {
   const subtotal = finalUnitPrice * qty;
   const tax = subtotal * 0.18;
   const grandTotal = subtotal + tax;
+
+  // Display old price & discount pill if on sale
+  const displayOldPrice = document.getElementById('displayOldPrice');
+  const displayDiscountTag = document.getElementById('displayDiscountTag');
+
+  if (regularPrice && salePrice && regularPrice > salePrice) {
+    const varDiscount = Math.round(((regularPrice - salePrice) / regularPrice) * 100);
+    if (displayOldPrice) {
+      displayOldPrice.textContent = '₹' + regularPrice.toFixed(2);
+      displayOldPrice.style.display = 'inline';
+    }
+    if (displayDiscountTag) {
+      displayDiscountTag.textContent = 'Save ' + varDiscount + '%';
+      displayDiscountTag.style.display = 'inline-block';
+    }
+  } else {
+    if (displayOldPrice) displayOldPrice.style.display = 'none';
+    if (displayDiscountTag) displayDiscountTag.style.display = 'none';
+  }
 
   // Update DOM
   document.getElementById('displayUnitPrice').textContent = '₹' + finalUnitPrice.toFixed(2);
@@ -852,33 +1191,22 @@ function syncQuoteForm() {
   const quoteQty = document.getElementById('syncQuoteQty');
   if (quoteQty) quoteQty.value = qty;
 
-  const sizeRadio = document.querySelector('input[name="selected_size"]:checked');
-  if (sizeRadio) {
-    const label = sizeRadio.closest('.size-choice-label').querySelector('span').textContent;
-    const sizingInput = document.getElementById('syncQuoteSizing');
-    if (sizingInput) sizingInput.value = label;
+  const sizingInput = document.getElementById('syncQuoteSizing');
+  if (sizingInput) {
+    if (HAS_VARIATIONS && currentMatchedVariation) {
+      sizingInput.value = `SKU: ${currentMatchedVariation.sku}`;
+    } else {
+      const sizeRadio = document.querySelector('input[name="selected_size"]:checked');
+      if (sizeRadio) {
+        const label = sizeRadio.closest('.size-choice-label').querySelector('span').textContent;
+        sizingInput.value = label;
+      }
+    }
   }
 }
 
-// Spec Tabs Switching
-function switchSpecTab(index) {
-  const tabs = document.querySelectorAll('.specs-tab-btn');
-  const contents = document.querySelectorAll('.specs-tab-content');
-
-  tabs.forEach((tab, i) => {
-    if (i === index) {
-      tab.classList.add('active');
-      tab.setAttribute('aria-selected', 'true');
-    } else {
-      tab.classList.remove('active');
-      tab.setAttribute('aria-selected', 'false');
-    }
-  });
-
-  contents.forEach((content, i) => {
-    content.style.display = (i === index) ? 'block' : 'none';
-  });
-}
+// Keep switchSpecTab for backward safety
+function switchSpecTab(index) {}
 
 // Star Rating Picker Logic
 let currentStarRating = 5;
@@ -951,9 +1279,13 @@ async function submitReview(e) {
   }
 }
 
-// Initial price run
+// Initial Run
 document.addEventListener('DOMContentLoaded', () => {
-  updateLivePrice();
+  if (HAS_VARIATIONS) {
+    handleVariationChange();
+  } else {
+    updateLivePrice();
+  }
   setStarRating(5);
 });
 </script>

@@ -11,13 +11,19 @@ require_once __DIR__ . '/../includes/header.php';
 $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'");
 ?>
 
-<section class="section section-navy" style="padding-top:4.5rem; padding-bottom:4.5rem;">
-  <div class="container text-center reveal slide-up">
-    <div class="section-label" style="justify-content:center;">Apparel Production &amp; Merchandise</div>
-    <h1 style="font-size:3.2rem; margin-bottom:1rem;">Custom T-Shirt Printing Studio</h1>
-    <p class="section-subtitle" style="color:rgba(255,255,255,0.75); margin:0 auto;">
-      From prototype brand samples to bulk corporate runs, we print high-density graphics onto 180–240 GSM bio-washed combed cotton, oversized drop-shoulder tees, and athletic polyester.
-    </p>
+<section class="page-intro-header">
+  <div class="container">
+    <div class="page-intro-box">
+      <div class="page-intro-eyebrow">
+        <span class="page-intro-dot"></span>
+        <span>Apparel Production &amp; Merchandise</span>
+      </div>
+      <h1 class="page-intro-title">Custom T-Shirt Printing Studio</h1>
+      <div class="page-intro-divider"></div>
+      <p class="page-intro-desc">
+        From prototype brand samples to bulk corporate runs, we print high-density graphics onto 180–240 GSM bio-washed combed cotton, oversized drop-shoulder tees, and athletic polyester.
+      </p>
+    </div>
   </div>
 </section>
 
@@ -124,9 +130,9 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'"
 
             <div class="file-preview-area"></div>
 
-            <div style="background:var(--ivory); padding:1.25rem; border-radius:var(--radius-sm); margin-top:1.25rem; border:1px solid var(--border-light);">
-              <h5 style="color:var(--navy); margin-bottom:0.35rem; font-size:0.95rem;">Fabric &amp; Print Assurance</h5>
-              <p style="font-size:0.825rem; color:var(--slate); margin:0;">
+            <div style="background:var(--bg-surface-elevated); padding:1.25rem; border-radius:var(--radius-sm); margin-top:1.25rem; border:1px solid var(--border-color);">
+              <h5 style="color:var(--text-primary); margin-bottom:0.35rem; font-size:0.95rem;">Fabric &amp; Print Assurance</h5>
+              <p style="font-size:0.825rem; color:var(--text-secondary); margin:0;">
                 All t-shirts use 100% super-combed bio-washed ringspun cotton with double-needle stitched neck and sleeves.
               </p>
             </div>

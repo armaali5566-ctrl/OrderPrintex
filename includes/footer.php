@@ -18,8 +18,8 @@ $ytUrl = get_setting('youtube_url', 'https://www.youtube.com/@PRINTEX_Delhi');
     <div class="footer-grid">
       <!-- Col 1: Brand & Bio -->
       <div class="footer-brand">
-        <a href="<?= url('') ?>" style="display:inline-block; margin-bottom:1.25rem; background:#FFFFFF; padding:6px 16px; border-radius:8px; border:1px solid rgba(185,154,97,0.35);">
-          <img src="<?= url('assets/images/logo.png') ?>" alt="OrderPrintex" style="height:36px; width:auto; display:block;">
+        <a href="<?= url('') ?>" style="display:inline-block; margin-bottom:1.25rem; background:transparent; padding:0;">
+          <img src="<?= url('assets/images/logo.png') ?>" alt="OrderPrintex" style="height:64px; width:64px; border-radius:50%; object-fit:cover; display:block; border:1.5px solid rgba(212,175,55,0.6); box-shadow:0 0 16px rgba(212,175,55,0.35);">
         </a>
         <p>
           PRINTEX is India's leading manufacturing studio specializing in industrial Direct-to-Film (DTF) and UV DTF transfers. Supplying high-durability custom print solutions across India with calibrated color fidelity, prepress verification, and rapid bulk fulfillment.
@@ -47,12 +47,12 @@ $ytUrl = get_setting('youtube_url', 'https://www.youtube.com/@PRINTEX_Delhi');
       <div>
         <h4 class="footer-title">Printing Services</h4>
         <div class="footer-links">
-          <a href="<?= url('services/dtf-printing.php') ?>">DTF Garment Transfers</a>
-          <a href="<?= url('services/uv-dtf-printing.php') ?>">UV DTF Hard Decals</a>
-          <a href="<?= url('services/t-shirt-printing.php') ?>">T-Shirt Printing</a>
-          <a href="<?= url('services/corporate-printing.php') ?>">Corporate Kits &amp; Merch</a>
-          <a href="<?= url('services.php') ?>">All Printing Capabilities</a>
-          <a href="<?= url('get-quote.php') ?>">Custom Quotation Studio</a>
+          <a href="<?= service_url('dtf-printing') ?>">DTF Garment Transfers</a>
+          <a href="<?= service_url('uv-dtf-printing') ?>">UV DTF Hard Decals</a>
+          <a href="<?= service_url('t-shirt-printing') ?>">T-Shirt Printing</a>
+          <a href="<?= service_url('corporate-printing') ?>">Corporate Kits &amp; Merch</a>
+          <a href="<?= url('services/') ?>">All Printing Capabilities</a>
+          <a href="<?= url('get-quote/') ?>">Custom Quotation Studio</a>
         </div>
       </div>
 
@@ -60,12 +60,14 @@ $ytUrl = get_setting('youtube_url', 'https://www.youtube.com/@PRINTEX_Delhi');
       <div>
         <h4 class="footer-title">Explore Printex</h4>
         <div class="footer-links">
-          <a href="<?= url('about.php') ?>">About Delhi Studio</a>
-          <a href="<?= url('products.php') ?>">Catalog &amp; Gang Sheets</a>
-          <a href="<?= url('gallery.php') ?>">Production Showcase</a>
-          <a href="<?= url('faq.php') ?>">Prepress &amp; FAQs</a>
-          <a href="<?= url('contact.php') ?>">Workshop Directions</a>
-          <a href="<?= url('account/dashboard.php') ?>">Client Portal</a>
+          <a href="<?= url('about/') ?>">About Delhi Studio</a>
+          <a href="<?= url('products/') ?>">Catalog &amp; Gang Sheets</a>
+          <a href="<?= pricing_url() ?>">Volume Pricing</a>
+          <a href="<?= blog_url() ?>">Printing Knowledge Base</a>
+          <a href="<?= url('gallery/') ?>">Production Showcase</a>
+          <a href="<?= url('faq/') ?>">Prepress &amp; FAQs</a>
+          <a href="<?= url('contact/') ?>">Workshop Directions</a>
+          <a href="<?= account_url() ?>">Client Portal</a>
         </div>
       </div>
 

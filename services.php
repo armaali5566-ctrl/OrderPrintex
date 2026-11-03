@@ -56,13 +56,19 @@ if (empty($services)) {
 }
 ?>
 
-<section class="section section-navy" style="padding-top:4.5rem; padding-bottom:4.5rem;">
-  <div class="container text-center reveal slide-up">
-    <div class="section-label" style="justify-content:center;">Commercial Print Capabilities</div>
-    <h1 style="font-size:3.2rem; margin-bottom:1rem;">Advanced Industrial Printing Services</h1>
-    <p class="section-subtitle" style="color:rgba(255,255,255,0.75); margin:0 auto;">
-      We engineer press-ready transfers with vivid color gamut, durable washability, and rapid turnaround for apparel brands, promotional studios, and print businesses.
-    </p>
+<section class="page-intro-header">
+  <div class="container">
+    <div class="page-intro-box">
+      <div class="page-intro-eyebrow">
+        <span class="page-intro-dot"></span>
+        <span>Commercial Print Capabilities</span>
+      </div>
+      <h1 class="page-intro-title">Advanced Industrial Printing Services</h1>
+      <div class="page-intro-divider"></div>
+      <p class="page-intro-desc">
+        We engineer press-ready transfers with vivid color gamut, durable washability, and rapid turnaround for apparel brands, promotional studios, and print businesses.
+      </p>
+    </div>
   </div>
 </section>
 
@@ -75,22 +81,22 @@ if (empty($services)) {
           <div class="service-showcase-row <?= ($idx % 2 !== 0) ? 'reverse' : '' ?> reveal slide-up">
             <div class="service-showcase-content">
               <span class="service-feature-pill"><?= e($svc['badge']) ?></span>
-              <h2 style="margin-bottom:0.75rem; font-size:2.2rem; color:var(--navy);"><?= e($svc['title']) ?></h2>
-              <p style="font-size:1.05rem; color:var(--royal); font-weight:600; margin-bottom:0.85rem;">
+              <h2 style="margin-bottom:0.75rem; font-size:clamp(1.8rem, 2.8vw, 2.35rem); color:var(--text-primary); font-weight:800;"><?= e($svc['title']) ?></h2>
+              <p style="font-size:1.05rem; color:var(--primary-gold); font-weight:600; margin-bottom:0.85rem;">
                 <?= e($svc['hero_tagline']) ?>
               </p>
-              <p style="margin-bottom:1.5rem; color:var(--text-muted); line-height:1.7;">
+              <p style="margin-bottom:1.5rem; color:var(--text-secondary); line-height:1.7;">
                 <?= e($svc['full_description']) ?>
               </p>
 
               <?php if (!empty($svc['specifications'])): ?>
-                <div style="background-color:var(--ivory); border-left:3px solid var(--gold); padding:1rem 1.25rem; border-radius:var(--radius-sm); margin-bottom:1.75rem; font-size:0.88rem; color:var(--navy); line-height:1.6;">
-                  <strong style="color:var(--navy);">Key Specs:</strong> <?= e($svc['specifications']) ?>
+                <div class="service-key-specs" style="background-color:var(--bg-surface-elevated); border:1px solid var(--border-color); border-left:3px solid var(--primary-gold); padding:1rem 1.25rem; border-radius:var(--radius-sm); margin-bottom:1.75rem; font-size:0.88rem; color:var(--text-primary); line-height:1.6;">
+                  <strong style="color:var(--primary-gold); font-weight:700;">Key Specs:</strong> <?= e($svc['specifications']) ?>
                 </div>
               <?php endif; ?>
 
-              <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-                <a href="<?= service_url($svc['slug']) ?>" class="btn btn-navy">
+              <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+                <a href="<?= service_url($svc['slug']) ?>" class="btn btn-outline">
                   <span>Detailed Specifications</span> &rarr;
                 </a>
                 <a href="<?= url('get-quote.php?service_id=' . e($svc['id'])) ?>" class="btn btn-primary">
@@ -100,7 +106,7 @@ if (empty($services)) {
             </div>
 
             <div class="service-showcase-media">
-              <img src="<?= url(e($svc['image_url'])) ?>" alt="<?= e($svc['title']) ?>" loading="lazy">
+              <img src="<?= url(e($svc['image_url'])) ?>" alt="<?= e($svc['title']) ?>" loading="lazy" style="width:100%; height:100%; object-fit:contain; display:block; padding:0.75rem;">
             </div>
           </div>
         <?php endforeach; ?>

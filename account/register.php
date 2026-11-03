@@ -10,7 +10,7 @@ require_once __DIR__ . '/../includes/auth.php';
 
 // Redirect if already logged in
 if (auth_check()) {
-    header('Location: ' . url('account/dashboard.php'));
+    header('Location: ' . account_url());
     exit;
 }
 
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = auth_register($_POST);
         if ($result['success']) {
             set_flash('success', 'Your OrderPrintex customer account has been created successfully!');
-            header('Location: ' . url('account/dashboard.php'));
+            header('Location: ' . account_url());
             exit;
         } else {
             $errors[] = $result['error'];
@@ -56,7 +56,7 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
       <?php endif; ?>
 
-      <form action="<?= url('account/register.php') ?>" method="POST">
+      <form action="<?= account_url('register') ?>" method="POST">
         <?= csrf_field() ?>
 
         <div class="form-grid" style="margin-top:0;">
@@ -108,7 +108,7 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
 
         <div class="text-center" style="margin-top:1.5rem; font-size:0.88rem; color:var(--slate);">
-          Already have an account? <a href="<?= url('account/login.php') ?>" class="text-gold" style="font-weight:600;">Sign in here</a>
+          Already have an account? <a href="<?= account_url('login') ?>" class="text-gold" style="font-weight:600;">Sign in here</a>
         </div>
       </form>
     </div>

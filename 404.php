@@ -11,29 +11,35 @@ $pageDesc  = "The page or printing product you are looking for could not be foun
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<section class="section section-navy text-center" style="padding-top: 5rem; padding-bottom: 5rem;">
-  <div class="container container-narrow reveal scale-in">
-    <div style="display:inline-flex; align-items:center; justify-content:center; width:80px; height:80px; border-radius:50%; background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3); margin-bottom:1.5rem; color:#EF4444;">
-      <svg style="width:40px; height:40px; fill:currentColor;" viewBox="0 0 24 24">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-      </svg>
-    </div>
-    <span class="section-badge" style="background:rgba(255,255,255,0.1); color:var(--gold); border:1px solid rgba(185,154,97,0.3);">Error 404</span>
-    <h1 style="font-size:3rem; margin-top:0.75rem; margin-bottom:1rem; color:#FFFFFF;">Page or Product Not Found</h1>
-    <p class="section-subtitle" style="color:rgba(255,255,255,0.8); max-width:640px; margin:0 auto 2.5rem;">
-      The requested URL or product slug does not exist, has been moved, or is temporarily unavailable. Browse our verified commercial printing catalog below or contact our prepress studio.
-    </p>
+<section class="page-intro-header text-center">
+  <div class="container">
+    <div class="page-intro-box">
+      <div style="display:inline-flex; align-items:center; justify-content:center; width:72px; height:72px; border-radius:50%; background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3); margin-bottom:1.25rem; color:#EF4444;">
+        <svg style="width:36px; height:36px; fill:currentColor;" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+      </div>
+      <div class="page-intro-eyebrow">
+        <span class="page-intro-dot" style="background:#EF4444; box-shadow:0 0 8px #EF4444;"></span>
+        <span>Error 404 &bull; Page Not Found</span>
+      </div>
+      <h1 class="page-intro-title">Page or Product Not Found</h1>
+      <div class="page-intro-divider"></div>
+      <p class="page-intro-desc" style="margin-bottom:2.5rem;">
+        The requested URL or product slug does not exist, has been moved, or is temporarily unavailable. Browse our verified commercial printing catalog below or contact our prepress studio.
+      </p>
 
-    <div style="display:flex; justify-content:center; gap:1.25rem; flex-wrap:wrap;">
-      <a href="<?= url('products.php') ?>" class="btn btn-primary btn-lg">
-        <span>Browse All Products</span> &rarr;
-      </a>
-      <a href="<?= url('services/') ?>" class="btn btn-outline-white btn-lg">
-        <span>Printing Services</span>
-      </a>
-      <a href="<?= url('') ?>" class="btn btn-navy btn-lg" style="border:1px solid rgba(255,255,255,0.2);">
-        <span>Back to Homepage</span>
-      </a>
+      <div style="display:flex; justify-content:center; gap:1.25rem; flex-wrap:wrap;">
+        <a href="<?= url('products/') ?>" class="btn btn-primary btn-lg">
+          <span>Browse All Products</span> &rarr;
+        </a>
+        <a href="<?= url('services/') ?>" class="btn btn-outline-white btn-lg">
+          <span>Printing Services</span>
+        </a>
+        <a href="<?= url('') ?>" class="btn btn-navy btn-lg" style="border:1px solid rgba(255,255,255,0.2);">
+          <span>Back to Homepage</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>

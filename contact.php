@@ -51,13 +51,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 }
 ?>
 
-<section class="section section-navy" style="padding-top:4.5rem; padding-bottom:4.5rem;">
-  <div class="container text-center reveal slide-up">
-    <div class="section-label" style="justify-content:center;">Direct Connection</div>
-    <h1 style="font-size:3.2rem; margin-bottom:1rem;">Contact Our Delhi Production Studio</h1>
-    <p class="section-subtitle" style="color:rgba(255,255,255,0.75); margin:0 auto;">
-      Whether you need prepress guidance, gang sheet quotations, sample swatches, or bulk supply agreements, our customer engineering team is ready to assist.
-    </p>
+<section class="page-intro-header">
+  <div class="container">
+    <div class="page-intro-box">
+      <div class="page-intro-eyebrow">
+        <span class="page-intro-dot"></span>
+        <span>Direct Connection</span>
+      </div>
+      <h1 class="page-intro-title">Contact Our Delhi Production Studio</h1>
+      <div class="page-intro-divider"></div>
+      <p class="page-intro-desc">
+        Whether you need prepress guidance, gang sheet quotations, sample swatches, or bulk supply agreements, our customer engineering team is ready to assist.
+      </p>
+    </div>
   </div>
 </section>
 

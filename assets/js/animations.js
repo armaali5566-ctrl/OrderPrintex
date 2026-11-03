@@ -75,4 +75,61 @@ document.addEventListener('DOMContentLoaded', function () {
 
     countElements.forEach(el => counterObserver.observe(el));
   }
+
+  // 3. Technology Zigzag Rows: Bidirectional Scroll Animation
+  const techRows = document.querySelectorAll('.tech-zigzag-row');
+  if (techRows.length > 0) {
+    if (prefersReducedMotion) {
+      techRows.forEach(row => row.classList.add('is-visible'));
+    } else if ('IntersectionObserver' in window) {
+      const techObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          } else {
+            // Re-arm when element is scrolled completely out of viewport (scrolling up or down)
+            const rect = entry.boundingClientRect;
+            if (rect.top > (window.innerHeight || document.documentElement.clientHeight) || rect.bottom < 0) {
+              entry.target.classList.remove('is-visible');
+            }
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      techRows.forEach(row => techObserver.observe(row));
+    } else {
+      techRows.forEach(row => row.classList.add('is-visible'));
+    }
+  }
+
+  // 4. Page Intro Headers: Bidirectional Scroll Entrance Observer
+  const pageIntroHeaders = document.querySelectorAll('.page-intro-header');
+  if (pageIntroHeaders.length > 0) {
+    if (prefersReducedMotion) {
+      pageIntroHeaders.forEach(el => el.classList.add('is-visible'));
+    } else if ('IntersectionObserver' in window) {
+      const introObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          } else {
+            const rect = entry.boundingClientRect;
+            if (rect.top > (window.innerHeight || document.documentElement.clientHeight) || rect.bottom < 0) {
+              entry.target.classList.remove('is-visible');
+            }
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -20px 0px'
+      });
+
+      pageIntroHeaders.forEach(el => introObserver.observe(el));
+    } else {
+      pageIntroHeaders.forEach(el => el.classList.add('is-visible'));
+    }
+  }
 });

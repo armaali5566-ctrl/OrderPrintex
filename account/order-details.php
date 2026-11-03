@@ -13,7 +13,14 @@ $user = auth_user();
 
 $orderId = intval($_GET['id'] ?? 0);
 if (!$orderId) {
-    header('Location: ' . url('account/orders.php'));
+    header('Location: ' . account_url('orders'));
+    exit;
+}
+
+$requestUri = $_SERVER['REQUEST_URI'] ?? '';
+if (strpos($requestUri, 'order-details.php') !== false) {
+    header('HTTP/1.1 301 Moved Permanently');
+    header('Location: ' . url('account/orders/' . $orderId . '/'));
     exit;
 }
 
@@ -34,7 +41,7 @@ $order = db_fetch_one("
 
 if (!$order) {
     set_flash('error', 'Order not found or unauthorized.');
-    header('Location: ' . url('account/orders.php'));
+    header('Location: ' . account_url('orders'));
     exit;
 }
 
@@ -79,7 +86,7 @@ require_once __DIR__ . '/../includes/header.php';
       </div>
 
       <div style="display:flex; gap:0.75rem;">
-        <a href="<?= url('account/orders.php') ?>" class="btn btn-outline">
+        <a href="<?= account_url('orders') ?>" class="btn btn-outline">
           &larr; Back to Orders
         </a>
       </div>

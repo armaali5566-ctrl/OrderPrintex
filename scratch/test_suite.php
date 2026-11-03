@@ -197,12 +197,138 @@ run_test("Dynamic Pricing API (api/calculate_price.php)", function() use ($baseU
 run_test("Sitemap (sitemap.xml) and Robots (robots.txt)", function() use ($baseUrl) {
     $rSitemap = http_req($baseUrl . '/sitemap.xml');
     $rRobots = http_req($baseUrl . '/robots.txt');
-    $hasCleanSitemap = str_contains($rSitemap['body'], '/product/bookmark-03/') && str_contains($rSitemap['body'], '/blog/complete-guide-to-business-card-printing/');
+    $hasCleanSitemap = str_contains($rSitemap['body'], '/product/bookmark-03/') 
+                    && str_contains($rSitemap['body'], '/product/category/dtf-gang-sheets/')
+                    && str_contains($rSitemap['body'], '/pricing/');
     $hasRobotsMap = str_contains($rRobots['body'], 'sitemap.xml');
     $pass = ($rSitemap['code'] === 200 && $rRobots['code'] === 200 && $hasCleanSitemap && $hasRobotsMap);
     return [
         'pass' => $pass,
         'details' => "sitemap HTTP {$rSitemap['code']}, robots HTTP {$rRobots['code']}, clean URLs verified"
+    ];
+});
+
+// TEST 11: Clean Category URLs (/product/category/{slug}/)
+$categoriesToTest = ['dtf-gang-sheets', 'uv-dtf-decals', 'custom-tshirts', 'printing-materials'];
+foreach ($categoriesToTest as $cSlug) {
+    run_test("Category: /product/category/{$cSlug}/", function() use ($baseUrl, $cSlug) {
+        $r = http_req($baseUrl . "/product/category/{$cSlug}/");
+        $hasContent = str_contains($r['body'], 'product-card') || str_contains($r['body'], 'Commercial Print Catalog');
+        $pass = ($r['code'] === 200 && $hasContent);
+        return [
+            'pass' => $pass,
+            'details' => "HTTP {$r['code']}, content loaded=" . ($hasContent ? 'YES' : 'NO')
+        ];
+    });
+}
+
+// TEST 11b: 301 Redirect from legacy /category/{slug}/ to /product/category/{slug}/
+run_test("301 Redirect: /category/printing-materials/ -> /product/category/printing-materials/", function() use ($baseUrl) {
+    $r = http_req($baseUrl . '/category/printing-materials/');
+    $target = $r['redirect_url'];
+    $pass = ($r['code'] === 301 && str_ends_with($target, '/product/category/printing-materials/'));
+    return [
+        'pass' => $pass,
+        'details' => "HTTP {$r['code']}, Target={$target}"
+    ];
+});
+
+// TEST 12: Invalid Category Slug returns HTTP 404
+run_test("Invalid Category Slug returns HTTP 404", function() use ($baseUrl) {
+    $r = http_req($baseUrl . '/product/category/non-existent-category-xyz-99999/');
+    $pass = ($r['code'] === 404);
+    return [
+        'pass' => $pass,
+        'details' => "HTTP {$r['code']}, 404 status received=" . ($pass ? 'YES' : 'NO')
+    ];
+});
+
+// TEST 13: 301 Canonical Redirects from legacy query and php URLs
+run_test("301 Redirect: /products.php?category=printing-materials -> /product/category/printing-materials/", function() use ($baseUrl) {
+    $r = http_req($baseUrl . '/products.php?category=printing-materials');
+    $target = $r['redirect_url'];
+    $pass = ($r['code'] === 301 && str_ends_with($target, '/product/category/printing-materials/'));
+    return [
+        'pass' => $pass,
+        'details' => "HTTP {$r['code']}, Target={$target}"
+    ];
+});
+
+run_test("301 Redirect: /products.php -> /products/", function() use ($baseUrl) {
+    $r = http_req($baseUrl . '/products.php');
+    $target = $r['redirect_url'];
+    $pass = ($r['code'] === 301 && str_ends_with($target, '/products/'));
+    return [
+        'pass' => $pass,
+        'details' => "HTTP {$r['code']}, Target={$target}"
+    ];
+});
+
+run_test("301 Redirect: /about.php -> /about/", function() use ($baseUrl) {
+    $r = http_req($baseUrl . '/about.php');
+    $target = $r['redirect_url'];
+    $pass = ($r['code'] === 301 && str_ends_with($target, '/about/'));
+    return [
+        'pass' => $pass,
+        'details' => "HTTP {$r['code']}, Target={$target}"
+    ];
+});
+
+// TEST 14: Shopping Pages (/pricing/, /cart/, /checkout/)
+$shoppingPages = [
+    '/pricing/' => 'Volume Pricing',
+    '/cart/' => 'Your Shopping Cart',
+    '/checkout/' => 'Secure Checkout'
+];
+foreach ($shoppingPages as $sPath => $sHeading) {
+    run_test("Shopping Page: {$sPath}", function() use ($baseUrl, $sPath, $sHeading) {
+        $r = http_req($baseUrl . $sPath);
+        $hasHeading = str_contains($r['body'], $sHeading);
+        $pass = ($r['code'] === 200 && $hasHeading);
+        return [
+            'pass' => $pass,
+            'details' => "HTTP {$r['code']}, Heading found=" . ($hasHeading ? 'YES' : 'NO')
+        ];
+    });
+}
+
+// TEST 15: Customer Pages (/account/login/, /account/register/)
+run_test("Customer Page: /account/login/", function() use ($baseUrl) {
+    $r = http_req($baseUrl . '/account/login/');
+    $hasForm = str_contains($r['body'], 'Sign In');
+    $pass = ($r['code'] === 200 && $hasForm);
+    return [
+        'pass' => $pass,
+        'details' => "HTTP {$r['code']}, form found=" . ($hasForm ? 'YES' : 'NO')
+    ];
+});
+
+run_test("Customer Page: /account/register/", function() use ($baseUrl) {
+    $r = http_req($baseUrl . '/account/register/');
+    $hasForm = str_contains($r['body'], 'Create an Account');
+    $pass = ($r['code'] === 200 && $hasForm);
+    return [
+        'pass' => $pass,
+        'details' => "HTTP {$r['code']}, form found=" . ($hasForm ? 'YES' : 'NO')
+    ];
+});
+
+// TEST 16: Clean Blog Category and 404 Handling
+run_test("Blog Category: /blog/category/printing-guides/", function() use ($baseUrl) {
+    $r = http_req($baseUrl . '/blog/category/printing-guides/');
+    $pass = ($r['code'] === 200);
+    return [
+        'pass' => $pass,
+        'details' => "HTTP {$r['code']}"
+    ];
+});
+
+run_test("Invalid Blog Category returns HTTP 404", function() use ($baseUrl) {
+    $r = http_req($baseUrl . '/blog/category/invalid-non-existent-cat-12345/');
+    $pass = ($r['code'] === 404);
+    return [
+        'pass' => $pass,
+        'details' => "HTTP {$r['code']}, 404 status received=" . ($pass ? 'YES' : 'NO')
     ];
 });
 

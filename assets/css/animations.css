@@ -94,6 +94,34 @@
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
 }
 
+/* Metallic Light Sweep & Shimmer Animations */
+@keyframes metallicLightSweep {
+  0% {
+    left: -75%;
+  }
+  30%, 100% {
+    left: 140%;
+  }
+}
+
+@keyframes metallicLightSweepFast {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 140%;
+  }
+}
+
+@keyframes goldGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(212, 175, 55, 0.55), 0 0 8px rgba(255, 215, 106, 0.35);
+  }
+}
+
 /* Accessibility: Respect Reduced Motion Preference */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -115,5 +143,9 @@
 
   .floating-badge {
     animation: none !important;
+  }
+
+  .btn-primary::after {
+    display: none !important;
   }
 }

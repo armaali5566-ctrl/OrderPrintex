@@ -7,6 +7,18 @@ require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/database.php';
 require_once __DIR__ . '/includes/functions.php';
 
+$requestUri = $_SERVER['REQUEST_URI'] ?? '';
+if (strpos($requestUri, 'blog-details.php') !== false) {
+    if (!empty($_GET['slug'])) {
+        header('HTTP/1.1 301 Moved Permanently');
+        header('Location: ' . blog_url($_GET['slug']));
+        exit;
+    }
+    header('HTTP/1.1 301 Moved Permanently');
+    header('Location: ' . blog_url());
+    exit;
+}
+
 $slug = trim($_GET['slug'] ?? '');
 
 if (empty($slug)) {
@@ -86,7 +98,7 @@ require_once __DIR__ . '/includes/header.php';
     <span style="color:var(--slate-subtle);">&rsaquo;</span>
     <a href="<?= blog_url() ?>" style="color:var(--navy); font-weight:600;">Blog</a>
     <span style="color:var(--slate-subtle);">&rsaquo;</span>
-    <a href="<?= blog_url() ?>?category=<?= urlencode($post['category_slug'] ?? '') ?>" style="color:var(--navy); font-weight:600;">
+    <a href="<?= blog_category_url($post['category_slug'] ?? '') ?>" style="color:var(--navy); font-weight:600;">
       <?= e($post['category_name']) ?>
     </a>
     <span style="color:var(--slate-subtle);">&rsaquo;</span>
@@ -145,7 +157,7 @@ require_once __DIR__ . '/includes/header.php';
 
 <!-- Featured Image Hero Card -->
 <div class="container container-readable" style="margin-bottom:3rem;">
-  <div style="border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-md); max-height:480px; background:#F8F5F0;">
+  <div style="border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border-color); box-shadow: 0 4px 14px rgba(15, 25, 45, 0.09), 0 16px 36px rgba(15, 25, 45, 0.12); max-height:480px; background:#F8F5F0;">
     <img src="<?= url(e($post['featured_image'])) ?>" alt="<?= e($post['title']) ?>" style="width:100%; height:100%; object-fit:cover; display:block;">
   </div>
 </div>
@@ -158,7 +170,7 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 
     <!-- Editorial Author Card -->
-    <div style="margin-top:4rem; padding:2rem; background:var(--ivory); border-radius:var(--radius-md); border-left:4px solid var(--gold); display:flex; gap:1.5rem; align-items:flex-start;">
+    <div style="margin-top:4rem; padding:2rem; background:var(--bg-surface); border-radius:var(--radius-md); border:1px solid var(--border-color); border-left:4px solid var(--gold); box-shadow: 0 4px 12px rgba(15, 25, 45, 0.08), 0 10px 24px rgba(15, 25, 45, 0.09); display:flex; gap:1.5rem; align-items:flex-start;">
       <div style="width:56px; height:56px; border-radius:50%; background:var(--navy); color:var(--gold); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.3rem; flex-shrink:0;">
         OP
       </div>
@@ -186,7 +198,7 @@ require_once __DIR__ . '/includes/header.php';
 
     <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:2rem; margin-top:2.5rem;">
       <?php foreach ($relatedPosts as $rel): ?>
-        <article class="product-card" style="background:#FFFFFF; border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border-light); display:flex; flex-direction:column;">
+        <article class="product-card" style="background:var(--bg-surface); border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border-color); box-shadow: 0 4px 12px rgba(15, 25, 45, 0.09), 0 12px 28px rgba(15, 25, 45, 0.10); display:flex; flex-direction:column;">
           <div style="height:190px; overflow:hidden;">
             <img src="<?= url(e($rel['featured_image'])) ?>" alt="<?= e($rel['title']) ?>" style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy">
           </div>

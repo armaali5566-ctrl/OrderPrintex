@@ -206,18 +206,19 @@ $totalFaqCount = count($faqItems);
 ?>
 
 <!-- FAQ Hero Section -->
-<section class="section section-navy" style="padding-top:4.5rem; padding-bottom:4.5rem; position:relative; overflow:hidden;">
-  <div class="hero-glow-blob" style="top:10%; right:15%;"></div>
-  <div class="hero-glow-blob" style="bottom:10%; left:10%;"></div>
-
-  <div class="container text-center reveal slide-up" style="position:relative; z-index:2;">
-    <div class="section-label" style="justify-content:center;">Knowledge Base &amp; Prepress Help</div>
-    <h1 style="font-size:clamp(2.4rem, 4.2vw, 3.4rem); margin-bottom:1rem; letter-spacing:-0.02em;">
-      Frequently Asked Questions
-    </h1>
-    <p class="section-subtitle" style="color:rgba(255,255,255,0.8); margin:0 auto; max-width:760px; font-size:1.1rem; line-height:1.7;">
-      Industrial guidance on DTF transfers, UV DTF cold peel decals, artwork resolution, gang roll economy, heat press calibration, and nationwide dispatch.
-    </p>
+<section class="page-intro-header">
+  <div class="container">
+    <div class="page-intro-box">
+      <div class="page-intro-eyebrow">
+        <span class="page-intro-dot"></span>
+        <span>Knowledge Base &amp; Prepress Help</span>
+      </div>
+      <h1 class="page-intro-title">Frequently Asked Questions</h1>
+      <div class="page-intro-divider"></div>
+      <p class="page-intro-desc">
+        Industrial guidance on DTF transfers, UV DTF cold peel decals, artwork resolution, gang roll economy, heat press calibration, and nationwide dispatch.
+      </p>
+    </div>
   </div>
 </section>
 
