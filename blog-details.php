@@ -92,17 +92,17 @@ require_once __DIR__ . '/includes/header.php';
 </script>
 
 <!-- Breadcrumb Navigation -->
-<nav class="breadcrumb-bar" style="background-color:var(--ivory); border-bottom:1px solid var(--border-light); padding:0.9rem 0;" aria-label="Breadcrumb">
-  <div class="container" style="font-size:0.85rem; color:var(--slate); display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
-    <a href="<?= url('') ?>" style="color:var(--navy); font-weight:600;">Home</a>
-    <span style="color:var(--slate-subtle);">&rsaquo;</span>
-    <a href="<?= blog_url() ?>" style="color:var(--navy); font-weight:600;">Blog</a>
-    <span style="color:var(--slate-subtle);">&rsaquo;</span>
-    <a href="<?= blog_category_url($post['category_slug'] ?? '') ?>" style="color:var(--navy); font-weight:600;">
+<nav class="breadcrumb-bar" style="background-color:#121212; border-bottom:1px solid #40351E; padding:0.9rem 0;" aria-label="Breadcrumb">
+  <div class="container" style="font-size:0.85rem; color:#B8B1A3; display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+    <a href="<?= url('') ?>" style="color:#B8B1A3; font-weight:600;">Home</a>
+    <span style="color:#776A4E;">&rsaquo;</span>
+    <a href="<?= blog_url() ?>" style="color:#B8B1A3; font-weight:600;">Blog</a>
+    <span style="color:#776A4E;">&rsaquo;</span>
+    <a href="<?= blog_category_url($post['category_slug'] ?? '') ?>" style="color:#B8B1A3; font-weight:600;">
       <?= e($post['category_name']) ?>
     </a>
-    <span style="color:var(--slate-subtle);">&rsaquo;</span>
-    <span style="color:var(--royal); font-weight:700;" aria-current="page"><?= e(mb_strimwidth($post['title'], 0, 45, '...')) ?></span>
+    <span style="color:#776A4E;">&rsaquo;</span>
+    <span style="color:#FFD76A; font-weight:700;" aria-current="page"><?= e(mb_strimwidth($post['title'], 0, 45, '...')) ?></span>
   </div>
 </nav>
 
@@ -110,7 +110,7 @@ require_once __DIR__ . '/includes/header.php';
 <header class="section section-white" style="padding-top:3.5rem; padding-bottom:2rem;">
   <div class="container container-readable">
     <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
-      <span style="background:rgba(29,78,216,0.1); color:var(--royal); font-weight:700; font-size:0.85rem; padding:0.35rem 0.85rem; border-radius:999px;">
+      <span style="background:rgba(212,175,55,0.12); color:#FFD76A; border:1px solid rgba(212,175,55,0.3); font-weight:700; font-size:0.85rem; padding:0.35rem 0.85rem; border-radius:999px;">
         <?= e($post['category_name']) ?>
       </span>
       <span style="font-size:0.85rem; color:var(--text-muted);">&bull;</span>
@@ -129,7 +129,7 @@ require_once __DIR__ . '/includes/header.php';
 
     <div style="display:flex; align-items:center; justify-content:space-between; padding:1rem 0; border-top:1px solid var(--border-light); border-bottom:1px solid var(--border-light); flex-wrap:wrap; gap:1rem;">
       <div style="display:flex; align-items:center; gap:0.75rem;">
-        <div style="width:44px; height:44px; border-radius:50%; background:var(--navy); color:var(--gold); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.1rem;">
+        <div style="width:44px; height:44px; border-radius:50%; background:#181818; border:1px solid #40351E; color:#FFD76A; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.1rem;">
           OP
         </div>
         <div>
@@ -157,7 +157,7 @@ require_once __DIR__ . '/includes/header.php';
 
 <!-- Featured Image Hero Card -->
 <div class="container container-readable" style="margin-bottom:3rem;">
-  <div style="border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border-color); box-shadow: 0 4px 14px rgba(15, 25, 45, 0.09), 0 16px 36px rgba(15, 25, 45, 0.12); max-height:480px; background:#F8F5F0;">
+  <div style="border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border-color); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 16px 36px rgba(0, 0, 0, 0.6); max-height:480px; background:#181818;">
     <img src="<?= url(e($post['featured_image'])) ?>" alt="<?= e($post['title']) ?>" style="width:100%; height:100%; object-fit:cover; display:block;">
   </div>
 </div>
@@ -170,8 +170,8 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 
     <!-- Editorial Author Card -->
-    <div style="margin-top:4rem; padding:2rem; background:var(--bg-surface); border-radius:var(--radius-md); border:1px solid var(--border-color); border-left:4px solid var(--gold); box-shadow: 0 4px 12px rgba(15, 25, 45, 0.08), 0 10px 24px rgba(15, 25, 45, 0.09); display:flex; gap:1.5rem; align-items:flex-start;">
-      <div style="width:56px; height:56px; border-radius:50%; background:var(--navy); color:var(--gold); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.3rem; flex-shrink:0;">
+    <div style="margin-top:4rem; padding:2rem; background:var(--bg-surface); border-radius:var(--radius-md); border:1px solid var(--border-color); border-left:4px solid var(--gold); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 10px 24px rgba(0, 0, 0, 0.6); display:flex; gap:1.5rem; align-items:flex-start;">
+      <div style="width:56px; height:56px; border-radius:50%; background:#181818; border:1px solid #40351E; color:#FFD76A; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.3rem; flex-shrink:0;">
         OP
       </div>
       <div>
@@ -179,7 +179,7 @@ require_once __DIR__ . '/includes/header.php';
         <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:0.75rem; line-height:1.6;">
           Our technical prepress team at OrderPrintex works daily with direct-to-film equipment, UV flatbed printers, and textile engineering to ensure every print file achieves optimal color fidelity and physical durability.
         </p>
-        <a href="<?= url('get-quote/') ?>" style="font-weight:700; color:var(--royal); font-size:0.9rem; text-decoration:none;">
+        <a href="<?= url('get-quote/') ?>" style="font-weight:700; color:#FFD76A; font-size:0.9rem; text-decoration:none;">
           Request a free artwork audit &rarr;
         </a>
       </div>
@@ -196,27 +196,29 @@ require_once __DIR__ . '/includes/header.php';
       <h2 style="font-size:2.2rem; color:var(--navy);">Related Printing &amp; Production Guides</h2>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:2rem; margin-top:2.5rem;">
+    <div class="blog-related-grid">
       <?php foreach ($relatedPosts as $rel): ?>
-        <article class="product-card" style="background:var(--bg-surface); border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border-color); box-shadow: 0 4px 12px rgba(15, 25, 45, 0.09), 0 12px 28px rgba(15, 25, 45, 0.10); display:flex; flex-direction:column;">
-          <div style="height:190px; overflow:hidden;">
-            <img src="<?= url(e($rel['featured_image'])) ?>" alt="<?= e($rel['title']) ?>" style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy">
-          </div>
-          <div style="padding:1.5rem; display:flex; flex-direction:column; flex:1;">
-            <span style="font-size:0.75rem; font-weight:700; color:var(--royal); text-transform:uppercase; margin-bottom:0.5rem;">
+        <article class="blog-card">
+          <div class="blog-card-media" style="height:190px;">
+            <img src="<?= url(e($rel['featured_image'])) ?>" alt="<?= e($rel['title']) ?>" loading="lazy">
+            <span class="blog-card-badge">
               <?= e($rel['category_name']) ?>
             </span>
-            <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:0.75rem; line-height:1.4;">
-              <a href="<?= blog_url($rel['slug']) ?>" style="color:inherit; text-decoration:none;">
+          </div>
+          <div class="blog-card-body">
+            <h3 class="blog-card-title">
+              <a href="<?= blog_url($rel['slug']) ?>">
                 <?= e($rel['title']) ?>
               </a>
             </h3>
-            <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.6; margin-bottom:1.25rem; flex:1;">
+            <p class="blog-card-desc">
               <?= e(mb_strimwidth($rel['excerpt'], 0, 110, '...')) ?>
             </p>
-            <a href="<?= blog_url($rel['slug']) ?>" style="font-weight:700; font-size:0.85rem; color:var(--royal); text-decoration:none;">
-              Read Guide &rarr;
-            </a>
+            <div class="blog-card-footer">
+              <a href="<?= blog_url($rel['slug']) ?>" class="blog-card-link">
+                Read Full Guide &rarr;
+              </a>
+            </div>
           </div>
         </article>
       <?php endforeach; ?>

@@ -116,7 +116,7 @@ $products = get_catalog_products($categorySlug, $searchTerm);
       </div>
 
       <!-- Search Box -->
-      <form action="<?= url('products/') ?>" method="GET" style="display:flex; gap:0.5rem; align-items:center;">
+      <form action="<?= url('products/') ?>" method="GET" class="product-filter-search-form" style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap; max-width:100%;">
         <?php if ($categorySlug): ?>
           <input type="hidden" name="category" value="<?= e($categorySlug) ?>">
         <?php endif; ?>
@@ -124,9 +124,9 @@ $products = get_catalog_products($categorySlug, $searchTerm);
           type="text" 
           name="search" 
           value="<?= e($searchTerm) ?>" 
-          class="form-control" 
+          class="form-control product-filter-search-input" 
           placeholder="Search products or specs..." 
-          style="width:240px; padding:0.6rem 0.95rem; border-radius:var(--radius-full); border:1.5px solid var(--border-light);"
+          style="width:240px; max-width:100%; flex:1 1 180px; padding:0.6rem 0.95rem; border-radius:var(--radius-full); border:1.5px solid var(--border-light);"
         >
         <button type="submit" class="btn btn-sm btn-navy">Search</button>
         <?php if ($searchTerm || $categorySlug): ?>

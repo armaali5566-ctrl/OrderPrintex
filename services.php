@@ -95,11 +95,11 @@ if (empty($services)) {
                 </div>
               <?php endif; ?>
 
-              <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
-                <a href="<?= service_url($svc['slug']) ?>" class="btn btn-outline">
+              <div class="service-cta-group">
+                <a href="<?= service_url($svc['slug']) ?>" class="btn service-btn-secondary">
                   <span>Detailed Specifications</span> &rarr;
                 </a>
-                <a href="<?= url('get-quote.php?service_id=' . e($svc['id'])) ?>" class="btn btn-primary">
+                <a href="<?= url('get-quote.php?service_id=' . e($svc['id'])) ?>" class="btn service-btn-primary">
                   <span>Get Quotation</span>
                 </a>
               </div>

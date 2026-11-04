@@ -39,37 +39,37 @@ $products = get_catalog_products();
 <section class="section section-white" style="padding-top:3.5rem; padding-bottom:4rem;">
   <div class="container">
     
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:2rem; margin-bottom:3.5rem;">
+    <div class="pricing-cards-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:2rem; margin-bottom:3.5rem;">
       
       <!-- Tier Card 1: DTF Gang Rolls -->
-      <div class="card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:2rem; box-shadow: 0 4px 14px rgba(15, 25, 45, 0.08), 0 12px 30px rgba(15, 25, 45, 0.10); display:flex; flex-direction:column; justify-content:space-between;">
+      <div class="card" style="background:#181818; border:1px solid #40351E; border-radius:12px; padding:2rem; box-shadow:0 8px 30px rgba(0,0,0,0.7); display:flex; flex-direction:column; justify-content:space-between;">
         <div>
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-            <span class="badge" style="background:rgba(29,78,216,0.1); color:var(--royal); font-weight:700;">Textile Printing</span>
-            <span style="font-size:0.8rem; color:var(--emerald); font-weight:700;">● Same-Day Dispatch</span>
+            <span class="badge" style="background:rgba(212,175,55,0.15); color:#FFD76A; border:1px solid rgba(212,175,55,0.3); font-weight:700;">Textile Printing</span>
+            <span style="font-size:0.8rem; color:#10B981; font-weight:700;">● Same-Day Dispatch</span>
           </div>
-          <h3 style="font-size:1.4rem; color:var(--navy); font-weight:800; margin-bottom:0.5rem;">22" DTF Gang Sheets</h3>
-          <p style="font-size:0.88rem; color:var(--slate); margin-bottom:1.5rem;">
+          <h3 style="font-size:1.4rem; color:#F5F1E8; font-weight:800; margin-bottom:0.5rem;">22" DTF Gang Sheets</h3>
+          <p style="font-size:0.88rem; color:#B8B1A3; margin-bottom:1.5rem;">
             Dual Epson i3200 printheads with dense white backing and TPU powder cure.
           </p>
 
-          <div style="background:var(--ivory); border-radius:8px; padding:1.25rem; margin-bottom:1.5rem; border:1px solid var(--border-light);">
-            <div style="font-size:0.8rem; font-weight:700; color:var(--navy); text-transform:uppercase; margin-bottom:0.5rem;">Volume Pricing Tiers:</div>
-            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; border-bottom:1px dashed var(--border-light); font-size:0.88rem;">
+          <div style="background:#111111; border-radius:8px; padding:1.25rem; margin-bottom:1.5rem; border:1px solid #40351E;">
+            <div style="font-size:0.8rem; font-weight:700; color:#E8C45A; text-transform:uppercase; margin-bottom:0.5rem;">Volume Pricing Tiers:</div>
+            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; border-bottom:1px dashed #40351E; font-size:0.88rem; color:#F5F1E8;">
               <span>Sample / 1 – 5 Metres:</span>
-              <strong style="color:var(--navy);">₹299 / Metre</strong>
+              <strong style="color:#F5F1E8;">₹299 / Metre</strong>
             </div>
-            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; border-bottom:1px dashed var(--border-light); font-size:0.88rem;">
+            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; border-bottom:1px dashed #40351E; font-size:0.88rem; color:#F5F1E8;">
               <span>Wholesale / 6 – 20 Metres:</span>
-              <strong style="color:var(--royal);">₹249 / Metre</strong>
+              <strong style="color:#FFD76A;">₹249 / Metre</strong>
             </div>
-            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; font-size:0.88rem;">
+            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; font-size:0.88rem; color:#F5F1E8;">
               <span>Contract / 21+ Metres:</span>
-              <strong style="color:var(--emerald);">₹199 / Metre</strong>
+              <strong style="color:#10B981;">₹199 / Metre</strong>
             </div>
           </div>
 
-          <ul style="list-style:none; padding:0; margin:0 0 1.5rem; font-size:0.85rem; color:var(--slate); display:flex; flex-direction:column; gap:0.5rem;">
+          <ul style="list-style:none; padding:0; margin:0 0 1.5rem; font-size:0.85rem; color:#B8B1A3; display:flex; flex-direction:column; gap:0.5rem;">
             <li>✓ 300 DPI Prepress Resolution Check</li>
             <li>✓ 50+ Commercial Wash Durability</li>
             <li>✓ Free Technical Gang Sheet Optimization</li>
@@ -82,34 +82,34 @@ $products = get_catalog_products();
       </div>
 
       <!-- Tier Card 2: UV DTF Decal Rolls -->
-      <div class="card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:2rem; box-shadow: 0 4px 14px rgba(15, 25, 45, 0.08), 0 12px 30px rgba(15, 25, 45, 0.10); display:flex; flex-direction:column; justify-content:space-between;">
+      <div class="card" style="background:#181818; border:1px solid #40351E; border-radius:12px; padding:2rem; box-shadow:0 8px 30px rgba(0,0,0,0.7); display:flex; flex-direction:column; justify-content:space-between;">
         <div>
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-            <span class="badge" style="background:rgba(185,154,97,0.15); color:var(--navy); font-weight:700;">Hard Surfaces</span>
-            <span style="font-size:0.8rem; color:var(--royal); font-weight:700;">★ 3D Tactile Gloss</span>
+            <span class="badge" style="background:rgba(212,175,55,0.15); color:#FFD76A; border:1px solid rgba(212,175,55,0.3); font-weight:700;">Hard Surfaces</span>
+            <span style="font-size:0.8rem; color:#E8C45A; font-weight:700;">★ 3D Tactile Gloss</span>
           </div>
-          <h3 style="font-size:1.4rem; color:var(--navy); font-weight:800; margin-bottom:0.5rem;">UV DTF Decal Sheets</h3>
-          <p style="font-size:0.88rem; color:var(--slate); margin-bottom:1.5rem;">
+          <h3 style="font-size:1.4rem; color:#F5F1E8; font-weight:800; margin-bottom:0.5rem;">UV DTF Decal Sheets</h3>
+          <p style="font-size:0.88rem; color:#B8B1A3; margin-bottom:1.5rem;">
             No heat press needed. Peel, stick, and rub onto glass, tumblers, wood, and acrylic.
           </p>
 
-          <div style="background:var(--ivory); border-radius:8px; padding:1.25rem; margin-bottom:1.5rem; border:1px solid var(--border-light);">
-            <div style="font-size:0.8rem; font-weight:700; color:var(--navy); text-transform:uppercase; margin-bottom:0.5rem;">Volume Pricing Tiers:</div>
-            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; border-bottom:1px dashed var(--border-light); font-size:0.88rem;">
+          <div style="background:#111111; border-radius:8px; padding:1.25rem; margin-bottom:1.5rem; border:1px solid #40351E;">
+            <div style="font-size:0.8rem; font-weight:700; color:#E8C45A; text-transform:uppercase; margin-bottom:0.5rem;">Volume Pricing Tiers:</div>
+            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; border-bottom:1px dashed #40351E; font-size:0.88rem; color:#F5F1E8;">
               <span>Sample / 1 – 3 Metres:</span>
-              <strong style="color:var(--navy);">₹449 / Metre</strong>
+              <strong style="color:#F5F1E8;">₹449 / Metre</strong>
             </div>
-            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; border-bottom:1px dashed var(--border-light); font-size:0.88rem;">
+            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; border-bottom:1px dashed #40351E; font-size:0.88rem; color:#F5F1E8;">
               <span>Studio / 4 – 15 Metres:</span>
-              <strong style="color:var(--royal);">₹389 / Metre</strong>
+              <strong style="color:#FFD76A;">₹389 / Metre</strong>
             </div>
-            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; font-size:0.88rem;">
+            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; font-size:0.88rem; color:#F5F1E8;">
               <span>Agency / 16+ Metres:</span>
-              <strong style="color:var(--emerald);">₹329 / Metre</strong>
+              <strong style="color:#10B981;">₹329 / Metre</strong>
             </div>
           </div>
 
-          <ul style="list-style:none; padding:0; margin:0 0 1.5rem; font-size:0.85rem; color:var(--slate); display:flex; flex-direction:column; gap:0.5rem;">
+          <ul style="list-style:none; padding:0; margin:0 0 1.5rem; font-size:0.85rem; color:#B8B1A3; display:flex; flex-direction:column; gap:0.5rem;">
             <li>✓ Waterproof &amp; Dishwasher Safe</li>
             <li>✓ Spot Varnish High-Build Texture</li>
             <li>✓ Sticks Permanently to Any Rigid Medium</li>
@@ -122,30 +122,30 @@ $products = get_catalog_products();
       </div>
 
       <!-- Tier Card 3: Custom Apparel -->
-      <div class="card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:2rem; box-shadow: 0 4px 14px rgba(15, 25, 45, 0.08), 0 12px 30px rgba(15, 25, 45, 0.10); display:flex; flex-direction:column; justify-content:space-between;">
+      <div class="card" style="background:#181818; border:1px solid #40351E; border-radius:12px; padding:2rem; box-shadow:0 8px 30px rgba(0,0,0,0.7); display:flex; flex-direction:column; justify-content:space-between;">
         <div>
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-            <span class="badge" style="background:rgba(20,35,60,0.08); color:var(--navy); font-weight:700;">Streetwear &amp; Polos</span>
-            <span style="font-size:0.8rem; color:var(--emerald); font-weight:700;">240 GSM Combed</span>
+            <span class="badge" style="background:rgba(212,175,55,0.15); color:#FFD76A; border:1px solid rgba(212,175,55,0.3); font-weight:700;">Streetwear &amp; Polos</span>
+            <span style="font-size:0.8rem; color:#10B981; font-weight:700;">240 GSM Combed</span>
           </div>
-          <h3 style="font-size:1.4rem; color:var(--navy); font-weight:800; margin-bottom:0.5rem;">Finished Custom Apparel</h3>
-          <p style="font-size:0.88rem; color:var(--slate); margin-bottom:1.5rem;">
+          <h3 style="font-size:1.4rem; color:#F5F1E8; font-weight:800; margin-bottom:0.5rem;">Finished Custom Apparel</h3>
+          <p style="font-size:0.88rem; color:#B8B1A3; margin-bottom:1.5rem;">
             Bio-washed combed cotton tees, oversized drops, and corporate employee uniforms.
           </p>
 
-          <div style="background:var(--ivory); border-radius:8px; padding:1.25rem; margin-bottom:1.5rem; border:1px solid var(--border-light);">
-            <div style="font-size:0.8rem; font-weight:700; color:var(--navy); text-transform:uppercase; margin-bottom:0.5rem;">Volume Pricing Tiers:</div>
-            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; border-bottom:1px dashed var(--border-light); font-size:0.88rem;">
+          <div style="background:#111111; border-radius:8px; padding:1.25rem; margin-bottom:1.5rem; border:1px solid #40351E;">
+            <div style="font-size:0.8rem; font-weight:700; color:#E8C45A; text-transform:uppercase; margin-bottom:0.5rem;">Volume Pricing Tiers:</div>
+            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; border-bottom:1px dashed #40351E; font-size:0.88rem; color:#F5F1E8;">
               <span>10 – 25 Pieces:</span>
-              <strong style="color:var(--navy);">₹549 / Tee</strong>
+              <strong style="color:#F5F1E8;">₹549 / Tee</strong>
             </div>
-            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; border-bottom:1px dashed var(--border-light); font-size:0.88rem;">
+            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; border-bottom:1px dashed #40351E; font-size:0.88rem; color:#F5F1E8;">
               <span>26 – 100 Pieces:</span>
-              <strong style="color:var(--royal);">₹449 / Tee</strong>
+              <strong style="color:#FFD76A;">₹449 / Tee</strong>
             </div>
-            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; font-size:0.88rem;">
+            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; font-size:0.88rem; color:#F5F1E8;">
               <span>101+ Bulk Fleet:</span>
-              <strong style="color:var(--emerald);">₹389 / Tee</strong>
+              <strong style="color:#10B981;">₹389 / Tee</strong>
             </div>
           </div>
 

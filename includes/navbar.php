@@ -139,6 +139,15 @@ $topLinkedIn  = get_setting('social_linkedin', 'https://www.linkedin.com/company
       <div class="nav-item">
         <a href="<?= url('contact/') ?>" class="nav-link <?= strpos($currentUri, 'contact') !== false ? 'active' : '' ?>">Contact</a>
       </div>
+      <!-- Mobile Drawer CTA Button -->
+      <div class="nav-item nav-drawer-cta-item">
+        <a href="<?= url('get-quote/') ?>" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:0.75rem; text-decoration:none;">
+          <span>Upload Your Design</span>
+          <svg style="width:14px;height:14px;fill:currentColor;" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+          </svg>
+        </a>
+      </div>
     </nav>
 
     <!-- Nav Actions Group -->

@@ -53,7 +53,7 @@ require_once __DIR__ . '/includes/header.php';
       <p class="section-subtitle">Jump directly to our most in-demand transfer gang sheets and merchandise items:</p>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:2rem; margin-top:2rem;">
+    <div class="error-nav-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:2rem; margin-top:2rem;">
       <div class="product-card" style="padding:1.5rem; text-align:center;">
         <div style="height:180px; background:#F8F5F0; border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; overflow:hidden;">
           <img src="<?= url('assets/images/dtf_fabric_print.jpg') ?>" alt="DTF Gang Sheet" style="max-height:160px; max-width:90%; object-fit:contain;">

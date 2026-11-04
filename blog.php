@@ -89,9 +89,9 @@ require_once __DIR__ . '/includes/header.php';
 
       <!-- Search Form -->
       <div style="width:100%; max-width:540px; margin:2.25rem auto 0;">
-        <form action="<?= blog_url() ?>" method="GET" style="display:flex; gap:0.5rem; background:var(--bg-surface); padding:6px; border-radius:999px; box-shadow:0 8px 30px rgba(0,0,0,0.25);">
-          <input type="text" name="q" value="<?= e($searchQuery) ?>" placeholder="Search printing guides, DTF, paper stocks..." style="flex:1; border:none; outline:none; padding:0.6rem 1.25rem; font-size:0.95rem; border-radius:999px; color:var(--navy);">
-          <button type="submit" class="btn btn-primary btn-sm" style="border-radius:999px; padding:0.6rem 1.4rem;">
+        <form action="<?= blog_url() ?>" method="GET" class="blog-search-form" style="display:flex; gap:0.5rem; background:var(--bg-surface); padding:6px; border-radius:999px; border:1px solid var(--border-color); box-shadow:0 8px 30px rgba(0,0,0,0.45); max-width:100%;">
+          <input type="text" name="q" value="<?= e($searchQuery) ?>" placeholder="Search printing guides, DTF, paper stocks..." style="flex:1; min-width:0; border:none; outline:none; padding:0.6rem 1rem; font-size:0.95rem; border-radius:999px; color:var(--text-primary); background:transparent;">
+          <button type="submit" class="btn btn-primary btn-sm" style="border-radius:999px; padding:0.6rem 1.4rem; flex-shrink:0;">
             <span>Search</span>
           </button>
         </form>
@@ -101,20 +101,20 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- Category Filter Navigation -->
-<section style="background:var(--ivory); border-bottom:1px solid var(--border-light); padding:1rem 0;">
+<nav class="blog-category-nav-section" aria-label="Blog Category Filter">
   <div class="container">
-    <div style="display:flex; gap:0.75rem; align-items:center; overflow-x:auto; padding-bottom:0.25rem; scrollbar-width:none;">
-      <a href="<?= blog_url() ?>" class="btn btn-sm <?= empty($categorySlug) ? 'btn-navy' : 'btn-outline' ?>" style="white-space:nowrap; border-radius:999px;">
-        All Articles (<?= count($posts) ?>)
+    <div class="blog-category-track">
+      <a href="<?= blog_url() ?>" class="blog-cat-chip <?= empty($categorySlug) ? 'is-active' : '' ?>">
+        <span>All Articles (<?= count($posts) ?>)</span>
       </a>
       <?php foreach ($categories as $cat): ?>
-        <a href="<?= blog_category_url($cat['slug']) ?>" class="btn btn-sm <?= ($categorySlug === $cat['slug']) ? 'btn-navy' : 'btn-outline' ?>" style="white-space:nowrap; border-radius:999px;">
-          <?= e($cat['name']) ?>
+        <a href="<?= blog_category_url($cat['slug']) ?>" class="blog-cat-chip <?= ($categorySlug === $cat['slug']) ? 'is-active' : '' ?>">
+          <span><?= e($cat['name']) ?></span>
         </a>
       <?php endforeach; ?>
     </div>
   </div>
-</section>
+</nav>
 
 <!-- Main Blog Section -->
 <section class="section section-white" style="padding-top:3.5rem; padding-bottom:5rem;">
@@ -131,17 +131,17 @@ require_once __DIR__ . '/includes/header.php';
 
       <!-- Hero Featured Post (Only on main blog page when no category/search active) -->
       <?php if (empty($categorySlug) && empty($searchQuery) && $featuredPost): ?>
-        <article class="reveal slide-up" style="background:var(--bg-surface); border-radius:var(--radius-lg); border:1px solid var(--border-color); box-shadow: 0 4px 14px rgba(15, 25, 45, 0.09), 0 16px 36px rgba(15, 25, 45, 0.12); overflow:hidden; display:grid; grid-template-columns:1.2fr 1fr; gap:0; margin-bottom:3.5rem; transition:transform 0.3s ease, box-shadow 0.3s ease;">
-          <div style="position:relative; min-height:360px; overflow:hidden; background:#F8F5F0;">
-            <img src="<?= url(e($featuredPost['featured_image'])) ?>" alt="<?= e($featuredPost['title']) ?>" style="width:100%; height:100%; object-fit:cover; display:block;">
-            <span style="position:absolute; top:1.25rem; left:1.25rem; background:var(--navy); color:var(--gold); font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; padding:0.35rem 0.85rem; border-radius:999px; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+        <article class="reveal slide-up blog-featured-article">
+          <div class="blog-featured-media">
+            <img src="<?= url(e($featuredPost['featured_image'])) ?>" alt="<?= e($featuredPost['title']) ?>" loading="lazy">
+            <span class="blog-featured-badge">
               Featured Editorial
             </span>
           </div>
 
-          <div style="padding:clamp(1.75rem, 3vw, 2.75rem); display:flex; flex-direction:column; justify-content:center;">
-            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.85rem; font-size:0.825rem; color:var(--text-muted);">
-              <span style="background:rgba(29,78,216,0.1); color:var(--royal); font-weight:700; padding:0.25rem 0.65rem; border-radius:4px;">
+          <div class="blog-featured-content">
+            <div class="blog-meta-row">
+              <span class="blog-meta-pill">
                 <?= e($featuredPost['category_name']) ?>
               </span>
               <span>&bull;</span>
@@ -150,21 +150,21 @@ require_once __DIR__ . '/includes/header.php';
               <span><?= date('M d, Y', strtotime($featuredPost['created_at'])) ?></span>
             </div>
 
-            <h2 style="font-size:clamp(1.6rem, 2.4vw, 2.1rem); color:var(--navy); line-height:1.3; margin-bottom:1rem;">
-              <a href="<?= blog_url($featuredPost['slug']) ?>" style="color:inherit; text-decoration:none;">
+            <h2 class="blog-featured-title">
+              <a href="<?= blog_url($featuredPost['slug']) ?>">
                 <?= e($featuredPost['title']) ?>
               </a>
             </h2>
 
-            <p style="color:var(--text-muted); line-height:1.7; margin-bottom:1.75rem; font-size:0.98rem;">
+            <p class="blog-featured-desc">
               <?= e($featuredPost['excerpt']) ?>
             </p>
 
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:1.25rem; border-top:1px solid var(--border-light);">
-              <div style="font-size:0.85rem; font-weight:600; color:var(--navy);">
+            <div class="blog-featured-footer">
+              <div class="blog-author-tag">
                 By <?= e($featuredPost['author']) ?>
               </div>
-              <a href="<?= blog_url($featuredPost['slug']) ?>" class="btn btn-navy btn-sm">
+              <a href="<?= blog_url($featuredPost['slug']) ?>" class="btn btn-primary btn-sm">
                 <span>Read Full Guide</span> &rarr;
               </a>
             </div>
@@ -173,40 +173,40 @@ require_once __DIR__ . '/includes/header.php';
       <?php endif; ?>
 
       <!-- Articles Grid -->
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:2.5rem;">
+      <div class="blog-posts-grid">
         <?php 
         $displayList = (empty($categorySlug) && empty($searchQuery) && $featuredPost) ? $gridPosts : $posts;
         foreach ($displayList as $idx => $post): 
         ?>
-          <article class="product-card reveal slide-up" style="display:flex; flex-direction:column; height:100%; border-radius:var(--radius-md); overflow:hidden; background:var(--bg-surface); border:1px solid var(--border-color); box-shadow: 0 4px 12px rgba(15, 25, 45, 0.09), 0 12px 28px rgba(15, 25, 45, 0.10); transition:transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
-            <div style="height:210px; overflow:hidden; position:relative; background:#F8F5F0;">
-              <img src="<?= url(e($post['featured_image'])) ?>" alt="<?= e($post['title']) ?>" style="width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s ease;" loading="lazy">
-              <span style="position:absolute; top:1rem; left:1rem; background:rgba(16,27,48,0.9); color:#FFFFFF; font-size:0.75rem; font-weight:700; padding:0.25rem 0.65rem; border-radius:999px;">
+          <article class="blog-card reveal slide-up">
+            <div class="blog-card-media">
+              <img src="<?= url(e($post['featured_image'])) ?>" alt="<?= e($post['title']) ?>" loading="lazy">
+              <span class="blog-card-badge">
                 <?= e($post['category_name']) ?>
               </span>
             </div>
 
-            <div style="padding:1.5rem; display:flex; flex-direction:column; flex:1;">
-              <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
                 <span><?= date('M d, Y', strtotime($post['created_at'])) ?></span>
                 <span>&bull;</span>
                 <span><?= e($post['read_time']) ?></span>
               </div>
 
-              <h3 style="font-size:1.25rem; color:var(--navy); line-height:1.4; margin-bottom:0.75rem; font-weight:700;">
-                <a href="<?= blog_url($post['slug']) ?>" style="color:inherit; text-decoration:none;">
+              <h3 class="blog-card-title">
+                <a href="<?= blog_url($post['slug']) ?>">
                   <?= e($post['title']) ?>
                 </a>
               </h3>
 
-              <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.6; margin-bottom:1.5rem; flex:1;">
+              <p class="blog-card-desc">
                 <?= e(mb_strimwidth($post['excerpt'], 0, 140, '...')) ?>
               </p>
 
-              <div style="display:flex; align-items:center; justify-content:space-between; padding-top:1rem; border-top:1px solid var(--border-light);">
-                <span style="font-size:0.8rem; font-weight:600; color:var(--navy);"><?= e($post['author']) ?></span>
-                <a href="<?= blog_url($post['slug']) ?>" style="font-size:0.85rem; font-weight:700; color:var(--royal); text-decoration:none; display:inline-flex; align-items:center; gap:0.25rem;">
-                  Read Article &rarr;
+              <div class="blog-card-footer">
+                <span class="blog-card-author">By <?= e($post['author']) ?></span>
+                <a href="<?= blog_url($post['slug']) ?>" class="blog-card-link">
+                  Read Full Article &rarr;
                 </a>
               </div>
             </div>

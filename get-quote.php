@@ -188,7 +188,7 @@ $currentUser = auth_user();
                 <span style="color:#10B981; font-weight:800; font-size:1.05rem;">✓</span>
                 <span>24-hr Quote Turnaround &bull; No upfront card required &bull; Pan-India Dispatch</span>
               </div>
-              <button type="submit" class="btn btn-primary btn-lg" style="padding:0.85rem 2rem; font-size:1rem; font-weight:700;">
+              <button type="submit" class="btn btn-primary btn-lg quote-submit-btn" style="padding:0.85rem 2rem; font-size:1rem; font-weight:700;">
                 <span>Submit Print Enquiry</span>
                 <svg style="width:16px;height:16px;fill:currentColor;margin-left:0.5rem;" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>

@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
       </div>
     <?php endif; ?>
 
-    <div style="display:grid; grid-template-columns:1fr 1.25fr; gap:3.5rem; align-items:flex-start;">
+    <div class="contact-main-grid" style="display:grid; grid-template-columns:1fr 1.25fr; gap:3.5rem; align-items:flex-start;">
       <!-- Contact Cards -->
       <div class="reveal slide-right">
         <div class="section-label">Delhi Office</div>

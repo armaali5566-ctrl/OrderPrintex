@@ -50,7 +50,7 @@ require_once __DIR__ . '/../includes/header.php';
 <main style="background:#080808; padding:3.5rem 0 5rem; min-height:60vh;">
   <div class="container">
     
-    <div id="wishlistContainer" class="products-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:1.75rem;">
+    <div id="wishlistContainer" class="products-grid">
       <?php if (!empty($wishlistProducts)): ?>
         <?php foreach ($wishlistProducts as $p): ?>
           <article class="product-card" id="wishItem_<?= $p['id'] ?>" style="background:#181818; border:1px solid #40351E; border-radius:10px; overflow:hidden; display:flex; flex-direction:column;">

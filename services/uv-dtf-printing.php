@@ -30,10 +30,10 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'uv-dtf-printing'")
 <!-- Overview -->
 <section class="section section-white">
   <div class="container">
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:center;">
-      <div class="reveal slide-right">
+    <div class="service-overview-grid">
+      <div class="service-overview-content reveal slide-right">
         <div class="section-label">Surface Printing Without Limits</div>
-        <h2 style="margin-bottom:1.25rem;">Transform Any Rigid or Curved Surface Instantly</h2>
+        <h2>Transform Any Rigid or Curved Surface Instantly</h2>
         <p>
           At <strong>Printex</strong>, we specialize in delivering high-quality UV DTF printing services in Delhi, helping brands, businesses, and creators brand physical objects that cannot fit under traditional heat presses.
         </p>
@@ -44,15 +44,15 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'uv-dtf-printing'")
           Application is effortless: peel the carrier backing, position onto the tumbler, mug, laptop, or glass bottle, squeegee or rub firmly, and lift away the top clear film. What remains is a crystal-clear, 3D raised graphic with permanent bond strength.
         </p>
 
-        <div style="margin-top:2rem; display:flex; gap:1rem;">
-          <a href="#upload-uv" class="btn btn-primary">Upload Design for UV DTF Quote</a>
-          <a href="<?= url('gallery.php') ?>" class="btn btn-outline">View UV Decal Gallery</a>
+        <div class="service-cta-group">
+          <a href="#upload-uv" class="btn service-btn-primary">Upload Design for UV DTF Quote</a>
+          <a href="<?= url('gallery.php') ?>" class="btn service-btn-secondary">View UV Decal Gallery</a>
         </div>
       </div>
 
-      <div class="reveal slide-left">
-        <div style="border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-lg); border:1px solid var(--border-gold);">
-          <img src="<?= url('assets/images/uv_dtf_drinkware.jpg') ?>" alt="UV DTF Printing on Curved Drinkware" style="width:100%; height:440px; object-fit:cover;">
+      <div class="service-overview-media reveal slide-left">
+        <div class="service-media-frame">
+          <img src="<?= url('assets/images/uv_dtf_drinkware.jpg') ?>" alt="UV DTF Printing on Curved Drinkware" loading="lazy">
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'uv-dtf-printing'")
       </p>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1.5rem;">
+    <div class="service-specs-grid">
       <div class="timeline-step reveal slide-up stagger-1">
         <h4 style="color:var(--navy); margin-bottom:0.35rem;">Drinkware &amp; Bottles</h4>
         <p style="font-size:0.85rem; color:var(--slate);">Stainless steel insulated tumblers, glass mason jars, ceramic mugs, sports bottles.</p>

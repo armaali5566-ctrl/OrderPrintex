@@ -249,11 +249,11 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
               </div>
             </div>
 
-            <div style="margin-top:2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.25rem;">
+            <div class="quote-submit-bar" style="margin-top:2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.25rem;">
               <small style="color:var(--slate-subtle); font-size:0.825rem;">
                 ✓ Free Prepress Audit &bull; 24-hr Quote Response &bull; Pan-India Dispatch
               </small>
-              <button type="submit" class="btn btn-primary btn-lg">
+              <button type="submit" class="btn btn-primary btn-lg quote-submit-btn">
                 <span>Submit Artwork &amp; Get Quotation</span>
                 <svg style="width:16px;height:16px;fill:currentColor;" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -348,7 +348,7 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
 
     <!-- Prominent "View All Products" Button -->
     <div style="text-align:center; margin-top:3.5rem;" class="reveal slide-up">
-      <a href="<?= url('products/') ?>" class="btn btn-outline btn-lg" style="display:inline-flex; align-items:center; gap:0.75rem; padding:1.15rem 2.75rem; font-size:1.05rem; border-color:var(--primary-gold); color:var(--bright-gold); background:var(--bg-surface);">
+      <a href="<?= url('products/') ?>" class="btn btn-outline btn-lg cta-wide-btn" style="border-color:var(--primary-gold); color:var(--bright-gold); background:var(--bg-surface);">
         <span>View All Products in Commercial Catalog</span>
         <svg style="width:18px;height:18px;" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -461,7 +461,7 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
       </p>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:2rem;">
+    <div class="home-features-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:2rem;">
       <div style="background:var(--navy-card); padding:2.25rem 1.75rem; border-radius:var(--radius-md); border:1px solid rgba(185,154,97,0.3); transition:transform 0.3s ease;">
         <div style="font-size:1.75rem; margin-bottom:1rem;">🎯</div>
         <h3 style="color:var(--white); font-size:1.25rem; margin-bottom:0.75rem;">300+ DPI Precision</h3>
@@ -539,7 +539,7 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
     ];
     ?>
 
-    <div class="gallery-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+    <div class="gallery-grid">
       <?php foreach ($homepagePortfolio as $idx => $item): ?>
         <div class="gallery-item reveal scale-in stagger-<?= $idx + 1 ?>" style="height:300px; border-radius:var(--radius-md);">
           <img src="<?= url($item['image']) ?>" alt="<?= e($item['title']) ?>" loading="lazy">
@@ -554,7 +554,7 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
 
     <!-- Prominent "View Full Portfolio" Button -->
     <div style="text-align:center; margin-top:3.25rem;" class="reveal slide-up">
-      <a href="<?= url('gallery/') ?>" class="btn btn-outline btn-lg" style="display:inline-flex; align-items:center; gap:0.75rem; padding:1.15rem 2.75rem; font-size:1.05rem;">
+      <a href="<?= url('gallery/') ?>" class="btn btn-outline btn-lg cta-wide-btn">
         <span>View Full Portfolio &amp; Specimen Gallery</span>
         <svg style="width:18px;height:18px;" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -629,7 +629,7 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
       </p>
     </div>
 
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:2rem;">
+    <div class="home-blog-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:2rem;">
       <?php foreach ($latestBlogPosts as $idx => $post): ?>
         <article class="blog-card reveal slide-up stagger-<?= $idx + 1 ?>">
           <div style="position:relative; height:200px; overflow:hidden; background:#121212;">
@@ -666,7 +666,7 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
     </div>
 
     <div style="text-align:center; margin-top:3.5rem;" class="reveal slide-up">
-      <a href="<?= blog_url() ?>" class="btn btn-navy btn-lg" style="display:inline-flex; align-items:center; gap:0.75rem; padding:1.15rem 2.75rem; font-size:1.05rem;">
+      <a href="<?= blog_url() ?>" class="btn btn-navy btn-lg cta-wide-btn">
         <span>View All Industry Guides &amp; Articles</span>
         <svg style="width:18px;height:18px;" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>

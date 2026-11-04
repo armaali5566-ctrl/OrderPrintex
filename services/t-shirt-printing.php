@@ -30,10 +30,10 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'"
 <!-- Overview -->
 <section class="section section-white">
   <div class="container">
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:center;">
-      <div class="reveal slide-right">
+    <div class="service-overview-grid">
+      <div class="service-overview-content reveal slide-right">
         <div class="section-label">Garment Quality Standards</div>
-        <h2 style="margin-bottom:1.25rem;">Retail-Grade Printing on Premium Bio-Washed Fabrics</h2>
+        <h2>Retail-Grade Printing on Premium Bio-Washed Fabrics</h2>
         <p>
           At <strong>OrderPrintex</strong>, we bridge the gap between small creator runs and heavy industrial garment manufacturing. By pairing advanced digital DTF machinery with ethically sourced, pre-shrunk combed cotton fabrics, we produce ready-to-wear garments that rival international retail brands.
         </p>
@@ -44,15 +44,15 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'"
           Whether you need 10 t-shirts for a wedding party or 5,000 corporate dry-fit jerseys for a nationwide marathon, our Delhi facility ensures strict color matching and on-time dispatch.
         </p>
 
-        <div style="margin-top:2rem; display:flex; gap:1rem;">
-          <a href="#upload-tshirt" class="btn btn-primary">Request T-Shirt Quote</a>
-          <a href="<?= url('products.php') ?>" class="btn btn-outline">Explore Garment Styles</a>
+        <div class="service-cta-group">
+          <a href="#upload-tshirt" class="btn service-btn-primary">Request T-Shirt Quote</a>
+          <a href="<?= url('products.php') ?>" class="btn service-btn-secondary">Explore Garment Styles</a>
         </div>
       </div>
 
-      <div class="reveal slide-left">
-        <div style="border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-lg); border:1px solid var(--border-gold);">
-          <img src="<?= url('assets/images/custom_tshirt_apparel.jpg') ?>" alt="Finished Custom Printed T-Shirts" style="width:100%; height:440px; object-fit:cover;">
+      <div class="service-overview-media reveal slide-left">
+        <div class="service-media-frame">
+          <img src="<?= url('assets/images/custom_tshirt_apparel.jpg') ?>" alt="Finished Custom Printed T-Shirts" loading="lazy">
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'"
       </p>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1.75rem;">
+    <div class="service-specs-grid">
       <div class="timeline-step reveal slide-up stagger-1">
         <h4 style="color:var(--navy); margin-bottom:0.35rem;">Brand Merchandise</h4>
         <p style="font-size:0.85rem; color:var(--slate);">240 GSM heavy oversized streetwear tees with neck label tags and individual barcode poly-bags.</p>

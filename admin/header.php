@@ -37,6 +37,7 @@ $pendingReviewsCount = db_fetch_one("SELECT COUNT(*) as cnt FROM product_reviews
   <link rel="stylesheet" href="<?= url('assets/css/style.css') ?>">
   <link rel="stylesheet" href="<?= url('assets/css/animations.css') ?>">
   <link rel="stylesheet" href="<?= url('assets/css/admin.css') ?>">
+  <link rel="stylesheet" href="<?= url('assets/css/responsive.css') ?>">
 </head>
 <body>
 

@@ -24,18 +24,34 @@ document.addEventListener('DOMContentLoaded', function () {
   const mobileToggle = document.querySelector('.mobile-toggle');
   const navMenu = document.querySelector('.nav-menu');
   if (mobileToggle && navMenu) {
+    const closeMobileMenu = function () {
+      navMenu.classList.remove('open');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      document.body.classList.remove('mobile-menu-open');
+    };
+
     mobileToggle.addEventListener('click', function () {
       const isOpen = navMenu.classList.toggle('open');
       mobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       document.body.style.overflow = isOpen ? 'hidden' : '';
+      document.body.classList.toggle('mobile-menu-open', isOpen);
     });
 
     // Close menu when clicking outside
     document.addEventListener('click', function (e) {
       if (!navMenu.contains(e.target) && !mobileToggle.contains(e.target) && navMenu.classList.contains('open')) {
-        navMenu.classList.remove('open');
-        document.body.style.overflow = '';
+        closeMobileMenu();
       }
+    });
+
+    // Close menu when clicking regular navigation links inside drawer
+    navMenu.querySelectorAll('a:not(.dropdown-toggle)').forEach(link => {
+      link.addEventListener('click', function () {
+        if (window.innerWidth <= 1120) {
+          closeMobileMenu();
+        }
+      });
     });
   }
 

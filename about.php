@@ -151,7 +151,7 @@ require_once __DIR__ . '/includes/header.php';
 <!-- ============================================================== -->
 <!-- 1. HERO SECTION -->
 <!-- ============================================================== -->
-<section class="section section-navy page-intro-header" style="position:relative; overflow:hidden; padding-top:clamp(4.5rem, 7vw, 6.5rem); padding-bottom:clamp(4rem, 6vw, 5.5rem); background: radial-gradient(circle at 80% 20%, rgba(185, 154, 97, 0.16) 0%, transparent 55%), radial-gradient(circle at 20% 80%, rgba(49, 89, 166, 0.14) 0%, transparent 50%), var(--navy);">
+<section class="section section-navy page-intro-header" style="position:relative; overflow:hidden; padding-top:clamp(4.5rem, 7vw, 6.5rem); padding-bottom:clamp(4rem, 6vw, 5.5rem); background: radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.16) 0%, transparent 55%), radial-gradient(circle at 20% 80%, rgba(143, 107, 30, 0.12) 0%, transparent 50%), #080808;">
   <div class="container text-center">
     <div class="page-intro-box" style="max-width:960px;">
       <!-- Facility Badge -->
@@ -219,7 +219,7 @@ require_once __DIR__ . '/includes/header.php';
       </p>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(310px, 1fr)); gap:2rem;">
+    <div class="about-solutions-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(310px, 1fr)); gap:2rem;">
       <!-- Solution 1: Apparel Brands & Streetwear -->
       <div class="card reveal slide-up stagger-1" style="padding:2.5rem 2rem; display:flex; flex-direction:column; border-top:4px solid var(--crimson);">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
@@ -261,10 +261,10 @@ require_once __DIR__ . '/includes/header.php';
       </div>
 
       <!-- Solution 3: Corporate & Commercial Merchandising -->
-      <div class="card reveal slide-up stagger-3" style="padding:2.5rem 2rem; display:flex; flex-direction:column; border-top:4px solid var(--blue);">
+      <div class="card reveal slide-up stagger-3" style="padding:2.5rem 2rem; display:flex; flex-direction:column; border-top:4px solid var(--gold);">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
           <span style="font-size:2.5rem; line-height:1;">🏢</span>
-          <span style="background:rgba(49,89,166,0.1); color:var(--blue); font-size:0.75rem; font-weight:800; padding:0.35rem 0.75rem; border-radius:999px; text-transform:uppercase; letter-spacing:0.06em;">
+          <span style="background:rgba(212,175,55,0.12); color:#FFD76A; border:1px solid rgba(212,175,55,0.25); font-size:0.75rem; font-weight:800; padding:0.35rem 0.75rem; border-radius:999px; text-transform:uppercase; letter-spacing:0.06em;">
             B2B Commercial
           </span>
         </div>
@@ -377,10 +377,10 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 
     <!-- 4 Visually Attractive Feature Cards -->
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1.75rem;">
+    <div class="about-features-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1.75rem;">
       <!-- Feature 1 -->
       <div class="feature-card reveal slide-up stagger-1">
-        <div style="width:48px; height:48px; border-radius:10px; background:rgba(49,89,166,0.1); color:var(--blue); display:flex; align-items:center; justify-content:center; font-size:1.5rem; margin-bottom:1.25rem;">
+        <div style="width:48px; height:48px; border-radius:10px; background:rgba(212,175,55,0.12); color:#FFD76A; border:1px solid rgba(212,175,55,0.25); display:flex; align-items:center; justify-content:center; font-size:1.5rem; margin-bottom:1.25rem;">
           🎨
         </div>
         <h3 style="font-size:1.2rem; color:var(--navy); font-weight:700; margin-bottom:0.6rem;">
@@ -436,7 +436,7 @@ require_once __DIR__ . '/includes/header.php';
 <!-- ============================================================== -->
 <!-- 5. OUR PROCESS (Design → Print → Quality Check → Delivery) -->
 <!-- ============================================================== -->
-<section class="section section-navy" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem); background: radial-gradient(circle at 50% 10%, rgba(49, 89, 166, 0.18) 0%, transparent 60%), var(--navy);">
+<section class="section section-navy" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem); background: radial-gradient(circle at 50% 10%, rgba(212, 175, 55, 0.14) 0%, transparent 60%), #080808;">
   <div class="container">
     <div class="section-header text-center reveal slide-up" style="max-width:760px; margin:0 auto clamp(2.5rem, 4vw, 4rem);">
       <span class="hero-badge" style="display:inline-flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.08); color:var(--gold); border:1px solid rgba(185,154,97,0.3); padding:0.4rem 1.15rem; border-radius:999px; font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem;">
@@ -513,13 +513,13 @@ require_once __DIR__ . '/includes/header.php';
 
       <!-- Required Get a Quote Button & Secondary CTAs -->
       <div style="display:flex; justify-content:center; align-items:center; gap:1.25rem; flex-wrap:wrap;">
-        <a href="<?= url('get-quote/') ?>" class="btn btn-primary btn-lg" style="padding:1rem 2.5rem; font-size:1.05rem;">
+        <a href="<?= url('get-quote/') ?>" class="btn btn-primary btn-lg cta-wide-btn">
           <span>Get a Quote</span> &rarr;
         </a>
-        <a href="<?= url('services/') ?>" class="btn btn-navy btn-lg" style="padding:1rem 2.25rem; font-size:1.05rem;">
+        <a href="<?= url('services/') ?>" class="btn btn-navy btn-lg cta-wide-btn">
           <span>Explore Services</span>
         </a>
-        <a href="<?= url('contact/') ?>" class="btn btn-outline btn-lg" style="padding:1rem 2.25rem; font-size:1.05rem;">
+        <a href="<?= url('contact/') ?>" class="btn btn-outline btn-lg cta-wide-btn">
           <span>Contact Delhi Studio</span>
         </a>
       </div>

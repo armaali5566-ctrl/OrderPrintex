@@ -1068,6 +1068,7 @@ $products = db_fetch_all($sql, $params);
             <button type="submit" class="btn btn-primary btn-sm" style="height:34px;">+ Add</button>
           </form>
 
+          <div class="table-responsive">
           <table class="data-table" style="width:100%; font-size:0.825rem;">
             <thead>
               <tr>
@@ -1100,6 +1101,7 @@ $products = db_fetch_all($sql, $params);
               <?php endif; ?>
             </tbody>
           </table>
+          </div>
         </div>
 
         <!-- Wholesale Tiers Box -->
@@ -1118,6 +1120,7 @@ $products = db_fetch_all($sql, $params);
             <button type="submit" class="btn btn-primary btn-sm" style="height:34px;">+ Add</button>
           </form>
 
+          <div class="table-responsive">
           <table class="data-table" style="width:100%; font-size:0.825rem;">
             <thead>
               <tr>
@@ -1148,6 +1151,7 @@ $products = db_fetch_all($sql, $params);
               <?php endif; ?>
             </tbody>
           </table>
+          </div>
         </div>
 
       </div>

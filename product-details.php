@@ -245,17 +245,17 @@ $hasVariations = !empty($variationData) && !empty($productAttributes);
 </script>
 
 <!-- Breadcrumb Navigation -->
-<nav class="breadcrumb-bar" style="background-color:var(--ivory); border-bottom:1px solid var(--border-light); padding:0.9rem 0;" aria-label="Breadcrumb">
-  <div class="container" style="font-size:0.85rem; color:var(--slate); display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
-    <a href="<?= url('') ?>" style="color:var(--navy); font-weight:600;">Home</a>
-    <span style="color:var(--slate-subtle);">&rsaquo;</span>
-    <a href="<?= url('products/') ?>" style="color:var(--navy); font-weight:600;">Products</a>
-    <span style="color:var(--slate-subtle);">&rsaquo;</span>
-    <a href="<?= category_url($product['category_slug'] ?? '') ?>" style="color:var(--navy); font-weight:600;">
+<nav class="breadcrumb-bar" style="background-color:#121212; border-bottom:1px solid #40351E; padding:0.9rem 0;" aria-label="Breadcrumb">
+  <div class="container" style="font-size:0.85rem; color:#B8B1A3; display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+    <a href="<?= url('') ?>" style="color:#B8B1A3; font-weight:600; text-decoration:none;">Home</a>
+    <span style="color:#665c47;">&rsaquo;</span>
+    <a href="<?= url('products/') ?>" style="color:#B8B1A3; font-weight:600; text-decoration:none;">Products</a>
+    <span style="color:#665c47;">&rsaquo;</span>
+    <a href="<?= category_url($product['category_slug'] ?? '') ?>" style="color:#B8B1A3; font-weight:600; text-decoration:none;">
       <?= e($product['category_name']) ?>
     </a>
-    <span style="color:var(--slate-subtle);">&rsaquo;</span>
-    <span style="color:var(--royal); font-weight:700;" aria-current="page"><?= e($product['title']) ?></span>
+    <span style="color:#665c47;">&rsaquo;</span>
+    <span style="color:#FFD76A; font-weight:700;" aria-current="page"><?= e($product['title']) ?></span>
   </div>
 </nav>
 
@@ -569,7 +569,7 @@ foreach ($supplementalImages as $sImg) {
     <!-- SECTION 2: TECHNICAL SPECIFICATIONS -->
     <!-- =================================================================== -->
     <?php if (!empty($product['specifications']) || !empty($product['description'])): ?>
-    <section class="product-content-block reveal slide-up" id="specs-section" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:clamp(1.75rem, 3vw, 2.5rem); box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65); margin-bottom:2.5rem;">
+    <section class="product-content-block" id="specs-section" style="background:#141414; border:1px solid #40351E; border-radius:var(--radius-md); padding:clamp(1.75rem, 3vw, 2.5rem); box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65); margin-bottom:2.5rem;">
       <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
         <span style="background:#202020; color:#E8C45A; border:1px solid #40351E; width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem;">02</span>
         <div>
@@ -598,7 +598,7 @@ foreach ($supplementalImages as $sImg) {
     <!-- SECTION 3: ARTWORK & FILE GUIDELINES -->
     <!-- =================================================================== -->
     <?php if (!empty($product['artwork_notes'])): ?>
-    <section class="product-content-block reveal slide-up" id="artwork-section" style="background:#181818; border:1px solid #40351E; border-radius:var(--radius-md); padding:clamp(1.75rem, 3vw, 2.5rem); box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65); margin-bottom:2.5rem;">
+    <section class="product-content-block" id="artwork-section" style="background:#141414; border:1px solid #40351E; border-radius:var(--radius-md); padding:clamp(1.75rem, 3vw, 2.5rem); box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65); margin-bottom:2.5rem;">
       <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
         <span style="background:#202020; color:#E8C45A; border:1px solid #40351E; width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem;">03</span>
         <div>
@@ -640,7 +640,7 @@ foreach ($supplementalImages as $sImg) {
     <!-- SECTION 4: APPLICATION & HEAT PRESS GUIDE -->
     <!-- =================================================================== -->
     <?php if (!empty($product['application_guide'])): ?>
-    <section class="product-content-block reveal slide-up" id="application-section" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:clamp(1.75rem, 3vw, 2.5rem); box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65); margin-bottom:2.5rem;">
+    <section class="product-content-block" id="application-section" style="background:#141414; border:1px solid #40351E; border-radius:var(--radius-md); padding:clamp(1.75rem, 3vw, 2.5rem); box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65); margin-bottom:2.5rem;">
       <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
         <span style="background:#202020; color:#E8C45A; border:1px solid #40351E; width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem;">04</span>
         <div>
@@ -655,7 +655,7 @@ foreach ($supplementalImages as $sImg) {
       </div>
 
       <!-- Standard 4-Step Pressing Matrix -->
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem;">
+      <div class="product-spec-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem;">
         <div style="background:#111111; padding:1.25rem; border-radius:var(--radius-sm); border:1px solid #40351E; text-align:center;">
           <div style="font-weight:700; color:#E8C45A; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.04em;">1. Temperature</div>
           <div style="font-size:1.35rem; font-weight:800; color:#FFD76A; margin:0.35rem 0;">155°C – 165°C</div>
@@ -683,7 +683,7 @@ foreach ($supplementalImages as $sImg) {
     <!-- =================================================================== -->
     <!-- SECTION 5: CUSTOMER REVIEWS -->
     <!-- =================================================================== -->
-    <section class="product-content-block reveal slide-up" id="reviews-section" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:clamp(1.75rem, 3vw, 2.5rem); box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65); margin-bottom:2.5rem;">
+    <section class="product-content-block" id="reviews-section" style="background:#141414; border:1px solid #40351E; border-radius:12px; padding:clamp(1.5rem, 3vw, 2.5rem); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7); margin-bottom:2.5rem;">
       <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
         <span style="background:#202020; color:#E8C45A; border:1px solid #40351E; width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem;">05</span>
         <div>
@@ -693,15 +693,15 @@ foreach ($supplementalImages as $sImg) {
       </div>
       <div style="width:40px; height:3px; background:var(--gold); border-radius:2px; margin-bottom:1.5rem;"></div>
 
-      <div style="display:grid; grid-template-columns:1fr 1.6fr; gap:2.5rem; align-items:flex-start; margin-bottom:2.5rem;">
+      <div class="review-workbench-grid" style="margin-bottom:2.5rem;">
         <!-- Review Summary Stats -->
-        <div class="review-summary-card" style="background:var(--ivory); padding:1.75rem; border-radius:var(--radius-md); border:1px solid var(--border-color);">
-          <div style="font-size:0.85rem; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--navy); margin-bottom:0.75rem;">Rating Breakdown</div>
+        <div class="review-summary-card">
+          <div class="review-card-title">Rating Breakdown</div>
           <div style="display:flex; align-items:baseline; gap:0.5rem; margin-bottom:0.5rem;">
-            <span style="font-size:2.8rem; font-weight:800; color:var(--navy); line-height:1;"><?= $reviewCount > 0 ? $avgRating : '5.0' ?></span>
-            <span style="font-size:1rem; color:var(--text-muted);">/ 5.0</span>
+            <span class="rating-large-num"><?= $reviewCount > 0 ? $avgRating : '5.0' ?></span>
+            <span class="rating-scale-denom">/ 5.0</span>
           </div>
-          <div style="color:#F59E0B; font-size:1.2rem; margin-bottom:0.75rem;">
+          <div class="rating-stars-gold">
             <?php
             $filledStars = $reviewCount > 0 ? round($avgRating) : 5;
             for ($i = 1; $i <= 5; $i++) {
@@ -709,31 +709,31 @@ foreach ($supplementalImages as $sImg) {
             }
             ?>
           </div>
-          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.25rem;">
+          <p class="rating-count-text">
             Based on <?= $reviewCount ?> <?= $reviewCount === 1 ? 'verified review' : 'verified reviews' ?>
           </p>
 
           <!-- Rating distribution bars -->
-          <div style="display:flex; flex-direction:column; gap:0.35rem; font-size:0.8rem;">
+          <div class="rating-bars-stack">
             <?php for ($star = 5; $star >= 1; $star--): 
               $count = $ratingCounts[$star] ?? 0;
               $pct = $reviewCount > 0 ? round(($count / $reviewCount) * 100) : ($star === 5 ? 100 : 0);
             ?>
-              <div style="display:flex; align-items:center; gap:0.5rem;">
-                <span style="width:25px; color:var(--navy); font-weight:600;"><?= $star ?>★</span>
-                <div style="flex:1; height:8px; background:rgba(0,0,0,0.06); border-radius:999px; overflow:hidden;">
-                  <div style="width:<?= $pct ?>%; height:100%; background:#F59E0B; border-radius:999px;"></div>
+              <div class="rating-bar-row">
+                <span class="rating-bar-label"><?= $star ?>★</span>
+                <div class="rating-bar-track">
+                  <div class="rating-bar-fill" style="width:<?= $pct ?>%;"></div>
                 </div>
-                <span style="width:30px; text-align:right; color:var(--text-muted);"><?= $count ?></span>
+                <span class="rating-bar-count"><?= $count ?></span>
               </div>
             <?php endfor; ?>
           </div>
         </div>
 
         <!-- Review Submission Form -->
-        <div style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.75rem; box-shadow: 0 2px 8px rgba(15, 25, 45, 0.05);">
-          <h3 style="font-size:1.15rem; color:var(--navy); margin-bottom:0.5rem; font-weight:700;">Write a Product Review</h3>
-          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.25rem;">
+        <div class="review-form-card">
+          <h3 class="review-card-title">Write a Product Review</h3>
+          <p class="review-card-desc">
             Have you printed or sampled this substrate? Share your production notes with our community.
           </p>
 
@@ -742,11 +742,11 @@ foreach ($supplementalImages as $sImg) {
             <input type="hidden" name="product_id" value="<?= $productId ?>">
 
             <!-- Interactive Star Rating Picker -->
-            <div style="margin-bottom:1rem;">
-              <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">
-                Your Rating <span style="color:var(--crimson);">*</span>
+            <div class="form-group review-star-group" style="margin-bottom:1rem;">
+              <label class="form-label" style="display:block; font-size:0.85rem; font-weight:700; color:#E8C45A; margin-bottom:0.35rem;">
+                Your Rating <span style="color:#EF4444;">*</span>
               </label>
-              <div id="starRatingPicker" style="display:flex; gap:0.35rem; font-size:1.6rem; color:#D1D5DB; cursor:pointer;">
+              <div id="starRatingPicker" class="star-rating-picker">
                 <span onclick="setStarRating(1)" onmouseover="hoverStarRating(1)" onmouseout="resetStarRating()">★</span>
                 <span onclick="setStarRating(2)" onmouseover="hoverStarRating(2)" onmouseout="resetStarRating()">★</span>
                 <span onclick="setStarRating(3)" onmouseover="hoverStarRating(3)" onmouseout="resetStarRating()">★</span>
@@ -756,30 +756,30 @@ foreach ($supplementalImages as $sImg) {
               <input type="hidden" name="rating" id="selectedRatingInput" value="5">
             </div>
 
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
-              <div>
-                <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.25rem;">Your Name *</label>
+            <div class="review-form-row-2">
+              <div class="form-group">
+                <label class="form-label" style="display:block; font-size:0.85rem; font-weight:700; color:#F5F1E8; margin-bottom:0.35rem;">Your Name <span style="color:#EF4444;">*</span></label>
                 <input type="text" name="customer_name" required class="form-control" placeholder="e.g. Vikram Malhotra">
               </div>
-              <div>
-                <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.25rem;">Email Address</label>
+              <div class="form-group">
+                <label class="form-label" style="display:block; font-size:0.85rem; font-weight:700; color:#F5F1E8; margin-bottom:0.35rem;">Email Address</label>
                 <input type="email" name="customer_email" class="form-control" placeholder="e.g. vikram@studio.com">
               </div>
             </div>
 
-            <div style="margin-bottom:1rem;">
-              <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.25rem;">Review Headline *</label>
+            <div class="form-group" style="margin-bottom:1rem;">
+              <label class="form-label" style="display:block; font-size:0.85rem; font-weight:700; color:#F5F1E8; margin-bottom:0.35rem;">Review Headline <span style="color:#EF4444;">*</span></label>
               <input type="text" name="title" required class="form-control" placeholder="e.g. Flawless white opacity and vivid colors!">
             </div>
 
-            <div style="margin-bottom:1.25rem;">
-              <label style="display:block; font-size:0.825rem; font-weight:700; color:var(--navy); margin-bottom:0.25rem;">Written Review *</label>
+            <div class="form-group" style="margin-bottom:1.25rem;">
+              <label class="form-label" style="display:block; font-size:0.85rem; font-weight:700; color:#F5F1E8; margin-bottom:0.35rem;">Written Review <span style="color:#EF4444;">*</span></label>
               <textarea name="review_text" rows="3" required class="form-control" placeholder="Describe the hand-feel, wash durability, or pressing performance..."></textarea>
             </div>
 
             <div id="reviewResponseAlert" style="display:none; padding:0.75rem; border-radius:6px; margin-bottom:1rem; font-size:0.85rem;"></div>
 
-            <button type="submit" id="submitReviewBtn" class="btn btn-navy btn-sm">
+            <button type="submit" id="submitReviewBtn" class="btn btn-primary submit-review-btn">
               <span>Submit Verified Review</span>
             </button>
           </form>
@@ -787,43 +787,43 @@ foreach ($supplementalImages as $sImg) {
       </div>
 
       <!-- Existing Reviews Feed -->
-      <div style="border-top:1px solid var(--border-light); padding-top:2rem;">
-        <h4 style="font-size:1.1rem; color:var(--navy); margin-bottom:1.25rem; font-weight:700;">Customer Feedback Feed</h4>
+      <div style="border-top:1px solid #40351E; padding-top:2rem;">
+        <h4 style="font-size:1.1rem; color:#E8C45A; margin-bottom:1.25rem; font-weight:700;">Customer Feedback Feed</h4>
         
         <?php if (empty($reviews)): ?>
-          <div style="text-align:center; padding:2.5rem 1.5rem; background:var(--ivory); border-radius:var(--radius-md); border:1px dashed var(--border-color);">
-            <div style="font-size:2rem; margin-bottom:0.5rem;">⭐</div>
-            <h4 style="color:var(--navy); margin-bottom:0.35rem; font-size:1rem;">Be the first to review this product!</h4>
-            <p style="color:var(--text-muted); font-size:0.85rem; max-width:440px; margin:0 auto 1rem;">
+          <div style="text-align:center; padding:2.5rem 1.5rem; background:#181818; border-radius:10px; border:1px dashed #40351E;">
+            <div style="font-size:2rem; margin-bottom:0.5rem; color:#E8C45A;">★</div>
+            <h4 style="color:#E8C45A; margin-bottom:0.35rem; font-size:1rem;">Be the first to review this product!</h4>
+            <p style="color:#B8B1A3; font-size:0.85rem; max-width:440px; margin:0 auto 1rem;">
               Share your production experience and print outcomes with fellow apparel creators.
             </p>
           </div>
         <?php else: ?>
           <div style="display:flex; flex-direction:column; gap:1.25rem;">
             <?php foreach ($reviews as $rev): ?>
-              <div class="review-card" style="padding:1.4rem; background:var(--bg-surface); border:1px solid var(--border-color); border-radius:8px; box-shadow: 0 3px 10px rgba(15, 25, 45, 0.07); transition: transform 0.25s ease, box-shadow 0.25s ease;">
+              <div class="review-card" style="padding:1.4rem; background:#181818; border:1px solid #40351E; border-radius:8px; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5); transition: transform 0.25s ease, box-shadow 0.25s ease;">
                 <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.35rem;">
                   <div style="display:flex; align-items:center; gap:0.5rem;">
-                    <span style="font-weight:700; color:var(--navy);"><?= e($rev['customer_name']) ?></span>
+                    <span style="font-weight:700; color:#F5F1E8;"><?= e($rev['customer_name']) ?></span>
                     <?php if (!empty($rev['is_verified_purchase'])): ?>
-                      <span style="background:rgba(16,185,129,0.1); color:#059669; font-size:0.7rem; font-weight:700; padding:0.15rem 0.45rem; border-radius:4px;">
+                      <span style="background:rgba(212,175,55,0.15); color:#FFD76A; border:1px solid rgba(212,175,55,0.3); font-size:0.7rem; font-weight:700; padding:0.15rem 0.45rem; border-radius:4px;">
                         Verified Buyer
                       </span>
                     <?php endif; ?>
                   </div>
-                  <span style="font-size:0.8rem; color:var(--text-muted);">
+                  <span style="font-size:0.8rem; color:#B8B1A3;">
                     <?= date('M d, Y', strtotime($rev['created_at'])) ?>
                   </span>
                 </div>
 
-                <div style="color:#F59E0B; font-size:0.95rem; margin-bottom:0.4rem;">
+                <div style="color:#F59E0B; font-size:0.95rem; margin-bottom:0.4rem; letter-spacing:1px;">
                   <?php for ($s = 1; $s <= 5; $s++) { echo $s <= (int)$rev['rating'] ? '★' : '☆'; } ?>
                 </div>
 
-                <h5 style="font-size:0.95rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">
+                <h5 style="font-size:0.95rem; font-weight:700; color:#E8C45A; margin-bottom:0.35rem;">
                   <?= e($rev['title']) ?>
                 </h5>
-                <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.6; margin:0;">
+                <p style="font-size:0.88rem; color:#B8B1A3; line-height:1.6; margin:0;">
                   <?= nl2br(e($rev['review_text'])) ?>
                 </p>
               </div>
@@ -837,7 +837,7 @@ foreach ($supplementalImages as $sImg) {
     <!-- SECTION 6: TURNAROUND & SHIPPING -->
     <!-- =================================================================== -->
     <?php if (!empty($product['shipping_info'])): ?>
-    <section class="product-content-block reveal slide-up" id="shipping-section" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:clamp(1.75rem, 3vw, 2.5rem); box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65); margin-bottom:1.5rem;">
+    <section class="product-content-block" id="shipping-section" style="background:#141414; border:1px solid #40351E; border-radius:var(--radius-md); padding:clamp(1.75rem, 3vw, 2.5rem); box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65); margin-bottom:1.5rem;">
       <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
         <span style="background:#202020; color:#E8C45A; border:1px solid #40351E; width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem;">06</span>
         <div>
@@ -851,7 +851,7 @@ foreach ($supplementalImages as $sImg) {
         <?= nl2br(e($product['shipping_info'])) ?>
       </div>
 
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+      <div class="product-guarantee-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
         <div style="padding:1.15rem; border:1px solid #40351E; border-radius:8px; background:#111111; box-shadow:0 4px 12px rgba(0,0,0,0.35);">
           <div style="font-weight:700; color:#E8C45A; font-size:0.9rem; margin-bottom:0.25rem;">Digital Prepress Proof</div>
           <div style="font-size:0.85rem; color:#B8B1A3; line-height:1.5;">Confirmed within 2–4 hours of artwork submission.</div>
@@ -872,19 +872,19 @@ foreach ($supplementalImages as $sImg) {
 </div>
 
 <!-- Embedded Quotation / Upload Form for this Product -->
-<section class="section section-ivory" id="quote-form">
+<section class="section" id="quote-form" style="background:#0c0c0c; border-top:1px solid #40351E;">
   <div class="container container-readable">
-    <div class="section-header text-center reveal slide-up">
-      <div class="section-label" style="justify-content:center; color:var(--royal);">Prepress Quotation Workbench</div>
-      <h2>Request Custom Quotation for <?= e($product['title']) ?></h2>
-      <p class="section-subtitle" style="margin:0 auto;">
+    <div class="section-header text-center" style="margin-bottom:2rem;">
+      <div class="section-label" style="justify-content:center; color:#E8C45A;">Prepress Quotation Workbench</div>
+      <h2 style="font-size:clamp(1.75rem, 2.5vw, 2.2rem); color:#F5F1E8; margin-bottom:0.75rem; font-weight:800;">Request Custom Quotation for <?= e($product['title']) ?></h2>
+      <p class="section-subtitle" style="margin:0 auto; color:#B8B1A3;">
         Upload your print-ready design or vector artwork to receive our prepress proof and wholesale price breakdown.
       </p>
     </div>
 
     <?= render_flash() ?>
 
-    <div class="upload-card reveal scale-in artwork-upload-component" style="background:var(--bg-surface); border:1px solid var(--border-light); border-radius:var(--radius-lg); padding:clamp(1.5rem, 3vw, 2.5rem); box-shadow:var(--shadow-md);">
+    <div class="upload-card artwork-upload-component" style="background:#141414; border:1px solid #40351E; border-radius:12px; padding:clamp(1.5rem, 3vw, 2.5rem); box-shadow:0 8px 30px rgba(0,0,0,0.7);">
       <form action="<?= url('api/submit-enquiry.php') ?>" method="POST" enctype="multipart/form-data">
         <?= csrf_field() ?>
         <input type="hidden" name="product_id" value="<?= e($product['id'] ?? 1) ?>">
@@ -893,22 +893,22 @@ foreach ($supplementalImages as $sImg) {
 
         <div class="upload-studio-grid">
           <div>
-            <div class="dropzone-container" style="border:2px dashed var(--border-light); border-radius:var(--radius-md); padding:2rem; text-align:center; background:var(--ivory); cursor:pointer;">
+            <div class="dropzone-container" style="border:2px dashed #40351E; border-radius:10px; padding:2rem; text-align:center; background:#111111; cursor:pointer;">
               <input type="file" name="artwork_file" class="file-input" accept=".png,.jpg,.jpeg,.pdf,.ai,.psd,.svg" style="display:none;">
-              <div class="dropzone-icon" style="color:var(--royal); margin-bottom:0.75rem;">
+              <div class="dropzone-icon" style="color:#E8C45A; margin-bottom:0.75rem;">
                 <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                   <polyline points="17 8 12 3 7 8"/>
                   <line x1="12" y1="3" x2="12" y2="15"/>
                 </svg>
               </div>
-              <div class="dropzone-title" style="font-weight:700; color:var(--navy); font-size:1.05rem;">
+              <div class="dropzone-title" style="font-weight:700; color:#F5F1E8; font-size:1.05rem;">
                 Upload Artwork for <?= e($product['title']) ?>
               </div>
-              <div class="dropzone-hint" style="color:var(--slate-light); font-size:0.825rem; margin-top:0.4rem;">
+              <div class="dropzone-hint" style="color:#B8B1A3; font-size:0.825rem; margin-top:0.4rem;">
                 Accepted: PNG (transparent), PDF, AI, PSD, SVG (Max 50 MB)
               </div>
-              <button type="button" class="btn btn-sm btn-outline" style="margin-top:1rem;">Select Design File</button>
+              <button type="button" class="btn btn-sm" style="margin-top:1rem; border:1px solid #40351E; background:#202020; color:#E8C45A;">Select Design File</button>
             </div>
 
             <div class="file-preview-area"></div>
@@ -969,17 +969,20 @@ foreach ($supplementalImages as $sImg) {
 
 <!-- Related Products Section -->
 <?php if (!empty($relatedProducts)): ?>
-<section class="related-products-section">
+<section class="related-products-section" style="background:#080808; border-top:1px solid #40351E; padding:4rem 0;">
   <div class="container">
-    <div class="section-header text-center reveal slide-up" style="margin-bottom:2.5rem;">
-      <div class="section-label" style="justify-content:center; color:var(--royal);">Complementary Print Solutions</div>
-      <h2 style="font-size:clamp(1.75rem, 2.6vw, 2.2rem); color:var(--navy);">Related Products &amp; Transfers</h2>
-      <p class="section-subtitle" style="margin:0 auto; font-size:0.95rem;">
+    <div class="section-header text-center" style="margin-bottom:2.5rem;">
+      <div class="section-label" style="justify-content:center; color:#E8C45A;">Complementary Print Solutions</div>
+      <h2 style="font-size:clamp(1.75rem, 2.6vw, 2.2rem); color:#F5F1E8; font-weight:800;">Related Products &amp; Transfers</h2>
+      <p class="section-subtitle" style="margin:0 auto; font-size:0.95rem; color:#B8B1A3;">
+        Explore additional printing mediums and merchandise produced with our calibrated industrial technology.
+      </p>
+    </div>
         Explore additional printing mediums and merchandise produced with our calibrated industrial technology.
       </p>
     </div>
 
-    <div class="products-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+    <div class="products-grid">
       <?php foreach ($relatedProducts as $idx => $relProd): ?>
         <article class="product-card reveal slide-up stagger-<?= ($idx % 4) + 1 ?>">
           <div class="product-media" style="position:relative;">
@@ -1066,7 +1069,7 @@ foreach ($supplementalImages as $sImg) {
   </div>
   <div class="sticky-cart-actions">
     <div class="sticky-cart-price" id="stickyPrice"><?= e($product['starting_price'] ?? '₹249') ?></div>
-    <button type="button" class="btn btn-primary" onclick="submitStickyPurchase()" style="white-space:nowrap; padding:0.6rem 1.4rem;">
+    <button type="button" class="btn btn-primary sticky-order-btn" onclick="submitStickyPurchase()">
       Order Now &darr;
     </button>
   </div>
@@ -1416,19 +1419,46 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sticky Bar Scroll Trigger
   const buyForm = document.getElementById('priceCalculatorForm');
   const stickyBar = document.getElementById('stickyCartBar');
+  const reviewForm = document.getElementById('productReviewForm');
+
   if (buyForm && stickyBar && 'IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (!entry.isIntersecting) {
+        if (!entry.isIntersecting && !stickyBar.classList.contains('is-hidden-by-form')) {
           stickyBar.classList.add('is-visible');
           document.body.classList.add('has-sticky-bar-active');
-        } else {
+        } else if (entry.isIntersecting) {
           stickyBar.classList.remove('is-visible');
           document.body.classList.remove('has-sticky-bar-active');
         }
       });
     }, { threshold: 0.1 });
     observer.observe(buyForm);
+  }
+
+  // Hide sticky purchase bar whenever the review form is focused or being filled out
+  if (reviewForm && stickyBar) {
+    reviewForm.addEventListener('focusin', function () {
+      stickyBar.classList.add('is-hidden-by-form');
+      stickyBar.classList.remove('is-visible');
+      document.body.classList.remove('has-sticky-bar-active');
+    });
+
+    reviewForm.addEventListener('focusout', function () {
+      setTimeout(function () {
+        if (!reviewForm.contains(document.activeElement)) {
+          stickyBar.classList.remove('is-hidden-by-form');
+          if (buyForm) {
+            const rect = buyForm.getBoundingClientRect();
+            const isInView = rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight);
+            if (!isInView && rect.bottom < 0) {
+              stickyBar.classList.add('is-visible');
+              document.body.classList.add('has-sticky-bar-active');
+            }
+          }
+        }
+      }, 200);
+    });
   }
 
   // ==============================================================

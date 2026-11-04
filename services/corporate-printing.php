@@ -30,10 +30,10 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'corporate-printing
 <!-- Overview -->
 <section class="section section-white">
   <div class="container">
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:center;">
-      <div class="reveal slide-right">
+    <div class="service-overview-grid">
+      <div class="service-overview-content reveal slide-right">
         <div class="section-label">End-to-End B2B Production</div>
-        <h2 style="margin-bottom:1.25rem;">Unified Brand Identity Across Every Corporate Touchpoint</h2>
+        <h2>Unified Brand Identity Across Every Corporate Touchpoint</h2>
         <p>
           Corporate gifting and company merchandise represent your brand's commitment to quality. At <strong>OrderPrintex</strong>, we manage high-volume corporate production with strict Pantone color adherence and premium substrate selection.
         </p>
@@ -44,15 +44,15 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'corporate-printing
           We provide GST invoicing, tiered wholesale volume pricing, and reliable door-to-door delivery to corporate offices across India.
         </p>
 
-        <div style="margin-top:2rem; display:flex; gap:1rem;">
-          <a href="#upload-corporate" class="btn btn-primary">Request Corporate Proposal</a>
-          <a href="<?= url('contact.php') ?>" class="btn btn-outline">Schedule Consultation</a>
+        <div class="service-cta-group">
+          <a href="#upload-corporate" class="btn service-btn-primary">Request Corporate Proposal</a>
+          <a href="<?= url('contact.php') ?>" class="btn service-btn-secondary">Schedule Consultation</a>
         </div>
       </div>
 
-      <div class="reveal slide-left">
-        <div style="border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-lg); border:1px solid var(--border-gold);">
-          <img src="<?= url('assets/images/corporate_swag_kit.jpg') ?>" alt="Corporate Printing Production Run" style="width:100%; height:440px; object-fit:cover;">
+      <div class="service-overview-media reveal slide-left">
+        <div class="service-media-frame">
+          <img src="<?= url('assets/images/corporate_swag_kit.jpg') ?>" alt="Corporate Printing Production Run" loading="lazy">
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'corporate-printing
       </p>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1.75rem;">
+    <div class="service-specs-grid">
       <div class="timeline-step reveal slide-up stagger-1">
         <h4 style="color:var(--navy); margin-bottom:0.35rem;">Custom Ceramic Mugs</h4>
         <p style="font-size:0.85rem; color:var(--slate);">11oz and 15oz Grade AAA white/black ceramic mugs with vibrant full-wrap dishwasher-safe prints.</p>
