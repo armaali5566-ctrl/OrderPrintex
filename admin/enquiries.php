@@ -8,7 +8,7 @@ require_once __DIR__ . '/../includes/database.php';
 require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 
-require_admin_panel();
+require_permission('enquiries.view');
 $adminUser = auth_user();
 
 // Handle Actions: Status Update & Delete
@@ -349,11 +349,11 @@ $countConverted = db_fetch_one("SELECT COUNT(*) as c FROM enquiries WHERE status
                         </a>
                     <?php endif; ?>
 
-                    <form method="POST" action="<?= url('admin/enquiries.php') ?>" onsubmit="return confirm('Are you sure you want to permanently delete this customer enquiry?');" style="margin-top: 10px; text-align: right;">
+                    <form method="POST" action="<?= url('admin/enquiries.php') ?>" style="margin-top: 10px; text-align: right;">
                         <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
                         <input type="hidden" name="action" value="delete_enquiry">
                         <input type="hidden" name="enquiry_id" value="<?= $activeEnquiry['id'] ?>">
-                        <button type="submit" class="btn btn-outline btn-xs" style="color: var(--color-crimson); border-color: rgba(168, 62, 60, 0.3);">
+                        <button type="button" data-confirm="Are you sure you want to permanently delete this customer enquiry?" data-confirm-title="Delete Enquiry?" data-confirm-item="Enquiry #<?= e($activeEnquiry['id']) ?> (<?= e($activeEnquiry['name']) ?>)" data-destructive="true" data-confirm-btn="Yes, Delete" class="btn btn-outline btn-xs" style="color: var(--color-crimson); border-color: rgba(168, 62, 60, 0.3);">
                             Delete Enquiry
                         </button>
                     </form>

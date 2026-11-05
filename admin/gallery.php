@@ -10,7 +10,7 @@ require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/seo_helper.php';
 
-require_admin();
+require_permission('portfolio.view');
 $adminUser = auth_user();
 
 // Handle Actions (Add, Edit, Delete, Toggle Featured, Toggle Published)
@@ -27,6 +27,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if ($action === 'add_item') {
         $title = trim($_POST['title'] ?? '');
         $category = trim($_POST['category'] ?? 'dtf');
+        $customCategory = trim($_POST['custom_category'] ?? '');
+        if (strtolower($category) === 'other' || !empty($customCategory)) {
+            if (!empty($customCategory)) {
+                $category = $customCategory;
+            } else {
+                set_flash('error', 'Please specify a custom category name.');
+                header('Location: ' . url('admin/gallery.php'));
+                exit;
+            }
+        }
         $description = trim($_POST['description'] ?? '');
         $isFeatured = isset($_POST['is_featured']) ? 1 : 0;
         $isPublished = isset($_POST['is_published']) ? 1 : 0;
@@ -75,6 +85,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $itemId = intval($_POST['item_id'] ?? 0);
         $title = trim($_POST['title'] ?? '');
         $category = trim($_POST['category'] ?? 'dtf');
+        $customCategory = trim($_POST['custom_category'] ?? '');
+        if (strtolower($category) === 'other' || !empty($customCategory)) {
+            if (!empty($customCategory)) {
+                $category = $customCategory;
+            } else {
+                set_flash('error', 'Please specify a custom category name.');
+                header('Location: ' . url('admin/gallery.php?edit_id=' . $itemId));
+                exit;
+            }
+        }
         $description = trim($_POST['description'] ?? '');
         $isFeatured = isset($_POST['is_featured']) ? 1 : 0;
         $isPublished = isset($_POST['is_published']) ? 1 : 0;
@@ -217,13 +237,24 @@ require_once __DIR__ . '/header.php';
                     <input type="text" name="title" class="form-input" required placeholder="e.g. Neon Cyber DTF Hoodies" value="<?= e($editItem['title'] ?? '') ?>">
                 </div>
 
+                <?php
+                $standardGalleryCats = ['dtf', 'uv_dtf', 'tshirt', 'corporate', 'packaging'];
+                $isCustomGalleryCat = ($editItem && !empty($editItem['category']) && !in_array($editItem['category'], $standardGalleryCats, true));
+                ?>
                 <div class="form-group">
                     <label class="form-label required">Category</label>
-                    <select name="category" class="form-select" required>
+                    <select name="category" class="form-select dynamic-other-select" required
+                            data-enable-other="true"
+                            data-other-name="custom_category"
+                            data-other-label="Specify Custom Category Name"
+                            data-other-placeholder="e.g. Stickers & Decals, Packaging & Boxes, Event Signage"
+                            data-other-value-init="<?= $isCustomGalleryCat ? e($editItem['category']) : '' ?>">
                         <option value="dtf" <?= ($editItem && $editItem['category'] === 'dtf') ? 'selected' : '' ?>>DTF Textile Transfers</option>
                         <option value="uv_dtf" <?= ($editItem && $editItem['category'] === 'uv_dtf') ? 'selected' : '' ?>>UV DTF Hard Decals</option>
                         <option value="tshirt" <?= ($editItem && $editItem['category'] === 'tshirt') ? 'selected' : '' ?>>Custom Apparel &amp; T-Shirts</option>
                         <option value="corporate" <?= ($editItem && $editItem['category'] === 'corporate') ? 'selected' : '' ?>>Corporate Kits &amp; Swag</option>
+                        <option value="packaging" <?= ($editItem && $editItem['category'] === 'packaging') ? 'selected' : '' ?>>Packaging &amp; Boxes</option>
+                        <option value="other" <?= $isCustomGalleryCat ? 'selected' : '' ?>>Other (Specify Custom Category)</option>
                     </select>
                 </div>
 
@@ -336,11 +367,11 @@ require_once __DIR__ . '/header.php';
                                         ✏ Edit
                                     </a>
 
-                                    <form method="POST" action="<?= url('admin/gallery.php') ?>" onsubmit="return confirm('Permanently remove this project from portfolio?');" style="display: inline;">
+                                    <form method="POST" action="<?= url('admin/gallery.php') ?>" style="display: inline;">
                                         <?= csrf_field() ?>
                                         <input type="hidden" name="action" value="delete_item">
                                         <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
-                                        <button type="submit" class="btn btn-outline btn-xs" style="color: var(--color-crimson); border-color: rgba(168, 62, 60, 0.4);">
+                                        <button type="button" data-confirm="Are you sure you want to permanently remove this project from your portfolio?" data-confirm-title="Delete Portfolio Project?" data-confirm-item="<?= e($item['title']) ?>" data-destructive="true" data-confirm-btn="Yes, Delete" class="btn btn-outline btn-xs" style="color: var(--color-crimson); border-color: rgba(168, 62, 60, 0.4);">
                                             Delete
                                         </button>
                                     </form>

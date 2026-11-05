@@ -141,5 +141,6 @@ $ytUrl = get_setting('youtube_url', 'https://www.youtube.com/@PRINTEX_Delhi');
 <script src="<?= url('assets/js/main.js') ?>"></script>
 <script src="<?= url('assets/js/animations.js') ?>"></script>
 <script src="<?= url('assets/js/upload.js') ?>"></script>
+<script src="<?= url('assets/js/dynamic-other.js') ?>"></script>
 </body>
 </html>

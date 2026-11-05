@@ -142,12 +142,17 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'corporate-printing
             <div class="form-grid">
               <div class="form-group">
                 <label class="form-label">Product Category <span class="required">*</span></label>
-                <select name="material_options" class="form-control">
+                <select name="material_options" class="form-control"
+                        data-enable-other="true"
+                        data-other-name="custom_material_options"
+                        data-other-label="Specify Custom Merchandise Item"
+                        data-other-placeholder="e.g. Leather Desk Organizers, Custom Acrylic Awards, Metal Pens">
                   <option value="Ceramic Mugs">Custom Printed Ceramic Mugs</option>
                   <option value="Executive Welcome Kit">Curated Employee Onboarding Kit</option>
                   <option value="Corporate Apparel">Company Polos &amp; Uniforms</option>
                   <option value="Drinkware / Bottles">Vacuum Insulated Flasks / Sippers</option>
                   <option value="Multiple Corporate Items">Combination / Multiple Items</option>
+                  <option value="other">Other (Specify Custom Item)</option>
                 </select>
               </div>
 

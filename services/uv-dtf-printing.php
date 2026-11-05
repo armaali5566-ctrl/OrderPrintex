@@ -145,12 +145,17 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'uv-dtf-printing'")
             <div class="form-grid">
               <div class="form-group">
                 <label class="form-label">Target Substrate / Material <span class="required">*</span></label>
-                <select name="material_options" class="form-control">
+                <select name="material_options" class="form-control"
+                        data-enable-other="true"
+                        data-other-name="custom_material_options"
+                        data-other-label="Specify Custom Target Substrate"
+                        data-other-placeholder="e.g. Anodized Aluminum Flasks, Carbon Fiber Panels, Ceramic Mugs">
                   <option value="Glass / Bottles">Glassware / Bottles</option>
                   <option value="Stainless Steel / Tumblers">Stainless Steel Tumblers / Mugs</option>
                   <option value="Acrylic / Plastic">Clear Acrylic / Plastic Packaging</option>
                   <option value="Wood / Metal">Finished Wood / Metal Plates</option>
                   <option value="General Hard Surface" selected>General Hard Surface</option>
+                  <option value="other">Other (Specify Custom Substrate)</option>
                 </select>
               </div>
 

@@ -9,7 +9,7 @@ require_once __DIR__ . '/../includes/database.php';
 require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 
-require_admin();
+require_permission('activity.view');
 $adminUser = auth_user();
 
 // Filters & Pagination

@@ -142,11 +142,16 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'"
             <div class="form-grid">
               <div class="form-group">
                 <label class="form-label">Garment Silhouette / Fabric <span class="required">*</span></label>
-                <select name="material_options" class="form-control">
+                <select name="material_options" class="form-control"
+                        data-enable-other="true"
+                        data-other-name="custom_material_options"
+                        data-other-label="Specify Custom Garment Fabric / Silhouette"
+                        data-other-placeholder="e.g. 280 GSM French Terry Fleece Hoodie, Bamboo Cotton Tank Top">
                   <option value="180 GSM Round Neck Cotton">180 GSM Round Neck (100% Bio-Washed Cotton)</option>
                   <option value="240 GSM Oversized Streetwear">240 GSM Heavyweight Oversized Tee</option>
                   <option value="Polo Collar Cotton Pique">Polo Collar Shirt (Cotton Pique)</option>
                   <option value="Dry-Fit Sports Polyester">Dry-Fit Athletic Polyester</option>
+                  <option value="other">Other (Specify Custom Garment)</option>
                 </select>
               </div>
 
@@ -157,11 +162,15 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'"
 
               <div class="form-group">
                 <label class="form-label">Print Placement</label>
-                <select class="form-control">
+                <select name="print_placement" class="form-control"
+                        data-enable-other="true"
+                        data-other-name="custom_print_placement"
+                        data-other-label="Specify Custom Print Placement"
+                        data-other-placeholder="e.g. Both Sleeves + Back Collar Tag + Side Hem">
                   <option value="Front Chest (A4)">Front Chest (A4)</option>
                   <option value="Front + Back Large">Front Chest + Full Back (A3)</option>
                   <option value="Left Chest Pocket Only">Left Chest Pocket Only</option>
-                  <option value="Custom Placements">Custom Placements</option>
+                  <option value="other">Other (Specify Custom Placements)</option>
                 </select>
               </div>
 

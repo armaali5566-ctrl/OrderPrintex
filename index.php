@@ -203,11 +203,16 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
                 <label class="form-label" for="serviceSelect">
                   Printing Service <span class="required">*</span>
                 </label>
-                <select name="service_name" id="serviceSelect" class="form-control" required>
+                <select name="service_name" id="serviceSelect" class="form-control" required
+                        data-enable-other="true"
+                        data-other-name="custom_service_name"
+                        data-other-label="Specify Custom Printing Service"
+                        data-other-placeholder="e.g. Sublimation Mugs, Screen Printed Posters, Metallic Decals">
                   <option value="DTF Printing" selected>DTF Printing (Garment Transfers)</option>
                   <option value="UV DTF Printing">UV DTF Printing (Hard Surface Decals)</option>
                   <option value="T-Shirt Printing">Custom T-Shirt Printing (Cotton)</option>
                   <option value="Corporate Printing">Corporate Gifts &amp; Branded Merch</option>
+                  <option value="other">Other (Specify Custom Service)</option>
                 </select>
               </div>
 

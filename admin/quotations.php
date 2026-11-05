@@ -8,7 +8,7 @@ require_once __DIR__ . '/../includes/database.php';
 require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 
-require_admin_panel();
+require_permission('quotations.view');
 $adminUser = auth_user();
 
 // Handle Quotation Saving & Status Changes
@@ -486,11 +486,11 @@ require_once __DIR__ . '/header.php';
                 <?php if ($editQuote): ?>
                     <div class="admin-card">
                         <div class="admin-card-body" style="padding: 16px;">
-                            <form method="POST" action="<?= url('admin/quotations.php') ?>" onsubmit="return confirm('Are you sure you want to permanently delete this quotation?');">
+                            <form method="POST" action="<?= url('admin/quotations.php') ?>">
                                 <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
                                 <input type="hidden" name="form_action" value="delete_quotation">
                                 <input type="hidden" name="quote_id" value="<?= $editQuote['id'] ?>">
-                                <button type="submit" class="btn btn-outline btn-sm btn-block" style="color: var(--color-crimson); border-color: rgba(168, 62, 60, 0.4);">
+                                <button type="button" data-confirm="Are you sure you want to permanently delete this quotation?" data-confirm-title="Delete Quotation?" data-confirm-item="Quote #<?= e($editQuote['quote_number'] ?? $editQuote['id']) ?>" data-destructive="true" data-confirm-btn="Yes, Delete" class="btn btn-outline btn-sm btn-block" style="color: var(--color-crimson); border-color: rgba(168, 62, 60, 0.4);">
                                     Delete Quotation
                                 </button>
                             </form>

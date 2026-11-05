@@ -258,11 +258,11 @@ require_once __DIR__ . '/header.php';
                     <a href="<?= url('admin/attributes.php?edit_id=' . $a['id']) ?>" class="btn btn-xs btn-outline" title="Edit">
                       ✎
                     </a>
-                    <form method="POST" action="<?= url('admin/attributes.php') ?>" style="display:inline;" onsubmit="return confirm('Delete this attribute? This will remove all its values and unlink from products.');">
+                    <form method="POST" action="<?= url('admin/attributes.php') ?>" style="display:inline;">
                       <?= csrf_field() ?>
                       <input type="hidden" name="action" value="delete_attribute">
                       <input type="hidden" name="attribute_id" value="<?= $a['id'] ?>">
-                      <button type="submit" class="btn btn-xs btn-danger" title="Delete">✕</button>
+                      <button type="button" data-confirm="Are you sure you want to delete attribute &#039;<?= e($a['name']) ?>&#039;? This will remove all its values and unlink from products." data-confirm-title="Delete Attribute?" data-confirm-item="<?= e($a['name']) ?>" data-destructive="true" data-confirm-btn="Yes, Delete" class="btn btn-xs btn-danger" title="Delete">✕</button>
                     </form>
                   </td>
                 </tr>
@@ -343,12 +343,12 @@ require_once __DIR__ . '/header.php';
 
                 <div style="display:flex; align-items:center; gap:0.75rem;">
                   <span style="font-size:0.75rem; color:var(--text-muted);">Order: <?= $val['display_order'] ?></span>
-                  <form method="POST" action="<?= url('admin/attributes.php') ?>" style="display:inline;" onsubmit="return confirm('Remove value \'<?= addslashes($val['value']) ?>\'?');">
+                  <form method="POST" action="<?= url('admin/attributes.php') ?>" style="display:inline;">
                     <?= csrf_field() ?>
                     <input type="hidden" name="action" value="delete_value">
                     <input type="hidden" name="value_id" value="<?= $val['id'] ?>">
                     <input type="hidden" name="attribute_id" value="<?= $activeAttr['id'] ?>">
-                    <button type="submit" class="btn btn-xs btn-danger" style="padding:2px 7px;">✕</button>
+                    <button type="button" data-confirm="Are you sure you want to remove value &#039;<?= e($val['value']) ?>&#039;?" data-confirm-title="Remove Value?" data-confirm-item="<?= e($val['value']) ?>" data-destructive="true" data-confirm-btn="Remove" class="btn btn-xs btn-danger" style="padding:2px 7px;">✕</button>
                   </form>
                 </div>
               </div>

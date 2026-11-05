@@ -66,10 +66,24 @@ require_once __DIR__ . '/header.php';
       </p>
     </div>
     <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-      <a href="<?= url('admin/enquiries.php') ?>" class="btn btn-sm btn-primary">Review Enquiries</a>
-      <a href="<?= url('admin/quotations.php?action=create') ?>" class="btn btn-sm btn-outline">+ Create Quotation</a>
-      <a href="<?= url('admin/products.php?action=new') ?>" class="btn btn-sm btn-outline">+ Add Product</a>
-      <a href="<?= url('admin/gallery.php') ?>" class="btn btn-sm btn-outline">Manage Portfolio</a>
+      <?php if (has_permission('enquiries.view')): ?>
+        <a href="<?= url('admin/enquiries.php') ?>" class="btn btn-sm btn-primary">Review Enquiries</a>
+      <?php endif; ?>
+      <?php if (has_permission('quotations.create')): ?>
+        <a href="<?= url('admin/quotations.php?action=create') ?>" class="btn btn-sm btn-outline">+ Create Quotation</a>
+      <?php endif; ?>
+      <?php if (has_permission('products.create')): ?>
+        <a href="<?= url('admin/products.php?action=new') ?>" class="btn btn-sm btn-outline">+ Add Product</a>
+      <?php endif; ?>
+      <?php if (has_permission('portfolio.view')): ?>
+        <a href="<?= url('admin/gallery.php') ?>" class="btn btn-sm btn-outline">Manage Portfolio</a>
+      <?php endif; ?>
+      <?php if (has_permission('blog.view')): ?>
+        <a href="<?= url('admin/blog.php') ?>" class="btn btn-sm btn-outline">Blog Articles</a>
+      <?php endif; ?>
+      <?php if (has_permission('reviews.view')): ?>
+        <a href="<?= url('admin/reviews.php') ?>" class="btn btn-sm btn-outline">Customer Reviews</a>
+      <?php endif; ?>
     </div>
   </div>
 </div>
@@ -244,6 +258,7 @@ require_once __DIR__ . '/header.php';
 <!-- ========================================================================= -->
 <!-- SECTION 1: RECENT CUSTOMER ENQUIRIES (FULL AVAILABLE CONTENT WIDTH) -->
 <!-- ========================================================================= -->
+<?php if (has_permission('enquiries.view')): ?>
 <div class="panel-card" style="width:100%; margin-bottom:2rem;">
   <div class="panel-header" style="border-bottom:1px solid var(--admin-border-card); padding:1.25rem 1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
     <div>
@@ -334,10 +349,12 @@ require_once __DIR__ . '/header.php';
     </table>
   </div>
 </div>
+<?php endif; ?>
 
 <!-- ========================================================================= -->
 <!-- SECTION 2: ITEMIZED QUOTATION DESK (FULL WIDTH - STACKED BELOW ENQUIRIES) -->
 <!-- ========================================================================= -->
+<?php if (has_permission('quotations.view')): ?>
 <div class="panel-card" style="width:100%; margin-bottom:2rem;">
   <div class="panel-header" style="border-bottom:1px solid var(--admin-border-card); padding:1.25rem 1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
     <div>
@@ -407,10 +424,12 @@ require_once __DIR__ . '/header.php';
     </table>
   </div>
 </div>
+<?php endif; ?>
 
 <!-- ========================================================================= -->
 <!-- SECTION 3: ACTIVE PRODUCT CATALOGUE HIGHLIGHTS (FULL WIDTH) -->
 <!-- ========================================================================= -->
+<?php if (has_permission('products.view')): ?>
 <div class="panel-card" style="width:100%;">
   <div class="panel-header" style="border-bottom:1px solid var(--admin-border-card); padding:1.25rem 1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
     <div>
@@ -456,9 +475,11 @@ require_once __DIR__ . '/header.php';
               </span>
             </td>
             <td style="text-align:right;">
+              <?php if (has_permission('products.edit')): ?>
               <a href="<?= url('admin/products.php?action=edit&id=' . $prod['id']) ?>" class="btn btn-xs btn-outline" style="padding:0.35rem 0.65rem;">
                 Edit
               </a>
+              <?php endif; ?>
             </td>
           </tr>
         <?php endforeach; ?>
@@ -466,5 +487,34 @@ require_once __DIR__ . '/header.php';
     </table>
   </div>
 </div>
+<?php endif; ?>
+
+<?php if (!has_permission('enquiries.view') && !has_permission('quotations.view') && !has_permission('products.view')): ?>
+<!-- Dedicated Workspace Hub for Specialized Roles -->
+<div class="panel-card" style="width:100%; text-align:center; padding:3.5rem 1.5rem; background:var(--admin-bg-card); border:1px solid var(--admin-border-card); border-radius:12px;">
+  <div style="font-size:2.5rem; margin-bottom:1rem;">🎨</div>
+  <h2 style="font-size:1.35rem; color:var(--admin-gold); margin:0 0 0.5rem; font-weight:700;">Welcome to Your OrderPrintex Workspace</h2>
+  <p style="color:var(--admin-text-muted); font-size:0.9rem; max-width:550px; margin:0 auto 1.5rem; line-height:1.6;">
+    Your account is configured with specialized departmental permissions. Use the sidebar or quick links below to manage your assigned responsibilities.
+  </p>
+  <div style="display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap;">
+    <?php if (has_permission('blog.view')): ?>
+      <a href="<?= url('admin/blog.php') ?>" class="btn btn-primary">Manage Blog Articles &rarr;</a>
+    <?php endif; ?>
+    <?php if (has_permission('portfolio.view')): ?>
+      <a href="<?= url('admin/gallery.php') ?>" class="btn btn-primary">Studio Portfolio Showcase &rarr;</a>
+    <?php endif; ?>
+    <?php if (has_permission('reviews.view')): ?>
+      <a href="<?= url('admin/reviews.php') ?>" class="btn btn-primary">Review Moderation &rarr;</a>
+    <?php endif; ?>
+    <?php if (has_permission('services.view')): ?>
+      <a href="<?= url('admin/services.php') ?>" class="btn btn-primary">Printing Services &rarr;</a>
+    <?php endif; ?>
+    <?php if (has_permission('categories.view')): ?>
+      <a href="<?= url('admin/categories.php') ?>" class="btn btn-primary">Product Categories &rarr;</a>
+    <?php endif; ?>
+  </div>
+</div>
+<?php endif; ?>
 
 <?php require_once __DIR__ . '/footer.php'; ?>

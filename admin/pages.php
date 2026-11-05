@@ -239,11 +239,11 @@ require_once __DIR__ . '/header.php';
               </td>
               <td style="text-align:right; white-space:nowrap;">
                 <a href="<?= url('admin/pages.php?edit_id=' . $p['id']) ?>" class="btn btn-xs btn-outline">✎ Edit</a>
-                <form method="POST" action="<?= url('admin/pages.php') ?>" style="display:inline;" onsubmit="return confirm('Delete page \'<?= addslashes($p['title']) ?>\'?');">
+                <form method="POST" action="<?= url('admin/pages.php') ?>" style="display:inline;">
                   <?= csrf_field() ?>
                   <input type="hidden" name="action" value="delete_page">
                   <input type="hidden" name="page_id" value="<?= $p['id'] ?>">
-                  <button type="submit" class="btn btn-xs btn-danger">✕</button>
+                  <button type="button" data-confirm="Are you sure you want to delete page &#039;<?= e($p['title']) ?>&#039;?" data-confirm-title="Delete Page?" data-destructive="true" data-confirm-btn="Yes, Delete" class="btn btn-xs btn-danger">✕</button>
                 </form>
               </td>
             </tr>

@@ -146,16 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // 3. Destructive Action Confirmation
-  document.querySelectorAll('[data-confirm]').forEach(el => {
-    el.addEventListener('click', function (e) {
-      const msg = el.getAttribute('data-confirm') || 'Are you sure you want to perform this action?';
-      if (!confirm(msg)) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    });
-  });
+  // 3. Destructive Action Confirmation is managed centrally by AdminModal via admin-notifications.js
 
   // 4. File Upload Image Preview
   document.querySelectorAll('input[type="file"][data-preview-target]').forEach(input => {

@@ -8,7 +8,7 @@ require_once __DIR__ . '/../includes/database.php';
 require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 
-require_admin();
+require_permission('content.manage');
 $adminUser = auth_user();
 
 // Handle Actions
@@ -218,11 +218,11 @@ require_once __DIR__ . '/header.php';
                                     <td>
                                         <div style="display:flex; gap:6px;">
                                             <a href="<?= url('admin/announcement.php?edit_ann=' . $ann['id']) ?>" class="btn btn-outline btn-xs">Edit</a>
-                                            <form method="POST" action="<?= url('admin/announcement.php') ?>" onsubmit="return confirm('Delete message?');" style="display:inline;">
+                                            <form method="POST" action="<?= url('admin/announcement.php') ?>" style="display:inline;">
                                                 <?= csrf_field() ?>
                                                 <input type="hidden" name="action" value="delete_announcement">
                                                 <input type="hidden" name="announcement_id" value="<?= $ann['id'] ?>">
-                                                <button type="submit" class="btn btn-outline btn-xs" style="color:var(--color-crimson);">Del</button>
+                                                <button type="button" data-confirm="Are you sure you want to delete this announcement message?" data-confirm-title="Delete Announcement?" data-destructive="true" data-confirm-btn="Yes, Delete" class="btn btn-outline btn-xs" style="color:var(--color-crimson);">Del</button>
                                             </form>
                                         </div>
                                     </td>
@@ -309,11 +309,11 @@ require_once __DIR__ . '/header.php';
                                         <?= e($eq['purpose']) ?>
                                     </td>
                                     <td>
-                                        <form method="POST" action="<?= url('admin/announcement.php') ?>" onsubmit="return confirm('Remove machine?');">
+                                        <form method="POST" action="<?= url('admin/announcement.php') ?>">
                                             <?= csrf_field() ?>
                                             <input type="hidden" name="action" value="delete_equipment">
                                             <input type="hidden" name="tool_id" value="<?= $eq['id'] ?>">
-                                            <button type="submit" class="btn btn-outline btn-xs" style="color:var(--color-crimson);">Remove</button>
+                                            <button type="button" data-confirm="Are you sure you want to remove machine '<?= e($eq['name']) ?>'?" data-confirm-title="Remove Machine?" data-confirm-item="<?= e($eq['name']) ?>" data-destructive="true" data-confirm-btn="Yes, Remove" class="btn btn-outline btn-xs" style="color:var(--color-crimson);">Remove</button>
                                         </form>
                                     </td>
                                 </tr>

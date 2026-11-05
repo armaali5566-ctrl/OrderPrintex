@@ -9,7 +9,7 @@ require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/seo_helper.php';
 
-require_admin();
+require_permission('blog.view');
 $adminUser = auth_user();
 
 // Handle Blog Actions (Processed before header output to avoid "headers already sent" warnings)
@@ -26,7 +26,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if ($action === 'save_post') {
         $postId = intval($_POST['post_id'] ?? 0);
         $title = trim($_POST['title'] ?? '');
-        $categoryId = !empty($_POST['category_id']) ? intval($_POST['category_id']) : null;
+        $categoryId = !empty($_POST['category_id']) && is_numeric($_POST['category_id']) ? intval($_POST['category_id']) : null;
+        $rawCatId = $_POST['category_id'] ?? '';
+        $customCat = trim($_POST['custom_category'] ?? '');
+        if (strtolower($rawCatId) === 'other' || !empty($customCat)) {
+            if (!empty($customCat)) {
+                $existingCat = db_fetch_one("SELECT id FROM blog_categories WHERE name = :name LIMIT 1", ['name' => $customCat]);
+                if ($existingCat) {
+                    $categoryId = (int)$existingCat['id'];
+                } else {
+                    $catSlug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $customCat)));
+                    if (empty($catSlug)) $catSlug = 'cat-' . time();
+                    $categoryId = db_insert('blog_categories', [
+                        'name'        => $customCat,
+                        'slug'        => $catSlug,
+                        'description' => 'Custom category added via Article Editor'
+                    ]);
+                }
+            } else {
+                set_flash('error', 'Please enter a name for the custom blog category.');
+                header('Location: ' . url('admin/blog.php' . ($postId ? '?edit_id=' . $postId : '?action=new')));
+                exit;
+            }
+        }
         $excerpt = trim($_POST['excerpt'] ?? '');
         $content = trim($_POST['content'] ?? '');
         $author = trim($_POST['author'] ?? 'OrderPrintex Editorial Team');
@@ -246,13 +268,18 @@ $posts = db_fetch_all($sql, $params);
 
                             <div class="form-group">
                                 <label class="form-label">Category</label>
-                                <select name="category_id" class="form-select">
+                                <select name="category_id" class="form-select dynamic-other-select"
+                                        data-enable-other="true"
+                                        data-other-name="custom_category"
+                                        data-other-label="Enter New Blog Category Name"
+                                        data-other-placeholder="e.g. Sustainable Printing, DTF Masterclass, Prepress Checklist">
                                     <option value="">-- Select Category --</option>
                                     <?php foreach ($categories as $cat): ?>
                                         <option value="<?= $cat['id'] ?>" <?= ($editPost && $editPost['category_id'] == $cat['id']) ? 'selected' : '' ?>>
                                             <?= e($cat['name']) ?>
                                         </option>
                                     <?php endforeach; ?>
+                                    <option value="other">Other (Create New Category)</option>
                                 </select>
                             </div>
                         </div>
@@ -449,11 +476,11 @@ $posts = db_fetch_all($sql, $params);
                                         <a href="<?= url('admin/blog.php?edit_id=' . $p['id']) ?>" class="btn btn-outline btn-xs">
                                             Edit
                                         </a>
-                                        <form method="POST" action="<?= url('admin/blog.php') ?>" onsubmit="return confirm('Delete this article?');" style="display: inline;">
+                                        <form method="POST" action="<?= url('admin/blog.php') ?>" style="display: inline;">
                                             <?= csrf_field() ?>
                                             <input type="hidden" name="action" value="delete_post">
                                             <input type="hidden" name="post_id" value="<?= $p['id'] ?>">
-                                            <button type="submit" class="btn btn-outline btn-xs" style="color: var(--color-crimson); border-color: rgba(168, 62, 60, 0.4);">
+                                            <button type="button" data-confirm="Are you sure you want to permanently delete this blog article?" data-confirm-title="Delete Article?" data-confirm-item="<?= e($p['title']) ?>" data-destructive="true" data-confirm-btn="Yes, Delete" class="btn btn-outline btn-xs" style="color: var(--color-crimson); border-color: rgba(168, 62, 60, 0.4);">
                                                 Del
                                             </button>
                                         </form>

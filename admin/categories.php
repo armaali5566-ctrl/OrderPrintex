@@ -10,7 +10,7 @@ require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/seo_helper.php';
 
-require_admin();
+require_permission('categories.view');
 $adminUser = auth_user();
 
 // Check if database table supports image_url
@@ -347,11 +347,11 @@ require_once __DIR__ . '/header.php';
                   <a href="<?= url('admin/categories.php?edit_id=' . $cat['id']) ?>#category-form" class="btn btn-xs btn-outline" style="padding:0.35rem 0.65rem;">
                     ✎ Edit
                   </a>
-                  <form method="POST" action="<?= url('admin/categories.php') ?>" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete category \'<?= addslashes($cat['name']) ?>\'? Associated products will be unassigned but not deleted.');">
+                  <form method="POST" action="<?= url('admin/categories.php') ?>" style="display:inline;">
                     <?= csrf_field() ?>
                     <input type="hidden" name="action" value="delete_category">
                     <input type="hidden" name="category_id" value="<?= $cat['id'] ?>">
-                    <button type="submit" class="btn btn-xs" style="background:none; border:1px solid rgba(248,113,113,0.3); color:#f87171; padding:0.35rem 0.65rem;" title="Delete Category">
+                    <button type="button" data-confirm="Are you sure you want to delete category &#039;<?= e(addslashes($cat['name'])) ?>&#039;? Associated products will be unassigned but not deleted." data-confirm-title="Delete Category?" data-confirm-item="<?= e($cat['name']) ?>" data-destructive="true" data-confirm-btn="Yes, Delete" class="btn btn-xs" style="background:none; border:1px solid rgba(248,113,113,0.3); color:#f87171; padding:0.35rem 0.65rem;" title="Delete Category">
                       ✕ Delete
                     </button>
                   </form>

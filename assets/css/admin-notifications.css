@@ -1,0 +1,380 @@
+/**
+ * OrderPrintex - Premium Admin Notifications & Modal System
+ * Dark / Black + Gold Aesthetic
+ */
+
+/* ==========================================================================
+   1. TOAST NOTIFICATIONS
+   ========================================================================== */
+#adminToastContainer {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 9999999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 440px;
+  width: calc(100vw - 36px);
+  pointer-events: none;
+}
+
+.admin-toast {
+  pointer-events: auto;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #15151D;
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: #F3F4F6;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  animation: adminToastSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: all 0.25s ease;
+}
+
+.admin-toast.closing {
+  animation: adminToastSlideOut 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes adminToastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes adminToastSlideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(40px) scale(0.92);
+  }
+}
+
+.admin-toast-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.admin-toast-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-toast-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin: 0 0 3px;
+  color: #F3F4F6;
+}
+
+.admin-toast-message {
+  font-size: 0.82rem;
+  color: #94A3B8;
+  line-height: 1.45;
+  margin: 0;
+  word-break: break-word;
+}
+
+.admin-toast-close {
+  background: transparent;
+  border: none;
+  color: #64748B;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 4px;
+  transition: color 0.15s ease;
+}
+
+.admin-toast-close:hover {
+  color: #F3F4F6;
+}
+
+/* Toast Color Variations */
+.admin-toast.toast-success {
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.8), 0 0 15px rgba(16, 185, 129, 0.15);
+}
+.admin-toast.toast-success .admin-toast-icon {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1.5px solid #10B981;
+  color: #10B981;
+}
+.admin-toast.toast-success .admin-toast-title {
+  color: #34D399;
+}
+
+.admin-toast.toast-error {
+  border-color: rgba(239, 68, 68, 0.45);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.8), 0 0 15px rgba(239, 68, 68, 0.18);
+}
+.admin-toast.toast-error .admin-toast-icon {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1.5px solid #EF4444;
+  color: #EF4444;
+}
+.admin-toast.toast-error .admin-toast-title {
+  color: #F87171;
+}
+
+.admin-toast.toast-warning {
+  border-color: rgba(245, 158, 11, 0.45);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.8), 0 0 15px rgba(245, 158, 11, 0.18);
+}
+.admin-toast.toast-warning .admin-toast-icon {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1.5px solid #F59E0B;
+  color: #F59E0B;
+}
+.admin-toast.toast-warning .admin-toast-title {
+  color: #FBBF24;
+}
+
+.admin-toast.toast-info {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.8), 0 0 15px rgba(212, 175, 55, 0.15);
+}
+.admin-toast.toast-info .admin-toast-icon {
+  background: rgba(212, 175, 55, 0.15);
+  border: 1.5px solid #D4AF37;
+  color: #D4AF37;
+}
+.admin-toast.toast-info .admin-toast-title {
+  color: #D4AF37;
+}
+
+/* ==========================================================================
+   2. REUSABLE CUSTOM CONFIRMATION MODAL
+   ========================================================================== */
+.admin-confirm-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 9999990;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.22s ease, visibility 0.22s ease;
+}
+
+.admin-confirm-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.admin-confirm-card {
+  background: #141419;
+  border: 1px solid var(--admin-border-card, rgba(212, 175, 55, 0.35));
+  border-radius: 14px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+  transform: scale(0.92);
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-confirm-backdrop.active .admin-confirm-card {
+  transform: scale(1);
+}
+
+.admin-confirm-card.destructive {
+  border-color: rgba(239, 68, 68, 0.45);
+}
+
+.admin-confirm-header {
+  padding: 1.5rem 1.75rem 0.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.admin-confirm-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+}
+
+.admin-confirm-icon-box.icon-destructive {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1.5px solid #EF4444;
+  color: #EF4444;
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.25);
+}
+
+.admin-confirm-icon-box.icon-positive {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1.5px solid #10B981;
+  color: #10B981;
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.25);
+}
+
+.admin-confirm-icon-box.icon-warning {
+  background: rgba(212, 175, 55, 0.15);
+  border: 1.5px solid #D4AF37;
+  color: #D4AF37;
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.25);
+}
+
+.admin-confirm-title-area {
+  flex: 1;
+}
+
+.admin-confirm-title {
+  margin: 0 0 4px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #F3F4F6;
+}
+
+.admin-confirm-body {
+  padding: 0.5rem 1.75rem 1.5rem 5.75rem;
+}
+
+@media (max-width: 480px) {
+  .admin-confirm-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .admin-confirm-body {
+    padding: 0.5rem 1.5rem 1.25rem 1.5rem;
+  }
+}
+
+.admin-confirm-message {
+  margin: 0 0 10px;
+  color: #94A3B8;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.admin-confirm-item-tag {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: #FDE68A;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.admin-confirm-footer {
+  padding: 1.1rem 1.75rem;
+  background: #181822;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.admin-confirm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.65rem 1.35rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.18s ease;
+  min-height: 42px;
+}
+
+.admin-confirm-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.admin-confirm-btn-cancel {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #E2E8F0;
+}
+
+.admin-confirm-btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.admin-confirm-btn-danger {
+  background: #EF4444;
+  color: #FFFFFF;
+  border-color: #EF4444;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+}
+
+.admin-confirm-btn-danger:hover {
+  background: #DC2626;
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.45);
+}
+
+.admin-confirm-btn-primary {
+  background: var(--admin-gold, #D4AF37);
+  color: #0D0D11;
+  border-color: var(--admin-gold, #D4AF37);
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
+}
+
+.admin-confirm-btn-primary:hover {
+  background: #E5C158;
+  box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45);
+}
+
+/* Spinner inside processing button */
+.admin-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #FFFFFF;
+  border-radius: 50%;
+  animation: adminSpin 0.7s linear infinite;
+  display: inline-block;
+}
+
+.admin-confirm-btn-primary .admin-spinner {
+  border: 2px solid rgba(13, 13, 17, 0.3);
+  border-top-color: #0D0D11;
+}
+
+@keyframes adminSpin {
+  to { transform: rotate(360deg); }
+}
+

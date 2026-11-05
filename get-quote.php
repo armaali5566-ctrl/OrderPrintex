@@ -114,13 +114,19 @@ $currentUser = auth_user();
                 <label class="form-label" for="quoteService">
                   <span>Printing Service Required <span class="required" aria-hidden="true">*</span></span>
                 </label>
-                <select name="service_name" id="quoteService" class="form-control" required>
+                <select name="service_name" id="quoteService" class="form-control" required
+                        data-enable-other="true"
+                        data-other-name="custom_service_name"
+                        data-other-label="Specify Custom Printing Service"
+                        data-other-placeholder="e.g. Screen Printed Lanyards, Embroidered Badges, Metallic Foil Transfers"
+                        data-other-hint="Describe your custom printing technique or product requirements below.">
                   <option value="">Choose a Service</option>
                   <?php foreach ($services as $svc): ?>
                     <option value="<?= e($svc['title']) ?>" <?= ($selectedServiceId === (int)$svc['id']) ? 'selected' : '' ?>>
                       <?= e($svc['title']) ?>
                     </option>
                   <?php endforeach; ?>
+                  <option value="other">Other (Specify Custom Service)</option>
                 </select>
               </div>
 

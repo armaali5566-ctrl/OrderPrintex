@@ -297,7 +297,7 @@ DROP TABLE IF EXISTS `gallery`;
 CREATE TABLE `gallery` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `title` VARCHAR(150) NOT NULL,
-  `category` ENUM('dtf', 'uv_dtf', 'tshirt', 'corporate') NOT NULL DEFAULT 'dtf',
+  `category` VARCHAR(100) NOT NULL DEFAULT 'dtf',
   `image_url` VARCHAR(255) NOT NULL,
   `description` VARCHAR(255) NULL,
   `is_featured` TINYINT(1) DEFAULT 1,

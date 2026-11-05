@@ -46,6 +46,52 @@ $quantity = !empty($_POST['quantity']) ? max(1, intval($_POST['quantity'])) : 1;
 $material = trim($_POST['material_options'] ?? '');
 $notes    = trim($_POST['customer_notes'] ?? '');
 
+// Handle Dynamic "Other" custom service name
+$customService = trim($_POST['custom_service_name'] ?? '');
+if (strtolower($service) === 'other' || !empty($customService)) {
+    if (!empty($customService)) {
+        $service = $customService;
+    } elseif (strtolower($service) === 'other') {
+        $error = 'Please specify your custom printing service specification.';
+        if ($isAjax) {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'error' => $error]);
+            exit;
+        }
+        set_flash('error', $error);
+        header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? url('get-quote.php')));
+        exit;
+    }
+}
+
+// Handle Dynamic "Other" custom material/substrate
+$customMaterial = trim($_POST['custom_material_options'] ?? '');
+if (strtolower($material) === 'other' || !empty($customMaterial)) {
+    if (!empty($customMaterial)) {
+        $material = $customMaterial;
+    } elseif (strtolower($material) === 'other') {
+        $error = 'Please enter your custom substrate / product material specification.';
+        if ($isAjax) {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'error' => $error]);
+            exit;
+        }
+        set_flash('error', $error);
+        header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? url('get-quote.php')));
+        exit;
+    }
+}
+
+// Append any specialized custom options to notes
+if (!empty($_POST['custom_film_material'])) {
+    $customFilm = trim($_POST['custom_film_material']);
+    $notes = ($notes ? $notes . " | " : "") . "Custom Film: " . $customFilm;
+}
+if (!empty($_POST['custom_print_placement'])) {
+    $customPlacement = trim($_POST['custom_print_placement']);
+    $notes = ($notes ? $notes . " | " : "") . "Custom Placement: " . $customPlacement;
+}
+
 $currentUser = auth_user();
 $userId = $currentUser ? $currentUser['id'] : null;
 

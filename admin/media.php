@@ -197,11 +197,11 @@ require_once __DIR__ . '/header.php';
               <button type="button" class="btn btn-xs btn-outline" style="flex:1;" onclick="copyPath('<?= e($file['url']) ?>', this)">
                 Copy Path
               </button>
-              <form method="POST" action="<?= url('admin/media.php') ?>" onsubmit="return confirm('Delete this image permanently?');">
+              <form method="POST" action="<?= url('admin/media.php') ?>">
                 <?= csrf_field() ?>
                 <input type="hidden" name="action" value="delete_media">
                 <input type="hidden" name="filename" value="<?= e($file['name']) ?>">
-                <button type="submit" class="btn btn-xs btn-danger">✕</button>
+                <button type="button" data-confirm="Are you sure you want to delete this media image permanently?" data-confirm-title="Delete Media?" data-destructive="true" data-confirm-btn="Yes, Delete" class="btn btn-xs btn-danger">✕</button>
               </form>
             </div>
           </div>

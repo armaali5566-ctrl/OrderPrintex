@@ -221,11 +221,11 @@ require_once __DIR__ . '/header.php';
                                             <a href="<?= url('admin/faqs.php?edit_id=' . $f['id']) ?>" class="btn btn-outline btn-xs">
                                                 Edit
                                             </a>
-                                            <form method="POST" action="<?= url('admin/faqs.php') ?>" onsubmit="return confirm('Delete this FAQ entry?');" style="display: inline;">
+                                            <form method="POST" action="<?= url('admin/faqs.php') ?>" style="display: inline;">
                                                 <?= csrf_field() ?>
                                                 <input type="hidden" name="action" value="delete_faq">
                                                 <input type="hidden" name="faq_id" value="<?= $f['id'] ?>">
-                                                <button type="submit" class="btn btn-outline btn-xs" style="color: var(--color-crimson); border-color: rgba(168, 62, 60, 0.4);">
+                                                <button type="button" data-confirm="Are you sure you want to delete this FAQ entry?" data-confirm-title="Delete FAQ?" data-destructive="true" data-confirm-btn="Yes, Delete" class="btn btn-outline btn-xs" style="color: var(--color-crimson); border-color: rgba(168, 62, 60, 0.4);">
                                                     Delete
                                                 </button>
                                             </form>

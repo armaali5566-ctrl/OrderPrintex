@@ -394,3 +394,61 @@ function log_activity(?int $userId, string $action, ?string $details = null): vo
         // Silently ignore activity log failures so main workflow is never blocked
     }
 }
+
+/**
+ * Validate and Normalize Indian Mobile Numbers
+ * Rules: Exactly 10 digits; first digit must be 6, 7, 8, or 9.
+ * Strips out prefixes (+91, 91, 0), spaces, dashes.
+ * Returns normalized '+91 XXXXXXXXXX' or null if invalid.
+ */
+function validate_indian_mobile(?string $rawPhone): ?string {
+    if ($rawPhone === null) {
+        return null;
+    }
+    $trimmed = trim($rawPhone);
+    if ($trimmed === '') {
+        return null;
+    }
+
+    // Strip non-digits
+    $digits = preg_replace('/\D+/', '', $trimmed);
+
+    // If starts with 91 and has 12 digits (+91 9876543210 -> 9876543210)
+    if (strlen($digits) === 12 && str_starts_with($digits, '91')) {
+        $digits = substr($digits, 2);
+    } elseif (strlen($digits) === 11 && str_starts_with($digits, '0')) {
+        // If starts with 0 and has 11 digits (09876543210 -> 9876543210)
+        $digits = substr($digits, 1);
+    }
+
+    // Must be exactly 10 digits and start with 6, 7, 8, or 9
+    if (strlen($digits) !== 10 || !preg_match('/^[6-9]\d{9}$/', $digits)) {
+        return null;
+    }
+
+    return '+91 ' . $digits;
+}
+
+/**
+ * Strict Email Format and Domain Validation
+ */
+function is_valid_email_strict(string $email): bool {
+    $email = trim(strtolower($email));
+    if (empty($email) || strlen($email) > 191) {
+        return false;
+    }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return false;
+    }
+    // Must contain a domain with a dot and at least 2 char TLD
+    $parts = explode('@', $email);
+    if (count($parts) !== 2) {
+        return false;
+    }
+    $domain = $parts[1];
+    if (!str_contains($domain, '.') || strlen(substr(strrchr($domain, '.'), 1)) < 2) {
+        return false;
+    }
+    return true;
+}
+

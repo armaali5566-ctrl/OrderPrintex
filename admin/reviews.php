@@ -8,7 +8,7 @@ require_once __DIR__ . '/../includes/database.php';
 require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 
-require_admin();
+require_permission('reviews.view');
 $adminUser = auth_user();
 
 // Handle Moderation Actions
@@ -42,7 +42,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             set_flash('success', "Review verification status updated.");
         }
     } elseif ($action === 'add_manual_review') {
-        $productId = intval($_POST['product_id'] ?? 0);
+        $rawProdId = $_POST['product_id'] ?? '';
+        $customProd = trim($_POST['custom_product'] ?? '');
+        $productId = !empty($_POST['product_id']) && is_numeric($_POST['product_id']) ? intval($_POST['product_id']) : 0;
+
+        if (strtolower($rawProdId) === 'other' || !empty($customProd)) {
+            if (!empty($customProd)) {
+                $p = db_fetch_one("SELECT id FROM products WHERE title = :t LIMIT 1", ['t' => $customProd]);
+                if ($p) {
+                    $productId = (int)$p['id'];
+                } else {
+                    $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $customProd)));
+                    if (empty($slug)) $slug = 'prod-' . time();
+                    $sku = 'REV-' . rand(100, 999);
+                    $productId = db_insert('products', [
+                        'title'     => $customProd,
+                        'slug'      => $slug,
+                        'sku'       => $sku,
+                        'is_active' => 1
+                    ]);
+                }
+            } else {
+                set_flash('error', 'Please specify a custom product or service name.');
+                header('Location: ' . url('admin/reviews.php'));
+                exit;
+            }
+        }
+
         $customerName = trim($_POST['customer_name'] ?? '');
         $customerEmail = trim($_POST['customer_email'] ?? '');
         $rating = max(1, min(5, intval($_POST['rating'] ?? 5)));
@@ -142,11 +168,16 @@ require_once __DIR__ . '/header.php';
             <div class="admin-form-2col" style="margin-bottom: 14px;">
                 <div class="form-group">
                     <label class="form-label required">Product</label>
-                    <select name="product_id" class="form-select" required>
+                    <select name="product_id" class="form-select dynamic-other-select" required
+                            data-enable-other="true"
+                            data-other-name="custom_product"
+                            data-other-label="Specify Custom Product / Service"
+                            data-other-placeholder="e.g. 24-inch DTF Gang Roll, Custom Corporate Polos Batch">
                         <option value="">-- Select Product --</option>
                         <?php foreach ($allProducts as $p): ?>
                             <option value="<?= $p['id'] ?>"><?= e($p['title']) ?> (<?= e($p['sku']) ?>)</option>
                         <?php endforeach; ?>
+                        <option value="other">Other (Specify Custom Product / Service)</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -327,17 +358,17 @@ require_once __DIR__ . '/header.php';
                                             <?= csrf_field() ?>
                                             <input type="hidden" name="action" value="reject">
                                             <input type="hidden" name="review_id" value="<?= $rev['id'] ?>">
-                                            <button type="submit" class="btn btn-xs btn-outline" style="width: 100%; color: #d97706; border-color: #d97706;">
+                                            <button type="button" data-confirm="Reject this customer review from being displayed on the website?" data-confirm-title="Reject Review?" data-confirm-item="Review by <?= e($rev['customer_name']) ?>" data-confirm-btn="Reject Review" class="btn btn-xs btn-outline" style="width: 100%; color: #d97706; border-color: #d97706;">
                                                 ✕ Reject
                                             </button>
                                         </form>
                                     <?php endif; ?>
 
-                                    <form method="POST" action="<?= url('admin/reviews.php') ?>" onsubmit="return confirm('Delete this review permanently?');">
+                                    <form method="POST" action="<?= url('admin/reviews.php') ?>">
                                         <?= csrf_field() ?>
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="review_id" value="<?= $rev['id'] ?>">
-                                        <button type="submit" class="btn btn-xs btn-outline" style="width: 100%; color: var(--color-crimson); border-color: rgba(168, 62, 60, 0.4);">
+                                        <button type="button" data-confirm="Are you sure you want to permanently delete this customer review?" data-confirm-title="Delete Review?" data-confirm-item="Review by <?= e($rev['customer_name']) ?>" data-destructive="true" data-confirm-btn="Yes, Delete" class="btn btn-xs btn-outline" style="width: 100%; color: var(--color-crimson); border-color: rgba(168, 62, 60, 0.4);">
                                             Delete
                                         </button>
                                     </form>

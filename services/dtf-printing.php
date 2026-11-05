@@ -192,11 +192,16 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'dtf-printing'");
               </div>
               <div class="form-group">
                 <label class="form-label">Material / Film Grade</label>
-                <select name="film_material" id="calcMaterialSelect" class="form-control" onchange="runDtfCalculation()">
+                <select name="film_material" id="calcMaterialSelect" class="form-control" onchange="runDtfCalculation()"
+                        data-enable-other="true"
+                        data-other-name="custom_film_material"
+                        data-other-label="Specify Custom Film or Specialty Foil"
+                        data-other-placeholder="e.g. Glitter DTF Film, Glow-in-the-Dark PET, Gold Metallic Foil">
                   <option value="cold_peel" data-extra="0" selected>Double-Matte Cold Peel PET (Standard)</option>
                   <option value="hot_peel" data-extra="20">Hot Peel Instant Release Film (+₹20/ft)</option>
                   <option value="reflective" data-extra="45">Reflective Silver DTF (+₹45/ft)</option>
                   <option value="neon" data-extra="35">Fluorescent Neon CMYK+W (+₹35/ft)</option>
+                  <option value="other" data-extra="0">Other (Specify Custom Film / Foil)</option>
                 </select>
               </div>
               <div class="form-group">

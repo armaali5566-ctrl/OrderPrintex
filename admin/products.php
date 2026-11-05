@@ -10,7 +10,7 @@ require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/seo_helper.php';
 
-require_admin_panel();
+require_permission('products.view');
 $adminUser = auth_user();
 
 // Helper for SKU abbreviation
@@ -64,8 +64,60 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action'])) {
         $productId = intval($_POST['product_id'] ?? 0);
         $title = trim($_POST['title'] ?? '');
         $sku = strtoupper(trim($_POST['sku'] ?? ''));
-        $categoryId = !empty($_POST['category_id']) ? intval($_POST['category_id']) : null;
-        $serviceId = !empty($_POST['service_id']) ? intval($_POST['service_id']) : null;
+
+        // Handle Dynamic "Other" for Category
+        $rawCatId = $_POST['category_id'] ?? '';
+        $customCat = trim($_POST['custom_category'] ?? '');
+        $categoryId = !empty($_POST['category_id']) && is_numeric($_POST['category_id']) ? intval($_POST['category_id']) : null;
+        if (strtolower($rawCatId) === 'other' || !empty($customCat)) {
+            if (!empty($customCat)) {
+                $existingCat = db_fetch_one("SELECT id FROM categories WHERE name = :name LIMIT 1", ['name' => $customCat]);
+                if ($existingCat) {
+                    $categoryId = (int)$existingCat['id'];
+                } else {
+                    $catSlug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $customCat)));
+                    if (empty($catSlug)) $catSlug = 'cat-' . time();
+                    $categoryId = db_insert('categories', [
+                        'name'          => $customCat,
+                        'slug'          => $catSlug,
+                        'description'   => 'Custom category created via product management',
+                        'display_order' => 99
+                    ]);
+                }
+            } else {
+                set_flash('error', 'Please enter a name for the custom product category.');
+                header('Location: ' . url('admin/products.php' . ($productId ? '?edit_id=' . $productId : '?action=new')));
+                exit;
+            }
+        }
+
+        // Handle Dynamic "Other" for Printing Service
+        $rawSvcId = $_POST['service_id'] ?? '';
+        $customSvc = trim($_POST['custom_service'] ?? '');
+        $serviceId = !empty($_POST['service_id']) && is_numeric($_POST['service_id']) ? intval($_POST['service_id']) : null;
+        if (strtolower($rawSvcId) === 'other' || !empty($customSvc)) {
+            if (!empty($customSvc)) {
+                $existingSvc = db_fetch_one("SELECT id FROM services WHERE title = :title LIMIT 1", ['title' => $customSvc]);
+                if ($existingSvc) {
+                    $serviceId = (int)$existingSvc['id'];
+                } else {
+                    $svcSlug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $customSvc)));
+                    if (empty($svcSlug)) $svcSlug = 'svc-' . time();
+                    $serviceId = db_insert('services', [
+                        'title'             => $customSvc,
+                        'slug'              => $svcSlug,
+                        'short_description' => 'Custom printing service',
+                        'is_active'         => 1,
+                        'display_order'     => 99
+                    ]);
+                }
+            } else {
+                set_flash('error', 'Please enter a name for the custom printing service.');
+                header('Location: ' . url('admin/products.php' . ($productId ? '?edit_id=' . $productId : '?action=new')));
+                exit;
+            }
+        }
+
         $badge = trim($_POST['badge'] ?? '');
         $startingPrice = trim($_POST['starting_price'] ?? '₹249');
         $priceUnit = trim($_POST['price_unit'] ?? '/ Unit');
@@ -554,9 +606,32 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action'])) {
     }
 
     if ($action === 'add_attribute_value') {
-        $attrId = intval($_POST['attribute_id'] ?? 0);
-        $value = trim($_POST['value'] ?? '');
+        $rawAttrId = $_POST['attribute_id'] ?? '';
+        $customAttr = trim($_POST['custom_attribute'] ?? '');
+        $attrId = !empty($_POST['attribute_id']) && is_numeric($_POST['attribute_id']) ? intval($_POST['attribute_id']) : 0;
         $productId = intval($_POST['product_id'] ?? 0);
+
+        if (strtolower($rawAttrId) === 'other' || !empty($customAttr)) {
+            if (!empty($customAttr)) {
+                $existingAttr = db_fetch_one("SELECT id FROM attributes WHERE name = :name LIMIT 1", ['name' => $customAttr]);
+                if ($existingAttr) {
+                    $attrId = (int)$existingAttr['id'];
+                } else {
+                    $attrSlug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $customAttr)));
+                    if (empty($attrSlug)) $attrSlug = 'attr-' . time();
+                    $attrId = db_insert('attributes', [
+                        'name' => $customAttr,
+                        'slug' => $attrSlug
+                    ]);
+                }
+            } else {
+                set_flash('error', 'Please enter a name for the custom attribute.');
+                header('Location: ' . url('admin/products.php' . ($productId ? '?edit_id=' . $productId . '#tab-attributes' : '')));
+                exit;
+            }
+        }
+
+        $value = trim($_POST['value'] ?? '');
         if ($attrId > 0 && !empty($value)) {
             db_insert('attribute_values', [
                 'attribute_id' => $attrId,
@@ -739,13 +814,18 @@ require_once __DIR__ . '/header.php';
             </div>
             <div>
               <label style="display:block; font-size:0.85rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">Category</label>
-              <select name="category_id" class="form-control">
+              <select name="category_id" class="form-control dynamic-other-select"
+                      data-enable-other="true"
+                      data-other-name="custom_category"
+                      data-other-label="Enter New Category Name"
+                      data-other-placeholder="e.g. Custom Mugs, Packaging Boxes, Corporate Drinkware">
                 <option value="">-- Select Category --</option>
                 <?php foreach ($categories as $cat): ?>
                   <option value="<?= $cat['id'] ?>" <?= ($editProduct && $editProduct['category_id'] == $cat['id']) ? 'selected' : '' ?>>
                     <?= e($cat['name']) ?>
                   </option>
                 <?php endforeach; ?>
+                <option value="other">Other (Create New Category)</option>
               </select>
             </div>
           </div>
@@ -753,13 +833,18 @@ require_once __DIR__ . '/header.php';
           <div class="admin-form-2col" style="margin-bottom:1rem;">
             <div>
               <label style="display:block; font-size:0.85rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">Associated Service</label>
-              <select name="service_id" class="form-control">
+              <select name="service_id" class="form-control dynamic-other-select"
+                      data-enable-other="true"
+                      data-other-name="custom_service"
+                      data-other-label="Enter Custom Printing Service"
+                      data-other-placeholder="e.g. Screen Printing, Laser Engraving, Flex Banner Printing">
                 <option value="">-- General Merchandise / None --</option>
                 <?php foreach ($services as $srv): ?>
                   <option value="<?= $srv['id'] ?>" <?= ($editProduct && $editProduct['service_id'] == $srv['id']) ? 'selected' : '' ?>>
                     <?= e($srv['title']) ?>
                   </option>
                 <?php endforeach; ?>
+                <option value="other">Other (Specify Custom Service)</option>
               </select>
             </div>
             <div>
@@ -1164,10 +1249,15 @@ require_once __DIR__ . '/header.php';
 
             <div class="form-group">
               <label class="form-label required">Select Attribute</label>
-              <select name="attribute_id" class="form-select" required>
+              <select name="attribute_id" class="form-select dynamic-other-select" required
+                      data-enable-other="true"
+                      data-other-name="custom_attribute"
+                      data-other-label="Enter New Attribute / Specification Name"
+                      data-other-placeholder="e.g. Neck Cut, Paper Texture, Laminate Finish">
                 <?php foreach ($allAttributes as $a): ?>
                   <option value="<?= $a['id'] ?>"><?= e($a['name']) ?></option>
                 <?php endforeach; ?>
+                <option value="other">Other (Create New Attribute)</option>
               </select>
             </div>
             <div class="form-group">
@@ -1204,20 +1294,20 @@ require_once __DIR__ . '/header.php';
 
           <!-- Actions: Generate & Regenerate -->
           <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
-            <form method="POST" action="<?= url('admin/products.php') ?>" style="display:inline;" onsubmit="return confirm('Generate variations automatically for all assigned attributes? Existing matching variations will be preserved.');">
+            <form method="POST" action="<?= url('admin/products.php') ?>" style="display:inline;">
               <?= csrf_field() ?>
               <input type="hidden" name="action" value="generate_variations">
               <input type="hidden" name="product_id" value="<?= $editProduct['id'] ?>">
-              <button type="submit" class="btn btn-primary btn-sm">
+              <button type="button" data-confirm="Generate variations automatically for all assigned attributes? Existing matching variations will be preserved." data-confirm-title="Generate Variations?" data-confirm-btn="Generate Variations" class="btn btn-primary btn-sm">
                 ⚡ Generate Variations Automatically
               </button>
             </form>
 
-            <form method="POST" action="<?= url('admin/products.php') ?>" style="display:inline;" onsubmit="return confirm('Regenerate all variation SKUs based on base product SKU + attribute abbreviations?');">
+            <form method="POST" action="<?= url('admin/products.php') ?>" style="display:inline;">
               <?= csrf_field() ?>
               <input type="hidden" name="action" value="regenerate_skus">
               <input type="hidden" name="product_id" value="<?= $editProduct['id'] ?>">
-              <button type="submit" class="btn btn-outline btn-sm">
+              <button type="button" data-confirm="Regenerate all variation SKUs based on base product SKU + attribute abbreviations?" data-confirm-title="Regenerate All SKUs?" data-confirm-btn="Regenerate SKUs" class="btn btn-outline btn-sm">
                 ↻ Regenerate All SKUs
               </button>
             </form>
@@ -1329,7 +1419,7 @@ require_once __DIR__ . '/header.php';
                         </td>
 
                         <td style="text-align:right;">
-                          <button type="button" class="btn btn-xs btn-danger" onclick="if(confirm('Delete variation [<?= addslashes($var['sku']) ?>]?')) { document.getElementById('del_var_single_<?= $var['id'] ?>').submit(); }">
+                          <button type="button" class="btn btn-xs btn-danger" onclick="AdminModal.confirm({ title: 'Delete Variation?', message: 'Are you sure you want to delete this variation?', itemName: 'SKU: <?= e($var['sku']) ?>', isDestructive: true, confirmText: 'Yes, Delete' }).then(c => { if(c) document.getElementById('del_var_single_<?= $var['id'] ?>').submit(); })">
                             ✕
                           </button>
                         </td>
@@ -1402,12 +1492,12 @@ require_once __DIR__ . '/header.php';
                     <td><?= e($s['dimensions']) ?></td>
                     <td style="color:var(--navy); font-weight:700;">₹<?= number_format($s['base_price'], 2) ?></td>
                     <td style="text-align:right;">
-                      <form method="POST" action="<?= url('admin/products.php') ?>" onsubmit="return confirm('Remove size?');" style="display:inline;">
+                      <form method="POST" action="<?= url('admin/products.php') ?>" style="display:inline;">
                         <?= csrf_field() ?>
                         <input type="hidden" name="action" value="delete_size">
                         <input type="hidden" name="size_id" value="<?= $s['id'] ?>">
                         <input type="hidden" name="product_id" value="<?= $editProduct['id'] ?>">
-                        <button type="submit" class="btn btn-xs btn-danger">✕</button>
+                        <button type="button" data-confirm="Are you sure you want to remove size '<?= e($s['size_label']) ?>'?" data-confirm-title="Remove Size?" data-confirm-item="<?= e($s['size_label']) ?>" data-destructive="true" data-confirm-btn="Remove" class="btn btn-xs btn-danger">✕</button>
                       </form>
                     </td>
                   </tr>
@@ -1452,12 +1542,12 @@ require_once __DIR__ . '/header.php';
                     <td><strong><?= $t['min_quantity'] ?><?= $t['max_quantity'] ? ' – ' . $t['max_quantity'] : '+' ?> units</strong></td>
                     <td><span class="badge" style="background:#ECFDF5; color:#065F46; font-weight:700;"><?= $t['discount_percent'] ?>% Off</span></td>
                     <td style="text-align:right;">
-                      <form method="POST" action="<?= url('admin/products.php') ?>" onsubmit="return confirm('Remove tier?');" style="display:inline;">
+                      <form method="POST" action="<?= url('admin/products.php') ?>" style="display:inline;">
                         <?= csrf_field() ?>
                         <input type="hidden" name="action" value="delete_tier">
                         <input type="hidden" name="tier_id" value="<?= $t['id'] ?>">
                         <input type="hidden" name="product_id" value="<?= $editProduct['id'] ?>">
-                        <button type="submit" class="btn btn-xs btn-danger">✕</button>
+                        <button type="button" data-confirm="Are you sure you want to remove wholesale tier '<?= $t['min_quantity'] ?>+ units'?" data-confirm-title="Remove Tier?" data-confirm-item="<?= $t['min_quantity'] ?>+ units" data-destructive="true" data-confirm-btn="Remove" class="btn btn-xs btn-danger">✕</button>
                       </form>
                     </td>
                   </tr>
@@ -1610,11 +1700,11 @@ require_once __DIR__ . '/header.php';
                   <a href="<?= url('admin/products.php?edit_id=' . $p['id']) ?>" class="btn btn-xs btn-outline" title="Edit Product">
                     ✎ Edit
                   </a>
-                  <form method="POST" action="<?= url('admin/products.php') ?>" onsubmit="return confirm('Are you sure you want to delete this product? All variations and sizes will be removed.');" style="display:inline;">
+                  <form method="POST" action="<?= url('admin/products.php') ?>" style="display:inline;">
                     <?= csrf_field() ?>
                     <input type="hidden" name="action" value="delete_product">
                     <input type="hidden" name="product_id" value="<?= $p['id'] ?>">
-                    <button type="submit" class="btn btn-xs btn-danger" title="Delete">✕</button>
+                    <button type="button" data-confirm="Are you sure you want to permanently delete this product? All variations and associated sizes will be removed." data-confirm-title="Delete Product?" data-confirm-item="<?= e($p['title']) ?>" data-destructive="true" data-confirm-btn="Yes, Delete Product" class="btn btn-xs btn-danger" title="Delete">✕</button>
                   </form>
                 </td>
               </tr>

@@ -11,8 +11,10 @@ require_once __DIR__ . '/../includes/auth.php';
 
 require_admin_panel();
 $adminUser = auth_user();
-$isAdmin = ($adminUser && $adminUser['role'] === 'admin');
-$isStaff = ($adminUser && $adminUser['role'] === 'staff');
+$isAdmin = user_is_super_admin((int) $adminUser['id']);
+$userRoles = user_get_roles((int) $adminUser['id']);
+$userRoleNames = $isAdmin ? 'Super Admin' : (!empty($userRoles) ? implode(', ', array_column($userRoles, 'name')) : 'Staff Member');
+$primaryRoleBadge = $isAdmin ? 'Super Admin' : (!empty($userRoles) ? $userRoles[0]['name'] : 'Staff');
 
 $activeRoute = basename($_SERVER['PHP_SELF']);
 
@@ -33,6 +35,7 @@ $pendingReviewsCount = (int) (db_fetch_one("SELECT COUNT(*) as cnt FROM product_
   <link rel="stylesheet" href="<?= url('assets/css/style.css') ?>">
   <link rel="stylesheet" href="<?= url('assets/css/animations.css') ?>">
   <link rel="stylesheet" href="<?= url('assets/css/admin.css') ?>">
+  <link rel="stylesheet" href="<?= url('assets/css/admin-notifications.css') ?>">
   <link rel="stylesheet" href="<?= url('assets/css/responsive.css') ?>">
 </head>
 <body>
@@ -74,7 +77,9 @@ $pendingReviewsCount = (int) (db_fetch_one("SELECT COUNT(*) as cnt FROM product_
       </a>
 
       <!-- 2. CORE BUSINESS -->
+      <?php if (has_permission('enquiries.view') || has_permission('quotations.view') || has_permission('customers.view')): ?>
       <div class="sidebar-label">Core Business</div>
+      <?php if (has_permission('enquiries.view')): ?>
       <a href="<?= url('admin/enquiries.php') ?>" class="sidebar-link <?= ($activeRoute === 'enquiries.php') ? 'active' : '' ?>">
         <svg class="sidebar-link-icon" viewBox="0 0 20 20" fill="currentColor">
           <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
@@ -85,7 +90,9 @@ $pendingReviewsCount = (int) (db_fetch_one("SELECT COUNT(*) as cnt FROM product_
           <span class="sidebar-badge"><?= $newEnquiriesCount ?></span>
         <?php endif; ?>
       </a>
+      <?php endif; ?>
 
+      <?php if (has_permission('quotations.view')): ?>
       <a href="<?= url('admin/quotations.php') ?>" class="sidebar-link <?= ($activeRoute === 'quotations.php') ? 'active' : '' ?>">
         <svg class="sidebar-link-icon" viewBox="0 0 20 20" fill="currentColor">
           <path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/>
@@ -95,38 +102,49 @@ $pendingReviewsCount = (int) (db_fetch_one("SELECT COUNT(*) as cnt FROM product_
           <span class="sidebar-badge"><?= $draftQuotesCount ?></span>
         <?php endif; ?>
       </a>
+      <?php endif; ?>
 
+      <?php if (has_permission('customers.view')): ?>
       <a href="<?= url('admin/customers.php') ?>" class="sidebar-link <?= ($activeRoute === 'customers.php') ? 'active' : '' ?>">
         <svg class="sidebar-link-icon" viewBox="0 0 20 20" fill="currentColor">
           <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
         </svg>
         <span>Customer Accounts</span>
       </a>
+      <?php endif; ?>
+      <?php endif; ?>
 
       <!-- 3. CATALOGUE & SERVICES -->
+      <?php if (has_permission('products.view') || has_permission('categories.view') || has_permission('services.view') || has_permission('reviews.view')): ?>
       <div class="sidebar-label">Catalogue &amp; Services</div>
+      <?php if (has_permission('products.view')): ?>
       <a href="<?= url('admin/products.php') ?>" class="sidebar-link <?= ($activeRoute === 'products.php' || $activeRoute === 'variations.php' || $activeRoute === 'attributes.php') ? 'active' : '' ?>">
         <svg class="sidebar-link-icon" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"/>
         </svg>
         <span>Product Management</span>
       </a>
+      <?php endif; ?>
 
-      <?php if ($isAdmin): ?>
+      <?php if (has_permission('categories.view')): ?>
       <a href="<?= url('admin/categories.php') ?>" class="sidebar-link <?= ($activeRoute === 'categories.php') ? 'active' : '' ?>">
         <svg class="sidebar-link-icon" viewBox="0 0 20 20" fill="currentColor">
           <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/>
         </svg>
         <span>Manage Categories</span>
       </a>
+      <?php endif; ?>
 
+      <?php if (has_permission('services.view')): ?>
       <a href="<?= url('admin/services.php') ?>" class="sidebar-link <?= ($activeRoute === 'services.php') ? 'active' : '' ?>">
         <svg class="sidebar-link-icon" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
         </svg>
         <span>Printing Services</span>
       </a>
+      <?php endif; ?>
 
+      <?php if (has_permission('reviews.view')): ?>
       <a href="<?= url('admin/reviews.php') ?>" class="sidebar-link <?= ($activeRoute === 'reviews.php') ? 'active' : '' ?>">
         <svg class="sidebar-link-icon" viewBox="0 0 20 20" fill="currentColor">
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
@@ -136,16 +154,22 @@ $pendingReviewsCount = (int) (db_fetch_one("SELECT COUNT(*) as cnt FROM product_
           <span class="sidebar-badge" style="background:#F59E0B;"><?= $pendingReviewsCount ?></span>
         <?php endif; ?>
       </a>
+      <?php endif; ?>
+      <?php endif; ?>
 
       <!-- 4. SHOWCASE & EDITORIAL -->
+      <?php if (has_permission('portfolio.view') || has_permission('blog.view') || has_permission('settings.view') || has_permission('content.view')): ?>
       <div class="sidebar-label">Showcase &amp; Editorial</div>
+      <?php if (has_permission('portfolio.view')): ?>
       <a href="<?= url('admin/gallery.php') ?>" class="sidebar-link <?= ($activeRoute === 'gallery.php') ? 'active' : '' ?>">
         <svg class="sidebar-link-icon" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
         </svg>
         <span>Portfolio Management</span>
       </a>
+      <?php endif; ?>
 
+      <?php if (has_permission('blog.view')): ?>
       <a href="<?= url('admin/blog.php') ?>" class="sidebar-link <?= ($activeRoute === 'blog.php') ? 'active' : '' ?>">
         <svg class="sidebar-link-icon" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"/>
@@ -153,29 +177,38 @@ $pendingReviewsCount = (int) (db_fetch_one("SELECT COUNT(*) as cnt FROM product_
         </svg>
         <span>Blog Articles</span>
       </a>
+      <?php endif; ?>
 
+      <?php if (has_permission('settings.view')): ?>
       <a href="<?= url('admin/settings.php') ?>" class="sidebar-link <?= ($activeRoute === 'settings.php') ? 'active' : '' ?>">
         <svg class="sidebar-link-icon" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
         </svg>
         <span>Website Settings</span>
       </a>
+      <?php endif; ?>
+      <?php endif; ?>
 
       <!-- 5. ADMINISTRATION -->
+      <?php if (has_permission('personnel.view') || has_permission('activity.view')): ?>
       <div class="sidebar-label">Administration</div>
+      <?php if (has_permission('personnel.view')): ?>
       <a href="<?= url('admin/users.php') ?>" class="sidebar-link <?= ($activeRoute === 'users.php') ? 'active' : '' ?>">
         <svg class="sidebar-link-icon" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
         </svg>
         <span>Admin Personnel</span>
       </a>
+      <?php endif; ?>
 
+      <?php if (has_permission('activity.view')): ?>
       <a href="<?= url('admin/activity.php') ?>" class="sidebar-link <?= ($activeRoute === 'activity.php') ? 'active' : '' ?>">
         <svg class="sidebar-link-icon" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h7a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
         </svg>
         <span>Security &amp; Activity Log</span>
       </a>
+      <?php endif; ?>
       <?php endif; ?>
 
       <!-- Public Site Link -->
@@ -197,8 +230,8 @@ $pendingReviewsCount = (int) (db_fetch_one("SELECT COUNT(*) as cnt FROM product_
         </div>
         <div class="user-info">
           <div class="user-name"><?= e($adminUser['name'] ?? 'Personnel') ?></div>
-          <div class="user-role" style="color: <?= $isAdmin ? 'var(--admin-gold, #D4AF37)' : '#38BDF8' ?>; font-weight: 700; font-size: 0.75rem;">
-            <?= $isAdmin ? 'Super Admin' : 'Staff Member' ?>
+          <div class="user-role" style="color: <?= $isAdmin ? 'var(--admin-gold, #D4AF37)' : '#38BDF8' ?>; font-weight: 700; font-size: 0.75rem;" title="<?= e($userRoleNames) ?>">
+            <?= e($primaryRoleBadge) ?>
           </div>
         </div>
       </div>
@@ -227,12 +260,14 @@ $pendingReviewsCount = (int) (db_fetch_one("SELECT COUNT(*) as cnt FROM product_
         <span class="topbar-user-badge" style="display:inline-flex; align-items:center; gap:6px;">
           Signed in as <strong><?= e($adminUser['email'] ?? 'admin') ?></strong>
           <span class="badge" style="font-size:0.7rem; padding:2px 8px; background:<?= $isAdmin ? 'rgba(212,175,55,0.2)' : 'rgba(56,189,248,0.2)' ?>; color:<?= $isAdmin ? 'var(--admin-gold)' : '#38BDF8' ?>; border:1px solid <?= $isAdmin ? 'rgba(212,175,55,0.4)' : 'rgba(56,189,248,0.4)' ?>; font-weight:700;">
-            <?= $isAdmin ? 'Super Admin' : 'Staff' ?>
+            <?= e($primaryRoleBadge) ?>
           </span>
         </span>
+        <?php if (has_permission('quotations.create')): ?>
         <a href="<?= url('admin/quotations.php?action=create') ?>" class="btn btn-sm btn-primary">
           + Create Quotation
         </a>
+        <?php endif; ?>
       </div>
     </header>
 

@@ -8,7 +8,7 @@ require_once __DIR__ . '/../includes/database.php';
 require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 
-require_admin_panel();
+require_permission('customers.view');
 $adminUser = auth_user();
 
 // Handle Customer Actions (Toggle Status)

@@ -10,7 +10,8 @@ require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/seo_helper.php';
 
-require_admin();
+require_permission('seo.manage');
+$adminUser = auth_user();
 
 // SEO & Sync Management interface decommissioned; synchronization runs automatically via centralized seo_helper.
 header('Location: ' . url('admin/dashboard.php'));

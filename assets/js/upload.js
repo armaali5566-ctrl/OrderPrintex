@@ -70,7 +70,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Validate Extension
       if (!allowedExtensions.includes(ext)) {
-        alert('Unsupported file format. Please upload PNG, JPG, PDF, AI, PSD, or SVG.');
+        if (window.AdminToast) {
+          AdminToast.error('Unsupported file format. Please upload PNG, JPG, PDF, AI, PSD, or SVG.', 'Invalid File');
+        } else {
+          alert('Unsupported file format. Please upload PNG, JPG, PDF, AI, PSD, or SVG.');
+        }
         fileInput.value = '';
         if (previewArea) previewArea.innerHTML = '';
         return;
@@ -78,7 +82,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Validate Size
       if (file.size > maxSizeBytes) {
-        alert('File size exceeds the 25 MB maximum limit.');
+        if (window.AdminToast) {
+          AdminToast.error('File size exceeds the 25 MB maximum limit.', 'File Too Large');
+        } else {
+          alert('File size exceeds the 25 MB maximum limit.');
+        }
         fileInput.value = '';
         if (previewArea) previewArea.innerHTML = '';
         return;
