@@ -3,8 +3,14 @@
  * OrderPrintex - Admin Services Management
  */
 
-$adminTitle = "Manage Printing Services";
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/database.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/seo_helper.php';
+
+require_admin();
+$adminUser = auth_user();
 
 // Handle Post Actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
@@ -60,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             }
 
             db_update('services', $updateData, 'id = :id', ['id' => $serviceId]);
+            @seo_sync_all();
             log_activity($adminUser['id'], 'update_service', "Updated service: {$title}");
             set_flash('success', "Service '{$title}' updated successfully.");
         } else {
@@ -77,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 'is_active'          => $isActive,
                 'display_order'      => $displayOrder
             ]);
+            @seo_sync_all();
             log_activity($adminUser['id'], 'create_service', "Created service: {$title}");
             set_flash('success', "New printing service created.");
         }
@@ -88,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
 // Edit Mode or List Mode
 $editId = intval($_GET['edit_id'] ?? 0);
+$isCreate = (isset($_GET['action']) && $_GET['action'] === 'create');
 $editService = null;
 if ($editId) {
     $editService = db_fetch_one("SELECT * FROM services WHERE id = :id", ['id' => $editId]);
@@ -100,6 +109,9 @@ $services = db_fetch_all("
     FROM services s 
     ORDER BY s.display_order ASC, s.id ASC
 ");
+
+$adminTitle = "Manage Printing Services";
+require_once __DIR__ . '/header.php';
 ?>
 
 <div class="admin-topbar">
@@ -108,62 +120,66 @@ $services = db_fetch_all("
         <p class="admin-page-subtitle">Configure studio capabilities, press specs, artwork guidelines, and client-facing service presentations.</p>
     </div>
     <div class="admin-topbar-actions">
-        <?php if ($editService): ?>
+        <?php if ($editService || $isCreate): ?>
             <a href="<?= url('admin/services.php') ?>" class="btn btn-outline btn-sm">&larr; Back to Services</a>
+        <?php else: ?>
+            <a href="<?= url('admin/services.php?action=create') ?>" class="btn btn-primary btn-sm">+ Add New Service</a>
         <?php endif; ?>
     </div>
 </div>
 
-<?php if ($editService): ?>
-    <!-- SERVICE EDIT FORM -->
+<?php if ($editService || $isCreate): ?>
+    <!-- SERVICE EDIT / CREATE FORM -->
     <div class="admin-card">
         <div class="admin-card-header">
-            <h2 class="admin-card-title">Edit Printing Service: <?= e($editService['title']) ?></h2>
-            <span style="font-size: 0.8rem; color: var(--color-royal); font-weight: 600;">Slug: /services/<?= e($editService['slug']) ?>.php</span>
+            <h2 class="admin-card-title"><?= $editService ? 'Edit Printing Service: ' . e($editService['title']) : 'Create New Printing Service' ?></h2>
+            <?php if ($editService): ?>
+                <span style="font-size: 0.8rem; color: var(--color-royal); font-weight: 600;">Slug: /services/<?= e($editService['slug']) ?>.php</span>
+            <?php endif; ?>
         </div>
         <div class="admin-card-body" style="padding: 24px;">
             <form method="POST" action="<?= url('admin/services.php') ?>" enctype="multipart/form-data">
                 <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
                 <input type="hidden" name="action" value="save_service">
-                <input type="hidden" name="service_id" value="<?= $editService['id'] ?>">
+                <input type="hidden" name="service_id" value="<?= $editService ? $editService['id'] : 0 ?>">
 
-                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+                <div class="admin-split-grid">
                     
                     <div style="display: flex; flex-direction: column; gap: 16px;">
                         <div class="form-group">
                             <label class="form-label required">Service Title</label>
-                            <input type="text" name="title" class="form-input" required value="<?= e($editService['title']) ?>">
+                            <input type="text" name="title" class="form-input" required value="<?= e($editService['title'] ?? '') ?>" placeholder="e.g. UV DTF Sticker Decals">
                         </div>
 
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div class="admin-form-2col">
                             <div class="form-group">
                                 <label class="form-label">Hero Tagline / Subtitle</label>
-                                <input type="text" name="hero_tagline" class="form-input" value="<?= e($editService['hero_tagline']) ?>" placeholder="e.g. Industrial-Grade Vibrant Film Transfers">
+                                <input type="text" name="hero_tagline" class="form-input" value="<?= e($editService['hero_tagline'] ?? '') ?>" placeholder="e.g. Industrial-Grade Vibrant Film Transfers">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Service Badge / Highlight</label>
-                                <input type="text" name="badge" class="form-input" value="<?= e($editService['badge']) ?>" placeholder="e.g. Direct-to-Film, Permanent UV Decal">
+                                <input type="text" name="badge" class="form-input" value="<?= e($editService['badge'] ?? '') ?>" placeholder="e.g. Direct-to-Film, Permanent UV Decal">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Short Description (Cards & Summaries)</label>
-                            <textarea name="short_desc" class="form-input" rows="3"><?= e($editService['short_description']) ?></textarea>
+                            <textarea name="short_desc" class="form-input" rows="3"><?= e($editService['short_description'] ?? '') ?></textarea>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Full Technical Description & Workflow</label>
-                            <textarea name="full_description" class="form-input" rows="8"><?= e($editService['full_description']) ?></textarea>
+                            <textarea name="full_description" class="form-input" rows="8"><?= e($editService['full_description'] ?? '') ?></textarea>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Printing Specifications & Press Settings</label>
-                            <textarea name="specifications" class="form-input" rows="6"><?= e($editService['specifications']) ?></textarea>
+                            <textarea name="specifications" class="form-input" rows="6"><?= e($editService['specifications'] ?? '') ?></textarea>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Artwork Guidelines & Prepress Advice</label>
-                            <textarea name="artwork_guidelines" class="form-input" rows="5"><?= e($editService['artwork_guidelines']) ?></textarea>
+                            <textarea name="artwork_guidelines" class="form-input" rows="5"><?= e($editService['artwork_guidelines'] ?? '') ?></textarea>
                         </div>
                     </div>
 
@@ -174,7 +190,7 @@ $services = db_fetch_all("
                             </div>
                             <div class="admin-card-body" style="padding: 16px;">
                                 <?php if (!empty($editService['image_url'])): ?>
-                                    <div style="margin-bottom: 12px; border-radius: 4px; overflow: hidden; border: 1px solid var(--color-border); height: 160px; background: #eee;">
+                                    <div style="margin-bottom: 12px; border-radius: 4px; overflow: hidden; border: 1px solid var(--color-border); height: 160px; background: var(--admin-bg-card-secondary, #171C2B);">
                                         <img src="<?= asset_url($editService['image_url']) ?>" alt="Service Preview" style="width: 100%; height: 100%; object-fit: cover;">
                                     </div>
                                 <?php endif; ?>
@@ -191,19 +207,19 @@ $services = db_fetch_all("
                             </div>
                             <div class="admin-card-body" style="padding: 16px; display: flex; flex-direction: column; gap: 14px;">
                                 <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 600;">
-                                    <input type="checkbox" name="is_active" value="1" <?= $editService['is_active'] ? 'checked' : '' ?>>
+                                    <input type="checkbox" name="is_active" value="1" <?= (!isset($editService) || $editService['is_active']) ? 'checked' : '' ?>>
                                     Active / Published on Website
                                 </label>
 
                                 <div class="form-group" style="margin-bottom: 0;">
                                     <label class="form-label" style="font-size: 0.8rem;">Sort Order</label>
-                                    <input type="number" name="display_order" class="form-input form-input-sm" value="<?= $editService['display_order'] ?>" style="width: 100px;">
+                                    <input type="number" name="display_order" class="form-input form-input-sm" value="<?= $editService['display_order'] ?? 0 ?>" style="width: 100px;">
                                 </div>
                             </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-block" style="padding: 12px; font-weight: 700; justify-content: center;">
-                            💾 Save Service Changes
+                            💾 <?= $editService ? 'Save Service Changes' : 'Publish New Service' ?>
                         </button>
                     </div>
 
@@ -233,7 +249,7 @@ $services = db_fetch_all("
                     <?php foreach ($services as $srv): ?>
                         <tr>
                             <td>
-                                <div style="width: 50px; height: 50px; border-radius: 4px; overflow: hidden; background: #eee; border: 1px solid var(--color-border);">
+                                <div style="width: 50px; height: 50px; border-radius: 4px; overflow: hidden; background: var(--admin-bg-card-secondary, #171C2B); border: 1px solid var(--color-border);">
                                     <img src="<?= asset_url($srv['image_url'] ?: 'assets/images/gallery_1.jpg') ?>" alt="<?= e($srv['title']) ?>" style="width: 100%; height: 100%; object-fit: cover;">
                                 </div>
                             </td>

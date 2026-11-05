@@ -29,10 +29,11 @@ class Database {
                         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
                         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                         PDO::ATTR_EMULATE_PREPARES   => false,
-                        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci"
                     ];
                     self::$instance = new PDO($dsn, DB_USER, DB_PASS, $options);
+                    self::$instance->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;");
                     self::$activeDriver = 'mysql';
+                    self::$connectionError = null;
                     return self::$instance;
                 } catch (PDOException $e) {
                     self::$connectionError = $e->getMessage();
@@ -69,6 +70,9 @@ class Database {
     }
 
     public static function getActiveDriver(): string {
+        if (self::$instance === null) {
+            self::getInstance();
+        }
         return self::$activeDriver;
     }
 
@@ -191,3 +195,22 @@ function db_delete(string $table, string $whereClause, array $whereParams = []):
     $stmt->execute($whereParams);
     return $stmt->rowCount();
 }
+
+/**
+ * Database Transaction Helpers
+ */
+function db_begin_transaction(): bool {
+    $db = Database::getInstance();
+    return $db ? $db->beginTransaction() : false;
+}
+
+function db_commit(): bool {
+    $db = Database::getInstance();
+    return $db ? $db->commit() : false;
+}
+
+function db_rollback(): bool {
+    $db = Database::getInstance();
+    return $db ? $db->rollBack() : false;
+}
+

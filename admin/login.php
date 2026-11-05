@@ -8,8 +8,8 @@ require_once __DIR__ . '/../includes/database.php';
 require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 
-// Redirect if already logged in as admin
-if (auth_check() && auth_is_admin()) {
+// Redirect if already logged in as admin or staff
+if (auth_check() && auth_is_staff_or_admin()) {
     header('Location: ' . url('admin/dashboard.php'));
     exit;
 }
@@ -25,11 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($result['success']) {
             $user = $result['user'];
-            if ($user['role'] !== 'admin') {
+            if (!in_array($user['role'] ?? '', ['admin', 'staff'], true)) {
                 auth_logout();
-                $error = 'Access denied. You do not have administrator permissions.';
+                $error = 'Access denied. You do not have administrator or staff privileges.';
             } else {
-                set_flash('success', "Welcome to the OrderPrintex Admin Console, {$user['name']}!");
+                $roleLabel = ($user['role'] === 'admin') ? 'Administrator' : 'Staff Member';
+                set_flash('success', "Welcome to the OrderPrintex Console, {$user['name']} ({$roleLabel})!");
                 header('Location: ' . url('admin/dashboard.php'));
                 exit;
             }

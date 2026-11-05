@@ -4,6 +4,11 @@
  * Compatible with XAMPP (http://localhost/OrderPrintex/) and standard PHP servers.
  */
 
+// Start output buffering early to prevent "headers already sent" warnings
+if (!ob_get_level()) {
+    ob_start();
+}
+
 // Prevent multiple inclusions
 if (defined('ORDERPRINTEX_CONFIG_LOADED')) {
     return;
@@ -19,10 +24,10 @@ error_reporting(E_ALL);
 date_default_timezone_set('Asia/Kolkata');
 
 // Database Configuration
-// Supports SQLite (local zero-config) and MySQL (production/XAMPP)
-define('DB_DRIVER', getenv('DB_DRIVER') ?: 'sqlite'); // 'sqlite' or 'mysql'
-define('DB_HOST', getenv('DB_HOST') ?: '127.0.0.1');
-define('DB_PORT', getenv('DB_PORT') ?: '3306');
+// Configured for XAMPP MySQL (Port 3307) with fallback to SQLite if needed
+define('DB_DRIVER', getenv('DB_DRIVER') ?: 'mysql'); // 'mysql' (XAMPP) or 'sqlite'
+define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_PORT', getenv('DB_PORT') ?: '3307');
 define('DB_NAME', getenv('DB_NAME') ?: 'orderprintex');
 define('DB_USER', getenv('DB_USER') ?: 'root');
 define('DB_PASS', getenv('DB_PASS') !== false ? getenv('DB_PASS') : '');
@@ -50,20 +55,53 @@ define('ALLOWED_MIME_TYPES', [
     'application/octet-stream' // common for .ai/.psd in some browsers
 ]);
 
-// Determine Base URL dynamically
+// Determine Base URL dynamically (supports http://127.0.0.1:8080/ and http://localhost/OrderPrintex/)
 if (!defined('BASE_URL')) {
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || ($_SERVER['SERVER_PORT'] ?? 80) == 443) ? 'https://' : 'http://';
     $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
     
     // Check script directory relative to document root
-    $docRoot = str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT'] ?? ROOT_PATH));
-    $root = str_replace('\\', '/', ROOT_PATH);
+    $docRoot = !empty($_SERVER['DOCUMENT_ROOT']) ? rtrim(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT'])), '/') : '';
+    $root = rtrim(str_replace('\\', '/', ROOT_PATH), '/');
     $subDir = '';
     
-    if (strpos($root, $docRoot) === 0) {
+    // If running under a server where document root is a parent directory (e.g. C:/xampp/htdocs)
+    if ($docRoot !== '' && strpos($root, $docRoot) === 0 && strlen($root) > strlen($docRoot)) {
         $subDir = trim(substr($root, strlen($docRoot)), '/');
     }
-    
+
+    // Check if the actual incoming request uses /OrderPrintex/ in its URI
+    if (!empty($_SERVER['REQUEST_URI'])) {
+        $reqPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '';
+        if (preg_match('~^/([^/?#]+)~', $reqPath, $matches)) {
+            $firstSegment = $matches[1];
+            if (strcasecmp($firstSegment, 'OrderPrintex') === 0) {
+                $subDir = $firstSegment;
+            } elseif (in_array(strtolower($firstSegment), ['assets', 'admin', 'api', 'products', 'product', 'services', 'about', 'contact', 'gallery', 'blog', 'pricing', 'cart', 'checkout', 'faq', 'get-quote', 'account', 'login', 'register'])) {
+                // Hitting root routes directly (e.g. http://127.0.0.1:8080/assets/...)
+                $subDir = '';
+            }
+        } elseif ($reqPath === '/' || $reqPath === '') {
+            if ($docRoot === $root || empty($subDir)) {
+                $subDir = '';
+            }
+        }
+    }
+
+    // Handle XAMPP subdirectory when SCRIPT_NAME indicates subfolder
+    if (empty($subDir) && !empty($_SERVER['SCRIPT_NAME'])) {
+        $scriptPath = trim(str_replace('\\', '/', $_SERVER['SCRIPT_NAME']), '/');
+        $parts = explode('/', $scriptPath);
+        if (count($parts) > 1 && strcasecmp($parts[0], 'OrderPrintex') === 0) {
+            $subDir = $parts[0];
+        }
+    }
+
+    // Default for pure CLI execution without webserver context
+    if (empty($subDir) && php_sapi_name() === 'cli' && empty($_SERVER['HTTP_HOST'])) {
+        $subDir = 'OrderPrintex';
+    }
+
     $baseUrl = $protocol . $host . ($subDir ? '/' . $subDir : '') . '/';
     define('BASE_URL', $baseUrl);
 }

@@ -3,8 +3,17 @@
  * OrderPrintex - Admin FAQ Management
  */
 
-$adminTitle = "Manage Frequently Asked Questions";
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/database.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth.php';
+
+require_admin();
+$adminUser = auth_user();
+
+// FAQs CMS module decommissioned in simplified workflow.
+header('Location: ' . url('admin/dashboard.php'));
+exit;
 
 // Handle Actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
@@ -86,6 +95,9 @@ $faqs = db_fetch_all($sql, $params);
 
 // Distinct Categories
 $categories = db_fetch_all("SELECT DISTINCT category FROM faqs ORDER BY category ASC");
+
+$adminTitle = "Manage Frequently Asked Questions";
+require_once __DIR__ . '/header.php';
 ?>
 
 <div class="admin-topbar">
@@ -95,7 +107,7 @@ $categories = db_fetch_all("SELECT DISTINCT category FROM faqs ORDER BY category
     </div>
 </div>
 
-<div class="admin-grid-layout" style="display: grid; grid-template-columns: 1fr 1.6fr; gap: 24px; align-items: start;">
+<div class="admin-split-grid">
     
     <!-- Add / Edit FAQ Card -->
     <div class="admin-card">
@@ -107,7 +119,7 @@ $categories = db_fetch_all("SELECT DISTINCT category FROM faqs ORDER BY category
         </div>
         <div class="admin-card-body" style="padding: 20px;">
             <form method="POST" action="<?= url('admin/faqs.php') ?>">
-                <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
+                <?= csrf_field() ?>
                 <input type="hidden" name="action" value="save_faq">
                 <input type="hidden" name="faq_id" value="<?= $editFaq ? $editFaq['id'] : 0 ?>">
 
@@ -135,7 +147,7 @@ $categories = db_fetch_all("SELECT DISTINCT category FROM faqs ORDER BY category
                     <textarea name="answer" class="form-input" rows="6" required placeholder="Provide clear technical guidance, press temperatures, peel instructions, file recommendations..."><?= e($editFaq['answer'] ?? '') ?></textarea>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: center; margin-bottom: 16px;">
+                <div class="admin-form-2col" style="align-items: center; margin-bottom: 16px;">
                     <div class="form-group" style="margin-bottom: 0;">
                         <label class="form-label">Sort Priority</label>
                         <input type="number" name="display_order" class="form-input form-input-sm" value="<?= $editFaq['display_order'] ?? 0 ?>">
@@ -157,7 +169,7 @@ $categories = db_fetch_all("SELECT DISTINCT category FROM faqs ORDER BY category
     <!-- FAQs Table -->
     <div>
         <div class="admin-filter-bar" style="margin-bottom: 16px;">
-            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <div class="admin-filter-tabs">
                 <a href="<?= url('admin/faqs.php') ?>" class="admin-tab-btn <?= empty($catFilter) ? 'active' : '' ?>">All (<?= count($faqs) ?>)</a>
                 <?php foreach ($categories as $c): ?>
                     <a href="<?= url('admin/faqs.php?category=' . urlencode($c['category'])) ?>" class="admin-tab-btn <?= $catFilter === $c['category'] ? 'active' : '' ?>">
@@ -210,7 +222,7 @@ $categories = db_fetch_all("SELECT DISTINCT category FROM faqs ORDER BY category
                                                 Edit
                                             </a>
                                             <form method="POST" action="<?= url('admin/faqs.php') ?>" onsubmit="return confirm('Delete this FAQ entry?');" style="display: inline;">
-                                                <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
+                                                <?= csrf_field() ?>
                                                 <input type="hidden" name="action" value="delete_faq">
                                                 <input type="hidden" name="faq_id" value="<?= $f['id'] ?>">
                                                 <button type="submit" class="btn btn-outline btn-xs" style="color: var(--color-crimson); border-color: rgba(168, 62, 60, 0.4);">

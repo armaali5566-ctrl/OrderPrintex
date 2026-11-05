@@ -44,6 +44,34 @@ function auth_is_admin(): bool {
 }
 
 /**
+ * Check if the logged-in user is a staff member
+ */
+function auth_is_staff(): bool {
+    $user = auth_user();
+    return $user && ($user['role'] === 'staff');
+}
+
+/**
+ * Check if the logged-in user is staff or admin
+ */
+function auth_is_staff_or_admin(): bool {
+    $user = auth_user();
+    return $user && in_array($user['role'] ?? '', ['admin', 'staff'], true);
+}
+
+/**
+ * Check if current user has any of the specified roles
+ */
+function auth_has_role(string|array $roles): bool {
+    $user = auth_user();
+    if (!$user) {
+        return false;
+    }
+    $roles = (array) $roles;
+    return in_array($user['role'] ?? '', $roles, true);
+}
+
+/**
  * Attempt user login
  */
 function auth_login(string $email, string $password): array {
@@ -187,13 +215,92 @@ function require_auth(string $redirectTo = 'account/login.php'): void {
 }
 
 /**
- * Require admin guard
+ * Display a dedicated Access Denied (403) page when permissions are insufficient
  */
-function require_admin(string $redirectTo = 'admin/login.php'): void {
-    if (!auth_check() || !auth_is_admin()) {
+function auth_access_denied(string $message = 'You do not have sufficient permissions to access this administrative resource.'): void {
+    http_response_code(403);
+    $adminUser = auth_user();
+    $adminTitle = "403 - Access Denied";
+    $denialReason = $message;
+
+    $deniedTemplate = __DIR__ . '/../admin/access_denied.php';
+    if (file_exists($deniedTemplate)) {
+        require $deniedTemplate;
+        exit;
+    }
+
+    // Direct luxury dark fallback if template file is absent
+    ?>
+    <!DOCTYPE html>
+    <html lang="en" data-theme="dark">
+    <head>
+      <meta charset="UTF-8">
+      <title>403 Forbidden | OrderPrintex</title>
+      <style>
+        body { background: #0D0D11; color: #F3F4F6; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 1.5rem; }
+        .box { background: #16161D; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 2.5rem; max-width: 520px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(239,68,68,0.15); border: 1.5px solid #EF4444; color: #EF4444; font-size: 26px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+        h1 { color: #D4AF37; margin: 0 0 0.5rem; font-size: 1.5rem; }
+        p { color: #94A3B8; font-size: 0.92rem; line-height: 1.5; margin: 0 0 1.5rem; }
+        .btn { display: inline-block; background: #D4AF37; color: #0D0D11; font-weight: 700; padding: 0.65rem 1.5rem; border-radius: 6px; text-decoration: none; font-size: 0.88rem; transition: opacity 0.2s; }
+        .btn:hover { opacity: 0.9; }
+      </style>
+    </head>
+    <body>
+      <div class="box">
+        <div class="icon">&#x1F6AB;</div>
+        <h1>403 - Access Denied</h1>
+        <p><?= htmlspecialchars($denialReason) ?></p>
+        <a href="<?= url('admin/dashboard.php') ?>" class="btn">&larr; Return to Dashboard</a>
+      </div>
+    </body>
+    </html>
+    <?php
+    exit;
+}
+
+/**
+ * Require general Admin Panel access (allows both 'admin' and 'staff' roles)
+ */
+function require_admin_panel(string $redirectTo = 'admin/login.php'): void {
+    if (!auth_check()) {
         $_SESSION['intended_url'] = $_SERVER['REQUEST_URI'] ?? '';
-        set_flash('error', 'Administrator privileges are required to access this area.');
+        set_flash('info', 'Please sign in with staff or administrative credentials.');
         header('Location: ' . url($redirectTo));
         exit;
+    }
+    if (!auth_is_staff_or_admin()) {
+        auth_access_denied('Administrator or Staff credentials are required to access the OrderPrintex Console.');
+    }
+}
+
+/**
+ * Strict Super Administrator guard (allows ONLY 'admin').
+ * Staff accounts attempting to access restricted pages receive a 403 Access Denied response.
+ */
+function require_admin(string $redirectTo = 'admin/login.php'): void {
+    if (!auth_check()) {
+        $_SESSION['intended_url'] = $_SERVER['REQUEST_URI'] ?? '';
+        set_flash('info', 'Please sign in to access the Admin Console.');
+        header('Location: ' . url($redirectTo));
+        exit;
+    }
+    $user = auth_user();
+    if (!$user || !in_array($user['role'] ?? '', ['admin', 'staff'], true)) {
+        header('Location: ' . url($redirectTo));
+        exit;
+    }
+    if ($user['role'] !== 'admin') {
+        auth_access_denied('Full Super Administrator privileges are required to access this section. Staff accounts are restricted from modifying personnel, website settings, or security audit logs.');
+    }
+}
+
+/**
+ * Require specific role(s)
+ */
+function require_role(string|array $roles, string $message = ''): void {
+    require_admin_panel();
+    if (!auth_has_role($roles)) {
+        auth_access_denied($message ?: 'Your assigned role does not grant permission to view or manage this module.');
     }
 }

@@ -4,8 +4,18 @@
  * Create, Edit & Manage Static & Custom Pages
  */
 
-$adminTitle = "Website Pages CMS";
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/database.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/seo_helper.php';
+
+require_admin();
+$adminUser = auth_user();
+
+// Pages CMS module decommissioned in simplified workflow.
+header('Location: ' . url('admin/dashboard.php'));
+exit;
 
 // Handle POST actions
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action'])) {
@@ -51,6 +61,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action'])) {
                 'updated_at'       => date('Y-m-d H:i:s')
             ], 'id = :id', ['id' => $pageId]);
 
+            @seo_sync_all();
             log_activity($adminUser['id'], 'update_page', "Updated CMS page: {$title}");
             set_flash('success', "Page '{$title}' updated successfully.");
             header('Location: ' . url('admin/pages.php?edit_id=' . $pageId));
@@ -68,6 +79,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action'])) {
                 'is_published'     => $isPublished
             ]);
 
+            @seo_sync_all();
             log_activity($adminUser['id'], 'create_page', "Created CMS page: {$title}");
             set_flash('success', "Page '{$title}' created successfully.");
             header('Location: ' . url('admin/pages.php?edit_id=' . $newId));
@@ -81,6 +93,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action'])) {
         $pg = db_fetch_one("SELECT * FROM pages WHERE id = :id", ['id' => $pageId]);
         if ($pg) {
             db_delete('pages', 'id = :id', ['id' => $pageId]);
+            @seo_sync_all();
             log_activity($adminUser['id'], 'delete_page', "Deleted CMS page: {$pg['title']}");
             set_flash('success', "Page '{$pg['title']}' deleted.");
         }
@@ -99,6 +112,9 @@ $editPage = null;
 if ($editId > 0) {
     $editPage = db_fetch_one("SELECT * FROM pages WHERE id = :id", ['id' => $editId]);
 }
+
+$adminTitle = "Website Pages CMS";
+require_once __DIR__ . '/header.php';
 ?>
 
 <div class="admin-topbar" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.75rem; flex-wrap:wrap; gap:1rem;">
@@ -138,7 +154,7 @@ if ($editId > 0) {
       <input type="hidden" name="action" value="save_page">
       <input type="hidden" name="page_id" value="<?= $editPage['id'] ?? 0 ?>">
 
-      <div style="display:grid; grid-template-columns:2fr 1fr; gap:1rem; margin-bottom:1.25rem;">
+      <div class="admin-form-2col" style="margin-bottom:1.25rem;">
         <div>
           <label style="display:block; font-size:0.85rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">Page Title *</label>
           <input type="text" name="title" required class="form-control" placeholder="e.g. Terms & Conditions" value="<?= e($editPage['title'] ?? '') ?>">
@@ -168,13 +184,13 @@ if ($editId > 0) {
         </div>
       </div>
 
-      <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-light); padding-top:1.25rem;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; border-top:1px solid var(--border-light); padding-top:1.25rem;">
         <label style="display:inline-flex; align-items:center; gap:0.5rem; cursor:pointer; font-weight:700; font-size:0.9rem; color:var(--navy);">
           <input type="checkbox" name="is_published" value="1" <?= (!isset($editPage) || !empty($editPage['is_published'])) ? 'checked' : '' ?>>
           <span>Publish Page (Live on Storefront)</span>
         </label>
 
-        <div style="display:flex; gap:0.75rem;">
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
           <a href="<?= url('admin/pages.php') ?>" class="btn btn-outline btn-sm">Cancel</a>
           <button type="submit" class="btn btn-primary btn-sm">
             <?= ($editPage) ? 'Update Page' : 'Publish Page' ?>
@@ -185,7 +201,7 @@ if ($editId > 0) {
   </div>
 <?php else: ?>
   <!-- Pages List Table -->
-  <div class="admin-card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.5rem; box-shadow: var(--shadow-card);">
+  <div class="admin-card">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1px solid rgba(20,35,60,0.08); padding-bottom:0.75rem;">
       <h3 style="font-size:1.1rem; color:var(--navy); font-weight:700; margin:0;">
         All Content Pages (<?= count($pages) ?>)
@@ -193,7 +209,7 @@ if ($editId > 0) {
     </div>
 
     <div class="table-responsive">
-      <table class="data-table" style="width:100%; font-size:0.88rem;">
+      <table class="admin-table">
         <thead>
           <tr>
             <th>Page Title</th>

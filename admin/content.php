@@ -3,8 +3,13 @@
  * OrderPrintex - Admin Website Content Management
  */
 
-$adminTitle = "Manage Website Copy & Editorial Content";
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/database.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth.php';
+
+require_admin();
+$adminUser = auth_user();
 
 // Handle Saving Content Settings
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'save_content') {
@@ -49,6 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     header('Location: ' . url('admin/content.php'));
     exit;
 }
+
+$adminTitle = "Manage Website Copy & Editorial Content";
+require_once __DIR__ . '/header.php';
 ?>
 
 <div class="admin-topbar">
@@ -100,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                 <h2 class="admin-card-title">2. Quality Assurance & Prepress Badges</h2>
             </div>
             <div class="admin-card-body" style="padding: 24px;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="admin-form-2col">
                     <div class="form-group">
                         <label class="form-label">Prepress Standards Note</label>
                         <input type="text" name="prepress_info" class="form-input" 
@@ -121,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             <div class="admin-card-header">
                 <h2 class="admin-card-title">3. "Why Choose OrderPrintex" Value Pillars</h2>
             </div>
-            <div class="admin-card-body" style="padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+            <div class="admin-card-body admin-split-grid" style="padding: 24px;">
                 
                 <!-- Pillar 1 -->
                 <div style="background: var(--color-ivory); padding: 16px; border-radius: 6px; border: 1px solid var(--color-border);">

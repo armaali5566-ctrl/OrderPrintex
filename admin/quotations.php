@@ -3,8 +3,13 @@
  * OrderPrintex - Admin Quotation Management
  */
 
-$adminTitle = "Manage Client Quotations";
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/database.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth.php';
+
+require_admin_panel();
+$adminUser = auth_user();
 
 // Handle Quotation Saving & Status Changes
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form_action'])) {
@@ -196,6 +201,9 @@ if ($searchTerm) {
 
 $listSql .= " ORDER BY q.created_at DESC";
 $quotationsList = db_fetch_all($listSql, $listParams);
+
+$adminTitle = "Manage Client Quotations";
+require_once __DIR__ . '/header.php';
 ?>
 
 <div class="admin-topbar">
@@ -224,7 +232,7 @@ $quotationsList = db_fetch_all($listSql, $listParams);
         <input type="hidden" name="quote_id" value="<?= $editQuote ? $editQuote['id'] : 0 ?>">
         <input type="hidden" name="enquiry_id" value="<?= $editQuote ? $editQuote['enquiry_id'] : ($linkedEnquiry ? $linkedEnquiry['id'] : '') ?>">
 
-        <div class="admin-grid-layout" style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; align-items: start;">
+        <div class="admin-split-grid">
             
             <!-- Left: Items & Specs -->
             <div style="display: flex; flex-direction: column; gap: 24px;">
@@ -235,7 +243,7 @@ $quotationsList = db_fetch_all($listSql, $listParams);
                             <h3 class="admin-card-title" style="font-size: 0.95rem;">📎 Attached Client Enquiry (<?= e($linkedEnquiry['ref_number']) ?>)</h3>
                         </div>
                         <div class="admin-card-body" style="padding: 14px 20px; font-size: 0.85rem;">
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); gap: 10px;">
                                 <div>
                                     <span style="color: var(--color-text-muted); display: block; font-size: 0.75rem;">Service Requested:</span>
                                     <strong><?= e($linkedEnquiry['service_name'] ?: 'Custom Printing') ?></strong>
@@ -273,7 +281,7 @@ $quotationsList = db_fetch_all($listSql, $listParams);
                         <h2 class="admin-card-title">1. Client Recipient Information</h2>
                     </div>
                     <div class="admin-card-body" style="padding: 20px;">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div class="admin-form-2col">
                             <div class="form-group">
                                 <label class="form-label required">Customer / Company Name</label>
                                 <input type="text" name="customer_name" class="form-input" required 
@@ -403,8 +411,8 @@ $quotationsList = db_fetch_all($listSql, $listParams);
             <!-- Right: Commercial Pricing Summary & Publish -->
             <div style="display: flex; flex-direction: column; gap: 24px;">
                 
-                <div class="admin-card" style="border: 2px solid var(--color-navy);">
-                    <div class="admin-card-header" style="background: var(--color-navy); color: #fff;">
+                <div class="admin-card" style="border: 2px solid var(--admin-gold, #D4AF37);">
+                    <div class="admin-card-header" style="background: var(--admin-sidebar-bg, #0C1017); color: #fff; border-bottom: 1px solid var(--admin-sidebar-border, rgba(255,255,255,0.1));">
                         <h2 class="admin-card-title" style="color: #fff;">Quotation Summary</h2>
                         <?php if ($editQuote): ?>
                             <span style="font-size: 0.8rem; color: var(--color-gold); font-weight: 700;"><?= e($editQuote['quote_number']) ?></span>
@@ -418,7 +426,7 @@ $quotationsList = db_fetch_all($listSql, $listParams);
                                 <strong id="calc_subtotal"><?= format_price($editQuote['subtotal'] ?? 0) ?></strong>
                             </div>
 
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: center;">
+                            <div class="admin-form-2col" style="align-items: center;">
                                 <div>
                                     <label class="form-label" style="font-size: 0.75rem; margin-bottom: 2px;">GST Rate (%)</label>
                                     <input type="number" step="0.1" name="tax_rate" id="calc_tax_rate" class="form-input form-input-sm" value="<?= $editQuote['tax_rate'] ?? 18.0 ?>" required>
@@ -505,7 +513,7 @@ $quotationsList = db_fetch_all($listSql, $listParams);
     $totalValue = db_fetch_one("SELECT SUM(grand_total) as s FROM quotations WHERE status != 'rejected'")['s'] ?? 0;
     ?>
 
-    <div class="admin-metrics-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 24px;">
+    <div class="admin-metrics-grid">
         <div class="admin-metric-card">
             <span class="admin-metric-label">Total Quotations</span>
             <div class="admin-metric-value"><?= $totalQuotesCount ?></div>
@@ -525,7 +533,7 @@ $quotationsList = db_fetch_all($listSql, $listParams);
     </div>
 
     <div class="admin-filter-bar">
-        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <div class="admin-filter-tabs">
             <a href="<?= url('admin/quotations.php') ?>" class="admin-tab-btn <?= empty($statusFilter) ? 'active' : '' ?>">All</a>
             <a href="<?= url('admin/quotations.php?status=draft') ?>" class="admin-tab-btn <?= $statusFilter === 'draft' ? 'active' : '' ?>">Drafts</a>
             <a href="<?= url('admin/quotations.php?status=sent') ?>" class="admin-tab-btn <?= $statusFilter === 'sent' ? 'active' : '' ?>">Sent / Pending</a>
@@ -534,11 +542,11 @@ $quotationsList = db_fetch_all($listSql, $listParams);
             <a href="<?= url('admin/quotations.php?status=rejected') ?>" class="admin-tab-btn <?= $statusFilter === 'rejected' ? 'active' : '' ?>">Rejected</a>
         </div>
 
-        <form method="GET" action="<?= url('admin/quotations.php') ?>" class="admin-search-form" style="display: flex; gap: 8px;">
+        <form method="GET" action="<?= url('admin/quotations.php') ?>" class="admin-search-form">
             <?php if ($statusFilter): ?>
                 <input type="hidden" name="status" value="<?= e($statusFilter) ?>">
             <?php endif; ?>
-            <input type="text" name="search" value="<?= e($searchTerm) ?>" placeholder="Search quote #, customer, email..." class="form-input form-input-sm" style="width: 260px;">
+            <input type="text" name="search" value="<?= e($searchTerm) ?>" placeholder="Search quote #, customer, email..." class="form-input form-input-sm">
             <button type="submit" class="btn btn-secondary btn-sm">Filter</button>
             <?php if ($searchTerm || $statusFilter): ?>
                 <a href="<?= url('admin/quotations.php') ?>" class="btn btn-outline btn-sm">Clear</a>

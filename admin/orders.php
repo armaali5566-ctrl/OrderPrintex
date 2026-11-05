@@ -3,10 +3,18 @@
  * OrderPrintex - Admin Order Management
  */
 
-$adminTitle = "Manage Production Orders";
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/database.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth.php';
 
-// Handle Order Status & Tracking Updates
+require_admin();
+$adminUser = auth_user();
+
+// OrderPrintex has transitioned to an Enquiry & Quotation business model. Production orders interface is decommissioned.
+set_flash('info', 'OrderPrintex operates exclusively on an Enquiry & Quotation model. Order management has been retired.');
+header('Location: ' . url('admin/quotations.php'));
+exit;
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update_order') {
     if (!csrf_verify()) {
         set_flash('error', 'Security token expired. Please try again.');
@@ -109,6 +117,9 @@ if ($selectedOrderId) {
         }
     }
 }
+
+$adminTitle = "Manage Production Orders";
+require_once __DIR__ . '/header.php';
 ?>
 
 <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem;">
@@ -150,7 +161,7 @@ if ($selectedOrderId) {
 
 <?php if ($activeOrder): ?>
   <!-- Edit / Manage Single Order View -->
-  <div style="display:grid; grid-template-columns:1.6fr 1.4fr; gap:2rem; align-items:flex-start; margin-bottom:2rem;">
+  <div class="admin-split-grid" style="margin-bottom:2rem;">
     <!-- Order Details & Timeline -->
     <div class="panel-card" style="margin-bottom:0;">
       <div class="panel-header">
@@ -228,7 +239,7 @@ if ($selectedOrderId) {
           </select>
         </div>
 
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1rem;">
+        <div class="admin-form-2col" style="gap:0.75rem; margin-bottom:1rem;">
           <div class="form-group">
             <label class="form-label">Courier Name</label>
             <input type="text" name="courier_name" class="form-control" value="<?= e($activeOrder['courier_name']) ?>" placeholder="e.g. DTDC / Delhivery / Bluedart">

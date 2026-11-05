@@ -17,7 +17,15 @@
  *   /account/orders/
  */
 
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$rawUri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+$decodedUri = rawurldecode($rawUri);
+
+// If running with built-in server and request path has /OrderPrintex prefix, strip it
+if (preg_match('~^/OrderPrintex(/.*)?$~i', $decodedUri, $m)) {
+    $decodedUri = !empty($m[1]) ? $m[1] : '/';
+}
+
+$uri = $decodedUri;
 $trimmedUri = rtrim($uri, '/');
 
 // 1. Robots.txt
@@ -25,16 +33,54 @@ if ($uri === '/robots.txt') {
     $file = __DIR__ . '/robots.txt';
     if (file_exists($file)) {
         header('Content-Type: text/plain; charset=utf-8');
+        header('Content-Disposition: inline');
         readfile($file);
         exit;
     }
 }
 
-// 2. Sitemap.xml
-if ($uri === '/sitemap.xml') {
-    $file = __DIR__ . '/sitemap.xml';
+// 1b. LLMS.txt
+if ($uri === '/llms.txt') {
+    $file = __DIR__ . '/llms.txt';
+    if (file_exists($file)) {
+        header('Content-Type: text/plain; charset=utf-8');
+        header('Content-Disposition: inline');
+        readfile($file);
+        exit;
+    }
+}
+
+// 2. Sitemap XML & Sitemap Index
+if ($uri === '/sitemap.xml' || $uri === '/sitemap_index.xml') {
+    $file = __DIR__ . $uri;
+    if (!file_exists($file)) {
+        $file = __DIR__ . '/sitemap.xml';
+    }
     if (file_exists($file)) {
         header('Content-Type: application/xml; charset=utf-8');
+        header('Content-Disposition: inline');
+        readfile($file);
+        exit;
+    }
+}
+
+// 2b. Schema.org JSON
+if ($uri === '/schema.json') {
+    $file = __DIR__ . '/schema.json';
+    if (file_exists($file)) {
+        header('Content-Type: application/json; charset=utf-8');
+        header('Content-Disposition: inline');
+        readfile($file);
+        exit;
+    }
+}
+
+// 2c. Main Markdown Discovery File
+if ($uri === '/ORDERPRINTEX.md' || $uri === '/orderprintex.md') {
+    $file = __DIR__ . '/ORDERPRINTEX.md';
+    if (file_exists($file)) {
+        header('Content-Type: text/markdown; charset=utf-8');
+        header('Content-Disposition: inline');
         readfile($file);
         exit;
     }
@@ -262,15 +308,57 @@ if ($trimmedUri === '/faq') {
 }
 
 // 19. Direct Static Files or Existing PHP Scripts
-$targetPath = __DIR__ . $uri;
+$targetPath = __DIR__ . str_replace('/', DIRECTORY_SEPARATOR, $uri);
 
-if ($uri !== '/' && file_exists($targetPath)) {
-    if (!is_dir($targetPath)) {
-        return false; // Let PHP built-in server serve static file or direct script
-    }
-    if (file_exists($targetPath . '/index.php')) {
-        require $targetPath . '/index.php';
+if ($uri !== '/') {
+    // If it's a directory containing index.php
+    if (is_dir($targetPath) && file_exists($targetPath . DIRECTORY_SEPARATOR . 'index.php')) {
+        require $targetPath . DIRECTORY_SEPARATOR . 'index.php';
         exit;
+    }
+
+    // Check candidate static file locations (exact, spaces as underscores, underscores as spaces)
+    $candidateFiles = [
+        $targetPath,
+        str_replace(' ', '_', $targetPath),
+        str_replace('_', ' ', $targetPath)
+    ];
+
+    foreach ($candidateFiles as $file) {
+        if (file_exists($file) && !is_dir($file)) {
+            $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+            if ($ext === 'php') {
+                require $file;
+                exit;
+            }
+
+            $mimes = [
+                'css'   => 'text/css; charset=utf-8',
+                'js'    => 'application/javascript; charset=utf-8',
+                'png'   => 'image/png',
+                'jpg'   => 'image/jpeg',
+                'jpeg'  => 'image/jpeg',
+                'gif'   => 'image/gif',
+                'webp'  => 'image/webp',
+                'svg'   => 'image/svg+xml',
+                'ico'   => 'image/x-icon',
+                'woff2' => 'font/woff2',
+                'woff'  => 'font/woff',
+                'ttf'   => 'font/ttf',
+                'pdf'   => 'application/pdf',
+                'json'  => 'application/json; charset=utf-8',
+                'txt'   => 'text/plain; charset=utf-8',
+                'md'    => 'text/plain; charset=utf-8',
+                'xml'   => 'application/xml; charset=utf-8'
+            ];
+            $contentType = $mimes[$ext] ?? 'text/plain; charset=utf-8';
+            header('Content-Type: ' . $contentType);
+            header('Content-Disposition: inline');
+            header('Content-Length: ' . filesize($file));
+            header('Cache-Control: public, max-age=3600');
+            readfile($file);
+            exit;
+        }
     }
 }
 

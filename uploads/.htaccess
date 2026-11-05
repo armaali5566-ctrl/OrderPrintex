@@ -1,8 +1,10 @@
-# Deny execution of PHP or executable scripts in uploads folder
-<FilesMatch "\.(php|php3|php4|php5|phtml|pl|py|cgi|sh|exe)$">
-    Order Deny,Allow
-    Deny from all
+# Prevent direct script execution in uploads directory
+<FilesMatch "\.(php|phtml|php3|php4|php5|php7|php8|phps|cgi|pl|exe)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
 </FilesMatch>
-
-# Disable directory browsing
-Options -Indexes

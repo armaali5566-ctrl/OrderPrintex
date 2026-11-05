@@ -3,8 +3,13 @@
  * OrderPrintex - Admin Announcement Bar & Workshop Equipment Manager
  */
 
-$adminTitle = "Promotions & Workshop Equipment";
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/database.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth.php';
+
+require_admin();
+$adminUser = auth_user();
 
 // Handle Actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
@@ -116,6 +121,9 @@ $editAnnouncement = null;
 if ($editAnnId > 0) {
     $editAnnouncement = db_fetch_one("SELECT * FROM announcement_bar WHERE id = :id", ['id' => $editAnnId]);
 }
+
+$adminTitle = "Promotions & Workshop Equipment";
+require_once __DIR__ . '/header.php';
 ?>
 
 <div class="admin-topbar">
@@ -125,7 +133,7 @@ if ($editAnnId > 0) {
     </div>
 </div>
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+<div class="admin-split-grid">
     
     <!-- LEFT: ANNOUNCEMENT BAR MESSAGES -->
     <div>
@@ -239,7 +247,7 @@ if ($editAnnId > 0) {
                     <input type="hidden" name="action" value="save_equipment">
                     <input type="hidden" name="tool_id" value="0">
 
-                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
+                    <div class="admin-form-2col">
                         <div class="form-group">
                             <label class="form-label required">Machine / Software Name</label>
                             <input type="text" name="name" class="form-input" required placeholder="e.g. Dual-Head Micro-Piezo DTF Production Press">

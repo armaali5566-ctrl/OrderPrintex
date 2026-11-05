@@ -9,7 +9,10 @@ require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/auth.php';
 
 $user = auth_user();
-$pageTitle = "My Saved Wishlist | OrderPrintex";
+
+// Wishlist functionality removed in simplified commercial workflow.
+header('Location: ' . url('products/'));
+exit;
 $canonical = url('account/wishlist.php');
 
 $wishlistProducts = [];

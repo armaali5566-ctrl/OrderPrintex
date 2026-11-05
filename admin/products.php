@@ -4,8 +4,14 @@
  * Complete Dynamic SKU, Variations Builder, 4 Scroll Sections, Images & Inventory Control
  */
 
-$adminTitle = "Manage Products Catalog";
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/database.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/seo_helper.php';
+
+require_admin_panel();
+$adminUser = auth_user();
 
 // Helper for SKU abbreviation
 function generate_val_code(string $val): string {
@@ -155,6 +161,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action'])) {
 
         if ($productId > 0) {
             db_update('products', $productData, 'id = :id', ['id' => $productId]);
+            @seo_sync_all();
             log_activity($adminUser['id'], 'update_product', "Updated product: {$title} (SKU: {$sku})");
             set_flash('success', "Product '{$title}' [SKU: {$sku}] updated successfully.");
             header('Location: ' . url('admin/products.php?edit_id=' . $productId));
@@ -171,6 +178,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action'])) {
             }
 
             $newId = db_insert('products', $productData);
+            @seo_sync_all();
             log_activity($adminUser['id'], 'create_product', "Created new product: {$title} (SKU: {$sku})");
             set_flash('success', "New product '{$title}' [SKU: {$sku}] created successfully.");
             header('Location: ' . url('admin/products.php?edit_id=' . $newId));
@@ -504,6 +512,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action'])) {
             db_delete('product_attributes', 'product_id = :id', ['id' => $productId]);
             db_delete('product_variations', 'product_id = :id', ['id' => $productId]);
             db_delete('products', 'id = :id', ['id' => $productId]);
+            @seo_sync_all();
             log_activity($adminUser['id'], 'delete_product', "Deleted product: {$prod['title']}");
             set_flash('success', "Product '{$prod['title']}' deleted.");
         }
@@ -517,9 +526,59 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action'])) {
         if ($prod) {
             $newStatus = $prod['is_active'] ? 0 : 1;
             db_update('products', ['is_active' => $newStatus], 'id = :id', ['id' => $productId]);
+            @seo_sync_all();
             set_flash('success', "Product visibility updated.");
         }
         header('Location: ' . url('admin/products.php'));
+        exit;
+    }
+
+    // =========================================================================
+    // 9. UNIFIED ATTRIBUTE ACTIONS (MERGED FROM ATTRIBUTES MODULE)
+    // =========================================================================
+    if ($action === 'create_attribute') {
+        $name = trim($_POST['name'] ?? '');
+        $slug = trim($_POST['slug'] ?? '');
+        $productId = intval($_POST['product_id'] ?? 0);
+        if (!empty($name)) {
+            if (empty($slug)) {
+                $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name)));
+            }
+            $check = db_fetch_one("SELECT id FROM attributes WHERE slug = :s", ['s' => $slug]);
+            if ($check) $slug .= '-' . rand(10, 99);
+            db_insert('attributes', ['name' => $name, 'slug' => $slug]);
+            set_flash('success', "Attribute '{$name}' created.");
+        }
+        header('Location: ' . url('admin/products.php' . ($productId ? '?edit_id=' . $productId . '#tab-attributes' : '')));
+        exit;
+    }
+
+    if ($action === 'add_attribute_value') {
+        $attrId = intval($_POST['attribute_id'] ?? 0);
+        $value = trim($_POST['value'] ?? '');
+        $productId = intval($_POST['product_id'] ?? 0);
+        if ($attrId > 0 && !empty($value)) {
+            db_insert('attribute_values', [
+                'attribute_id' => $attrId,
+                'value'        => $value,
+                'color_code'   => !empty($_POST['color_code']) ? trim($_POST['color_code']) : null,
+                'display_order'=> intval($_POST['display_order'] ?? 0)
+            ]);
+            set_flash('success', "Added value '{$value}' to attribute.");
+        }
+        header('Location: ' . url('admin/products.php' . ($productId ? '?edit_id=' . $productId . '#tab-attributes' : '')));
+        exit;
+    }
+
+    if ($action === 'delete_attribute_value') {
+        $valId = intval($_POST['value_id'] ?? 0);
+        $productId = intval($_POST['product_id'] ?? 0);
+        if ($valId > 0) {
+            db_delete('product_variation_values', 'attribute_value_id = :vid', ['vid' => $valId]);
+            db_delete('attribute_values', 'id = :id', ['id' => $valId]);
+            set_flash('success', "Attribute value removed.");
+        }
+        header('Location: ' . url('admin/products.php' . ($productId ? '?edit_id=' . $productId . '#tab-attributes' : '')));
         exit;
     }
 }
@@ -531,7 +590,7 @@ $allAttributes = db_fetch_all("SELECT a.*, COUNT(av.id) as val_count FROM attrib
 
 // Check if Editing or Creating
 $subAction = $_GET['action'] ?? '';
-$editId = intval($_GET['edit_id'] ?? 0);
+$editId = intval($_GET['edit_id'] ?? ($_GET['id'] ?? 0));
 $editProduct = null;
 $productSizes = [];
 $productTiers = [];
@@ -547,9 +606,13 @@ if ($editId > 0) {
         $assignedRows = db_fetch_all("SELECT attribute_id FROM product_attributes WHERE product_id = :id ORDER BY display_order ASC", ['id' => $editId]);
         $assignedAttrIds = array_column($assignedRows, 'attribute_id');
 
+        $concatExpr = Database::getActiveDriver() === 'mysql'
+            ? "GROUP_CONCAT(CONCAT(a.name, ': ', av.value) SEPARATOR ' | ')"
+            : "GROUP_CONCAT(a.name || ': ' || av.value, ' | ')";
+
         $productVariations = db_fetch_all("
             SELECT pv.*,
-                   GROUP_CONCAT(a.name || ': ' || av.value, ' | ') as combination_summary
+                   {$concatExpr} as combination_summary
             FROM product_variations pv
             LEFT JOIN product_variation_values pvv ON pv.id = pvv.variation_id
             LEFT JOIN attribute_values av ON pvv.attribute_value_id = av.id
@@ -585,6 +648,9 @@ if ($searchTerm) {
 
 $sql .= " GROUP BY p.id ORDER BY p.display_order ASC, p.id DESC";
 $products = db_fetch_all($sql, $params);
+
+$adminTitle = ($editProduct ? "Edit: " . $editProduct['title'] : ($subAction === 'new' ? "Add New Product" : "Manage Products Catalog"));
+require_once __DIR__ . '/header.php';
 ?>
 
 <div class="admin-topbar" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.75rem; flex-wrap:wrap; gap:1rem;">
@@ -602,12 +668,6 @@ $products = db_fetch_all($sql, $params);
         &larr; Back to Catalog
       </a>
     <?php else: ?>
-      <a href="<?= url('admin/attributes.php') ?>" class="btn btn-outline btn-sm">
-        ⚙ Attributes
-      </a>
-      <a href="<?= url('admin/variations.php') ?>" class="btn btn-outline btn-sm">
-        ⇄ Variations
-      </a>
       <a href="<?= url('admin/categories.php') ?>" class="btn btn-outline btn-sm">
         📁 Categories
       </a>
@@ -619,6 +679,20 @@ $products = db_fetch_all($sql, $params);
 </div>
 
 <?php if ($editProduct || $subAction === 'new'): ?>
+  <!-- UNIFIED PRODUCT MANAGEMENT TABS -->
+  <div class="admin-filter-bar" style="margin-bottom: 1.5rem;">
+    <div class="admin-filter-tabs" id="productEditTabs">
+      <button type="button" class="admin-tab-btn active" data-tab="tab-basic" onclick="switchProductTab('tab-basic', this)">A. Basic Information</button>
+      <button type="button" class="admin-tab-btn" data-tab="tab-skus" onclick="switchProductTab('tab-skus', this)">B. SKU Management</button>
+      <button type="button" class="admin-tab-btn" data-tab="tab-attributes" onclick="switchProductTab('tab-attributes', this)">C. Product Attributes</button>
+      <?php if ($editProduct): ?>
+        <button type="button" class="admin-tab-btn" data-tab="tab-variations" onclick="switchProductTab('tab-variations', this)">D. Product Variations (<?= count($productVariations) ?>)</button>
+      <?php endif; ?>
+    </div>
+  </div>
+
+  <!-- TAB A: BASIC INFORMATION -->
+  <div id="tab-basic" class="product-tab-pane">
   <!-- ===================================================================== -->
   <!-- PRODUCT EDIT / CREATE FORM -->
   <!-- ===================================================================== -->
@@ -626,9 +700,9 @@ $products = db_fetch_all($sql, $params);
     <?= csrf_field() ?>
     <input type="hidden" name="action" value="save_product">
     <input type="hidden" name="product_id" value="<?= $editProduct['id'] ?? 0 ?>">
-    <input type="hidden" name="current_image_url" value="<?= e($editProduct['image_url'] ?? '') ?>">
+    <input type="hidden" name="current_image_url" value="<?= e($editProduct['image_url'] ?? '') ?>">    
 
-    <div style="display:grid; grid-template-columns:2fr 1fr; gap:1.75rem; align-items:flex-start; margin-bottom:2rem;">
+    <div class="admin-split-grid" style="align-items:flex-start; margin-bottom:2rem;">
 
       <!-- Left Column: Details, Pricing, & The 4 Scroll Sections -->
       <div style="display:flex; flex-direction:column; gap:1.5rem;">
@@ -646,7 +720,7 @@ $products = db_fetch_all($sql, $params);
             <?php endif; ?>
           </div>
 
-          <div style="display:grid; grid-template-columns:3fr 1.2fr; gap:1rem; margin-bottom:1rem;">
+          <div class="admin-form-2col" style="margin-bottom:1rem;">
             <div>
               <label style="display:block; font-size:0.85rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">Product Title *</label>
               <input type="text" name="title" class="form-control" required placeholder="e.g. Streetwear Oversized Heavyweight Tee" value="<?= e($editProduct['title'] ?? '') ?>">
@@ -658,7 +732,7 @@ $products = db_fetch_all($sql, $params);
             </div>
           </div>
 
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+          <div class="admin-form-2col" style="margin-bottom:1rem;">
             <div>
               <label style="display:block; font-size:0.85rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">URL Slug</label>
               <input type="text" name="slug" class="form-control" placeholder="e.g. streetwear-oversized-tee" value="<?= e($editProduct['slug'] ?? '') ?>">
@@ -676,7 +750,7 @@ $products = db_fetch_all($sql, $params);
             </div>
           </div>
 
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+          <div class="admin-form-2col" style="margin-bottom:1rem;">
             <div>
               <label style="display:block; font-size:0.85rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">Associated Service</label>
               <select name="service_id" class="form-control">
@@ -706,7 +780,7 @@ $products = db_fetch_all($sql, $params);
             2. Base Pricing &amp; Stock Inventory
           </h3>
 
-          <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:1rem; margin-bottom:1rem;">
+          <div class="admin-form-2col" style="margin-bottom:1rem;">
             <div>
               <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--navy); margin-bottom:0.25rem;">Regular Price (₹)</label>
               <input type="number" step="0.01" name="regular_price" class="form-control" value="<?= e($editProduct['regular_price'] ?? '699.00') ?>">
@@ -725,7 +799,7 @@ $products = db_fetch_all($sql, $params);
             </div>
           </div>
 
-          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;">
+          <div class="admin-form-3col">
             <div>
               <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--navy); margin-bottom:0.25rem;">Warehouse Stock Quantity</label>
               <input type="number" name="stock_quantity" class="form-control" value="<?= e($editProduct['stock_quantity'] ?? '50') ?>">
@@ -820,7 +894,7 @@ $products = db_fetch_all($sql, $params);
           <h3 style="font-size:1rem; color:var(--navy); font-weight:700; margin-bottom:0.75rem;">Product Main Image</h3>
           
           <?php if (!empty($editProduct['image_url'])): ?>
-            <div style="height:200px; background:#F8FAFC; border:1px solid var(--border-light); border-radius:6px; display:flex; align-items:center; justify-content:center; padding:10px; margin-bottom:1rem;">
+            <div style="height:200px; background:var(--admin-bg-card-secondary, #171C2B); border:1px solid var(--border-light); border-radius:6px; display:flex; align-items:center; justify-content:center; padding:10px; margin-bottom:1rem;">
               <img src="<?= url(e($editProduct['image_url'])) ?>" alt="Preview" style="max-height:100%; max-width:100%; object-fit:contain;">
             </div>
             <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.5rem; overflow:hidden; text-overflow:ellipsis;">
@@ -871,12 +945,252 @@ $products = db_fetch_all($sql, $params);
 
     </div>
   </form>
+  </div> <!-- /#tab-basic -->
 
-  <!-- ===================================================================== -->
-  <!-- DYNAMIC VARIATIONS BUILDER & WORKBENCH (WHEN EDITING A PRODUCT) -->
-  <!-- ===================================================================== -->
+  <!-- TAB B: SKU MANAGEMENT -->
+  <div id="tab-skus" class="product-tab-pane" style="display:none;">
+    <div class="admin-card" style="margin-bottom:1.5rem;">
+      <div class="admin-card-header">
+        <h2 class="admin-card-title">Base SKU &amp; Commercial Pricing Architecture</h2>
+      </div>
+      <div class="admin-card-body" style="padding:1.5rem;">
+        <form method="POST" action="<?= url('admin/products.php') ?>">
+          <?= csrf_field() ?>
+          <input type="hidden" name="action" value="save_product">
+          <input type="hidden" name="product_id" value="<?= $editProduct['id'] ?? 0 ?>">
+          <input type="hidden" name="title" value="<?= e($editProduct['title'] ?? '') ?>">
+          <input type="hidden" name="slug" value="<?= e($editProduct['slug'] ?? '') ?>">
+          <input type="hidden" name="category_id" value="<?= e($editProduct['category_id'] ?? '') ?>">
+          <input type="hidden" name="service_id" value="<?= e($editProduct['service_id'] ?? '') ?>">
+          <input type="hidden" name="current_image_url" value="<?= e($editProduct['image_url'] ?? '') ?>">
+          <input type="hidden" name="is_active" value="<?= !empty($editProduct['is_active']) ? 1 : 0 ?>">
+          <input type="hidden" name="is_featured" value="<?= !empty($editProduct['is_featured']) ? 1 : 0 ?>">
+
+          <div class="admin-form-3col" style="margin-bottom:1.25rem;">
+            <div>
+              <label class="form-label required">Primary Base SKU Code</label>
+              <input type="text" name="sku" class="form-input" required style="font-weight:700; text-transform:uppercase;" value="<?= e($editProduct['sku'] ?? '') ?>">
+              <small style="color:var(--admin-text-muted); font-size:0.75rem;">Root identifier prefix for all product variations</small>
+            </div>
+            <div>
+              <label class="form-label">Base Regular Price (₹)</label>
+              <input type="number" step="0.01" name="regular_price" class="form-input" value="<?= e($editProduct['regular_price'] ?? '699.00') ?>">
+            </div>
+            <div>
+              <label class="form-label">Base Sale Price (₹)</label>
+              <input type="number" step="0.01" name="sale_price" class="form-input" placeholder="Optional" value="<?= e($editProduct['sale_price'] ?? '') ?>">
+            </div>
+          </div>
+
+          <div class="admin-form-3col" style="margin-bottom:1.25rem;">
+            <div>
+              <label class="form-label">Starting Price Display</label>
+              <input type="text" name="starting_price" class="form-input" value="<?= e($editProduct['starting_price'] ?? '₹249') ?>">
+            </div>
+            <div>
+              <label class="form-label">Price Unit</label>
+              <input type="text" name="price_unit" class="form-input" value="<?= e($editProduct['price_unit'] ?? '/ Unit') ?>">
+            </div>
+            <div>
+              <label class="form-label">Min. Order Requirement</label>
+              <input type="text" name="min_order" class="form-input" value="<?= e($editProduct['min_order'] ?? 'Min. 1') ?>">
+            </div>
+          </div>
+
+          <div class="admin-form-2col" style="margin-bottom:1.25rem;">
+            <div>
+              <label class="form-label">Warehouse Stock Level</label>
+              <input type="number" name="stock_quantity" class="form-input" value="<?= e($editProduct['stock_quantity'] ?? '50') ?>">
+            </div>
+            <div>
+              <label class="form-label">Stock Status</label>
+              <select name="stock_status" class="form-select">
+                <option value="in_stock" <?= (!isset($editProduct) || ($editProduct['stock_status'] ?? '') === 'in_stock') ? 'selected' : '' ?>>In Stock</option>
+                <option value="out_of_stock" <?= (($editProduct['stock_status'] ?? '') === 'out_of_stock') ? 'selected' : '' ?>>Out of Stock</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-sm">
+            💾 Update Base SKU &amp; Pricing
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <?php if ($editProduct): ?>
+    <!-- Itemized Variation SKUs Breakdown -->
+    <div class="admin-card">
+      <div class="admin-card-header" style="display:flex; justify-content:space-between; align-items:center;">
+        <h2 class="admin-card-title">Assigned Variation SKUs (<?= count($productVariations) ?>)</h2>
+        <button type="button" class="btn btn-outline btn-xs" onclick="switchProductTab('tab-variations', document.querySelector('#productEditTabs button[data-tab=\'tab-variations\']'))">+ Generate More SKUs &rarr;</button>
+      </div>
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>SKU Code</th>
+              <th>Combination / Specs</th>
+              <th>Regular Price</th>
+              <th>Sale Price</th>
+              <th>Stock Qty</th>
+              <th>Status</th>
+              <th>Quick Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if (empty($productVariations)): ?>
+              <tr>
+                <td colspan="7" style="text-align:center; padding:2.5rem; color:var(--admin-text-muted);">
+                  No variation SKUs generated for this product yet. Switch to <strong>D. Product Variations</strong> to generate combinations.
+                </td>
+              </tr>
+            <?php else: ?>
+              <?php foreach ($productVariations as $v): ?>
+                <tr>
+                  <form method="POST" action="<?= url('admin/products.php') ?>">
+                    <?= csrf_field() ?>
+                    <input type="hidden" name="action" value="quick_update_variation">
+                    <input type="hidden" name="variation_id" value="<?= $v['id'] ?>">
+                    <input type="hidden" name="product_id" value="<?= $editProduct['id'] ?>">
+
+                    <td style="font-weight:700; color:var(--admin-gold);">
+                      <input type="text" name="sku" class="form-input form-input-sm" value="<?= e($v['sku']) ?>" style="font-weight:700; width:130px; text-transform:uppercase;">
+                    </td>
+                    <td style="font-size:0.85rem; color:var(--admin-text-main);">
+                      <?= e($v['attributes_summary'] ?: 'Standard') ?>
+                    </td>
+                    <td>
+                      <input type="number" step="0.01" name="regular_price" class="form-input form-input-sm" value="<?= e($v['regular_price']) ?>" style="width:90px;">
+                    </td>
+                    <td>
+                      <input type="number" step="0.01" name="sale_price" class="form-input form-input-sm" value="<?= e($v['sale_price'] ?? '') ?>" placeholder="—" style="width:90px;">
+                    </td>
+                    <td>
+                      <input type="number" name="stock_quantity" class="form-input form-input-sm" value="<?= e($v['stock_quantity']) ?>" style="width:75px;">
+                    </td>
+                    <td>
+                      <span class="status-badge <?= $v['is_in_stock'] ? 'badge-success' : 'badge-danger' ?>">
+                        <?= $v['is_in_stock'] ? 'In Stock' : 'Out of Stock' ?>
+                      </span>
+                    </td>
+                    <td>
+                      <button type="submit" class="btn btn-secondary btn-xs">Save</button>
+                    </td>
+                  </form>
+                </tr>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <?php endif; ?>
+  </div> <!-- /#tab-skus -->
+
+  <!-- TAB C: PRODUCT ATTRIBUTES -->
+  <div id="tab-attributes" class="product-tab-pane" style="display:none;">
+    <?php if ($editProduct): ?>
+      <div class="admin-card" style="margin-bottom:1.5rem;">
+        <div class="admin-card-header">
+          <h2 class="admin-card-title">Assign Attributes to <?= e($editProduct['title']) ?></h2>
+        </div>
+        <div class="admin-card-body" style="padding:1.5rem;">
+          <p style="font-size:0.85rem; color:var(--admin-text-muted); margin-bottom:1.25rem;">
+            Select which attributes apply to this product (e.g. Size, Colour, Paper Type, Finish). Once saved, variations can be generated automatically.
+          </p>
+
+          <form method="POST" action="<?= url('admin/products.php') ?>">
+            <?= csrf_field() ?>
+            <input type="hidden" name="action" value="save_product_attributes">
+            <input type="hidden" name="product_id" value="<?= $editProduct['id'] ?>">
+
+            <div style="display:flex; flex-wrap:wrap; gap:1rem; margin-bottom:1.25rem;">
+              <?php foreach ($allAttributes as $attr): ?>
+                <label style="display:inline-flex; align-items:center; gap:0.5rem; background:var(--admin-bg-card-secondary, #171C2B); padding:0.6rem 1rem; border:1px solid rgba(255,255,255,0.1); border-radius:6px; cursor:pointer; font-weight:600; font-size:0.85rem; color:var(--admin-text-main);">
+                  <input type="checkbox" name="assigned_attributes[]" value="<?= $attr['id'] ?>" <?= in_array($attr['id'], $assignedAttrIds) ? 'checked' : '' ?>>
+                  <span><?= e($attr['name']) ?></span>
+                  <span style="font-size:0.75rem; color:var(--admin-gold);">(<?= $attr['val_count'] ?> values)</span>
+                </label>
+              <?php endforeach; ?>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-sm">
+              Save Assigned Attributes
+            </button>
+          </form>
+        </div>
+      </div>
+    <?php endif; ?>
+
+    <!-- Manage Global Attributes & Specification Values -->
+    <div class="admin-split-grid">
+      <!-- Create New Attribute -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h2 class="admin-card-title">+ Add New Attribute Type</h2>
+        </div>
+        <div class="admin-card-body" style="padding:1.25rem;">
+          <form method="POST" action="<?= url('admin/products.php') ?>">
+            <?= csrf_field() ?>
+            <input type="hidden" name="action" value="create_attribute">
+            <input type="hidden" name="product_id" value="<?= $editProduct['id'] ?? 0 ?>">
+
+            <div class="form-group">
+              <label class="form-label required">Attribute Name</label>
+              <input type="text" name="name" class="form-input" required placeholder="e.g. Paper GSM, Lamination, Foil Colour">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Slug (Optional)</label>
+              <input type="text" name="slug" class="form-input" placeholder="e.g. paper-gsm">
+            </div>
+            <button type="submit" class="btn btn-secondary btn-sm btn-block" style="justify-content:center;">
+              + Create Attribute
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Add Values to Existing Attribute -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h2 class="admin-card-title">+ Add Value to Existing Attribute</h2>
+        </div>
+        <div class="admin-card-body" style="padding:1.25rem;">
+          <form method="POST" action="<?= url('admin/products.php') ?>">
+            <?= csrf_field() ?>
+            <input type="hidden" name="action" value="add_attribute_value">
+            <input type="hidden" name="product_id" value="<?= $editProduct['id'] ?? 0 ?>">
+
+            <div class="form-group">
+              <label class="form-label required">Select Attribute</label>
+              <select name="attribute_id" class="form-select" required>
+                <?php foreach ($allAttributes as $a): ?>
+                  <option value="<?= $a['id'] ?>"><?= e($a['name']) ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Value / Specification</label>
+              <input type="text" name="value" class="form-input" required placeholder="e.g. 350 GSM, Matt Gold, XXL">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Display Order</label>
+              <input type="number" name="display_order" class="form-input form-input-sm" value="0" style="width:100px;">
+            </div>
+            <button type="submit" class="btn btn-secondary btn-sm btn-block" style="justify-content:center;">
+              + Add Specification Value
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div> <!-- /#tab-attributes -->
+
+  <!-- TAB D: PRODUCT VARIATIONS -->
   <?php if ($editProduct): ?>
-    <div id="variations-workbench" style="margin-top:2.5rem; border-top:2px solid var(--border-gold); padding-top:2rem;">
+  <div id="tab-variations" class="product-tab-pane" style="display:none;">
+    <div id="variations-workbench" style="margin-top:0;">
 
       <div class="admin-card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:2rem; box-shadow: 0 6px 18px rgba(15, 25, 45, 0.09); margin-bottom:2rem;">
         
@@ -1050,7 +1364,7 @@ $products = db_fetch_all($sql, $params);
       </div>
 
       <!-- SIZES & WHOLESALE PRICING TIERS (FOR GANG SHEETS / CALCULATORS) -->
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.75rem; margin-bottom:2rem;">
+      <div class="admin-split-grid" style="margin-bottom:2rem;">
         
         <!-- Product Sizes Box -->
         <div class="admin-card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.5rem; box-shadow: var(--shadow-card);">
@@ -1058,13 +1372,13 @@ $products = db_fetch_all($sql, $params);
             Gang Sheet Sizes &amp; Dimensions (Calculator Fallback)
           </h3>
 
-          <form method="POST" action="<?= url('admin/products.php') ?>" style="display:grid; grid-template-columns:2fr 2fr 1.5fr auto; gap:8px; margin-bottom:1rem;">
+          <form method="POST" action="<?= url('admin/products.php') ?>" style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:1rem;">
             <?= csrf_field() ?>
             <input type="hidden" name="action" value="add_size">
             <input type="hidden" name="product_id" value="<?= $editProduct['id'] ?>">
-            <input type="text" name="size_label" class="form-control" style="font-size:0.8rem; height:34px;" placeholder="Size Name (e.g. 24x60)" required>
-            <input type="text" name="dimensions" class="form-control" style="font-size:0.8rem; height:34px;" placeholder="Dimensions (e.g. 24 x 60 in)">
-            <input type="number" step="0.01" name="base_price" class="form-control" style="font-size:0.8rem; height:34px;" placeholder="₹ Base" required>
+            <input type="text" name="size_label" class="form-control" style="font-size:0.8rem; height:34px; flex:1 1 120px;" placeholder="Size Name (e.g. 24x60)" required>
+            <input type="text" name="dimensions" class="form-control" style="font-size:0.8rem; height:34px; flex:1 1 120px;" placeholder="Dimensions (e.g. 24 x 60 in)">
+            <input type="number" step="0.01" name="base_price" class="form-control" style="font-size:0.8rem; height:34px; flex:1 1 90px;" placeholder="₹ Base" required>
             <button type="submit" class="btn btn-primary btn-sm" style="height:34px;">+ Add</button>
           </form>
 
@@ -1110,13 +1424,13 @@ $products = db_fetch_all($sql, $params);
             Wholesale Quantity Discount Tiers
           </h3>
 
-          <form method="POST" action="<?= url('admin/products.php') ?>" style="display:grid; grid-template-columns:1fr 1fr 1.5fr auto; gap:8px; margin-bottom:1rem;">
+          <form method="POST" action="<?= url('admin/products.php') ?>" style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:1rem;">
             <?= csrf_field() ?>
             <input type="hidden" name="action" value="add_tier">
             <input type="hidden" name="product_id" value="<?= $editProduct['id'] ?>">
-            <input type="number" name="min_quantity" class="form-control" style="font-size:0.8rem; height:34px;" placeholder="Min Qty" required>
-            <input type="number" name="max_quantity" class="form-control" style="font-size:0.8rem; height:34px;" placeholder="Max Qty">
-            <input type="number" step="0.1" name="discount_percent" class="form-control" style="font-size:0.8rem; height:34px;" placeholder="Discount %" required>
+            <input type="number" name="min_quantity" class="form-control" style="font-size:0.8rem; height:34px; flex:1 1 80px;" placeholder="Min Qty" required>
+            <input type="number" name="max_quantity" class="form-control" style="font-size:0.8rem; height:34px; flex:1 1 80px;" placeholder="Max Qty">
+            <input type="number" step="0.1" name="discount_percent" class="form-control" style="font-size:0.8rem; height:34px; flex:1 1 80px;" placeholder="Discount %" required>
             <button type="submit" class="btn btn-primary btn-sm" style="height:34px;">+ Add</button>
           </form>
 
@@ -1157,7 +1471,34 @@ $products = db_fetch_all($sql, $params);
       </div>
 
     </div>
+  </div> <!-- /#tab-variations -->
   <?php endif; ?>
+
+  <script>
+  function switchProductTab(tabId, btn) {
+    document.querySelectorAll('.product-tab-pane').forEach(function(pane) {
+      pane.style.display = 'none';
+    });
+    document.querySelectorAll('#productEditTabs .admin-tab-btn').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    var target = document.getElementById(tabId);
+    if (target) {
+      target.style.display = 'block';
+    }
+    if (btn) {
+      btn.classList.add('active');
+    }
+    history.replaceState(null, null, '#' + tabId);
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    var hash = window.location.hash.replace('#', '');
+    if (hash && document.getElementById(hash)) {
+      var btn = document.querySelector('#productEditTabs button[data-tab="' + hash + '"]');
+      if (btn) switchProductTab(hash, btn);
+    }
+  });
+  </script>
 
 <?php else: ?>
   <!-- ===================================================================== -->
@@ -1246,7 +1587,7 @@ $products = db_fetch_all($sql, $params);
                 </td>
 
                 <td>
-                  <a href="<?= url('admin/variations.php?product_id=' . $p['id']) ?>" class="badge" style="background:rgba(185,154,97,0.15); color:var(--navy); font-weight:700; text-decoration:none;">
+                  <a href="<?= url('admin/products.php?action=edit&id=' . $p['id'] . '#tab-variations') ?>" class="badge" style="background:rgba(185,154,97,0.15); color:var(--admin-gold); font-weight:700; text-decoration:none;">
                     <?= $p['variation_count'] ?> variations &rarr;
                   </a>
                 </td>

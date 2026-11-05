@@ -42,7 +42,7 @@ require_once __DIR__ . '/../includes/header.php';
         <div class="section-label" style="justify-content:center;">Client Portal</div>
         <h2>Create an Account</h2>
         <p style="font-size:0.9rem; color:var(--slate);">
-          Manage your artwork files, track quotations, and follow production progress in real-time.
+          Manage your printing enquiries, review transparent quotations, and communicate directly with our commercial team.
         </p>
       </div>
 

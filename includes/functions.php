@@ -17,6 +17,10 @@ function e(?string $value): string {
  * Generate application URL
  */
 function url(string $path = ''): string {
+    $trimmed = trim($path);
+    if (strpos($trimmed, 'http://') === 0 || strpos($trimmed, 'https://') === 0 || strpos($trimmed, '//') === 0) {
+        return $trimmed;
+    }
     $cleanPath = ltrim($path, '/');
     return BASE_URL . $cleanPath;
 }
@@ -178,7 +182,7 @@ function generate_ref(string $prefix = 'OP'): string {
 /**
  * Settings Cache & Getter
  */
-function get_setting(string $key, string $default = ''): string {
+function &get_settings_cache(): array {
     static $settingsCache = null;
     if ($settingsCache === null) {
         $settingsCache = [];
@@ -187,7 +191,12 @@ function get_setting(string $key, string $default = ''): string {
             $settingsCache[$row['setting_key']] = $row['setting_value'];
         }
     }
-    return $settingsCache[$key] ?? $default;
+    return $settingsCache;
+}
+
+function get_setting(string $key, string $default = ''): string {
+    $cache = &get_settings_cache();
+    return $cache[$key] ?? $default;
 }
 
 /**
@@ -204,6 +213,8 @@ function set_setting(string $key, string $value, string $group = 'general'): boo
             'group_name' => $group
         ]);
     }
+    $cache = &get_settings_cache();
+    $cache[$key] = $value;
     return true;
 }
 

@@ -1,26 +1,188 @@
 /**
- * ORDERPRINTEX — Admin Portal Dynamic Calculations & Controls
+ * ORDERPRINTEX — Enterprise Admin Panel Interactive Controls
+ * Sidebar, Quotation Calculator, Modals, Confirmations & Previews
  */
 
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  // 1. Admin Sidebar Toggle for Small Screens
-  const sidebarToggle = document.querySelector('.dashboard-sidebar-toggle');
-  const sidebar = document.querySelector('.dashboard-sidebar');
-  if (sidebarToggle && sidebar) {
-    sidebarToggle.addEventListener('click', function () {
-      sidebar.classList.toggle('open');
+  // 1. Sidebar Scroll Persistence & Active Link Visibility (Fix for Sidebar Scroll Reset Bug)
+  const sidebarNav = document.getElementById('adminSidebarNav');
+  const activeLink = document.querySelector('.sidebar-link.active');
+
+  function saveSidebarScroll() {
+    if (sidebarNav) {
+      try {
+        sessionStorage.setItem('op_admin_sidebar_scroll', sidebarNav.scrollTop);
+      } catch (e) {}
+    }
+  }
+
+  if (sidebarNav) {
+    // Restore scroll position if saved
+    try {
+      const savedScroll = sessionStorage.getItem('op_admin_sidebar_scroll');
+      if (savedScroll !== null) {
+        sidebarNav.scrollTop = parseInt(savedScroll, 10);
+      }
+    } catch (e) {}
+
+    // Track scroll position on user scroll
+    sidebarNav.addEventListener('scroll', saveSidebarScroll, { passive: true });
+
+    // Save scroll before navigating via any sidebar link
+    sidebarNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function () {
+        saveSidebarScroll();
+        if (window.innerWidth <= 992) {
+          closeSidebar();
+        }
+      });
     });
 
-    document.addEventListener('click', function (e) {
-      if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target) && sidebar.classList.contains('open')) {
-        sidebar.classList.remove('open');
+    // Ensure active link is scrolled into view smoothly if not already visible
+    if (activeLink) {
+      setTimeout(() => {
+        const navRect = sidebarNav.getBoundingClientRect();
+        const linkRect = activeLink.getBoundingClientRect();
+        if (linkRect.top < navRect.top + 30 || linkRect.bottom > navRect.bottom - 30) {
+          activeLink.scrollIntoView({ block: 'nearest', behavior: 'auto' });
+          saveSidebarScroll();
+        }
+      }, 50);
+    }
+  }
+
+  window.addEventListener('beforeunload', saveSidebarScroll);
+
+  // 1B. Mobile Sidebar Drawer & Touch Backdrop
+  const sidebarToggle = document.querySelector('.dashboard-sidebar-toggle');
+  const sidebarClose = document.getElementById('sidebarCloseBtn');
+  const sidebar = document.querySelector('.dashboard-sidebar');
+  let overlay = document.querySelector('.sidebar-overlay');
+
+  if (!overlay && sidebar) {
+    overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+    document.body.appendChild(overlay);
+  }
+
+  function openSidebar() {
+    if (sidebar) sidebar.classList.add('open');
+    if (overlay) overlay.classList.add('open');
+    document.body.classList.add('sidebar-open');
+  }
+
+  function closeSidebar() {
+    if (sidebar) sidebar.classList.remove('open');
+    if (overlay) overlay.classList.remove('open');
+    document.body.classList.remove('sidebar-open');
+  }
+
+  if (sidebarToggle) {
+    sidebarToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (sidebar && sidebar.classList.contains('open')) {
+        closeSidebar();
+      } else {
+        openSidebar();
       }
     });
   }
 
-  // 2. Quotation Line Items Repeater & Dynamic Calculation
+  if (sidebarClose) {
+    sidebarClose.addEventListener('click', function (e) {
+      e.stopPropagation();
+      closeSidebar();
+    });
+  }
+
+  if (overlay) {
+    overlay.addEventListener('click', closeSidebar);
+  }
+
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 992 && sidebar && sidebar.classList.contains('open')) {
+      closeSidebar();
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      closeSidebar();
+      closeAllModals();
+    }
+  });
+
+  // 2. Modals Management
+  function closeAllModals() {
+    document.querySelectorAll('.modal-backdrop.open').forEach(modal => {
+      modal.classList.remove('open');
+    });
+  }
+
+  document.querySelectorAll('[data-modal-open]').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const targetId = btn.getAttribute('data-modal-open');
+      const targetModal = document.getElementById(targetId);
+      if (targetModal) {
+        targetModal.classList.add('open');
+      }
+    });
+  });
+
+  document.querySelectorAll('.modal-close, [data-modal-close]').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const modal = btn.closest('.modal-backdrop');
+      if (modal) modal.classList.remove('open');
+    });
+  });
+
+  document.querySelectorAll('.modal-backdrop').forEach(modal => {
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) {
+        modal.classList.remove('open');
+      }
+    });
+  });
+
+  // 3. Destructive Action Confirmation
+  document.querySelectorAll('[data-confirm]').forEach(el => {
+    el.addEventListener('click', function (e) {
+      const msg = el.getAttribute('data-confirm') || 'Are you sure you want to perform this action?';
+      if (!confirm(msg)) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    });
+  });
+
+  // 4. File Upload Image Preview
+  document.querySelectorAll('input[type="file"][data-preview-target]').forEach(input => {
+    input.addEventListener('change', function () {
+      const targetSelector = input.getAttribute('data-preview-target');
+      const targetEl = document.querySelector(targetSelector);
+      if (!targetEl || !input.files || !input.files[0]) return;
+
+      const file = input.files[0];
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          if (targetEl.tagName.toLowerCase() === 'img') {
+            targetEl.src = e.target.result;
+            targetEl.style.display = 'block';
+          } else {
+            targetEl.style.backgroundImage = 'url(' + e.target.result + ')';
+            targetEl.style.backgroundSize = 'cover';
+            targetEl.style.backgroundPosition = 'center';
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  });
+
+  // 5. Quotation Line Items Dynamic Calculator
   const itemsContainer = document.getElementById('quotation_items_body');
   const addItemBtn = document.getElementById('add_quotation_item_btn');
   const subtotalEl = document.getElementById('calc_subtotal');
@@ -60,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (grandTotalEl) grandTotalEl.textContent = '₹' + grandTotal.toFixed(2);
 
-    // Update hidden inputs if present
+    // Update hidden inputs
     const hiddenSubtotal = document.getElementById('hidden_subtotal');
     const hiddenTax = document.getElementById('hidden_tax_amount');
     const hiddenGrand = document.getElementById('hidden_grand_total');
@@ -71,11 +233,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (itemsContainer) {
     itemsContainer.addEventListener('input', calculateQuotation);
-
     if (taxRateInput) taxRateInput.addEventListener('input', calculateQuotation);
     if (deliveryInput) deliveryInput.addEventListener('input', calculateQuotation);
-
-    // Initial calculation
     calculateQuotation();
   }
 
@@ -101,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function () {
           ₹0.00
         </td>
         <td style="width: 60px; text-align: center;">
-          <button type="button" class="btn btn-sm btn-outline text-crimson remove-row-btn">&times;</button>
+          <button type="button" class="btn btn-sm btn-outline text-crimson remove-row-btn" title="Remove Item">&times;</button>
         </td>
       `;
       itemsContainer.appendChild(tr);
@@ -114,7 +273,6 @@ document.addEventListener('DOMContentLoaded', function () {
       calculateQuotation();
     });
 
-    // Attach remove to existing rows
     itemsContainer.querySelectorAll('.remove-row-btn').forEach(btn => {
       btn.addEventListener('click', function () {
         btn.closest('.quote-item-row').remove();

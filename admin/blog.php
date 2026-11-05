@@ -3,10 +3,16 @@
  * OrderPrintex - Admin Blog Management CMS
  */
 
-$adminTitle = "Blog & Content Management";
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/database.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/seo_helper.php';
 
-// Handle Blog Actions
+require_admin();
+$adminUser = auth_user();
+
+// Handle Blog Actions (Processed before header output to avoid "headers already sent" warnings)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if (!csrf_verify()) {
         set_flash('error', 'Security token expired. Please try again.');
@@ -79,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             }
 
             db_update('blog_posts', $updateData, 'id = :id', ['id' => $postId]);
+            @seo_sync_all();
             log_activity($adminUser['id'], 'update_blog_post', "Updated article: {$title}");
             set_flash('success', "Article '{$title}' updated successfully.");
         } else {
@@ -104,6 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 'seo_description' => $seoDesc
             ]);
 
+            @seo_sync_all();
             log_activity($adminUser['id'], 'create_blog_post', "Published new article: {$title}");
             set_flash('success', "New article '{$title}' created successfully.");
         }
@@ -118,6 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $post = db_fetch_one("SELECT title FROM blog_posts WHERE id = :id", ['id' => $postId]);
         if ($post) {
             db_delete('blog_posts', 'id = :id', ['id' => $postId]);
+            @seo_sync_all();
             log_activity($adminUser['id'], 'delete_blog_post', "Deleted article: {$post['title']}");
             set_flash('success', "Article '{$post['title']}' deleted.");
         }
@@ -142,6 +151,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         exit;
     }
 }
+
+$adminTitle = "Blog & Content Management";
+require_once __DIR__ . '/header.php';
 
 // Fetch categories
 $categories = db_fetch_all("SELECT * FROM blog_categories ORDER BY name ASC");
@@ -215,7 +227,7 @@ $posts = db_fetch_all($sql, $params);
                 <input type="hidden" name="action" value="save_post">
                 <input type="hidden" name="post_id" value="<?= $editPost ? $editPost['id'] : 0 ?>">
 
-                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+                <div class="admin-split-grid">
                     <!-- Left: Content & Hierarchy -->
                     <div style="display: flex; flex-direction: column; gap: 16px;">
                         <div class="form-group">
@@ -224,7 +236,7 @@ $posts = db_fetch_all($sql, $params);
                                    value="<?= e($editPost['title'] ?? '') ?>" placeholder="e.g. Complete Guide to Business Card Printing: Paper Weights & Finishes">
                         </div>
 
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div class="admin-form-2col">
                             <div class="form-group">
                                 <label class="form-label">SEO Clean Slug (URL)</label>
                                 <input type="text" name="slug" class="form-input" 
@@ -303,7 +315,7 @@ $posts = db_fetch_all($sql, $params);
                                     <input type="text" name="read_time" class="form-input form-input-sm" value="<?= e($editPost['read_time'] ?? '5 min read') ?>" placeholder="e.g. 6 min read">
                                 </div>
 
-                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 600; color: #b45309; background: #fef3c7; padding: 8px 12px; border-radius: 4px;">
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 600; color: #FBBF24; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); padding: 8px 12px; border-radius: 6px;">
                                     <input type="checkbox" name="is_sample" value="1" <?= (!isset($editPost) || $editPost['is_sample']) ? 'checked' : '' ?>>
                                     Mark as Demo / Sample Article
                                 </label>
@@ -317,7 +329,7 @@ $posts = db_fetch_all($sql, $params);
                             </div>
                             <div class="admin-card-body" style="padding: 16px;">
                                 <?php if (!empty($editPost['featured_image'])): ?>
-                                    <div style="margin-bottom: 12px; border-radius: 4px; overflow: hidden; border: 1px solid var(--color-border); height: 160px; background: #eee;">
+                                    <div style="margin-bottom: 12px; border-radius: 4px; overflow: hidden; border: 1px solid var(--color-border); height: 160px; background: var(--admin-bg-card-secondary, #171C2B);">
                                         <img src="<?= asset_url($editPost['featured_image']) ?>" alt="Article Image" style="width: 100%; height: 100%; object-fit: cover;">
                                     </div>
                                     <input type="hidden" name="featured_image_path" value="<?= e($editPost['featured_image']) ?>">
@@ -343,7 +355,7 @@ $posts = db_fetch_all($sql, $params);
 <?php else: ?>
     <!-- ARTICLES LISTING TABLE -->
     <div class="admin-filter-bar">
-        <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+        <div class="admin-filter-tabs">
             <a href="<?= url('admin/blog.php') ?>" class="admin-tab-btn <?= (empty($categoryFilter) && empty($statusFilter)) ? 'active' : '' ?>">
                 All Articles (<?= count($posts) ?>)
             </a>
@@ -360,7 +372,7 @@ $posts = db_fetch_all($sql, $params);
             <?php endforeach; ?>
         </div>
 
-        <form method="GET" action="<?= url('admin/blog.php') ?>" class="admin-search-form" style="display: flex; gap: 8px;">
+        <form method="GET" action="<?= url('admin/blog.php') ?>" class="admin-search-form">
             <?php if ($categoryFilter): ?>
                 <input type="hidden" name="category" value="<?= $categoryFilter ?>">
             <?php endif; ?>
@@ -398,7 +410,7 @@ $posts = db_fetch_all($sql, $params);
                         <?php foreach ($posts as $p): ?>
                             <tr>
                                 <td>
-                                    <div style="width: 50px; height: 50px; border-radius: 4px; overflow: hidden; background: #eee; border: 1px solid var(--color-border);">
+                                    <div style="width: 50px; height: 50px; border-radius: 4px; overflow: hidden; background: var(--admin-bg-card-secondary, #171C2B); border: 1px solid var(--color-border);">
                                         <img src="<?= asset_url($p['featured_image'] ?: 'assets/images/branding_stationery.jpg') ?>" alt="Thumb" style="width: 100%; height: 100%; object-fit: cover;">
                                     </div>
                                 </td>
@@ -422,7 +434,7 @@ $posts = db_fetch_all($sql, $params);
                                 </td>
                                 <td>
                                     <?php if ($p['is_sample']): ?>
-                                        <span class="badge" style="background:#fef3c7; color:#b45309; font-size: 0.7rem; border:1px solid #fde68a;">Sample Demo</span>
+                                        <span class="badge" style="background:rgba(245, 158, 11, 0.15); color:#FBBF24; font-size: 0.7rem; border:1px solid rgba(245, 158, 11, 0.3);">Sample Demo</span>
                                     <?php else: ?>
                                         <span class="badge badge-info" style="font-size: 0.7rem;">Original</span>
                                     <?php endif; ?>

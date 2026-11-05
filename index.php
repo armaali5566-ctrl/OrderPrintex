@@ -288,11 +288,6 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
             <?php if (!empty($prod['badge'])): ?>
               <span class="product-badge-tag"><?= e($prod['badge']) ?></span>
             <?php endif; ?>
-            <button type="button" class="btn-wishlist" onclick="event.stopPropagation(); toggleWishlist(<?= $prod['id'] ?>, this)" title="Save to Wishlist" style="position:absolute; top:12px; right:12px; z-index:5;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-              </svg>
-            </button>
             <img src="<?= url($prod['image_url'] ?: 'assets/images/placeholder.jpg') ?>" 
                  alt="<?= e($prod['title']) ?> - OrderPrintex" 
                  loading="lazy" 
@@ -324,13 +319,6 @@ $heroDesc = get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF
                 <span class="price-unit"><?= e($prod['price_unit']) ?></span>
               </div>
               <span class="product-min-order"><?= e($prod['min_order']) ?></span>
-            </div>
-
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.6rem; margin-bottom:0.6rem; padding-top:0.5rem; border-top:1px solid #28221b;">
-              <label class="compare-checkbox-label">
-                <input type="checkbox" class="opx-compare-cb" data-product-id="<?= $prod['id'] ?>" onchange="toggleCompareProduct(<?= $prod['id'] ?>, this)">
-                Compare
-              </label>
             </div>
 
             <div class="product-card-actions">

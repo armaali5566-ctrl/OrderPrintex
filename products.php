@@ -159,11 +159,6 @@ $products = get_catalog_products($categorySlug, $searchTerm);
               <span class="product-badge-tag <?= e($badgeClass) ?>">
                 <?= e($badgeText) ?>
               </span>
-              <button type="button" class="btn-wishlist" onclick="event.stopPropagation(); toggleWishlist(<?= $prod['id'] ?>, this)" title="Save to Wishlist" style="position:absolute; top:12px; right:12px; z-index:5;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                </svg>
-              </button>
               <img src="<?= url(e($prod['image_url'])) ?>" alt="<?= e($prod['title']) ?> - Industrial Commercial Printing" loading="lazy">
             </div>
             <div class="product-body">
@@ -200,19 +195,12 @@ $products = get_catalog_products($categorySlug, $searchTerm);
                 <?php endif; ?>
               </div>
 
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.6rem; margin-bottom:0.6rem; padding-top:0.5rem; border-top:1px solid #28221b;">
-                <label class="compare-checkbox-label">
-                  <input type="checkbox" class="opx-compare-cb" data-product-id="<?= $prod['id'] ?>" onchange="toggleCompareProduct(<?= $prod['id'] ?>, this)">
-                  Compare
-                </label>
-              </div>
-
-              <div class="product-card-actions">
+              <div class="product-card-actions" style="margin-top:0.75rem;">
                 <a href="<?= product_url($prod['slug']) ?>" class="btn btn-outline" aria-label="View details for <?= e($prod['title']) ?>">
                   View Details
                 </a>
                 <a href="<?= url('get-quote/?service_slug=' . urlencode($prod['service_slug'] ?? '')) ?>" class="btn btn-primary" aria-label="Request quote for <?= e($prod['title']) ?>">
-                  Order / Quote
+                  Request Quote
                 </a>
               </div>
             </div>

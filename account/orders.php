@@ -11,6 +11,10 @@ require_once __DIR__ . '/../includes/auth.php';
 require_auth();
 $user = auth_user();
 
+// OrderPrintex has transitioned to an Enquiry & Quotation business model. Orders interface redirected to Quotations.
+header('Location: ' . url('account/quotations.php'));
+exit;
+
 $orders = db_fetch_all("
     SELECT o.*, q.quote_number, e.service_name
     FROM orders o

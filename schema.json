@@ -1,0 +1,1090 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "ProfessionalService",
+            "@id": "http://localhost/OrderPrintex/#organization",
+            "name": "OrderPrintex",
+            "legalName": "OrderPrintex Commercial Printing Studio",
+            "url": "http://localhost/OrderPrintex/",
+            "logo": "http://localhost/OrderPrintex/assets/images/logo.png",
+            "image": "http://localhost/OrderPrintex/assets/images/logo.png",
+            "description": "OrderPrintex is India's premier bulk manufacturer of DTF apparel transfers, UV DTF decals, custom streetwear t-shirts, and corporate merchandise with pan-India express dispatch.",
+            "email": "contact@orderprintex.com",
+            "telephone": "+91 93540 28199",
+            "priceRange": "₹₹",
+            "currenciesAccepted": "INR",
+            "paymentAccepted": "Bank Transfer, UPI, Commercial Invoice, Credit Card",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Okhla Industrial Area, Phase II, New Delhi - 110020",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110020",
+                "addressCountry": "IN"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 28.5355,
+                "longitude": 77.2713
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
+                    ],
+                    "opens": "09:30",
+                    "closes": "19:30"
+                }
+            ],
+            "areaServed": [
+                {
+                    "@type": "Country",
+                    "name": "India"
+                },
+                {
+                    "@type": "City",
+                    "name": "Delhi NCR"
+                },
+                {
+                    "@type": "City",
+                    "name": "Mumbai"
+                },
+                {
+                    "@type": "City",
+                    "name": "Bengaluru"
+                }
+            ],
+            "sameAs": [
+                "https://www.facebook.com/orderprintex",
+                "https://www.instagram.com/orderprintex",
+                "https://www.linkedin.com/company/orderprintex"
+            ]
+        },
+        {
+            "@type": "WebSite",
+            "@id": "http://localhost/OrderPrintex/#website",
+            "name": "OrderPrintex",
+            "url": "http://localhost/OrderPrintex/",
+            "description": "OrderPrintex is India's premier bulk manufacturer of DTF apparel transfers, UV DTF decals, custom streetwear t-shirts, and corporate merchandise with pan-India express dispatch.",
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "http://localhost/OrderPrintex/products/?search={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "http://localhost/OrderPrintex/#webpage",
+            "url": "http://localhost/OrderPrintex/",
+            "name": "OrderPrintex",
+            "isPartOf": {
+                "@id": "http://localhost/OrderPrintex/#website"
+            },
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "http://localhost/OrderPrintex/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "OrderPrintex",
+                        "item": "http://localhost/OrderPrintex/"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "http://localhost/OrderPrintex/products/#webpage",
+            "url": "http://localhost/OrderPrintex/products/",
+            "name": "Commercial Print Product Catalog | OrderPrintex",
+            "isPartOf": {
+                "@id": "http://localhost/OrderPrintex/#website"
+            },
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "http://localhost/OrderPrintex/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Commercial Print Product Catalog | OrderPrintex",
+                        "item": "http://localhost/OrderPrintex/products/"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "http://localhost/OrderPrintex/services/#webpage",
+            "url": "http://localhost/OrderPrintex/services/",
+            "name": "Printing & Manufacturing Services | OrderPrintex",
+            "isPartOf": {
+                "@id": "http://localhost/OrderPrintex/#website"
+            },
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "http://localhost/OrderPrintex/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Printing & Manufacturing Services | OrderPrintex",
+                        "item": "http://localhost/OrderPrintex/services/"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "http://localhost/OrderPrintex/pricing/#webpage",
+            "url": "http://localhost/OrderPrintex/pricing/",
+            "name": "Trade Pricing & Volume Discount Tiers | OrderPrintex",
+            "isPartOf": {
+                "@id": "http://localhost/OrderPrintex/#website"
+            },
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "http://localhost/OrderPrintex/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Trade Pricing & Volume Discount Tiers | OrderPrintex",
+                        "item": "http://localhost/OrderPrintex/pricing/"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "http://localhost/OrderPrintex/get-quote/#webpage",
+            "url": "http://localhost/OrderPrintex/get-quote/",
+            "name": "Request a Custom Print Quotation | OrderPrintex",
+            "isPartOf": {
+                "@id": "http://localhost/OrderPrintex/#website"
+            },
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "http://localhost/OrderPrintex/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Request a Custom Print Quotation | OrderPrintex",
+                        "item": "http://localhost/OrderPrintex/get-quote/"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "http://localhost/OrderPrintex/gallery/#webpage",
+            "url": "http://localhost/OrderPrintex/gallery/",
+            "name": "Production Portfolio & Showcase | OrderPrintex",
+            "isPartOf": {
+                "@id": "http://localhost/OrderPrintex/#website"
+            },
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "http://localhost/OrderPrintex/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Production Portfolio & Showcase | OrderPrintex",
+                        "item": "http://localhost/OrderPrintex/gallery/"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "http://localhost/OrderPrintex/blog/#webpage",
+            "url": "http://localhost/OrderPrintex/blog/",
+            "name": "Printing Knowledge Base & Prepress Guides | OrderPrintex",
+            "isPartOf": {
+                "@id": "http://localhost/OrderPrintex/#website"
+            },
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "http://localhost/OrderPrintex/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Printing Knowledge Base & Prepress Guides | OrderPrintex",
+                        "item": "http://localhost/OrderPrintex/blog/"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "http://localhost/OrderPrintex/about/#webpage",
+            "url": "http://localhost/OrderPrintex/about/",
+            "name": "About Our Facility & Printing Studio | OrderPrintex",
+            "isPartOf": {
+                "@id": "http://localhost/OrderPrintex/#website"
+            },
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "http://localhost/OrderPrintex/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "About Our Facility & Printing Studio | OrderPrintex",
+                        "item": "http://localhost/OrderPrintex/about/"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "http://localhost/OrderPrintex/faq/#webpage",
+            "url": "http://localhost/OrderPrintex/faq/",
+            "name": "Frequently Asked Questions | OrderPrintex",
+            "isPartOf": {
+                "@id": "http://localhost/OrderPrintex/#website"
+            },
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "http://localhost/OrderPrintex/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Frequently Asked Questions | OrderPrintex",
+                        "item": "http://localhost/OrderPrintex/faq/"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "http://localhost/OrderPrintex/contact/#webpage",
+            "url": "http://localhost/OrderPrintex/contact/",
+            "name": "Contact & Factory Location | OrderPrintex",
+            "isPartOf": {
+                "@id": "http://localhost/OrderPrintex/#website"
+            },
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "http://localhost/OrderPrintex/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Contact & Factory Location | OrderPrintex",
+                        "item": "http://localhost/OrderPrintex/contact/"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "Service",
+            "@id": "http://localhost/OrderPrintex/services/dtf-printing/#service",
+            "name": "DTF Printing",
+            "url": "http://localhost/OrderPrintex/services/dtf-printing/",
+            "serviceType": "Commercial Printing",
+            "provider": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "description": "Industrial printing service.",
+            "areaServed": {
+                "@type": "Country",
+                "name": "India"
+            }
+        },
+        {
+            "@type": "Service",
+            "@id": "http://localhost/OrderPrintex/services/uv-dtf-printing/#service",
+            "name": "UV DTF Printing",
+            "url": "http://localhost/OrderPrintex/services/uv-dtf-printing/",
+            "serviceType": "Commercial Printing",
+            "provider": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "description": "Industrial printing service.",
+            "areaServed": {
+                "@type": "Country",
+                "name": "India"
+            }
+        },
+        {
+            "@type": "Service",
+            "@id": "http://localhost/OrderPrintex/services/t-shirt-printing/#service",
+            "name": "T-Shirt Printing",
+            "url": "http://localhost/OrderPrintex/services/t-shirt-printing/",
+            "serviceType": "Commercial Printing",
+            "provider": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "description": "Industrial printing service.",
+            "areaServed": {
+                "@type": "Country",
+                "name": "India"
+            }
+        },
+        {
+            "@type": "Service",
+            "@id": "http://localhost/OrderPrintex/services/corporate-printing/#service",
+            "name": "Corporate Printing",
+            "url": "http://localhost/OrderPrintex/services/corporate-printing/",
+            "serviceType": "Commercial Printing",
+            "provider": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "description": "Industrial printing service.",
+            "areaServed": {
+                "@type": "Country",
+                "name": "India"
+            }
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/custom-uv-dtf-decal-sheet/#product",
+            "name": "Transfer Sheet",
+            "url": "http://localhost/OrderPrintex/product/custom-uv-dtf-decal-sheet/",
+            "image": "http://localhost/OrderPrintex/assets/images/uv_dtf_drinkware.jpg",
+            "description": "Waterproof, scratch-resistant 3D embossed stickers with spot varnish. Bonds instantly to glass, metal, plastic, wood, and acrylic with zero heat pressing.",
+            "sku": "UV-001",
+            "category": "UV DTF Decals",
+            "brand": {
+                "@type": "Brand",
+                "name": "OrderPrintex"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/custom-uv-dtf-decal-sheet/",
+                "priceCurrency": "INR",
+                "price": "0.00",
+                "availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition"
+            },
+            "additionalProperty": [
+                {
+                    "@type": "PropertyValue",
+                    "name": "Lead Time",
+                    "value": "24-48 Hours"
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "Minimum Order Quantity",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/streetwear-oversized-tee/#product",
+            "name": "Heavyweight 240 GSM Oversized Streetwear T-Shirt",
+            "url": "http://localhost/OrderPrintex/product/streetwear-oversized-tee/",
+            "image": "http://localhost/OrderPrintex/assets/images/custom_tshirt_apparel.jpg",
+            "description": "Luxury heavyweight drop-shoulder streetwear t-shirt printed with high-density DTF graphics. Super-combed pre-shrunk cotton single jersey.",
+            "sku": "STR-001",
+            "category": "Custom T-Shirts",
+            "brand": {
+                "@type": "Brand",
+                "name": "OrderPrintex"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/streetwear-oversized-tee/",
+                "priceCurrency": "INR",
+                "price": "0.00",
+                "availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition"
+            },
+            "additionalProperty": [
+                {
+                    "@type": "PropertyValue",
+                    "name": "Lead Time",
+                    "value": "24-48 Hours"
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "Minimum Order Quantity",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/thermal-sipper-bottle/#product",
+            "name": "Laser-Engraved Vacuum Thermal Sipper Bottle (750ml)",
+            "url": "http://localhost/OrderPrintex/product/thermal-sipper-bottle/",
+            "image": "http://localhost/OrderPrintex/assets/images/corporate_swag_kit.jpg",
+            "description": "Double-wall stainless steel thermal bottle with laser-etched or full-color UV DTF company branding. 12hr hot / 24hr cold retention.",
+            "sku": "BTL-001",
+            "category": "Corporate Merchandise",
+            "brand": {
+                "@type": "Brand",
+                "name": "OrderPrintex"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/thermal-sipper-bottle/",
+                "priceCurrency": "INR",
+                "price": "0.00",
+                "availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition"
+            },
+            "additionalProperty": [
+                {
+                    "@type": "PropertyValue",
+                    "name": "Lead Time",
+                    "value": "24-48 Hours"
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "Minimum Order Quantity",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/apparel-mailer-box/#product",
+            "name": "Custom Branded Matte Black Apparel Mailer Box",
+            "url": "http://localhost/OrderPrintex/product/apparel-mailer-box/",
+            "image": "http://localhost/OrderPrintex/assets/images/packaging_box.jpg",
+            "description": "Rigid corrugated e-commerce shipping box with metallic gold foil logo and UV spot gloss. Luxury unboxing for apparel brands.",
+            "sku": "BOX-001",
+            "category": "Packaging & Boxes",
+            "brand": {
+                "@type": "Brand",
+                "name": "OrderPrintex"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/apparel-mailer-box/",
+                "priceCurrency": "INR",
+                "price": "0.00",
+                "availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition"
+            },
+            "additionalProperty": [
+                {
+                    "@type": "PropertyValue",
+                    "name": "Lead Time",
+                    "value": "24-48 Hours"
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "Minimum Order Quantity",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/holographic-stickers/#product",
+            "name": "Die-Cut Holographic & UV DTF Sticker Pack",
+            "url": "http://localhost/OrderPrintex/product/holographic-stickers/",
+            "image": "http://localhost/OrderPrintex/assets/images/custom_stickers.jpg",
+            "description": "Die-cut rainbow holographic vinyl decals and 3D textured UV DTF stickers. 100% weatherproof and UV-resistant for laptops & bottles.",
+            "sku": "STK-001",
+            "category": "Custom Stickers",
+            "brand": {
+                "@type": "Brand",
+                "name": "OrderPrintex"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/holographic-stickers/",
+                "priceCurrency": "INR",
+                "price": "0.00",
+                "availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition"
+            },
+            "additionalProperty": [
+                {
+                    "@type": "PropertyValue",
+                    "name": "Lead Time",
+                    "value": "24-48 Hours"
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "Minimum Order Quantity",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/bio-washed-cotton-tee/#product",
+            "name": "180 GSM Bio-Washed Combed Cotton Printed T-Shirt",
+            "url": "http://localhost/OrderPrintex/product/bio-washed-cotton-tee/",
+            "image": "http://localhost/OrderPrintex/assets/images/streetwear_tee.jpg",
+            "description": "Breathable everyday crewneck t-shirt with soft-hand DTF breast and back prints. Ideal for team uniforms and retail brand drops.",
+            "sku": "TEE-001",
+            "category": "Custom T-Shirts",
+            "brand": {
+                "@type": "Brand",
+                "name": "OrderPrintex"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/bio-washed-cotton-tee/",
+                "priceCurrency": "INR",
+                "price": "0.00",
+                "availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition"
+            },
+            "additionalProperty": [
+                {
+                    "@type": "PropertyValue",
+                    "name": "Lead Time",
+                    "value": "24-48 Hours"
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "Minimum Order Quantity",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/executive-welcome-hamper/#product",
+            "name": "Executive Welcome Gift Hamper & Corporate Swag Kit",
+            "url": "http://localhost/OrderPrintex/product/executive-welcome-hamper/",
+            "image": "http://localhost/OrderPrintex/assets/images/branding_stationery.jpg",
+            "description": "Curated VIP gift bundle featuring custom ceramic mug, hardbound diary, metal pen, and branded apparel inside a presentation box.",
+            "sku": "HMP-001",
+            "category": "Custom Stationery",
+            "brand": {
+                "@type": "Brand",
+                "name": "OrderPrintex"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/executive-welcome-hamper/",
+                "priceCurrency": "INR",
+                "price": "0.00",
+                "availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition"
+            },
+            "additionalProperty": [
+                {
+                    "@type": "PropertyValue",
+                    "name": "Lead Time",
+                    "value": "24-48 Hours"
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "Minimum Order Quantity",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/bookmark-03/#product",
+            "name": "Custom Printed Promotional Paper Bookmarks",
+            "url": "http://localhost/OrderPrintex/product/bookmark-03/",
+            "image": "http://localhost/OrderPrintex/assets/images/branding_stationery.jpg",
+            "description": "Premium double-sided printed bookmarks with velvet soft-touch lamination, foil accents, and rounded corner options for authors and brands.",
+            "sku": "BKM-001",
+            "category": "Custom Stationery",
+            "brand": {
+                "@type": "Brand",
+                "name": "OrderPrintex"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/bookmark-03/",
+                "priceCurrency": "INR",
+                "price": "0.00",
+                "availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition"
+            },
+            "review": [
+                {
+                    "@type": "Review",
+                    "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": "5",
+                        "bestRating": "5"
+                    },
+                    "author": {
+                        "@type": "Person",
+                        "name": "Aarav Mehta"
+                    },
+                    "reviewBody": "The 350 GSM cardstock with matte lamination feels ultra premium. Fast delivery to Mumbai."
+                }
+            ],
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "5",
+                "reviewCount": "1",
+                "bestRating": "5"
+            },
+            "additionalProperty": [
+                {
+                    "@type": "PropertyValue",
+                    "name": "Lead Time",
+                    "value": "24-48 Hours"
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "Minimum Order Quantity",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "@type": "BlogPosting",
+            "@id": "http://localhost/OrderPrintex/blog/dcd/#article",
+            "headline": "sd",
+            "url": "http://localhost/OrderPrintex/blog/dcd/",
+            "image": "http://localhost/OrderPrintex/assets/images/branding_stationery.jpg",
+            "description": "cddc",
+            "datePublished": "2026-11-05T05:09:33+05:30",
+            "dateModified": "2026-11-05T11:03:50+05:30",
+            "author": {
+                "@type": "Person",
+                "name": "OrderPrintex Editorial Team"
+            },
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://localhost/OrderPrintex/blog/dcd/"
+            }
+        },
+        {
+            "@type": "BlogPosting",
+            "@id": "http://localhost/OrderPrintex/blog/complete-guide-to-business-card-printing-778/#article",
+            "headline": "Complete Guide to Business Card Printing",
+            "url": "http://localhost/OrderPrintex/blog/complete-guide-to-business-card-printing-778/",
+            "image": "http://localhost/OrderPrintex/assets/images/branding_stationery.jpg",
+            "description": "Discover the essentials of business card printing, from choosing the right paper and finish to understanding sizes, layouts and design considerations. This beginner-friendly guide will help you prepare artwork for professional-looking business cards.",
+            "datePublished": "2026-11-05T05:07:12+05:30",
+            "dateModified": "2026-11-05T14:09:27+05:30",
+            "author": {
+                "@type": "Person",
+                "name": "OrderPrintex Editorial Team"
+            },
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://localhost/OrderPrintex/blog/complete-guide-to-business-card-printing-778/"
+            }
+        },
+        {
+            "@type": "BlogPosting",
+            "@id": "http://localhost/OrderPrintex/blog/complete-guide-to-business-card-printing/#article",
+            "headline": "Complete Guide to Business Card Printing: Paper Weights, Finishes & Design Tips",
+            "url": "http://localhost/OrderPrintex/blog/complete-guide-to-business-card-printing/",
+            "image": "http://localhost/OrderPrintex/assets/images/branding_stationery.jpg",
+            "description": "Discover everything you need to know about professional business card printing in India — from 350 vs 400 GSM cardstocks to soft-touch velvet lamination and gold foil stamping.",
+            "datePublished": "2026-11-02T08:55:04+05:30",
+            "dateModified": "2026-11-05T14:09:31+05:30",
+            "author": {
+                "@type": "Person",
+                "name": "OrderPrintex Prepress Team"
+            },
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://localhost/OrderPrintex/blog/complete-guide-to-business-card-printing/"
+            }
+        },
+        {
+            "@type": "BlogPosting",
+            "@id": "http://localhost/OrderPrintex/blog/dtf-printing-explained-guide/#article",
+            "headline": "DTF Printing Explained: Everything You Need to Know About Direct-to-Film Transfers",
+            "url": "http://localhost/OrderPrintex/blog/dtf-printing-explained-guide/",
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "description": "A comprehensive guide to Direct-to-Film (DTF) apparel printing: how it works, washability testing, pressing temperatures, and why it surpasses vinyl and screen printing.",
+            "datePublished": "2026-11-02T08:55:04+05:30",
+            "dateModified": "2026-11-02T08:55:04+05:30",
+            "author": {
+                "@type": "Person",
+                "name": "Rahul Sharma (Senior Prepress Engineer)"
+            },
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://localhost/OrderPrintex/blog/dtf-printing-explained-guide/"
+            }
+        },
+        {
+            "@type": "BlogPosting",
+            "@id": "http://localhost/OrderPrintex/blog/how-to-choose-the-right-paper/#article",
+            "headline": "How to Choose the Right Paper for Your Printing Project: GSM, Texture & Coatings",
+            "url": "http://localhost/OrderPrintex/blog/how-to-choose-the-right-paper/",
+            "image": "http://localhost/OrderPrintex/assets/images/packaging_box.jpg",
+            "description": "Confused between Art Card, Maplitho, Bond, and Textured Paper? Here is an expert breakdown of paper weights, fiber direction, and coating selections.",
+            "datePublished": "2026-11-02T08:55:04+05:30",
+            "dateModified": "2026-11-02T08:55:04+05:30",
+            "author": {
+                "@type": "Person",
+                "name": "OrderPrintex Editorial Team"
+            },
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://localhost/OrderPrintex/blog/how-to-choose-the-right-paper/"
+            }
+        },
+        {
+            "@type": "BlogPosting",
+            "@id": "http://localhost/OrderPrintex/blog/offset-vs-digital-printing/#article",
+            "headline": "Offset Printing vs Digital Printing: Key Differences, Costs & Turnaround Times",
+            "url": "http://localhost/OrderPrintex/blog/offset-vs-digital-printing/",
+            "image": "http://localhost/OrderPrintex/assets/images/corporate_swag_kit.jpg",
+            "description": "When should you choose digital printing versus offset lithography? Understand the break-even volume, color consistency, and turnaround advantages of each method.",
+            "datePublished": "2026-11-02T08:55:04+05:30",
+            "dateModified": "2026-11-05T13:26:55+05:30",
+            "author": {
+                "@type": "Person",
+                "name": "Vikas Verma (Production Manager)"
+            },
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://localhost/OrderPrintex/blog/offset-vs-digital-printing/"
+            }
+        },
+        {
+            "@type": "BlogPosting",
+            "@id": "http://localhost/OrderPrintex/blog/custom-stickers-and-labels-guide/#article",
+            "headline": "Custom Stickers and Labels: A Complete Guide to Materials, Adhesives & UV Decals",
+            "url": "http://localhost/OrderPrintex/blog/custom-stickers-and-labels-guide/",
+            "image": "http://localhost/OrderPrintex/assets/images/custom_stickers.jpg",
+            "description": "From waterproof vinyl decals to prismatic holographic foils and 3D embossed UV DTF transfers — pick the ideal sticker material for your product packaging.",
+            "datePublished": "2026-11-02T08:55:04+05:30",
+            "dateModified": "2026-11-02T08:55:04+05:30",
+            "author": {
+                "@type": "Person",
+                "name": "OrderPrintex Editorial Team"
+            },
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://localhost/OrderPrintex/blog/custom-stickers-and-labels-guide/"
+            }
+        },
+        {
+            "@type": "BlogPosting",
+            "@id": "http://localhost/OrderPrintex/blog/packaging-printing-ideas-for-brands/#article",
+            "headline": "Packaging Printing Ideas for Growing E-Commerce & DTC Brands in India",
+            "url": "http://localhost/OrderPrintex/blog/packaging-printing-ideas-for-brands/",
+            "image": "http://localhost/OrderPrintex/assets/images/packaging_box.jpg",
+            "description": "How custom shipping mailer boxes, branded tissue wrap, and spot-UV thank you cards transform standard package delivery into an unforgettable unboxing event.",
+            "datePublished": "2026-11-02T08:55:04+05:30",
+            "dateModified": "2026-11-02T08:55:04+05:30",
+            "author": {
+                "@type": "Person",
+                "name": "Pooja Mehta (Brand Specialist)"
+            },
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://localhost/OrderPrintex/blog/packaging-printing-ideas-for-brands/"
+            }
+        },
+        {
+            "@type": "CreativeWork",
+            "name": "High-Detail DTF Apparel Print on Dark Garment",
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "description": "Direct-to-Film transfer showcasing ultra-fine color gradients, opaque white underbase, and soft stretch elasticity without hand feel stiffness.",
+            "creator": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            }
+        },
+        {
+            "@type": "CreativeWork",
+            "name": "UV DTF Decals on Glass & Tumbler Curved Surfaces",
+            "image": "http://localhost/OrderPrintex/assets/images/uv_dtf_drinkware.jpg",
+            "description": "Industrial-adhesion 3D tactile UV DTF stickers applied seamlessly onto curved stainless steel bottles and glassware with spot gloss varnish.",
+            "creator": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            }
+        },
+        {
+            "@type": "CreativeWork",
+            "name": "Heavyweight 240 GSM Streetwear Graphic Tee",
+            "image": "http://localhost/OrderPrintex/assets/images/streetwear_tee.jpg",
+            "description": "Vintage washed boxy drop-shoulder t-shirt with photographic DTF chest graphic, double-needle stitched seams, and tight retail ribbing.",
+            "creator": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            }
+        },
+        {
+            "@type": "CreativeWork",
+            "name": "Luxury Apparel Unboxing Mailer Packaging Box",
+            "image": "http://localhost/OrderPrintex/assets/images/packaging_box.jpg",
+            "description": "Custom matte black corrugated mailer box with hot-stamped gold foil logo, spot UV accents, and inner branded tissue wrap.",
+            "creator": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            }
+        },
+        {
+            "@type": "CreativeWork",
+            "name": "Custom Die-Cut & Holographic Decal Collection",
+            "image": "http://localhost/OrderPrintex/assets/images/custom_stickers.jpg",
+            "description": "Multi-surface peel-and-stick vinyl decals with embossed gloss spot varnish, iridescent light reflection, and permanent acrylic bond.",
+            "creator": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            }
+        },
+        {
+            "@type": "CreativeWork",
+            "name": "Executive Corporate Swag & Client Gifting Kit",
+            "image": "http://localhost/OrderPrintex/assets/images/corporate_swag_kit.jpg",
+            "description": "Turnkey corporate onboarding kit runs featuring customized insulated drinkware, embossed diary, and stylus pen in a bespoke gift hamper.",
+            "creator": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            }
+        },
+        {
+            "@type": "CreativeWork",
+            "name": "Luxury Embossed Branding Collateral & Stationery",
+            "image": "http://localhost/OrderPrintex/assets/images/branding_stationery.jpg",
+            "description": "Thick crimson red and warm beige business cards with edge gilding, debossed linen corporate journal, and executive presentation folders.",
+            "creator": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            }
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "http://localhost/OrderPrintex/faq/#faqpage",
+            "name": "OrderPrintex Frequently Asked Questions",
+            "url": "http://localhost/OrderPrintex/faq/",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is OrderPrintex and what printing services do you manufacture?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "OrderPrintex is a premier manufacturing facility and bulk printing studio based in New Delhi, India. We specialize in industrial-grade Direct-to-Film (DTF) apparel transfers, UV DTF multi-surface transfer decals, custom screen-quality t-shirt printing, and turnkey corporate promotional kits. We cater to apparel brands, promotional agencies, screen printers, and independent creators across India."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Do you serve B2B clients, print studios, and wholesale resellers?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes! A significant portion of our daily production is dedicated to job-work and white-label wholesale supply for screen printing studios, DTG printers, uniform manufacturers, and retail clothing brands. We provide rolls and gang sheets ready for you to press and distribute to your own customers."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Which file formats can I upload for printing?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "We accept high-resolution files in Transparent PNG (300 DPI, recommended for single designs and gang sheets), vector Adobe Illustrator (.ai), EPS (.eps), layered Adobe Photoshop (.psd at 300 DPI), and print-ready vector PDF with embedded fonts."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How do I submit my artwork and prepare transparent backgrounds?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "You can upload artwork directly through the Upload Your Design workbench on our Homepage, on our Service pages, or via the Get a Quote form. Ensure your artwork has transparent negative spaces wherever you do not want white ink backing to print. If you submit a JPEG with a white background, that white square will print as solid opaque white ink."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can I request a digital design proof before production begins?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, absolutely. Every order undergoes rigorous prepress review by our color technicians. We verify resolution, line thickness, color gamut, and bleed margins. For custom projects, digital mockups and RIP proofs are shared via the client portal for formal approval before physical printing starts."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is DTF printing and which fabrics does it bond to?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "DTF (Direct-to-Film) is a cutting-edge digital garment decoration technique. Artwork is printed onto specialized PET release film using high-density CMYK textile inks plus a solid white underbase, followed by a layer of hot-melt polyurethane adhesive powder cured under heat. DTF transfers apply flawlessly to virtually any fabric: 100% cotton, combed cotton, 100% polyester, poly-cotton blends, fleece, denim, nylon, canvas, and performance spandex."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is the recommended heat press setting for DTF transfers?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "For optimal washability and soft-hand feel: 1) Pre-press garment 3-5 seconds to remove moisture. 2) Transfer Press at 160°C (320°F) for 15 seconds under medium-to-firm pressure (40-50 PSI / 4-5 bar). 3) Cold Peel: Allow the transfer to cool completely to room temperature, then peel PET film smoothly. 4) Post-press: Cover graphic with Teflon or silicone parchment paper and press for 5 seconds to seal the transfer into the weave."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How do I wash DTF-printed garments to ensure 50+ wash longevity?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Turn garments inside-out, wash in cold or lukewarm water (max 30°C / 85°F) with mild detergent, avoid bleach or harsh spot removers, tumble dry on gentle low heat or hang dry in shade, and never iron directly on the printed graphic."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is UV DTF printing and how does it work?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "UV DTF is an innovative cold-transfer technology engineered specifically for hard, non-porous surfaces. Using piezoelectric printheads, the printer deposits white ink, vibrant CMYK inks, and a high-gloss 3D tactile clear varnish, cured instantaneously by ultraviolet LED lamps. Prints are applied directly to products without heat presses or ovens: peel, align, rub firmly, and peel away the carrier film."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Which surfaces are compatible with UV DTF transfer stickers?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "UV DTF stickers bond permanently to clean, rigid, and smooth or lightly contoured materials including glassware, stainless steel tumblers, aluminum water flasks, ceramic mugs, plastics, acrylics, cell phone cases, rigid electronics, lacquered wood, and cosmetic packaging."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Are UV DTF decals waterproof, scratch-resistant, and dishwasher safe?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. Because inks are cross-linked under high-intensity UV LED light and sealed with a heavy clear spot varnish layer, UV DTF stickers are 100% waterproof, UV-resistant, and scratch-resistant under normal handling. For maximum longevity on drinkware, hand-washing with a soft sponge is recommended."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can I order custom T-shirts and what garment qualities are available?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes! We offer complete end-to-end t-shirt manufacturing and printing. Clients can supply their own blanks or choose from our factory inventory: 180 GSM bio-washed combed cotton, 240 GSM heavyweight oversized streetwear tees, dry-fit sports polyester jerseys, and pique knit corporate polo shirts."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Where can graphics be placed on custom t-shirts?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "We support Left Chest pocket prints, Center Chest, Full Front (up to 12x16 inches), Full Back (up to 12x18 inches), Left/Right Sleeve branding, and interior neck custom brand labels. Multiple positions can be combined on a single run."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can I build gang sheets with mixed logos, neck tags, and artwork sizes?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes! On our 22-inch roll gang sheets, you can arrange dozens of different logos, neck labels, chest graphics, and sleeve designs on a single roll with no per-design setup fees. You only pay for the total linear length of the gang roll."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is the minimum order quantity (MOQ)?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "For DTF gang sheets, you can order from as little as 1 meter roll. For custom printed t-shirts and corporate merchandise, single prototype samples are available before committing to bulk production runs of 50, 500, or 5,000+ units."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How can I request a quotation for my printing project?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Submit your artwork and required dimensions via our online Get a Quote form, upload via the homepage design tool, or contact our sales team via WhatsApp (+91 93540 28199). Prepress coordinators calculate optimal sheet yield and provide an itemized formal quotation with transparent per-unit and volume tiered pricing."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Do you offer tiered discounts for continuous gang rolls and bulk orders?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. Commercial printers and brand owners who order recurring volume or continuous rolls (10m, 25m, 50m, 100m+) receive preferential trade wholesale pricing. Contact our Delhi facility to set up a dedicated B2B trade account."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How can I track my order once dispatched?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Once your order passes our final quality control inspection, it is packaged in heavy-duty moisture-resistant protective tubes or corrugated mailers. Dispatch details and tracking links (Blue Dart, DTDC, Delhivery, or India Post Speed Post) are updated in your customer portal and notified via WhatsApp or Email."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is your standard turnaround time for gang sheets and printed merchandise?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Standard production for approved DTF gang sheets and UV DTF decals is typically 24 to 48 hours. Finished custom t-shirts and bulk promotional merchandise take 3 to 5 business days depending on volume. Expedited same-day dispatch from our New Delhi hub is available for urgent rush orders upon request."
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -48,6 +48,12 @@ $canonical = $canonical ?? url($_SERVER['REQUEST_URI'] ?? '');
   <link rel="stylesheet" href="<?= url('assets/css/animations.css') ?>">
   <link rel="stylesheet" href="<?= url('assets/css/responsive.css') ?>">
 
+  <!-- AI Discovery, Sitemaps & Structured Graph Links -->
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="<?= url('sitemap.xml') ?>">
+  <link rel="alternate" type="text/plain" href="<?= url('llms.txt') ?>" title="LLM Context">
+  <link rel="alternate" type="application/json" href="<?= url('schema.json') ?>" title="Structured Data Graph">
+  <link rel="alternate" type="text/markdown" href="<?= url('ORDERPRINTEX.md') ?>" title="Technical Documentation">
+
   <!-- Schema.org Organization Structured Data -->
   <script type="application/ld+json">
   {

@@ -3,8 +3,13 @@
  * OrderPrintex - Admin Customer Management
  */
 
-$adminTitle = "Manage Registered Customers";
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/database.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth.php';
+
+require_admin_panel();
+$adminUser = auth_user();
 
 // Handle Customer Actions (Toggle Status)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
@@ -82,6 +87,9 @@ if ($selectedCustomerId) {
         ", ['uid' => $cId, 'email' => $cEmail]);
     }
 }
+
+$adminTitle = "Manage Registered Customers";
+require_once __DIR__ . '/header.php';
 ?>
 
 <div class="admin-topbar">
@@ -93,13 +101,13 @@ if ($selectedCustomerId) {
 
 <div class="admin-filter-bar">
     <div>
-        <span style="font-size: 0.9rem; font-weight: 600; color: var(--color-navy);">
+        <span style="font-size: 0.9rem; font-weight: 600; color: var(--admin-text-main);">
             Total Registered Customers: <?= count($customers) ?>
         </span>
     </div>
 
-    <form method="GET" action="<?= url('admin/customers.php') ?>" class="admin-search-form" style="display: flex; gap: 8px;">
-        <input type="text" name="search" value="<?= e($searchTerm) ?>" placeholder="Search name, email, phone, company..." class="form-input form-input-sm" style="width: 280px;">
+    <form method="GET" action="<?= url('admin/customers.php') ?>" class="admin-search-form">
+        <input type="text" name="search" value="<?= e($searchTerm) ?>" placeholder="Search name, email, phone, company..." class="form-input form-input-sm" style="min-width: 0; width: 280px; max-width: 100%;">
         <button type="submit" class="btn btn-secondary btn-sm">Search</button>
         <?php if ($searchTerm): ?>
             <a href="<?= url('admin/customers.php') ?>" class="btn btn-outline btn-sm">Clear</a>
@@ -107,7 +115,7 @@ if ($selectedCustomerId) {
     </form>
 </div>
 
-<div class="admin-grid-layout" style="display: grid; grid-template-columns: <?= $activeCustomer ? '1.2fr 1fr' : '1fr' ?>; gap: 24px; align-items: start;">
+<div class="<?= $activeCustomer ? 'admin-split-grid' : '' ?>">
     
     <!-- Customers Table -->
     <div class="admin-card">
@@ -185,7 +193,7 @@ if ($selectedCustomerId) {
             <div class="admin-card-body" style="padding: 20px;">
                 <!-- Profile Summary -->
                 <div style="margin-bottom: 20px;">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.85rem;">
+                    <div class="admin-form-2col" style="gap: 12px; font-size: 0.85rem;">
                         <div>
                             <span style="color: var(--color-text-muted); display: block; font-size: 0.75rem;">Email:</span>
                             <a href="mailto:<?= e($activeCustomer['email']) ?>" style="color: var(--color-royal); word-break: break-all;"><?= e($activeCustomer['email']) ?></a>
@@ -212,7 +220,7 @@ if ($selectedCustomerId) {
                     </div>
 
                     <?php if (!empty($activeCustomer['address'])): ?>
-                        <div style="margin-top: 12px; background: #fafafa; padding: 10px; border-radius: 4px; font-size: 0.85rem; border: 1px solid var(--color-border);">
+                        <div style="margin-top: 12px; background: var(--admin-bg-card-secondary, #171C2B); padding: 10px; border-radius: 4px; font-size: 0.85rem; border: 1px solid var(--color-border);">
                             <span style="font-size: 0.75rem; color: var(--color-text-muted); display: block;">Default Shipping Address:</span>
                             <?= e($activeCustomer['address']) ?>, <?= e($activeCustomer['city']) ?>, <?= e($activeCustomer['state']) ?> - <?= e($activeCustomer['pincode']) ?>
                         </div>
@@ -229,7 +237,7 @@ if ($selectedCustomerId) {
                     <?php else: ?>
                         <div style="display: flex; flex-direction: column; gap: 8px;">
                             <?php foreach ($customerOrders as $ord): ?>
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--color-surface, #181818); border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--admin-bg-card-secondary, #171C2B); border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem;">
                                     <div>
                                         <a href="<?= url('admin/orders.php?order_id=' . $ord['id']) ?>" style="font-weight: 700; color: var(--color-royal);">
                                             <?= e($ord['order_number']) ?>
@@ -256,7 +264,7 @@ if ($selectedCustomerId) {
                     <?php else: ?>
                         <div style="display: flex; flex-direction: column; gap: 8px;">
                             <?php foreach ($customerQuotations as $q): ?>
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--color-surface, #181818); border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--admin-bg-card-secondary, #171C2B); border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem;">
                                     <div>
                                         <a href="<?= url('admin/quotations.php?quote_id=' . $q['id']) ?>" style="font-weight: 700; color: var(--color-royal);">
                                             <?= e($q['quote_number']) ?>
@@ -283,7 +291,7 @@ if ($selectedCustomerId) {
                     <?php else: ?>
                         <div style="display: flex; flex-direction: column; gap: 8px;">
                             <?php foreach ($customerEnquiries as $enq): ?>
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--color-surface, #181818); border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--admin-bg-card-secondary, #171C2B); border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem;">
                                     <div>
                                         <a href="<?= url('admin/enquiries.php?enquiry_id=' . $enq['id']) ?>" style="font-weight: 700; color: var(--color-royal);">
                                             <?= e($enq['ref_number']) ?>

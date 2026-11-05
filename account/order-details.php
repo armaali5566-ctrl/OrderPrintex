@@ -11,6 +11,10 @@ require_once __DIR__ . '/../includes/auth.php';
 require_auth();
 $user = auth_user();
 
+// Order tracking decommissioned in Enquiry & Quotation business workflow.
+header('Location: ' . url('account/quotations.php'));
+exit;
+
 $orderId = intval($_GET['id'] ?? 0);
 if (!$orderId) {
     header('Location: ' . account_url('orders'));

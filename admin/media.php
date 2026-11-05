@@ -4,8 +4,17 @@
  * Centralized Image Uploader, Storage Browser & Asset Manager
  */
 
-$adminTitle = "Media Library & Image Manager";
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/database.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth.php';
+
+require_admin();
+$adminUser = auth_user();
+
+// Media Library module decommissioned; assets managed directly inside Portfolio & Products.
+header('Location: ' . url('admin/gallery.php'));
+exit;
 
 $uploadDir = __DIR__ . '/../uploads';
 if (!is_dir($uploadDir)) {
@@ -113,6 +122,9 @@ if (is_dir($assetDir)) {
 
 // Sort newest first
 usort($files, fn($a, $b) => $b['mtime'] <=> $a['mtime']);
+
+$adminTitle = "Media Library & Image Manager";
+require_once __DIR__ . '/header.php';
 ?>
 
 <div class="admin-topbar" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.75rem; flex-wrap:wrap; gap:1rem;">
@@ -152,7 +164,7 @@ usort($files, fn($a, $b) => $b['mtime'] <=> $a['mtime']);
 
 <!-- Tabs: Uploaded Media vs System Assets -->
 <div class="admin-card" style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.75rem; box-shadow: var(--shadow-card);">
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem; border-bottom:1px solid rgba(20,35,60,0.08); padding-bottom:0.75rem;">
+  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.25rem; border-bottom:1px solid rgba(20,35,60,0.08); padding-bottom:0.75rem;">
     <h3 style="font-size:1.1rem; color:var(--navy); font-weight:700; margin:0;">
       Uploaded Media (<?= count($files) ?> files)
     </h3>
@@ -165,10 +177,10 @@ usort($files, fn($a, $b) => $b['mtime'] <=> $a['mtime']);
       <p style="margin:0; font-size:0.85rem;">Uploaded files will appear here with instant path copying.</p>
     </div>
   <?php else: ?>
-    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:1.25rem;">
+    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 160px), 1fr)); gap:1.25rem;">
       <?php foreach ($files as $file): ?>
         <div style="border:1px solid rgba(20,35,60,0.10); border-radius:8px; overflow:hidden; background:var(--bg-surface); display:flex; flex-direction:column; box-shadow:0 2px 6px rgba(15,25,45,0.05); transition:transform 0.2s ease, box-shadow 0.2s ease;">
-          <div style="height:140px; background:#F8FAFC; display:flex; align-items:center; justify-content:center; padding:0.5rem; border-bottom:1px solid var(--border-light); overflow:hidden;">
+          <div style="height:140px; background:var(--admin-bg-card-secondary, #171C2B); display:flex; align-items:center; justify-content:center; padding:0.5rem; border-bottom:1px solid var(--border-light); overflow:hidden;">
             <img src="<?= url(e($file['url'])) ?>" alt="" style="max-height:100%; max-width:100%; object-fit:contain;">
           </div>
           <div style="padding:0.75rem; flex:1; display:flex; flex-direction:column; justify-content:space-between;">
@@ -203,7 +215,7 @@ usort($files, fn($a, $b) => $b['mtime'] <=> $a['mtime']);
     <h4 style="font-size:1rem; color:var(--navy); font-weight:700; margin-bottom:1rem;">
       Default Catalog Images (<?= count($assetFiles) ?> files in assets/images/)
     </h4>
-    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:1rem;">
+    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 140px), 1fr)); gap:1rem;">
       <?php foreach (array_slice($assetFiles, 0, 12) as $af): ?>
         <div style="border:1px solid var(--border-light); border-radius:6px; padding:0.5rem; background:var(--ivory); font-size:0.75rem;">
           <div style="height:90px; display:flex; align-items:center; justify-content:center; margin-bottom:0.4rem;">

@@ -63,7 +63,7 @@ require_once __DIR__ . '/../includes/header.php';
         <div class="section-label" style="justify-content:center;">Client Portal</div>
         <h2>Sign In to OrderPrintex</h2>
         <p style="font-size:0.9rem; color:var(--slate);">
-          Access your quotation history, track live production orders, and manage artwork files.
+          Access your quotation history, track custom prepress enquiries, and collaborate with our printing team.
         </p>
       </div>
 

@@ -4,8 +4,31 @@
  * Complete Control Over General, Contact, Sticky Top Social Bar & SEO Settings
  */
 
-$adminTitle = "Website & Business Settings";
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/database.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/seo_helper.php';
+
+require_admin();
+$adminUser = auth_user();
+
+// Handle Manual SEO Synchronization
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action']) && $_POST['action'] === 'sync_seo') {
+    if (!csrf_verify()) {
+        set_flash('error', 'Security token expired. Please try again.');
+        header('Location: ' . url('admin/settings.php'));
+        exit;
+    }
+    $res = seo_sync_all();
+    if ($res['success']) {
+        set_flash('success', "SEO & AI discovery files synchronized successfully! Updated sitemap.xml ({$res['sitemap_urls']} URLs), llms.txt, schema.json ({$res['schema_nodes']} nodes), and ORDERPRINTEX.md.");
+    } else {
+        set_flash('error', "SEO synchronization failed: " . ($res['error'] ?? 'Unknown error'));
+    }
+    header('Location: ' . url('admin/settings.php'));
+    exit;
+}
 
 // Handle Saving Settings
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action']) && $_POST['action'] === 'save_settings') {
@@ -85,11 +108,16 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action']) && 
     if (isset($_POST['social_youtube']))   set_setting('youtube_url', trim($_POST['social_youtube']), 'social');
     if (isset($_POST['social_linkedin']))  set_setting('linkedin_url', trim($_POST['social_linkedin']), 'social');
 
+    @seo_sync_all();
     log_activity($adminUser['id'], 'update_settings', "Updated studio contact, sticky top bar, social and SEO settings");
     set_flash('success', "Website settings updated successfully. Top contact bar and social links updated storefront-wide.");
     header('Location: ' . url('admin/settings.php'));
     exit;
 }
+
+$seoStatus = seo_get_status();
+$adminTitle = "Website & Business Settings";
+require_once __DIR__ . '/header.php';
 ?>
 
 <div class="admin-topbar" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.75rem; flex-wrap:wrap; gap:1rem;">
@@ -126,7 +154,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action']) && 
         </label>
       </div>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:1.25rem;">
+      <div class="admin-form-2col" style="margin-bottom:1.25rem;">
         <div>
           <label style="display:block; font-size:0.85rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">
             Sales / Customer Support Email <span style="color:var(--crimson);">*</span>
@@ -144,7 +172,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action']) && 
         </div>
       </div>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:1.25rem;">
+      <div class="admin-form-2col" style="margin-bottom:1.25rem;">
         <div>
           <label style="display:block; font-size:0.85rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">
             WhatsApp Support Number <span style="color:var(--crimson);">*</span>
@@ -165,7 +193,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action']) && 
         Social Media URLs (Displayed as clean icons in top bar &amp; footer)
       </h4>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+      <div class="admin-form-2col">
         <div>
           <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--navy); margin-bottom:0.25rem;">Instagram Profile URL</label>
           <input type="url" name="social_instagram" class="form-control" placeholder="https://instagram.com/..." value="<?= e(get_setting('social_instagram', get_setting('instagram_url', 'https://www.instagram.com/order_printex/?hl=en'))) ?>">
@@ -194,7 +222,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action']) && 
         <span style="color:var(--royal);">02.</span> Business Identification &amp; Workshop Address
       </h3>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:1.25rem;">
+      <div class="admin-form-2col" style="margin-bottom:1.25rem;">
         <div>
           <label style="display:block; font-size:0.85rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">Brand / Business Name</label>
           <input type="text" name="site_name" class="form-control" value="<?= e(get_setting('site_name', 'OrderPrintex')) ?>">
@@ -211,7 +239,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action']) && 
         <textarea name="address" class="form-control" rows="2"><?= e(get_setting('address', 'Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh, Delhi, 110059')) ?></textarea>
       </div>
 
-      <div style="display:grid; grid-template-columns:1.5fr 1fr; gap:1.25rem;">
+      <div class="admin-form-2col">
         <div>
           <label style="display:block; font-size:0.85rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">Google Maps Location URL</label>
           <input type="url" name="google_maps_url" class="form-control" value="<?= e(get_setting('google_maps_url', 'https://share.google/MWOVYne70asGLsYXn')) ?>">
@@ -244,6 +272,50 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action']) && 
         <label style="display:block; font-size:0.85rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">Default Social Share Image URL</label>
         <input type="text" name="meta_og_image" class="form-control" placeholder="assets/images/og_banner.jpg" value="<?= e(get_setting('meta_og_image', 'assets/images/gallery_1.jpg')) ?>">
       </div>
+
+      <!-- SEO & AI Discovery Files Status Card -->
+      <div style="margin-top: 1.5rem; padding: 1.25rem; background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: var(--radius-md);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+          <div>
+            <h4 style="margin: 0; font-size: 0.95rem; color: var(--admin-gold, #D4AF37); font-weight: 700; display: flex; align-items: center; gap: 8px;">
+              <span>⚡ Automated SEO &amp; AI Discovery Engine</span>
+              <span class="badge badge-success" style="font-size: 0.7rem;">Status: <?= e($seoStatus['last_status']) ?></span>
+            </h4>
+            <div style="font-size: 0.8rem; color: var(--admin-text-muted, #94A3B8); margin-top: 4px;">
+              Last synchronized: <strong><?= e($seoStatus['last_generated']) ?></strong> (<?= (int)$seoStatus['url_count'] ?> indexable URLs)
+            </div>
+          </div>
+          <button type="submit" name="action" value="sync_seo" class="btn btn-secondary btn-sm" style="font-weight: 700; border-color: rgba(212, 175, 55, 0.4); color: var(--admin-gold, #D4AF37);">
+            ⚡ Re-Sync All 4 Discovery Files Now
+          </button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; font-size: 0.8rem;">
+          <div style="background: rgba(0,0,0,0.25); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+            <div style="font-weight: 700; color: #FFF;">sitemap.xml</div>
+            <div style="color: var(--admin-text-muted, #94A3B8);"><?= (int)$seoStatus['url_count'] ?> URLs &bull; <?= number_format($seoStatus['sitemap_size'] / 1024, 1) ?> KB</div>
+            <a href="<?= url('sitemap.xml') ?>" target="_blank" style="color: var(--admin-gold, #D4AF37); text-decoration: underline; font-size: 0.75rem;">View XML &rarr;</a>
+          </div>
+
+          <div style="background: rgba(0,0,0,0.25); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+            <div style="font-weight: 700; color: #FFF;">llms.txt</div>
+            <div style="color: var(--admin-text-muted, #94A3B8);">AI Agent Guide &bull; <?= number_format($seoStatus['llms_size'] / 1024, 1) ?> KB</div>
+            <a href="<?= url('llms.txt') ?>" target="_blank" style="color: var(--admin-gold, #D4AF37); text-decoration: underline; font-size: 0.75rem;">View Text &rarr;</a>
+          </div>
+
+          <div style="background: rgba(0,0,0,0.25); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+            <div style="font-weight: 700; color: #FFF;">schema.json</div>
+            <div style="color: var(--admin-text-muted, #94A3B8);">JSON-LD Graph &bull; <?= number_format($seoStatus['schema_size'] / 1024, 1) ?> KB</div>
+            <a href="<?= url('schema.json') ?>" target="_blank" style="color: var(--admin-gold, #D4AF37); text-decoration: underline; font-size: 0.75rem;">View JSON &rarr;</a>
+          </div>
+
+          <div style="background: rgba(0,0,0,0.25); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+            <div style="font-weight: 700; color: #FFF;">ORDERPRINTEX.md</div>
+            <div style="color: var(--admin-text-muted, #94A3B8);">Full Markdown &bull; <?= number_format($seoStatus['markdown_size'] / 1024, 1) ?> KB</div>
+            <a href="<?= url('ORDERPRINTEX.md') ?>" target="_blank" style="color: var(--admin-gold, #D4AF37); text-decoration: underline; font-size: 0.75rem;">View Markdown &rarr;</a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- 4. Commercial & Quotation Parameters -->
@@ -252,7 +324,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action']) && 
         <span style="color:var(--royal);">04.</span> Commercial &amp; Tax Defaults
       </h3>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.25rem;">
+      <div class="admin-form-3col">
         <div>
           <label style="display:block; font-size:0.85rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">Standard GST Rate (%)</label>
           <input type="number" step="0.1" name="default_gst_rate" class="form-control" value="<?= e(get_setting('default_gst_rate', '18.0')) ?>">

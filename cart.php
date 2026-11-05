@@ -4,10 +4,11 @@
  */
 
 require_once __DIR__ . '/includes/config.php';
-require_once __DIR__ . '/includes/database.php';
 require_once __DIR__ . '/includes/functions.php';
 
-$pageTitle = "Shopping Cart & Prepress Orders | OrderPrintex";
+// OrderPrintex is strictly an Enquiry & Quotation platform. Shopping cart redirected to product catalogue.
+header('Location: ' . url('products/'));
+exit;
 $pageDesc  = "Review your selected print products, DTF transfer rolls, custom garments, and calculated GST breakdown.";
 $canonical = cart_url();
 

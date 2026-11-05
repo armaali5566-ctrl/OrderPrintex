@@ -4,8 +4,17 @@
  * Manage Homepage Hero, Banners, Guarantees & Editorial Sections
  */
 
-$adminTitle = "Homepage CMS & Layout Control";
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/database.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth.php';
+
+require_admin();
+$adminUser = auth_user();
+
+// Homepage CMS standalone module decommissioned in simplified workflow.
+header('Location: ' . url('admin/settings.php'));
+exit;
 
 // Handle POST actions
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action']) && $_POST['action'] === 'save_homepage') {
@@ -68,6 +77,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action']) && 
     header('Location: ' . url('admin/homepage.php'));
     exit;
 }
+
+$adminTitle = "Homepage CMS & Layout Control";
+require_once __DIR__ . '/header.php';
 ?>
 
 <div class="admin-topbar" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.75rem; flex-wrap:wrap; gap:1rem;">
@@ -114,7 +126,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action']) && 
           <textarea name="hero_description" rows="3" class="form-control"><?= e(get_setting('hero_description', 'Manufacturer & Bulk Supplier of DTF and UV DTF in India. We engineer press-ready transfers with vivid color gamut, durable washability, and rapid turnaround for apparel brands, promotional studios, and print businesses.')) ?></textarea>
         </div>
 
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div class="admin-form-2col">
           <div>
             <label style="display:block; font-size:0.85rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">Primary CTA Button Text</label>
             <input type="text" name="hero_cta_primary_text" class="form-control" value="<?= e(get_setting('hero_cta_primary_text', 'Upload Artwork & Order')) ?>">
@@ -125,7 +137,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action']) && 
           </div>
         </div>
 
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div class="admin-form-2col">
           <div>
             <label style="display:block; font-size:0.85rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">Secondary CTA Button Text</label>
             <input type="text" name="hero_cta_sec_text" class="form-control" value="<?= e(get_setting('hero_cta_sec_text', 'Explore Services')) ?>">
@@ -144,7 +156,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action']) && 
         <span style="color:var(--royal);">02.</span> Prepress Guarantees (3 Feature Pillars)
       </h3>
 
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1.25rem;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap:1.25rem;">
         <div style="background:var(--ivory); padding:1rem; border-radius:6px; border:1px solid var(--border-light);">
           <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--navy); margin-bottom:0.25rem;">Pillar 1 Title</label>
           <input type="text" name="guarantee_1_title" class="form-control" style="margin-bottom:0.5rem;" value="<?= e(get_setting('guarantee_1_title', '300 DPI Prepress Audit')) ?>">
@@ -174,7 +186,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action']) && 
         <span style="color:var(--royal);">03.</span> Featured Section Titles
       </h3>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+      <div class="admin-form-2col">
         <div>
           <h4 style="font-size:0.95rem; font-weight:700; color:var(--royal); margin-bottom:0.75rem;">Products Section</h4>
           <div style="margin-bottom:0.75rem;">
@@ -202,7 +214,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action']) && 
     </div>
 
     <!-- Submit Button Bar -->
-    <div style="position:sticky; bottom:1rem; z-index:100; background:var(--bg-surface); border:1px solid var(--border-color); border-radius:8px; padding:1rem 1.5rem; display:flex; justify-content:space-between; align-items:center; box-shadow:0 8px 24px rgba(15, 25, 45, 0.15);">
+    <div style="position:sticky; bottom:1rem; z-index:100; background:var(--bg-surface); border:1px solid var(--border-color); border-radius:8px; padding:1rem 1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; box-shadow:0 8px 24px rgba(15, 25, 45, 0.15);">
       <span style="font-size:0.85rem; color:var(--slate);">Publish updates to live website immediately upon saving.</span>
       <button type="submit" class="btn btn-primary btn-md">
         <span>Save Homepage Changes</span> &rarr;

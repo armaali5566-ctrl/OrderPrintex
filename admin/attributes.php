@@ -4,8 +4,19 @@
  * Create, Edit & Delete Attributes (Size, Colour, Material) and their Values
  */
 
-$adminTitle = "Product Attributes & Options";
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/database.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth.php';
+
+require_admin();
+$adminUser = auth_user();
+
+// Unified Product Management: Attributes are now managed directly inside admin/products.php
+if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'GET') {
+    header('Location: ' . url('admin/products.php'));
+    exit;
+}
 
 // Handle POST actions
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['action'])) {
@@ -135,6 +146,9 @@ if ($manageId > 0) {
 } elseif ($editAttrId > 0) {
     $activeAttr = db_fetch_one("SELECT * FROM attributes WHERE id = :id", ['id' => $editAttrId]);
 }
+
+$adminTitle = "Product Attributes & Options";
+require_once __DIR__ . '/header.php';
 ?>
 
 <div class="admin-topbar" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.75rem; flex-wrap:wrap; gap:1rem;">
@@ -156,7 +170,7 @@ if ($manageId > 0) {
   </div>
 </div>
 
-<div style="display:grid; grid-template-columns:<?= ($manageId > 0) ? '1fr 1.3fr' : '1fr 1fr' ?>; gap:1.75rem; align-items:flex-start;">
+<div class="admin-split-grid" style="align-items:flex-start;">
 
   <!-- Column 1: Attributes List & Add/Edit Form -->
   <div style="display:flex; flex-direction:column; gap:1.5rem;">
@@ -281,25 +295,25 @@ if ($manageId > 0) {
             <input type="hidden" name="action" value="add_value">
             <input type="hidden" name="attribute_id" value="<?= $activeAttr['id'] ?>">
 
-            <div style="display:grid; grid-template-columns:1fr <?= (stripos($activeAttr['name'], 'colour') !== false || stripos($activeAttr['name'], 'color') !== false) ? '120px 80px' : '80px' ?> auto; gap:0.75rem; align-items:flex-end;">
-              <div>
+            <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:flex-end;">
+              <div style="flex: 2 1 180px;">
                 <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-primary); margin-bottom:0.25rem;">Value Label *</label>
                 <input type="text" name="value" required class="form-control" placeholder="e.g. Small (S), Bright White, Matte, 240 GSM">
               </div>
 
               <?php if (stripos($activeAttr['name'], 'colour') !== false || stripos($activeAttr['name'], 'color') !== false): ?>
-                <div>
+                <div style="flex: 1 1 90px;">
                   <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-primary); margin-bottom:0.25rem;">Color Hex</label>
                   <input type="color" name="color_code" value="#14233C" class="form-control" style="height:38px; padding:2px; cursor:pointer;">
                 </div>
               <?php endif; ?>
 
-              <div>
+              <div style="flex: 1 1 80px;">
                 <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-primary); margin-bottom:0.25rem;">Order</label>
                 <input type="number" name="display_order" value="0" class="form-control">
               </div>
 
-              <div>
+              <div style="flex: 0 0 auto;">
                 <button type="submit" class="btn btn-primary btn-sm" style="height:38px;">+ Add Value</button>
               </div>
             </div>

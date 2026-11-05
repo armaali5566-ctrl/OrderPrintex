@@ -152,14 +152,7 @@ $topLinkedIn  = get_setting('social_linkedin', 'https://www.linkedin.com/company
 
     <!-- Nav Actions Group -->
     <div class="nav-actions">
-      <!-- Shopping Cart -->
-      <a href="<?= cart_url() ?>" class="btn-nav-icon nav-cart-btn" title="Shopping Cart" aria-label="Shopping Cart">
-        <svg style="width:20px;height:20px;fill:currentColor;" viewBox="0 0 24 24">
-          <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
-        </svg>
-      </a>
-
-      <!-- Account User Dropdown (Immediately beside cart) -->
+      <!-- Account User Dropdown -->
       <div class="nav-user-dropdown" id="navUserDropdown">
         <button type="button" class="btn-nav-icon nav-user-btn" id="navUserBtn" aria-label="Account Menu" aria-haspopup="true" aria-expanded="false" title="Account">
           <svg style="width:20px;height:20px;fill:currentColor;" viewBox="0 0 24 24">
@@ -181,15 +174,19 @@ $topLinkedIn  = get_setting('social_linkedin', 'https://www.linkedin.com/company
             <?php endif; ?>
             <a href="<?= account_url() ?>" class="user-dropdown-item" role="menuitem">
               <svg style="width:16px;height:16px;fill:currentColor;" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"/></svg>
-              <span>My Account</span>
+              <span>Dashboard Overview</span>
             </a>
-            <a href="<?= account_url('orders') ?>" class="user-dropdown-item" role="menuitem">
-              <svg style="width:16px;height:16px;fill:currentColor;" viewBox="0 0 20 20"><path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/><path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"/></svg>
-              <span>My Orders</span>
+            <a href="<?= account_url('enquiries') ?>" class="user-dropdown-item" role="menuitem">
+              <svg style="width:16px;height:16px;fill:currentColor;" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+              <span>My Enquiries</span>
             </a>
-            <a href="<?= url('account/wishlist.php') ?>" class="user-dropdown-item" role="menuitem">
-              <svg style="width:16px;height:16px;fill:currentColor;" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-              <span>My Wishlist</span>
+            <a href="<?= account_url('quotations') ?>" class="user-dropdown-item" role="menuitem">
+              <svg style="width:16px;height:16px;fill:currentColor;" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/></svg>
+              <span>My Quotations</span>
+            </a>
+            <a href="<?= account_url('profile') ?>" class="user-dropdown-item" role="menuitem">
+              <svg style="width:16px;height:16px;fill:currentColor;" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/></svg>
+              <span>Account Settings</span>
             </a>
             <div class="user-dropdown-divider"></div>
             <a href="<?= account_url('logout') ?>" class="user-dropdown-item text-gold" role="menuitem">

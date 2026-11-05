@@ -3,8 +3,13 @@
  * OrderPrintex - Admin Enquiry & Artwork Management
  */
 
-$adminTitle = "Manage Customer Enquiries & Artwork";
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/database.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth.php';
+
+require_admin_panel();
+$adminUser = auth_user();
 
 // Handle Actions: Status Update & Delete
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
@@ -96,12 +101,15 @@ if ($selectedId) {
         $enquiryFiles = db_fetch_all("SELECT * FROM enquiry_files WHERE enquiry_id = :eid ORDER BY id ASC", ['eid' => $selectedId]);
     }
 }
+
+$adminTitle = "Customer Enquiries";
+require_once __DIR__ . '/header.php';
 ?>
 
 <div class="admin-topbar">
     <div>
         <h1 class="admin-page-title">Manage Customer Enquiries</h1>
-        <p class="admin-page-subtitle">Inspect client artwork uploads, review print requirements, and convert requests into detailed quotations.</p>
+        <p class="admin-page-subtitle">Review customer print requests, specifications, and convert enquiries into itemized quotations.</p>
     </div>
     <div class="admin-topbar-actions">
         <a href="<?= url('admin/quotations.php?action=create') ?>" class="btn btn-primary btn-sm">
@@ -120,7 +128,7 @@ $countConverted = db_fetch_one("SELECT COUNT(*) as c FROM enquiries WHERE status
 ?>
 
 <div class="admin-filter-bar">
-    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+    <div class="admin-filter-tabs">
         <a href="<?= url('admin/enquiries.php') ?>" class="admin-tab-btn <?= empty($statusFilter) ? 'active' : '' ?>">
             All (<?= $countAll ?>)
         </a>
@@ -134,15 +142,15 @@ $countConverted = db_fetch_one("SELECT COUNT(*) as c FROM enquiries WHERE status
             Quoted (<?= $countQuoted ?>)
         </a>
         <a href="<?= url('admin/enquiries.php?status=converted') ?>" class="admin-tab-btn <?= $statusFilter === 'converted' ? 'active' : '' ?>">
-            Converted to Order (<?= $countConverted ?>)
+            Converted (<?= $countConverted ?>)
         </a>
     </div>
 
-    <form method="GET" action="<?= url('admin/enquiries.php') ?>" class="admin-search-form" style="display: flex; gap: 8px;">
+    <form method="GET" action="<?= url('admin/enquiries.php') ?>" class="admin-search-form">
         <?php if ($statusFilter): ?>
             <input type="hidden" name="status" value="<?= e($statusFilter) ?>">
         <?php endif; ?>
-        <input type="text" name="search" value="<?= e($searchTerm) ?>" placeholder="Search ref, customer, email, phone..." class="form-input form-input-sm" style="width: 260px;">
+        <input type="text" name="search" value="<?= e($searchTerm) ?>" placeholder="Search ref, customer, email, phone..." class="form-input form-input-sm">
         <button type="submit" class="btn btn-secondary btn-sm">Filter</button>
         <?php if ($searchTerm || $statusFilter): ?>
             <a href="<?= url('admin/enquiries.php') ?>" class="btn btn-outline btn-sm">Clear</a>
@@ -151,7 +159,7 @@ $countConverted = db_fetch_one("SELECT COUNT(*) as c FROM enquiries WHERE status
 </div>
 
 <!-- Main Enquiries Split View -->
-<div class="admin-grid-layout" style="display: grid; grid-template-columns: <?= $activeEnquiry ? '1.2fr 1fr' : '1fr' ?>; gap: 24px; align-items: start;">
+<div class="<?= $activeEnquiry ? 'admin-split-grid' : '' ?>">
     
     <!-- Enquiries Table Column -->
     <div class="admin-card">
@@ -166,7 +174,6 @@ $countConverted = db_fetch_one("SELECT COUNT(*) as c FROM enquiries WHERE status
                         <th>Customer</th>
                         <th>Service / Specs</th>
                         <th>Qty</th>
-                        <th>Artwork</th>
                         <th>Status</th>
                         <th>Date</th>
                         <th>Action</th>
@@ -175,7 +182,7 @@ $countConverted = db_fetch_one("SELECT COUNT(*) as c FROM enquiries WHERE status
                 <tbody>
                     <?php if (empty($enquiries)): ?>
                         <tr>
-                            <td colspan="8" style="text-align: center; padding: 40px; color: var(--color-text-muted);">
+                            <td colspan="7" style="text-align: center; padding: 40px; color: var(--color-text-muted);">
                                 No customer enquiries found matching the criteria.
                             </td>
                         </tr>
@@ -208,15 +215,6 @@ $countConverted = db_fetch_one("SELECT COUNT(*) as c FROM enquiries WHERE status
                                     <?php endif; ?>
                                 </td>
                                 <td><strong><?= intval($enq['quantity']) ?></strong></td>
-                                <td>
-                                    <?php if ($enq['files_count'] > 0): ?>
-                                        <span class="badge badge-info" style="font-size: 0.75rem;">
-                                            📎 <?= $enq['files_count'] ?> File<?= $enq['files_count'] > 1 ? 's' : '' ?>
-                                        </span>
-                                    <?php else: ?>
-                                        <span style="font-size: 0.75rem; color: var(--color-text-muted);">None</span>
-                                    <?php endif; ?>
-                                </td>
                                 <td>
                                     <?= status_badge($enq['status']) ?>
                                 </td>
@@ -254,7 +252,7 @@ $countConverted = db_fetch_one("SELECT COUNT(*) as c FROM enquiries WHERE status
 
             <div class="admin-card-body" style="padding: 20px;">
                 <!-- Status Control Box -->
-                <form method="POST" action="<?= url('admin/enquiries.php') ?>" style="margin-bottom: 20px; background: #fafafa; padding: 14px; border-radius: 6px; border: 1px solid var(--color-border);">
+                <form method="POST" action="<?= url('admin/enquiries.php') ?>" style="margin-bottom: 20px; background: var(--admin-bg-card-secondary, #171C2B); padding: 14px; border-radius: 6px; border: 1px solid var(--color-border);">
                     <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
                     <input type="hidden" name="action" value="update_status">
                     <input type="hidden" name="enquiry_id" value="<?= $activeEnquiry['id'] ?>">
@@ -278,7 +276,7 @@ $countConverted = db_fetch_one("SELECT COUNT(*) as c FROM enquiries WHERE status
                 <!-- Customer Info -->
                 <div style="margin-bottom: 20px;">
                     <h3 style="font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-navy); border-bottom: 1px solid var(--color-border); padding-bottom: 6px; margin-bottom: 12px;">Customer Details</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.85rem;">
+                    <div class="admin-form-2col" style="gap: 12px; font-size: 0.85rem;">
                         <div>
                             <span style="color: var(--color-text-muted); display: block; font-size: 0.75rem;">Name</span>
                             <strong><?= e($activeEnquiry['customer_name']) ?></strong>
@@ -303,7 +301,7 @@ $countConverted = db_fetch_one("SELECT COUNT(*) as c FROM enquiries WHERE status
                 <!-- Print Specifications -->
                 <div style="margin-bottom: 20px;">
                     <h3 style="font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-navy); border-bottom: 1px solid var(--color-border); padding-bottom: 6px; margin-bottom: 12px;">Print Specifications</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.85rem;">
+                    <div class="admin-form-2col" style="gap: 12px; font-size: 0.85rem;">
                         <div>
                             <span style="color: var(--color-text-muted); display: block; font-size: 0.75rem;">Selected Service</span>
                             <strong style="color: var(--color-navy);"><?= e($activeEnquiry['service_name'] ?: 'Custom Print') ?></strong>
@@ -330,53 +328,6 @@ $countConverted = db_fetch_one("SELECT COUNT(*) as c FROM enquiries WHERE status
                     <?php endif; ?>
                 </div>
 
-                <!-- Uploaded Artwork Files -->
-                <div style="margin-bottom: 24px;">
-                    <h3 style="font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-navy); border-bottom: 1px solid var(--color-border); padding-bottom: 6px; margin-bottom: 12px;">
-                        Customer Artwork (<?= count($enquiryFiles) ?>)
-                    </h3>
-                    
-                    <?php if (empty($enquiryFiles)): ?>
-                        <p style="font-size: 0.85rem; color: var(--color-text-muted); font-style: italic;">No artwork was attached to this request (Text-only quote enquiry).</p>
-                    <?php else: ?>
-                        <div style="display: flex; flex-direction: column; gap: 12px;">
-                            <?php foreach ($enquiryFiles as $file): ?>
-                                <?php 
-                                    $isImage = in_array(strtolower($file['file_extension']), ['jpg', 'jpeg', 'png', 'webp', 'gif']);
-                                    $fileUrl = upload_url($file['stored_name']);
-                                ?>
-                                <div style="display: flex; align-items: center; gap: 14px; padding: 12px; border: 1px solid var(--color-border); border-radius: 6px; background: var(--color-surface, #181818);">
-                                    <?php if ($isImage): ?>
-                                        <a href="<?= $fileUrl ?>" target="_blank" style="display: block; width: 64px; height: 64px; flex-shrink: 0; border: 1px solid var(--color-border); border-radius: 4px; overflow: hidden; background: #eee;">
-                                            <img src="<?= $fileUrl ?>" alt="<?= e($file['original_name']) ?>" style="width: 100%; height: 100%; object-fit: cover;">
-                                        </a>
-                                    <?php else: ?>
-                                        <div style="width: 64px; height: 64px; flex-shrink: 0; background: var(--color-navy); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 4px; font-weight: 700; font-size: 0.75rem; text-transform: uppercase;">
-                                            <span>FILE</span>
-                                            <span style="color: var(--color-gold); font-size: 0.65rem;"><?= e($file['file_extension']) ?></span>
-                                        </div>
-                                    <?php endif; ?>
-
-                                    <div style="flex-grow: 1; min-width: 0;">
-                                        <div style="font-weight: 600; font-size: 0.85rem; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" title="<?= e($file['original_name']) ?>">
-                                            <?= e($file['original_name']) ?>
-                                        </div>
-                                        <div style="font-size: 0.75rem; color: var(--color-text-muted);">
-                                            <?= round($file['file_size'] / 1024, 1) ?> KB &bull; <?= strtoupper($file['file_extension']) ?>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <a href="<?= $fileUrl ?>" download="<?= e($file['original_name']) ?>" target="_blank" class="btn btn-secondary btn-xs">
-                                            Download
-                                        </a>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endif; ?>
-                </div>
-
                 <!-- Quotation Status or Generator CTA -->
                 <div style="border-top: 1px solid var(--color-border); padding-top: 18px; display: flex; flex-direction: column; gap: 10px;">
                     <?php if ($activeEnquiry['existing_quote_id']): ?>
@@ -398,7 +349,7 @@ $countConverted = db_fetch_one("SELECT COUNT(*) as c FROM enquiries WHERE status
                         </a>
                     <?php endif; ?>
 
-                    <form method="POST" action="<?= url('admin/enquiries.php') ?>" onsubmit="return confirm('Are you sure you want to delete this enquiry and its uploaded artwork?');" style="margin-top: 10px; text-align: right;">
+                    <form method="POST" action="<?= url('admin/enquiries.php') ?>" onsubmit="return confirm('Are you sure you want to permanently delete this customer enquiry?');" style="margin-top: 10px; text-align: right;">
                         <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
                         <input type="hidden" name="action" value="delete_enquiry">
                         <input type="hidden" name="enquiry_id" value="<?= $activeEnquiry['id'] ?>">

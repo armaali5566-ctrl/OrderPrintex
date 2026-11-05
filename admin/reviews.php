@@ -3,8 +3,13 @@
  * OrderPrintex - Admin Product Reviews Moderation
  */
 
-$adminTitle = "Moderate Product Reviews";
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/database.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth.php';
+
+require_admin();
+$adminUser = auth_user();
 
 // Handle Moderation Actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
@@ -36,6 +41,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             db_update('product_reviews', ['is_verified_purchase' => $newVal], 'id = :id', ['id' => $reviewId]);
             set_flash('success', "Review verification status updated.");
         }
+    } elseif ($action === 'add_manual_review') {
+        $productId = intval($_POST['product_id'] ?? 0);
+        $customerName = trim($_POST['customer_name'] ?? '');
+        $customerEmail = trim($_POST['customer_email'] ?? '');
+        $rating = max(1, min(5, intval($_POST['rating'] ?? 5)));
+        $title = trim($_POST['title'] ?? '');
+        $reviewText = trim($_POST['review_text'] ?? '');
+        $isVerified = isset($_POST['is_verified']) ? 1 : 0;
+        $status = in_array($_POST['status'] ?? '', ['approved', 'pending'], true) ? $_POST['status'] : 'approved';
+
+        if ($productId > 0 && !empty($customerName) && !empty($reviewText)) {
+            db_insert('product_reviews', [
+                'product_id'           => $productId,
+                'customer_name'        => $customerName,
+                'customer_email'       => $customerEmail,
+                'rating'               => $rating,
+                'title'                => $title ?: 'Verified Buyer Review',
+                'review_text'          => $reviewText,
+                'is_verified_purchase' => $isVerified,
+                'status'               => $status,
+                'created_at'           => date('Y-m-d H:i:s')
+            ]);
+            log_activity($adminUser['id'], 'create_review', "Added manual customer review for product #{$productId}");
+            set_flash('success', "Customer review added successfully.");
+        } else {
+            set_flash('error', "Please select a product and provide reviewer name and review text.");
+        }
     }
 
     header('Location: ' . url('admin/reviews.php'));
@@ -44,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
 // Filters & Query
 $statusFilter = trim($_GET['status'] ?? '');
+$ratingFilter = intval($_GET['rating'] ?? 0);
 $searchTerm = trim($_GET['search'] ?? '');
 
 $sql = "SELECT r.*, p.title as product_title, p.slug as product_slug, p.sku as product_sku
@@ -57,6 +90,11 @@ if ($statusFilter !== '') {
     $params['st'] = $statusFilter;
 }
 
+if ($ratingFilter > 0) {
+    $sql .= " AND r.rating = :rf";
+    $params['rf'] = $ratingFilter;
+}
+
 if ($searchTerm !== '') {
     $sql .= " AND (r.customer_name LIKE :s OR r.title LIKE :s OR r.review_text LIKE :s OR p.title LIKE :s)";
     $params['s'] = '%' . $searchTerm . '%';
@@ -65,11 +103,17 @@ if ($searchTerm !== '') {
 $sql .= " ORDER BY r.created_at DESC";
 $reviews = db_fetch_all($sql, $params);
 
+// Products for manual review dropdown
+$allProducts = db_fetch_all("SELECT id, title, sku FROM products ORDER BY title ASC");
+
 // Counts
 $countAll = count(db_fetch_all("SELECT id FROM product_reviews"));
 $countApproved = count(db_fetch_all("SELECT id FROM product_reviews WHERE status = 'approved'"));
 $countPending = count(db_fetch_all("SELECT id FROM product_reviews WHERE status = 'pending'"));
 $countRejected = count(db_fetch_all("SELECT id FROM product_reviews WHERE status = 'rejected'"));
+
+$adminTitle = "Moderate Product Reviews";
+require_once __DIR__ . '/header.php';
 ?>
 
 <div class="admin-topbar">
@@ -77,10 +121,88 @@ $countRejected = count(db_fetch_all("SELECT id FROM product_reviews WHERE status
         <h1 class="admin-page-title">Product Reviews Moderation</h1>
         <p class="admin-page-subtitle">Approve, reject, or manage authentic customer reviews and ratings for your products.</p>
     </div>
+    <div class="admin-topbar-actions">
+        <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('manualReviewCard').style.display = (document.getElementById('manualReviewCard').style.display === 'none' ? 'block' : 'none');">
+            + Add Review Manually
+        </button>
+    </div>
+</div>
+
+<!-- Add Manual Review Card (Collapsible) -->
+<div id="manualReviewCard" class="admin-card" style="display: none; margin-bottom: 24px; border: 2px solid var(--admin-gold, #D4AF37);">
+    <div class="admin-card-header" style="background: var(--admin-bg-card-secondary, #171C2B); display: flex; justify-content: space-between; align-items: center;">
+        <h3 class="admin-card-title">+ Add Offline / Imported Customer Review</h3>
+        <button type="button" onclick="document.getElementById('manualReviewCard').style.display='none'" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--color-text-muted);">&times;</button>
+    </div>
+    <div class="admin-card-body" style="padding: 20px;">
+        <form method="POST" action="<?= url('admin/reviews.php') ?>">
+            <?= csrf_field() ?>
+            <input type="hidden" name="action" value="add_manual_review">
+
+            <div class="admin-form-2col" style="margin-bottom: 14px;">
+                <div class="form-group">
+                    <label class="form-label required">Product</label>
+                    <select name="product_id" class="form-select" required>
+                        <option value="">-- Select Product --</option>
+                        <?php foreach ($allProducts as $p): ?>
+                            <option value="<?= $p['id'] ?>"><?= e($p['title']) ?> (<?= e($p['sku']) ?>)</option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label required">Star Rating</label>
+                    <select name="rating" class="form-select" required>
+                        <option value="5" selected>★★★★★ (5 Stars - Excellent)</option>
+                        <option value="4">★★★★☆ (4 Stars - Very Good)</option>
+                        <option value="3">★★★☆☆ (3 Stars - Average)</option>
+                        <option value="2">★★☆☆☆ (2 Stars - Poor)</option>
+                        <option value="1">★☆☆☆☆ (1 Star - Terrible)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="admin-form-2col" style="margin-bottom: 14px;">
+                <div class="form-group">
+                    <label class="form-label required">Customer Name</label>
+                    <input type="text" name="customer_name" class="form-input" required placeholder="e.g. Rahul Sharma">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Customer Email</label>
+                    <input type="email" name="customer_email" class="form-input" placeholder="e.g. rahul@example.com">
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 14px;">
+                <label class="form-label">Review Headline / Title</label>
+                <input type="text" name="title" class="form-input" placeholder="e.g. Exceptional Print Quality & Vibrant Colors">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 14px;">
+                <label class="form-label required">Review Body / Feedback</label>
+                <textarea name="review_text" rows="3" class="form-input" required placeholder="Detailed customer feedback on washability, peel ease, or adhesion..."></textarea>
+            </div>
+
+            <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+                <label style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; cursor: pointer;">
+                    <input type="checkbox" name="is_verified" value="1" checked>
+                    Mark as Verified Purchase
+                </label>
+                <label style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; cursor: pointer;">
+                    <input type="radio" name="status" value="approved" checked>
+                    Publish Directly (Approved)
+                </label>
+                <label style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; cursor: pointer;">
+                    <input type="radio" name="status" value="pending">
+                    Save as Pending
+                </label>
+                <button type="submit" class="btn btn-primary btn-sm" style="margin-left: auto;">Save Review</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <div class="admin-filter-bar">
-    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+    <div class="admin-filter-tabs">
         <a href="<?= url('admin/reviews.php') ?>" class="admin-tab-btn <?= ($statusFilter === '') ? 'active' : '' ?>">
             All (<?= $countAll ?>)
         </a>
@@ -95,7 +217,7 @@ $countRejected = count(db_fetch_all("SELECT id FROM product_reviews WHERE status
         </a>
     </div>
 
-    <form method="GET" action="<?= url('admin/reviews.php') ?>" class="admin-search-form" style="display: flex; gap: 8px;">
+    <form method="GET" action="<?= url('admin/reviews.php') ?>" class="admin-search-form">
         <?php if ($statusFilter !== ''): ?>
             <input type="hidden" name="status" value="<?= e($statusFilter) ?>">
         <?php endif; ?>

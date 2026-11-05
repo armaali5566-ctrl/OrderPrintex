@@ -260,10 +260,10 @@ $hasVariations = !empty($variationData) && !empty($productAttributes);
 </nav>
 
 <?php
-$galleryImages = [url(e($product['image_url']))];
+$galleryImages = [url($product['image_url'])];
 foreach ($variationData as $v) {
     if (!empty($v['image_url'])) {
-        $vUrl = url(e($v['image_url']));
+        $vUrl = url($v['image_url']);
         if (!in_array($vUrl, $galleryImages)) {
             $galleryImages[] = $vUrl;
         }
@@ -295,12 +295,6 @@ foreach ($supplementalImages as $sImg) {
             <span class="product-badge-tag <?= e($product['badge_class'] ?? 'badge-gold') ?>" style="position:absolute; top:1.25rem; left:1.25rem; z-index:10;">
               <?= e($product['badge'] ?? 'Commercial Grade') ?>
             </span>
-
-            <button type="button" class="btn-wishlist" id="detailWishlistBtn" data-product-id="<?= $product['id'] ?>" onclick="event.stopPropagation(); toggleWishlist(<?= $product['id'] ?>, this)" title="Save to Wishlist" style="position:absolute; top:1.25rem; right:1.25rem; z-index:10;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-              </svg>
-            </button>
 
             <img id="mainProductImage" src="<?= $galleryImages[0] ?>" alt="<?= e($product['title']) ?> - Full Product View" style="max-width:100%; max-height:420px; object-fit:contain; display:block; margin:0 auto; transition:opacity 0.25s ease;" loading="eager">
 
@@ -352,11 +346,6 @@ foreach ($supplementalImages as $sImg) {
               <?= e($product['min_order']) ?>
             </span>
           <?php endif; ?>
-
-          <label class="compare-checkbox-label" style="margin-left:0.25rem;">
-            <input type="checkbox" class="opx-compare-cb" data-product-id="<?= $product['id'] ?>" onchange="toggleCompareProduct(<?= $product['id'] ?>, this)">
-            Compare
-          </label>
 
           <!-- Rating Stars preview -->
           <div style="margin-left:auto; display:flex; align-items:center; gap:0.35rem; font-size:0.85rem;">
@@ -989,11 +978,6 @@ foreach ($supplementalImages as $sImg) {
             <span class="product-badge-tag <?= e($relProd['badge_class'] ?? 'badge-gold') ?>">
               <?= e($relProd['badge'] ?? $relProd['category_name']) ?>
             </span>
-            <button type="button" class="btn-wishlist" onclick="event.stopPropagation(); toggleWishlist(<?= $relProd['id'] ?>, this)" title="Save to Wishlist" style="position:absolute; top:12px; right:12px; z-index:5;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-              </svg>
-            </button>
             <img src="<?= url(e($relProd['image_url'])) ?>" alt="<?= e($relProd['title']) ?> - Commercial Specimen" loading="lazy">
           </div>
           <div class="product-body">
@@ -1021,19 +1005,12 @@ foreach ($supplementalImages as $sImg) {
               <?php endif; ?>
             </div>
 
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.6rem; padding-top:0.5rem; border-top:1px solid #28221b;">
-              <label class="compare-checkbox-label">
-                <input type="checkbox" class="opx-compare-cb" data-product-id="<?= $relProd['id'] ?>" onchange="toggleCompareProduct(<?= $relProd['id'] ?>, this)">
-                Compare
-              </label>
-            </div>
-
-            <div class="product-card-actions">
+            <div class="product-card-actions" style="margin-top:0.75rem;">
               <a href="<?= product_url($relProd['slug']) ?>" class="btn btn-outline" aria-label="View details for <?= e($relProd['title']) ?>">
                 View Details
               </a>
               <a href="<?= url('get-quote/?service_slug=' . urlencode($relProd['service_slug'] ?? '')) ?>" class="btn btn-primary" aria-label="Order or request quote for <?= e($relProd['title']) ?>">
-                Order / Quote
+                Request Quote
               </a>
             </div>
           </div>
@@ -1070,7 +1047,7 @@ foreach ($supplementalImages as $sImg) {
   <div class="sticky-cart-actions">
     <div class="sticky-cart-price" id="stickyPrice"><?= e($product['starting_price'] ?? '₹249') ?></div>
     <button type="button" class="btn btn-primary sticky-order-btn" onclick="submitStickyPurchase()">
-      Order Now &darr;
+      Request Quote &darr;
     </button>
   </div>
 </div>
