@@ -153,6 +153,90 @@ $techMeta = [
 require_once __DIR__ . '/includes/header.php';
 ?>
 
+<style>
+/* ==============================================================
+   COMPACT & SLEEK METRICS STRIP STYLING
+   ============================================================== */
+.metrics-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  align-items: stretch;
+  padding: 1.5rem 1.75rem;
+  max-width: 1080px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--radius-lg, 16px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+.metrics-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+  padding: 0.25rem 0.75rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.metrics-item:last-child,
+.metrics-item:nth-child(4) {
+  border-right: none;
+}
+
+.metrics-item-value {
+  font-size: clamp(1.1rem, 1.55vw, 1.35rem);
+  line-height: 1.25;
+  font-weight: 800;
+  color: var(--gold, #D4AF37);
+  margin-bottom: 0.45rem;
+  letter-spacing: -0.01em;
+}
+
+.metrics-item-label {
+  font-size: 0.72rem;
+  line-height: 1.45;
+  letter-spacing: 0.06em;
+  max-width: 210px;
+  margin: 0 auto;
+  opacity: 0.82;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .metrics-strip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 1rem;
+    padding: 1.35rem 1.25rem;
+  }
+  .metrics-item:nth-child(2) {
+    border-right: none;
+  }
+}
+
+@media (max-width: 540px) {
+  .metrics-strip {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 1.25rem 1rem;
+  }
+  .metrics-item {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0 0 1rem;
+  }
+  .metrics-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+</style>
+
 <!-- ============================================================== -->
 <!-- 1. HERO SECTION -->
 <!-- ============================================================== -->

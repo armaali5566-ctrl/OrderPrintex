@@ -29,31 +29,43 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'"
 </section>
 
 <!-- Like Retail, But Better -->
-<section class="section section-white">
+<section class="section section-white" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
-    <div class="service-overview-grid">
-      <div class="service-overview-content reveal slide-right">
-        <div class="section-label">Garment Standards - What Makes Our T-Shirts So Special</div>
-        <h2>Like Retail, But Better - Custom T-Shirt Printing on Premium Bio-Washed Fabrics</h2>
-        <p>
-          At OrderPrintex, we bridge that gap between making a few special items for your event and churning out a thousand corporate tees in a week. Using the latest digital technology we pair with super-soft combed cotton, we bring you shirts that look and feel like the real deal.
-        </p>
-        <p>
-          Our inks are blended so they stay soft, breathable and hold their colour through even the heaviest washing. And they don't crack or peel - they're built to last. Whether it's 10 tees for the wedding party, or 5,000 corporate dry-fit jerseys for that marathon, we ensure spot on colour matching and speedy dispatch from our Delhi facility.
-        </p>
-        <p>
-          We handle everything, from custom t-shirt printing for a wedding party to a major branding push for your company. One stop shop, every time.
-        </p>
-
-        <div class="service-cta-group">
-          <a href="#upload-tshirt" class="btn service-btn-primary">Hit us up for a T-Shirt quote</a>
-          <a href="<?= url('products.php') ?>" class="btn service-btn-secondary">Check out our Garment styles</a>
+    <div class="tech-zigzag-row tech-row-odd is-visible">
+      <div class="tech-zigzag-media">
+        <div class="tech-zigzag-img-wrap">
+          <img src="<?= url('assets/images/custom_tshirt_apparel.jpg') ?>" alt="Finished Custom Printed T-Shirts" class="tech-zigzag-img" loading="lazy" width="1200" height="896">
+          <div class="tech-media-badge">
+            <span class="tech-media-badge-dot"></span>
+            <span>Bio-Washed Combed Cotton</span>
+          </div>
         </div>
       </div>
 
-      <div class="service-overview-media reveal slide-left">
-        <div class="service-media-frame">
-          <img src="<?= url('assets/images/custom_tshirt_apparel.jpg') ?>" alt="Finished Custom Printed T-Shirts" loading="lazy">
+      <div class="tech-zigzag-content">
+        <div class="section-label" style="color:var(--bright-gold, #FFD76A);">Garment Standards - What Makes Our T-Shirts So Special</div>
+        <h2 style="font-size:clamp(1.75rem, 2.7vw, 2.4rem); color:#F8FAFC; font-weight:800; line-height:1.24; margin-bottom:1rem;">
+          Like Retail, But Better - Custom T-Shirt Printing on Premium Bio-Washed Fabrics
+        </h2>
+        <div class="tech-accent-line line-gold"></div>
+
+        <p class="tech-desc" style="color:#CBD5E1;">
+          At OrderPrintex, we bridge that gap between making a few special items for your event and churning out a thousand corporate tees in a week. Using the latest digital technology we pair with super-soft combed cotton, we bring you shirts that look and feel like the real deal.
+        </p>
+        <p class="tech-desc" style="color:#CBD5E1;">
+          Our inks are blended so they stay soft, breathable and hold their colour through even the heaviest washing. And they don't crack or peel - they're built to last. Whether it's 10 tees for the wedding party, or 5,000 corporate dry-fit jerseys for that marathon, we ensure spot on colour matching and speedy dispatch from our Delhi facility.
+        </p>
+        <p class="tech-desc" style="color:#CBD5E1;">
+          We handle everything, from custom t-shirt printing for a wedding party to a major branding push for your company. One stop shop, every time.
+        </p>
+
+        <div class="service-cta-group" style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1.5rem;">
+          <a href="#upload-tshirt" class="btn btn-primary btn-lg">
+            <span>Hit us up for a T-Shirt quote</span> &rarr;
+          </a>
+          <a href="<?= url('products.php') ?>" class="btn btn-outline btn-lg" style="border-color:rgba(212,175,55,0.4); color:#D4AF37;">
+            <span>Check out our Garment styles</span>
+          </a>
         </div>
       </div>
     </div>
@@ -61,49 +73,53 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'"
 </section>
 
 <!-- Packages Section -->
-<section class="section section-ivory">
+<section class="section section-ivory" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
-    <div class="section-header reveal slide-up">
-      <div class="section-label">Packages</div>
-      <h2>T-Shirt Printing Packages for Every Occasion - Because Life's Too Short For Boring Tees</h2>
-      <p class="section-subtitle" style="max-width:850px; margin:0 auto 2rem; text-align:left;">
+    <div class="section-header reveal slide-up" style="max-width:850px; margin-bottom:2.5rem;">
+      <div class="section-label" style="color:var(--crimson, #DC2626);">Packages</div>
+      <h2 style="font-size:clamp(1.9rem, 3vw, 2.5rem); color:#F8FAFC; font-weight:800; line-height:1.24; margin-bottom:1rem;">
+        T-Shirt Printing Packages for Every Occasion - Because Life's Too Short For Boring Tees
+      </h2>
+      <p class="section-subtitle" style="max-width:850px; margin:0; text-align:left; color:#CBD5E1; font-size:1.05rem; line-height:1.75;">
         Choose from our flexible order quantities, swanky packaging and an array of tees to make your day - or week - special.
       </p>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1.25rem;">
-      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-size:1.1rem; line-height:1.2; font-weight:800;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">Brand Merch: Heavy streetwear tees that feel good, look great and have those all important hash tags and labels.</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.35rem;">
+      <div class="service-feature-card reveal slide-up stagger-1">
+        <span style="color:var(--primary-gold, #D4AF37); font-size:1.35rem; line-height:1; font-weight:800;">•</span>
+        <p style="font-weight:600;">Brand Merch: Heavy streetwear tees that feel good, look great and have those all important hash tags and labels.</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-size:1.1rem; line-height:1.2; font-weight:800;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">Couple &amp; Family Tees: Get matching his and hers tees, tasteful anniversary gifts and some awesome typography to celebrate life's milestones.</p>
+      <div class="service-feature-card reveal slide-up stagger-2">
+        <span style="color:var(--primary-gold, #D4AF37); font-size:1.35rem; line-height:1; font-weight:800;">•</span>
+        <p style="font-weight:600;">Couple &amp; Family Tees: Get matching his and hers tees, tasteful anniversary gifts and some awesome typography to celebrate life's milestones.</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-size:1.1rem; line-height:1.2; font-weight:800;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">Wedding &amp; Event Tees: We've got coordinated squad tees, college fest tees, reunion tees and sporty team kits to boot.</p>
+      <div class="service-feature-card reveal slide-up stagger-3">
+        <span style="color:var(--primary-gold, #D4AF37); font-size:1.35rem; line-height:1; font-weight:800;">•</span>
+        <p style="font-weight:600;">Wedding &amp; Event Tees: We've got coordinated squad tees, college fest tees, reunion tees and sporty team kits to boot.</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-size:1.1rem; line-height:1.2; font-weight:800;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">Corporate Polos: High quality, comfy pique cotton polos with the perfect embroidered or DTF chest logo to show your company pride.</p>
+      <div class="service-feature-card reveal slide-up stagger-4">
+        <span style="color:var(--primary-gold, #D4AF37); font-size:1.35rem; line-height:1; font-weight:800;">•</span>
+        <p style="font-weight:600;">Corporate Polos: High quality, comfy pique cotton polos with the perfect embroidered or DTF chest logo to show your company pride.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Fabrics Table Section -->
-<section class="section section-white">
+<section class="section section-white" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
-    <div class="section-header reveal slide-up">
-      <div class="section-label">Fabric Guide</div>
-      <h2>T-Shirt Fabrics and Styles You Can Choose</h2>
+    <div class="section-header reveal slide-up" style="max-width:760px; margin-bottom:2.25rem;">
+      <div class="section-label" style="color:var(--blue, #3B82F6);">Fabric Guide</div>
+      <h2 style="font-size:clamp(1.9rem, 3vw, 2.5rem); color:#F8FAFC; font-weight:800; line-height:1.24;">
+        T-Shirt Fabrics and Styles You Can Choose
+      </h2>
     </div>
 
-    <div style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); overflow-x:auto; margin-bottom:1.25rem; box-shadow:var(--shadow-card);">
+    <div class="elevated-compare-card reveal slide-up">
       <table class="compare-table" style="width:100%; min-width:600px;">
         <thead>
-          <tr style="background:var(--bg-surface-elevated); border-bottom:2px solid var(--border-color);">
+          <tr>
             <th style="padding:1rem 1.25rem; color:var(--primary-gold); font-weight:800;">Garment</th>
             <th style="padding:1rem 1.25rem; color:var(--primary-gold); font-weight:800;">Fabric</th>
             <th style="padding:1rem 1.25rem; color:var(--primary-gold); font-weight:800;">Best for</th>
@@ -133,171 +149,196 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'"
         </tbody>
       </table>
     </div>
-    <p style="font-weight:600; color:var(--text-secondary); font-size:0.95rem; margin:0;">
+    <p style="font-weight:600; color:#CBD5E1; font-size:0.95rem; margin:0;">
       All t-shirts use 100% super-combed bio-washed ringspun cotton with double-needle stitched neck and sleeves.
     </p>
   </div>
 </section>
 
 <!-- DTF vs Screen Printing Table Section -->
-<section class="section section-ivory">
+<section class="section section-ivory" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
-    <div class="section-header reveal slide-up">
-      <div class="section-label">Print Method</div>
-      <h2>Why We Use DTF T-Shirt Printing for Custom Orders</h2>
-      <p class="section-subtitle" style="max-width:850px; margin:0 auto 1.5rem; text-align:left;">
+    <div class="section-header reveal slide-up" style="max-width:850px; margin-bottom:2.25rem;">
+      <div class="section-label" style="color:var(--crimson, #DC2626);">Print Method</div>
+      <h2 style="font-size:clamp(1.9rem, 3vw, 2.5rem); color:#F8FAFC; font-weight:800; line-height:1.24; margin-bottom:1rem;">
+        Why We Use DTF T-Shirt Printing for Custom Orders
+      </h2>
+      <p class="section-subtitle" style="max-width:850px; margin:0 auto 1.5rem; text-align:left; color:#CBD5E1; font-size:1.05rem; line-height:1.75;">
         DTF t-shirt printing prints your design on film first and presses it onto the garment, so even full-colour artwork with gradients and fine details comes out sharp. There are no screens to make and no extra charge for every colour, which keeps small and mixed-design orders affordable.
       </p>
     </div>
 
-    <div style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); overflow-x:auto; margin-bottom:1.25rem; box-shadow:var(--shadow-card);">
+    <div class="elevated-compare-card reveal slide-up">
       <table class="compare-table" style="width:100%; min-width:600px;">
         <thead>
-          <tr style="background:var(--bg-surface-elevated); border-bottom:2px solid var(--border-color);">
+          <tr>
             <th style="padding:1rem 1.25rem; color:var(--primary-gold); font-weight:800;">Feature</th>
-            <th style="padding:1rem 1.25rem; color:var(--primary-gold); font-weight:800;">DTF t-shirt printing</th>
+            <th class="flagship-col" style="padding:1rem 1.25rem; font-weight:800;">DTF t-shirt printing</th>
             <th style="padding:1rem 1.25rem; color:var(--primary-gold); font-weight:800;">Screen printing</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td style="font-weight:700;">Set-up</td>
-            <td>None</td>
+            <td class="flagship-col">None</td>
             <td>Screens for every colour</td>
           </tr>
           <tr>
             <td style="font-weight:700;">Many colours</td>
-            <td>Same price</td>
+            <td class="flagship-col">Same price</td>
             <td>Costs more</td>
           </tr>
           <tr>
             <td style="font-weight:700;">Small orders</td>
-            <td>Great</td>
+            <td class="flagship-col">Great</td>
             <td>Expensive</td>
           </tr>
           <tr>
             <td style="font-weight:700;">Feel</td>
-            <td>Soft and flexible</td>
+            <td class="flagship-col">Soft and flexible</td>
             <td>Soft</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p style="margin-top:1.25rem; font-weight:600;">
-      <a href="<?= service_url('dtf-printing') ?>" style="color:var(--primary-gold); text-decoration:underline;">
-        Want to know how the transfers are made? Read about our DTF printing process.
-      </a>
-    </p>
+
+    <div class="reveal slide-up" style="margin-top:1.25rem;">
+      <div style="display:inline-flex; align-items:center; gap:0.6rem; background:rgba(212,175,55,0.12); border:1px solid rgba(212,175,55,0.32); border-radius:999px; padding:0.5rem 1.35rem; font-weight:700; color:#FFD76A; font-size:1.02rem;">
+        <span style="color:#D4AF37; font-size:1.15rem;">★</span>
+        <a href="<?= service_url('dtf-printing') ?>" style="color:#FFD76A; text-decoration:underline;">
+          Want to know how the transfers are made? Read about our DTF printing process.
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- Bulk T-Shirt Printing -->
-<section class="section section-white">
+<section class="section section-white" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
-    <div class="section-header reveal slide-up">
-      <div class="section-label">Bulk Orders</div>
-      <h2>Bulk T-Shirt Printing in Delhi for Companies, Events and Brands</h2>
-    </div>
+    <div class="tech-zigzag-row tech-row-even is-visible">
+      <div class="tech-zigzag-content">
+        <div class="section-label" style="color:var(--crimson, #DC2626);">Bulk Orders</div>
+        <h2 style="font-size:clamp(1.75rem, 2.7vw, 2.4rem); color:#F8FAFC; font-weight:800; line-height:1.24; margin-bottom:1rem;">
+          Bulk T-Shirt Printing in Delhi for Companies, Events and Brands
+        </h2>
+        <div class="tech-accent-line line-gold"></div>
 
-    <div style="max-width:850px; line-height:1.8; color:var(--text-secondary); font-size:1.05rem;">
-      <p style="margin-bottom:1.25rem;">
-        Planning a team launch, a college fest or a staff uniform drive? Our bulk t-shirt printing keeps colours consistent from the first piece to the last, and the rate per piece comes down as your quantity grows. Share your total quantity with a size breakdown and your colour preferences, and we send a clear quote.
-      </p>
-      <p>
-        Corporate t-shirt printing is packed in bulk and dispatched on time, with polos and dry-fit jerseys available for staff and sports teams. For brand merchandise, we can add neck label tags and individual poly-bags so your tees arrive ready to sell.
-      </p>
+        <p class="tech-desc" style="color:#CBD5E1; font-size:1.04rem; line-height:1.8;">
+          Planning a team launch, a college fest or a staff uniform drive? Our bulk t-shirt printing keeps colours consistent from the first piece to the last, and the rate per piece comes down as your quantity grows. Share your total quantity with a size breakdown and your colour preferences, and we send a clear quote.
+        </p>
+        <p class="tech-desc" style="color:#CBD5E1; font-size:1.04rem; line-height:1.8;">
+          Corporate t-shirt printing is packed in bulk and dispatched on time, with polos and dry-fit jerseys available for staff and sports teams. For brand merchandise, we can add neck label tags and individual poly-bags so your tees arrive ready to sell.
+        </p>
+      </div>
+
+      <div class="tech-zigzag-media">
+        <div class="tech-zigzag-img-wrap">
+          <img src="<?= url('assets/images/streetwear_tee.jpg') ?>" alt="Streetwear and Bulk Apparel" class="tech-zigzag-img" loading="lazy" width="1200" height="896">
+          <div class="tech-media-badge">
+            <span class="tech-media-badge-dot"></span>
+            <span>Streetwear &amp; Bulk Apparel</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- Logo T-Shirt Printing -->
-<section class="section section-ivory">
+<section class="section section-ivory" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
-    <div class="section-header reveal slide-up">
-      <div class="section-label">Placement Options</div>
-      <h2>Logo T-Shirt Printing for Teams, Startups and Events</h2>
-      <p class="section-subtitle" style="max-width:850px; margin:0 auto 1.5rem; text-align:left;">
+    <div class="section-header reveal slide-up" style="max-width:850px; margin-bottom:2.5rem;">
+      <div class="section-label" style="color:var(--blue, #3B82F6);">Placement Options</div>
+      <h2 style="font-size:clamp(1.9rem, 3vw, 2.5rem); color:#F8FAFC; font-weight:800; line-height:1.24; margin-bottom:1rem;">
+        Logo T-Shirt Printing for Teams, Startups and Events
+      </h2>
+      <p class="section-subtitle" style="max-width:850px; margin:0 auto 1.5rem; text-align:left; color:#CBD5E1; font-size:1.05rem; line-height:1.75;">
         Logo t-shirt printing is our most popular order. Choose where your design goes:
       </p>
     </div>
 
     <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1.25rem; margin-bottom:1.5rem;">
-      <div style="display:flex; align-items:flex-start; gap:0.85rem; padding:1.25rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.1rem; line-height:1.2;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem;">Front chest (A4)</p>
+      <div class="service-feature-card reveal slide-up stagger-1">
+        <span style="color:var(--primary-gold, #D4AF37); font-weight:800; font-size:1.25rem; line-height:1;">•</span>
+        <p style="font-weight:600;">Front chest (A4)</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:0.85rem; padding:1.25rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.1rem; line-height:1.2;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem;">Front chest and full back (A3)</p>
+      <div class="service-feature-card reveal slide-up stagger-2">
+        <span style="color:var(--primary-gold, #D4AF37); font-weight:800; font-size:1.25rem; line-height:1;">•</span>
+        <p style="font-weight:600;">Front chest and full back (A3)</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:0.85rem; padding:1.25rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.1rem; line-height:1.2;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem;">Left chest pocket only</p>
+      <div class="service-feature-card reveal slide-up stagger-3">
+        <span style="color:var(--primary-gold, #D4AF37); font-weight:800; font-size:1.25rem; line-height:1;">•</span>
+        <p style="font-weight:600;">Left chest pocket only</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:0.85rem; padding:1.25rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.1rem; line-height:1.2;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem;">Custom placements on sleeve or neckline</p>
+      <div class="service-feature-card reveal slide-up stagger-4">
+        <span style="color:var(--primary-gold, #D4AF37); font-weight:800; font-size:1.25rem; line-height:1;">•</span>
+        <p style="font-weight:600;">Custom placements on sleeve or neckline</p>
       </div>
     </div>
 
-    <p style="color:var(--text-secondary); line-height:1.7; font-size:1.02rem; margin:0;">
+    <p style="color:#CBD5E1; line-height:1.7; font-size:1.02rem; margin:0;">
       Send your logo as a transparent PNG at 300 DPI, or as a vector file, and we will place it exactly where you want it.
     </p>
   </div>
 </section>
 
 <!-- Occasions Section -->
-<section class="section section-white">
+<section class="section section-white" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
-    <div class="section-header reveal slide-up">
-      <div class="section-label">Occasions</div>
-      <h2>Custom T-Shirt Printing for Weddings, Events, Colleges and Companies</h2>
-      <p class="section-subtitle" style="max-width:850px; margin:0 auto 1.5rem; text-align:left;">
+    <div class="section-header reveal slide-up" style="max-width:850px; margin-bottom:2.5rem;">
+      <div class="section-label" style="color:var(--bright-gold, #FFD76A);">Occasions</div>
+      <h2 style="font-size:clamp(1.9rem, 3vw, 2.5rem); color:#F8FAFC; font-weight:800; line-height:1.24; margin-bottom:1rem;">
+        Custom T-Shirt Printing for Weddings, Events, Colleges and Companies
+      </h2>
+      <p class="section-subtitle" style="max-width:850px; margin:0 auto 1.5rem; text-align:left; color:#CBD5E1; font-size:1.05rem; line-height:1.75;">
         Every occasion needs its own look, and custom t-shirt printing makes a group feel like a team. Here is what our customers order most:
       </p>
     </div>
 
     <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem;">
-      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.1rem; line-height:1.2;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">Wedding squad tees for the bride, groom and friends</p>
+      <div class="service-feature-card reveal slide-up stagger-1">
+        <span style="color:var(--primary-gold, #D4AF37); font-weight:800; font-size:1.25rem; line-height:1;">•</span>
+        <p style="font-weight:600;">Wedding squad tees for the bride, groom and friends</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.1rem; line-height:1.2;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">College fest and society batches with names and logos</p>
+      <div class="service-feature-card reveal slide-up stagger-2">
+        <span style="color:var(--primary-gold, #D4AF37); font-weight:800; font-size:1.25rem; line-height:1;">•</span>
+        <p style="font-weight:600;">College fest and society batches with names and logos</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.1rem; line-height:1.2;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">Corporate team-building, offsite and staff appreciation tees</p>
+      <div class="service-feature-card reveal slide-up stagger-3">
+        <span style="color:var(--primary-gold, #D4AF37); font-weight:800; font-size:1.25rem; line-height:1;">•</span>
+        <p style="font-weight:600;">Corporate team-building, offsite and staff appreciation tees</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.1rem; line-height:1.2;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">Sports tournaments, marathons and gym events in dry-fit</p>
+      <div class="service-feature-card reveal slide-up stagger-4">
+        <span style="color:var(--primary-gold, #D4AF37); font-weight:800; font-size:1.25rem; line-height:1;">•</span>
+        <p style="font-weight:600;">Sports tournaments, marathons and gym events in dry-fit</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.1rem; line-height:1.2;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">Startup launches, brand drops and merchandise runs</p>
+      <div class="service-feature-card reveal slide-up stagger-5">
+        <span style="color:var(--primary-gold, #D4AF37); font-weight:800; font-size:1.25rem; line-height:1;">•</span>
+        <p style="font-weight:600;">Startup launches, brand drops and merchandise runs</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.1rem; line-height:1.2;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">Family reunions, birthdays and anniversary sets</p>
+      <div class="service-feature-card reveal slide-up stagger-6">
+        <span style="color:var(--primary-gold, #D4AF37); font-weight:800; font-size:1.25rem; line-height:1;">•</span>
+        <p style="font-weight:600;">Family reunions, birthdays and anniversary sets</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Print Size and Placement Guide -->
-<section class="section section-ivory">
+<section class="section section-ivory" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
-    <div class="section-header reveal slide-up">
-      <div class="section-label">Placement Guide</div>
-      <h2>Print Size and Placement Guide for Custom T-Shirt Printing</h2>
+    <div class="section-header reveal slide-up" style="max-width:760px; margin-bottom:2.25rem;">
+      <div class="section-label" style="color:var(--crimson, #DC2626);">Placement Guide</div>
+      <h2 style="font-size:clamp(1.9rem, 3vw, 2.5rem); color:#F8FAFC; font-weight:800; line-height:1.24;">
+        Print Size and Placement Guide for Custom T-Shirt Printing
+      </h2>
     </div>
 
-    <div style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); overflow-x:auto; margin-bottom:1.25rem; box-shadow:var(--shadow-card);">
+    <div class="elevated-compare-card reveal slide-up">
       <table class="compare-table" style="width:100%; min-width:600px;">
         <thead>
-          <tr style="background:var(--bg-surface-elevated); border-bottom:2px solid var(--border-color);">
+          <tr>
             <th style="padding:1rem 1.25rem; color:var(--primary-gold); font-weight:800;">Placement</th>
             <th style="padding:1rem 1.25rem; color:var(--primary-gold); font-weight:800;">Typical size</th>
             <th style="padding:1rem 1.25rem; color:var(--primary-gold); font-weight:800;">Best for</th>
@@ -327,45 +368,51 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'"
         </tbody>
       </table>
     </div>
-    <p style="font-weight:600; color:var(--text-secondary); font-size:0.95rem; margin:0;">
+    <p style="font-weight:600; color:#CBD5E1; font-size:0.95rem; margin:0;">
       Not sure what fits your design? Tell us the garment and we will suggest a placement.
     </p>
   </div>
 </section>
 
 <!-- How Custom T-Shirt Printing Works at Printex -->
-<section class="section section-white">
+<section class="section section-navy" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem); background: radial-gradient(circle at 50% 10%, rgba(212, 175, 55, 0.16) 0%, transparent 60%), #080808;">
   <div class="container">
-    <div class="section-header text-center reveal slide-up">
-      <div class="section-label">Production Workflow</div>
-      <h2>How Custom T-Shirt Printing Works at Printex</h2>
+    <div class="section-header text-center reveal slide-up" style="max-width:740px; margin:0 auto clamp(2.5rem, 4vw, 3.5rem);">
+      <div class="section-label" style="justify-content:center; color:var(--bright-gold, #FFD76A);">Production Workflow</div>
+      <h2 style="font-size:clamp(2rem, 3.2vw, 2.75rem); color:#FFFFFF; font-weight:800; line-height:1.2; margin-bottom:0.85rem;">
+        How Custom T-Shirt Printing Works at Printex
+      </h2>
     </div>
 
-    <div class="service-specs-grid" style="grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));">
-      <div class="timeline-step reveal slide-up stagger-1">
+    <div class="process-grid" style="grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));">
+      <div class="process-step-card reveal slide-up stagger-1">
+        <div class="process-step-num">01</div>
         <h4 style="color:var(--primary-gold); margin-bottom:0.5rem;">Step 1</h4>
-        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">
+        <p class="process-step-desc">
           1. Get Your Design and Details to us: send across your artwork - and not forgetting to let us know which t-shirt you're after, how you'd like it printed and how many you need.
         </p>
       </div>
 
-      <div class="timeline-step reveal slide-up stagger-2">
+      <div class="process-step-card reveal slide-up stagger-2">
+        <div class="process-step-num">02</div>
         <h4 style="color:var(--primary-gold); margin-bottom:0.5rem;">Step 2</h4>
-        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">
+        <p class="process-step-desc">
           2. We work up a tailored quote: check over your design and send you a customised price breakdown with all the sizes and costs laid out in black and white.
         </p>
       </div>
 
-      <div class="timeline-step reveal slide-up stagger-3">
+      <div class="process-step-card reveal slide-up stagger-3">
+        <div class="process-step-num">03</div>
         <h4 style="color:var(--primary-gold); margin-bottom:0.5rem;">Step 3</h4>
-        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">
+        <p class="process-step-desc">
           3. We get to work on your order: your custom t-shirt design gets printed on high-quality DTF and then pressed onto our pre-shrunk t-shirts.
         </p>
       </div>
 
-      <div class="timeline-step reveal slide-up stagger-4">
+      <div class="process-step-card reveal slide-up stagger-4">
+        <div class="process-step-num">04</div>
         <h4 style="color:var(--primary-gold); margin-bottom:0.5rem;">Step 4</h4>
-        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">
+        <p class="process-step-desc">
           4. We check them over and get them in the post: every single t-shirt gets a quality check, they're then packaged up in bulk and sent out to all corners of India.
         </p>
       </div>
@@ -374,15 +421,17 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'"
 </section>
 
 <!-- How to Get Your Design Ready -->
-<section class="section section-ivory">
+<section class="section section-ivory" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
-    <div class="section-header reveal slide-up">
-      <div class="section-label">Prepress Guide</div>
-      <h2>How to Get Your Design Ready for Our Custom T-Shirt Printing</h2>
+    <div class="section-header reveal slide-up" style="max-width:760px; margin-bottom:2rem;">
+      <div class="section-label" style="color:var(--blue, #3B82F6);">Prepress Guide</div>
+      <h2 style="font-size:clamp(1.9rem, 3vw, 2.5rem); color:#F8FAFC; font-weight:800; line-height:1.24;">
+        How to Get Your Design Ready for Our Custom T-Shirt Printing
+      </h2>
     </div>
 
-    <div style="max-width:850px; line-height:1.8; color:var(--text-secondary); font-size:1.05rem;">
-      <p>
+    <div class="reveal slide-up" style="background:#111111; border:1px solid rgba(212,175,55,0.25); border-left:4px solid var(--primary-gold, #D4AF37); border-radius:14px; padding:2rem 2.25rem; max-width:920px; box-shadow:0 6px 20px rgba(0,0,0,0.35);">
+      <p style="line-height:1.85; color:#CBD5E1; font-size:1.05rem; margin:0;">
         Don't upload a random .jpg, come prepared with a transparent PNG at 300 DPI, or a vector file (like an Adobe Illustrator file) in AI, SVG or PDF format. Make sure any fonts have been knocked up into outlines and steer clear of super thin lines on dark coloured tees - and don't forget to mention your size breakdown (XS to 3XL, for example) and any colour preferences you might have, so we can get it spot on from the get go.
       </p>
     </div>
@@ -390,15 +439,17 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'"
 </section>
 
 <!-- How to Keep Your Printed T-Shirts Looking their Best -->
-<section class="section section-white">
+<section class="section section-white" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
-    <div class="section-header reveal slide-up">
-      <div class="section-label">Garment Care</div>
-      <h2>How to Keep Your Printed T-Shirts Looking their Best</h2>
+    <div class="section-header reveal slide-up" style="max-width:760px; margin-bottom:2rem;">
+      <div class="section-label" style="color:var(--bright-gold, #FFD76A);">Garment Care</div>
+      <h2 style="font-size:clamp(1.9rem, 3vw, 2.5rem); color:#F8FAFC; font-weight:800; line-height:1.24;">
+        How to Keep Your Printed T-Shirts Looking their Best
+      </h2>
     </div>
 
-    <div style="max-width:850px; line-height:1.8; color:var(--text-secondary); font-size:1.05rem;">
-      <p>
+    <div class="reveal slide-up" style="background:#111111; border:1px solid rgba(212,175,55,0.25); border-left:4px solid var(--primary-gold, #D4AF37); border-radius:14px; padding:2rem 2.25rem; max-width:920px; box-shadow:0 6px 20px rgba(0,0,0,0.35);">
+      <p style="line-height:1.85; color:#CBD5E1; font-size:1.05rem; margin:0;">
         When you're washing your custom tees, try keeping them on the inside out in either cold or warm water, and steer clear of bleach altogether. Don't iron straight onto the print either - follow these simple tips and your custom t-shirt printing will stay looking its best for longer.
       </p>
     </div>
@@ -406,40 +457,42 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'"
 </section>
 
 <!-- Why Should You Choose Printex for Your T-Shirt Printing in Delhi? -->
-<section class="section section-ivory">
+<section class="section section-ivory" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
-    <div class="section-header reveal slide-up">
-      <div class="section-label">The Printex Advantage</div>
-      <h2>Why Should You Choose Printex for Your T-Shirt Printing in Delhi?</h2>
+    <div class="section-header reveal slide-up" style="max-width:760px; margin-bottom:2.5rem;">
+      <div class="section-label" style="color:var(--crimson, #DC2626);">The Printex Advantage</div>
+      <h2 style="font-size:clamp(1.9rem, 3vw, 2.5rem); color:#F8FAFC; font-weight:800; line-height:1.24;">
+        Why Should You Choose Printex for Your T-Shirt Printing in Delhi?
+      </h2>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1.75rem; padding:1.25rem 0;">
-      <div style="display:flex; align-items:flex-start; gap:1rem;">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.6;">We only use the best fabrics: pre-shrunk, bio-washed combed cotton tees with double-needle stitching for a top-notch finish.</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1.5rem; padding:1.25rem 0;">
+      <div class="service-feature-card reveal slide-up stagger-1">
+        <span style="color:#16A34A; font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
+        <p style="font-weight:600;">We only use the best fabrics: pre-shrunk, bio-washed combed cotton tees with double-needle stitching for a top-notch finish.</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem;">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.6;">Our soft, stretchy prints: are made to move with you, staying put even after multiple washes.</p>
+      <div class="service-feature-card reveal slide-up stagger-2">
+        <span style="color:#16A34A; font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
+        <p style="font-weight:600;">Our soft, stretchy prints: are made to move with you, staying put even after multiple washes.</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem;">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.6;">We can print in any quantity you need: from a handful to thousands - we can make it happen.</p>
+      <div class="service-feature-card reveal slide-up stagger-3">
+        <span style="color:#16A34A; font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
+        <p style="font-weight:600;">We can print in any quantity you need: from a handful to thousands - we can make it happen.</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem;">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.6;">We match colours to perfection: our colour matching is so tight you'll get the same results from each and every t-shirt.</p>
+      <div class="service-feature-card reveal slide-up stagger-4">
+        <span style="color:#16A34A; font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
+        <p style="font-weight:600;">We match colours to perfection: our colour matching is so tight you'll get the same results from each and every t-shirt.</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem; grid-column:1 / -1;">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.6;">We dispatch across India: we print and package up your custom tees in our Delhi studio, then get them shipped out to you.</p>
+      <div class="service-feature-card reveal slide-up stagger-5" style="grid-column:1 / -1;">
+        <span style="color:#16A34A; font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
+        <p style="font-weight:600;">We dispatch across India: we print and package up your custom tees in our Delhi studio, then get them shipped out to you.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Frequently Asked Questions -->
-<section class="section section-white">
+<section class="section section-white" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container container-narrow">
     <div class="section-header text-center reveal slide-up">
       <div class="section-label">Common Queries</div>
@@ -561,7 +614,7 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'"
 </section>
 
 <!-- Direct Upload / Order Form -->
-<section class="section section-ivory" id="upload-tshirt">
+<section class="section section-ivory" id="upload-tshirt" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
     <div class="section-header text-center reveal slide-up">
       <div class="section-label">Direct Upload Studio</div>
@@ -596,9 +649,9 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'"
 
             <div class="file-preview-area"></div>
 
-            <div style="background:var(--bg-surface-elevated); padding:1.25rem; border-radius:var(--radius-sm); margin-top:1.25rem; border:1px solid var(--border-color);">
-              <h5 style="color:var(--text-primary); margin-bottom:0.35rem; font-size:0.95rem;">Fabric &amp; Print Assurance</h5>
-              <p style="font-size:0.825rem; color:var(--text-secondary); margin:0;">
+            <div style="background:#111111; padding:1.25rem; border-radius:10px; margin-top:1.25rem; border:1.5px solid #40351E;">
+              <h5 style="color:#F8FAFC; margin-bottom:0.35rem; font-size:0.95rem;">Fabric &amp; Print Assurance</h5>
+              <p style="font-size:0.825rem; color:#CBD5E1; margin:0;">
                 All t-shirts use 100% super-combed bio-washed ringspun cotton with double-needle stitched neck and sleeves.
               </p>
             </div>
@@ -677,22 +730,24 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'"
 </section>
 
 <!-- Visit Studio Section -->
-<section class="section section-white">
+<section class="section section-white" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container container-narrow text-center reveal slide-up">
-    <div class="section-label" style="justify-content:center;">Location</div>
-    <h2 style="margin-bottom:1rem;">T-Shirt Printing in Delhi: Visit Our Studio</h2>
-    <p style="font-size:1.1rem; color:var(--text-primary); margin-bottom:1rem;">
+    <div class="section-label" style="justify-content:center; color:var(--crimson, #DC2626);">Location</div>
+    <h2 style="font-size:clamp(1.9rem, 3vw, 2.5rem); color:#F8FAFC; font-weight:800; line-height:1.24; margin-bottom:1rem;">
+      T-Shirt Printing in Delhi: Visit Our Studio
+    </h2>
+    <p style="font-size:1.08rem; color:#CBD5E1; margin-bottom:1.5rem; line-height:1.65;">
       Order custom t-shirts from our Delhi studio.
     </p>
-    <div style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.5rem; margin:1.5rem auto; max-width:650px;">
-      <p style="font-weight:700; color:var(--primary-gold); font-size:1.05rem; margin-bottom:0.5rem;">
+    <div style="background:#111111; border:1px solid rgba(212,175,55,0.3); border-top:3px solid var(--primary-gold, #D4AF37); border-radius:14px; padding:1.75rem 2rem; margin:1.5rem auto; max-width:650px; box-shadow:0 8px 24px rgba(0,0,0,0.35);">
+      <p style="font-weight:700; color:#FFD76A; font-size:1.05rem; margin-bottom:0.5rem; line-height:1.5;">
         Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Delhi 110059
       </p>
-      <p style="margin:0; color:var(--text-secondary);">
+      <p style="margin:0; color:#CBD5E1; font-size:0.95rem;">
         Call / WhatsApp:
       </p>
     </div>
-    <div style="margin-top:1.5rem;">
+    <div style="margin-top:2rem;">
       <a href="<?= url('contact.php') ?>" class="btn btn-primary btn-lg">
         <span>Contact Printex Studio</span> &rarr;
       </a>

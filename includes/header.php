@@ -40,7 +40,7 @@ $canonical = $canonical ?? url($_SERVER['REQUEST_URI'] ?? '');
   <meta property="og:image" content="<?= url('assets/images/logo.png') ?>">
 
   <!-- Core Native Stylesheets (No External CDNs) -->
-  <link rel="stylesheet" href="<?= url('assets/css/style.css') ?>">
+  <link rel="stylesheet" href="<?= url('assets/css/style.css?v=' . (file_exists(__DIR__ . '/../assets/css/style.css') ? filemtime(__DIR__ . '/../assets/css/style.css') : '2.2')) ?>">
   <link rel="stylesheet" href="<?= url('assets/css/animations.css') ?>">
   <link rel="stylesheet" href="<?= url('assets/css/responsive.css') ?>">
 

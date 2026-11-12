@@ -28,35 +28,47 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'dtf-printing'");
 </section>
 
 <!-- What's All this About DTF Printing -->
-<section class="section section-white">
+<section class="section section-white" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
-    <div class="service-overview-grid">
-      <div class="service-overview-content reveal slide-right">
-        <div class="section-label">Direct-to-Film</div>
-        <h2>What's All this About DTF Printing (and how does it work?)</h2>
-        <p>
-          You probably know it as Direct-to-Film. Here's the lowdown: your design gets printed directly onto a special film that's coated with a bit of adhesive. Then, with a bit of heat, its pressed onto the garment. The result is colours that stay bright on even the darkest fabrics, and the fine details are still as sharp as can be.
-        </p>
-        <p>
-          Our DTF transfer printing service here in Delhi is geared towards brands, print shops, resellers and anyone new to the game. You can send us your artwork and we will make ready-to-press transfers for you to apply yourself, or send us your garments and we will do the pressing for you. These films work like a charm on cotton, polyester, blends - you name it.
-        </p>
-        <p>
-          DTF is a great choice when you want to steer clear of screens, colour separation and all the extra per-colour charges that come with it. Small batches, repeat orders, bulk runs - DTF is a real winner when it comes to these types of print jobs. Hit us up with your artwork and we'll have a look at it before we get to work.
-        </p>
-
-        <p style="font-weight:700; color:var(--text-primary); margin-top:1.25rem;">
-          Upload Your Design and we'll give You a Quote for DTF Printing - and Check out our Gang Sheet Options While You're At It
-        </p>
-
-        <div class="service-cta-group">
-          <a href="#upload-dtf" class="btn service-btn-primary">Upload Design for DTF Quote</a>
-          <a href="<?= url('products.php') ?>" class="btn service-btn-secondary">View Gang Sheet Options</a>
+    <div class="tech-zigzag-row tech-row-odd is-visible">
+      <div class="tech-zigzag-media">
+        <div class="tech-zigzag-img-wrap">
+          <img src="<?= url('assets/images/dtf_fabric_print.jpg') ?>" alt="DTF Transfer Print on Dark Fabric" class="tech-zigzag-img" loading="lazy" width="1200" height="896">
+          <div class="tech-media-badge">
+            <span class="tech-media-badge-dot"></span>
+            <span>Direct-to-Film 24" Print</span>
+          </div>
         </div>
       </div>
 
-      <div class="service-overview-media reveal slide-left">
-        <div class="service-media-frame">
-          <img src="<?= url('assets/images/dtf_fabric_print.jpg') ?>" alt="DTF Transfer Print on Dark Fabric" loading="lazy">
+      <div class="tech-zigzag-content">
+        <div class="section-label" style="color:var(--blue, #2563EB);">Direct-to-Film</div>
+        <h2 style="font-size:clamp(1.75rem, 2.7vw, 2.4rem); color:#F8FAFC; font-weight:800; line-height:1.24; margin-bottom:1rem;">
+          What's All this About DTF Printing (and how does it work?)
+        </h2>
+        <div class="tech-accent-line line-gold"></div>
+
+        <p class="tech-desc" style="color:#CBD5E1;">
+          You probably know it as Direct-to-Film. Here's the lowdown: your design gets printed directly onto a special film that's coated with a bit of adhesive. Then, with a bit of heat, its pressed onto the garment. The result is colours that stay bright on even the darkest fabrics, and the fine details are still as sharp as can be.
+        </p>
+        <p class="tech-desc" style="color:#CBD5E1;">
+          Our DTF transfer printing service here in Delhi is geared towards brands, print shops, resellers and anyone new to the game. You can send us your artwork and we will make ready-to-press transfers for you to apply yourself, or send us your garments and we will do the pressing for you. These films work like a charm on cotton, polyester, blends - you name it.
+        </p>
+        <p class="tech-desc" style="color:#CBD5E1;">
+          DTF is a great choice when you want to steer clear of screens, colour separation and all the extra per-colour charges that come with it. Small batches, repeat orders, bulk runs - DTF is a real winner when it comes to these types of print jobs. Hit us up with your artwork and we'll have a look at it before we get to work.
+        </p>
+
+        <p style="font-weight:700; color:#F8FAFC; margin-top:0.5rem; margin-bottom:1.5rem; font-size:1.02rem;">
+          Upload Your Design and we'll give You a Quote for DTF Printing - and Check out our Gang Sheet Options While You're At It
+        </p>
+
+        <div class="service-cta-group" style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <a href="#upload-dtf" class="btn btn-primary btn-lg">
+            <span>Upload Design for DTF Quote</span> &rarr;
+          </a>
+          <a href="<?= url('products.php') ?>" class="btn btn-outline btn-lg" style="border-color:rgba(212,175,55,0.4); color:#D4AF37;">
+            <span>View Gang Sheet Options</span>
+          </a>
         </div>
       </div>
     </div>
@@ -64,148 +76,175 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'dtf-printing'");
 </section>
 
 <!-- DTF vs Screen Printing vs Vinyl: Which Is Better? -->
-<section class="section section-ivory">
+<section class="section section-ivory" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
-    <div class="section-header reveal slide-up">
-      <div class="section-label">Comparison</div>
-      <h2>DTF vs Screen Printing vs Vinyl: Which Is Better?</h2>
+    <div class="section-header reveal slide-up" style="max-width:760px; margin-bottom:2.25rem;">
+      <div class="section-label" style="color:var(--crimson, #DC2626);">Comparison</div>
+      <h2 style="font-size:clamp(1.9rem, 3vw, 2.5rem); color:#F8FAFC; font-weight:800; line-height:1.24;">
+        DTF vs Screen Printing vs Vinyl: Which Is Better?
+      </h2>
     </div>
 
-    <div style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); overflow-x:auto; margin-bottom:1.5rem; box-shadow:var(--shadow-card);">
-      <table class="compare-table" style="width:100%; min-width:600px;">
+    <div class="elevated-compare-card reveal slide-up">
+      <table class="compare-table">
         <thead>
-          <tr style="background:var(--bg-surface-elevated); border-bottom:2px solid var(--border-color);">
-            <th style="padding:1rem 1.25rem; color:var(--primary-gold); font-weight:800;">Feature</th>
-            <th style="padding:1rem 1.25rem; color:var(--primary-gold); font-weight:800;">DTF printing</th>
-            <th style="padding:1rem 1.25rem; color:var(--primary-gold); font-weight:800;">Screen printing</th>
-            <th style="padding:1rem 1.25rem; color:var(--primary-gold); font-weight:800;">Vinyl</th>
+          <tr>
+            <th>Feature</th>
+            <th class="flagship-col">DTF printing</th>
+            <th>Screen printing</th>
+            <th>Vinyl</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td style="font-weight:700;">Set-up</td>
-            <td>None</td>
+            <td class="flagship-col">None</td>
             <td>Separate screen per colour</td>
             <td>Cutting and weeding</td>
           </tr>
           <tr>
             <td style="font-weight:700;">Full colour and gradients</td>
-            <td>Yes, no extra cost</td>
+            <td class="flagship-col">Yes, no extra cost</td>
             <td>Costly, more colours = more cost</td>
             <td>Limited</td>
           </tr>
           <tr>
             <td style="font-weight:700;">Small and repeat orders</td>
-            <td>Great</td>
+            <td class="flagship-col">Great</td>
             <td>Expensive</td>
             <td>Okay</td>
           </tr>
           <tr>
             <td style="font-weight:700;">Dark fabrics</td>
-            <td>Bright, thanks to white base</td>
+            <td class="flagship-col">Bright, thanks to white base</td>
             <td>Needs underbase</td>
             <td>Works</td>
           </tr>
           <tr>
             <td style="font-weight:700;">Feel</td>
-            <td>Soft and flexible</td>
+            <td class="flagship-col">Soft and flexible</td>
             <td>Soft</td>
             <td>Can feel plasticky</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p style="font-weight:700; color:var(--primary-gold); font-size:1.05rem;">
-      Ten pieces in six colours? DTF is the clear winner.
-    </p>
+
+    <div class="reveal slide-up" style="margin-top:1.25rem;">
+      <div style="display:inline-flex; align-items:center; gap:0.6rem; background:rgba(212,175,55,0.12); border:1px solid rgba(212,175,55,0.32); border-radius:999px; padding:0.5rem 1.35rem; font-weight:700; color:#FFD76A; font-size:1.02rem;">
+        <span style="color:#D4AF37; font-size:1.15rem;">★</span>
+        <span>Ten pieces in six colours? DTF is the clear winner.</span>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- DTF Gang Sheets & Bulk DTF Transfers -->
-<section class="section section-white">
+<section class="section section-white" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
-    <div class="section-header reveal slide-up">
-      <div class="section-label">Maximum Value</div>
-      <h2>DTF Gang Sheets &amp; Bulk DTF Transfers - Make the Most of Your Ink</h2>
-    </div>
+    <div class="tech-zigzag-row tech-row-even is-visible">
+      <div class="tech-zigzag-content">
+        <div class="section-label" style="color:var(--crimson, #DC2626);">Maximum Value</div>
+        <h2 style="font-size:clamp(1.75rem, 2.7vw, 2.4rem); color:#F8FAFC; font-weight:800; line-height:1.24; margin-bottom:1rem;">
+          DTF Gang Sheets &amp; Bulk DTF Transfers - Make the Most of Your Ink
+        </h2>
+        <div class="tech-accent-line line-gold"></div>
 
-    <div style="max-width:850px; line-height:1.8; color:var(--text-secondary); font-size:1.05rem;">
-      <p style="margin-bottom:1.25rem;">
-        A DTF gang sheet is basically one big sheet of film with loads of designs all crammed in together, so there's zero waste and you only pay for what you use. Logos and big graphics can happily coexist on the same sheet.
-      </p>
-      <p>
-        Our bulk DTF transfers come in two sizes, 22 and 24 inches wide, and the per foot price drops as you order more. You'll get a custom quote for your DTF sheet based on length, how many you're ordering and the number of designs. Just let us know what you're working with and we'll get a quote sorted.
-      </p>
+        <p class="tech-desc" style="color:#CBD5E1; font-size:1.04rem; line-height:1.8;">
+          A DTF gang sheet is basically one big sheet of film with loads of designs all crammed in together, so there's zero waste and you only pay for what you use. Logos and big graphics can happily coexist on the same sheet.
+        </p>
+        <p class="tech-desc" style="color:#CBD5E1; font-size:1.04rem; line-height:1.8;">
+          Our bulk DTF transfers come in two sizes, 22 and 24 inches wide, and the per foot price drops as you order more. You'll get a custom quote for your DTF sheet based on length, how many you're ordering and the number of designs. Just let us know what you're working with and we'll get a quote sorted.
+        </p>
+      </div>
+
+      <div class="tech-zigzag-media">
+        <div class="tech-zigzag-img-wrap">
+          <img src="<?= url('assets/images/streetwear_tee.jpg') ?>" alt="DTF Gang Sheets and Transfers" class="tech-zigzag-img" loading="lazy" width="1200" height="896">
+          <div class="tech-media-badge">
+            <span class="tech-media-badge-dot"></span>
+            <span>22" &amp; 24" Industrial Rolls</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- DTF Printing for T-Shirts, Hoodies, Sportswear and Loads More -->
-<section class="section section-ivory">
+<section class="section section-ivory" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
-    <div class="section-header reveal slide-up">
-      <div class="section-label">Versatility</div>
-      <h2>DTF Printing for T-Shirts, Hoodies, Sportswear and Loads More</h2>
+    <div class="section-header reveal slide-up" style="max-width:760px; margin-bottom:2.5rem;">
+      <div class="section-label" style="color:var(--blue, #2563EB);">Versatility</div>
+      <h2 style="font-size:clamp(1.9rem, 3vw, 2.5rem); color:#F8FAFC; font-weight:800; line-height:1.24;">
+        DTF Printing for T-Shirts, Hoodies, Sportswear and Loads More
+      </h2>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.25rem; margin-bottom:2rem;">
-      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-size:1.1rem; line-height:1.2; font-weight:800;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">T-shirts and those massive oversized tees - both print out great</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.35rem; margin-bottom:2rem;">
+      <div class="service-feature-card reveal slide-up stagger-1">
+        <span style="color:var(--primary-gold, #D4AF37); font-size:1.35rem; line-height:1; font-weight:800;">•</span>
+        <p>T-shirts and those massive oversized tees - both print out great</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-size:1.1rem; line-height:1.2; font-weight:800;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">Hoodies and sweatshirts - our prints are nice and flexible, move with the fabric no problem</p>
+      <div class="service-feature-card reveal slide-up stagger-2">
+        <span style="color:var(--primary-gold, #D4AF37); font-size:1.35rem; line-height:1; font-weight:800;">•</span>
+        <p>Hoodies and sweatshirts - our prints are nice and flexible, move with the fabric no problem</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-size:1.1rem; line-height:1.2; font-weight:800;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">Sportswear and team jerseys - from match day to training, we've got you covered</p>
+      <div class="service-feature-card reveal slide-up stagger-3">
+        <span style="color:var(--primary-gold, #D4AF37); font-size:1.35rem; line-height:1; font-weight:800;">•</span>
+        <p>Sportswear and team jerseys - from match day to training, we've got you covered</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
-        <span style="color:var(--primary-gold); font-size:1.1rem; line-height:1.2; font-weight:800;">•</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">Caps, tote bags and uniforms - pretty much anything will work in a pinch</p>
+      <div class="service-feature-card reveal slide-up stagger-4">
+        <span style="color:var(--primary-gold, #D4AF37); font-size:1.35rem; line-height:1; font-weight:800;">•</span>
+        <p>Caps, tote bags and uniforms - pretty much anything will work in a pinch</p>
       </div>
     </div>
 
-    <p style="color:var(--text-secondary); line-height:1.7;">
+    <p class="reveal slide-up" style="color:#CBD5E1; line-height:1.75; font-size:1.02rem; max-width:860px; margin:0;">
       We supply all sorts of print shops and brands across India, and we ship all over the country. Want to know how we deal with nylon or other performance fabrics? Just ask and we'll sort you out with the right film.
     </p>
   </div>
 </section>
 
 <!-- How Printex Do DTF -->
-<section class="section section-white">
+<section class="section section-navy" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem); background: radial-gradient(circle at 50% 10%, rgba(212, 175, 55, 0.16) 0%, transparent 60%), #080808;">
   <div class="container">
-    <div class="section-header text-center reveal slide-up">
-      <div class="section-label">Our Process</div>
-      <h2>How Printex Do DTF</h2>
+    <div class="section-header text-center reveal slide-up" style="max-width:740px; margin:0 auto clamp(2.5rem, 4vw, 3.5rem);">
+      <span class="section-label" style="justify-content:center; color:var(--bright-gold, #FFD76A);">Our Process</span>
+      <h2 style="font-size:clamp(2rem, 3.2vw, 2.75rem); color:#FFFFFF; font-weight:800; line-height:1.2; margin-bottom:0.85rem;">
+        How Printex Do DTF
+      </h2>
     </div>
 
-    <div class="service-specs-grid" style="grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));">
-      <div class="timeline-step reveal slide-up stagger-1">
-        <h4 style="color:var(--primary-gold); margin-bottom:0.5rem;">Step 1</h4>
-        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">
+    <div class="process-grid">
+      <div class="process-step-card reveal slide-up stagger-1">
+        <div class="process-step-num">01</div>
+        <h3 class="process-step-title" style="color:#D4AF37;">Step 1</h3>
+        <p class="process-step-desc">
           Send us your design - just a transparent PNG, PDF or vector file (AI or SVG) would be great, ideally get it up to 300 DPI.
         </p>
       </div>
 
-      <div class="timeline-step reveal slide-up stagger-2">
-        <h4 style="color:var(--primary-gold); margin-bottom:0.5rem;">Step 2</h4>
-        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">
+      <div class="process-step-card reveal slide-up stagger-2">
+        <div class="process-step-num">02</div>
+        <h3 class="process-step-title" style="color:#D4AF37;">Step 2</h3>
+        <p class="process-step-desc">
           We have a look: check for resolution, margins, sheet layout and all that jazz. Then we get back to you with a clear quote.
         </p>
       </div>
 
-      <div class="timeline-step reveal slide-up stagger-3">
-        <h4 style="color:var(--primary-gold); margin-bottom:0.5rem;">Step 3</h4>
-        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">
+      <div class="process-step-card reveal slide-up stagger-3">
+        <div class="process-step-num">03</div>
+        <h3 class="process-step-title" style="color:#D4AF37;">Step 3</h3>
+        <p class="process-step-desc">
           We get to work: your design is printed on some film, we slap on the adhesive and throw the sheet through the curing process.
         </p>
       </div>
 
-      <div class="timeline-step reveal slide-up stagger-4">
-        <h4 style="color:var(--primary-gold); margin-bottom:0.5rem;">Step 4</h4>
-        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">
+      <div class="process-step-card reveal slide-up stagger-4">
+        <div class="process-step-num">04</div>
+        <h3 class="process-step-title" style="color:#D4AF37;">Step 4</h3>
+        <p class="process-step-desc">
           We send it off: every sheet gets a double check, is packed up and shipped all over India.
         </p>
       </div>
@@ -214,71 +253,75 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'dtf-printing'");
 </section>
 
 <!-- Why Choose Printex for DTF Printing in Delhi -->
-<section class="section section-ivory">
+<section class="section section-white" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
-    <div class="section-header reveal slide-up">
-      <div class="section-label">The Printex Advantage</div>
-      <h2>Why Choose Printex for DTF Printing in Delhi - We've Got You Covered</h2>
+    <div class="section-header reveal slide-up" style="max-width:760px; margin-bottom:2.5rem;">
+      <div class="section-label" style="color:var(--crimson, #DC2626);">The Printex Advantage</div>
+      <h2 style="font-size:clamp(1.9rem, 3vw, 2.5rem); color:#F8FAFC; font-weight:800; line-height:1.24;">
+        Why Choose Printex for DTF Printing in Delhi - We've Got You Covered
+      </h2>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.75rem; padding:1.25rem 0;">
-      <div style="display:flex; align-items:flex-start; gap:1rem;">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.6;">Free artwork check - we make sure everything's good to go, no extra charge</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.5rem;">
+      <div class="service-feature-card reveal slide-up stagger-1">
+        <span style="color:#16A34A; font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
+        <p>Free artwork check - we make sure everything's good to go, no extra charge</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem;">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.6;">Consistent colour: your second order looks the same as the first, no complaints</p>
+      <div class="service-feature-card reveal slide-up stagger-2">
+        <span style="color:#16A34A; font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
+        <p>Consistent colour: your second order looks the same as the first, no complaints</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem;">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.6;">We're flexible on quantities - want one sheet or the whole roll? Your call</p>
+      <div class="service-feature-card reveal slide-up stagger-3">
+        <span style="color:#16A34A; font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
+        <p>We're flexible on quantities - want one sheet or the whole roll? Your call</p>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:1rem;">
-        <span style="color:var(--primary-gold); font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
-        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.6;">Pan-India shipping: we print in Delhi and get your order delivered to your doorstep.</p>
+      <div class="service-feature-card reveal slide-up stagger-4">
+        <span style="color:#16A34A; font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
+        <p>Pan-India shipping: we print in Delhi and get your order delivered to your doorstep.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- How to Press a DTF Transfer - Heat, Time and a Bit of Pressure -->
-<section class="section section-white">
+<section class="section section-ivory" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
-    <div class="section-header reveal slide-up">
-      <div class="section-label">Application Guide</div>
-      <h2>How to Press a DTF Transfer - Heat, Time and a Bit of Pressure</h2>
+    <div class="section-header reveal slide-up" style="max-width:760px; margin-bottom:2.5rem;">
+      <div class="section-label" style="color:var(--blue, #2563EB);">Application Guide</div>
+      <h2 style="font-size:clamp(1.9rem, 3vw, 2.5rem); color:#F8FAFC; font-weight:800; line-height:1.24;">
+        How to Press a DTF Transfer - Heat, Time and a Bit of Pressure
+      </h2>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:2rem; border-top:1px solid var(--border-color); padding-top:2.25rem;">
-      <div class="reveal slide-up stagger-1">
-        <div style="font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:var(--primary-gold); margin-bottom:0.65rem;">01 / Temperature</div>
-        <h4 style="color:var(--primary-gold); margin-bottom:0.5rem; font-size:1.1rem;">Temperature</h4>
-        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6; margin:0;">
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1.75rem;">
+      <div class="reveal slide-up stagger-1" style="background:#111111; border:1px solid rgba(212,175,55,0.22); border-radius:12px; padding:1.75rem; box-shadow:0 4px 16px rgba(0,0,0,0.04);">
+        <div style="font-size:0.78rem; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:var(--primary-gold, #D4AF37); margin-bottom:0.65rem;">01 / Temperature</div>
+        <h4 style="color:#F8FAFC; margin-bottom:0.65rem; font-size:1.15rem; font-weight:700;">Temperature</h4>
+        <p style="font-size:0.95rem; color:#CBD5E1; line-height:1.65; margin:0;">
           Temperature: about 150 to 160°C so that adhesive bonds in properly.
         </p>
       </div>
 
-      <div class="reveal slide-up stagger-2">
-        <div style="font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:var(--primary-gold); margin-bottom:0.65rem;">02 / Pressing</div>
-        <h4 style="color:var(--primary-gold); margin-bottom:0.5rem; font-size:1.1rem;">Time and Pressure</h4>
-        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6; margin:0;">
+      <div class="reveal slide-up stagger-2" style="background:#111111; border:1px solid rgba(212,175,55,0.22); border-radius:12px; padding:1.75rem; box-shadow:0 4px 16px rgba(0,0,0,0.04);">
+        <div style="font-size:0.78rem; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:var(--primary-gold, #D4AF37); margin-bottom:0.65rem;">02 / Pressing</div>
+        <h4 style="color:#F8FAFC; margin-bottom:0.65rem; font-size:1.15rem; font-weight:700;">Time and Pressure</h4>
+        <p style="font-size:0.95rem; color:#CBD5E1; line-height:1.65; margin:0;">
           Time and pressure: 10 to 15 seconds at medium pressure is good. You can use a bit of heat and your press should be set up to get even pressure.
         </p>
       </div>
 
-      <div class="reveal slide-up stagger-3">
-        <div style="font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:var(--primary-gold); margin-bottom:0.65rem;">03 / Release</div>
-        <h4 style="color:var(--primary-gold); margin-bottom:0.5rem; font-size:1.1rem;">Peeling</h4>
-        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6; margin:0;">
+      <div class="reveal slide-up stagger-3" style="background:#111111; border:1px solid rgba(212,175,55,0.22); border-radius:12px; padding:1.75rem; box-shadow:0 4px 16px rgba(0,0,0,0.04);">
+        <div style="font-size:0.78rem; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:var(--primary-gold, #D4AF37); margin-bottom:0.65rem;">03 / Release</div>
+        <h4 style="color:#F8FAFC; margin-bottom:0.65rem; font-size:1.15rem; font-weight:700;">Peeling</h4>
+        <p style="font-size:0.95rem; color:#CBD5E1; line-height:1.65; margin:0;">
           Peeling: you can use a cold or warm peel - just let it cool down a bit, then peel it off in one smooth go
         </p>
       </div>
 
-      <div class="reveal slide-up stagger-4">
-        <div style="font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:var(--primary-gold); margin-bottom:0.65rem;">04 / Sizing</div>
-        <h4 style="color:var(--primary-gold); margin-bottom:0.5rem; font-size:1.1rem;">Sheet Width</h4>
-        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6; margin:0;">
+      <div class="reveal slide-up stagger-4" style="background:#111111; border:1px solid rgba(212,175,55,0.22); border-radius:12px; padding:1.75rem; box-shadow:0 4px 16px rgba(0,0,0,0.04);">
+        <div style="font-size:0.78rem; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:var(--primary-gold, #D4AF37); margin-bottom:0.65rem;">04 / Sizing</div>
+        <h4 style="color:#F8FAFC; margin-bottom:0.65rem; font-size:1.15rem; font-weight:700;">Sheet Width</h4>
+        <p style="font-size:0.95rem; color:#CBD5E1; line-height:1.65; margin:0;">
           Sheet width: our gang sheets and rolls are made to order - 22 or 24 inches
         </p>
       </div>
@@ -287,7 +330,7 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'dtf-printing'");
 </section>
 
 <!-- Artwork Guidelines & Upload / CTA Section -->
-<section class="section section-ivory" id="upload-dtf">
+<section class="section section-white" id="upload-dtf" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container">
     <div class="section-header text-center reveal slide-up">
       <div class="section-label">Direct Upload Studio</div>
@@ -430,7 +473,7 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'dtf-printing'");
 </section>
 
 <!-- Frequently Asked Questions -->
-<section class="section section-white">
+<section class="section section-ivory" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container container-narrow">
     <div class="section-header text-center reveal slide-up">
       <div class="section-label">Common Queries</div>
@@ -522,22 +565,24 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'dtf-printing'");
 </section>
 
 <!-- Visit Studio Section -->
-<section class="section section-ivory">
+<section class="section section-white" style="padding-top:clamp(4.5rem, 6.5vw, 6.5rem); padding-bottom:clamp(4.5rem, 6.5vw, 6.5rem);">
   <div class="container container-narrow text-center reveal slide-up">
-    <div class="section-label" style="justify-content:center;">Location</div>
-    <h2 style="margin-bottom:1rem;">DTF Printing in Delhi: Come visit us</h2>
-    <p style="font-size:1.1rem; color:var(--text-primary); margin-bottom:1rem;">
+    <div class="section-label" style="justify-content:center; color:var(--crimson, #DC2626);">Location</div>
+    <h2 style="font-size:clamp(1.9rem, 3vw, 2.5rem); color:#F8FAFC; font-weight:800; line-height:1.24; margin-bottom:1rem;">
+      DTF Printing in Delhi: Come visit us
+    </h2>
+    <p style="font-size:1.08rem; color:#CBD5E1; margin-bottom:1.5rem; line-height:1.65;">
       You can now order DTF transfers and gang sheets direct from our Delhi studio.
     </p>
-    <div style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.5rem; margin:1.5rem auto; max-width:650px;">
-      <p style="font-weight:700; color:var(--primary-gold); font-size:1.05rem; margin-bottom:0.5rem;">
+    <div style="background:#111111; border:1px solid rgba(212,175,55,0.3); border-top:3px solid var(--primary-gold, #D4AF37); border-radius:14px; padding:1.75rem 2rem; margin:1.5rem auto; max-width:650px; box-shadow:0 8px 24px rgba(15,25,45,0.06);">
+      <p style="font-weight:700; color:#FFD76A; font-size:1.05rem; margin-bottom:0.5rem; line-height:1.5;">
         Shop E-6, Chanakya Palace, 21 Street No, Pankha Rd, next to 40 Feet Road, Delhi 110059
       </p>
-      <p style="margin:0; color:var(--text-secondary);">
+      <p style="margin:0; color:#CBD5E1; font-size:0.95rem;">
         Give us a call or fire off a WhatsApp to get started.
       </p>
     </div>
-    <div style="margin-top:1.5rem;">
+    <div style="margin-top:2rem;">
       <a href="<?= url('contact.php') ?>" class="btn btn-primary btn-lg">
         <span>Contact Printex Studio</span> &rarr;
       </a>

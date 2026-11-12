@@ -101,6 +101,18 @@ html {
   scroll-behavior: smooth;
 }
 
+html, body {
+  overflow-x: clip !important;
+}
+
+.site-wrapper,
+section.blog-reading-section,
+.blog-reading-section,
+.blog-reading-section .container,
+.blog-layout-grid {
+  overflow: visible !important;
+}
+
 .blog-editorial-hero {
   position: relative;
   overflow: hidden;
@@ -181,13 +193,14 @@ html {
   background: #1A1F2B;
 }
 
-/* 2-Column Grid */
+/* 2-Column Desktop Grid (Article Content Left, Sticky TOC Right) */
 .blog-layout-grid {
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
-  gap: 3.5rem;
-  align-items: flex-start;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 2.5rem;
+  align-items: start;
   position: relative;
+  overflow: visible !important;
 }
 
 @media (max-width: 991px) {
@@ -197,17 +210,31 @@ html {
   }
 }
 
-/* Sticky TOC Sidebar */
+/* Sticky TOC Sidebar (Right Column) */
 .blog-sidebar-col {
+  align-self: start;
+  position: -webkit-sticky;
   position: sticky;
-  top: 96px;
-  align-self: flex-start;
+  top: 145px;
+  max-height: calc(100vh - 165px);
+  overflow-y: auto;
   z-index: 10;
+}
+
+.blog-sidebar-col::-webkit-scrollbar {
+  width: 4px;
+}
+
+.blog-sidebar-col::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.35);
+  border-radius: 4px;
 }
 
 @media (max-width: 991px) {
   .blog-sidebar-col {
     position: static;
+    max-height: none;
+    overflow-y: visible;
   }
 }
 
@@ -217,17 +244,6 @@ html {
   border-radius: 12px;
   padding: 1.35rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  max-height: calc(100vh - 130px);
-  overflow-y: auto;
-}
-
-.blog-toc-card::-webkit-scrollbar {
-  width: 4px;
-}
-
-.blog-toc-card::-webkit-scrollbar-thumb {
-  background: rgba(212, 175, 55, 0.3);
-  border-radius: 4px;
 }
 
 .blog-toc-header {
@@ -302,6 +318,7 @@ html {
 /* Article Body Typography */
 .blog-main-content {
   min-width: 0;
+  overflow: visible !important;
 }
 
 .article-body-content {
@@ -320,7 +337,7 @@ html {
   padding-bottom: 0.5rem;
   border-bottom: 1px solid rgba(212, 175, 55, 0.2);
   position: relative;
-  scroll-margin-top: 100px;
+  scroll-margin-top: 145px;
 }
 
 .article-body-content h2::after {
@@ -340,7 +357,7 @@ html {
   margin-bottom: 0.85rem;
   font-weight: 700;
   line-height: 1.4;
-  scroll-margin-top: 100px;
+  scroll-margin-top: 145px;
 }
 
 .article-body-content p {
@@ -610,7 +627,7 @@ html {
         <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?= urlencode($canonical) ?>" target="_blank" rel="noopener" class="btn-outline-share" title="Share on LinkedIn">
           LinkedIn
         </a>
-        <button type="button" onclick="navigator.clipboard.writeText('<?= $canonical ?>'); alert('Link copied to clipboard!');" class="btn-outline-share" title="Copy Link">
+        <button type="button" onclick="navigator.clipboard.writeText('<?= $canonical ?>'); this.innerText='Copied!'; setTimeout(() => this.innerText='Copy Link', 2000);" class="btn-outline-share" title="Copy Link">
           Copy Link
         </button>
       </div>
@@ -619,42 +636,19 @@ html {
 </header>
 
 <!-- Main Reading Container (2-Column Buzzspire-Inspired Grid) -->
-<section class="section section-white" style="padding-top:2.75rem; padding-bottom:5rem; background:var(--bg-primary, #0B0E14);">
-  <div class="container" style="max-width:1200px; margin:0 auto;">
-
-    <!-- Featured Image Hero Card (if present) -->
-    <?php if (!empty($post['featured_image'])): ?>
-      <div style="margin-bottom:3rem; border-radius:12px; overflow:hidden; border:1px solid rgba(212,175,55,0.22); box-shadow:0 12px 36px rgba(0,0,0,0.45); max-height:480px; background:#12151C;">
-        <img src="<?= url(e($post['featured_image'])) ?>" alt="<?= e($post['title']) ?>" style="width:100%; height:100%; max-height:480px; object-fit:cover; display:block;">
-      </div>
-    <?php endif; ?>
+<section class="section section-white blog-reading-section" style="padding-top:2.75rem; padding-bottom:5rem; background:var(--bg-primary, #0B0E14); overflow:visible !important;">
+  <div class="container" style="max-width:1200px; margin:0 auto; overflow:visible !important;">
 
     <div class="blog-layout-grid">
-      <!-- Left Column: Sticky Table of Contents -->
-      <aside class="blog-sidebar-col">
-        <div class="blog-toc-card">
-          <div class="blog-toc-header">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="8" y1="6" x2="21" y2="6"></line>
-              <line x1="8" y1="12" x2="21" y2="12"></line>
-              <line x1="8" y1="18" x2="21" y2="18"></line>
-              <line x1="3" y1="6" x2="3.01" y2="6"></line>
-              <line x1="3" y1="12" x2="3.01" y2="12"></line>
-              <line x1="3" y1="18" x2="3.01" y2="18"></line>
-            </svg>
-            <span>Table of Contents</span>
-          </div>
-          <div class="blog-toc-progress-track">
-            <div class="blog-toc-progress-bar" id="blogTocProgressBar"></div>
-          </div>
-          <nav class="blog-toc-nav" id="blogTocNav">
-            <!-- Dynamically populated from h2 headings by JS -->
-          </nav>
-        </div>
-      </aside>
-
-      <!-- Right Column: Article Content -->
+      <!-- Left Column: Article Content -->
       <main class="blog-main-content">
+        <!-- Featured Blog Image Frame -->
+        <?php if (!empty($post['featured_image'])): ?>
+          <div class="blog-featured-image-container" style="width: 100%; max-height: 440px; border-radius: 14px; overflow: hidden; margin-bottom: 2rem; border: 1px solid rgba(185, 154, 97, 0.25); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12); background: #12151C;">
+            <img src="<?= url(e($post['featured_image'])) ?>" alt="<?= e($post['title']) ?>" style="width: 100%; height: 100%; max-height: 440px; object-fit: cover; object-position: center; display: block;">
+          </div>
+        <?php endif; ?>
+
         <div class="article-body-content" id="articleBody">
           <?= $post['content'] ?>
         </div>
@@ -698,6 +692,29 @@ html {
           </div>
         </div>
       </main>
+
+      <!-- Right Column: Sticky Table of Contents -->
+      <aside class="blog-sidebar-col">
+        <div class="blog-toc-card">
+          <div class="blog-toc-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+            <span>Table of Contents</span>
+          </div>
+          <div class="blog-toc-progress-track">
+            <div class="blog-toc-progress-bar" id="blogTocProgressBar"></div>
+          </div>
+          <nav class="blog-toc-nav" id="blogTocNav">
+            <!-- Dynamically populated from h2 headings by JS -->
+          </nav>
+        </div>
+      </aside>
     </div>
   </div>
 </section>
@@ -830,10 +847,8 @@ document.addEventListener('DOMContentLoaded', function() {
           e.preventDefault();
           const targetEl = document.getElementById(h2.id);
           if (targetEl) {
-            const offset = 95;
-            const bodyRect = document.body.getBoundingClientRect().top;
-            const elementRect = targetEl.getBoundingClientRect().top;
-            const elementPosition = elementRect - bodyRect;
+            const offset = 100;
+            const elementPosition = targetEl.getBoundingClientRect().top + window.scrollY;
             const offsetPosition = elementPosition - offset;
 
             window.scrollTo({
@@ -856,13 +871,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
       function updateActiveToc() {
         let currentId = '';
-        const scrollPos = window.scrollY + 130;
 
         h2s.forEach(function(h2) {
-          if (h2.offsetTop <= scrollPos) {
+          const rect = h2.getBoundingClientRect();
+          if (rect.top <= 140) {
             currentId = h2.id;
           }
         });
+
+        if (!currentId && h2s.length > 0) {
+          const firstRect = h2s[0].getBoundingClientRect();
+          if (firstRect.top < window.innerHeight * 0.7) {
+            currentId = h2s[0].id;
+          }
+        }
 
         tocLinks.forEach(function(link) {
           if (link.getAttribute('data-target') === currentId) {
@@ -874,9 +896,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Reading Progress Bar
         if (progressBar) {
-          const articleTop = article.offsetTop;
+          const articleRect = article.getBoundingClientRect();
+          const articleTopFromDoc = window.scrollY + articleRect.top;
           const articleHeight = article.offsetHeight;
-          const currentProgress = Math.min(100, Math.max(0, ((window.scrollY - articleTop + 200) / articleHeight) * 100));
+          const currentProgress = Math.min(100, Math.max(0, ((window.scrollY - articleTopFromDoc + 150) / articleHeight) * 100));
           progressBar.style.width = currentProgress + '%';
         }
       }
