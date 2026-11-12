@@ -465,7 +465,7 @@ p:last-child {
 .page-intro-header {
   position: relative;
   overflow: hidden;
-  padding-top: clamp(4.25rem, 6.5vw, 5.75rem);
+  padding-top: clamp(5.75rem, 8vw, 7.5rem);
   padding-bottom: clamp(3.75rem, 5.5vw, 4.75rem);
   background: radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.14) 0%, transparent 52%),
     radial-gradient(circle at 20% 80%, rgba(143, 107, 30, 0.10) 0%, transparent 52%),
@@ -1152,6 +1152,7 @@ p:last-child {
   padding: 0.6rem 0;
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transform: translateY(8px);
   transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
     visibility 0.22s cubic-bezier(0.16, 1, 0.3, 1),
@@ -1164,6 +1165,7 @@ p:last-child {
 .nav-item.dropdown-open .dropdown-menu {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
   transform: translateY(0);
 }
 
@@ -1251,6 +1253,7 @@ p:last-child {
   padding: 0.65rem 0;
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transform: translateY(8px);
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 1050;
@@ -1261,6 +1264,7 @@ p:last-child {
 .nav-user-dropdown.is-open .user-dropdown-menu {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
   transform: translateY(0);
 }
 
@@ -2691,11 +2695,15 @@ textarea.form-control {
 
 .faq-body,
 .faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.35s ease;
-  padding: 0 1.85rem;
-  color: var(--slate);
+  max-height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, padding 0.35s ease !important;
+  color: var(--text-secondary, var(--slate));
   font-size: 0.965rem;
   line-height: 1.7;
 }
@@ -2717,10 +2725,11 @@ textarea.form-control {
 
 .faq-item.active .faq-body,
 .faq-item.active .faq-answer {
-  max-height: 600px;
-  padding-bottom: 1.65rem;
+  max-height: 800px !important;
+  opacity: 1 !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 1.35rem !important;
   border-top: 1px dashed var(--border-light);
-  padding-top: 1.15rem;
 }
 
 .faq-no-results {

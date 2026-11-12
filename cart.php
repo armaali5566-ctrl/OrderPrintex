@@ -24,13 +24,20 @@ $cartItems = $_SESSION['cart'] ?? [];
     <div class="page-intro-box">
       <div class="page-intro-eyebrow">
         <span class="page-intro-dot"></span>
-        <span>Order Review</span>
+        <span>YOUR ORDER</span>
       </div>
-      <h1 class="page-intro-title">Your Shopping Cart</h1>
+      <h1 class="page-intro-title">Your Cart</h1>
       <div class="page-intro-divider"></div>
       <p class="page-intro-desc">
-        Review your custom transfer orders, selected sizes, quantities, and digital proof options before checkout.
+        Check your items, sizes and quantities before you checkout. Need a change? Message us on WhatsApp for help.
       </p>
+      <div style="margin-top:1.25rem; font-size:0.85rem; color:var(--primary-gold); font-weight:600; display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap;">
+        <span>GST invoice available</span>
+        <span>•</span>
+        <span>Delivery across India</span>
+        <span>•</span>
+        <span>Free file check before printing</span>
+      </div>
     </div>
   </div>
 </section>
@@ -41,16 +48,16 @@ $cartItems = $_SESSION['cart'] ?? [];
     <?php if (empty($cartItems)): ?>
       <div class="card" style="background:var(--bg-surface); border:1px dashed var(--border-color); border-radius:var(--radius-md); padding:3.5rem 2rem; text-align:center; box-shadow: var(--shadow-card);">
         <div style="font-size:3rem; margin-bottom:1rem; color:var(--royal);">🛒</div>
-        <h2 style="font-size:1.5rem; color:var(--navy); font-weight:800; margin-bottom:0.5rem;">Your Cart is Currently Empty</h2>
-        <p style="color:var(--slate); font-size:0.95rem; max-width:480px; margin:0 auto 2rem; line-height:1.6;">
-          You haven't configured any custom DTF gang rolls, UV decals, or finished garments yet. Explore our commercial catalog to configure size, materials, and quantity tiers.
+        <h2 style="font-size:1.5rem; color:var(--text-primary); font-weight:800; margin-bottom:0.5rem;">Your cart is empty</h2>
+        <p style="color:var(--text-secondary); font-size:0.95rem; max-width:540px; margin:0 auto 2rem; line-height:1.6;">
+          Looks like you haven’t added anything yet. Browse our DTF transfers, UV decals and custom tees, or send us your own design for a quote.
         </p>
         <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
           <a href="<?= url('products/') ?>" class="btn btn-primary btn-lg">
-            <span>Browse Products Catalog</span> &rarr;
+            <span>Browse Products</span> &rarr;
           </a>
           <a href="<?= url('get-quote/') ?>" class="btn btn-outline btn-lg">
-            Upload Custom Artwork
+            Upload Your Design
           </a>
         </div>
       </div>

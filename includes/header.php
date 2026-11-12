@@ -19,11 +19,7 @@ $canonical = $canonical ?? url($_SERVER['REQUEST_URI'] ?? '');
   <script>
     (function() {
       try {
-        var t = localStorage.getItem('op_theme');
-        if (!t || t === 'light') {
-          t = 'dark';
-          localStorage.setItem('op_theme', 'dark');
-        }
+        var t = localStorage.getItem('op_theme') || 'dark';
         document.documentElement.setAttribute('data-theme', t);
       } catch (e) {}
     })();

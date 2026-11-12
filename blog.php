@@ -79,18 +79,18 @@ require_once __DIR__ . '/includes/header.php';
     <div class="page-intro-box">
       <div class="page-intro-eyebrow">
         <span class="page-intro-dot"></span>
-        <span>Industry Knowledge &amp; Prepress Guides</span>
+        <span>PRINTING GUIDES &amp; TIPS</span>
       </div>
-      <h1 class="page-intro-title">The OrderPrintex Knowledge Hub</h1>
+      <h1 class="page-intro-title">Printing Guides &amp; Tips</h1>
       <div class="page-intro-divider"></div>
       <p class="page-intro-desc">
-        In-depth technical guides, material comparisons, and production insights written by commercial printing specialists and prepress engineers.
+        Simple, practical guides on DTF, UV DTF, t-shirt and corporate printing from our Delhi team. Learn what works before you order.
       </p>
 
       <!-- Search Form -->
       <div style="width:100%; max-width:540px; margin:2.25rem auto 0;">
         <form action="<?= blog_url() ?>" method="GET" class="blog-search-form" style="display:flex; gap:0.5rem; background:var(--bg-surface); padding:6px; border-radius:999px; border:1px solid var(--border-color); box-shadow:0 8px 30px rgba(0,0,0,0.45); max-width:100%;">
-          <input type="text" name="q" value="<?= e($searchQuery) ?>" placeholder="Search printing guides, DTF, paper stocks..." style="flex:1; min-width:0; border:none; outline:none; padding:0.6rem 1rem; font-size:0.95rem; border-radius:999px; color:var(--text-primary); background:transparent;">
+          <input type="text" name="q" value="<?= e($searchQuery) ?>" placeholder="Search guides, e.g. DTF, UV decals, t-shirts" style="flex:1; min-width:0; border:none; outline:none; padding:0.6rem 1rem; font-size:0.95rem; border-radius:999px; color:var(--text-primary); background:transparent;">
           <button type="submit" class="btn btn-primary btn-sm" style="border-radius:999px; padding:0.6rem 1.4rem; flex-shrink:0;">
             <span>Search</span>
           </button>
@@ -105,7 +105,7 @@ require_once __DIR__ . '/includes/header.php';
   <div class="container">
     <div class="blog-category-track">
       <a href="<?= blog_url() ?>" class="blog-cat-chip <?= empty($categorySlug) ? 'is-active' : '' ?>">
-        <span>All Articles (<?= count($posts) ?>)</span>
+        <span>All Guides (<?= count($posts) ?>)</span>
       </a>
       <?php foreach ($categories as $cat): ?>
         <a href="<?= blog_category_url($cat['slug']) ?>" class="blog-cat-chip <?= ($categorySlug === $cat['slug']) ? 'is-active' : '' ?>">
@@ -222,17 +222,17 @@ require_once __DIR__ . '/includes/header.php';
 <!-- Prepress Quote Call to Action -->
 <section class="section section-ivory text-center">
   <div class="container container-narrow reveal scale-in">
-    <span class="section-label" style="justify-content:center;">Ready to Print?</span>
-    <h2 style="font-size:2.4rem; margin-bottom:1rem; color:var(--navy);">Put Commercial Printing Knowledge into Action</h2>
+    <span class="section-label" style="justify-content:center;">READY TO PRINT?</span>
+    <h2 style="font-size:2.4rem; margin-bottom:1rem; color:var(--navy);">Ready to Start Your Print Order?</h2>
     <p style="color:var(--text-muted); margin-bottom:2rem; line-height:1.7;">
-      Upload your artwork files today. Our prepress technicians inspect line thickness, color trapping, and alpha transparency with zero obligation.
+      Send us your design and our team will check the lines, colors and background for free. There’s no obligation to order.
     </p>
     <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
       <a href="<?= url('get-quote/') ?>" class="btn btn-primary btn-lg">
-        <span>Upload Design for Free Proof</span> &rarr;
+        <span>Upload Your Design</span> &rarr;
       </a>
       <a href="<?= url('products/') ?>" class="btn btn-navy btn-lg">
-        <span>Explore Commercial Catalog</span>
+        <span>See Our Products</span>
       </a>
     </div>
   </div>

@@ -56,12 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     <div class="page-intro-box">
       <div class="page-intro-eyebrow">
         <span class="page-intro-dot"></span>
-        <span>Direct Connection</span>
+        <span>GET IN TOUCH</span>
       </div>
-      <h1 class="page-intro-title">Contact Our Delhi Production Studio</h1>
+      <h1 class="page-intro-title">Talk to Our Delhi Team</h1>
       <div class="page-intro-divider"></div>
       <p class="page-intro-desc">
-        Whether you need prepress guidance, gang sheet quotations, sample swatches, or bulk supply agreements, our customer engineering team is ready to assist.
+        Need a quote, help with your artwork, or a sample before a bulk order? Call, WhatsApp or send us a message, and we’ll get back to you.
       </p>
     </div>
   </div>

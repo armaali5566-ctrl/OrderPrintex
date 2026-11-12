@@ -5,242 +5,248 @@
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
   <url>
-    <loc>http://localhost/OrderPrintex/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/products/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/products/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/services/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/services/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/pricing/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/pricing/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/get-quote/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/get-quote/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/gallery/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/gallery/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/blog/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/blog/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/about/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/about/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/faq/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/faq/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/contact/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/contact/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/services/dtf-printing/</loc>
-    <lastmod>2026-11-02</lastmod>
+    <loc>http://127.0.0.1:8080/services/dtf-printing/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/services/uv-dtf-printing/</loc>
-    <lastmod>2026-11-02</lastmod>
+    <loc>http://127.0.0.1:8080/services/uv-dtf-printing/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/services/t-shirt-printing/</loc>
-    <lastmod>2026-11-02</lastmod>
+    <loc>http://127.0.0.1:8080/services/t-shirt-printing/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/services/corporate-printing/</loc>
-    <lastmod>2026-11-02</lastmod>
+    <loc>http://127.0.0.1:8080/services/corporate-printing/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/product/category/uv-dtf-decals/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/product/category/uv-dtf-decals/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/product/category/custom-tshirts/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/product/category/custom-tshirts/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/product/category/corporate-merchandise/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/product/category/corporate-merchandise/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/product/category/packaging/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/product/category/packaging/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/product/category/custom-stickers/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/product/category/custom-stickers/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/product/category/custom-stationery/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/product/category/custom-stationery/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/product/category/automated-test-category/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/product/category/automated-test-category/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/product/custom-uv-dtf-decal-sheet/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/product/custom-dtf-gang-sheet/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/product/streetwear-oversized-tee/</loc>
-    <lastmod>2026-11-02</lastmod>
+    <loc>http://127.0.0.1:8080/product/custom-uv-dtf-decal-sheet/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/product/thermal-sipper-bottle/</loc>
-    <lastmod>2026-11-02</lastmod>
+    <loc>http://127.0.0.1:8080/product/streetwear-oversized-tee/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/product/apparel-mailer-box/</loc>
-    <lastmod>2026-11-02</lastmod>
+    <loc>http://127.0.0.1:8080/product/thermal-sipper-bottle/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/product/holographic-stickers/</loc>
-    <lastmod>2026-11-02</lastmod>
+    <loc>http://127.0.0.1:8080/product/apparel-mailer-box/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/product/bio-washed-cotton-tee/</loc>
-    <lastmod>2026-11-02</lastmod>
+    <loc>http://127.0.0.1:8080/product/holographic-stickers/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/product/executive-welcome-hamper/</loc>
-    <lastmod>2026-11-02</lastmod>
+    <loc>http://127.0.0.1:8080/product/bio-washed-cotton-tee/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/product/bookmark-03/</loc>
-    <lastmod>2026-11-02</lastmod>
+    <loc>http://127.0.0.1:8080/product/executive-welcome-hamper/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/blog/dcd/</loc>
-    <lastmod>2026-11-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <loc>http://127.0.0.1:8080/product/bookmark-03/</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/blog/complete-guide-to-business-card-printing-778/</loc>
-    <lastmod>2026-11-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>http://localhost/OrderPrintex/blog/complete-guide-to-business-card-printing/</loc>
+    <loc>http://127.0.0.1:8080/blog/dcd/</loc>
     <lastmod>2026-11-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/blog/dtf-printing-explained-guide/</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>http://localhost/OrderPrintex/blog/how-to-choose-the-right-paper/</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>http://localhost/OrderPrintex/blog/offset-vs-digital-printing/</loc>
+    <loc>http://127.0.0.1:8080/blog/complete-guide-to-business-card-printing-778/</loc>
     <lastmod>2026-11-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/blog/custom-stickers-and-labels-guide/</loc>
-    <lastmod>2026-11-02</lastmod>
+    <loc>http://127.0.0.1:8080/blog/dtf-printing-technology-custom-apparel/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/blog/packaging-printing-ideas-for-brands/</loc>
-    <lastmod>2026-11-02</lastmod>
+    <loc>http://127.0.0.1:8080/blog/uv-dtf-printing-product-branding/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/privacy-policy/</loc>
+    <loc>http://127.0.0.1:8080/blog/different-t-shirt-printing-techniques/</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://127.0.0.1:8080/blog/offset-vs-digital-printing/</loc>
     <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://127.0.0.1:8080/blog/custom-stickers-and-labels-guide/</loc>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://127.0.0.1:8080/blog/packaging-printing-ideas-for-brands/</loc>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://127.0.0.1:8080/privacy-policy/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/terms-and-conditions/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/terms-and-conditions/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>
   </url>
   <url>
-    <loc>http://localhost/OrderPrintex/shipping-policy/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/shipping-policy/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>
   </url>

@@ -80,16 +80,16 @@ $products = get_catalog_products($categorySlug, $searchTerm);
     <div class="page-intro-box">
       <div class="page-intro-eyebrow">
         <span class="page-intro-dot"></span>
-        <span><?= $currentCategory ? e($currentCategory['name']) : 'Commercial Print Catalog' ?></span>
+        <span><?= $currentCategory ? e($currentCategory['name']) : 'OUR PRODUCTS' ?></span>
       </div>
       <h1 class="page-intro-title">
-        <?= $currentCategory ? e($currentCategory['name']) : 'Print Products &amp; Custom Transfers' ?>
+        <?= $currentCategory ? e($currentCategory['name']) : 'DTF Transfers, UV Decals &amp; Custom Merchandise' ?>
       </h1>
       <div class="page-intro-divider"></div>
       <p class="page-intro-desc">
         <?= $currentCategory && !empty($currentCategory['description']) 
             ? e($currentCategory['description']) 
-            : 'Precision-manufactured DTF gang rolls, multi-surface UV decals, bio-washed apparel, and corporate merchandise engineered at our New Delhi facility.' ?>
+            : 'Browse ready-to-order prints, tees and branded gifts made in our Delhi workshop. Pick a product, or ask us for a custom quote.' ?>
       </p>
     </div>
   </div>
@@ -125,7 +125,7 @@ $products = get_catalog_products($categorySlug, $searchTerm);
           name="search" 
           value="<?= e($searchTerm) ?>" 
           class="form-control product-filter-search-input" 
-          placeholder="Search products or specs..." 
+          placeholder="Search products..." 
           style="width:240px; max-width:100%; flex:1 1 180px; padding:0.6rem 0.95rem; border-radius:var(--radius-full); border:1.5px solid var(--border-light);"
         >
         <button type="submit" class="btn btn-sm btn-navy">Search</button>
@@ -164,11 +164,6 @@ $products = get_catalog_products($categorySlug, $searchTerm);
             <div class="product-body">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.35rem;">
                 <span class="product-category-label"><?= e($prod['category_name']) ?></span>
-                <?php if (!empty($prod['sku'])): ?>
-                  <span class="sku-badge">
-                    SKU: <?= e($prod['sku']) ?>
-                  </span>
-                <?php endif; ?>
               </div>
               <h3 class="product-title">
                 <a href="<?= product_url($prod['slug']) ?>" title="View details for <?= e($prod['title']) ?>">
@@ -177,9 +172,9 @@ $products = get_catalog_products($categorySlug, $searchTerm);
               </h3>
               <p class="product-desc"><?= e($prod['short_desc']) ?></p>
 
-              <?php if (!empty($prod['specifications'])): ?>
+              <?php if (!empty($prod['specifications']) && ($prod['slug'] === 'bookmark-03' || strpos(strtolower($prod['title']), 'bookmark') !== false)): ?>
                 <div class="product-specs-chip">
-                  <?= e(mb_strimwidth($prod['specifications'], 0, 85, '...')) ?>
+                  <?= e($prod['specifications']) ?>
                 </div>
               <?php endif; ?>
 
@@ -200,7 +195,7 @@ $products = get_catalog_products($categorySlug, $searchTerm);
                   View Details
                 </a>
                 <a href="<?= url('get-quote/?service_slug=' . urlencode($prod['service_slug'] ?? '')) ?>" class="btn btn-primary" aria-label="Request quote for <?= e($prod['title']) ?>">
-                  Request Quote
+                  Get Quote
                 </a>
               </div>
             </div>
@@ -219,19 +214,19 @@ $products = get_catalog_products($categorySlug, $searchTerm);
 <!-- Wholesale Gang Roll Banner -->
 <section class="section section-navy text-center" style="padding-top:4.5rem; padding-bottom:4.5rem; border-top:2px solid var(--border-gold);">
   <div class="container container-narrow reveal scale-in">
-    <div class="section-label" style="justify-content:center; color:var(--beige);">B2B Wholesale Contracts</div>
+    <div class="section-label" style="justify-content:center; color:var(--beige);">FOR PRINT SHOPS &amp; RESELLERS</div>
     <h2 style="font-size:clamp(2rem, 3.2vw, 2.6rem); margin-bottom:1rem; color:#FFFFFF;">
-      Need Continuous Gang Roll Dispatch for Your Print Shop?
+      Need Regular Gang Rolls for Your Print Shop?
     </h2>
     <p style="color:rgba(237,225,210,0.85); margin-bottom:2.25rem; font-size:1.05rem; line-height:1.7;">
-      We partner with commercial screen printers, DTG studios, corporate merchandisers, and clothing labels across India for ongoing wholesale roll supply with same-day prepress turnaround.
+      We supply screen printers, DTG studios, merchandisers and clothing labels across India with ongoing roll orders. Share your artwork and we’ll get it print-ready fast.
     </p>
     <div style="display:flex; justify-content:center; gap:1.25rem; flex-wrap:wrap;">
       <a href="<?= url('contact/') ?>" class="btn btn-primary btn-lg">
-        <span>Inquire About Wholesale Rates</span> &rarr;
+        <span>Ask About Wholesale Rates</span> &rarr;
       </a>
       <a href="https://wa.me/919354028199?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20wholesale%20gang%20roll%20supply." target="_blank" rel="noopener" class="btn btn-outline-white btn-lg">
-        Chat With Wholesale Desk
+        Chat on WhatsApp
       </a>
     </div>
   </div>

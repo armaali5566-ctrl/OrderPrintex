@@ -12,5 +12,6 @@
 <script src="<?= url('assets/js/admin-notifications.js') ?>"></script>
 <script src="<?= url('assets/js/admin.js') ?>"></script>
 <script src="<?= url('assets/js/dynamic-other.js') ?>"></script>
+<script src="<?= url('assets/js/admin-artwork-viewer.js') ?>"></script>
 </body>
 </html>

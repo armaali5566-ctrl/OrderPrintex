@@ -1,0 +1,832 @@
+<USER_REQUEST>
+TASK: Update the text content across the website's PHP pages and Blog posts using the EXACT copy provided below.
+
+CRITICAL RULES (MUST FOLLOW STRICTLY):
+1. ZERO CHANGES TO COPY: Copy and paste the text word-for-word, character-for-character. Do NOT fix grammar, spelling, punctuation, spacing, hyphens (-), slashes (/), or capitalization. Do NOT summarize, shorten, paraphrase, or skip any line, FAQ, bullet point, table cell, or section.
+2. PRESERVE DESIGN & STRUCTURE: Keep all existing HTML structure, CSS classes, inline styles, fonts, layout grids, PHP functions (`url()`, `service_url()`, `e()`), `slug` values, and `id` values completely intact. Only replace the visible text content, meta titles, and meta descriptions.
+3. DATABASE OVERRIDE HANDLING: If any page fetches old content from the database (e.g., `db_fetch_all("SELECT * FROM services...")`, `products`, `blogs`, etc.), either update the database/SQL seed records with this exact text OR bypass/override the database fetch with these updated arrays so the new content renders live on the site without being overwritten by old DB rows.
+4. PLACEHOLDER NOTES: Where the copy contains placeholders like `₹____ per sheet`, `[MOQ confirm karo]`, or blank `Call / WhatsApp:`, keep them exactly as written unless a site-wide phone constant already exists in `config.php` (if unsure, keep exact text). For Cart empty state where two versions are listed, use the second full version (or preserve both if the template has a title + subtext structure).
+5. SELF-VERIFICATION: After editing all files, review each file line-by-line against the prompt below to ensure 100% of the text is present and nothing is missing.
+
+=================================================================
+1. SERVICES OVERVIEW PAGE (e.g., services.php / services/index.php)
+=================================================================
+Meta Title: Printing Services in Delhi | DTF, UV DTF, T-Shirt | Printex
+Meta Description: DTF Printing, UV DTF Stickers, T-Shirt, Hoodie, and Mug Printing in Delhi - We've got you covered. Printex is the go to for brands, shops and businesses across India . We'll get you a quote in no time.
+
+Hero Eyebrow: Our Printing Services in Delhi
+Hero H1: DTF, UV DTF & T-Shirt Printing Services in Delhi
+Hero Description: At Printex we print DTF transfers, UV DTF stickers, t-shirts, hoodies and mugs from our studio in Pankha Road, Delhi. Whether you're looking to order a small sample or a bulk batch , we deliver across India.
+
+Service Card 1:
+- Badge / Title: 1.DTF Printing in Delhi
+- Tagline: Prints on Fabric with Bright, Soft, and Long Lasting Results
+- Description: Our DTF (Direct-to-Film) printing is perfect for cotton, polyester and blended fabrics. It prints a white base under the colours so your designs stay bright even on black. Want to get started ? You can order ready-to-press transfers and gang sheets for your own pressing or we can do it for you. This service is a hit with apparel brands, resellers and print shops that need reliable bulk DTF printing.
+- Specs: Works on: Cotton, Polyester, Blends | Sheet width: 24 inches - Let us know if you need anything else | Order: Gang sheets and bulk rolls
+- Buttons: Know More → | Get a Quote
+
+Service Card 2:
+- Badge / Title: 2. UV DTF Printing - A Popular Choice
+- Tagline: UV DTF Printing & Stickers - Add a 3D Glossy Finish to Your Products
+- Description: Peel and stick stickers that just need to be applied - no heat press needed. The glossy layer gives them a raised 3D look, making them waterproof and scratch resistant. They work on glass, steel, acrylic, plastic, and wood, so they are super popular for mugs, tumblers, bottles, gift items and packaging. We make UV DTF stickers in custom sizes and bulk quantities.
+- Specs: Layers: Colour + White + Gloss | Surfaces: Glass, Steel, Acrylic, Plastic, Wood | No heat press needed
+- Buttons: Know More → | Get a Quote
+
+Service Card 3:
+- Badge / Title: 3. T-Shirt Printing for Bulk Orders
+- Tagline: T-Shirt Printing in Delhi - Custom T-Shirts for Brands, Teams and Events
+- Description: We print custom t-shirts for brands, offices, colleges, events and teams in Delhi. We use DTF printing, so your full-colour designs and fine text come out sharp. Just send us your design along with the quantity and we will suggest the right fabric and print placement. Price of bulk orders are based on the quantity.
+- Specs: Fabrics: Cotton, Poly-Rich, Dry-Fit | Sizes: XS to 3XL | Orders: Single sample to bulk
+- Buttons: Know More → | Get a Quote
+
+Service Card 4:
+- Badge / Title: 4. Corporate Printing Services for Businesses
+- Tagline: Corporate T-Shirt & Merchandise Printing - For Offices, Events and Brands
+- Description: Need branded merchandise for your company or event ? Printex is here to help. We print uniform t-shirts, branded mugs and bottles, and giveaways with your logo, in the same colours across the whole batch. GST invoice available on request.
+- Specs: Products: T-Shirts, Mugs, Bottles, Giveaways | Invoice: GST on request | Delivery: Delhi and pan-India
+- Buttons: Know More → | Get a Quote
+
+
+=================================================================
+2. DTF PRINTING DETAIL PAGE (slug: dtf-printing)
+=================================================================
+Meta Title: DTF Printing in Delhi | Bulk DTF Transfers & Gang Sheets – Printex
+Meta Description: DTF printing in Delhi by Printex, a DTF printing manufacturer in India. Bulk DTF transfers and gang sheets on 22 & 24 inch rolls. Upload your design for a quote.
+
+Eyebrow: DTF Printing Services in Delhi
+H1: DTF Printing in Delhi - Making Your Designs Pop with Long-Lasting Results
+Hero Text: Want to get that cool design on a t-shirt or hoodie without breaking the bank or dealing with the hassle of screens, set up costs, and colour restrictions? Our DTF printing services in Delhi cover all bases. Whether it's a single sheet or bulk rolls, your prints will arrive across India in no time and look fantastic - the colours are bright, the feel is soft, and the prints are super durable.
+
+Section: What's All this About DTF Printing (and how does it work?)
+- You probably know it as Direct-to-Film. Here's the lowdown: your design gets printed directly onto a special film that's coated with a bit of adhesive. Then, with a bit of heat, its pressed onto the garment. The result is colours that stay bright on even the darkest fabrics, and the fine details are still as sharp as can be.
+- Our DTF transfer printing service here in Delhi is geared towards brands, print shops, resellers and anyone new to the game. You can send us your artwork and we will make ready-to-press transfers for you to apply yourself, or send us your garments and we will do the pressing for you. These films work like a charm on cotton, polyester, blends - you name it.
+- DTF is a great choice when you want to steer clear of screens, colour separation and all the extra per-colour charges that come with it. Small batches, repeat orders, bulk runs - DTF is a real winner when it comes to these types of print jobs. Hit us up with your artwork and we'll have a look at it before we get to work.
+- CTA Line: Upload Your Design and we'll give You a Quote for DTF Printing - and Check out our Gang Sheet Options While You're At It
+
+Section: DTF vs Screen Printing vs Vinyl: Which Is Better?
+Table Columns: Feature | DTF printing | Screen printing | Vinyl
+- Set-up: None | Separate screen per colour | Cutting and weeding
+- Full colour and gradients: Yes, no extra cost | Costly, more colours = more cost | Limited
+- Small and repeat orders: Great | Expensive | Okay
+- Dark fabrics: Bright, thanks to white base | Needs underbase | Works
+- Feel: Soft and flexible | Soft | Can feel plasticky
+Note below table: Ten pieces in six colours? DTF is the clear winner.
+
+Section: DTF Gang Sheets & Bulk DTF Transfers - Make the Most of Your Ink
+- A DTF gang sheet is basically one big sheet of film with loads of designs all crammed in together, so there's zero waste and you only pay for what you use. Logos and big graphics can happily coexist on the same sheet.
+- Our bulk DTF transfers come in two sizes, 22 and 24 inches wide, and the per foot price drops as you order more. You'll get a custom quote for your DTF sheet based on length, how many you're ordering and the number of designs. Just let us know what you're working with and we'll get a quote sorted.
+
+Section: DTF Printing for T-Shirts, Hoodies, Sportswear and Loads More
+- T-shirts and those massive oversized tees - both print out great
+- Hoodies and sweatshirts - our prints are nice and flexible, move with the fabric no problem
+- Sportswear and team jerseys - from match day to training, we've got you covered
+- Caps, tote bags and uniforms - pretty much anything will work in a pinch
+- We supply all sorts of print shops and brands across India, and we ship all over the country. Want to know how we deal with nylon or other performance fabrics? Just ask and we'll sort you out with the right film.
+
+Section: How Printex Do DTF
+1. Send us your design - just a transparent PNG, PDF or vector file (AI or SVG) would be great, ideally get it up to 300 DPI.
+2. We have a look: check for resolution, margins, sheet layout and all that jazz. Then we get back to you with a clear quote.
+3. We get to work: your design is printed on some film, we slap on the adhesive and throw the sheet through the curing process.
+4. We send it off: every sheet gets a double check, is packed up and shipped all over India.
+
+Section: Why Choose Printex for DTF Printing in Delhi - We've Got You Covered
+- Free artwork check - we make sure everything's good to go, no extra charge
+- Consistent colour: your second order looks the same as the first, no complaints
+- We're flexible on quantities - want one sheet or the whole roll? Your call
+- Pan-India shipping: we print in Delhi and get your order delivered to your doorstep.
+
+Section: How to Press a DTF Transfer - Heat, Time and a Bit of Pressure
+- Temperature: about 150 to 160°C so that adhesive bonds in properly.
+- Time and pressure: 10 to 15 seconds at medium pressure is good. You can use a bit of heat and your press should be set up to get even pressure.
+- Peeling: you can use a cold or warm peel - just let it cool down a bit, then peel it off in one smooth go
+- Sheet width: our gang sheets and rolls are made to order - 22 or 24 inches
+
+Section: Frequently Asked Questions
+1. Q: What's the minimum order I need to place?
+   A: You can start small and order just one sheet, no need to buy a whole roll.
+2. Q: How much will a DTF sheet cost me?
+   A: The price of our DTF sheets depends on a handful of things - how long you need the sheet, how many you buy, and how many designs you're looking to print. Upload your design along with the size you need and we'll send over a clear quote without any fuss.
+3. Q: Are the DTF prints you do washable?
+   A: Absolutely. As long as you follow the right washing instructions and get them pressed correctly, the prints will stay bright and flexible even after you've washed them multiple times. Just remember to wash them inside out in cold water and steer clear of bleach.
+4. Q: Which fabrics work best with DTF printing?
+   A: That's pretty much any cotton blend or polyester mix. If you're planning on printing on nylon or sportswear fabrics, it's worth reaching out to us to make sure you're getting the right film.
+5. Q: Can I send my own garments to be printed ?
+   A: Yes you can. You can either order up a batch of ready-to-press transfers or send your garments over and we'll take care of pressing them for you.
+6. Q: What file format should I upload for my design?
+   A: Ideally, it's a good idea to upload a transparent PNG, PDF or a vector file like an AI or SVG - and make sure it's at a resolution of 300 DPI to get the best results.
+7. Q: Do you do DTF printing in Delhi and deliver across India?
+   A: Yep - we're based in Delhi and we deliver to the major cities and towns across India.
+8. Q: What's the difference between DTF and UV DTF printing?
+   A: The main difference here is that DTF transfers are for fabric and need a heat press, while UV DTF is for glass, metal and acrylic and doesn't need any heat. If you want to know more about UV DTF printing, you should probably check out our page on that.
+
+CTA Section:
+- Heading: Get a Quote for DTF Printing in Delhi
+- Text: Just upload your design as a PNG, PDF or vector file, tell us the size and quantity you need and we'll get back to you with a clear price quote.
+
+Visit Studio Section:
+- Heading: DTF Printing in Delhi: Come visit us
+- Text: You can now order DTF transfers and gang sheets direct from our Delhi studio.
+- Address: Shop E-6, Chanakya Palace, 21 Street No, Pankha Rd, next to 40 Feet Road, Delhi 110059
+- Subtext: Give us a call or fire off a WhatsApp to get started.
+
+
+=================================================================
+3. UV DTF PRINTING DETAIL PAGE (slug: uv-dtf-printing)
+=================================================================
+Eyebrow: Hard-Surface Decal Innovation
+H1: Industrial UV DTF Printing in Delhi
+Hero Text: Instant transfer stickers with a 3d embossed tactile finish - they stick to glass, acrylic, stainless steel, wood and plastic like glue and don't need a heat press. This makes the quality instant, and forever-bonded to the surface
+
+Eyebrow: Printing The Impossible
+H2: Take Your Designs To Any Surface with UV DTF Printing
+- At Printex, we've got a knack for printing high-quality UV DTF in Delhi, helping our customers - big brands, small businesses & creatives - turn physical objects that can't fit under a heat press into one-of-a-kind works of art. We ship UV DTF stickers all over the country, to every major city and all points in between.
+- Our industrial UV DTF machines are state-of-the-art - they put down 3 layers at the same time: a base coat, a vibrant CMYK colour layer and a glossy UV varnish. All this gets cured instantly by super-powerful UV LEDs onto a specialized AB adhesive sheet.
+- Applying the decals is a breeze - just peel the backing off, slap it on a tumbler or mug, rub it gently and lift off the top clear layer. What you're left with is a clean, raised graphic that sticks like crazy.
+- Whether you run a tumbler brand, a business that sells cool gifts or a print shop, a UV DTF transfer lets you add a top-end, tactile logo to pretty much any hard product without breaking the bank, or needing special equipment.
+- Want to get a quote or see some of our UV decal work? Head on over to the bottom of this page to upload your design, or browse our gallery to get some ideas
+
+Section: How Does UV DTF Printing Work?
+- UV DTF stands for ultraviolet direct-to-film - it's like this : the design gets printed in layers on a special sheet, then cured with UV light, so it dries instantly & comes out all raised and shiny. Once it's printed you just slap on a clear layer on top - that's why you can just move it from the sheet to your product by hand.
+- Regular old DTF transfers need a heat press and are made for fabrics. UV DTF decals are different - they stick cold, with no heat at all, so they work great on hard & curved surfaces like glass, metal, ceramic and plastic. Looking for t-shirt or hoodies instead? We've got you covered - check out our DTF printing page for info on garment prints.
+
+Section: UV DTF Stickers vs Vinyl Stickers vs Regular DTF
+Table Columns: Feature | UV DTF stickers | Vinyl stickers | Regular DTF
+- Best for: Hard and curved surfaces | Flat surfaces, labels | Fabric and garments
+- Heat press needed: No | No | Yes
+- Look: 3D, raised and glossy | Flat | Soft and flexible
+- Fine details and full colour: Sharp | Limited by cutting | Sharp
+- Ready to apply: Yes, pre-masked | Needs cutting and weeding | Needs pressing
+
+Section: UV DTF Stickers for Glass, Tumblers, Acrylic & Packaging - Where Quality Meets Flexibility
+Intro: We've engineered our UV DTF decals to stick exceptionally well to a wide range of materials. They're water-proof, scratch-proof and chemically stable - making them perfect for all sorts of commercial products like drinkware, gadgets and retail packaging.
+- Drinkware & Bottles: Think stainless steel insulated tumblers, glass mason jars, ceramic mugs, and sports bottles. - or any other drinkware that you'd like to personalise.
+- Electronics & Gadgets: We've got you covered with laptop lids, smartphone cases, wireless power banks, tablets, and even audio gear.
+- Acrylic & Signage: Our decals work great on clear acrylic awards, corporate door signs, POS displays, trophy plates - in fact, any type of signage or award that you need to make an impact.
+- Retail Packaging: And for retail packaging - we've got rigid gift boxes, cosmetic glass jars, metal tins, candle holders, wood boards all covered.
+
+Section: Who Turns to Printex for UV DTF Stickers
+- Tumbler and drinkware brands who want a high-end, 3D logo on every single bottle they produce.
+- Companies that specialise in corporate gifting - branding mugs, diaries, power banks and welcome kits for businesses.
+- Packaging and cosmetic brands who decorate glass jars, tins and rigid boxes to give their products an extra wow factor.
+- Signage and award makers who need sharp graphics on acrylic and metal plates that grab the attention.
+- And print shops and resellers who buy UV DTF printing in bulk and use it to brand products for their own customers.
+
+Section: The Benefits of Printing with UV DTF
+- No need for a heat press: decals can be applied cold, so you can brand objects that just can't be heated.
+- Premium 3D finish: the raised gloss varnish gives your designs a tactile, high-end feel that just can't be beaten.
+- Waterproof and scratch-resistant: our decals are made to withstand the daily knocks that come with being used.
+- Full colour on any design: whether you want photos, gradients or fine logos, you can print them all in full colour, without any extra costs.
+- Fast and easy to apply: it's a simple peel, stick, rub, lift process - no special skills or equipment needed.
+- One-off or one thousand: you can start with a single sheet and scale up your production when you're ready.
+
+Section: How to Prepare Your Artwork for UV DTF Printing
+To get the best out of your decals, make sure your artwork is good to go. We need a transparent PNG or a vector file (AI, SVG or PDF) with fonts converted to outlines, at 300 DPI. Try to avoid super thin lines and teeny tiny text as these can get lost on a 3D finish. And if you want to add a gloss varnish to a specific part of your design, just let us know in the notes and we'll set it up. If you're not sure about your file, send it over and our team will check it out before we print it
+
+Section: UV DTF Decals in Any Size - One Sheet to Bulk
+- Our UV DTF printing starts with a single sheet - so you can trial a design or order bulk decals for your whole product run. Send us your logo or artwork, along with the size and quantity you need, and we'll fit as many decals as we can onto each sheet to keep your costs down. Our rates start from ₹____ per sheet.
+- And, to make things even easier, every order comes with carrier tape pre-applied, so your customers just need to peel, stick and rub. If you're a regular customer, you'll qualify for better rates as you order more - so let us know your monthly requirements and we'll quote you accordingly.
+
+Section: The Lowdown on UV DTF Printing at Printex
+- Get your design readywe've got our preferences - a nice transparent PNG or vector file, ideally 300 DPI, with fonts nice and outlined.
+1. We take a look: before we give you a quote, we check the resolution, margins, and sheet layout to make sure everything is good to go.
+2. Print & Cure Magic: White base, colours & gloss varnish get printed and cured with UV light - all in one go!
+3. It's off to you: every sheet gets inspected, carefully packed and shipped off to anywhere in India from our Delhi studio.
+
+Section: Why We're the Ones to Trust for UV DTF Printing in Delhi
+- Free artwork check: We take a glance at your design before printing to make sure everything's good to print.
+- We've got a sharp finish that will knock your socks off - bright colours with a raised, glossy varnish that really makes your decals pop.
+- With us, you get quality that's consistentsame great results on your first order as you will on your repeat order.
+- We're all about flexibilitywhether its one sheet or a whole production run, we've got you covered.
+- Our UV DTF stickers ship from our Delhi studio to your doorstep all over India.
+
+Section: How to Apply a UV DTF Sticker Like a Pro
+1. Clean and clear: make sure the surface is dust, oil and moisture free - a quick wipe will do the trick.
+2. Peel off the backing: remove the carrier backing and pop the decal in place.
+3. Give it a rub: take a squeegee or your finger and gently press the decal in from the centre outwards.
+4. Lift the clear film: peel away the top film slowly and carefully, leaving your decal looking great.
+5. Looking after your decal: wash by hand and avoid harsh scrubbing - its all about keeping it looking new for longer.
+
+Section: Frequently Asked Questions About UV DTF Printing
+1. Q: What is the minimum order for UV DTF printing?
+   A: You can start with just one sheet. [MOQ confirm karo]
+2. Q: How much do UV DTF stickers cost?
+   A: It depends on the decal size, quantity and number of designs. Upload your design with the size you need and we will reply with a clear quote.
+3. Q: Are UV DTF stickers waterproof?
+   A: Yes. UV DTF decals are waterproof and scratch-resistant once applied to a clean, dry surface.
+4. Q: Do I need a heat press for UV DTF?
+   A: No. UV DTF decals are applied cold. Just peel, stick and rub.
+5. Q: Which surfaces can I use UV DTF stickers on?
+   A: Glass, acrylic, stainless steel, ceramic, metal, wood and most hard plastics. For fabric, use our DTF transfers instead.
+6. Q: Can I stick them on curved bottles and tumblers?
+   A: Yes. UV DTF decals are made for curved and rigid surfaces such as tumblers, mugs and bottles.
+7. Q: Can UV DTF decals go in the dishwasher?
+   A: We recommend gentle hand washing and no harsh scrubbing, so your decal looks new for longer.
+8. Q: How long does a UV DTF sticker last?
+   A: With clean application and normal care, UV DTF stickers stay firmly on the surface through daily use.
+9. Q: Can I get a spot gloss or varnish effect?
+   A: Yes. Mention it in the special finish notes of the quote form and we will set it up on your design.
+10. Q: What file should I upload?
+    A: A transparent PNG or vector file at 300 DPI, with fonts converted to outlines.
+11. Q: What is the difference between UV DTF and regular DTF?
+    A: Regular DTF transfers are for fabric and need a heat press. UV DTF decals stick to hard surfaces with no heat.
+12. Q: Do you deliver across India?
+    A: Yes, we dispatch UV DTF stickers to all major cities and towns.
+
+CTA Section:
+- Heading: Get an Instant UV DTF Printing Quote
+- Text: Upload your transparent artwork or logo sheet for quick turnaround production. UV DTF decals are supplied pre-masked with carrier tape for peel, stick and rub application.
+
+Visit Studio Section:
+- Heading: UV DTF Printing in Delhi: Visit Our Studio
+- Text: Order UV DTF stickers and decals from our Delhi studio.
+- Address: Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Delhi 110059
+- Contact Line: Call / WhatsApp:
+
+
+=================================================================
+4. CORPORATE PRINTING DETAIL PAGE (slug: corporate-printing)
+=================================================================
+Eyebrow: B2B Promotional Solutions
+H1: Bringing Your Brand to Life in Delhi with Custom Merchandise
+Hero Text: Branded merchandise that your team and clients actually get excited to use - and keep on their desks, bags and bottles. From welcome kits to summit giveaways, we handle corporate printing in Delhi with squash colours, top-notch finishes and GST-ready billing - so your brand looks sharp and just the way you want it on every surface.
+
+Eyebrow: One Vendor, End-to-End Solutions
+H2: Your Brand on Every Desk, Bag and Bottle - and Loving It
+- At Printex, we've picked up a thing or two about corporate printing in Delhi that really makes companies look the part. Big corporates, fast-growth startups, agencies and HR teams all come to us to turn plain products into branded merchandise that people are actually happy to carry around. We get orders shipped to every major city and all the smaller ones too.
+- We take care of corporate merchandise printing from start to finish: matching your Pantone colours, double-checking the pre-press proofing, laser etching, UV DTF decal bonding and even packing each item individually just the way you want them. You deal with one team instead of trying to juggle with five different vendors, and your logo and colours stay spot on every time.
+- Need some ideas for corporate gifts in Delhi for your clients, or bulk corporate gifting across India for a special occasion? We're happy to scale up from a small team order to thousands of pieces without losing the finish. Every order comes with an official GST invoice, competitive wholesale pricing and fast door-to-door delivery to your office.
+- Want a quote or some inspiration? Head to the bottom of this page to send us your logo, or browse our gallery to see what we've been up to recently.
+- Buttons: Send us a Request Corporate Proposal | Schedule a Consultation with our team
+
+Section: Our Core Corporate Print Categories
+Intro: Everything can be customised with your company logo, employee names and exact brand palette, just the way you want.
+1. Custom Ceramic Mugs - A Great Way to Start the Day
+   11oz and 15oz Grade AAA white and black ceramic mugs with vibrant, full-wrap, dishwasher-safe prints. Our custom branded mugs for corporate gifting are a solid choice for client thank-yous and festive hampers.
+2. Onboarding Gift Kits - A Warm Welcome
+   A curated employee onboarding kit with a branded notebook, metallic stylus pen, vacuum bottle and polo, all neatly packed in a welcome box. Every welcome kit for new employees can be tailored to fit your company's role, department or office.
+3. Uniforms and Polos - Team Spirit
+   We do corporate polo shirt printing, staff aprons and volunteer apparel with wash-resistant prints. Our corporate uniform printing keeps teams looking sharp, and branded hoodies for employees are always a hit for winter kits and team celebrations.
+4. Event and Summit Giveaways - Memorable Swag
+   Conferences and trade shows need giveaways people remember. Our event giveaways printing covers custom printed tote bags and lanyards, metal badges and promotional sticker packs, with company logo printing on products done exactly to your brand guidelines.
+
+Section: Which Corporate Merchandise Is Right for You?
+Table Columns: Feature | Custom Mugs | Onboarding Kits | Uniforms & Polos | Event Giveaways
+- Best for: Client gifts, desk use | New joiners, HR | Teams, staff, volunteers | Summits, trade shows
+- Typical items: Ceramic mugs | Diary, pen, bottle, polo | Polos, hoodies, aprons | Totes, lanyards, badges
+- Customisation: Full-wrap logo print | Logo and name per kit | Logo, name, role | Logo, event name
+- Reorder-friendly: Yes | Yes | Yes | Yes
+- Packaging: Gift box optional | Welcome box included | Individual or bulk | Bulk packed
+
+Section: Promotional Merchandise in Delhi for Every Occasion Where Quality Really Does Meet Flexibility
+Intro: No matter the occasion, our corporate printing in Delhi is designed to keep your brand looking top-notch and consistent. As a local partner in promotional merchandise in Delhi, we tailor the product to the moment:
+- New hire welcome: a thoughtful onboarding kit with a notebook, bottle and polo that they'll actually use
+- Client appreciation: a show of gratitude with branded mugs and some nice premium stationery
+- Festive gifting: a Diwali hamper or a year-end gift box - we've got that covered too
+- Events and summits: tote bags, lanyards, badges and sticker packs in bulk and on time - no hassle
+- Team uniforms: polos, hoodies or staff aprons - we can even help with custom orders
+
+Section: Who Turns to Printex for Their Corporate Printing in Delhi
+- HR teams who want to make a lasting impression on the first day for new employees.
+- Marketing managers who need merchandise that genuinely reflects their brand.
+- Event planners who're looking for hassle-free giveaways in bulk and on time.
+- Startups and agencies who want premium branded gifts but don't have a huge budget.
+- Resellers and gifting companies who buy in bulk and then brand products for their own customers.
+
+Section: The Benefits of Choosing Printex for Corporate Merchandise Printing
+- Colour accuracy is a priority: Pantone matching ensures your logo looks the exact same on every item.
+- See it before you spend a single rupee: we give you a digital 3D mockup for your stakeholders to approve before we start making anything.
+- One stop shop for all your needs: we can make mugs, kits, uniforms and giveaways from a single corporate printing in Delhi studio.
+- Easy billing for business: official GST invoices with every order for your records.
+- Finishing touches: we use top quality materials and do our best to give you crisp, long-lasting prints.
+- Great packaging too: we can do individual packing and even luxury packaging if you want it.
+- One order, hassle free repeat orders: same quality on your repeat order as your first.
+
+Section: How to Prepare Your Logo for Corporate Printing
+To get the best result send over a vector file such as AI, EPS or PDF with all fonts converted to outlines. We can also handle PSD and PNG files up to 50MB. If you've got brand guidelines or Pantone codes, share them with us too and try to avoid very thin lines and tiny text as they can get lost on smaller products. If you're not sure about your file, send it over and our team will take a look before we even think about production.
+
+Section: Corporate Printing in Delhi in Any Quantity - From Small Orders to Big
+Whether it's a small team or the whole company, we can handle it. Send us your logo, the products you're interested in and the quantity you need, and we'll plan the production to keep your costs per piece as low as possible. We give regular clients the best rates as volumes grow, so tell us about your yearly gifting and uniform requirements and we'll give you a price that works for you.
+
+Section: The Lowdown on Corporate Printing at Printex - The Inside Scoop
+1. Tell us what you need: give us the lowdown on products, quantity and occasion, and upload your logo or brand kit.
+2. Check out the mockup: you get a digital 3D mockup of your order to show your team before we lift a finger.
+3. Prepress and colour matching: we double-check your artwork, sizing and Pantone accuracy to get the print spot-on for your brand.
+4. Getting it done and packed: your order gets printed, etched or bonded right here in our Delhi studio and then we pack it up with care.
+5. Delivery Time: it gets shipped door to door across India with a GST invoice no worries.
+
+Section: Why You Can Trust Printex for Corporate Printing in Delhi
+- Free artwork check - no surprises: we take a squint at your design before printing to make sure everything matches up.
+- Consistent, top-notch finish: it's always the same great result - whether it's your first order or your tenth.
+- Flexible orders: one kit or a full company run - we're happy to cover you.
+- Your dedicated B2B prepress manager: one point of contact for your whole project, no juggling around.
+- Nationwide delivery: from our Delhi studio to your head office, wherever that may be.
+
+Section: Looking After Your Branded Swag
+- Mugs and bottles: a gentle hand wash is all you need to keep the print looking new, just avoid scrubbing too hard.
+- Polos and hoodies: wash them inside out in cold water and keep an eye on the iron - don't scorch the print with high heat.
+- Tote bags and lanyards: just clean off any spills with a soft cloth and the colours will stay bright.
+- Storage 101: keep those gift kits in a cool, dry place till it's time to hand them out.
+
+Section: Frequently Asked Questions About Corporate Printing - We've Got Answers
+1. Q: What is the minimum order size for corporate printing in Delhi?
+   A: Tell us the product and quantity and we'll confirm what works for you.
+2. Q: How much will corporate merchandise set me back?
+   A: It varies - type of product, quantity and finish all play a part. Just upload your logo and quantity and we'll send over a clear quote.
+3. Q: Do you include GST invoices with your orders?
+   A: Absolutely - every corporate order comes with one.
+4. Q: Which logo file should I upload?
+   A: A vector file (AI, EPS, SVG or PDF) is the way to go. PSD and PNG files work too if they're under 50MB.
+5. Q: Do I get to see a preview before you start printing?
+   A: You bet - all corporate runs include a digital 3D mockup for your approval before we start production.
+6. Q: Can I mix and match products in one order?
+   A: You can - choose the combination option in the quote form and we'll take care of the rest.
+7. Q: Can I personalise items with names and roles?
+   A: Sure thing - names, roles and departments can be added on kits, mugs and apparel.
+8. Q: Do you offer gift wrapping or individual packaging?
+   A: Yes and yes - we've got individual gift packing and luxury packaging options available.
+9. Q: Do you deliver corporate orders to all over India?
+   A: You bet - we ship to all major cities and towns.
+10. Q: What areas do you cover for corporate printing in Delhi?
+    A: Delhi NCR, Rani Bagh, Pitampura, Noida, Gurgaon and all the rest - we've got you covered.
+11. Q: Can I place a repeat order for new joiners?
+    A: We keep your design details on file so reorders stay consistent, no worries.
+
+Quote Form Section:
+- Heading: Get an Instant Corporate Printing Quote
+- Description: Upload your vector logo or brand kit with the product and quantity, and our team will send an itemised quotation. All corporate runs include a digital 3D mockup, official GST invoicing and optional luxury packaging.
+- Upload Box Label: Upload Company Logo or Brand Kit
+- Upload Subtext: AI, EPS, PDF, PSD, SVG or PNG (Max 50MB)
+- Upload Button: Select Brand Files
+- Form Fields: Product Category, Estimated Quantity, Company Name, Contact Person, Work Email, Phone/WhatsApp, Project Scope & Target Delivery Date
+- Badges: ✓ Official GST Invoicing • PAN-India Logistics • Dedicated B2B Prepress Manager
+- Submit Button: Submit Corporate Proposal →
+
+Visit Studio Section:
+- Heading: Corporate Printing in Delhi: Visit Our Studio
+- Text: Order corporate merchandise from our Delhi studio.
+- Address: Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Delhi 110059
+- Contact Line: Call / WhatsApp:
+
+
+=================================================================
+5. PRODUCTS / SHOP PAGE (e.g., products.php / shop.php)
+=================================================================
+Eyebrow: OUR PRODUCTS
+H1: DTF Transfers, UV Decals & Custom Merchandise
+Hero Text: Browse ready-to-order prints, tees and branded gifts made in our Delhi workshop. Pick a product, or ask us for a custom quote.
+
+Filters: All Products • DTF & UV DTF • Stickers • T-Shirts • Corporate Gifts • Packaging • Branded Merch
+Search Input Placeholder: Search products...
+Search Button: Search
+
+Product Cards (Buttons on cards: View Details | Get Quote):
+Card 1:
+- Title: DTF Gang Sheet (22" Wide)
+- Description: Ready-to-press transfers with bright color and a soft feel. Works on cotton, polyester and blends.
+- Price: From ₹249 / sheet
+
+Card 2:
+- Title: 3D Gloss UV DTF Decal Sheet
+- Description: Raised, glossy decals that peel and stick on glass, steel, acrylic and plastic. Waterproof once applied.
+- Price: From ₹349 / sheet
+
+Card 3:
+- Title: Oversized Streetwear T-Shirt (240 GSM)
+- Description: A heavy drop-shoulder tee with your design printed in DTF. Roomy fit and a soft feel.
+- Price: From ₹449 / piece
+
+Card 4:
+- Title: Custom Steel Thermal Bottle (750 ml)
+- Description: A double-wall steel bottle with your logo printed on it. Good for gifts and team kits.
+- Price: Price: From ₹599 / bottle
+
+Card 5:
+- Title: Branded Apparel Mailer Box
+- Description: A sturdy matte black box with your logo in gold foil and gloss detail. Made for shipping apparel.
+- Price: From ₹65 / box
+
+Card 6:
+- Title: Custom Die-Cut Sticker Pack
+- Description: Stickers cut to your shape, in holographic and UV DTF finishes. Great for brands and giveaways.
+- Price: From ₹299 / pack
+
+Card 7:
+- Title: Everyday Cotton T-Shirt (180 GSM)
+- Description: A breathable combed cotton crewneck with a soft printed design. Easy to wear all day.
+- Price: From ₹299 / piece
+
+Card 8:
+- Title: Corporate Welcome Gift Kit
+- Description: A ready gift set with branded items for new joiners and clients, packed neatly.
+- Price: From ₹599 / kit
+- Buttons: View Details | Get Quote
+
+Card 9:
+- Category Eyebrow: CUSTOM STATIONERY
+- Title: Custom Printed Bookmarks
+- Description: Double-sided bookmarks on thick card, with a soft-touch finish. Good for brands, bookstores and event giveaways.
+- Specs: 350 GSM card • Double-sided print • Custom sizes
+- Price: From ₹1.50 / piece
+- MOQ: Min. 100 pcs
+- Buttons: View Details | Get Quote
+
+Wholesale CTA Section:
+- Eyebrow: FOR PRINT SHOPS & RESELLERS
+- Heading: Need Regular Gang Rolls for Your Print Shop?
+- Text: We supply screen printers, DTG studios, merchandisers and clothing labels across India with ongoing roll orders. Share your artwork and we’ll get it print-ready fast.
+- Buttons: Ask About Wholesale Rates → | Chat on WhatsApp
+
+
+=================================================================
+6. PORTFOLIO / PRINT GALLERY PAGE (e.g., portfolio.php / gallery.php)
+=================================================================
+Eyebrow: OUR WORK
+H1: Print Gallery
+Hero Text: A look at the DTF transfers, UV decals, t-shirts and corporate gifts we’ve made for brands, agencies and businesses across India.
+Subtext: Browse sample work across DTF transfers, UV decals, t-shirts and corporate gifts. This is the kind of print quality we deliver for brands, agencies and businesses across India.
+
+Filters: All Work • DTF Transfers • UV DTF Decals • Custom T-Shirts • Corporate Gifts • Packaging & Branding
+Bottom Note: Some images are sample prints. Every custom order is priced by artwork, size and quantity.
+
+Section Header:
+- Eyebrow: PRINT QUALITY UP CLOSE
+- Heading: Take a Closer Look at Our Prints
+- Subtext: Check the detail, color and finish of each print. Tap a thumbnail to switch the preview.
+
+Specimen 1:
+- Category: DTF PRINTING
+- Eyebrow: DTF PRINTING • SAMPLE 1
+- Title: Detailed DTF Print on a Dark T-Shirt
+- Description: A DTF transfer with smooth color blends, a bright white base and a soft, stretchy feel that doesn’t turn stiff.
+- Specs Box:
+  * Print detail: 1440 DPI
+  * Inks: CMYK colors with a white base layer
+  * Works on: Cotton, polyester blends and fleece
+  * Durability: Built for 50+ washes with proper care
+- Buttons: Get a Similar Print → | View Full Screen
+- Image button text: Tap to enlarge
+
+Thumbnail Section:
+- Label: CHOOSE A PRINT TO PREVIEW:
+- Categories: DTF Prints • UV DTF Decals • T-Shirts • Packaging • Stickers • Corporate Gifts • Branding Materials
+
+
+=================================================================
+7. BLOG LISTING PAGE (e.g., blog.php / blog/index.php)
+=================================================================
+Eyebrow: PRINTING GUIDES & TIPS
+H1: Printing Guides & Tips
+Hero Text: Simple, practical guides on DTF, UV DTF, t-shirt and corporate printing from our Delhi team. Learn what works before you order.
+Search Input Placeholder: Search guides, e.g. DTF, UV decals, t-shirts | Search
+Filters: All Guides • Printing Basics • T-Shirts & Apparel • Corporate & Branding • Packaging & Labels
+
+CTA Section:
+- Eyebrow: READY TO PRINT?
+- Heading: Ready to Start Your Print Order?
+- Text: Send us your design and our team will check the lines, colors and background for free. There’s no obligation to order.
+- Buttons: Upload Your Design → | See Our Products
+
+
+=================================================================
+8. CONTACT, GET-QUOTE & CART PAGES
+=================================================================
+A. Contact Page (contact.php):
+- Eyebrow: GET IN TOUCH
+- H1: Talk to Our Delhi Team
+- Text: Need a quote, help with your artwork, or a sample before a bulk order? Call, WhatsApp or send us a message, and we’ll get back to you.
+
+B. Get-Quote Page (get-quote.php):
+- Eyebrow: GET A QUOTE
+- H1: Get a Quote for Your Print Order
+- Text: Send your design and order details. We’ll check your file and reply with a clear price breakdown within 24 hours. Free, with no obligation.
+
+C. Cart Page (cart.php):
+- Eyebrow: YOUR ORDER
+- H1: Your Cart
+- Text: Check your items, sizes and quantities before you checkout. Need a change? Message us on WhatsApp for help.
+- Trust Badges: GST invoice available • Delivery across India • Free file check before printing
+- Empty Cart State 1 (Compact):
+  * Heading: Your cart is empty
+  * Text: Browse our products and add something to get started.
+  * Button: Browse Products →
+- Empty Cart State 2 (Full):
+  * Heading: Your cart is empty
+  * Text: Looks like you haven’t added anything yet. Browse our DTF transfers, UV decals and custom tees, or send us your own design for a quote.
+  * Buttons: Browse Products → | Upload Your Design
+
+
+=================================================================
+9. BLOG ARTICLES (Create/Update in Blog Posts / Database)
+=================================================================
+
+--- BLOG ARTICLE 1 ---
+Meta Title: DTF Printing Technology: How It’s Changing Custom Apparel
+Meta Description: Learn how DTF printing technology is reshaping custom apparel printing, from low minimum orders to colourful, long-lasting prints. See how it compares with screen printing.
+URL slug: /blog/dtf-printing-technology-custom-apparel/
+Primary keyword: DTF printing technology
+Secondary keywords: what is DTF printing, DTF printing for custom apparel, custom apparel printing, DTF vs screen printing, benefits of DTF printing, DTF printing on T-shirts, DTF printing services in Delhi, bulk DTF printing India
+
+H1: How DTF Printing Technology Is Transforming the Custom Apparel Industry
+Ask anyone who has tried to start a small clothing brand a few years back, and you will hear the same story. The designs were ready, the idea was solid, but the printing costs ate everything. Screen printing wanted big quantities, and most other options either looked dull or washed out after a few cycles.
+DTF printing technology has quietly changed that story. Today, a college society, a cafe owner or a first-time label can order a small batch of full-colour T-shirts and get a result that looks professional. Let’s look at how this happened and why the whole custom apparel industry is paying attention.
+
+H2: What Is DTF Printing?
+If you are wondering what DTF printing is, the name says most of it. DTF stands for Direct to Film. The design is first printed onto a thin transfer film using special water-based inks. While the ink is still wet, a fine adhesive powder is spread over it. The film is then heated so the powder melts and sets, and finally it is pressed onto the garment with a heat press. Once you peel the film away, the design stays on the fabric.
+There are no screens to make and no complicated pre-treatment on the garment. The print is created on the film, and the garment simply receives it. That one difference is behind almost every advantage we talk about below.
+
+H2: Why DTF Printing for Custom Apparel Is Growing So Fast
+H3: It does not care much about fabric
+Some methods work beautifully on 100% cotton and struggle with anything else. DTF printing on T-shirts, hoodies, polos, jackets and even polyester sportswear works well because the adhesive does the bonding. This matters a lot for a printer, since customers rarely ask what their garment is made of. They just want the design to look right.
+
+H3: Colour is no longer a cost problem
+Anyone who has priced a screen print knows that each additional colour adds to the bill. With DTF, a simple one-colour logo and a detailed artwork with shading and gradients take about the same effort. Photographs, fine lines and small text come out clean. For designers, this feels like being let out of a box.
+
+H3: Small orders finally make sense
+This is the real shift. Because there is no screen setup, printing 10 or 25 pieces is practical. A new brand can test two or three designs before committing to a large run. A school club can print team shirts without ordering 100 extra. The risk drops, and more people feel confident enough to try.
+
+H3: Turnaround is faster
+Without screens to prepare, jobs move quickly from the file to the finished piece. Many printers also keep ready transfers that can be pressed whenever a repeat order arrives. When an event date is fixed and cannot be moved, that speed is a real relief.
+
+H2: Benefits of DTF Printing at a Glance
+If you only want the short version, here are the main benefits of DTF printing:
+- Prints on cotton, polyester, blends and more
+- Handles full-colour and detailed artwork easily
+- Works for single pieces as well as bulk orders
+- Soft, flexible finish that moves with the fabric
+- Good wash durability when done with quality materials
+- Quick setup and faster delivery
+One honest note: quality is not the same everywhere. The film, the ink, the powder and the pressing temperature all affect how long a print lasts. A cheap setup can crack or peel early, so the printer you choose matters as much as the technology.
+
+H2: DTF vs Screen Printing: Which One Should You Pick?
+People often ask whether DTF is going to replace screen printing completely. Not really. Both still have a place.
+Screen printing is a good fit when you need thousands of pieces with one simple design, because the cost per piece falls sharply at very high volumes. The setup effort is worth it only when the quantity is huge.
+DTF printing wins almost everywhere else. If your design has many colours, if you need different designs in the same order, or if your quantity is somewhere between one and a few hundred, DTF usually gives better value and a quicker result. It also gives you more freedom to change artwork between orders without paying for new screens.
+So the smarter question is not which one is better, but which one suits your order. For most custom apparel printing today, that answer leans toward DTF.
+
+H2: How DTF Is Changing the Custom Apparel Business
+New brands can start lighter. Instead of stocking hundreds of pieces and hoping they sell, founders can print in small lots, watch what sells and reorder only the winners. It is a much gentler way to start.
+Corporate and event orders are easier. Uniforms with different names, departments or sizes used to be a headache. DTF handles these variations within a single order without much fuss.
+Personalisation has become normal. Birthday T-shirts, couple prints, custom hoodies, name and number jerseys. These used to feel like luxury items. Now they are everyday requests.
+Smaller workshops can offer more. Tailors, boutiques and gift shops can buy ready transfers and press them in-house, adding a custom printing service without a big machine investment.
+
+H2: What to Check Before Ordering DTF Prints
+Before you place an order with any printer, it helps to ask a few simple things:
+1. Can I see a printed sample? A screen preview never shows the real finish.
+2. What kind of ink and film do you use? Good materials show up in how a print survives washing.
+3. Will you check my artwork? A decent printer will warn you if the resolution is too low.
+4. Can you handle bulk if I grow? Ideally you want one partner for both small and large runs.
+5. How long will it take? Ask for a clear delivery timeline before paying.
+
+H2: Where DTF Printing Is Heading
+Printers are getting faster, inks are improving and transfers are becoming softer and more breathable. As these improvements continue, DTF printing technology will likely become the default choice for custom clothing rather than an alternative. The industry is moving toward smaller batches, faster launches and more personal designs, and DTF fits that direction almost perfectly.
+
+H2: Looking for DTF Printing Services in Delhi?
+At Printex, we have been printing custom apparel in Delhi since 2010. Whether you need a single sample T-shirt or a large run for your brand, team or company, our DTF printing services are built to give you sharp colours and prints that last. We also take on bulk DTF printing for businesses across India, so you can scale up without changing your supplier.
+Share your design with us, and we will guide you on fabric, size and quantity so you get the best result for your budget. Get in touch with Printex today and see what DTF can do for your brand.
+
+H2: Frequently Asked Questions About DTF Printing
+1. What is DTF printing?
+   DTF stands for Direct to Film. Your design is printed on a special film, coated with adhesive powder, and then heat-pressed onto the garment. Once the film is peeled off, the design stays on the fabric. This method works on many types of material, which is why it has become so popular for custom apparel printing.
+2. Is DTF printing good for T-shirts?
+   Yes. DTF printing on T-shirts gives bright colours, sharp details and a soft, flexible finish. It works well on cotton, polyester and blended fabrics, and it handles detailed artwork and multi-colour designs without extra cost.
+3. How is DTF different from screen printing?
+   Screen printing needs a separate screen for every colour, so it makes sense mainly for very large quantities of a simple design. DTF needs no screens, so it suits small and medium orders, designs with many colours, and orders where different designs are needed together. When comparing DTF vs screen printing, the right choice depends on your quantity and artwork.
+4. Are DTF prints long-lasting?
+   A good DTF print holds up well with regular washing. Durability depends on the quality of the film, ink and adhesive, and on correct heat pressing. To make the print last longer, wash the garment inside out in normal water, avoid harsh bleaching, and do not iron directly over the design.
+5. Can DTF printing be done on dark-coloured garments?
+   Yes. DTF prints include a white base layer, so colours stay vivid on dark fabrics like black, navy or maroon, without any special pre-treatment of the garment.
+6. What is the minimum order for DTF printing?
+   Since there is no screen setup, even a single piece can be printed, which makes DTF handy for samples and personalised gifts. For exact minimums and pricing, it is best to check with your printer.
+7. Can I order bulk DTF printing in India?
+   Yes. Many printers now offer bulk DTF printing for brands, corporate teams, schools and events, with deliveries across India. At Printex, we handle both small trial runs and large orders, so you can scale up without changing your supplier.
+8. Where can I get DTF printing services in Delhi?
+   Printex has been doing custom printing in Delhi since 2010. You can share your design with us and we will suggest the right fabric, size and quantity before printing. Check our DTF printing services page or contact us for a quote.
+9. What file format should I send for DTF printing?
+   A high-resolution PNG with a transparent background is usually best. Vector files like AI, PDF or SVG also work well. Low-resolution images can look blurry when printed, so it helps to send the largest version of your artwork.
+
+
+--- BLOG ARTICLE 2 ---
+Meta Title: UV DTF Printing: How It Works & Its Uses in Product Branding
+Meta Description: What is UV DTF printing and how does it work? Learn about UV DTF stickers, transfers and their uses in product branding, plus UV DTF printing in Delhi.
+Primary keyword: UV DTF printing
+Secondary keywords: what is UV DTF printing, how UV DTF printing works, UV DTF printing applications, UV DTF printing for product branding, UV DTF stickers, UV DTF transfers, UV DTF vs DTF printing, UV DTF printing on bottles / mugs / glass, UV DTF printing in Delhi
+
+H1: UV DTF Printing: How It Works and Its Applications in Product Branding
+Pick up a premium-looking water bottle or a café mug these days and run your thumb over the logo. Chances are it feels slightly raised, glossy, and almost moulded into the surface. Most people assume that kind of finish needs expensive manufacturing. In reality, it is often UV DTF printing, a method that has quietly changed how small and mid-sized brands put their name on products.
+If you have been wondering whether it is worth trying for your business, this guide will help. We will look at what the technique is, how it works, how it differs from regular DTF, and where it makes the most sense for branding.
+
+H2: What Is UV DTF Printing?
+So, what is UV DTF printing? The name stands for ultraviolet direct-to-film. Instead of printing straight onto your product, the artwork is first printed on a special film using UV-curable ink. An adhesive layer and a clear protective film are then added. What you end up with is a ready-to-apply design that needs no heat press and no special equipment.
+The easiest way to picture it is as a sticker, but not the kind you are imagining. An ordinary sticker leaves a vinyl background visible around the design. UV DTF stickers work differently: once the top film is peeled away, only the artwork stays on the surface. No border, no backing, just your logo or graphic with a glossy, slightly raised finish.
+These UV DTF transfers are also tough. After application they resist water, scratches and everyday wear, which is why they have become popular on items that get handled and washed often.
+
+H2: How UV DTF Printing Works
+Knowing how UV DTF printing works helps you brief your printer properly and spot quality differences between vendors. The process runs in a few clear steps.
+1. Artwork check. The design is reviewed for resolution, colour and size. Thin lines and tiny text are adjusted so they stay readable after transfer.
+2. Printing on the film. A UV printer lays down the colours on a transfer film. A white ink layer goes in as well, so the colours stay bright even on dark or metallic products.
+3. Gloss layer. A clear varnish is printed over the design. This is what creates the raised, glassy effect that makes UV DTF stand out.
+4. Instant curing. UV light cures the ink as it is printed. There is no drying time, and the finish is hard and scratch resistant.
+5. Lamination. A second adhesive film is laminated on top. This is the layer you peel off later.
+6. Cutting. The sheet is cut into individual pieces, by hand or with a cutting machine, depending on the shape.
+7. Application. You place the transfer on the product, press and rub firmly, then peel off the top film. It takes under a minute.
+
+H2: UV DTF vs DTF Printing
+The two get confused a lot because the names are nearly identical, but they are built for different jobs.
+Regular DTF prints a design on film and presses it onto fabric using heat. It is ideal for T-shirts, hoodies, caps and bags. The result is soft and flexible, so it moves with the cloth.
+UV DTF is made for hard surfaces. It needs no heat, so you can use it on things that would melt, warp or burn under a press. The finish is glossy and raised instead of soft.
+A quick way to decide:
+- Selling apparel? Go with DTF.
+- Selling bottles, mugs, gifts or packaged products? Go with UV DTF.
+- Doing both? Many brands do, and the two work well side by side.
+
+H2: UV DTF Printing Applications
+The real value shows up when you look at where it can be used. Here are the most common UV DTF printing applications in branding.
+
+H3: UV DTF Printing on Bottles, Mugs and Glass
+This is the biggest use case. Steel bottles, tumblers, ceramic mugs and glass jars all take UV DTF stickers well, including curved shapes. The logo stays sharp, survives regular washing, and looks far more polished than a paper label. Cafés, gyms, schools and offices use it for branded drinkware all the time.
+
+H3: Corporate Gifting
+Diaries, pen holders, power banks, wooden boxes, metal cards and desk accessories can all carry your logo. Even a batch of 25 or 50 pieces is practical, which matters when you are planning gifts for a small team or a handful of clients.
+
+H3: Product Packaging
+Cosmetic jars, candle containers, perfume bottles and gift boxes look more premium with a glossy logo on the pack. For a new brand, this is a cheaper way to get a custom look without ordering printed packaging in thousands.
+
+H3: Personalised and Event Items
+Wedding favours, return gifts, trophies and name-printed bottles are perfect for UV DTF, since every piece can carry a different name or design without extra setup cost.
+
+H3: Electronics and Accessories
+Phone covers, laptop cases and headphone cases take UV DTF printing well too, and a custom graphic gives them a retail-ready look.
+
+H2: Why UV DTF Printing for Product Branding Makes Sense
+There are a few practical reasons brands keep choosing it.
+Low minimum quantities. You do not have to commit to hundreds of pieces to test an idea.
+A premium feel. The raised, glossy finish makes an ordinary product look more expensive than it is.
+Full-colour freedom. Gradients, photographs and multi-colour logos print without extra cost per colour.
+Durability. A properly applied transfer handles water, friction and daily use.
+Speed. With no screens or moulds to prepare, orders move quickly.
+Flexibility. One technique covers glass, metal, plastic, wood, ceramic and leather.
+
+H2: Tips for Better Results
+- Share vector files (AI, CDR, PDF) or a high-resolution PNG.
+- Clean the product with an alcohol wipe before applying. Dust and oil weaken the bond.
+- Choose flat or gently curved areas. Sharp curves and rough textures can lift the edges.
+- Press from the centre outwards, then peel the film slowly.
+- Give it around 24 hours before washing or heavy use.
+
+H2: UV DTF Printing in Delhi
+If you are looking for UV DTF printing in Delhi, Printex has been handling custom printing work since 2010. We print, cut and supply ready-to-apply UV DTF stickers and transfers for bottles, mugs, gift items and packaging, in small as well as bulk quantities. Send us your artwork and we will help you pick the right size, finish and quantity for your product.
+Ready to see your logo as a UV DTF sticker? Share your design with us and get a quote.
+
+H2: Frequently Asked Questions
+1. Is UV DTF printing waterproof?
+   Yes. Once applied, the design resists water, scratches and fading, so it holds up on bottles and mugs.
+2. Can UV DTF stickers go on curved surfaces?
+   Yes, they work well on cylindrical and gently curved items. Very sharp curves or heavily textured surfaces may not hold as well.
+3. Do UV DTF transfers need a heat press?
+   No. They are applied by hand with pressure, which makes them safe for heat-sensitive products.
+4. Can I order a small quantity?
+   Yes. UV DTF suits small custom orders as well as bulk.
+
+
+--- BLOG ARTICLE 3 ---
+H1: Different T-Shirt Printing Techniques: A Complete Guide for Businesses
+Author: By Printex
+
+If you run a business, sooner or later you will need printed T-shirts. Maybe it is a uniform for your staff, merchandise for a launch, gifts for a corporate event, or a small clothing line of your own. And the moment you start asking for quotes, you run into a confusing list: screen printing, DTF, DTG, heat transfer, sublimation, vinyl, embroidery. Every printer swears by a different one, which makes choosing between T-shirt printing techniques harder than it should be.
+The truth is that there is no single "best" T-shirt printing technique. There is only the best technique for your order: your quantity, your design, your fabric and your budget. This guide walks through the main T-shirt printing techniques used in India today, what each one does well, where it falls short, and how a business should choose for custom T-shirt printing and bulk T-shirt printing orders.
+
+H2: Why T-shirt printing techniques matter more than you think
+Two T-shirts can carry the exact same logo and still feel completely different. One stays soft and bright after fifty washes. The other cracks, fades or feels like a plastic sticker on your chest. That difference comes from the T-shirt printing techniques behind it, not the design.
+For a business, this has real consequences. Staff uniforms need to survive daily wear. Event T-shirts need to look sharp in photos. Retail merchandise needs to feel premium enough that customers actually wear it. Choosing the wrong one of these T-shirt printing techniques can mean wasted money, unhappy customers and reprints.
+
+H2: 1. Screen printing
+Screen printing is the oldest and most familiar of all T-shirt printing techniques. A stencil (the screen) is made for each colour in your design, and ink is pushed through it onto the fabric. One colour, one screen.
+Where it works well
+- Bulk T-shirt printing orders of 100 pieces or more, where the setup cost gets spread thin
+- Simple designs with one to three colours, such as a logo or a slogan
+- Long-lasting prints on cotton that handle repeated washing
+Where it struggles
+- Small quantities, because every screen has a setup cost
+- Detailed, photographic or gradient designs, which need many screens and become expensive
+If you are ordering a few hundred uniforms with a single-colour logo, screen printing is still very hard to beat on cost per piece.
+
+H2: 2. DTF (Direct to Film) printing
+DTF has become one of the most talked-about T-shirt printing techniques in the last few years, and for good reason. Your design is printed on a special film with water-based inks, coated with adhesive powder, and then heat-pressed onto the garment.
+Where it works well
+- Full-colour designs, gradients and fine detail
+- Small to medium custom T-shirt printing orders, since there is no screen setup
+- Many fabrics: cotton, polyester, blends and even some dark or stretchy materials
+- Businesses that want different designs across a batch without paying extra for each one
+Where it struggles
+- Very large runs of a single simple design, where screen printing can be cheaper
+- Cheap quality films and powders, which is why the printer you choose matters
+For most growing businesses, DTF printing offers the best balance of quality, flexibility and price. If you want to understand it in depth, we have explained it in our guide on how DTF printing technology is transforming the custom apparel industry.
+
+H2: 3. DTG (Direct to Garment) printing
+DTG works like a home inkjet printer, except the paper is a T-shirt. The ink goes straight into the fabric fibres, which gives a very soft feel.
+Where it works well
+- Highly detailed artwork and photographs
+- Very small orders, even a single piece
+- 100% cotton garments, where it gives its best results
+Where it struggles
+- Polyester and blended fabrics, where colours can look dull
+- Dark garments, which usually need a pre-treatment step and push up the cost
+- Bulk orders, because it is slower than other methods
+Among all T-shirt printing techniques, DTG suits boutique brands and sample runs, but it is rarely the most practical choice for corporate bulk orders.
+
+H2: 4. Heat transfer and vinyl printing
+In heat transfer printing, the design is first printed or cut on a special paper or vinyl sheet, then pressed onto the T-shirt with heat. Vinyl is common for names, numbers and single-colour lettering, and it is one of the most budget-friendly T-shirt printing techniques for small jobs.
+Where it works well
+- Names and numbers on sports jerseys and team wear
+- Quick, small jobs with simple lettering
+- Reflective or metallic finishes
+Where it struggles
+- Large designs, which can feel heavy and less breathable
+- Long-term durability, since cheap vinyl can peel after repeated washing
+
+H2: 5. Sublimation printing
+Sublimation uses heat to turn special dye into gas, which bonds permanently with the fabric. The print becomes part of the material itself, so it never cracks or peels.
+Where it works well
+- Polyester and polyester-rich fabrics such as sports jerseys
+- All-over prints that cover the entire T-shirt
+- Vibrant colours that do not fade
+Where it struggles
+- Cotton, because the dye needs polyester to bond
+- Dark fabrics, since sublimation works only on light-coloured material
+If your business is in fitness, sports or events, sublimation on polyester is one of the T-shirt printing techniques worth considering.
+
+H2: 6. Embroidery
+Embroidery is not printing in the strict sense, but many businesses compare it with printing, so it deserves a mention. A machine stitches your logo directly into the fabric with thread.
+Where it works well
+- Corporate polo shirts, caps and premium uniforms
+- Small logos on the chest or sleeve
+- A rich, professional look that lasts for years
+Where it struggles
+- Large or highly detailed designs
+- Cost, since it is usually more expensive than printing
+
+H2: Quick comparison of T-shirt printing techniques for different business needs
+Table Columns: Technique | Best for | Ideal quantity | Fabric
+- Screen printing | Simple logos, uniforms | 100+ pieces | Cotton, blends
+- DTF printing | Full-colour, detailed designs | 10 to 1,000+ pieces | Almost all fabrics
+- DTG printing | Photographic designs, samples | 1 to 50 pieces | 100% cotton
+- Heat transfer / vinyl | Names, numbers, lettering | 1 to 100 pieces | Cotton, polyester
+- Sublimation | All-over prints, sportswear | 10 to 500 pieces | Polyester
+- Embroidery | Polos, caps, premium wear | 10 to 500 pieces | Cotton, polo fabrics
+
+H2: How to choose between T-shirt printing techniques for your business
+Before you compare T-shirt printing techniques and ask for a quote, answer these five questions. They will narrow down the right method in minutes.
+1. How many pieces do you need?
+   Under 50 pieces usually points towards DTF, DTG or heat transfer. Above 100 pieces with a simple design, screen printing starts to make financial sense.
+2. How complex is your design? A single-colour logo is easy for almost any method. A multi-colour logo, gradient or photograph is a job for DTF or DTG.
+3. What is the fabric? Cotton is flexible. Polyester needs sublimation or DTF. Mixing fabrics in one order? DTF handles that best.
+4. How will the T-shirt be used? Daily staff uniforms need durability. A one-day event T-shirt does not. Retail merchandise needs a soft feel and a premium finish.
+5. What is your timeline? Screen printing needs setup time. DTF and heat transfer can usually be turned around much faster, which helps when an event date is fixed.
+
+H2: Common mistakes businesses make when ordering printed T-shirts
+- Choosing only on price. The cheapest quote often hides weak films, poor inks or low-GSM T-shirts. Reprints cost more than a good first print.
+- Sending low-resolution artwork. A blurry logo prints as a blurry logo. Share vector files (AI, CDR, PDF) or high-resolution PNGs.
+- Ignoring fabric quality. The best print will still look cheap on a thin, badly stitched T-shirt.
+- Skipping the sample. For bulk orders, always approve one sample before the full run.
+- Not asking about wash care. A good printer will tell you how the print should be washed and how long it should last.
+
+H2: Which T-shirt printing techniques do most businesses in Delhi choose?
+In our experience of T-shirt printing in Delhi at Printex, most corporate and startup clients in Delhi end up choosing DTF printing for its flexibility, or screen printing for very large, simple uniform orders. Sports clubs and gyms often go for sublimation, and boutique brands with small drops lean towards DTG or DTF.
+There is no shortcut, though. The right answer depends on your design, quantity and budget, and a good printer will tell you honestly when a cheaper method will do the job.
+
+H2: Final thoughts
+Understanding T-shirt printing techniques saves you from paying for features you do not need and from receiving prints that do not last. Screen printing is the old reliable for bulk. DTF is the all-rounder. DTG suits detailed small runs. Heat transfer handles names and numbers. Sublimation is made for polyester sportswear. Embroidery gives uniforms that premium touch.
+If you are planning a custom T-shirt printing order for your business, talk to a printer who offers more than one of these T-shirt printing techniques, because that is the only way you will get advice that is not tied to a single machine.
+At Printex, we handle custom T-shirt printing, DTF printing, UV printing and corporate bulk orders for businesses across Delhi and India. Share your design and quantity, and our team will suggest the technique that fits your budget and timeline. Get in touch today for a quote on your next batch.
+
+H2: Frequently Asked Questions
+1. Which of the T-shirt printing techniques is best for bulk orders?
+   For large orders of a single, simple design (100 pieces or more), screen printing usually gives the lowest cost per piece. If your design has multiple colours or you need different designs in one batch, DTF printing is often the better choice for bulk T-shirt printing.
+2. What is the difference between DTF and screen printing?
+   Screen printing pushes ink through a separate stencil for each colour, so it has a setup cost and suits simple designs in large quantities. DTF prints the full design on a film and heat-presses it onto the garment, so it handles multi-colour designs and small or mixed orders without any screen setup.
+3. Which of the T-shirt printing techniques lasts the longest after washing?
+   Screen printing, sublimation and embroidery are known for lasting a long time. Good quality DTF prints also hold up well through regular washing when the film, powder and heat press settings are right. Wash care matters too: turning the T-shirt inside out and avoiding high heat helps any print last longer.
+4. Can DTF printing be done on both cotton and polyester T-shirts?
+   Yes. DTF works on cotton, polyester and blended fabrics, which is why it is a popular choice when a business wants the same design on different types of garments. Sublimation, by comparison, works properly only on polyester.
+5. What is the minimum order quantity for custom T-shirt printing?
+   It depends on the technique. DTF, DTG and heat transfer can handle very small orders, even a single piece. Screen printing makes financial sense from around 100 pieces. For exact minimums and pricing, share your design with the Printex team and we will guide you.
+6. What file format should I send for T-shirt printing?
+   Vector files such as AI, CDR or PDF are best, because they stay sharp at any size. If you do not have one, send a high-resolution PNG with a transparent background. Low-quality or screenshot images usually produce blurry prints.
+7. How long does it take to get custom printed T-shirts?
+   Turnaround depends on the quantity and technique. DTF and heat transfer orders can usually be completed faster, while screen printing needs extra time for setup. If you have an event date, tell us early so we can plan the production schedule.
+8. Does Printex offer T-shirt printing in Delhi for businesses?
+   Yes. Printex handles custom T-shirt printing, DTF printing, UV printing and corporate bulk orders for businesses in Delhi and across India. You can send your design and quantity for a quote and a recommendation on the right technique.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-11-12T12:25:09+05:30.
+
+The user's current state is as follows:
+Active Document: c:\Movies\Internship\OrderPrintex\services\dtf-printing.php (LANGUAGE_UNSPECIFIED)
+Cursor is on line: 29
+Other open documents:
+- c:\Movies\Internship\OrderPrintex\scratch\verify_services_mobile.js (LANGUAGE_UNSPECIFIED)
+- c:\Movies\Internship\OrderPrintex\services.php (LANGUAGE_UNSPECIFIED)
+- c:\Movies\Internship\OrderPrintex\schema.json (LANGUAGE_UNSPECIFIED)
+- c:\Movies\Internship\OrderPrintex\product-details.php (LANGUAGE_UNSPECIFIED)
+- c:\Movies\Internship\OrderPrintex\about.php (LANGUAGE_UNSPECIFIED)
+</ADDITIONAL_METADATA>

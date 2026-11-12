@@ -3,8 +3,8 @@
  * OrderPrintex - All Printing Services Overview
  */
 
-$pageTitle = "Industrial Printing Services — DTF, UV DTF & Apparel Transfers | OrderPrintex";
-$pageDesc  = "Explore OrderPrintex's verified printing services: Direct-to-Film (DTF) apparel transfers, UV DTF decal stickers, custom screen-grade t-shirt printing, and corporate promotional merchandise.";
+$pageTitle = "Printing Services in Delhi | DTF, UV DTF, T-Shirt | Printex";
+$pageDesc  = "DTF Printing, UV DTF Stickers, T-Shirt, Hoodie, and Mug Printing in Delhi - We've got you covered. Printex is the go to for brands, shops and businesses across India . We'll get you a quote in no time.";
 
 require_once __DIR__ . '/includes/header.php';
 
@@ -15,42 +15,42 @@ if (empty($services)) {
         [
             'id' => 1,
             'slug' => 'dtf-printing',
-            'title' => 'DTF Printing',
-            'badge' => 'Flagship Service',
-            'hero_tagline' => 'Ultra Soft Hand-Feel & 50+ Wash Cycles',
-            'full_description' => 'Printex is a top manufacturer & bulk supplier of DTF transfers in India. Direct-to-Film (DTF) technology allows full-color photographic designs with gradients, fine lines, and white backing to be pressed seamlessly onto dark, light, or synthetic fabrics without weeding. Every sheet is printed with calibrated ICC color profiles and sealed with premium hot-melt polyurethane adhesive powder for stretch resistance and long-lasting wash cycles.',
+            'title' => '1.DTF Printing in Delhi',
+            'badge' => '1.DTF Printing in Delhi',
+            'hero_tagline' => 'Prints on Fabric with Bright, Soft, and Long Lasting Results',
+            'full_description' => "Our DTF (Direct-to-Film) printing is perfect for cotton, polyester and blended fabrics. It prints a white base under the colours so your designs stay bright even on black. Want to get started ? You can order ready-to-press transfers and gang sheets for your own pressing or we can do it for you. This service is a hit with apparel brands, resellers and print shops that need reliable bulk DTF printing.",
             'image_url' => 'assets/images/dtf_fabric_print.jpg',
-            'specifications' => 'Max Print Width: 24 inches (Gang Sheets up to 100 meters) | Inks: Premium Water-based Textile Pigment Inks | Powder: High-Grade TPU Hot Melt Adhesive | Press Temp: 160°C for 15s'
+            'specifications' => 'Works on: Cotton, Polyester, Blends | Sheet width: 24 inches - Let us know if you need anything else | Order: Gang sheets and bulk rolls'
         ],
         [
             'id' => 2,
             'slug' => 'uv-dtf-printing',
-            'title' => 'UV DTF Printing',
-            'badge' => 'High Demand',
-            'hero_tagline' => 'No Heat Press Required — Peel, Stick & Rub',
-            'full_description' => 'Our UV DTF printing service in Delhi provides industrial-grade UV cured transfer decals. UV DTF uses micro-piezo printheads to lay down white ink, vibrant CMYK, and high-gloss clear varnish topped with durable pressure-sensitive adhesive film. The result is a waterproof, scratch-resistant 3D embossed sticker that bonds permanently to hard surfaces like stainless steel mugs, glass bottles, electronics, plastic packaging, and signage without requiring a heat press or lamination machine.',
+            'title' => '2. UV DTF Printing - A Popular Choice',
+            'badge' => '2. UV DTF Printing - A Popular Choice',
+            'hero_tagline' => 'UV DTF Printing & Stickers - Add a 3D Glossy Finish to Your Products',
+            'full_description' => 'Peel and stick stickers that just need to be applied - no heat press needed. The glossy layer gives them a raised 3D look, making them waterproof and scratch resistant. They work on glass, steel, acrylic, plastic, and wood, so they are super popular for mugs, tumblers, bottles, gift items and packaging. We make UV DTF stickers in custom sizes and bulk quantities.',
             'image_url' => 'assets/images/uv_dtf_drinkware.jpg',
-            'specifications' => 'Resolution: Up to 1440x2880 DPI | Layers: White Underbase + CMYK + Spot Gloss Varnish | Adhesion: High-tack permanent acrylic | Water Resistance: 100% Waterproof & Dishwasher Resistant'
+            'specifications' => 'Layers: Colour + White + Gloss | Surfaces: Glass, Steel, Acrylic, Plastic, Wood | No heat press needed'
         ],
         [
             'id' => 3,
             'slug' => 't-shirt-printing',
-            'title' => 'T-Shirt Printing',
-            'badge' => 'Bulk Supplier',
-            'hero_tagline' => 'Premium Combed Cotton & High-Density Prints',
-            'full_description' => 'From independent streetwear labels to bulk organizational uniforms, OrderPrintex delivers ready-to-wear printed t-shirts with exceptional print fidelity. We combine 100% combed cotton and breathable poly-rich fabrics with state-of-the-art DTF and digital print technology. Whether you need single sample prototypes or bulk runs for college fests, corporate teams, or brand merchandise, our Delhi production facility delivers crisp detail with vibrant pigments.',
+            'title' => '3. T-Shirt Printing for Bulk Orders',
+            'badge' => '3. T-Shirt Printing for Bulk Orders',
+            'hero_tagline' => 'T-Shirt Printing in Delhi - Custom T-Shirts for Brands, Teams and Events',
+            'full_description' => 'We print custom t-shirts for brands, offices, colleges, events and teams in Delhi. We use DTF printing, so your full-colour designs and fine text come out sharp. Just send us your design along with the quantity and we will suggest the right fabric and print placement. Price of bulk orders are based on the quantity.',
             'image_url' => 'assets/images/custom_tshirt_apparel.jpg',
-            'specifications' => 'Garment Types: 180–240 GSM Bio-Washed Combed Cotton, Dry-Fit Polyester, Oversized Streetwear Tees, Polo Collars | Sizes: XS to 3XL | Placement: Front Chest, Back Full, Sleeves'
+            'specifications' => 'Fabrics: Cotton, Poly-Rich, Dry-Fit | Sizes: XS to 3XL | Orders: Single sample to bulk'
         ],
         [
             'id' => 4,
             'slug' => 'corporate-printing',
-            'title' => 'Corporate Printing',
-            'badge' => 'B2B Solutions',
-            'hero_tagline' => 'Complete Branded Merchandise & Business Swag',
-            'full_description' => 'Printex handles comprehensive corporate and promotional printing requirements across India. We produce high-impact branded merchandise including personalized ceramic and stainless mugs, premium corporate diaries, metal pens, branded ID lanyards, uniform polo shirts, and customized packaging boxes. With strict quality inspection and reliable door-to-door delivery across India, we empower businesses to present a unified, high-end brand identity.',
+            'title' => '4. Corporate Printing Services for Businesses',
+            'badge' => '4. Corporate Printing Services for Businesses',
+            'hero_tagline' => 'Corporate T-Shirt & Merchandise Printing - For Offices, Events and Brands',
+            'full_description' => 'Need branded merchandise for your company or event ? Printex is here to help. We print uniform t-shirts, branded mugs and bottles, and giveaways with your logo, in the same colours across the whole batch. GST invoice available on request.',
             'image_url' => 'assets/images/corporate_swag_kit.jpg',
-            'specifications' => 'Product Categories: Custom Printed Drinkware (Mugs/Sipper Bottles), Executive Stationery, Event Giveaways, Custom Branded Packaging | Customization: UV DTF, Screen Print, Sublimation'
+            'specifications' => 'Products: T-Shirts, Mugs, Bottles, Giveaways | Invoice: GST on request | Delivery: Delhi and pan-India'
         ]
     ];
 }
@@ -61,12 +61,12 @@ if (empty($services)) {
     <div class="page-intro-box">
       <div class="page-intro-eyebrow">
         <span class="page-intro-dot"></span>
-        <span>Commercial Print Capabilities</span>
+        <span>Our Printing Services in Delhi</span>
       </div>
-      <h1 class="page-intro-title">Advanced Industrial Printing Services</h1>
+      <h1 class="page-intro-title">DTF, UV DTF &amp; T-Shirt Printing Services in Delhi</h1>
       <div class="page-intro-divider"></div>
       <p class="page-intro-desc">
-        We engineer press-ready transfers with vivid color gamut, durable washability, and rapid turnaround for apparel brands, promotional studios, and print businesses.
+        At Printex we print DTF transfers, UV DTF stickers, t-shirts, hoodies and mugs from our studio in Pankha Road, Delhi. Whether you're looking to order a small sample or a bulk batch , we deliver across India.
       </p>
     </div>
   </div>
@@ -91,16 +91,16 @@ if (empty($services)) {
 
               <?php if (!empty($svc['specifications'])): ?>
                 <div class="service-key-specs" style="background-color:var(--bg-surface-elevated); border:1px solid var(--border-color); border-left:3px solid var(--primary-gold); padding:1rem 1.25rem; border-radius:var(--radius-sm); margin-bottom:1.75rem; font-size:0.88rem; color:var(--text-primary); line-height:1.6;">
-                  <strong style="color:var(--primary-gold); font-weight:700;">Key Specs:</strong> <?= e($svc['specifications']) ?>
+                  <?= e($svc['specifications']) ?>
                 </div>
               <?php endif; ?>
 
               <div class="service-cta-group">
                 <a href="<?= service_url($svc['slug']) ?>" class="btn service-btn-secondary">
-                  <span>Detailed Specifications</span> &rarr;
+                  <span>Know More &rarr;</span>
                 </a>
                 <a href="<?= url('get-quote.php?service_id=' . e($svc['id'])) ?>" class="btn service-btn-primary">
-                  <span>Get Quotation</span>
+                  <span>Get a Quote</span>
                 </a>
               </div>
             </div>

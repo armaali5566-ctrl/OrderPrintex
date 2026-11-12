@@ -1,0 +1,124 @@
+PART 2: T-SHIRT PRINTING DETAIL PAGE (`services/t-shirt-printing.php`)
+=================================================================
+Create or update `services/t-shirt-printing.php` (matching the slug `t-shirt-printing` from `services.php`) using the upgraded zigzag/editorial UI and interactive FAQ accordion, with this EXACT text:
+
+Eyebrow: Apparel Production & Merchandise - Made to Order
+H1: Delhi's Custom T-Shirt Printing Studio - Where Art Meets Fabric
+Hero Text: We take your brand from concept to production, printing vibrant high-density graphics onto those comfy 180-240 GSM bio-washed combed cotton tees with the perfect oversized fit, or the sleek athletic wear polyester. Whether you're just starting out or producing in bulk for your company, we've got you covered.
+
+Eyebrow: Garment Standards - What Makes Our T-Shirts So Special
+H2: Like Retail, But Better - Custom T-Shirt Printing on Premium Bio-Washed Fabrics
+- At OrderPrintex, we bridge that gap between making a few special items for your event and churning out a thousand corporate tees in a week. Using the latest digital technology we pair with super-soft combed cotton, we bring you shirts that look and feel like the real deal.
+- Our inks are blended so they stay soft, breathable and hold their colour through even the heaviest washing. And they don't crack or peel - they're built to last. Whether it's 10 tees for the wedding party, or 5,000 corporate dry-fit jerseys for that marathon, we ensure spot on colour matching and speedy dispatch from our Delhi facility.
+- We handle everything, from custom t-shirt printing for a wedding party to a major branding push for your company. One stop shop, every time.
+- Buttons: Hit us up for a T-Shirt quote | Check out our Garment styles
+
+Section: T-Shirt Printing Packages for Every Occasion - Because Life's Too Short For Boring Tees
+Intro: Choose from our flexible order quantities, swanky packaging and an array of tees to make your day - or week - special.
+- Brand Merch: Heavy streetwear tees that feel good, look great and have those all important hash tags and labels.
+- Couple & Family Tees: Get matching his and hers tees, tasteful anniversary gifts and some awesome typography to celebrate life's milestones.
+- Wedding & Event Tees: We've got coordinated squad tees, college fest tees, reunion tees and sporty team kits to boot.
+- Corporate Polos: High quality, comfy pique cotton polos with the perfect embroidered or DTF chest logo to show your company pride.
+
+Section: T-Shirt Fabrics and Styles You Can Choose
+Table Columns: Garment | Fabric | Best for
+- Round neck tee | 180 GSM, 100% bio-washed cotton | Everyday wear, events, promotions
+- Oversized tee | 240 GSM heavyweight cotton | Streetwear brands and merchandise
+- Polo shirt | Cotton pique | Corporate staff and uniforms
+- Dry-fit tee | Athletic polyester | Sports teams, marathons, gym wear
+Note below table: All t-shirts use 100% super-combed bio-washed ringspun cotton with double-needle stitched neck and sleeves.
+
+Section: Why We Use DTF T-Shirt Printing for Custom Orders
+Intro: DTF t-shirt printing prints your design on film first and presses it onto the garment, so even full-colour artwork with gradients and fine details comes out sharp. There are no screens to make and no extra charge for every colour, which keeps small and mixed-design orders affordable.
+Table Columns: Feature | DTF t-shirt printing | Screen printing
+- Set-up | None | Screens for every colour
+- Many colours | Same price | Costs more
+- Small orders | Great | Expensive
+- Feel | Soft and flexible | Soft
+Link line below table: Want to know how the transfers are made? Read about our DTF printing process.
+
+Section: Bulk T-Shirt Printing in Delhi for Companies, Events and Brands
+- Planning a team launch, a college fest or a staff uniform drive? Our bulk t-shirt printing keeps colours consistent from the first piece to the last, and the rate per piece comes down as your quantity grows. Share your total quantity with a size breakdown and your colour preferences, and we send a clear quote.
+- Corporate t-shirt printing is packed in bulk and dispatched on time, with polos and dry-fit jerseys available for staff and sports teams. For brand merchandise, we can add neck label tags and individual poly-bags so your tees arrive ready to sell.
+
+Section: Logo T-Shirt Printing for Teams, Startups and Events
+Intro: Logo t-shirt printing is our most popular order. Choose where your design goes:
+- Front chest (A4)
+- Front chest and full back (A3)
+- Left chest pocket only
+- Custom placements on sleeve or neckline
+Closing: Send your logo as a transparent PNG at 300 DPI, or as a vector file, and we will place it exactly where you want it.
+
+Section: Custom T-Shirt Printing for Weddings, Events, Colleges and Companies
+Intro: Every occasion needs its own look, and custom t-shirt printing makes a group feel like a team. Here is what our customers order most:
+- Wedding squad tees for the bride, groom and friends
+- College fest and society batches with names and logos
+- Corporate team-building, offsite and staff appreciation tees
+- Sports tournaments, marathons and gym events in dry-fit
+- Startup launches, brand drops and merchandise runs
+- Family reunions, birthdays and anniversary sets
+
+Section: Print Size and Placement Guide for Custom T-Shirt Printing
+Table Columns: Placement | Typical size | Best for
+- Front chest | A4 | Large front graphics, event tees
+- Front chest plus full back | A3 | Team names, numbers, brand drops
+- Left chest pocket | Small logo | Polos and staff uniforms
+- Custom placement | Sleeve or neckline | Detail prints and branding
+Note below table: Not sure what fits your design? Tell us the garment and we will suggest a placement.
+
+Section: How Custom T-Shirt Printing Works at Printex
+1. Get Your Design and Details to us: send across your artwork - and not forgetting to let us know which t-shirt you're after, how you'd like it printed and how many you need.
+2. We work up a tailored quote: check over your design and send you a customised price breakdown with all the sizes and costs laid out in black and white.
+3. We get to work on your order: your custom t-shirt design gets printed on high-quality DTF and then pressed onto our pre-shrunk t-shirts.
+4. We check them over and get them in the post: every single t-shirt gets a quality check, they're then packaged up in bulk and sent out to all corners of India.
+
+Section: How to Get Your Design Ready for Our Custom T-Shirt Printing
+Don't upload a random .jpg, come prepared with a transparent PNG at 300 DPI, or a vector file (like an Adobe Illustrator file) in AI, SVG or PDF format. Make sure any fonts have been knocked up into outlines and steer clear of super thin lines on dark coloured tees - and don't forget to mention your size breakdown (XS to 3XL, for example) and any colour preferences you might have, so we can get it spot on from the get go.
+
+Section: How to Keep Your Printed T-Shirts Looking their Best
+When you're washing your custom tees, try keeping them on the inside out in either cold or warm water, and steer clear of bleach altogether. Don't iron straight onto the print either - follow these simple tips and your custom t-shirt printing will stay looking its best for longer.
+
+Section: Why Should You Choose Printex for Your T-Shirt Printing in Delhi?
+- We only use the best fabrics: pre-shrunk, bio-washed combed cotton tees with double-needle stitching for a top-notch finish.
+- Our soft, stretchy prints: are made to move with you, staying put even after multiple washes.
+- We can print in any quantity you need: from a handful to thousands - we can make it happen.
+- We match colours to perfection: our colour matching is so tight you'll get the same results from each and every t-shirt.
+- We dispatch across India: we print and package up your custom tees in our Delhi studio, then get them shipped out to you.
+
+Section: Some Questions We Get Asked About Custom T-Shirt Printing a Lot (Collapsible Accordion — closed by default!)
+1. Q: What's the minimum order for custom t-shirt printing?
+   A: You can order as few as 10 t-shirts - and we can print thousands if you need that many.
+2. Q: How much does it cost to have t-shirts printed?
+   A: It all depends on what type of tee you choose, where you want the print placed and how many you're after. Just share your design and numbers with us and we'll get back to you with a clear quote.
+3. Q: Do you supply the t-shirts to print on?
+   A: Yep, we print on our own premium cotton and polyester tops, so you don't need to come looking for blanks elsewhere.
+4. Q: What types of t-shirt fabrics can I choose from?
+   A: We've got 180 GSM round neck cotton, 240 GSM heavyweight oversized tees, cotton pique polos and dry-fit athletic polyester.
+5. Q: Are DTF prints washable?
+   A: Yes they are. Our prints are super soft, stretchy and don't crack or peel after multiple home machine washes.
+6. Q: Can I order different designs and sizes together?
+   A: No problem. Just share a size breakdown and any colour preferences you might have, and we'll get your mixed order sorted.
+7. Q: Can I get a logo printed on polo shirts?
+   A: Yes. We can print a DTF chest logo on corporate polos, and we also do embroidery options if you need that sort of thing.
+8. Q: Can I print names and numbers on team jerseys?
+   A: Yes. Send us the list of names, numbers and sizes and we will set up your team kit.
+9. Q: How long does custom t-shirt printing take?
+   A: Turnaround depends on quantity and design. Share your deadline and we will confirm the timeline in your quote. [timeline confirm karo]
+10. Q: Do you deliver all over India?
+    A: Yes, we dispatch bulk and corporate orders to all major cities and towns.
+11. Q: Where can I get t-shirt printing near me in Delhi?
+    A: Visit our studio at Chanakya Palace, Pankha Road, or send your design online and we will deliver to you.
+
+Quote Section:
+- Heading: Get a Custom T-Shirt Printing Quote
+- Text: Upload your front or back graphic and choose your quantities and sizes for a direct factory quote.
+- Assurance line above form: Fabric & Print Assurance
+- Include the standard quote form fields (garment type, size breakdown, quantity, artwork upload, contact details).
+
+Visit Studio Section:
+- Heading: T-Shirt Printing in Delhi: Visit Our Studio
+- Text: Order custom t-shirts from our Delhi studio.
+- Address: Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Delhi 110059
+- Contact Line: Call / WhatsApp:
+
+=================================================================

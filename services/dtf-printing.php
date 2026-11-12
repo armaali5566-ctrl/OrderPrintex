@@ -3,8 +3,8 @@
  * OrderPrintex - DTF Printing Service Page
  */
 
-$pageTitle = "DTF Printing in India — Direct-to-Film Transfers for Garments | OrderPrintex";
-$pageDesc  = "OrderPrintex is India's bulk manufacturer of DTF garment transfers. Ultra soft-hand feel, 50+ wash cycles, 22-inch gang sheets, and fast nationwide dispatch.";
+$pageTitle = "DTF Printing in Delhi | Bulk DTF Transfers & Gang Sheets – Printex";
+$pageDesc  = "DTF printing in Delhi by Printex, a DTF printing manufacturer in India. Bulk DTF transfers and gang sheets on 22 & 24 inch rolls. Upload your design for a quote.";
 
 require_once __DIR__ . '/../includes/header.php';
 
@@ -16,32 +16,36 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'dtf-printing'");
     <div class="page-intro-box">
       <div class="page-intro-eyebrow">
         <span class="page-intro-dot"></span>
-        <span>Apparel &amp; Textile Innovation</span>
+        <span>DTF Printing Services in Delhi</span>
       </div>
-      <h1 class="page-intro-title">Commercial DTF Printing (Direct-to-Film)</h1>
+      <h1 class="page-intro-title">DTF Printing in Delhi - Making Your Designs Pop with Long-Lasting Results</h1>
       <div class="page-intro-divider"></div>
       <p class="page-intro-desc">
-        High-density white underbase, vibrant textile pigments, and stretchable TPU adhesive for flawless pressing onto cotton, poly-blends, nylon, and performance wear.
+        Want to get that cool design on a t-shirt or hoodie without breaking the bank or dealing with the hassle of screens, set up costs, and colour restrictions? Our DTF printing services in Delhi cover all bases. Whether it's a single sheet or bulk rolls, your prints will arrive across India in no time and look fantastic - the colours are bright, the feel is soft, and the prints are super durable.
       </p>
     </div>
   </div>
 </section>
 
-<!-- Specifications & Overview -->
+<!-- What's All this About DTF Printing -->
 <section class="section section-white">
   <div class="container">
     <div class="service-overview-grid">
       <div class="service-overview-content reveal slide-right">
-        <div class="section-label">Garment Transfer Engineering</div>
-        <h2>Why OrderPrintex DTF Outperforms Traditional Screen &amp; Vinyl</h2>
+        <div class="section-label">Direct-to-Film</div>
+        <h2>What's All this About DTF Printing (and how does it work?)</h2>
         <p>
-          Direct-to-Film (DTF) transfer printing has revolutionized garment customization across India. Unlike screen printing which requires expensive mesh setup and color separation fees per shade, DTF prints photorealistic artwork, gradients, shadows, and fine line-art directly onto release film in full vibrant color.
+          You probably know it as Direct-to-Film. Here's the lowdown: your design gets printed directly onto a special film that's coated with a bit of adhesive. Then, with a bit of heat, its pressed onto the garment. The result is colours that stay bright on even the darkest fabrics, and the fine details are still as sharp as can be.
         </p>
         <p>
-          Every sheet produced at our Delhi facility is backed with uniform, high-grade thermoplastic polyurethane (TPU) powder that bonds mechanically to the fibers of cotton, polyester, spandex, leather, and canvas.
+          Our DTF transfer printing service here in Delhi is geared towards brands, print shops, resellers and anyone new to the game. You can send us your artwork and we will make ready-to-press transfers for you to apply yourself, or send us your garments and we will do the pressing for you. These films work like a charm on cotton, polyester, blends - you name it.
         </p>
         <p>
-          No weeding, no vinyl cutting, and zero mess. Simply cut the transfer, heat-press at 160&deg;C for 15 seconds, cold peel, and post-press for a factory-finish feel.
+          DTF is a great choice when you want to steer clear of screens, colour separation and all the extra per-colour charges that come with it. Small batches, repeat orders, bulk runs - DTF is a real winner when it comes to these types of print jobs. Hit us up with your artwork and we'll have a look at it before we get to work.
+        </p>
+
+        <p style="font-weight:700; color:var(--text-primary); margin-top:1.25rem;">
+          Upload Your Design and we'll give You a Quote for DTF Printing - and Check out our Gang Sheet Options While You're At It
         </p>
 
         <div class="service-cta-group">
@@ -59,53 +63,237 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'dtf-printing'");
   </div>
 </section>
 
-<!-- Technical Specifications Table -->
+<!-- DTF vs Screen Printing vs Vinyl: Which Is Better? -->
 <section class="section section-ivory">
   <div class="container">
     <div class="section-header reveal slide-up">
-      <div class="section-label">Technical Parameters</div>
-      <h2>DTF Press &amp; Material Specifications</h2>
-      <p class="section-subtitle">
-        Calibrated parameters for professional apparel decorators and print shops.
-      </p>
+      <div class="section-label">Comparison</div>
+      <h2>DTF vs Screen Printing vs Vinyl: Which Is Better?</h2>
     </div>
 
-    <div class="service-specs-grid">
+    <div style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); overflow-x:auto; margin-bottom:1.5rem; box-shadow:var(--shadow-card);">
+      <table class="compare-table" style="width:100%; min-width:600px;">
+        <thead>
+          <tr style="background:var(--bg-surface-elevated); border-bottom:2px solid var(--border-color);">
+            <th style="padding:1rem 1.25rem; color:var(--primary-gold); font-weight:800;">Feature</th>
+            <th style="padding:1rem 1.25rem; color:var(--primary-gold); font-weight:800;">DTF printing</th>
+            <th style="padding:1rem 1.25rem; color:var(--primary-gold); font-weight:800;">Screen printing</th>
+            <th style="padding:1rem 1.25rem; color:var(--primary-gold); font-weight:800;">Vinyl</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-weight:700;">Set-up</td>
+            <td>None</td>
+            <td>Separate screen per colour</td>
+            <td>Cutting and weeding</td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;">Full colour and gradients</td>
+            <td>Yes, no extra cost</td>
+            <td>Costly, more colours = more cost</td>
+            <td>Limited</td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;">Small and repeat orders</td>
+            <td>Great</td>
+            <td>Expensive</td>
+            <td>Okay</td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;">Dark fabrics</td>
+            <td>Bright, thanks to white base</td>
+            <td>Needs underbase</td>
+            <td>Works</td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;">Feel</td>
+            <td>Soft and flexible</td>
+            <td>Soft</td>
+            <td>Can feel plasticky</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-weight:700; color:var(--primary-gold); font-size:1.05rem;">
+      Ten pieces in six colours? DTF is the clear winner.
+    </p>
+  </div>
+</section>
+
+<!-- DTF Gang Sheets & Bulk DTF Transfers -->
+<section class="section section-white">
+  <div class="container">
+    <div class="section-header reveal slide-up">
+      <div class="section-label">Maximum Value</div>
+      <h2>DTF Gang Sheets &amp; Bulk DTF Transfers - Make the Most of Your Ink</h2>
+    </div>
+
+    <div style="max-width:850px; line-height:1.8; color:var(--text-secondary); font-size:1.05rem;">
+      <p style="margin-bottom:1.25rem;">
+        A DTF gang sheet is basically one big sheet of film with loads of designs all crammed in together, so there's zero waste and you only pay for what you use. Logos and big graphics can happily coexist on the same sheet.
+      </p>
+      <p>
+        Our bulk DTF transfers come in two sizes, 22 and 24 inches wide, and the per foot price drops as you order more. You'll get a custom quote for your DTF sheet based on length, how many you're ordering and the number of designs. Just let us know what you're working with and we'll get a quote sorted.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- DTF Printing for T-Shirts, Hoodies, Sportswear and Loads More -->
+<section class="section section-ivory">
+  <div class="container">
+    <div class="section-header reveal slide-up">
+      <div class="section-label">Versatility</div>
+      <h2>DTF Printing for T-Shirts, Hoodies, Sportswear and Loads More</h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.25rem; margin-bottom:2rem;">
+      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
+        <span style="color:var(--primary-gold); font-size:1.1rem; line-height:1.2; font-weight:800;">•</span>
+        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">T-shirts and those massive oversized tees - both print out great</p>
+      </div>
+      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
+        <span style="color:var(--primary-gold); font-size:1.1rem; line-height:1.2; font-weight:800;">•</span>
+        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">Hoodies and sweatshirts - our prints are nice and flexible, move with the fabric no problem</p>
+      </div>
+      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
+        <span style="color:var(--primary-gold); font-size:1.1rem; line-height:1.2; font-weight:800;">•</span>
+        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">Sportswear and team jerseys - from match day to training, we've got you covered</p>
+      </div>
+      <div style="display:flex; align-items:flex-start; gap:1rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.03); border:1px solid rgba(212,175,55,0.18); border-left:3px solid var(--primary-gold); border-radius:var(--radius-sm);">
+        <span style="color:var(--primary-gold); font-size:1.1rem; line-height:1.2; font-weight:800;">•</span>
+        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.5;">Caps, tote bags and uniforms - pretty much anything will work in a pinch</p>
+      </div>
+    </div>
+
+    <p style="color:var(--text-secondary); line-height:1.7;">
+      We supply all sorts of print shops and brands across India, and we ship all over the country. Want to know how we deal with nylon or other performance fabrics? Just ask and we'll sort you out with the right film.
+    </p>
+  </div>
+</section>
+
+<!-- How Printex Do DTF -->
+<section class="section section-white">
+  <div class="container">
+    <div class="section-header text-center reveal slide-up">
+      <div class="section-label">Our Process</div>
+      <h2>How Printex Do DTF</h2>
+    </div>
+
+    <div class="service-specs-grid" style="grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));">
       <div class="timeline-step reveal slide-up stagger-1">
-        <h4 style="color:var(--gold); margin-bottom:0.5rem;">Press Temperature</h4>
-        <div style="font-size:1.8rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">155&deg;C – 165&deg;C</div>
-        <p style="font-size:0.85rem; color:var(--slate);">Optimal temperature for polyurethane adhesive activation.</p>
+        <h4 style="color:var(--primary-gold); margin-bottom:0.5rem;">Step 1</h4>
+        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">
+          Send us your design - just a transparent PNG, PDF or vector file (AI or SVG) would be great, ideally get it up to 300 DPI.
+        </p>
       </div>
 
       <div class="timeline-step reveal slide-up stagger-2">
-        <h4 style="color:var(--gold); margin-bottom:0.5rem;">Press Time &amp; Pressure</h4>
-        <div style="font-size:1.8rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">15 Seconds &bull; Med-High</div>
-        <p style="font-size:0.85rem; color:var(--slate);">Firm, even pressure (40–50 PSI) ensures deep fabric adhesion.</p>
+        <h4 style="color:var(--primary-gold); margin-bottom:0.5rem;">Step 2</h4>
+        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">
+          We have a look: check for resolution, margins, sheet layout and all that jazz. Then we get back to you with a clear quote.
+        </p>
       </div>
 
       <div class="timeline-step reveal slide-up stagger-3">
-        <h4 style="color:var(--gold); margin-bottom:0.5rem;">Peel Technique</h4>
-        <div style="font-size:1.8rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">Cold / Warm Release</div>
-        <p style="font-size:0.85rem; color:var(--slate);">Allow film to cool for a clean, sharp, tear-free transfer edge.</p>
+        <h4 style="color:var(--primary-gold); margin-bottom:0.5rem;">Step 3</h4>
+        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">
+          We get to work: your design is printed on some film, we slap on the adhesive and throw the sheet through the curing process.
+        </p>
       </div>
 
       <div class="timeline-step reveal slide-up stagger-4">
-        <h4 style="color:var(--gold); margin-bottom:0.5rem;">Roll Width Options</h4>
-        <div style="font-size:1.8rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">22 &amp; 24 Inches</div>
-        <p style="font-size:0.85rem; color:var(--slate);">Continuous gang roll lengths up to 100 meters per order.</p>
+        <h4 style="color:var(--primary-gold); margin-bottom:0.5rem;">Step 4</h4>
+        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">
+          We send it off: every sheet gets a double check, is packed up and shipped all over India.
+        </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Artwork Guidelines & Upload -->
-<section class="section section-white" id="upload-dtf">
+<!-- Why Choose Printex for DTF Printing in Delhi -->
+<section class="section section-ivory">
+  <div class="container">
+    <div class="section-header reveal slide-up">
+      <div class="section-label">The Printex Advantage</div>
+      <h2>Why Choose Printex for DTF Printing in Delhi - We've Got You Covered</h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.75rem; padding:1.25rem 0;">
+      <div style="display:flex; align-items:flex-start; gap:1rem;">
+        <span style="color:var(--primary-gold); font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
+        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.6;">Free artwork check - we make sure everything's good to go, no extra charge</p>
+      </div>
+      <div style="display:flex; align-items:flex-start; gap:1rem;">
+        <span style="color:var(--primary-gold); font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
+        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.6;">Consistent colour: your second order looks the same as the first, no complaints</p>
+      </div>
+      <div style="display:flex; align-items:flex-start; gap:1rem;">
+        <span style="color:var(--primary-gold); font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
+        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.6;">We're flexible on quantities - want one sheet or the whole roll? Your call</p>
+      </div>
+      <div style="display:flex; align-items:flex-start; gap:1rem;">
+        <span style="color:var(--primary-gold); font-weight:800; font-size:1.25rem; line-height:1;">✓</span>
+        <p style="margin:0; font-weight:600; color:var(--text-primary); font-size:1rem; line-height:1.6;">Pan-India shipping: we print in Delhi and get your order delivered to your doorstep.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How to Press a DTF Transfer - Heat, Time and a Bit of Pressure -->
+<section class="section section-white">
+  <div class="container">
+    <div class="section-header reveal slide-up">
+      <div class="section-label">Application Guide</div>
+      <h2>How to Press a DTF Transfer - Heat, Time and a Bit of Pressure</h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:2rem; border-top:1px solid var(--border-color); padding-top:2.25rem;">
+      <div class="reveal slide-up stagger-1">
+        <div style="font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:var(--primary-gold); margin-bottom:0.65rem;">01 / Temperature</div>
+        <h4 style="color:var(--primary-gold); margin-bottom:0.5rem; font-size:1.1rem;">Temperature</h4>
+        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6; margin:0;">
+          Temperature: about 150 to 160°C so that adhesive bonds in properly.
+        </p>
+      </div>
+
+      <div class="reveal slide-up stagger-2">
+        <div style="font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:var(--primary-gold); margin-bottom:0.65rem;">02 / Pressing</div>
+        <h4 style="color:var(--primary-gold); margin-bottom:0.5rem; font-size:1.1rem;">Time and Pressure</h4>
+        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6; margin:0;">
+          Time and pressure: 10 to 15 seconds at medium pressure is good. You can use a bit of heat and your press should be set up to get even pressure.
+        </p>
+      </div>
+
+      <div class="reveal slide-up stagger-3">
+        <div style="font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:var(--primary-gold); margin-bottom:0.65rem;">03 / Release</div>
+        <h4 style="color:var(--primary-gold); margin-bottom:0.5rem; font-size:1.1rem;">Peeling</h4>
+        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6; margin:0;">
+          Peeling: you can use a cold or warm peel - just let it cool down a bit, then peel it off in one smooth go
+        </p>
+      </div>
+
+      <div class="reveal slide-up stagger-4">
+        <div style="font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:var(--primary-gold); margin-bottom:0.65rem;">04 / Sizing</div>
+        <h4 style="color:var(--primary-gold); margin-bottom:0.5rem; font-size:1.1rem;">Sheet Width</h4>
+        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6; margin:0;">
+          Sheet width: our gang sheets and rolls are made to order - 22 or 24 inches
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Artwork Guidelines & Upload / CTA Section -->
+<section class="section section-ivory" id="upload-dtf">
   <div class="container">
     <div class="section-header text-center reveal slide-up">
       <div class="section-label">Direct Upload Studio</div>
-      <h2>Order DTF Transfers &amp; Gang Sheets</h2>
+      <h2>Get a Quote for DTF Printing in Delhi</h2>
       <p class="section-subtitle">
-        Upload your transparent PNG, PDF, or vector design below for a rapid turnaround commercial quotation.
+        Just upload your design as a PNG, PDF or vector file, tell us the size and quantity you need and we'll get back to you with a clear price quote.
       </p>
     </div>
 
@@ -241,6 +429,122 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'dtf-printing'");
   </div>
 </section>
 
+<!-- Frequently Asked Questions -->
+<section class="section section-white">
+  <div class="container container-narrow">
+    <div class="section-header text-center reveal slide-up">
+      <div class="section-label">Common Queries</div>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-accordion">
+      <div class="faq-item">
+        <div class="faq-question" style="padding:1.25rem 1.5rem; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+          <span>1. What's the minimum order I need to place?</span>
+          <span class="faq-icon" style="color:var(--primary-gold); font-size:1.2rem;">+</span>
+        </div>
+        <div class="faq-answer">
+          You can start small and order just one sheet, no need to buy a whole roll.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" style="padding:1.25rem 1.5rem; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+          <span>2. How much will a DTF sheet cost me?</span>
+          <span class="faq-icon" style="color:var(--primary-gold); font-size:1.2rem;">+</span>
+        </div>
+        <div class="faq-answer">
+          The price of our DTF sheets depends on a handful of things - how long you need the sheet, how many you buy, and how many designs you're looking to print. Upload your design along with the size you need and we'll send over a clear quote without any fuss.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" style="padding:1.25rem 1.5rem; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+          <span>3. Are the DTF prints you do washable?</span>
+          <span class="faq-icon" style="color:var(--primary-gold); font-size:1.2rem;">+</span>
+        </div>
+        <div class="faq-answer">
+          Absolutely. As long as you follow the right washing instructions and get them pressed correctly, the prints will stay bright and flexible even after you've washed them multiple times. Just remember to wash them inside out in cold water and steer clear of bleach.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" style="padding:1.25rem 1.5rem; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+          <span>4. Which fabrics work best with DTF printing?</span>
+          <span class="faq-icon" style="color:var(--primary-gold); font-size:1.2rem;">+</span>
+        </div>
+        <div class="faq-answer">
+          That's pretty much any cotton blend or polyester mix. If you're planning on printing on nylon or sportswear fabrics, it's worth reaching out to us to make sure you're getting the right film.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" style="padding:1.25rem 1.5rem; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+          <span>5. Can I send my own garments to be printed ?</span>
+          <span class="faq-icon" style="color:var(--primary-gold); font-size:1.2rem;">+</span>
+        </div>
+        <div class="faq-answer">
+          Yes you can. You can either order up a batch of ready-to-press transfers or send your garments over and we'll take care of pressing them for you.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" style="padding:1.25rem 1.5rem; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+          <span>6. What file format should I upload for my design?</span>
+          <span class="faq-icon" style="color:var(--primary-gold); font-size:1.2rem;">+</span>
+        </div>
+        <div class="faq-answer">
+          Ideally, it's a good idea to upload a transparent PNG, PDF or a vector file like an AI or SVG - and make sure it's at a resolution of 300 DPI to get the best results.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" style="padding:1.25rem 1.5rem; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+          <span>7. Do you do DTF printing in Delhi and deliver across India?</span>
+          <span class="faq-icon" style="color:var(--primary-gold); font-size:1.2rem;">+</span>
+        </div>
+        <div class="faq-answer">
+          Yep - we're based in Delhi and we deliver to the major cities and towns across India.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" style="padding:1.25rem 1.5rem; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+          <span>8. What's the difference between DTF and UV DTF printing?</span>
+          <span class="faq-icon" style="color:var(--primary-gold); font-size:1.2rem;">+</span>
+        </div>
+        <div class="faq-answer">
+          The main difference here is that DTF transfers are for fabric and need a heat press, while UV DTF is for glass, metal and acrylic and doesn't need any heat. If you want to know more about UV DTF printing, you should probably check out our page on that.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Visit Studio Section -->
+<section class="section section-ivory">
+  <div class="container container-narrow text-center reveal slide-up">
+    <div class="section-label" style="justify-content:center;">Location</div>
+    <h2 style="margin-bottom:1rem;">DTF Printing in Delhi: Come visit us</h2>
+    <p style="font-size:1.1rem; color:var(--text-primary); margin-bottom:1rem;">
+      You can now order DTF transfers and gang sheets direct from our Delhi studio.
+    </p>
+    <div style="background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.5rem; margin:1.5rem auto; max-width:650px;">
+      <p style="font-weight:700; color:var(--primary-gold); font-size:1.05rem; margin-bottom:0.5rem;">
+        Shop E-6, Chanakya Palace, 21 Street No, Pankha Rd, next to 40 Feet Road, Delhi 110059
+      </p>
+      <p style="margin:0; color:var(--text-secondary);">
+        Give us a call or fire off a WhatsApp to get started.
+      </p>
+    </div>
+    <div style="margin-top:1.5rem;">
+      <a href="<?= url('contact.php') ?>" class="btn btn-primary btn-lg">
+        <span>Contact Printex Studio</span> &rarr;
+      </a>
+    </div>
+  </div>
+</section>
+
 <script>
 function setDtfLength(inches) {
   const input = document.getElementById('calcLengthInput');
@@ -264,31 +568,25 @@ function runDtfCalculation() {
   // Linear Foot Count (min 1 foot)
   const linearFeet = Math.max(1, length / 12);
 
-  // Base Pricing Rules directly from DTF database tiers:
-  // 1 ft = ₹249, 2 ft = ₹450, 1m (~3.28 ft) = ₹599, 5 ft = ₹1099
   let ratePerFt = 249;
   if (linearFeet >= 5) {
-    ratePerFt = 1099 / 5; // ~219.8 / ft
+    ratePerFt = 1099 / 5;
   } else if (linearFeet >= 3.28) {
-    ratePerFt = 599 / 3.28; // ~182.6 / ft
+    ratePerFt = 599 / 3.28;
   } else if (linearFeet >= 2) {
-    ratePerFt = 450 / 2; // 225 / ft
+    ratePerFt = 450 / 2;
   } else {
     ratePerFt = 249;
   }
 
-  // Adjust for 24" roll (+9% area)
   if (width > 22) {
     ratePerFt = ratePerFt * (width / 22);
   }
 
-  // Add material extra
   ratePerFt += matExtraPerFt;
 
   let unitBase = ratePerFt * linearFeet;
 
-  // Wholesale Quantity Tiers (from product_pricing_tiers):
-  // 1-4: 0%, 5-9: 8%, 10-24: 15%, 25+: 25%
   let discountPct = 0;
   let tierText = 'Standard (1-4)';
   if (qty >= 25) {
@@ -324,10 +622,32 @@ function runDtfCalculation() {
   if (grandDisp) grandDisp.textContent = `₹${grandTotal.toFixed(2)}`;
 }
 
-document.addEventListener('DOMContentLoaded', runDtfCalculation);
+document.addEventListener('DOMContentLoaded', function() {
+  runDtfCalculation();
+  
+  // Accordion click handling
+  document.querySelectorAll('.faq-question').forEach(function(item) {
+    item.addEventListener('click', function() {
+      const parent = this.parentElement;
+      const isOpen = parent.classList.contains('active');
+      const accordion = parent.closest('.faq-accordion');
+      if (accordion) {
+        accordion.querySelectorAll('.faq-item.active').forEach(function(other) {
+          if (other !== parent) {
+            other.classList.remove('active');
+            const icon = other.querySelector('.faq-icon');
+            if (icon) icon.textContent = '+';
+          }
+        });
+      }
+      parent.classList.toggle('active', !isOpen);
+      const icon = this.querySelector('.faq-icon');
+      if (icon) {
+        icon.textContent = !isOpen ? '−' : '+';
+      }
+    });
+  });
+});
 </script>
-    </div>
-  </div>
-</section>
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

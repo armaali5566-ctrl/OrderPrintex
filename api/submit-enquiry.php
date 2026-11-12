@@ -114,19 +114,56 @@ if (empty($name) || empty($email) || empty($phone)) {
     exit;
 }
 
-// 3. Handle File Upload if present
-$fileResult = null;
-if (!empty($_FILES['artwork_file']) && $_FILES['artwork_file']['error'] !== UPLOAD_ERR_NO_FILE) {
-    $fileResult = handle_file_upload($_FILES['artwork_file'], ARTWORK_PATH);
-    if (!$fileResult['success']) {
-        if ($isAjax) {
-            header('Content-Type: application/json');
-            echo json_encode(['success' => false, 'error' => $fileResult['error']]);
-            exit;
+// 3. Handle File Uploads (Supports single file or multiple artwork uploads)
+$uploadedFiles = [];
+$candidateUploadKeys = ['artwork_file', 'artwork_files'];
+
+foreach ($candidateUploadKeys as $uploadKey) {
+    if (!empty($_FILES[$uploadKey]) && !empty($_FILES[$uploadKey]['name'])) {
+        if (is_array($_FILES[$uploadKey]['name'])) {
+            // Multi-file upload array
+            $totalFiles = count($_FILES[$uploadKey]['name']);
+            for ($i = 0; $i < $totalFiles; $i++) {
+                if (empty($_FILES[$uploadKey]['name'][$i]) || $_FILES[$uploadKey]['error'][$i] === UPLOAD_ERR_NO_FILE) {
+                    continue;
+                }
+                $singleUpload = [
+                    'name'     => $_FILES[$uploadKey]['name'][$i],
+                    'type'     => $_FILES[$uploadKey]['type'][$i] ?? '',
+                    'tmp_name' => $_FILES[$uploadKey]['tmp_name'][$i],
+                    'error'    => $_FILES[$uploadKey]['error'][$i],
+                    'size'     => $_FILES[$uploadKey]['size'][$i]
+                ];
+                $fResult = handle_file_upload($singleUpload, ARTWORK_PATH);
+                if (!$fResult['success']) {
+                    if ($isAjax) {
+                        header('Content-Type: application/json');
+                        echo json_encode(['success' => false, 'error' => $fResult['error']]);
+                        exit;
+                    }
+                    set_flash('error', $fResult['error']);
+                    header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? url('get-quote.php')));
+                    exit;
+                }
+                $uploadedFiles[] = $fResult;
+            }
+        } else {
+            // Standard single file upload
+            if ($_FILES[$uploadKey]['error'] !== UPLOAD_ERR_NO_FILE) {
+                $fResult = handle_file_upload($_FILES[$uploadKey], ARTWORK_PATH);
+                if (!$fResult['success']) {
+                    if ($isAjax) {
+                        header('Content-Type: application/json');
+                        echo json_encode(['success' => false, 'error' => $fResult['error']]);
+                        exit;
+                    }
+                    set_flash('error', $fResult['error']);
+                    header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? url('get-quote.php')));
+                    exit;
+                }
+                $uploadedFiles[] = $fResult;
+            }
         }
-        set_flash('error', $fileResult['error']);
-        header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? url('get-quote.php')));
-        exit;
     }
 }
 
@@ -164,17 +201,19 @@ try {
         'status'           => 'received'
     ]);
 
-    // Save File Reference
-    if ($fileResult && $fileResult['success']) {
-        db_insert('enquiry_files', [
-            'enquiry_id'     => $enquiryId,
-            'original_name'  => $fileResult['original_name'],
-            'stored_name'    => $fileResult['stored_name'],
-            'file_path'      => $fileResult['file_path'],
-            'file_size'      => $fileResult['file_size'],
-            'mime_type'      => $fileResult['mime_type'],
-            'file_extension' => $fileResult['file_extension']
-        ]);
+    // Save Uploaded Artwork File References
+    if (!empty($uploadedFiles)) {
+        foreach ($uploadedFiles as $fRes) {
+            db_insert('enquiry_files', [
+                'enquiry_id'     => $enquiryId,
+                'original_name'  => $fRes['original_name'],
+                'stored_name'    => $fRes['stored_name'],
+                'file_path'      => $fRes['file_path'],
+                'file_size'      => $fRes['file_size'],
+                'mime_type'      => $fRes['mime_type'],
+                'file_extension' => $fRes['file_extension']
+            ]);
+        }
     }
 
     log_activity($userId, 'submit_enquiry', "Created enquiry {$refNumber} for {$email}");

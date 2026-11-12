@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
-    <loc>http://localhost/OrderPrintex/sitemap.xml</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>http://127.0.0.1:8080/sitemap.xml</loc>
+    <lastmod>2026-11-12</lastmod>
   </sitemap>
 </sitemapindex>

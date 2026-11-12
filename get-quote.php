@@ -28,12 +28,12 @@ $currentUser = auth_user();
     <div class="page-intro-box">
       <div class="page-intro-eyebrow">
         <span class="page-intro-dot"></span>
-        <span>Transparent B2B Pricing</span>
+        <span>GET A QUOTE</span>
       </div>
-      <h1 class="page-intro-title">Request an Itemized Quotation</h1>
+      <h1 class="page-intro-title">Get a Quote for Your Print Order</h1>
       <div class="page-intro-divider"></div>
       <p class="page-intro-desc">
-        Submit your printing specifications and artwork file. Our prepress team evaluates printability, resolution, and gang optimization to provide a prompt, binding commercial quotation within 24 hours.
+        Send your design and order details. We’ll check your file and reply with a clear price breakdown within 24 hours. Free, with no obligation.
       </p>
     </div>
   </div>
