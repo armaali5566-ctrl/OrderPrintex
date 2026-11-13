@@ -5,248 +5,248 @@
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
   <url>
-    <loc>http://127.0.0.1:8080/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://orderprintex.com/</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/products/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://orderprintex.com/products</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/services/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://orderprintex.com/services</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/pricing/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://orderprintex.com/pricing</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/get-quote/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://orderprintex.com/get-quote</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/gallery/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://orderprintex.com/gallery</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/blog/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://orderprintex.com/blog</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/about/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://orderprintex.com/about</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/faq/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://orderprintex.com/faq</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/contact/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://orderprintex.com/contact</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/services/dtf-printing/</loc>
+    <loc>https://orderprintex.com/services/dtf-printing</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/services/uv-dtf-printing/</loc>
+    <loc>https://orderprintex.com/services/uv-dtf-printing</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/services/t-shirt-printing/</loc>
+    <loc>https://orderprintex.com/services/t-shirt-printing</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/services/corporate-printing/</loc>
+    <loc>https://orderprintex.com/services/corporate-printing</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/product/category/uv-dtf-decals/</loc>
+    <loc>https://orderprintex.com/product/category/uv-dtf-decals</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://orderprintex.com/product/category/custom-tshirts</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://orderprintex.com/product/category/corporate-merchandise</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://orderprintex.com/product/category/packaging</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://orderprintex.com/product/category/custom-stickers</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://orderprintex.com/product/category/custom-stationery</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://orderprintex.com/blog/category/printing-basics</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://orderprintex.com/blog/category/t-shirts-apparel</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://orderprintex.com/blog/category/corporate-branding</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://orderprintex.com/blog/category/packaging-labels</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://orderprintex.com/product/custom-dtf-gang-sheet</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/product/category/custom-tshirts/</loc>
+    <loc>https://orderprintex.com/product/custom-uv-dtf-decal-sheet</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/product/category/corporate-merchandise/</loc>
+    <loc>https://orderprintex.com/product/streetwear-oversized-tee</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/product/category/packaging/</loc>
+    <loc>https://orderprintex.com/product/thermal-sipper-bottle</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/product/category/custom-stickers/</loc>
+    <loc>https://orderprintex.com/product/apparel-mailer-box</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/product/category/custom-stationery/</loc>
+    <loc>https://orderprintex.com/product/holographic-stickers</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/product/category/automated-test-category/</loc>
+    <loc>https://orderprintex.com/product/bio-washed-cotton-tee</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/product/custom-dtf-gang-sheet/</loc>
+    <loc>https://orderprintex.com/product/executive-welcome-hamper</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/product/custom-uv-dtf-decal-sheet/</loc>
+    <loc>https://orderprintex.com/product/bookmark-03</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/product/streetwear-oversized-tee/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>http://127.0.0.1:8080/product/thermal-sipper-bottle/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>http://127.0.0.1:8080/product/apparel-mailer-box/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>http://127.0.0.1:8080/product/holographic-stickers/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>http://127.0.0.1:8080/product/bio-washed-cotton-tee/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>http://127.0.0.1:8080/product/executive-welcome-hamper/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>http://127.0.0.1:8080/product/bookmark-03/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>http://127.0.0.1:8080/blog/dcd/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>https://orderprintex.com/blog/dtf-vs-screen-printing-differences-benefits-applications</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/blog/complete-guide-to-business-card-printing-778/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <loc>https://orderprintex.com/blog/how-custom-printed-t-shirts-help-businesses-build-brand-identity</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/blog/dtf-printing-technology-custom-apparel/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://orderprintex.com/blog/dtf-printing-technology-custom-apparel</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/blog/uv-dtf-printing-product-branding/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://orderprintex.com/blog/uv-dtf-printing-product-branding</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/blog/different-t-shirt-printing-techniques/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://orderprintex.com/blog/different-t-shirt-printing-techniques</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/blog/offset-vs-digital-printing/</loc>
-    <lastmod>2026-11-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>http://127.0.0.1:8080/blog/custom-stickers-and-labels-guide/</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>http://127.0.0.1:8080/blog/packaging-printing-ideas-for-brands/</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>http://127.0.0.1:8080/privacy-policy/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://orderprintex.com/privacy-policy</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/terms-and-conditions/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://orderprintex.com/terms-and-conditions</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>
   </url>
   <url>
-    <loc>http://127.0.0.1:8080/shipping-policy/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <loc>https://orderprintex.com/shipping-policy</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>
   </url>

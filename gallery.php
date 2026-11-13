@@ -3,8 +3,14 @@
  * OrderPrintex - Production Gallery & Showcase
  */
 
+require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/includes/database.php';
+require_once __DIR__ . '/includes/functions.php';
+
 $pageTitle = "Production Gallery & Print Showcase | OrderPrintex Delhi";
 $pageDesc  = "Browse actual production runs and commercial printing work completed at the OrderPrintex Delhi studio: DTF apparel prints, UV DTF hard-surface decals, and corporate gifts.";
+$canonical = url('gallery');
+$pageSchemaKey = 'gallery';
 
 require_once __DIR__ . '/includes/header.php';
 

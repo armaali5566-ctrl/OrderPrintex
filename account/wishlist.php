@@ -11,7 +11,7 @@ require_once __DIR__ . '/../includes/auth.php';
 $user = auth_user();
 
 // Wishlist functionality removed in simplified commercial workflow.
-header('Location: ' . url('products/'));
+header('Location: ' . url('products'));
 exit;
 $canonical = url('account/wishlist.php');
 
@@ -113,7 +113,7 @@ require_once __DIR__ . '/../includes/header.php';
       <p style="color:#B8B1A3; font-size:0.9rem; margin-bottom:1.5rem;">
         Browse our catalog of custom DTF gang sheets, apparel, and commercial print items to save your preferred products.
       </p>
-      <a href="<?= url('products/') ?>" class="btn btn-primary">
+      <a href="<?= url('products') ?>" class="btn btn-primary">
         Explore Products &rarr;
       </a>
     </div>

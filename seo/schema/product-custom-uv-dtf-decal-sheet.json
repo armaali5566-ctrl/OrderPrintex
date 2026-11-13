@@ -1,0 +1,23 @@
+{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://orderprintex.com/product/custom-uv-dtf-decal-sheet#product",
+    "name": "3D Gloss UV DTF Decal Sheet",
+    "url": "https://orderprintex.com/product/custom-uv-dtf-decal-sheet",
+    "image": "https://orderprintex.com/assets/images/uv_dtf_drinkware.jpg",
+    "description": "Raised, glossy decals that peel and stick on glass, steel, acrylic and plastic. Waterproof once applied.",
+    "sku": "UV-001",
+    "category": "UV DTF Decals",
+    "brand": {
+        "@type": "Brand",
+        "name": "OrderPrintex"
+    },
+    "offers": {
+        "@type": "Offer",
+        "url": "https://orderprintex.com/product/custom-uv-dtf-decal-sheet",
+        "priceCurrency": "INR",
+        "price": "0.00",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
+    }
+}

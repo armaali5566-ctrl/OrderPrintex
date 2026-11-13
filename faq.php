@@ -4,8 +4,14 @@
  * Comprehensive Knowledge Base covering all 8 print & prepress categories.
  */
 
+require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/includes/database.php';
+require_once __DIR__ . '/includes/functions.php';
+
 $pageTitle = "Frequently Asked Questions — Prepress, DTF, UV DTF & Ordering | OrderPrintex";
 $pageDesc  = "Explore comprehensive answers on DTF transfers, UV DTF decals, custom t-shirt printing, artwork file preparation, gang sheet efficiency, and quotation workflows.";
+$canonical = url('faq');
+$pageSchemaKey = 'faq';
 
 require_once __DIR__ . '/includes/header.php';
 

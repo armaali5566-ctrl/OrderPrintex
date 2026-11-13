@@ -1,0 +1,40 @@
+{
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://orderprintex.com/services/dtf-printing#service",
+    "name": "1.DTF Printing in Delhi",
+    "url": "https://orderprintex.com/services/dtf-printing",
+    "serviceType": "Commercial Printing",
+    "description": "Commercial printing service.",
+    "provider": {
+        "@type": "ProfessionalService",
+        "@id": "https://orderprintex.com/#organization",
+        "name": "OrderPrintex",
+        "url": "https://orderprintex.com/",
+        "telephone": "+91 93540 28199",
+        "email": "sales@orderprintex.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh, Delhi, 110059",
+            "addressLocality": "New Delhi",
+            "addressRegion": "Delhi",
+            "postalCode": "110059",
+            "addressCountry": "IN"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 28.618,
+            "longitude": 77.0805
+        },
+        "sameAs": [
+            "https://www.facebook.com/orderprintex",
+            "https://www.instagram.com/orderprintex",
+            "https://www.youtube.com/@orderprintex",
+            "https://www.linkedin.com/company/orderprintex"
+        ]
+    },
+    "areaServed": {
+        "@type": "Country",
+        "name": "India"
+    }
+}

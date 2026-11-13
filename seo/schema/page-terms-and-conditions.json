@@ -1,0 +1,36 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebPage",
+            "@id": "https://orderprintex.com/terms-and-conditions#webpage",
+            "url": "https://orderprintex.com/terms-and-conditions",
+            "name": "Terms & Conditions | OrderPrintex",
+            "description": "By placing a custom printing order with OrderPrintex, clients agree to digital prepress proof confirmation before production. All invoices include 18% GST and s",
+            "isPartOf": {
+                "@type": "WebSite",
+                "@id": "https://orderprintex.com/#website",
+                "name": "OrderPrintex",
+                "url": "https://orderprintex.com/"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://orderprintex.com/terms-and-conditions#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://orderprintex.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Terms & Conditions",
+                    "item": "https://orderprintex.com/terms-and-conditions"
+                }
+            ]
+        }
+    ]
+}

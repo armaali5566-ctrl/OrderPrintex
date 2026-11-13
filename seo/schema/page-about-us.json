@@ -1,0 +1,36 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebPage",
+            "@id": "https://orderprintex.com/about-us#webpage",
+            "url": "https://orderprintex.com/about-us",
+            "name": "About Us | OrderPrintex",
+            "description": "OrderPrintex is India's premier industrial DTF and UV DTF contract printing facility based in Delhi NCR. We specialize in commercial-grade heat transfers, custo",
+            "isPartOf": {
+                "@type": "WebSite",
+                "@id": "https://orderprintex.com/#website",
+                "name": "OrderPrintex",
+                "url": "https://orderprintex.com/"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://orderprintex.com/about-us#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://orderprintex.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "About Us",
+                    "item": "https://orderprintex.com/about-us"
+                }
+            ]
+        }
+    ]
+}

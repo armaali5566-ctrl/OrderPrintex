@@ -1,0 +1,47 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "CollectionPage",
+            "@id": "https://orderprintex.com/product/category/packaging#collection",
+            "url": "https://orderprintex.com/product/category/packaging",
+            "name": "Packaging & Boxes | Commercial Printing Products | OrderPrintex",
+            "description": "Custom rigid and corrugated shipping mailer boxes",
+            "mainEntity": {
+                "@type": "ItemList",
+                "itemListElement": [
+                    {
+                        "@type": "Product",
+                        "position": 1,
+                        "name": "Branded Apparel Mailer Box",
+                        "url": "https://orderprintex.com/product/apparel-mailer-box"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://orderprintex.com/product/category/packaging#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://orderprintex.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Products",
+                    "item": "https://orderprintex.com/products"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Packaging & Boxes",
+                    "item": "https://orderprintex.com/product/category/packaging"
+                }
+            ]
+        }
+    ]
+}

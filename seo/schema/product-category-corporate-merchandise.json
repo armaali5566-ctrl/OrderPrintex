@@ -1,0 +1,47 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "CollectionPage",
+            "@id": "https://orderprintex.com/product/category/corporate-merchandise#collection",
+            "url": "https://orderprintex.com/product/category/corporate-merchandise",
+            "name": "Corporate Merchandise | Commercial Printing Products | OrderPrintex",
+            "description": "Branded drinkware, stationery, and swag",
+            "mainEntity": {
+                "@type": "ItemList",
+                "itemListElement": [
+                    {
+                        "@type": "Product",
+                        "position": 1,
+                        "name": "Custom Steel Thermal Bottle (750 ml)",
+                        "url": "https://orderprintex.com/product/thermal-sipper-bottle"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://orderprintex.com/product/category/corporate-merchandise#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://orderprintex.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Products",
+                    "item": "https://orderprintex.com/products"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Corporate Merchandise",
+                    "item": "https://orderprintex.com/product/category/corporate-merchandise"
+                }
+            ]
+        }
+    ]
+}

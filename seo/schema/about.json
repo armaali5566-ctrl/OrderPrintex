@@ -1,0 +1,35 @@
+{
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": "https://orderprintex.com/about#aboutpage",
+    "url": "https://orderprintex.com/about",
+    "name": "About Our Printing Studio & Manufacturing Facility | OrderPrintex",
+    "description": "Learn about OrderPrintex: Delhi's leading commercial DTF and UV DTF printing studio with 10+ years of prepress expertise.",
+    "mainEntity": {
+        "@type": "ProfessionalService",
+        "@id": "https://orderprintex.com/#organization",
+        "name": "OrderPrintex",
+        "url": "https://orderprintex.com/",
+        "telephone": "+91 93540 28199",
+        "email": "sales@orderprintex.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh, Delhi, 110059",
+            "addressLocality": "New Delhi",
+            "addressRegion": "Delhi",
+            "postalCode": "110059",
+            "addressCountry": "IN"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 28.618,
+            "longitude": 77.0805
+        },
+        "sameAs": [
+            "https://www.facebook.com/orderprintex",
+            "https://www.instagram.com/orderprintex",
+            "https://www.youtube.com/@orderprintex",
+            "https://www.linkedin.com/company/orderprintex"
+        ]
+    }
+}

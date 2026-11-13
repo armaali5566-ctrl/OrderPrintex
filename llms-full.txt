@@ -1,0 +1,368 @@
+# OrderPrintex — Commercial Printing & Custom Transfer Manufacturing
+
+> OrderPrintex is a premier industrial printing facility and digital transfer manufacturer headquartered at Pankha Road, New Delhi, India. We specialize in Direct-to-Film (DTF) apparel transfers, UV DTF 3D tactile hard-surface decals, custom streetwear and corporate t-shirt printing, bespoke packaging, and corporate merchandise.
+
+## Commercial Business Model & Order Lifecycle
+
+OrderPrintex operates on a dedicated **B2B & Bespoke Enquiry-to-Quotation Workflow**. The site does not utilize self-service e-commerce carts or instant checkout.
+
+1. **Explore Products & Services**: Clients review print technologies, substrate compatibility, and base pricing.
+2. **Submit Enquiry & Artwork**: Clients upload transparent artwork (PNG/PDF) and provide dimensions and quantity requirements via the online quote tool or WhatsApp.
+3. **Prepress Engineering & Formal Quotation**: Our color engineers verify file resolution, line weights, and ink coverage, issuing a formal itemized quotation with 18% GST and volume discounts.
+4. **Digital Proof Approval**: The client logs into their secure portal account to inspect the digital RIP proof and accept the quote.
+5. **High-Speed Industrial Production**: Orders enter physical production on dual Epson i3200 micro-piezo heads with automated TPU powder curing.
+6. **Tracked Nationwide Dispatch**: Finished orders are packed in rigid moisture-proof containers and dispatched via express courier across India.
+
+## Industrial Equipment & Machinery Fleet
+
+- **Industrial Micro-Piezo Dual-Head DTF Printers** (Textile Printing)
+  - **Purpose**: Dual Epson i3200 micro-piezo heads laying down high-density white underbase and CMYK textile pigments simultaneously.
+  - **Impact**: Photorealistic 1440x2880 DPI resolution with ultra-smooth gradient transitions and flawless solid color fill on dark garments.
+- **Automatic Powder Shaker & Infrared Conveyor Oven** (Transfer Curing)
+  - **Purpose**: Automated roll-to-roll powdering unit with electrostatic vibration and calibrated infrared heat tunnels.
+  - **Impact**: Guarantees uniform TPU adhesive distribution and complete polyurethane polymerization for 50+ wash longevity.
+- **Multi-Axis UV DTF Hybrid Flatbed & Roll System** (UV Hard Surfaces)
+  - **Purpose**: UV LED curing system printing opaque white, CMYK, and high-build clear spot varnish onto release film.
+  - **Impact**: Creates waterproof, scratchproof 3D tactile embossed decals for glass, tumblers, wood, and electronics.
+- **Digital Precision Optical Contour Cutting Plotters** (Finishing & Decals)
+  - **Purpose**: High-speed cutting plotters with optical registration cameras for precision blade contouring.
+  - **Impact**: Flawless kiss-cut and die-cut borders with sub-millimeter registration accuracy on vinyl and holographic stocks.
+- **Industrial Pneumatic Auto-Open Heat Presses** (Garment Pressing)
+  - **Purpose**: Digital dual-platen pneumatic presses with microprocessor temperature control and consistent pneumatic pressure.
+  - **Impact**: Ensures 100% mechanical fiber bonding of transfers without hot spots, scorching, or uneven adhesion.
+- **X-Rite Prepress Color Spectrophotometers** (Prepress & Quality)
+  - **Purpose**: Spectrophotometric color management instruments calibrating ICC profiles for CMYK and Pantone reproduction.
+  - **Impact**: Guarantees consistent color fidelity between digital client mockups and physical press-ready output.
+
+## Core Services Directory
+
+### [1.DTF Printing in Delhi](https://orderprintex.com/services/dtf-printing)
+- **URL**: https://orderprintex.com/services/dtf-printing
+- **Overview**: High-definition industrial printing service.
+- **Standard Turnaround**: 24-48 Hours (Express same-day dispatch available on request)
+
+### [2. UV DTF Printing - A Popular Choice](https://orderprintex.com/services/uv-dtf-printing)
+- **URL**: https://orderprintex.com/services/uv-dtf-printing
+- **Overview**: High-definition industrial printing service.
+- **Standard Turnaround**: 24-48 Hours (Express same-day dispatch available on request)
+
+### [Delhi's Custom T-Shirt Printing Studio - Where Art Meets Fabric](https://orderprintex.com/services/t-shirt-printing)
+- **URL**: https://orderprintex.com/services/t-shirt-printing
+- **Overview**: High-definition industrial printing service.
+- **Standard Turnaround**: 24-48 Hours (Express same-day dispatch available on request)
+
+### [4. Corporate Printing Services for Businesses](https://orderprintex.com/services/corporate-printing)
+- **URL**: https://orderprintex.com/services/corporate-printing
+- **Overview**: High-definition industrial printing service.
+- **Standard Turnaround**: 24-48 Hours (Express same-day dispatch available on request)
+
+## Product Categories
+
+- **[UV DTF Decals](https://orderprintex.com/product/category/uv-dtf-decals)**: Scratchproof 3D embossed decals for hard surfaces
+- **[Custom T-Shirts](https://orderprintex.com/product/category/custom-tshirts)**: Ready-to-wear printed apparel and streetwear
+- **[Corporate Merchandise](https://orderprintex.com/product/category/corporate-merchandise)**: Branded drinkware, stationery, and swag
+- **[Packaging & Boxes](https://orderprintex.com/product/category/packaging)**: Custom rigid and corrugated shipping mailer boxes
+- **[Custom Stickers](https://orderprintex.com/product/category/custom-stickers)**: Holographic, die-cut, and vinyl labels
+- **[Custom Stationery](https://orderprintex.com/product/category/custom-stationery)**: Bookmarks, flyers, brochures, and business cards
+
+## Blog Categories
+
+- **[Printing Basics](https://orderprintex.com/blog/category/printing-basics)**: In-depth commercial and technical printing tutorials
+- **[T-Shirts & Apparel](https://orderprintex.com/blog/category/t-shirts-apparel)**: DTF transfers, screen printing, and streetwear fashion tips
+- **[Corporate & Branding](https://orderprintex.com/blog/category/corporate-branding)**: Promotional merchandise, corporate gifting, and unboxing ideas
+- **[Packaging & Labels](https://orderprintex.com/blog/category/packaging-labels)**: Packaging boxes, adhesive stickers, and retail presentation
+
+## Exhaustive Product Catalog
+
+### [DTF Gang Sheet (22" Wide)](https://orderprintex.com/product/custom-dtf-gang-sheet)
+- **Product URL**: https://orderprintex.com/product/custom-dtf-gang-sheet
+- **SKU**: `OP-PRD-1` | **Category**: Printing
+- **Base Pricing**: ₹249.00 (/ sheet)
+- **Minimum Order Quantity (MOQ)**: 1 | **Lead Time**: 24-48 Hours
+- **Summary**: Ready-to-press transfers with bright color and a soft feel. Works on cotton, polyester and blends.
+
+### [3D Gloss UV DTF Decal Sheet](https://orderprintex.com/product/custom-uv-dtf-decal-sheet)
+- **Product URL**: https://orderprintex.com/product/custom-uv-dtf-decal-sheet
+- **SKU**: `UV-001` | **Category**: UV DTF Decals
+- **Base Pricing**: Custom Quoted (/ sheet)
+- **Minimum Order Quantity (MOQ)**: 1 | **Lead Time**: 24-48 Hours
+- **Summary**: Raised, glossy decals that peel and stick on glass, steel, acrylic and plastic. Waterproof once applied.
+- **Specifications**: Sheet Sizes: A4, A3, or 24-inch continuous gang sheet | Finish: High-Build Spot Gloss Varnish | Adhesion: High-Tack Industrial Acrylic
+- **Available Sizes / Options**: A4 Sheet (8.25" x 11.75") (8.25" x 11.75") @ ₹349.00, A3 Sheet (11.75" x 16.5") (11.75" x 16.5") @ ₹599.00, Full Roll (24" x 36") (24" x 36") @ ₹999.00
+
+### [Oversized Streetwear T-Shirt (240 GSM)](https://orderprintex.com/product/streetwear-oversized-tee)
+- **Product URL**: https://orderprintex.com/product/streetwear-oversized-tee
+- **SKU**: `STR-001` | **Category**: Custom T-Shirts
+- **Base Pricing**: Custom Quoted (/ piece)
+- **Minimum Order Quantity (MOQ)**: 1 | **Lead Time**: 24-48 Hours
+- **Summary**: A heavy drop-shoulder tee with your design printed in DTF. Roomy fit and a soft feel.
+- **Specifications**: Fabric: 100% Combed Cotton | Weight: 240 GSM Heavyweight | Fit: Relaxed Drop-Shoulder Oversized | Collar: 1.25" Lycra Ribbed | Sizes: S to 3XL
+- **Available Sizes / Options**: Small (S) (Chest 40") @ ₹449.00, Medium (M) (Chest 42") @ ₹449.00, Large (L) (Chest 44") @ ₹449.00, X-Large (XL) (Chest 46") @ ₹479.00, 2X-Large (2XL) (Chest 48") @ ₹499.00
+- **Volume Discount Tiers**: 5 - 19 units; 20 - 49 units (10.00% off); 50 - 99 units (18.00% off); 100 - 9999 units (28.00% off)
+
+### [Custom Steel Thermal Bottle (750 ml)](https://orderprintex.com/product/thermal-sipper-bottle)
+- **Product URL**: https://orderprintex.com/product/thermal-sipper-bottle
+- **SKU**: `BTL-001` | **Category**: Corporate Merchandise
+- **Base Pricing**: Custom Quoted (/ bottle)
+- **Minimum Order Quantity (MOQ)**: 1 | **Lead Time**: 24-48 Hours
+- **Summary**: A double-wall steel bottle with your logo printed on it. Good for gifts and team kits.
+- **Specifications**: Capacity: 750ml / 25oz | Material: Food-Grade SS 304 | Insulation: Double-Wall Vacuum Insulated | Finish: Matte Powder-Coat with Laser/UV DTF branding
+- **Available Sizes / Options**: 500ml Flask (500ml) @ ₹349.00, 750ml Vacuum Bottle (750ml) @ ₹399.00, 1000ml Heavy Duty (1000ml) @ ₹489.00
+
+### [Branded Apparel Mailer Box](https://orderprintex.com/product/apparel-mailer-box)
+- **Product URL**: https://orderprintex.com/product/apparel-mailer-box
+- **SKU**: `BOX-001` | **Category**: Packaging & Boxes
+- **Base Pricing**: Custom Quoted (/ box)
+- **Minimum Order Quantity (MOQ)**: 1 | **Lead Time**: 24-48 Hours
+- **Summary**: A sturdy matte black box with your logo in gold foil and gloss detail. Made for shipping apparel.
+- **Specifications**: Board: 3-Ply E-Flute Corrugated | Finish: Matte Soft-Touch Lamination + Gold Foil Stamping | Dimensions: 12x9x3 inches | Closure: Self-locking tab
+- **Available Sizes / Options**: Small (9" x 6" x 2") (9x6x2") @ ₹45.00, Medium (12" x 9" x 3") (12x9x3") @ ₹65.00, Large (14" x 10" x 4") (14x10x4") @ ₹85.00
+
+### [Custom Die-Cut Sticker Pack](https://orderprintex.com/product/holographic-stickers)
+- **Product URL**: https://orderprintex.com/product/holographic-stickers
+- **SKU**: `STK-001` | **Category**: Custom Stickers
+- **Base Pricing**: Custom Quoted (/ pack)
+- **Minimum Order Quantity (MOQ)**: 1 | **Lead Time**: 24-48 Hours
+- **Summary**: Stickers cut to your shape, in holographic and UV DTF finishes. Great for brands and giveaways.
+- **Specifications**: Material: Rainbow Holographic Vinyl + 3D UV Varnish | Cut: Precision Kiss-Cut or Die-Cut | Adhesion: Extra-strength permanent adhesive | Outdoor Durability: 2+ years
+- **Available Sizes / Options**: Pack of 50 Pcs (2" x 2") @ ₹299.00, Pack of 100 Pcs (2" x 2") @ ₹499.00, Pack of 250 Pcs (2" x 2") @ ₹999.00
+
+### [Everyday Cotton T-Shirt (180 GSM)](https://orderprintex.com/product/bio-washed-cotton-tee)
+- **Product URL**: https://orderprintex.com/product/bio-washed-cotton-tee
+- **SKU**: `TEE-001` | **Category**: Custom T-Shirts
+- **Base Pricing**: Custom Quoted (/ piece)
+- **Minimum Order Quantity (MOQ)**: 1 | **Lead Time**: 24-48 Hours
+- **Summary**: A breathable combed cotton crewneck with a soft printed design. Easy to wear all day.
+- **Specifications**: Material: 100% Bio-Washed Combed Cotton | Weight: 180 GSM Pre-Shrunk | Fit: Regular Unisex | Seams: Double-needle reinforced | Colors: Black, Navy, White, Sage
+- **Available Sizes / Options**: Small (S) (Chest 38") @ ₹299.00, Medium (M) (Chest 40") @ ₹299.00, Large (L) (Chest 42") @ ₹299.00, X-Large (XL) (Chest 44") @ ₹329.00
+
+### [Corporate Welcome Gift Kit](https://orderprintex.com/product/executive-welcome-hamper)
+- **Product URL**: https://orderprintex.com/product/executive-welcome-hamper
+- **SKU**: `HMP-001` | **Category**: Custom Stationery
+- **Base Pricing**: Custom Quoted (/ kit)
+- **Minimum Order Quantity (MOQ)**: 1 | **Lead Time**: 24-48 Hours
+- **Summary**: A ready gift set with branded items for new joiners and clients, packed neatly.
+- **Specifications**: Contents: 1 Ceramic Mug (11oz), 1 Hardbound Diary, 1 Metal Stylus Pen, 1 Branded Polo | Packaging: Rigid luxury presentation box with magnetic lid
+- **Available Sizes / Options**: Executive Standard (3 Items) (Box 10x8x4") @ ₹899.00, VIP Deluxe Suite (5 Items) (Box 14x11x5") @ ₹1,399.00
+
+### [Custom Printed Bookmarks](https://orderprintex.com/product/bookmark-03)
+- **Product URL**: https://orderprintex.com/product/bookmark-03
+- **SKU**: `BKM-001` | **Category**: Custom Stationery
+- **Base Pricing**: Custom Quoted (/ piece)
+- **Minimum Order Quantity (MOQ)**: 1 | **Lead Time**: 24-48 Hours
+- **Summary**: Double-sided bookmarks on thick card, with a soft-touch finish. Good for brands, bookstores and event giveaways.
+- **Specifications**: 350 GSM card • Double-sided print • Custom sizes
+- **Available Sizes / Options**: Standard (2 x 6 inches) (2" x 6") @ ₹1.50, Medium (2 x 7 inches) (2" x 7") @ ₹2.00, Large (2.5 x 8 inches) (2.5" x 8") @ ₹2.80
+- **Volume Discount Tiers**: 100 - 249 units; 250 - 499 units (10.00% off); 500 - 999 units (20.00% off); 1000+ units (35.00% off)
+
+## Prepress & Artwork Submission Standards
+
+- **Resolution Requirement**: 300 DPI at 100% physical finished print size.
+- **Accepted File Types**: Transparent PNG, vector PDF, Adobe Illustrator (.ai), layered Photoshop (.psd).
+- **Color Space & Profiles**: CMYK (US Web Coated SWOP or Coated FOGRA39) or sRGB IEC61966-2.1. Rich black formula: `C:60 M:40 Y:40 K:100`.
+- **Background Transparency**: Backgrounds must be 100% transparent. Opaque white boxes will print as solid opaque white ink underbase.
+- **Vector Outlines**: All text and font elements must be converted to curves/outlines prior to submission.
+- **Minimum Stroke Width**: Minimum 0.5pt (0.18mm) for fine text, lines, and negative space gaps.
+
+## Production Showcase & Factory Gallery
+
+- **Detailed DTF Print on a Dark T-Shirt** (DTF)
+  - A DTF transfer with smooth color blends, a bright white base and a soft, stretchy feel that doesn’t turn stiff.
+  - Image Asset: https://orderprintex.com/assets/images/dtf_fabric_print.jpg
+- **UV DTF Decals on Glass & Tumbler Curved Surfaces** (UV_DTF)
+  - Industrial-adhesion 3D tactile UV DTF stickers applied seamlessly onto curved stainless steel bottles and glassware with spot gloss varnish.
+  - Image Asset: https://orderprintex.com/assets/images/uv_dtf_drinkware.jpg
+- **Heavyweight 240 GSM Streetwear Graphic Tee** (TSHIRT)
+  - Vintage washed boxy drop-shoulder t-shirt with photographic DTF chest graphic, double-needle stitched seams, and tight retail ribbing.
+  - Image Asset: https://orderprintex.com/assets/images/streetwear_tee.jpg
+- **Luxury Apparel Unboxing Mailer Packaging Box** (PACKAGING)
+  - Custom matte black corrugated mailer box with hot-stamped gold foil logo, spot UV accents, and inner branded tissue wrap.
+  - Image Asset: https://orderprintex.com/assets/images/packaging_box.jpg
+- **Custom Die-Cut & Holographic Decal Collection** (STICKERS)
+  - Multi-surface peel-and-stick vinyl decals with embossed gloss spot varnish, iridescent light reflection, and permanent acrylic bond.
+  - Image Asset: https://orderprintex.com/assets/images/custom_stickers.jpg
+- **Executive Corporate Swag & Client Gifting Kit** (CORPORATE)
+  - Turnkey corporate onboarding kit runs featuring customized insulated drinkware, embossed diary, and stylus pen in a bespoke gift hamper.
+  - Image Asset: https://orderprintex.com/assets/images/corporate_swag_kit.jpg
+- **Luxury Embossed Branding Collateral & Stationery** (BRANDING)
+  - Thick crimson red and warm beige business cards with edge gilding, debossed linen corporate journal, and executive presentation folders.
+  - Image Asset: https://orderprintex.com/assets/images/branding_stationery.jpg
+
+## Knowledge Base & Printing Guides
+
+### [DTF vs Screen Printing: Understanding the Differences, Benefits and Applications](https://orderprintex.com/blog/dtf-vs-screen-printing-differences-benefits-applications)
+- **URL**: https://orderprintex.com/blog/dtf-vs-screen-printing-differences-benefits-applications
+- **Author**: Printex Team | **Read Time**: 6 min read
+- **Summary**: Sooner or later, everyone who orders custom T-shirts runs into the same question: DTF vs screen printing, which one should I go for? Both methods can give you a sharp, good-looking print, but they work very differently, cost differently and suit different kinds of orders.
+
+### [How Custom Printed T-Shirts Help Businesses Build Brand Identity](https://orderprintex.com/blog/how-custom-printed-t-shirts-help-businesses-build-brand-identity)
+- **URL**: https://orderprintex.com/blog/how-custom-printed-t-shirts-help-businesses-build-brand-identity
+- **Author**: By Printex | **Read Time**: 5 min read
+- **Summary**: Walk into a busy café, an exhibition stall or a corporate office and notice what you remember afterwards. It is rarely the brochure on the counter. It is the person wearing the logo. Custom printed T-shirts for business turn everyday clothing into a small billboard that people see, remember and talk about.
+
+### [How DTF Printing Technology Is Transforming the Custom Apparel Industry](https://orderprintex.com/blog/dtf-printing-technology-custom-apparel)
+- **URL**: https://orderprintex.com/blog/dtf-printing-technology-custom-apparel
+- **Author**: OrderPrintex Editorial Team | **Read Time**: 6 min read
+- **Summary**: Ask anyone who has tried to start a small clothing brand a few years back, and you will hear the same story. The designs were ready, the idea was solid, but the printing costs ate everything. Screen printing wanted big quantities, and most other options either looked dull or washed out after a few cycles.
+
+### [UV DTF Printing: How It Works and Its Applications in Product Branding](https://orderprintex.com/blog/uv-dtf-printing-product-branding)
+- **URL**: https://orderprintex.com/blog/uv-dtf-printing-product-branding
+- **Author**: OrderPrintex Editorial Team | **Read Time**: 5 min read
+- **Summary**: Pick up a premium-looking water bottle or a café mug these days and run your thumb over the logo. Chances are it feels slightly raised, glossy, and almost moulded into the surface. Most people assume that kind of finish needs expensive manufacturing. In reality, it is often UV DTF printing, a method that has quietly changed how small and mid-sized brands put their name on products.
+
+### [Different T-Shirt Printing Techniques: A Complete Guide for Businesses](https://orderprintex.com/blog/different-t-shirt-printing-techniques)
+- **URL**: https://orderprintex.com/blog/different-t-shirt-printing-techniques
+- **Author**: By Printex | **Read Time**: 8 min read
+- **Summary**: If you run a business, sooner or later you will need printed T-shirts. Maybe it is a uniform for your staff, merchandise for a launch, gifts for a corporate event, or a small clothing line of your own. And the moment you start asking for quotes, you run into a confusing list: screen printing, DTF, DTG, heat transfer, sublimation, vinyl, embroidery. Every printer swears by a different one, which makes choosing between T-shirt printing techniques harder than it should be.
+
+## Frequently Asked Questions (Curated Knowledge Base)
+
+### What is OrderPrintex and what printing services do you manufacture?
+**Category**: General Questions
+
+OrderPrintex is a premier manufacturing facility and bulk printing studio based in New Delhi, India. We specialize in industrial-grade Direct-to-Film (DTF) apparel transfers, UV DTF multi-surface transfer decals, custom screen-quality t-shirt printing, and turnkey corporate promotional kits. We cater to apparel brands, promotional agencies, screen printers, and independent creators across India.
+
+### Do you serve B2B clients, print studios, and wholesale resellers?
+**Category**: General Questions
+
+Yes! A significant portion of our daily production is dedicated to job-work and white-label wholesale supply for screen printing studios, DTG printers, uniform manufacturers, and retail clothing brands. We provide rolls and gang sheets ready for you to press and distribute to your own customers.
+
+### Which file formats can I upload for printing?
+**Category**: Artwork & File Upload
+
+We accept high-resolution files in Transparent PNG (300 DPI, recommended for single designs and gang sheets), vector Adobe Illustrator (.ai), EPS (.eps), layered Adobe Photoshop (.psd at 300 DPI), and print-ready vector PDF with embedded fonts.
+
+### How do I submit my artwork and prepare transparent backgrounds?
+**Category**: Artwork & File Upload
+
+You can upload artwork directly through the Upload Your Design workbench on our Homepage, on our Service pages, or via the Get a Quote form. Ensure your artwork has transparent negative spaces wherever you do not want white ink backing to print. If you submit a JPEG with a white background, that white square will print as solid opaque white ink.
+
+### Can I request a digital design proof before production begins?
+**Category**: Artwork & File Upload
+
+Yes, absolutely. Every order undergoes rigorous prepress review by our color technicians. We verify resolution, line thickness, color gamut, and bleed margins. For custom projects, digital mockups and RIP proofs are shared via the client portal for formal approval before physical printing starts.
+
+### What is DTF printing and which fabrics does it bond to?
+**Category**: DTF Printing
+
+DTF (Direct-to-Film) is a cutting-edge digital garment decoration technique. Artwork is printed onto specialized PET release film using high-density CMYK textile inks plus a solid white underbase, followed by a layer of hot-melt polyurethane adhesive powder cured under heat. DTF transfers apply flawlessly to virtually any fabric: 100% cotton, combed cotton, 100% polyester, poly-cotton blends, fleece, denim, nylon, canvas, and performance spandex.
+
+### What is the recommended heat press setting for DTF transfers?
+**Category**: DTF Printing
+
+For optimal washability and soft-hand feel: 1) Pre-press garment 3-5 seconds to remove moisture. 2) Transfer Press at 160°C (320°F) for 15 seconds under medium-to-firm pressure (40-50 PSI / 4-5 bar). 3) Cold Peel: Allow the transfer to cool completely to room temperature, then peel PET film smoothly. 4) Post-press: Cover graphic with Teflon or silicone parchment paper and press for 5 seconds to seal the transfer into the weave.
+
+### How do I wash DTF-printed garments to ensure 50+ wash longevity?
+**Category**: DTF Printing
+
+Turn garments inside-out, wash in cold or lukewarm water (max 30°C / 85°F) with mild detergent, avoid bleach or harsh spot removers, tumble dry on gentle low heat or hang dry in shade, and never iron directly on the printed graphic.
+
+### What is UV DTF printing and how does it work?
+**Category**: UV DTF Printing
+
+UV DTF is an innovative cold-transfer technology engineered specifically for hard, non-porous surfaces. Using piezoelectric printheads, the printer deposits white ink, vibrant CMYK inks, and a high-gloss 3D tactile clear varnish, cured instantaneously by ultraviolet LED lamps. Prints are applied directly to products without heat presses or ovens: peel, align, rub firmly, and peel away the carrier film.
+
+### Which surfaces are compatible with UV DTF transfer stickers?
+**Category**: UV DTF Printing
+
+UV DTF stickers bond permanently to clean, rigid, and smooth or lightly contoured materials including glassware, stainless steel tumblers, aluminum water flasks, ceramic mugs, plastics, acrylics, cell phone cases, rigid electronics, lacquered wood, and cosmetic packaging.
+
+### Are UV DTF decals waterproof, scratch-resistant, and dishwasher safe?
+**Category**: UV DTF Printing
+
+Yes. Because inks are cross-linked under high-intensity UV LED light and sealed with a heavy clear spot varnish layer, UV DTF stickers are 100% waterproof, UV-resistant, and scratch-resistant under normal handling. For maximum longevity on drinkware, hand-washing with a soft sponge is recommended.
+
+### Can I order custom T-shirts and what garment qualities are available?
+**Category**: T-Shirt Printing
+
+Yes! We offer complete end-to-end t-shirt manufacturing and printing. Clients can supply their own blanks or choose from our factory inventory: 180 GSM bio-washed combed cotton, 240 GSM heavyweight oversized streetwear tees, dry-fit sports polyester jerseys, and pique knit corporate polo shirts.
+
+### Where can graphics be placed on custom t-shirts?
+**Category**: T-Shirt Printing
+
+We support Left Chest pocket prints, Center Chest, Full Front (up to 12x16 inches), Full Back (up to 12x18 inches), Left/Right Sleeve branding, and interior neck custom brand labels. Multiple positions can be combined on a single run.
+
+### Can I build gang sheets with mixed logos, neck tags, and artwork sizes?
+**Category**: Orders & Quantities
+
+Yes! On our 22-inch roll gang sheets, you can arrange dozens of different logos, neck labels, chest graphics, and sleeve designs on a single roll with no per-design setup fees. You only pay for the total linear length of the gang roll.
+
+### What is the minimum order quantity (MOQ)?
+**Category**: Orders & Quantities
+
+For DTF gang sheets, you can order from as little as 1 meter roll. For custom printed t-shirts and corporate merchandise, single prototype samples are available before committing to bulk production runs of 50, 500, or 5,000+ units.
+
+### How can I request a quotation for my printing project?
+**Category**: Quotes & Pricing
+
+Submit your artwork and required dimensions via our online Get a Quote form, upload via the homepage design tool, or contact our sales team via WhatsApp (+91 93540 28199). Prepress coordinators calculate optimal sheet yield and provide an itemized formal quotation with transparent per-unit and volume tiered pricing.
+
+### Do you offer tiered discounts for continuous gang rolls and bulk orders?
+**Category**: Quotes & Pricing
+
+Yes. Commercial printers and brand owners who order recurring volume or continuous rolls (10m, 25m, 50m, 100m+) receive preferential trade wholesale pricing. Contact our Delhi facility to set up a dedicated B2B trade account.
+
+### How can I track my order once dispatched?
+**Category**: Delivery & Tracking
+
+Once your order passes our final quality control inspection, it is packaged in heavy-duty moisture-resistant protective tubes or corrugated mailers. Dispatch details and tracking links (Blue Dart, DTDC, Delhivery, or India Post Speed Post) are updated in your customer portal and notified via WhatsApp or Email.
+
+### What is your standard turnaround time for gang sheets and printed merchandise?
+**Category**: Delivery & Tracking
+
+Standard production for approved DTF gang sheets and UV DTF decals is typically 24 to 48 hours. Finished custom t-shirts and bulk promotional merchandise take 3 to 5 business days depending on volume. Expedited same-day dispatch from our New Delhi hub is available for urgent rush orders upon request.
+
+## Corporate Directory & Contact Details
+
+- **Entity Name**: OrderPrintex
+- **Headquarters & Production Facility**: Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh, Delhi, 110059
+- **Official Email**: sales@orderprintex.com
+- **Telephone / WhatsApp**: +91 93540 28199 (<https://wa.me/919354028199>)
+- **Operating Hours**: Mon - Sat: 9:30 AM - 8:00 PM
+- **Geographical Coverage**: Nationwide delivery across all states in India & Worldwide B2B Export.
+- **Direct Quote Request**: https://orderprintex.com/get-quote
+
+## Complete Public URL Directory & Inter-Page Relationships
+
+- <https://orderprintex.com/>
+- <https://orderprintex.com/products>
+- <https://orderprintex.com/services>
+- <https://orderprintex.com/pricing>
+- <https://orderprintex.com/get-quote>
+- <https://orderprintex.com/gallery>
+- <https://orderprintex.com/blog>
+- <https://orderprintex.com/about>
+- <https://orderprintex.com/faq>
+- <https://orderprintex.com/contact>
+- <https://orderprintex.com/services/dtf-printing>
+- <https://orderprintex.com/services/uv-dtf-printing>
+- <https://orderprintex.com/services/t-shirt-printing>
+- <https://orderprintex.com/services/corporate-printing>
+- <https://orderprintex.com/product/category/uv-dtf-decals>
+- <https://orderprintex.com/product/category/custom-tshirts>
+- <https://orderprintex.com/product/category/corporate-merchandise>
+- <https://orderprintex.com/product/category/packaging>
+- <https://orderprintex.com/product/category/custom-stickers>
+- <https://orderprintex.com/product/category/custom-stationery>
+- <https://orderprintex.com/blog/category/printing-basics>
+- <https://orderprintex.com/blog/category/t-shirts-apparel>
+- <https://orderprintex.com/blog/category/corporate-branding>
+- <https://orderprintex.com/blog/category/packaging-labels>
+- <https://orderprintex.com/product/custom-dtf-gang-sheet>
+- <https://orderprintex.com/product/custom-uv-dtf-decal-sheet>
+- <https://orderprintex.com/product/streetwear-oversized-tee>
+- <https://orderprintex.com/product/thermal-sipper-bottle>
+- <https://orderprintex.com/product/apparel-mailer-box>
+- <https://orderprintex.com/product/holographic-stickers>
+- <https://orderprintex.com/product/bio-washed-cotton-tee>
+- <https://orderprintex.com/product/executive-welcome-hamper>
+- <https://orderprintex.com/product/bookmark-03>
+- <https://orderprintex.com/blog/dtf-vs-screen-printing-differences-benefits-applications>
+- <https://orderprintex.com/blog/how-custom-printed-t-shirts-help-businesses-build-brand-identity>
+- <https://orderprintex.com/blog/dtf-printing-technology-custom-apparel>
+- <https://orderprintex.com/blog/uv-dtf-printing-product-branding>
+- <https://orderprintex.com/blog/different-t-shirt-printing-techniques>
+- <https://orderprintex.com/privacy-policy>
+- <https://orderprintex.com/terms-and-conditions>
+- <https://orderprintex.com/shipping-policy>
+

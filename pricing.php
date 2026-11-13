@@ -12,6 +12,7 @@ require_once __DIR__ . '/includes/catalog_helper.php';
 $pageTitle = "Wholesale Pricing & Volume Discount Tiers | OrderPrintex Delhi";
 $pageDesc  = "Transparent manufacturer rates for 22-inch DTF gang rolls, UV DTF decals, custom printed apparel, and packaging. Pan-India express dispatch with zero plate fees.";
 $canonical = pricing_url();
+$pageSchemaKey = 'pricing';
 
 require_once __DIR__ . '/includes/header.php';
 

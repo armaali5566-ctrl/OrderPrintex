@@ -208,7 +208,7 @@ require_once __DIR__ . '/header.php';
         <p class="admin-page-subtitle">Showcase genuine commercial printing work, garment transfers, decals, and bespoke corporate merchandise to prospective clients.</p>
     </div>
     <div class="admin-topbar-actions">
-        <a href="<?= url('gallery/') ?>" target="_blank" class="btn btn-outline btn-sm">
+        <a href="<?= url('gallery') ?>" target="_blank" class="btn btn-outline btn-sm">
             <span>View Public Portfolio ↗</span>
         </a>
     </div>

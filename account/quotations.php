@@ -137,7 +137,7 @@ require_once __DIR__ . '/../includes/header.php';
           &larr; Back to All Quotations
         </a>
       <?php else: ?>
-        <a href="<?= url('get-quote/') ?>" class="btn btn-primary" style="padding:0.65rem 1.4rem;">
+        <a href="<?= url('get-quote') ?>" class="btn btn-primary" style="padding:0.65rem 1.4rem;">
           <span>+ Request New Quotation</span>
         </a>
       <?php endif; ?>
@@ -281,7 +281,7 @@ require_once __DIR__ . '/../includes/header.php';
                 This quotation was declined. You can submit a new enquiry with updated specifications at any time.
               </p>
             </div>
-            <a href="<?= url('get-quote/') ?>" class="btn btn-outline" style="width:100%; text-align:center; display:block;">
+            <a href="<?= url('get-quote') ?>" class="btn btn-outline" style="width:100%; text-align:center; display:block;">
               Submit New Print Enquiry
             </a>
 
@@ -360,7 +360,7 @@ require_once __DIR__ . '/../includes/header.php';
                   <td colspan="7" style="padding:3.5rem 1.5rem; text-align:center; color:#B8B1A3;">
                     <div style="font-size:1.1rem; margin-bottom:0.5rem; color:#F5F1E8; font-weight:600;">No quotations generated yet</div>
                     <p style="margin:0 0 1.25rem; font-size:0.9rem;">Submit your commercial printing specifications to receive an itemized quotation.</p>
-                    <a href="<?= url('get-quote/') ?>" class="btn btn-primary btn-sm">Request Your First Quote</a>
+                    <a href="<?= url('get-quote') ?>" class="btn btn-primary btn-sm">Request Your First Quote</a>
                   </td>
                 </tr>
               <?php else: ?>

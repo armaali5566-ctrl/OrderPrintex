@@ -1,0 +1,23 @@
+{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://orderprintex.com/product/streetwear-oversized-tee#product",
+    "name": "Oversized Streetwear T-Shirt (240 GSM)",
+    "url": "https://orderprintex.com/product/streetwear-oversized-tee",
+    "image": "https://orderprintex.com/assets/images/custom_tshirt_apparel.jpg",
+    "description": "A heavy drop-shoulder tee with your design printed in DTF. Roomy fit and a soft feel.",
+    "sku": "STR-001",
+    "category": "Custom T-Shirts",
+    "brand": {
+        "@type": "Brand",
+        "name": "OrderPrintex"
+    },
+    "offers": {
+        "@type": "Offer",
+        "url": "https://orderprintex.com/product/streetwear-oversized-tee",
+        "priceCurrency": "INR",
+        "price": "0.00",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
+    }
+}

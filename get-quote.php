@@ -4,9 +4,15 @@
  * Full-Width Studio Workbench Architecture
  */
 
+require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/includes/database.php';
+require_once __DIR__ . '/includes/functions.php';
+
 $pageTitle = "Get an Itemized Printing Quotation | PRINTEX Studio";
 $pageDesc  = "Request an itemized quotation for DTF transfers, UV DTF stickers, custom t-shirt production, or corporate promotional merchandise. Fast prepress review and transparent pricing.";
 $bodyClass = 'page-get-quote';
+$canonical = url('get-quote');
+$pageSchemaKey = 'get-quote';
 
 require_once __DIR__ . '/includes/header.php';
 

@@ -2,6 +2,7 @@
 /**
  * OrderPrintex - Centralized SEO, Sitemap, LLMs.txt, Schema.org JSON-LD & Documentation Engine
  * Complete Website-Wide Automated Synchronization for Search Engines and AI Discovery.
+ * Generates Clean Canonical URLs without trailing slash (e.g. /about, /services/dtf-printing).
  */
 
 require_once __DIR__ . '/config.php';
@@ -125,67 +126,958 @@ function seo_get_portfolio_items(): array {
             'id' => 1,
             'title' => 'High-Detail DTF Apparel Print on Dark Garment',
             'category' => 'dtf',
-            'image_url' => 'assets/images/dtf_fabric_print.jpg',
+            'image_url' => 'assets/images/dtf_fabric_print.webp',
             'description' => 'Direct-to-Film transfer showcasing ultra-fine color gradients, opaque white underbase, and soft stretch elasticity without hand feel stiffness.'
         ],
         [
             'id' => 2,
             'title' => 'UV DTF Decals on Glass & Tumbler Curved Surfaces',
             'category' => 'uv_dtf',
-            'image_url' => 'assets/images/uv_dtf_drinkware.jpg',
+            'image_url' => 'assets/images/uv_dtf_drinkware.webp',
             'description' => 'Industrial-adhesion 3D tactile UV DTF stickers applied seamlessly onto curved stainless steel bottles and glassware with spot gloss varnish.'
         ],
         [
             'id' => 3,
             'title' => 'Heavyweight 240 GSM Streetwear Graphic Tee',
             'category' => 'tshirt',
-            'image_url' => 'assets/images/streetwear_tee.jpg',
+            'image_url' => 'assets/images/streetwear_tee.webp',
             'description' => 'Vintage washed boxy drop-shoulder t-shirt with photographic DTF chest graphic, double-needle stitched seams, and tight retail ribbing.'
         ],
         [
             'id' => 4,
             'title' => 'Luxury Apparel Unboxing Mailer Packaging Box',
             'category' => 'packaging',
-            'image_url' => 'assets/images/packaging_box.jpg',
+            'image_url' => 'assets/images/packaging_box.webp',
             'description' => 'Custom matte black corrugated mailer box with hot-stamped gold foil logo, spot UV accents, and inner branded tissue wrap.'
         ],
         [
             'id' => 5,
             'title' => 'Custom Die-Cut & Holographic Decal Collection',
             'category' => 'uv_dtf',
-            'image_url' => 'assets/images/custom_stickers.jpg',
+            'image_url' => 'assets/images/custom_stickers.webp',
             'description' => 'Multi-surface peel-and-stick vinyl decals with embossed gloss spot varnish, iridescent light reflection, and permanent acrylic bond.'
         ],
         [
             'id' => 6,
             'title' => 'Executive Corporate Swag & Client Gifting Kit',
             'category' => 'corporate',
-            'image_url' => 'assets/images/corporate_swag_kit.jpg',
+            'image_url' => 'assets/images/corporate_swag_kit.webp',
             'description' => 'Turnkey corporate onboarding kit runs featuring customized insulated drinkware, embossed diary, and stylus pen in a bespoke gift hamper.'
         ],
         [
             'id' => 7,
             'title' => 'Retail Brand Collection & Crimson Studio Apparel',
             'category' => 'tshirt',
-            'image_url' => 'assets/images/custom_tshirt_apparel.jpg',
+            'image_url' => 'assets/images/custom_tshirt_apparel.webp',
             'description' => 'Studio fashion apparel featuring rich crimson red garment dyes, true-match ICC color profiling, and breathable photographic chest prints.'
         ],
         [
             'id' => 8,
             'title' => 'Luxury Embossed Branding Collateral & Stationery',
             'category' => 'packaging',
-            'image_url' => 'assets/images/branding_stationery.jpg',
+            'image_url' => 'assets/images/branding_stationery.webp',
             'description' => 'Thick crimson red and warm beige business cards with edge gilding, debossed linen corporate journal, and executive presentation folders.'
         ]
     ];
 }
 
 /**
- * Synchronize all four SEO, AI & Documentation artifacts:
- * 1. sitemap.xml
- * 2. llms.txt
+ * Canonical URL Helpers for Production SEO & AI Discovery Files
+ * Strictly outputs the verified production domain https://orderprintex.com WITHOUT trailing slash
+ */
+function seo_prod_url(string $path = ''): string {
+    $trimmed = trim(ltrim($path, '/'));
+    if ($trimmed === '' || $trimmed === '/') {
+        return 'https://orderprintex.com/';
+    }
+    if (strpos($trimmed, '#') === 0) {
+        return 'https://orderprintex.com/' . $trimmed;
+    }
+    return 'https://orderprintex.com/' . rtrim($trimmed, '/');
+}
+function seo_prod_service_url(string $slug): string {
+    return 'https://orderprintex.com/services/' . trim($slug, '/');
+}
+function seo_prod_category_url(string $slug): string {
+    return 'https://orderprintex.com/product/category/' . trim($slug, '/');
+}
+function seo_prod_product_url(string $slug): string {
+    return 'https://orderprintex.com/product/' . trim($slug, '/');
+}
+function seo_prod_blog_url(string $slug = ''): string {
+    if (empty($slug)) {
+        return 'https://orderprintex.com/blog';
+    }
+    return 'https://orderprintex.com/blog/' . trim($slug, '/');
+}
+function seo_prod_blog_category_url(string $slug): string {
+    return 'https://orderprintex.com/blog/category/' . trim($slug, '/');
+}
+
+/**
+ * Render Schema.org JSON-LD tag from /seo/schema/{key}.json
+ */
+function seo_render_schema(string $key): string {
+    $rootDir = realpath(__DIR__ . '/..') ?: 'C:/Movies/Internship/OrderPrintex';
+    $cleanKey = strtolower(trim($key));
+    $candidates = [
+        $rootDir . '/seo/schema/' . $cleanKey . '.json',
+        $rootDir . '/seo/schema/' . $key . '.json',
+        $rootDir . '/seo/schema/services-' . $cleanKey . '.json'
+    ];
+    foreach ($candidates as $file) {
+        if (file_exists($file) && !is_dir($file)) {
+            $content = file_get_contents($file);
+            if ($content) {
+                return "\n  <!-- Schema.org Structured Data (" . htmlspecialchars($cleanKey) . ") -->\n" .
+                       "  <script type=\"application/ld+json\">\n" .
+                       trim($content) . "\n" .
+                       "  </script>\n";
+            }
+        }
+    }
+    return '';
+}
+
+/**
+ * Safe slug generator preventing filename collisions or invalid characters
+ */
+function seo_safe_slug(string $slug): string {
+    $slug = strtolower(trim($slug));
+    $slug = preg_replace('/[^a-z0-9_-]+/', '-', $slug);
+    $slug = trim($slug, '-_');
+    return $slug ?: 'item';
+}
+
+/**
+ * Safe atomic file write preventing incomplete or corrupted files
+ */
+function seo_atomic_write(string $filePath, string $content): bool {
+    $dir = dirname($filePath);
+    if (!is_dir($dir)) {
+        @mkdir($dir, 0777, true);
+    }
+    $tmpFile = $filePath . '.' . uniqid('seo_', true) . '.tmp';
+    if (@file_put_contents($tmpFile, $content) === false) {
+        return (@file_put_contents($filePath, $content) !== false);
+    }
+    if (file_exists($filePath)) {
+        @unlink($filePath);
+    }
+    if (@rename($tmpFile, $filePath)) {
+        return true;
+    }
+    $res = (@file_put_contents($filePath, $content) !== false);
+    @unlink($tmpFile);
+    return $res;
+}
+
+/**
+ * Convert HTML content to clean, readable Markdown
+ */
+function seo_html_to_markdown(string $html): string {
+    $text = trim($html);
+    if ($text === '') {
+        return '';
+    }
+    // Headings
+    $text = preg_replace('/<h1[^>]*>(.*?)<\/h1>/is', "\n# $1\n", $text);
+    $text = preg_replace('/<h2[^>]*>(.*?)<\/h2>/is', "\n## $1\n", $text);
+    $text = preg_replace('/<h3[^>]*>(.*?)<\/h3>/is', "\n### $1\n", $text);
+    $text = preg_replace('/<h4[^>]*>(.*?)<\/h4>/is', "\n#### $1\n", $text);
+    // Bold / Italic
+    $text = preg_replace('/<(strong|b)[^>]*>(.*?)<\/(strong|b)>/is', '**$2**', $text);
+    $text = preg_replace('/<(em|i)[^>]*>(.*?)<\/(em|i)>/is', '*$2*', $text);
+    // Links
+    $text = preg_replace('/<a\s+[^>]*href=["\']([^"\']*)["\'][^>]*>(.*?)<\/a>/is', '[$2]($1)', $text);
+    // Lists
+    $text = preg_replace('/<li[^>]*>(.*?)<\/li>/is', "\n- $1", $text);
+    // Paragraphs and line breaks
+    $text = preg_replace('/<br\s*\/?>/is', "\n", $text);
+    $text = preg_replace('/<p[^>]*>(.*?)<\/p>/is', "\n$1\n", $text);
+    // Blockquotes
+    $text = preg_replace('/<blockquote[^>]*>(.*?)<\/blockquote>/is', "\n> $1\n", $text);
+    // Strip remaining tags
+    $text = strip_tags($text);
+    // Decode HTML entities
+    $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    // Normalize excess blank lines
+    $text = preg_replace("/[\r\n]{3,}/", "\n\n", $text);
+    return trim($text);
+}
+
+/**
+ * Explicitly delete content-specific SEO files (used on unpublish / delete)
+ */
+function seo_delete_content_files(string $type, string $slug): void {
+    $rootDir = realpath(__DIR__ . '/..') ?: 'C:/Movies/Internship/OrderPrintex';
+    $safeSlug = seo_safe_slug($slug);
+    $mdFiles = [
+        $rootDir . '/seo/markdown/' . $type . '-' . $safeSlug . '.md',
+        $rootDir . '/seo/markdown/' . $safeSlug . '.md'
+    ];
+    $jsonFiles = [
+        $rootDir . '/seo/schema/' . $type . '-' . $safeSlug . '.json',
+        $rootDir . '/seo/schema/' . $safeSlug . '.json'
+    ];
+    foreach ($mdFiles as $f) {
+        if (file_exists($f)) @unlink($f);
+    }
+    foreach ($jsonFiles as $f) {
+        if (file_exists($f)) @unlink($f);
+    }
+}
+
+/**
+ * Generate all 14 core page Markdowns + Product, Category, Service, and Blog Markdowns into /seo/markdown/
+ * Uses clean canonical URLs without trailing slash.
+ */
+function seo_generate_page_markdowns(string $rootDir, array $ctx): array {
+    $mdDir = $rootDir . '/seo/markdown';
+    if (!is_dir($mdDir)) {
+        @mkdir($mdDir, 0777, true);
+    }
+
+    $created = [];
+    $today = date('Y-m-d');
+
+    // 1. Home / Index Markdown
+    $homeMd = "# OrderPrintex — Commercial DTF & UV DTF Printing Studio Delhi\n\n";
+    $homeMd .= "- **Canonical URL**: <" . seo_prod_url('') . ">\n";
+    $homeMd .= "- **Meta Description**: " . $ctx['metaDesc'] . "\n";
+    $homeMd .= "- **Operating Headquarters**: " . $ctx['siteAddress'] . "\n";
+    $homeMd .= "- **Primary Contact**: " . $ctx['sitePhone'] . " | " . $ctx['siteEmail'] . "\n\n";
+    $homeMd .= "## Executive Overview\n\n";
+    $homeMd .= "OrderPrintex is a high-capacity industrial digital printing facility based in New Delhi, India. We deliver commercial-grade Direct-to-Film (DTF) apparel transfers, UV DTF 3D tactile decals, custom t-shirt manufacturing, and corporate swag kits. We operate on a bespoke B2B Enquiry-to-Quotation workflow with automated prepress inspection and pan-India express dispatch.\n\n";
+    $homeMd .= "## Core Manufacturing Capabilities\n\n";
+    $homeMd .= "1. **Direct-to-Film (DTF) Transfers**: Continuous 22-inch roll printing with dual Epson i3200 printheads, ultra-dense white ink backing, and automated TPU adhesive curing.\n";
+    $homeMd .= "2. **UV DTF Decals**: Instant cold-peel multi-surface transfer stickers with 3D spot gloss varnish for drinkware, metal, glass, and acrylic.\n";
+    $homeMd .= "3. **Custom T-Shirt Printing**: Premium 180 GSM bio-washed combed cotton, 240 GSM oversized streetwear, and sports polyester with photographic detail.\n";
+    $homeMd .= "4. **Corporate Swag & Promotional Kits**: Turnkey client onboarding boxes, customized insulated drinkware, diaries, and executive presentation items.\n\n";
+    $homeMd .= "## Machinery & Fleet\n\n";
+    foreach ($ctx['equipment'] as $eq) {
+        $homeMd .= "- **{$eq['name']}** ({$eq['category']}): {$eq['purpose']} — {$eq['impact']}\n";
+    }
+    $homeMd .= "\n## How to Order & Prepress Workflow\n\n";
+    $homeMd .= "1. Visit <" . seo_prod_url('get-quote') . "> or upload artwork via the homepage.\n";
+    $homeMd .= "2. Prepress engineers audit your resolution (300 DPI transparent PNG/PDF) and send a formal commercial quotation.\n";
+    $homeMd .= "3. Approve the digital RIP proof in your customer dashboard.\n";
+    $homeMd .= "4. Production runs within 24-48 hours with express nationwide tracking.\n";
+
+    seo_atomic_write($mdDir . '/home.md', $homeMd);
+    seo_atomic_write($mdDir . '/index.md', $homeMd);
+    $created[] = 'home.md';
+    $created[] = 'index.md';
+
+    // 2. About Markdown
+    $aboutMd = "# About OrderPrintex — Printing Facility & Prepress Studio\n\n";
+    $aboutMd .= "- **Canonical URL**: <" . seo_prod_url('about') . ">\n";
+    $aboutMd .= "- **Meta Description**: Learn about OrderPrintex: Delhi's leading commercial DTF and UV DTF printing studio with 10+ years of prepress expertise, serving 500+ brands across India.\n\n";
+    $aboutMd .= "## Our Operational Heritage\n\n";
+    $aboutMd .= "Founded with a mission to bring world-class digital garment and surface decoration technologies to Indian brands and print studios, OrderPrintex combines precision Japanese printheads, European TPU adhesives, and in-house prepress color calibration.\n\n";
+    $aboutMd .= "## Factory Metrics & Infrastructure\n\n";
+    $aboutMd .= "- **Heritage**: Over 10 years of prepress and textile printing experience.\n";
+    $aboutMd .= "- **Technology Focus**: Industrial DTF roll-to-roll and UV DTF cold transfers.\n";
+    $aboutMd .= "- **Prepress Guarantee**: Every customer file is manually audited for DPI, alpha channels, and color gamut before printing.\n";
+    $aboutMd .= "- **Pan-India Dispatch**: Daily shipments via Blue Dart, DTDC, Delhivery, and express cargo.\n";
+    $aboutMd .= "- **Facility Address**: " . $ctx['siteAddress'] . "\n";
+    seo_atomic_write($mdDir . '/about.md', $aboutMd);
+    $created[] = 'about.md';
+
+    // 3. Services Directory Markdown
+    $servicesMd = "# Industrial Printing & Manufacturing Services | OrderPrintex\n\n";
+    $servicesMd .= "- **Canonical URL**: <" . seo_prod_url('services') . ">\n";
+    $servicesMd .= "- **Meta Description**: Explore our end-to-end commercial printing services: DTF fabric transfers, UV DTF rigid decals, custom screen-quality t-shirts, and corporate swag kits.\n\n";
+    $servicesMd .= "## Available Services\n\n";
+    foreach ($ctx['services'] as $srv) {
+        $servicesMd .= "### [{$srv['title']}](<" . seo_prod_service_url($srv['slug']) . ">)\n";
+        $servicesMd .= "- **Service URL**: <" . seo_prod_service_url($srv['slug']) . ">\n";
+        $desc = !empty($srv['full_description']) ? strip_tags($srv['full_description']) : (!empty($srv['short_description']) ? strip_tags($srv['short_description']) : 'High-definition industrial printing service.');
+        $servicesMd .= "- **Overview**: {$desc}\n";
+        $servicesMd .= "- **Turnaround**: 24-48 Hours | **Pan-India Dispatch**\n\n";
+    }
+    seo_atomic_write($mdDir . '/services.md', $servicesMd);
+    $created[] = 'services.md';
+
+    // 4-7. Individual Services Markdowns (both services-{slug}.md and {slug}.md)
+    foreach ($ctx['services'] as $srv) {
+        $slug = seo_safe_slug($srv['slug']);
+        $sFile = 'services-' . $slug . '.md';
+        $aliasFile = $slug . '.md';
+        $sMd = "# {$srv['title']} | OrderPrintex\n\n";
+        $sMd .= "- **Canonical URL**: <" . seo_prod_service_url($slug) . ">\n";
+        $desc = !empty($srv['full_description']) ? strip_tags($srv['full_description']) : (!empty($srv['short_description']) ? strip_tags($srv['short_description']) : 'Commercial printing service.');
+        $sMd .= "- **Description**: {$desc}\n\n";
+        $sMd .= "## Service Specifications & Technical Capabilities\n\n";
+        $sMd .= "- **Turnaround**: 24-48 Hours standard.\n";
+        $sMd .= "- **File Formats**: 300 DPI Transparent PNG, vector PDF, AI, PSD.\n";
+        $sMd .= "- **Quality Standard**: OEKO-TEX certified inks, 1440x2880 DPI resolution.\n";
+        $sMd .= "- **Production Hub**: " . $ctx['siteAddress'] . "\n\n";
+        $sMd .= "## Direct Quote Request\n\n";
+        $sMd .= "Request a commercial quote for {$srv['title']} at <" . seo_prod_url('get-quote') . ">.\n";
+        
+        seo_atomic_write($mdDir . '/' . $sFile, $sMd);
+        seo_atomic_write($mdDir . '/' . $aliasFile, $sMd);
+        $created[] = $sFile;
+        $created[] = $aliasFile;
+    }
+
+    // 8. Products Catalog Markdown
+    $prodCatalogMd = "# Commercial Print Product Catalog | OrderPrintex\n\n";
+    $prodCatalogMd .= "- **Canonical URL**: <" . seo_prod_url('products') . ">\n";
+    $prodCatalogMd .= "- **Meta Description**: Browse all OrderPrintex manufactured products: DTF gang rolls, UV DTF sticker sheets, blank apparel, corporate swag kits, and custom packaging boxes.\n\n";
+    $prodCatalogMd .= "## Product Categories\n\n";
+    foreach ($ctx['categories'] as $cat) {
+        $prodCatalogMd .= "- **[{$cat['name']}](<" . seo_prod_category_url($cat['slug']) . ">)**: " . strip_tags($cat['description'] ?? '') . "\n";
+    }
+    $prodCatalogMd .= "\n## Products Directory\n\n";
+    foreach ($ctx['products'] as $p) {
+        $price = $p['sale_price'] ?? $p['regular_price'] ?? $p['starting_price'] ?? 0;
+        $priceStr = $price > 0 ? "₹" . number_format($price, 2) : "Custom Quoted";
+        $sku = $p['sku'] ?: ('OP-PRD-' . $p['id']);
+        $prodCatalogMd .= "### [{$p['title']}](<" . seo_prod_product_url($p['slug']) . ">)\n";
+        $prodCatalogMd .= "- **SKU**: `{$sku}` | **Category**: " . ($p['category_name'] ?: 'Printing') . " | **Base Price**: {$priceStr}\n";
+        $pDesc = !empty($p['short_desc']) ? strip_tags($p['short_desc']) : (!empty($p['description']) ? substr(strip_tags($p['description']), 0, 160) . '...' : '');
+        $prodCatalogMd .= "- **Summary**: {$pDesc}\n\n";
+    }
+    seo_atomic_write($mdDir . '/products.md', $prodCatalogMd);
+    $created[] = 'products.md';
+
+    // 9. Pricing Markdown
+    $pricingMd = "# Trade Pricing & Volume Discount Tiers | OrderPrintex\n\n";
+    $pricingMd .= "- **Canonical URL**: <" . seo_prod_url('pricing') . ">\n";
+    $pricingMd .= "- **Meta Description**: Transparent commercial pricing for DTF gang sheets, UV decals, and apparel. Wholesale discount tiers for brands, screen printers, and volume resellers.\n\n";
+    $pricingMd .= "## B2B Commercial Pricing Structure\n\n";
+    $pricingMd .= "OrderPrintex offers transparent per-meter and per-unit tiered pricing. As print volume increases, per-unit rates decrease significantly.\n\n";
+    $pricingMd .= "### DTF Transfer Rolls (22-Inch Width)\n";
+    $pricingMd .= "- **1 to 5 Linear Meters**: Standard retail/sample tier.\n";
+    $pricingMd .= "- **6 to 20 Linear Meters**: Brand & studio discount tier (10% - 15% off).\n";
+    $pricingMd .= "- **21 to 50 Linear Meters**: Bulk trade tier (20% - 25% off).\n";
+    $pricingMd .= "- **50+ Linear Meters**: Master wholesale roll pricing (up to 35% off).\n\n";
+    $pricingMd .= "### Quotation Details\n";
+    $pricingMd .= "- All invoices comply with 18% GST.\n";
+    $pricingMd .= "- Transparent linear yield calculations with zero hidden plate or setup charges.\n";
+    seo_atomic_write($mdDir . '/pricing.md', $pricingMd);
+    $created[] = 'pricing.md';
+
+    // 10. Gallery Markdown
+    $galleryMd = "# Production Portfolio & Specimen Gallery | OrderPrintex\n\n";
+    $galleryMd .= "- **Canonical URL**: <" . seo_prod_url('gallery') . ">\n";
+    $galleryMd .= "- **Meta Description**: High-resolution photographs of commercial production runs: DTF prints on dark garments, UV DTF on glassware, luxury unboxing packaging, and merchandise.\n\n";
+    $galleryMd .= "## Showcase Specimens\n\n";
+    foreach ($ctx['portfolioItems'] as $item) {
+        $galleryMd .= "### {$item['title']} (" . strtoupper($item['category']) . ")\n";
+        $galleryMd .= "- **Description**: {$item['description']}\n";
+        $galleryMd .= "- **Image Asset**: <" . seo_prod_url($item['image_url']) . ">\n\n";
+    }
+    seo_atomic_write($mdDir . '/gallery.md', $galleryMd);
+    $created[] = 'gallery.md';
+
+    // 11. Blog Markdown
+    $blogMd = "# Printing Knowledge Base & Prepress Guides | OrderPrintex\n\n";
+    $blogMd .= "- **Canonical URL**: <" . seo_prod_url('blog') . ">\n";
+    $blogMd .= "- **Meta Description**: Educational guides, heat press temperature charts, DTF vs UV DTF comparisons, file preparation tutorials, and commercial printing insights.\n\n";
+    $blogMd .= "## Published Industry Guides\n\n";
+    foreach ($ctx['blogPosts'] as $post) {
+        $blogMd .= "### [{$post['title']}](<" . seo_prod_blog_url($post['slug']) . ">)\n";
+        $blogMd .= "- **Author**: " . ($post['author'] ?: 'OrderPrintex Editorial Team') . " | **Read Time**: " . ($post['read_time'] ?: '5 min read') . "\n";
+        $excerpt = !empty($post['excerpt']) ? strip_tags($post['excerpt']) : 'Printing industry technical guide.';
+        $blogMd .= "- **Summary**: {$excerpt}\n\n";
+    }
+    seo_atomic_write($mdDir . '/blog.md', $blogMd);
+    $created[] = 'blog.md';
+
+    // 12. FAQ Markdown
+    $faqMd = "# Frequently Asked Questions | OrderPrintex\n\n";
+    $faqMd .= "- **Canonical URL**: <" . seo_prod_url('faq') . ">\n";
+    $faqMd .= "- **Meta Description**: Comprehensive answers covering artwork upload formats, DTF press settings, wash care instructions, UV DTF adhesion, minimum order quantities, and turnaround.\n\n";
+    $faqMd .= "## Knowledge Base Q&As\n\n";
+    foreach ($ctx['faqs'] as $idx => $f) {
+        $num = $idx + 1;
+        $faqMd .= "### Q{$num}. [{$f['category']}] {$f['question']}\n\n";
+        $faqMd .= "{$f['answer']}\n\n";
+    }
+    seo_atomic_write($mdDir . '/faq.md', $faqMd);
+    $created[] = 'faq.md';
+
+    // 13. Contact Markdown
+    $contactMd = "# Contact & Factory Location | OrderPrintex\n\n";
+    $contactMd .= "- **Canonical URL**: <" . seo_prod_url('contact') . ">\n";
+    $contactMd .= "- **Meta Description**: Get in touch with our New Delhi printing facility. Phone, WhatsApp, email, business hours, and directions to Pankha Road, Sitapuri Part 1.\n\n";
+    $contactMd .= "## Manufacturing Facility & Direct Channels\n\n";
+    $contactMd .= "- **Company Name**: " . $ctx['siteName'] . "\n";
+    $contactMd .= "- **Address**: " . $ctx['siteAddress'] . "\n";
+    $contactMd .= "- **Phone / WhatsApp**: " . $ctx['sitePhone'] . " (<https://wa.me/919354028199>)\n";
+    $contactMd .= "- **Email**: " . $ctx['siteEmail'] . "\n";
+    $contactMd .= "- **Working Hours**: " . $ctx['siteHours'] . "\n";
+    $contactMd .= "- **Coordinates**: 28.6180° N, 77.0805° E (Near 40 Feet Road, Pankha Road, Sitapuri Part 1, Rani Bagh, Delhi 110059)\n";
+    seo_atomic_write($mdDir . '/contact.md', $contactMd);
+    $created[] = 'contact.md';
+
+    // 14. Get Quote Markdown
+    $quoteMd = "# Request a Custom Print Quotation | OrderPrintex\n\n";
+    $quoteMd .= "- **Canonical URL**: <" . seo_prod_url('get-quote') . ">\n";
+    $quoteMd .= "- **Meta Description**: Upload your design files, specify dimensions and quantities, and receive an itemized commercial quotation with volume discounts within hours.\n\n";
+    $quoteMd .= "## Quotation Request Guidelines\n\n";
+    $quoteMd .= "1. Provide artwork in 300 DPI transparent PNG, PDF, or AI format.\n";
+    $quoteMd .= "2. State your required dimensions (in inches or linear meters) and required volume.\n";
+    $quoteMd .= "3. Prepress technicians verify print feasibility, calculate optimal nesting yield, and issue a formal GST invoice quote.\n";
+    $quoteMd .= "4. Direct sales hotline: " . $ctx['sitePhone'] . " (WhatsApp available).\n";
+    seo_atomic_write($mdDir . '/get-quote.md', $quoteMd);
+    $created[] = 'get-quote.md';
+
+    // Product Category Markdowns (category-{slug}.md and product-category-{slug}.md)
+    foreach ($ctx['categories'] as $cat) {
+        $cSlug = seo_safe_slug($cat['slug']);
+        $cFile = 'category-' . $cSlug . '.md';
+        $aliasCFile = 'product-category-' . $cSlug . '.md';
+        $cUrl = seo_prod_category_url($cSlug);
+        $cDesc = !empty($cat['description']) ? trim(strip_tags($cat['description'])) : "Commercial {$cat['name']} printing products and services.";
+
+        $cMd = "# {$cat['name']} | Commercial Printing Products | OrderPrintex\n\n";
+        $cMd .= "- **Canonical URL**: <{$cUrl}>\n";
+        $cMd .= "- **Category Name**: {$cat['name']}\n";
+        $cMd .= "- **Description**: {$cDesc}\n\n";
+        $cMd .= "## Available Products in this Category\n\n";
+
+        $matchedProducts = 0;
+        foreach ($ctx['products'] as $p) {
+            if ((int)($p['category_id'] ?? 0) === (int)$cat['id'] || (isset($p['category_slug']) && $p['category_slug'] === $cat['slug'])) {
+                $matchedProducts++;
+                $price = $p['sale_price'] ?? $p['regular_price'] ?? $p['starting_price'] ?? 0;
+                $priceStr = $price > 0 ? "₹" . number_format($price, 2) : "Custom Quoted";
+                $sku = $p['sku'] ?: ('OP-PRD-' . $p['id']);
+                $cMd .= "### [{$p['title']}](<" . seo_prod_product_url($p['slug']) . ">)\n";
+                $cMd .= "- **Product URL**: <" . seo_prod_product_url($p['slug']) . ">\n";
+                $cMd .= "- **SKU**: `{$sku}` | **Base Price**: {$priceStr}\n";
+                $cMd .= "- **Summary**: " . strip_tags($p['short_desc'] ?? '') . "\n\n";
+            }
+        }
+        if ($matchedProducts === 0) {
+            $cMd .= "Products currently being manufactured. Request a custom quote at <" . seo_prod_url('get-quote') . ">.\n\n";
+        }
+        $cMd .= "---\n\nPublished by [OrderPrintex Commercial Printing Studio](<" . seo_prod_url('') . ">).\n";
+
+        seo_atomic_write($mdDir . '/' . $cFile, $cMd);
+        seo_atomic_write($mdDir . '/' . $aliasCFile, $cMd);
+        $created[] = $cFile;
+        $created[] = $aliasCFile;
+    }
+
+    // Blog Category Markdowns (blog-category-{slug}.md)
+    foreach ($ctx['blogCategories'] as $bcat) {
+        $bcSlug = seo_safe_slug($bcat['slug']);
+        $bcFile = 'blog-category-' . $bcSlug . '.md';
+        $bcUrl = seo_prod_blog_category_url($bcSlug);
+        $bcDesc = !empty($bcat['description']) ? trim(strip_tags($bcat['description'])) : "Industry guides and tutorials for {$bcat['name']}.";
+
+        $bcMd = "# {$bcat['name']} | Printing Knowledge Base | OrderPrintex\n\n";
+        $bcMd .= "- **Canonical URL**: <{$bcUrl}>\n";
+        $bcMd .= "- **Category**: {$bcat['name']}\n";
+        $bcMd .= "- **Description**: {$bcDesc}\n\n";
+        $bcMd .= "## Published Articles in this Category\n\n";
+
+        $matchedPosts = 0;
+        foreach ($ctx['blogPosts'] as $post) {
+            if ((int)($post['category_id'] ?? 0) === (int)$bcat['id'] || (isset($post['category_slug']) && $post['category_slug'] === $bcat['slug'])) {
+                $matchedPosts++;
+                $bcMd .= "### [{$post['title']}](<" . seo_prod_blog_url($post['slug']) . ">)\n";
+                $bcMd .= "- **Author**: " . ($post['author'] ?: 'OrderPrintex Editorial Team') . " | **Read Time**: " . ($post['read_time'] ?: '5 min read') . "\n";
+                $bcMd .= "- **Summary**: " . strip_tags($post['excerpt'] ?? '') . "\n\n";
+            }
+        }
+        if ($matchedPosts === 0) {
+            $bcMd .= "New articles coming soon. Explore the full blog at <" . seo_prod_url('blog') . ">.\n\n";
+        }
+        $bcMd .= "---\n\nPublished by [OrderPrintex Commercial Printing Studio](<" . seo_prod_url('') . ">).\n";
+
+        seo_atomic_write($mdDir . '/' . $bcFile, $bcMd);
+        $created[] = $bcFile;
+    }
+
+    // Product Markdowns (product-{slug}.md)
+    foreach ($ctx['products'] as $p) {
+        $pSlug = seo_safe_slug($p['slug']);
+        $pFile = 'product-' . $pSlug . '.md';
+        $price = $p['sale_price'] ?? $p['regular_price'] ?? $p['starting_price'] ?? 0;
+        $priceStr = $price > 0 ? "₹" . number_format($price, 2) : "Custom Quoted";
+        $sku = $p['sku'] ?: ('OP-PRD-' . $p['id']);
+
+        $pMd = "# {$p['title']} | OrderPrintex\n\n";
+        $pMd .= "- **Canonical URL**: <" . seo_prod_url('product/' . $pSlug) . ">\n";
+        $pMd .= "- **SKU**: `{$sku}`\n";
+        $pMd .= "- **Category**: " . ($p['category_name'] ?: 'Printing') . "\n";
+        $pMd .= "- **Base Price**: {$priceStr} " . (!empty($p['price_unit']) ? "({$p['price_unit']})" : "") . "\n";
+        $pMd .= "- **Lead Time**: " . ($p['lead_time'] ?: '24-48 Hours') . "\n";
+        $pMd .= "- **Minimum Order Quantity**: " . ($p['min_order_qty'] ?: ($p['min_order'] ?: '1 Unit')) . "\n\n";
+        
+        $pDesc = !empty($p['description']) ? strip_tags($p['description']) : (!empty($p['short_desc']) ? strip_tags($p['short_desc']) : '');
+        if ($pDesc) {
+            $pMd .= "## Description\n\n{$pDesc}\n\n";
+        }
+
+        if (!empty($p['specifications'])) {
+            $pMd .= "## Technical Specifications\n\n" . strip_tags($p['specifications']) . "\n\n";
+        }
+        if (!empty($p['artwork_guidelines'])) {
+            $pMd .= "## Artwork Submission Guidelines\n\n" . strip_tags($p['artwork_guidelines']) . "\n\n";
+        }
+        if (!empty($p['application_instructions'])) {
+            $pMd .= "## Application Instructions\n\n" . strip_tags($p['application_instructions']) . "\n\n";
+        }
+
+        $pMd .= "## Order & Inquiries\n\n";
+        $pMd .= "To order {$p['title']}, request a quote at <" . seo_prod_url('get-quote') . "> or contact WhatsApp: " . $ctx['sitePhone'] . ".\n";
+
+        seo_atomic_write($mdDir . '/' . $pFile, $pMd);
+        $created[] = $pFile;
+    }
+
+    // Blog Post Markdowns (blog-{slug}.md) — Fully Detailed as Required
+    foreach ($ctx['blogPosts'] as $post) {
+        $bSlug = seo_safe_slug($post['slug']);
+        $bFile = 'blog-' . $bSlug . '.md';
+        $canonicalUrl = seo_prod_blog_url($bSlug);
+        $pubDate = !empty($post['created_at']) ? substr($post['created_at'], 0, 10) : $today;
+        $modDate = !empty($post['updated_at']) ? substr($post['updated_at'], 0, 10) : $pubDate;
+        $author = !empty($post['author']) ? trim($post['author']) : 'OrderPrintex Editorial Team';
+        $readTime = !empty($post['read_time']) ? trim($post['read_time']) : '5 min read';
+        $metaTitle = !empty($post['seo_title']) ? trim($post['seo_title']) : $post['title'] . ' | OrderPrintex';
+        $metaDesc = !empty($post['seo_description']) ? trim($post['seo_description']) : (!empty($post['excerpt']) ? strip_tags($post['excerpt']) : substr(strip_tags($post['content']), 0, 160));
+        $catName = !empty($post['category_name']) ? trim($post['category_name']) : 'Printing & Manufacturing';
+        $catSlug = !empty($post['category_slug']) ? trim($post['category_slug']) : '';
+        $catUrl = $catSlug ? seo_prod_blog_category_url($catSlug) : seo_prod_blog_url();
+        $featImg = !empty($post['featured_image']) ? seo_prod_url($post['featured_image']) : seo_prod_url('assets/images/logo.png');
+        $imgAlt = !empty($post['title']) ? htmlspecialchars($post['title']) : 'OrderPrintex Blog Article';
+
+        $bMd = "# {$post['title']}\n\n";
+        $bMd .= "- **Meta Title**: {$metaTitle}\n";
+        $bMd .= "- **Meta Description**: {$metaDesc}\n";
+        $bMd .= "- **Canonical URL**: <{$canonicalUrl}>\n";
+        $bMd .= "- **Category**: [{$catName}](<{$catUrl}>)\n";
+        $bMd .= "- **Author**: {$author}\n";
+        $bMd .= "- **Published Date**: {$pubDate}\n";
+        $bMd .= "- **Last Modified Date**: {$modDate}\n";
+        $bMd .= "- **Reading Time**: {$readTime}\n\n";
+
+        if ($featImg) {
+            $bMd .= "![{$imgAlt}](<{$featImg}>)\n\n";
+        }
+
+        if (!empty($post['excerpt'])) {
+            $bMd .= "> " . trim(strip_tags($post['excerpt'])) . "\n\n";
+        }
+
+        $bMd .= "## Article Content\n\n";
+        $bMd .= seo_html_to_markdown($post['content']) . "\n\n";
+
+        $bMd .= "## Related Printing Services & Fast Links\n\n";
+        $bMd .= "- [Direct-to-Film (DTF) Transfers](<" . seo_prod_service_url('dtf-printing') . ">)\n";
+        $bMd .= "- [UV DTF 3D Hard Surface Decals](<" . seo_prod_service_url('uv-dtf-printing') . ">)\n";
+        $bMd .= "- [Custom Screen & T-Shirt Studio](<" . seo_prod_service_url('t-shirt-printing') . ">)\n";
+        $bMd .= "- [Corporate Merchandise & Gifting](<" . seo_prod_service_url('corporate-printing') . ">)\n";
+        $bMd .= "- [Commercial Products Catalog](<" . seo_prod_url('products') . ">)\n";
+        $bMd .= "- [Request a Commercial Quotation](<" . seo_prod_url('get-quote') . ">)\n\n";
+        $bMd .= "---\n\nPublished by [OrderPrintex Commercial Printing Studio](<" . seo_prod_url('') . ">).\n";
+
+        seo_atomic_write($mdDir . '/' . $bFile, $bMd);
+        $created[] = $bFile;
+    }
+
+    // Static Pages from Database (page-{slug}.md)
+    foreach ($ctx['staticPages'] as $sp) {
+        $spSlug = seo_safe_slug($sp['slug']);
+        $spFile = 'page-' . $spSlug . '.md';
+        $spUrl = seo_prod_url($spSlug);
+
+        $spMd = "# {$sp['title']} | OrderPrintex\n\n";
+        $spMd .= "- **Canonical URL**: <{$spUrl}>\n";
+        $spMd .= "- **Published Date**: " . (!empty($sp['created_at']) ? substr($sp['created_at'], 0, 10) : $today) . "\n\n";
+        if (!empty($sp['content'])) {
+            $spMd .= "## Page Content\n\n" . seo_html_to_markdown($sp['content']) . "\n\n";
+        }
+        $spMd .= "---\n\nPublished by [OrderPrintex Commercial Printing Studio](<" . seo_prod_url('') . ">).\n";
+
+        seo_atomic_write($mdDir . '/' . $spFile, $spMd);
+        $created[] = $spFile;
+        // Also write direct clean alias if not already a core file
+        if (!in_array($spSlug . '.md', ['about.md', 'contact.md', 'products.md', 'services.md', 'blog.md', 'faq.md', 'pricing.md', 'gallery.md', 'get-quote.md', 'home.md', 'index.md'], true)) {
+            seo_atomic_write($mdDir . '/' . $spSlug . '.md', $spMd);
+            $created[] = $spSlug . '.md';
+        }
+    }
+
+    // Clean up stale markdown files for deleted or unpublished content
+    $existingMdFiles = glob($mdDir . '/*.md') ?: [];
+    foreach ($existingMdFiles as $filePath) {
+        $baseName = basename($filePath);
+        // Only sweep dynamically managed content files
+        if (preg_match('/^(blog|product|category|blog-category|services|page)-.+\.md$/', $baseName) || in_array($baseName, ['about-us.md', 'privacy-policy.md', 'terms-and-conditions.md', 'shipping-policy.md'], true)) {
+            if (!in_array($baseName, $created, true)) {
+                @unlink($filePath);
+            }
+        }
+    }
+
+    return $created;
+}
+
+/**
+ * Generate all 14 core page Schema JSONs + Product Schema JSONs + Blog Schema JSONs into /seo/schema/
+ * Uses clean canonical URLs without trailing slash.
+ */
+function seo_generate_page_schemas(string $rootDir, array $ctx): array {
+    $schemaDir = $rootDir . '/seo/schema';
+    if (!is_dir($schemaDir)) {
+        @mkdir($schemaDir, 0777, true);
+    }
+
+    $created = [];
+    $nowIso = date('c');
+
+    $orgReference = [
+        '@type' => 'ProfessionalService',
+        '@id' => seo_prod_url('#organization'),
+        'name' => $ctx['siteName'],
+        'url' => seo_prod_url(''),
+        'telephone' => $ctx['sitePhone'],
+        'email' => $ctx['siteEmail'],
+        'address' => [
+            '@type' => 'PostalAddress',
+            'streetAddress' => $ctx['siteAddress'],
+            'addressLocality' => 'New Delhi',
+            'addressRegion' => 'Delhi',
+            'postalCode' => '110059',
+            'addressCountry' => 'IN'
+        ],
+        'geo' => [
+            '@type' => 'GeoCoordinates',
+            'latitude' => 28.6180,
+            'longitude' => 77.0805
+        ],
+        'sameAs' => [
+            'https://www.facebook.com/orderprintex',
+            'https://www.instagram.com/orderprintex',
+            'https://www.youtube.com/@orderprintex',
+            'https://www.linkedin.com/company/orderprintex'
+        ]
+    ];
+
+    // Helper writer
+    $writeSchema = function(string $name, array $data) use ($schemaDir, &$created) {
+        $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        file_put_contents($schemaDir . '/' . $name, $json);
+        $created[] = $name;
+    };
+
+    // 1. Home Schema (home.json & index.json)
+    $homeSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'WebPage',
+        '@id' => seo_prod_url('#webpage'),
+        'url' => seo_prod_url(''),
+        'name' => 'OrderPrintex — Commercial DTF & UV DTF Printing Studio Delhi',
+        'description' => $ctx['metaDesc'],
+        'isPartOf' => [
+            '@type' => 'WebSite',
+            '@id' => seo_prod_url('#website'),
+            'name' => $ctx['siteName'],
+            'url' => seo_prod_url('')
+        ],
+        'about' => $orgReference
+    ];
+    $writeSchema('home.json', $homeSchema);
+    $writeSchema('index.json', $homeSchema);
+
+    // 2. About Schema
+    $aboutSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'AboutPage',
+        '@id' => seo_prod_url('about') . '#aboutpage',
+        'url' => seo_prod_url('about'),
+        'name' => 'About Our Printing Studio & Manufacturing Facility | OrderPrintex',
+        'description' => "Learn about OrderPrintex: Delhi's leading commercial DTF and UV DTF printing studio with 10+ years of prepress expertise.",
+        'mainEntity' => $orgReference
+    ];
+    $writeSchema('about.json', $aboutSchema);
+
+    // 3. Services Directory Schema
+    $serviceItems = [];
+    foreach ($ctx['services'] as $idx => $srv) {
+        $serviceItems[] = [
+            '@type' => 'Service',
+            'position' => $idx + 1,
+            'name' => $srv['title'],
+            'url' => seo_prod_service_url($srv['slug']),
+            'provider' => ['@id' => seo_prod_url('#organization')]
+        ];
+    }
+    $servicesSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'CollectionPage',
+        '@id' => seo_prod_url('services') . '#collection',
+        'url' => seo_prod_url('services'),
+        'name' => 'Industrial Printing & Manufacturing Services | OrderPrintex',
+        'description' => 'Explore our end-to-end commercial printing services: DTF fabric transfers, UV DTF rigid decals, custom t-shirts, and corporate swag kits.',
+        'hasPart' => $serviceItems
+    ];
+    $writeSchema('services.json', $servicesSchema);
+
+    // 4-7. Individual Services Schemas (both services-{slug}.json and {slug}.json)
+    foreach ($ctx['services'] as $srv) {
+        $slug = $srv['slug'];
+        $sFile = 'services-' . $slug . '.json';
+        $aliasFile = $slug . '.json';
+        $srvUrl = seo_prod_service_url($slug);
+        $desc = !empty($srv['description']) ? strip_tags($srv['description']) : (!empty($srv['short_desc']) ? strip_tags($srv['short_desc']) : 'Commercial printing service.');
+
+        $sSchema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Service',
+            '@id' => $srvUrl . '#service',
+            'name' => $srv['title'],
+            'url' => $srvUrl,
+            'serviceType' => 'Commercial Printing',
+            'description' => $desc,
+            'provider' => $orgReference,
+            'areaServed' => ['@type' => 'Country', 'name' => 'India']
+        ];
+        $writeSchema($sFile, $sSchema);
+        $writeSchema($aliasFile, $sSchema);
+    }
+
+    // 8. Products Catalog Schema
+    $prodItems = [];
+    foreach ($ctx['products'] as $idx => $p) {
+        $prodItems[] = [
+            '@type' => 'Product',
+            'position' => $idx + 1,
+            'name' => $p['title'],
+            'url' => seo_prod_product_url($p['slug'])
+        ];
+    }
+    $productsSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'CollectionPage',
+        '@id' => seo_prod_url('products') . '#catalog',
+        'url' => seo_prod_url('products'),
+        'name' => 'Commercial Print Product Catalog | OrderPrintex',
+        'description' => 'Browse all OrderPrintex manufactured products: DTF gang rolls, UV DTF decals, apparel, and corporate swag kits.',
+        'mainEntity' => [
+            '@type' => 'ItemList',
+            'itemListElement' => $prodItems
+        ]
+    ];
+    $writeSchema('products.json', $productsSchema);
+
+    // 9. Pricing Schema
+    $pricingSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'WebPage',
+        '@id' => seo_prod_url('pricing') . '#pricingpage',
+        'url' => seo_prod_url('pricing'),
+        'name' => 'Trade Pricing & Volume Discount Tiers | OrderPrintex',
+        'description' => 'Transparent commercial pricing for DTF gang sheets, UV decals, and apparel. Wholesale discount tiers for brands and volume resellers.'
+    ];
+    $writeSchema('pricing.json', $pricingSchema);
+
+    // 10. Gallery Schema
+    $galleryItems = [];
+    foreach ($ctx['portfolioItems'] as $item) {
+        $galleryItems[] = [
+            '@type' => 'CreativeWork',
+            'name' => $item['title'],
+            'image' => seo_prod_url($item['image_url']),
+            'description' => $item['description']
+        ];
+    }
+    $gallerySchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'CollectionPage',
+        '@id' => seo_prod_url('gallery') . '#portfolio',
+        'url' => seo_prod_url('gallery'),
+        'name' => 'Production Portfolio & Specimen Gallery | OrderPrintex',
+        'description' => 'High-resolution photographs of commercial production runs manufactured at our New Delhi printing facility.',
+        'hasPart' => $galleryItems
+    ];
+    $writeSchema('gallery.json', $gallerySchema);
+
+    // 11. Blog Schema
+    $blogArticleNodes = [];
+    foreach ($ctx['blogPosts'] as $post) {
+        $blogArticleNodes[] = [
+            '@type' => 'BlogPosting',
+            'headline' => $post['title'],
+            'url' => seo_prod_blog_url($post['slug']),
+            'author' => ['@type' => 'Person', 'name' => $post['author'] ?: 'OrderPrintex Editorial Team']
+        ];
+    }
+    $blogSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Blog',
+        '@id' => seo_prod_url('blog') . '#blogpage',
+        'url' => seo_prod_url('blog'),
+        'name' => 'Printing Industry Knowledge Base & Prepress Guides | OrderPrintex',
+        'description' => 'Educational guides, heat press charts, DTF vs UV DTF comparisons, and commercial printing insights.',
+        'blogPost' => $blogArticleNodes
+    ];
+    $writeSchema('blog.json', $blogSchema);
+
+    // 12. FAQ Schema
+    $faqQAs = [];
+    foreach ($ctx['faqs'] as $f) {
+        $faqQAs[] = [
+            '@type' => 'Question',
+            'name' => $f['question'],
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text' => $f['answer']
+            ]
+        ];
+    }
+    $faqSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        '@id' => seo_prod_url('faq') . '#faqpage',
+        'url' => seo_prod_url('faq'),
+        'name' => 'Frequently Asked Questions | OrderPrintex',
+        'description' => 'Comprehensive answers covering artwork upload formats, DTF press settings, wash care instructions, and MOQ.',
+        'mainEntity' => $faqQAs
+    ];
+    $writeSchema('faq.json', $faqSchema);
+
+    // 13. Contact Schema
+    $contactSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'ContactPage',
+        '@id' => seo_prod_url('contact') . '#contactpage',
+        'url' => seo_prod_url('contact'),
+        'name' => 'Contact & Factory Location | OrderPrintex',
+        'description' => 'Get in touch with our New Delhi printing facility. Phone, WhatsApp, email, business hours, and directions to Pankha Road.',
+        'mainEntity' => $orgReference
+    ];
+    $writeSchema('contact.json', $contactSchema);
+
+    // 14. Get Quote Schema
+    $quoteSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'WebPage',
+        '@id' => seo_prod_url('get-quote') . '#quotepage',
+        'url' => seo_prod_url('get-quote'),
+        'name' => 'Request a Custom Print Quotation | OrderPrintex',
+        'description' => 'Upload your design files, specify dimensions and quantities, and receive an itemized commercial quotation with volume discounts.'
+    ];
+    $writeSchema('get-quote.json', $quoteSchema);
+
+    // Product Schemas (product-{slug}.json)
+    foreach ($ctx['products'] as $p) {
+        $pSlug = $p['slug'];
+        $pFile = 'product-' . $pSlug . '.json';
+        $pUrl = seo_prod_product_url($pSlug);
+        $price = $p['sale_price'] ?? $p['regular_price'] ?? $p['starting_price'] ?? 0;
+        $sku = $p['sku'] ?: ('OP-PRD-' . $p['id']);
+        $pDesc = !empty($p['short_desc']) ? strip_tags($p['short_desc']) : (!empty($p['description']) ? substr(strip_tags($p['description']), 0, 200) : 'Industrial transfer product.');
+        $img = !empty($p['image_url']) ? seo_prod_url($p['image_url']) : seo_prod_url('assets/images/logo.png');
+
+        $pSchema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Product',
+            '@id' => $pUrl . '#product',
+            'name' => $p['title'],
+            'url' => $pUrl,
+            'image' => $img,
+            'description' => $pDesc,
+            'sku' => $sku,
+            'category' => $p['category_name'] ?: 'Printing',
+            'brand' => [
+                '@type' => 'Brand',
+                'name' => $ctx['siteName']
+            ],
+            'offers' => [
+                '@type' => 'Offer',
+                'url' => $pUrl,
+                'priceCurrency' => 'INR',
+                'price' => number_format((float) $price, 2, '.', ''),
+                'availability' => 'https://schema.org/InStock',
+                'itemCondition' => 'https://schema.org/NewCondition'
+            ]
+        ];
+
+        // Add genuine reviews if exist
+        if (!empty($ctx['reviewsByProduct'][$p['id']])) {
+            $revs = $ctx['reviewsByProduct'][$p['id']];
+            $pSchema['review'] = [];
+            $ratingSum = 0;
+            foreach ($revs as $r) {
+                $ratingVal = (int) ($r['rating'] ?? 5);
+                $ratingSum += $ratingVal;
+                $pSchema['review'][] = [
+                    '@type' => 'Review',
+                    'reviewRating' => [
+                        '@type' => 'Rating',
+                        'ratingValue' => (string) $ratingVal,
+                        'bestRating' => '5'
+                    ],
+                    'author' => [
+                        '@type' => 'Person',
+                        'name' => $r['customer_name'] ?: ($r['reviewer_name'] ?: 'Verified Client')
+                    ],
+                    'reviewBody' => strip_tags($r['review_text'] ?? '')
+                ];
+            }
+            $pSchema['aggregateRating'] = [
+                '@type' => 'AggregateRating',
+                'ratingValue' => (string) round($ratingSum / count($revs), 1),
+                'reviewCount' => (string) count($revs),
+                'bestRating' => '5'
+            ];
+        }
+
+        $writeSchema($pFile, $pSchema);
+    }
+
+    // Blog Post Schemas (blog-{slug}.json)
+    foreach ($ctx['blogPosts'] as $post) {
+        $bSlug = $post['slug'];
+        $bFile = 'blog-' . $bSlug . '.json';
+        $bUrl = seo_prod_blog_url($bSlug);
+        $bImg = !empty($post['featured_image']) ? seo_prod_url($post['featured_image']) : seo_prod_url('assets/images/logo.png');
+
+        $bSchema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'BlogPosting',
+            '@id' => $bUrl . '#article',
+            'headline' => $post['title'],
+            'url' => $bUrl,
+            'image' => $bImg,
+            'description' => !empty($post['excerpt']) ? strip_tags($post['excerpt']) : '',
+            'datePublished' => !empty($post['created_at']) ? date('c', strtotime($post['created_at'])) : $nowIso,
+            'dateModified' => !empty($post['updated_at']) ? date('c', strtotime($post['updated_at'])) : $nowIso,
+            'author' => [
+                '@type' => 'Person',
+                'name' => $post['author'] ?: 'OrderPrintex Editorial Team'
+            ],
+            'publisher' => $orgReference,
+            'mainEntityOfPage' => [
+                '@type' => 'WebPage',
+                '@id' => $bUrl
+            ]
+        ];
+
+        $writeSchema($bFile, $bSchema);
+    }
+
+    return $created;
+}
+
+/**
+ * Synchronize all SEO, AI & Documentation artifacts:
+ * 1. sitemap.xml & sitemap_index.xml
+ * 2. llms.txt & llms-full.txt
  * 3. schema.json
- * 4. ORDERPRINTEX.md (and SITE_OVERVIEW.md)
+ * 4. ORDERPRINTEX.md & SITE_OVERVIEW.md
+ * 5. /seo/markdown/ (all 14 core markdowns + products + blogs + service aliases)
+ * 6. /seo/schema/ (all 14 core schemas + products + blogs + service aliases)
  *
  * @return array Detailed operation metrics and validation summary.
  */
@@ -204,11 +1096,11 @@ function seo_sync_all(): array {
         // FETCH ALL RELEVANT DATA FROM DATABASE
         // -------------------------------------------------------------
         $siteName = get_setting('site_name', 'OrderPrintex');
-        $siteEmail = get_setting('contact_email', 'contact@orderprintex.com');
-        $sitePhone = get_setting('contact_phone', '+91 93540 28199');
-        $siteAddress = get_setting('contact_address', 'Okhla Industrial Area, Phase II, New Delhi - 110020');
-        $siteHours = get_setting('operating_hours', 'Monday - Saturday: 9:30 AM - 7:30 PM IST');
-        $metaDesc = get_setting('meta_description', 'OrderPrintex is a premier manufacturing facility and digital transfer printing studio based in New Delhi, India specializing in DTF apparel transfers, UV DTF decals, custom printed apparel, and corporate merchandise.');
+        $siteEmail = get_setting('email', 'sales@orderprintex.com');
+        $sitePhone = get_setting('phone', '+91 93540 28199');
+        $siteAddress = get_setting('address', 'Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh, Delhi, 110059');
+        $siteHours = get_setting('business_hours', 'Mon - Sat: 9:30 AM - 8:00 PM');
+        $metaDesc = get_setting('meta_description', "OrderPrintex is India's premier bulk manufacturer of DTF apparel transfers, UV DTF decals, custom streetwear t-shirts, and corporate merchandise with pan-India express dispatch.");
 
         // Products with category and pricing
         $products = db_fetch_all("
@@ -247,6 +1139,9 @@ function seo_sync_all(): array {
         // Categories
         $categories = db_fetch_all("SELECT * FROM categories ORDER BY display_order ASC, id ASC") ?: [];
 
+        // Blog Categories
+        $blogCategories = db_fetch_all("SELECT * FROM blog_categories ORDER BY id ASC") ?: [];
+
         // Services
         $services = db_fetch_all("SELECT * FROM services WHERE is_active = 1 ORDER BY display_order ASC, id ASC") ?: [];
 
@@ -265,23 +1160,30 @@ function seo_sync_all(): array {
         // Portfolio Items
         $portfolioItems = seo_get_portfolio_items();
 
+        $ctx = compact(
+            'siteName', 'siteEmail', 'sitePhone', 'siteAddress', 'siteHours', 'metaDesc',
+            'products', 'productSizes', 'pricingTiers', 'reviewsByProduct',
+            'categories', 'blogCategories', 'services', 'blogPosts',
+            'equipment', 'staticPages', 'faqs', 'portfolioItems'
+        );
+
         // -------------------------------------------------------------
         // 1. GENERATE SITEMAP.XML (AND SITEMAP_INDEX.XML)
         // -------------------------------------------------------------
         $urls = [];
 
-        // Core Static Landing Pages
+        // Core Static Landing Pages (clean URLs without trailing slash)
         $corePages = [
-            ['loc' => url(''),             'lastmod' => $today, 'changefreq' => 'daily',   'priority' => '1.0'],
-            ['loc' => url('products/'),     'lastmod' => $today, 'changefreq' => 'daily',   'priority' => '0.95'],
-            ['loc' => url('services/'),     'lastmod' => $today, 'changefreq' => 'weekly',  'priority' => '0.95'],
-            ['loc' => url('pricing/'),      'lastmod' => $today, 'changefreq' => 'weekly',  'priority' => '0.90'],
-            ['loc' => url('get-quote/'),    'lastmod' => $today, 'changefreq' => 'weekly',  'priority' => '0.90'],
-            ['loc' => url('gallery/'),      'lastmod' => $today, 'changefreq' => 'weekly',  'priority' => '0.85'],
-            ['loc' => url('blog/'),         'lastmod' => $today, 'changefreq' => 'daily',   'priority' => '0.90'],
-            ['loc' => url('about/'),        'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.85'],
-            ['loc' => url('faq/'),          'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.80'],
-            ['loc' => url('contact/'),      'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.80'],
+            ['loc' => seo_prod_url(''),             'lastmod' => $today, 'changefreq' => 'daily',   'priority' => '1.0'],
+            ['loc' => seo_prod_url('products'),     'lastmod' => $today, 'changefreq' => 'daily',   'priority' => '0.95'],
+            ['loc' => seo_prod_url('services'),     'lastmod' => $today, 'changefreq' => 'weekly',  'priority' => '0.95'],
+            ['loc' => seo_prod_url('pricing'),      'lastmod' => $today, 'changefreq' => 'weekly',  'priority' => '0.90'],
+            ['loc' => seo_prod_url('get-quote'),    'lastmod' => $today, 'changefreq' => 'weekly',  'priority' => '0.90'],
+            ['loc' => seo_prod_url('gallery'),      'lastmod' => $today, 'changefreq' => 'weekly',  'priority' => '0.85'],
+            ['loc' => seo_prod_url('blog'),         'lastmod' => $today, 'changefreq' => 'daily',   'priority' => '0.90'],
+            ['loc' => seo_prod_url('about'),        'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.85'],
+            ['loc' => seo_prod_url('faq'),          'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.80'],
+            ['loc' => seo_prod_url('contact'),      'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.80'],
         ];
         foreach ($corePages as $cp) {
             $urls[] = $cp;
@@ -291,17 +1193,27 @@ function seo_sync_all(): array {
         foreach ($services as $srv) {
             $modTime = !empty($srv['updated_at']) ? substr($srv['updated_at'], 0, 10) : (!empty($srv['created_at']) ? substr($srv['created_at'], 0, 10) : $today);
             $urls[] = [
-                'loc'        => service_url($srv['slug']),
+                'loc'        => seo_prod_service_url($srv['slug']),
                 'lastmod'    => $modTime,
                 'changefreq' => 'weekly',
                 'priority'   => '0.90'
             ];
         }
 
-        // Category Pages
+        // Product Category Pages
         foreach ($categories as $cat) {
             $urls[] = [
-                'loc'        => category_url($cat['slug']),
+                'loc'        => seo_prod_category_url($cat['slug']),
+                'lastmod'    => $today,
+                'changefreq' => 'weekly',
+                'priority'   => '0.85'
+            ];
+        }
+
+        // Blog Category Pages
+        foreach ($blogCategories as $bcat) {
+            $urls[] = [
+                'loc'        => seo_prod_blog_category_url($bcat['slug']),
                 'lastmod'    => $today,
                 'changefreq' => 'weekly',
                 'priority'   => '0.85'
@@ -312,7 +1224,7 @@ function seo_sync_all(): array {
         foreach ($products as $p) {
             $modTime = !empty($p['updated_at']) ? substr($p['updated_at'], 0, 10) : (!empty($p['created_at']) ? substr($p['created_at'], 0, 10) : $today);
             $urls[] = [
-                'loc'        => product_url($p['slug']),
+                'loc'        => seo_prod_product_url($p['slug']),
                 'lastmod'    => $modTime,
                 'changefreq' => 'weekly',
                 'priority'   => '0.85'
@@ -323,7 +1235,7 @@ function seo_sync_all(): array {
         foreach ($blogPosts as $post) {
             $modTime = !empty($post['updated_at']) ? substr($post['updated_at'], 0, 10) : (!empty($post['created_at']) ? substr($post['created_at'], 0, 10) : $today);
             $urls[] = [
-                'loc'        => blog_url($post['slug']),
+                'loc'        => seo_prod_blog_url($post['slug']),
                 'lastmod'    => $modTime,
                 'changefreq' => 'monthly',
                 'priority'   => '0.80'
@@ -334,7 +1246,7 @@ function seo_sync_all(): array {
         foreach ($staticPages as $sp) {
             if (in_array($sp['slug'], ['privacy-policy', 'terms-and-conditions', 'shipping-policy'])) {
                 $urls[] = [
-                    'loc'        => url($sp['slug'] . '/'),
+                    'loc'        => seo_prod_url($sp['slug']),
                     'lastmod'    => $today,
                     'changefreq' => 'monthly',
                     'priority'   => '0.50'
@@ -374,7 +1286,7 @@ function seo_sync_all(): array {
         $indexXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         $indexXml .= "<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
         $indexXml .= "  <sitemap>\n";
-        $indexXml .= "    <loc>" . url('sitemap.xml') . "</loc>\n";
+        $indexXml .= "    <loc>https://orderprintex.com/sitemap.xml</loc>\n";
         $indexXml .= "    <lastmod>{$today}</lastmod>\n";
         $indexXml .= "  </sitemap>\n";
         $indexXml .= "</sitemapindex>\n";
@@ -387,10 +1299,10 @@ function seo_sync_all(): array {
         }
 
         // -------------------------------------------------------------
-        // 2. GENERATE LLMS.TXT (AI DISCOVERY & SEMANTIC AGENT GUIDE)
+        // 2. GENERATE LLMS.TXT & LLMS-FULL.TXT
         // -------------------------------------------------------------
         $llms = "# {$siteName} — Commercial Printing & Custom Transfer Manufacturing\n\n";
-        $llms .= "> {$siteName} is a premier industrial printing facility and digital transfer manufacturer headquartered in Okhla Industrial Area, New Delhi, India. We specialize in Direct-to-Film (DTF) apparel transfers, UV DTF 3D tactile hard-surface decals, custom streetwear and corporate t-shirt printing, bespoke packaging, and corporate merchandise.\n\n";
+        $llms .= "> {$siteName} is a premier industrial printing facility and digital transfer manufacturer headquartered at Pankha Road, New Delhi, India. We specialize in Direct-to-Film (DTF) apparel transfers, UV DTF 3D tactile hard-surface decals, custom streetwear and corporate t-shirt printing, bespoke packaging, and corporate merchandise.\n\n";
 
         $llms .= "## Commercial Business Model & Order Lifecycle\n\n";
         $llms .= "OrderPrintex operates on a dedicated **B2B & Bespoke Enquiry-to-Quotation Workflow**. The site does not utilize self-service e-commerce carts or instant checkout.\n\n";
@@ -411,8 +1323,8 @@ function seo_sync_all(): array {
 
         $llms .= "## Core Services Directory\n\n";
         foreach ($services as $srv) {
-            $llms .= "### [{$srv['title']}](" . service_url($srv['slug']) . ")\n";
-            $llms .= "- **URL**: " . service_url($srv['slug']) . "\n";
+            $llms .= "### [{$srv['title']}](" . seo_prod_service_url($srv['slug']) . ")\n";
+            $llms .= "- **URL**: " . seo_prod_service_url($srv['slug']) . "\n";
             $desc = !empty($srv['description']) ? strip_tags($srv['description']) : (!empty($srv['short_desc']) ? strip_tags($srv['short_desc']) : 'High-definition industrial printing service.');
             $llms .= "- **Overview**: {$desc}\n";
             $llms .= "- **Standard Turnaround**: 24-48 Hours (Express same-day dispatch available on request)\n\n";
@@ -421,7 +1333,14 @@ function seo_sync_all(): array {
         $llms .= "## Product Categories\n\n";
         foreach ($categories as $cat) {
             $catDesc = !empty($cat['description']) ? strip_tags($cat['description']) : 'Commercial print product category.';
-            $llms .= "- **[{$cat['name']}](" . category_url($cat['slug']) . ")**: {$catDesc}\n";
+            $llms .= "- **[{$cat['name']}](" . seo_prod_category_url($cat['slug']) . ")**: {$catDesc}\n";
+        }
+        $llms .= "\n";
+
+        $llms .= "## Blog Categories\n\n";
+        foreach ($blogCategories as $bcat) {
+            $bcatDesc = !empty($bcat['description']) ? strip_tags($bcat['description']) : 'Printing education category.';
+            $llms .= "- **[{$bcat['name']}](" . seo_prod_blog_category_url($bcat['slug']) . ")**: {$bcatDesc}\n";
         }
         $llms .= "\n";
 
@@ -433,8 +1352,8 @@ function seo_sync_all(): array {
             $lead = $p['lead_time'] ?: '24-48 Hours';
             $moq = $p['min_order_qty'] ?: ($p['min_order'] ?: '1 Unit');
 
-            $llms .= "### [{$p['title']}](" . product_url($p['slug']) . ")\n";
-            $llms .= "- **Product URL**: " . product_url($p['slug']) . "\n";
+            $llms .= "### [{$p['title']}](" . seo_prod_product_url($p['slug']) . ")\n";
+            $llms .= "- **Product URL**: " . seo_prod_product_url($p['slug']) . "\n";
             $llms .= "- **SKU**: `{$sku}` | **Category**: " . ($p['category_name'] ?: 'Printing') . "\n";
             $llms .= "- **Base Pricing**: {$priceStr} " . (!empty($p['price_unit']) ? "({$p['price_unit']})" : "") . "\n";
             $llms .= "- **Minimum Order Quantity (MOQ)**: {$moq} | **Lead Time**: {$lead}\n";
@@ -496,15 +1415,15 @@ function seo_sync_all(): array {
         foreach ($portfolioItems as $idx => $item) {
             $llms .= "- **{$item['title']}** (" . strtoupper($item['category']) . ")\n";
             $llms .= "  - {$item['description']}\n";
-            $llms .= "  - Image Asset: " . url($item['image_url']) . "\n";
+            $llms .= "  - Image Asset: " . seo_prod_url($item['image_url']) . "\n";
         }
         $llms .= "\n";
 
         $llms .= "## Knowledge Base & Printing Guides\n\n";
         foreach ($blogPosts as $post) {
             $excerpt = !empty($post['excerpt']) ? strip_tags($post['excerpt']) : 'Comprehensive printing industry guide.';
-            $llms .= "### [{$post['title']}](" . blog_url($post['slug']) . ")\n";
-            $llms .= "- **URL**: " . blog_url($post['slug']) . "\n";
+            $llms .= "### [{$post['title']}](" . seo_prod_blog_url($post['slug']) . ")\n";
+            $llms .= "- **URL**: " . seo_prod_blog_url($post['slug']) . "\n";
             $llms .= "- **Author**: " . ($post['author'] ?: 'OrderPrintex Editorial Team') . " | **Read Time**: " . ($post['read_time'] ?: '5 min read') . "\n";
             $llms .= "- **Summary**: {$excerpt}\n\n";
         }
@@ -523,7 +1442,7 @@ function seo_sync_all(): array {
         $llms .= "- **Telephone / WhatsApp**: {$sitePhone} (<https://wa.me/919354028199>)\n";
         $llms .= "- **Operating Hours**: {$siteHours}\n";
         $llms .= "- **Geographical Coverage**: Nationwide delivery across all states in India & Worldwide B2B Export.\n";
-        $llms .= "- **Direct Quote Request**: " . url('get-quote/') . "\n\n";
+        $llms .= "- **Direct Quote Request**: " . seo_prod_url('get-quote') . "\n\n";
 
         $llms .= "## Complete Public URL Directory & Inter-Page Relationships\n\n";
         foreach ($urls as $u) {
@@ -539,6 +1458,10 @@ function seo_sync_all(): array {
             rename($llmsTmp, $llmsPath);
         }
 
+        // Duplicate to llms-full.txt
+        $llmsFullPath = $rootDir . '/llms-full.txt';
+        @copy($llmsPath, $llmsFullPath);
+
         // -------------------------------------------------------------
         // 3. GENERATE SCHEMA.JSON (ENTERPRISE JSON-LD STRUCTURED GRAPH)
         // -------------------------------------------------------------
@@ -547,12 +1470,12 @@ function seo_sync_all(): array {
         // Organization / LocalBusiness / ProfessionalService
         $orgNode = [
             '@type'             => 'ProfessionalService',
-            '@id'               => url('#organization'),
+            '@id'               => seo_prod_url('#organization'),
             'name'              => $siteName,
             'legalName'         => 'OrderPrintex Commercial Printing Studio',
-            'url'               => url(''),
-            'logo'              => url('assets/images/logo.png'),
-            'image'             => url('assets/images/logo.png'),
+            'url'               => seo_prod_url(''),
+            'logo'              => seo_prod_url('assets/images/logo.png'),
+            'image'             => seo_prod_url('assets/images/logo.png'),
             'description'       => $metaDesc,
             'email'             => $siteEmail,
             'telephone'         => $sitePhone,
@@ -564,20 +1487,20 @@ function seo_sync_all(): array {
                 'streetAddress'   => $siteAddress,
                 'addressLocality' => 'New Delhi',
                 'addressRegion'   => 'Delhi',
-                'postalCode'      => '110020',
+                'postalCode'      => '110059',
                 'addressCountry'  => 'IN'
             ],
             'geo'               => [
                 '@type'           => 'GeoCoordinates',
-                'latitude'        => 28.5355,
-                'longitude'       => 77.2713
+                'latitude'        => 28.6180,
+                'longitude'       => 77.0805
             ],
             'openingHoursSpecification' => [
                 [
                     '@type'       => 'OpeningHoursSpecification',
                     'dayOfWeek'   => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                     'opens'       => '09:30',
-                    'closes'      => '19:30'
+                    'closes'      => '20:00'
                 ]
             ],
             'areaServed'        => [
@@ -589,6 +1512,7 @@ function seo_sync_all(): array {
             'sameAs'            => [
                 'https://www.facebook.com/orderprintex',
                 'https://www.instagram.com/orderprintex',
+                'https://www.youtube.com/@orderprintex',
                 'https://www.linkedin.com/company/orderprintex'
             ]
         ];
@@ -597,14 +1521,14 @@ function seo_sync_all(): array {
         // WebSite Node
         $siteNode = [
             '@type'             => 'WebSite',
-            '@id'               => url('#website'),
+            '@id'               => seo_prod_url('#website'),
             'name'              => $siteName,
-            'url'               => url(''),
+            'url'               => seo_prod_url(''),
             'description'       => $metaDesc,
-            'publisher'         => ['@id' => url('#organization')],
+            'publisher'         => ['@id' => seo_prod_url('#organization')],
             'potentialAction'   => [
                 '@type'       => 'SearchAction',
-                'target'      => url('products/?search={search_term_string}'),
+                'target'      => seo_prod_url('products') . '?search={search_term_string}',
                 'query-input' => 'required name=search_term_string'
             ]
         ];
@@ -613,26 +1537,26 @@ function seo_sync_all(): array {
         // WebPage Nodes for Main Pages
         foreach ($corePages as $cp) {
             $pageTitle = $siteName;
-            if (str_contains($cp['loc'], 'products/'))   $pageTitle = "Commercial Print Product Catalog | {$siteName}";
-            elseif (str_contains($cp['loc'], 'services/')) $pageTitle = "Printing & Manufacturing Services | {$siteName}";
-            elseif (str_contains($cp['loc'], 'pricing/'))  $pageTitle = "Trade Pricing & Volume Discount Tiers | {$siteName}";
-            elseif (str_contains($cp['loc'], 'get-quote/'))$pageTitle = "Request a Custom Print Quotation | {$siteName}";
-            elseif (str_contains($cp['loc'], 'gallery/'))  $pageTitle = "Production Portfolio & Showcase | {$siteName}";
-            elseif (str_contains($cp['loc'], 'blog/'))     $pageTitle = "Printing Knowledge Base & Prepress Guides | {$siteName}";
-            elseif (str_contains($cp['loc'], 'about/'))    $pageTitle = "About Our Facility & Printing Studio | {$siteName}";
-            elseif (str_contains($cp['loc'], 'faq/'))      $pageTitle = "Frequently Asked Questions | {$siteName}";
-            elseif (str_contains($cp['loc'], 'contact/'))  $pageTitle = "Contact & Factory Location | {$siteName}";
+            if (str_contains($cp['loc'], '/products'))       $pageTitle = "Commercial Print Product Catalog | {$siteName}";
+            elseif (str_contains($cp['loc'], '/services'))   $pageTitle = "Printing & Manufacturing Services | {$siteName}";
+            elseif (str_contains($cp['loc'], '/pricing'))    $pageTitle = "Trade Pricing & Volume Discount Tiers | {$siteName}";
+            elseif (str_contains($cp['loc'], '/get-quote'))  $pageTitle = "Request a Custom Print Quotation | {$siteName}";
+            elseif (str_contains($cp['loc'], '/gallery'))    $pageTitle = "Production Portfolio & Showcase | {$siteName}";
+            elseif (str_contains($cp['loc'], '/blog'))       $pageTitle = "Printing Knowledge Base & Prepress Guides | {$siteName}";
+            elseif (str_contains($cp['loc'], '/about'))      $pageTitle = "About Our Facility & Printing Studio | {$siteName}";
+            elseif (str_contains($cp['loc'], '/faq'))        $pageTitle = "Frequently Asked Questions | {$siteName}";
+            elseif (str_contains($cp['loc'], '/contact'))    $pageTitle = "Contact & Factory Location | {$siteName}";
 
             $graph[] = [
                 '@type'           => 'WebPage',
                 '@id'             => $cp['loc'] . '#webpage',
                 'url'             => $cp['loc'],
                 'name'            => $pageTitle,
-                'isPartOf'        => ['@id' => url('#website')],
+                'isPartOf'        => ['@id' => seo_prod_url('#website')],
                 'breadcrumb'      => [
                     '@type'       => 'BreadcrumbList',
                     'itemListElement' => [
-                        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => url('')],
+                        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => seo_prod_url('')],
                         ['@type' => 'ListItem', 'position' => 2, 'name' => $pageTitle, 'item' => $cp['loc']]
                     ]
                 ]
@@ -641,7 +1565,7 @@ function seo_sync_all(): array {
 
         // Service Nodes
         foreach ($services as $srv) {
-            $srvUrl = service_url($srv['slug']);
+            $srvUrl = seo_prod_service_url($srv['slug']);
             $srvDesc = !empty($srv['description']) ? strip_tags($srv['description']) : (!empty($srv['short_desc']) ? strip_tags($srv['short_desc']) : 'Industrial printing service.');
             $graph[] = [
                 '@type'         => 'Service',
@@ -649,7 +1573,7 @@ function seo_sync_all(): array {
                 'name'          => $srv['title'],
                 'url'           => $srvUrl,
                 'serviceType'   => 'Commercial Printing',
-                'provider'      => ['@id' => url('#organization')],
+                'provider'      => ['@id' => seo_prod_url('#organization')],
                 'description'   => $srvDesc,
                 'areaServed'    => ['@type' => 'Country', 'name' => 'India']
             ];
@@ -657,11 +1581,11 @@ function seo_sync_all(): array {
 
         // Product Nodes
         foreach ($products as $p) {
-            $pUrl = product_url($p['slug']);
+            $pUrl = seo_prod_product_url($p['slug']);
             $price = $p['sale_price'] ?? $p['regular_price'] ?? $p['starting_price'] ?? 0;
             $sku = $p['sku'] ?: ('OP-PRD-' . $p['id']);
             $pDesc = !empty($p['short_desc']) ? strip_tags($p['short_desc']) : (!empty($p['description']) ? substr(strip_tags($p['description']), 0, 200) : 'Industrial transfer product.');
-            $img = !empty($p['image_url']) ? url($p['image_url']) : url('assets/images/logo.png');
+            $img = !empty($p['image_url']) ? seo_prod_url($p['image_url']) : seo_prod_url('assets/images/logo.png');
 
             $prodNode = [
                 '@type'         => 'Product',
@@ -734,8 +1658,8 @@ function seo_sync_all(): array {
 
         // Blog Article Nodes
         foreach ($blogPosts as $post) {
-            $bUrl = blog_url($post['slug']);
-            $bImg = !empty($post['featured_image']) ? url($post['featured_image']) : url('assets/images/logo.png');
+            $bUrl = seo_prod_blog_url($post['slug']);
+            $bImg = !empty($post['featured_image']) ? seo_prod_url($post['featured_image']) : seo_prod_url('assets/images/logo.png');
             $graph[] = [
                 '@type'             => 'BlogPosting',
                 '@id'               => $bUrl . '#article',
@@ -749,7 +1673,7 @@ function seo_sync_all(): array {
                     '@type'           => 'Person',
                     'name'            => $post['author'] ?: 'OrderPrintex Editorial Team'
                 ],
-                'publisher'         => ['@id' => url('#organization')],
+                'publisher'         => ['@id' => seo_prod_url('#organization')],
                 'mainEntityOfPage'  => [
                     '@type'           => 'WebPage',
                     '@id'             => $bUrl
@@ -762,9 +1686,9 @@ function seo_sync_all(): array {
             $graph[] = [
                 '@type'             => 'CreativeWork',
                 'name'              => $item['title'],
-                'image'             => url($item['image_url']),
+                'image'             => seo_prod_url($item['image_url']),
                 'description'       => $item['description'],
-                'creator'           => ['@id' => url('#organization')]
+                'creator'           => ['@id' => seo_prod_url('#organization')]
             ];
         }
 
@@ -782,9 +1706,9 @@ function seo_sync_all(): array {
         }
         $graph[] = [
             '@type'             => 'FAQPage',
-            '@id'               => url('faq/#faqpage'),
+            '@id'               => seo_prod_url('faq') . '#faqpage',
             'name'              => 'OrderPrintex Frequently Asked Questions',
-            'url'               => url('faq/'),
+            'url'               => seo_prod_url('faq'),
             'mainEntity'        => $faqEntities
         ];
 
@@ -806,7 +1730,7 @@ function seo_sync_all(): array {
         // 4. GENERATE ORDERPRINTEX.MD (MAIN MARKDOWN DISCOVERY GUIDE)
         // -------------------------------------------------------------
         $md = "# ORDERPRINTEX — Complete Commercial Printing, Technical Specifications & Website Documentation\n\n";
-        $md .= "*Generated Automatically on " . date('d F Y, H:i:s T') . " | Production Version: 2.4.0*\n\n";
+        $md .= "*Generated Automatically on " . date('d F Y, H:i:s T') . " | Production Version: 2.5.0*\n\n";
 
         $md .= "---\n\n";
         $md .= "## Table of Contents\n\n";
@@ -836,8 +1760,8 @@ function seo_sync_all(): array {
         $md .= "## 2. B2B Commercial Business Model & The Enquiry-to-Quotation Architecture\n\n";
         $md .= "Unlike standard consumer retail e-commerce stores with automated shopping carts and credit card checkout, OrderPrintex operates as an **industrial-grade print-on-demand and commercial job-work manufacturing facility**. Every print run is custom-tailored to client substrate specifications, color gamuts, and physical volume.\n\n";
         $md .= "### Step-by-Step Order Lifecycle:\n\n";
-        $md .= "1. **Discovery & Specification**: The customer visits [orderprintex.com](" . url('') . "), browses the product catalogue or service descriptions, and determines required transfer formats (e.g. 22\" DTF gang sheets, UV DTF decals, or finished garments).\n";
-        $md .= "2. **Artwork Upload & Enquiry Submission**: The customer uploads high-resolution artwork (transparent PNG, vector PDF, or AI) through the online interactive workbench or the [Get a Quote](" . url('get-quote/') . ") form.\n";
+        $md .= "1. **Discovery & Specification**: The customer visits [orderprintex.com](https://orderprintex.com/), browses the product catalogue or service descriptions, and determines required transfer formats (e.g. 22\" DTF gang sheets, UV DTF decals, or finished garments).\n";
+        $md .= "2. **Artwork Upload & Enquiry Submission**: The customer uploads high-resolution artwork (transparent PNG, vector PDF, or AI) through the online interactive workbench or the [Get a Quote](https://orderprintex.com/get-quote) form.\n";
         $md .= "3. **Prepress Engineering & RIP Audit**: Our in-house color engineers audit the vector lines, transparency layers, color profiles (CMYK vs RGB), and calculate optimal gang sheet linear yields.\n";
         $md .= "4. **Itemized Quotation Issuance**: A formal commercial quotation is generated containing base unit prices, volume-tiered discounts, prepress setup (if any), and 18% GST.\n";
         $md .= "5. **Client Portal Review & Acceptance**: The client accesses their secure account dashboard, inspects the itemized line items and proof, and accepts the quotation.\n";
@@ -855,8 +1779,8 @@ function seo_sync_all(): array {
         // Section 4
         $md .= "## 4. Commercial Printing Services Directory\n\n";
         foreach ($services as $srv) {
-            $md .= "### [{$srv['title']}](" . service_url($srv['slug']) . ")\n\n";
-            $md .= "- **Canonical URL**: <" . service_url($srv['slug']) . ">\n";
+            $md .= "### [{$srv['title']}](" . seo_prod_service_url($srv['slug']) . ")\n\n";
+            $md .= "- **Canonical URL**: <" . seo_prod_service_url($srv['slug']) . ">\n";
             $desc = !empty($srv['description']) ? strip_tags($srv['description']) : (!empty($srv['short_desc']) ? strip_tags($srv['short_desc']) : 'High-definition industrial printing service.');
             $md .= "- **Overview**: {$desc}\n";
             $md .= "- **Turnaround & Dispatch**: 24-48 hours standard. Express same-day production available on pre-approved artwork.\n";
@@ -880,8 +1804,8 @@ function seo_sync_all(): array {
                 $lead = $p['lead_time'] ?: '24-48 Hours';
                 $moq = $p['min_order_qty'] ?: ($p['min_order'] ?: '1 Unit');
 
-                $md .= "#### [{$p['title']}](" . product_url($p['slug']) . ")\n\n";
-                $md .= "- **Direct URL**: <" . product_url($p['slug']) . ">\n";
+                $md .= "#### [{$p['title']}](" . seo_prod_product_url($p['slug']) . ")\n\n";
+                $md .= "- **Direct URL**: <" . seo_prod_product_url($p['slug']) . ">\n";
                 $md .= "- **SKU**: `{$sku}`\n";
                 $md .= "- **Base Pricing**: {$priceStr} " . (!empty($p['price_unit']) ? "({$p['price_unit']})" : "") . "\n";
                 $md .= "- **Minimum Order Quantity (MOQ)**: {$moq}\n";
@@ -946,15 +1870,15 @@ function seo_sync_all(): array {
         $md .= "Our studio portfolio showcases genuine commercial production runs and demonstration specimens manufactured at our New Delhi studio:\n\n";
         foreach ($portfolioItems as $item) {
             $md .= "### {$item['title']} (" . strtoupper($item['category']) . ")\n";
-            $md .= "- **Image Asset**: <" . url($item['image_url']) . ">\n";
+            $md .= "- **Image Asset**: <" . seo_prod_url($item['image_url']) . ">\n";
             $md .= "- **Technical Summary**: {$item['description']}\n\n";
         }
 
         // Section 8
         $md .= "## 8. Industry Knowledge Base & Educational Guides\n\n";
         foreach ($blogPosts as $post) {
-            $md .= "### [{$post['title']}](" . blog_url($post['slug']) . ")\n";
-            $md .= "- **Canonical Route**: <" . blog_url($post['slug']) . ">\n";
+            $md .= "### [{$post['title']}](" . seo_prod_blog_url($post['slug']) . ")\n";
+            $md .= "- **Canonical Route**: <" . seo_prod_blog_url($post['slug']) . ">\n";
             $md .= "- **Editorial Author**: " . ($post['author'] ?: 'OrderPrintex Technical Team') . " | **Reading Time**: " . ($post['read_time'] ?: '5 min read') . "\n";
             $excerpt = !empty($post['excerpt']) ? strip_tags($post['excerpt']) : 'Comprehensive guide on digital printing, DTF technology, and commercial substrates.';
             $md .= "- **Synopsis**: {$excerpt}\n\n";
@@ -987,7 +1911,7 @@ function seo_sync_all(): array {
             if (str_contains($u['loc'], '/services/')) $catLabel = 'Printing Service';
             elseif (str_contains($u['loc'], '/product/category/')) $catLabel = 'Product Category';
             elseif (str_contains($u['loc'], '/product/')) $catLabel = 'Product Details';
-            elseif (str_contains($u['loc'], '/blog/')) $catLabel = 'Knowledge Base';
+            elseif (str_contains($u['loc'], '/blog')) $catLabel = 'Knowledge Base';
             elseif (str_contains($u['loc'], '-policy')) $catLabel = 'Legal & Terms';
 
             $md .= "| <{$u['loc']}> | {$catLabel} | {$u['changefreq']} | {$u['priority']} |\n";
@@ -1007,6 +1931,12 @@ function seo_sync_all(): array {
         @copy($mdPath, $overviewPath);
 
         // -------------------------------------------------------------
+        // 5. GENERATE /seo/markdown/ AND /seo/schema/
+        // -------------------------------------------------------------
+        $markdownFiles = seo_generate_page_markdowns($rootDir, $ctx);
+        $schemaFiles = seo_generate_page_schemas($rootDir, $ctx);
+
+        // -------------------------------------------------------------
         // PERSIST METADATA & SYSTEM LOGS
         // -------------------------------------------------------------
         set_setting('seo_last_generated', date('Y-m-d H:i:s'), 'seo');
@@ -1018,7 +1948,7 @@ function seo_sync_all(): array {
         set_setting('seo_articles_count', (string) count($blogPosts), 'seo');
         set_setting('seo_portfolio_count', (string) count($portfolioItems), 'seo');
 
-        log_activity(null, 'seo_sync_all', "Synchronized sitemap.xml ({$urlCount} URLs), llms.txt, schema.json, and ORDERPRINTEX.md successfully.");
+        log_activity(null, 'seo_sync_all', "Synchronized sitemap.xml ({$urlCount} URLs), llms.txt, schema.json, ORDERPRINTEX.md, " . count($markdownFiles) . " markdowns, and " . count($schemaFiles) . " schemas.");
 
         return [
             'success'          => true,
@@ -1031,6 +1961,8 @@ function seo_sync_all(): array {
             'schema_nodes'     => count($graph),
             'markdown_path'    => $mdPath,
             'markdown_size'    => file_exists($mdPath) ? filesize($mdPath) : 0,
+            'markdown_files'   => count($markdownFiles),
+            'schema_files'     => count($schemaFiles),
             'counts'           => [
                 'urls'       => $urlCount,
                 'products'   => count($products),
@@ -1040,7 +1972,7 @@ function seo_sync_all(): array {
                 'portfolio'  => count($portfolioItems),
                 'faqs'       => count($faqs)
             ],
-            'message'          => "Successfully synchronized all 4 discovery files: sitemap.xml ({$urlCount} URLs), llms.txt, schema.json ({$urlCount} entities), and ORDERPRINTEX.md."
+            'message'          => "Successfully synchronized all SEO & AI discovery assets: sitemap.xml ({$urlCount} URLs), llms.txt, schema.json ({$urlCount} entities), ORDERPRINTEX.md, " . count($markdownFiles) . " Markdown pages, and " . count($schemaFiles) . " Schema JSONs."
         ];
 
     } catch (Exception $e) {
@@ -1054,13 +1986,10 @@ function seo_sync_all(): array {
 }
 
 /**
- * Return current status and file metadata for all 4 SEO & AI discovery files.
+ * Return current status and file metadata for all SEO & AI discovery files.
  */
 function seo_get_status(): array {
-    $rootDir = realpath(__DIR__ . '/..');
-    if (!$rootDir) {
-        $rootDir = 'C:/Movies/Internship/OrderPrintex';
-    }
+    $rootDir = realpath(__DIR__ . '/..') ?: 'C:/Movies/Internship/OrderPrintex';
 
     $sitemapPath = $rootDir . '/sitemap.xml';
     $llmsPath = $rootDir . '/llms.txt';
@@ -1109,16 +2038,17 @@ function seo_get_status(): array {
  */
 function seo_jsonld_organization(): string {
     $siteName = get_setting('site_name', 'OrderPrintex');
-    $siteEmail = get_setting('contact_email', 'contact@orderprintex.com');
+    $siteEmail = get_setting('contact_email', 'sales@orderprintex.com');
     $sitePhone = get_setting('contact_phone', '+91 93540 28199');
-    $siteAddress = get_setting('contact_address', 'Okhla Industrial Area, Phase II, New Delhi - 110020');
+    $siteAddress = get_setting('contact_address', 'Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh, Delhi, 110059');
 
     $schema = [
         '@context' => 'https://schema.org',
         '@type' => 'ProfessionalService',
+        '@id' => seo_prod_url('#organization'),
         'name' => $siteName,
-        'url' => url(''),
-        'logo' => url('assets/images/logo.png'),
+        'url' => seo_prod_url(''),
+        'logo' => seo_prod_url('assets/images/logo.png'),
         'description' => 'Commercial DTF printing, UV DTF gang sheets, and custom merchandise manufacturer in New Delhi.',
         'email' => $siteEmail,
         'telephone' => $sitePhone,
@@ -1127,12 +2057,19 @@ function seo_jsonld_organization(): string {
             'streetAddress' => $siteAddress,
             'addressLocality' => 'New Delhi',
             'addressRegion' => 'Delhi',
-            'postalCode' => '110020',
+            'postalCode' => '110059',
             'addressCountry' => 'IN'
+        ],
+        'geo' => [
+            '@type' => 'GeoCoordinates',
+            'latitude' => 28.6180,
+            'longitude' => 77.0805
         ],
         'sameAs' => [
             'https://www.facebook.com/orderprintex',
-            'https://www.instagram.com/orderprintex'
+            'https://www.instagram.com/orderprintex',
+            'https://www.youtube.com/@orderprintex',
+            'https://www.linkedin.com/company/orderprintex'
         ]
     ];
 
@@ -1151,7 +2088,7 @@ function seo_jsonld_product(array $product): string {
         '@context' => 'https://schema.org',
         '@type' => 'Product',
         'name' => $product['title'] ?? 'Custom Print Product',
-        'image' => !empty($product['image_url']) ? url($product['image_url']) : url('assets/images/logo.png'),
+        'image' => !empty($product['image_url']) ? seo_prod_url($product['image_url']) : seo_prod_url('assets/images/logo.png'),
         'description' => $desc,
         'sku' => $sku,
         'brand' => [
@@ -1160,7 +2097,7 @@ function seo_jsonld_product(array $product): string {
         ],
         'offers' => [
             '@type' => 'Offer',
-            'url' => product_url($product['slug'] ?? ''),
+            'url' => seo_prod_product_url($product['slug'] ?? ''),
             'priceCurrency' => 'INR',
             'price' => number_format((float) $price, 2, '.', ''),
             'availability' => ($product['stock_status'] ?? 'in_stock') === 'out_of_stock' ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
@@ -1180,7 +2117,7 @@ function seo_jsonld_article(array $post): string {
         '@type' => 'BlogPosting',
         'headline' => $post['title'] ?? '',
         'description' => !empty($post['excerpt']) ? strip_tags($post['excerpt']) : '',
-        'image' => !empty($post['featured_image']) ? url($post['featured_image']) : url('assets/images/logo.png'),
+        'image' => !empty($post['featured_image']) ? seo_prod_url($post['featured_image']) : seo_prod_url('assets/images/logo.png'),
         'author' => [
             '@type' => 'Person',
             'name' => $post['author'] ?? 'OrderPrintex Editorial Team'
@@ -1190,14 +2127,14 @@ function seo_jsonld_article(array $post): string {
             'name' => 'OrderPrintex',
             'logo' => [
                 '@type' => 'ImageObject',
-                'url' => url('assets/images/logo.png')
+                'url' => seo_prod_url('assets/images/logo.png')
             ]
         ],
         'datePublished' => !empty($post['created_at']) ? date('c', strtotime($post['created_at'])) : date('c'),
         'dateModified' => !empty($post['updated_at']) ? date('c', strtotime($post['updated_at'])) : date('c'),
         'mainEntityOfPage' => [
             '@type' => 'WebPage',
-            '@id' => blog_url($post['slug'] ?? '')
+            '@id' => seo_prod_blog_url($post['slug'] ?? '')
         ]
     ];
 

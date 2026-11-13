@@ -38,7 +38,7 @@ require_once __DIR__ . '/../includes/header.php';
           Live status milestones, tracking numbers, and proof approval for approved production jobs.
         </p>
       </div>
-      <a href="<?= url('get-quote/') ?>" class="btn btn-primary">
+      <a href="<?= url('get-quote') ?>" class="btn btn-primary">
         <span>+ Place New Print Order</span>
       </a>
     </div>

@@ -158,9 +158,11 @@ if ($reviewCount > 0) {
 }
 
 // SEO Metadata
-$pageTitle = (!empty($product['meta_title']) ? $product['meta_title'] : (e($product['title']) . " (SKU: " . e($product['sku']) . ")")) . " | OrderPrintex";
-$pageDesc  = !empty($product['meta_description']) ? e($product['meta_description']) : e($product['short_desc']);
+$pageTitle = (!empty($product['meta_title']) ? $product['meta_title'] : ($product['title'] . " (SKU: " . $product['sku'] . ")")) . " | OrderPrintex";
+$pageDesc  = !empty($product['meta_description']) ? $product['meta_description'] : $product['short_desc'];
 $canonical = product_url($product['slug']);
+$ogImage   = !empty($product['image_url']) ? url($product['image_url']) : url('assets/images/logo.png');
+$ogType    = 'product';
 $bodyClass = 'product-detail-page has-sticky-cart-page';
 
 require_once __DIR__ . '/includes/header.php';
@@ -226,7 +228,7 @@ $hasVariations = !empty($variationData) && !empty($productAttributes);
       "@type": "ListItem",
       "position": 2,
       "name": "Products",
-      "item": <?= json_encode(url('products/')) ?>
+      "item": <?= json_encode(url('products')) ?>
     },
     {
       "@type": "ListItem",
@@ -249,7 +251,7 @@ $hasVariations = !empty($variationData) && !empty($productAttributes);
   <div class="container" style="font-size:0.85rem; color:#B8B1A3; display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
     <a href="<?= url('') ?>" style="color:#B8B1A3; font-weight:600; text-decoration:none;">Home</a>
     <span style="color:#665c47;">&rsaquo;</span>
-    <a href="<?= url('products/') ?>" style="color:#B8B1A3; font-weight:600; text-decoration:none;">Products</a>
+    <a href="<?= url('products') ?>" style="color:#B8B1A3; font-weight:600; text-decoration:none;">Products</a>
     <span style="color:#665c47;">&rsaquo;</span>
     <a href="<?= category_url($product['category_slug'] ?? '') ?>" style="color:#B8B1A3; font-weight:600; text-decoration:none;">
       <?= e($product['category_name']) ?>
@@ -358,8 +360,6 @@ foreach ($supplementalImages as $sImg) {
 
         <!-- Primary Product H1 -->
         <h1 class="product-page-title" style="font-size:clamp(1.75rem, 2.5vw, 2.3rem); color:#F5F1E8; margin-bottom:0.75rem; line-height:1.25; font-weight:800;">
-          <?= e($product['title']) ?>
-        </h1>
           <?= e($product['title']) ?>
         </h1>
         

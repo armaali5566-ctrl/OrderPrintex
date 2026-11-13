@@ -1,0 +1,41 @@
+{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://orderprintex.com/#webpage",
+    "url": "https://orderprintex.com/",
+    "name": "OrderPrintex — Commercial DTF & UV DTF Printing Studio Delhi",
+    "description": "OrderPrintex is India's premier bulk manufacturer of DTF apparel transfers, UV DTF decals, custom streetwear t-shirts, and corporate merchandise with pan-India express dispatch.",
+    "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://orderprintex.com/#website",
+        "name": "OrderPrintex",
+        "url": "https://orderprintex.com/"
+    },
+    "about": {
+        "@type": "ProfessionalService",
+        "@id": "https://orderprintex.com/#organization",
+        "name": "OrderPrintex",
+        "url": "https://orderprintex.com/",
+        "telephone": "+91 93540 28199",
+        "email": "sales@orderprintex.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh, Delhi, 110059",
+            "addressLocality": "New Delhi",
+            "addressRegion": "Delhi",
+            "postalCode": "110059",
+            "addressCountry": "IN"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 28.618,
+            "longitude": 77.0805
+        },
+        "sameAs": [
+            "https://www.facebook.com/orderprintex",
+            "https://www.instagram.com/orderprintex",
+            "https://www.youtube.com/@orderprintex",
+            "https://www.linkedin.com/company/orderprintex"
+        ]
+    }
+}

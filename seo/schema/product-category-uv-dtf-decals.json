@@ -1,0 +1,47 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "CollectionPage",
+            "@id": "https://orderprintex.com/product/category/uv-dtf-decals#collection",
+            "url": "https://orderprintex.com/product/category/uv-dtf-decals",
+            "name": "UV DTF Decals | Commercial Printing Products | OrderPrintex",
+            "description": "Scratchproof 3D embossed decals for hard surfaces",
+            "mainEntity": {
+                "@type": "ItemList",
+                "itemListElement": [
+                    {
+                        "@type": "Product",
+                        "position": 1,
+                        "name": "3D Gloss UV DTF Decal Sheet",
+                        "url": "https://orderprintex.com/product/custom-uv-dtf-decal-sheet"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://orderprintex.com/product/category/uv-dtf-decals#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://orderprintex.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Products",
+                    "item": "https://orderprintex.com/products"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "UV DTF Decals",
+                    "item": "https://orderprintex.com/product/category/uv-dtf-decals"
+                }
+            ]
+        }
+    ]
+}

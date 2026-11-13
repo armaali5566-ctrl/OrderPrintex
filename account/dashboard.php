@@ -57,7 +57,7 @@ require_once __DIR__ . '/../includes/header.php';
         </p>
       </div>
       <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
-        <a href="<?= url('get-quote/') ?>" class="btn btn-primary" style="padding:0.65rem 1.4rem;">
+        <a href="<?= url('get-quote') ?>" class="btn btn-primary" style="padding:0.65rem 1.4rem;">
           <span>+ Request New Quotation</span>
         </a>
         <a href="<?= account_url('profile') ?>" class="btn btn-outline" style="padding:0.65rem 1.25rem;">
@@ -186,7 +186,7 @@ require_once __DIR__ . '/../includes/header.php';
                 <td colspan="7" style="padding:3rem 1.5rem; text-align:center; color:#B8B1A3;">
                   <div style="font-size:1.05rem; margin-bottom:0.5rem; color:#F5F1E8;">No quotations generated yet</div>
                   <p style="margin:0 0 1rem; font-size:0.88rem;">Submit your commercial printing specifications to receive an itemized quote.</p>
-                  <a href="<?= url('get-quote/') ?>" class="btn btn-primary btn-sm">Request Your First Quote</a>
+                  <a href="<?= url('get-quote') ?>" class="btn btn-primary btn-sm">Request Your First Quote</a>
                 </td>
               </tr>
             <?php else: ?>
@@ -253,7 +253,7 @@ require_once __DIR__ . '/../includes/header.php';
                 <td colspan="6" style="padding:3rem 1.5rem; text-align:center; color:#B8B1A3;">
                   <div style="font-size:1.05rem; margin-bottom:0.5rem; color:#F5F1E8;">No enquiries submitted yet</div>
                   <p style="margin:0 0 1rem; font-size:0.88rem;">Have a custom DTF, UV DTF, or garment printing requirement? Request a quote anytime.</p>
-                  <a href="<?= url('get-quote/') ?>" class="btn btn-primary btn-sm">Submit New Enquiry</a>
+                  <a href="<?= url('get-quote') ?>" class="btn btn-primary btn-sm">Submit New Enquiry</a>
                 </td>
               </tr>
             <?php else: ?>

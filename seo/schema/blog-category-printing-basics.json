@@ -1,0 +1,53 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "CollectionPage",
+            "@id": "https://orderprintex.com/blog/category/printing-basics#collection",
+            "url": "https://orderprintex.com/blog/category/printing-basics",
+            "name": "Printing Basics | Printing Knowledge Base | OrderPrintex",
+            "description": "In-depth commercial and technical printing tutorials",
+            "mainEntity": {
+                "@type": "ItemList",
+                "itemListElement": [
+                    {
+                        "@type": "BlogPosting",
+                        "position": 1,
+                        "headline": "DTF vs Screen Printing: Understanding the Differences, Benefits and Applications",
+                        "url": "https://orderprintex.com/blog/dtf-vs-screen-printing-differences-benefits-applications"
+                    },
+                    {
+                        "@type": "BlogPosting",
+                        "position": 2,
+                        "headline": "How DTF Printing Technology Is Transforming the Custom Apparel Industry",
+                        "url": "https://orderprintex.com/blog/dtf-printing-technology-custom-apparel"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://orderprintex.com/blog/category/printing-basics#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://orderprintex.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Blog",
+                    "item": "https://orderprintex.com/blog"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Printing Basics",
+                    "item": "https://orderprintex.com/blog/category/printing-basics"
+                }
+            ]
+        }
+    ]
+}

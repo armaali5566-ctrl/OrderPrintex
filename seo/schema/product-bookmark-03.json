@@ -1,0 +1,44 @@
+{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://orderprintex.com/product/bookmark-03#product",
+    "name": "Custom Printed Bookmarks",
+    "url": "https://orderprintex.com/product/bookmark-03",
+    "image": "https://orderprintex.com/assets/images/branding_stationery.jpg",
+    "description": "Double-sided bookmarks on thick card, with a soft-touch finish. Good for brands, bookstores and event giveaways.",
+    "sku": "BKM-001",
+    "category": "Custom Stationery",
+    "brand": {
+        "@type": "Brand",
+        "name": "OrderPrintex"
+    },
+    "offers": {
+        "@type": "Offer",
+        "url": "https://orderprintex.com/product/bookmark-03",
+        "priceCurrency": "INR",
+        "price": "0.00",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
+    },
+    "review": [
+        {
+            "@type": "Review",
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+            },
+            "author": {
+                "@type": "Person",
+                "name": "Aarav Mehta"
+            },
+            "reviewBody": "The 350 GSM cardstock with matte lamination feels ultra premium. Fast delivery to Mumbai."
+        }
+    ],
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "1",
+        "bestRating": "5"
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://orderprintex.com/product/apparel-mailer-box#product",
+    "name": "Branded Apparel Mailer Box",
+    "url": "https://orderprintex.com/product/apparel-mailer-box",
+    "image": "https://orderprintex.com/assets/images/packaging_box.jpg",
+    "description": "A sturdy matte black box with your logo in gold foil and gloss detail. Made for shipping apparel.",
+    "sku": "BOX-001",
+    "category": "Packaging & Boxes",
+    "brand": {
+        "@type": "Brand",
+        "name": "OrderPrintex"
+    },
+    "offers": {
+        "@type": "Offer",
+        "url": "https://orderprintex.com/product/apparel-mailer-box",
+        "priceCurrency": "INR",
+        "price": "0.00",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
+    }
+}

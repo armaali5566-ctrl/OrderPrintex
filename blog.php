@@ -22,8 +22,15 @@ if (strpos($requestUri, 'blog.php') !== false) {
     exit;
 }
 
-// Fetch Categories
-$categories = db_fetch_all("SELECT * FROM blog_categories ORDER BY id ASC");
+// Fetch Categories with published post counts
+$categories = db_fetch_all("
+    SELECT c.*, COUNT(p.id) as post_count 
+    FROM blog_categories c 
+    LEFT JOIN blog_posts p ON p.category_id = c.id AND p.status = 'published' 
+    GROUP BY c.id 
+    ORDER BY c.id ASC
+");
+$totalPublishedCount = (int)(db_fetch_one("SELECT COUNT(*) as cnt FROM blog_posts WHERE status = 'published'")['cnt'] ?? 0);
 
 // Validate Category Slug if present
 $activeCategory = null;
@@ -66,9 +73,17 @@ $posts = db_fetch_all($sql, $params);
 $featuredPost = !empty($posts) ? $posts[0] : null;
 $gridPosts = !empty($posts) ? array_slice($posts, 1) : [];
 
-$pageTitle = "Commercial Printing Guides & Insights | OrderPrintex Delhi Blog";
-$pageDesc  = "Explore expert printing tutorials, DTF transfer advice, paper stock guides, and apparel branding strategies from OrderPrintex's Delhi prepress engineers.";
-$canonical = blog_url();
+if ($activeCategory) {
+    $pageTitle = $activeCategory['name'] . " — Commercial Printing Guides | OrderPrintex Delhi";
+    $pageDesc  = !empty($activeCategory['description']) 
+        ? $activeCategory['description'] 
+        : ("Explore expert " . $activeCategory['name'] . " guides, DTF printing tutorials, and apparel advice from OrderPrintex's Delhi prepress engineers.");
+    $canonical = blog_category_url($activeCategory['slug']);
+} else {
+    $pageTitle = "Commercial Printing Guides & Insights | OrderPrintex Delhi Blog";
+    $pageDesc  = "Explore expert printing tutorials, DTF transfer advice, paper stock guides, and apparel branding strategies from OrderPrintex's Delhi prepress engineers.";
+    $canonical = blog_url();
+}
 
 require_once __DIR__ . '/includes/header.php';
 ?>
@@ -105,11 +120,11 @@ require_once __DIR__ . '/includes/header.php';
   <div class="container">
     <div class="blog-category-track">
       <a href="<?= blog_url() ?>" class="blog-cat-chip <?= empty($categorySlug) ? 'is-active' : '' ?>">
-        <span>All Guides (<?= count($posts) ?>)</span>
+        <span>All Guides (<?= $totalPublishedCount ?>)</span>
       </a>
       <?php foreach ($categories as $cat): ?>
         <a href="<?= blog_category_url($cat['slug']) ?>" class="blog-cat-chip <?= ($categorySlug === $cat['slug']) ? 'is-active' : '' ?>">
-          <span><?= e($cat['name']) ?></span>
+          <span><?= e($cat['name']) ?> (<?= (int)($cat['post_count'] ?? 0) ?>)</span>
         </a>
       <?php endforeach; ?>
     </div>

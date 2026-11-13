@@ -42,7 +42,7 @@ require_once __DIR__ . '/../includes/header.php';
           Track prepress specifications, custom parameters, and quotation statuses.
         </p>
       </div>
-      <a href="<?= url('get-quote/') ?>" class="btn btn-primary" style="padding:0.65rem 1.4rem;">
+      <a href="<?= url('get-quote') ?>" class="btn btn-primary" style="padding:0.65rem 1.4rem;">
         <span>+ Request New Quotation</span>
       </a>
     </div>
@@ -88,7 +88,7 @@ require_once __DIR__ . '/../includes/header.php';
                 <td colspan="6" style="padding:3.5rem 1.5rem; text-align:center; color:#B8B1A3;">
                   <div style="font-size:1.1rem; margin-bottom:0.5rem; color:#F5F1E8; font-weight:600;">No enquiries submitted yet</div>
                   <p style="margin:0 0 1.25rem; font-size:0.9rem;">Submit your commercial printing parameters to receive a custom quotation from our studio.</p>
-                  <a href="<?= url('get-quote/') ?>" class="btn btn-primary btn-sm">Request Your First Quote</a>
+                  <a href="<?= url('get-quote') ?>" class="btn btn-primary btn-sm">Request Your First Quote</a>
                 </td>
               </tr>
             <?php else: ?>

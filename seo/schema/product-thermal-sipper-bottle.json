@@ -1,0 +1,23 @@
+{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://orderprintex.com/product/thermal-sipper-bottle#product",
+    "name": "Custom Steel Thermal Bottle (750 ml)",
+    "url": "https://orderprintex.com/product/thermal-sipper-bottle",
+    "image": "https://orderprintex.com/assets/images/corporate_swag_kit.jpg",
+    "description": "A double-wall steel bottle with your logo printed on it. Good for gifts and team kits.",
+    "sku": "BTL-001",
+    "category": "Corporate Merchandise",
+    "brand": {
+        "@type": "Brand",
+        "name": "OrderPrintex"
+    },
+    "offers": {
+        "@type": "Offer",
+        "url": "https://orderprintex.com/product/thermal-sipper-bottle",
+        "priceCurrency": "INR",
+        "price": "0.00",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
+    }
+}

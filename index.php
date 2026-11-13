@@ -5,8 +5,14 @@
  * Focused on Customer Conversions, Clean URLs, Dynamic Products & Blog Showcase
  */
 
+require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/includes/database.php';
+require_once __DIR__ . '/includes/functions.php';
+
 $pageTitle = "PRINTEX — Industrial DTF & UV DTF Manufacturer & Bulk Supplier in India";
 $pageDesc  = "PRINTEX is India's leading bulk manufacturer of DTF garment transfers, UV DTF 3D decals, custom screen-quality t-shirts, and corporate merchandise. Fast turnaround, prepress checks, and nationwide delivery.";
+$canonical = url('');
+$pageSchemaKey = 'home';
 
 require_once __DIR__ . '/includes/header.php';
 
@@ -105,7 +111,10 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
       <!-- Right Visual Composition -->
       <div class="hero-visual reveal slide-left">
         <div class="hero-visual-card">
-          <img src="<?= url('assets/images/dtf_fabric_print.jpg') ?>" alt="PRINTEX Delhi Studio DTF Production">
+          <picture>
+            <source srcset="<?= url('assets/images/dtf_fabric_print.webp') ?>" type="image/webp">
+            <img src="<?= url('assets/images/dtf_fabric_print.jpg') ?>" alt="PRINTEX Delhi Studio DTF Production" width="1200" height="896" fetchpriority="high">
+          </picture>
         </div>
 
         <!-- Floating Studio Quality Badge -->
@@ -416,7 +425,10 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
       <!-- 1. DTF Transfers -->
       <div class="service-card reveal slide-up">
         <div class="service-card-media">
-          <img src="<?= url('assets/images/dtf_fabric_print.jpg') ?>" alt="Custom DTF transfer printed on a dark T-shirt">
+          <picture>
+            <source srcset="<?= url('assets/images/dtf_fabric_print.webp') ?>" type="image/webp">
+            <img src="<?= url('assets/images/dtf_fabric_print.jpg') ?>" alt="Custom DTF transfer printed on a dark T-shirt" width="1200" height="896" loading="lazy">
+          </picture>
           <span class="service-card-badge">FLAGSHIP SERVICE</span>
         </div>
         <div class="service-card-body">
@@ -433,7 +445,10 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
       <!-- 2. UV DTF Decals -->
       <div class="service-card reveal slide-up" style="transition-delay:0.1s;">
         <div class="service-card-media">
-          <img src="<?= url('assets/images/uv_dtf_drinkware.jpg') ?>" alt="UV DTF decal applied on a bottle">
+          <picture>
+            <source srcset="<?= url('assets/images/uv_dtf_drinkware.webp') ?>" type="image/webp">
+            <img src="<?= url('assets/images/uv_dtf_drinkware.jpg') ?>" alt="UV DTF decal applied on a bottle" width="1200" height="896" loading="lazy">
+          </picture>
           <span class="service-card-badge">NO HEAT PRESS</span>
         </div>
         <div class="service-card-body">
@@ -450,7 +465,10 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
       <!-- 3. T-Shirt Printing -->
       <div class="service-card reveal slide-up" style="transition-delay:0.2s;">
         <div class="service-card-media">
-          <img src="<?= url('assets/images/streetwear_tee.jpg') ?>" alt="Black custom printed graphic T-shirt">
+          <picture>
+            <source srcset="<?= url('assets/images/streetwear_tee.webp') ?>" type="image/webp">
+            <img src="<?= url('assets/images/streetwear_tee.jpg') ?>" alt="Black custom printed graphic T-shirt" width="1200" height="896" loading="lazy">
+          </picture>
           <span class="service-card-badge">COTTON TEES</span>
         </div>
         <div class="service-card-body">
@@ -467,7 +485,10 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
       <!-- 4. Corporate Printing -->
       <div class="service-card reveal slide-up" style="transition-delay:0.3s;">
         <div class="service-card-media">
-          <img src="<?= url('assets/images/corporate_swag_kit.jpg') ?>" alt="Corporate welcome kit with printed mug and diary">
+          <picture>
+            <source srcset="<?= url('assets/images/corporate_swag_kit.webp') ?>" type="image/webp">
+            <img src="<?= url('assets/images/corporate_swag_kit.jpg') ?>" alt="Corporate welcome kit with printed mug and diary" width="1200" height="896" loading="lazy">
+          </picture>
           <span class="service-card-badge">BULK MERCHANDISE</span>
         </div>
         <div class="service-card-body">

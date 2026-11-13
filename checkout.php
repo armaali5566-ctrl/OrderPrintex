@@ -7,7 +7,7 @@ require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/functions.php';
 
 // OrderPrintex is strictly an Enquiry & Quotation platform. Direct checkout redirected to quotation request.
-header('Location: ' . url('get-quote/'));
+header('Location: ' . url('get-quote'));
 exit;
 $pageDesc  = "Complete your order with PAN-India express delivery, verified prepress proofs, and 18% GST tax invoice.";
 $canonical = checkout_url();

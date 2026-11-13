@@ -1,0 +1,53 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "CollectionPage",
+            "@id": "https://orderprintex.com/product/category/custom-stationery#collection",
+            "url": "https://orderprintex.com/product/category/custom-stationery",
+            "name": "Custom Stationery | Commercial Printing Products | OrderPrintex",
+            "description": "Bookmarks, flyers, brochures, and business cards",
+            "mainEntity": {
+                "@type": "ItemList",
+                "itemListElement": [
+                    {
+                        "@type": "Product",
+                        "position": 1,
+                        "name": "Corporate Welcome Gift Kit",
+                        "url": "https://orderprintex.com/product/executive-welcome-hamper"
+                    },
+                    {
+                        "@type": "Product",
+                        "position": 2,
+                        "name": "Custom Printed Bookmarks",
+                        "url": "https://orderprintex.com/product/bookmark-03"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://orderprintex.com/product/category/custom-stationery#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://orderprintex.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Products",
+                    "item": "https://orderprintex.com/products"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Custom Stationery",
+                    "item": "https://orderprintex.com/product/category/custom-stationery"
+                }
+            ]
+        }
+    ]
+}

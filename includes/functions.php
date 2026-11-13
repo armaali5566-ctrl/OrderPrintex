@@ -26,49 +26,49 @@ function url(string $path = ''): string {
 }
 
 /**
- * Generate clean SEO product URL: /product/slug-name/
+ * Generate clean SEO product URL: /product/slug-name
  */
 function product_url(string $slug): string {
     $cleanSlug = trim(trim($slug), '/');
-    return url('product/' . $cleanSlug . '/');
+    return url('product/' . $cleanSlug);
 }
 
 /**
- * Generate clean SEO category URL: /product/category/slug-name/ or /products/
+ * Generate clean SEO category URL: /product/category/slug-name or /products
  */
 function category_url(?string $slug = null): string {
     if (empty($slug)) {
-        return url('products/');
+        return url('products');
     }
     $cleanSlug = trim(trim($slug), '/');
-    return url('product/category/' . $cleanSlug . '/');
+    return url('product/category/' . $cleanSlug);
 }
 
 /**
- * Generate clean SEO blog URL: /blog/ or /blog/slug-name/
+ * Generate clean SEO blog URL: /blog or /blog/slug-name
  */
 function blog_url(?string $slug = null): string {
     if (empty($slug)) {
-        return url('blog/');
+        return url('blog');
     }
     $cleanSlug = trim(trim($slug), '/');
-    return url('blog/' . $cleanSlug . '/');
+    return url('blog/' . $cleanSlug);
 }
 
 /**
- * Generate clean SEO blog category URL: /blog/category/slug-name/
+ * Generate clean SEO blog category URL: /blog/category/slug-name
  */
 function blog_category_url(string $slug): string {
     $cleanSlug = trim(trim($slug), '/');
-    return url('blog/category/' . $cleanSlug . '/');
+    return url('blog/category/' . $cleanSlug);
 }
 
 /**
- * Generate clean SEO service URL: /services/slug-name/
+ * Generate clean SEO service URL: /services/slug-name
  */
 function service_url(string $slug): string {
     $cleanSlug = trim(trim($slug), '/');
-    return url('services/' . $cleanSlug . '/');
+    return url('services/' . $cleanSlug);
 }
 
 /**
@@ -76,26 +76,30 @@ function service_url(string $slug): string {
  */
 function page_url(string $page): string {
     $clean = trim(trim($page), '/');
-    return url($clean . '/');
+    return url($clean);
 }
 
 function cart_url(): string {
-    return url('cart/');
+    return url('cart');
 }
 
 function checkout_url(): string {
-    return url('checkout/');
+    return url('checkout');
 }
 
 function pricing_url(): string {
-    return url('pricing/');
+    return url('pricing');
+}
+
+function quote_url(): string {
+    return url('get-quote');
 }
 
 function account_url(string $subpath = ''): string {
     if (empty($subpath)) {
-        return url('account/');
+        return url('account');
     }
-    return url('account/' . trim(trim($subpath), '/') . '/');
+    return url('account/' . trim(trim($subpath), '/'));
 }
 
 /**
@@ -375,6 +379,133 @@ function handle_file_upload(array $file, string $targetDir = ARTWORK_PATH): arra
         'file_size'      => $file['size'],
         'mime_type'      => $mimeType,
         'file_extension' => $extension
+    ];
+}
+
+/**
+ * Convert an image file (JPEG or PNG) to WebP format using GD
+ */
+function convert_to_webp(string $sourcePath, string $destPath, int $quality = 85): bool {
+    if (!file_exists($sourcePath)) {
+        return false;
+    }
+    if (!function_exists('imagewebp')) {
+        return false;
+    }
+
+    $imgInfo = @getimagesize($sourcePath);
+    $mime = $imgInfo['mime'] ?? '';
+    $img = null;
+
+    if ($mime === 'image/jpeg') {
+        $img = @imagecreatefromjpeg($sourcePath);
+    } elseif ($mime === 'image/png') {
+        $img = @imagecreatefrompng($sourcePath);
+        if ($img !== null && $img !== false) {
+            imagepalettetotruecolor($img);
+            imagealphablending($img, false);
+            imagesavealpha($img, true);
+        }
+    } elseif ($mime === 'image/webp') {
+        if ($sourcePath !== $destPath) {
+            return @copy($sourcePath, $destPath);
+        }
+        return true;
+    } else {
+        // Fallback by extension
+        $ext = strtolower(pathinfo($sourcePath, PATHINFO_EXTENSION));
+        if ($ext === 'jpg' || $ext === 'jpeg') {
+            $img = @imagecreatefromjpeg($sourcePath);
+        } elseif ($ext === 'png') {
+            $img = @imagecreatefrompng($sourcePath);
+        } elseif ($ext === 'webp') {
+            return $sourcePath !== $destPath ? @copy($sourcePath, $destPath) : true;
+        }
+    }
+
+    if ($img === null || $img === false) {
+        return false;
+    }
+
+    $destDir = dirname($destPath);
+    if (!is_dir($destDir)) {
+        @mkdir($destDir, 0755, true);
+    }
+
+    $result = @imagewebp($img, $destPath, $quality);
+    @imagedestroy($img);
+    return (bool)$result;
+}
+
+/**
+ * Dedicated upload handler for blog images with automatic WebP conversion
+ */
+function handle_blog_image_upload(array $file): array {
+    if (!isset($file['error']) || is_array($file['error'])) {
+        return ['success' => false, 'error' => 'Invalid file parameter.'];
+    }
+
+    if ($file['error'] !== UPLOAD_ERR_OK) {
+        $errors = [
+            UPLOAD_ERR_INI_SIZE   => 'Uploaded file exceeds server size limit.',
+            UPLOAD_ERR_FORM_SIZE  => 'Uploaded file exceeds form size limit.',
+            UPLOAD_ERR_PARTIAL    => 'File was only partially uploaded.',
+            UPLOAD_ERR_NO_FILE    => 'No file was uploaded.',
+            UPLOAD_ERR_NO_TMP_DIR => 'Missing temporary folder.',
+            UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk.',
+            UPLOAD_ERR_EXTENSION  => 'A PHP extension stopped the file upload.'
+        ];
+        return ['success' => false, 'error' => $errors[$file['error']] ?? 'Unknown upload error.'];
+    }
+
+    // 15 MB limit for blog assets
+    if ($file['size'] > 15 * 1024 * 1024) {
+        return ['success' => false, 'error' => 'File size exceeds 15 MB limit.'];
+    }
+
+    $originalName = basename($file['name']);
+    $extension = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
+    $allowed = ['jpg', 'jpeg', 'png', 'webp'];
+
+    if (!in_array($extension, $allowed, true)) {
+        return ['success' => false, 'error' => 'Only JPG, PNG, and WebP images are permitted for blog articles.'];
+    }
+
+    $finfo = new finfo(FILEINFO_MIME_TYPE);
+    $mimeType = $finfo->file($file['tmp_name']);
+    if (!str_starts_with($mimeType, 'image/')) {
+        return ['success' => false, 'error' => 'Uploaded file is not a valid image.'];
+    }
+
+    $blogUploadDir = ROOT_PATH . 'uploads' . DIRECTORY_SEPARATOR . 'blog' . DIRECTORY_SEPARATOR;
+    if (!is_dir($blogUploadDir)) {
+        @mkdir($blogUploadDir, 0755, true);
+    }
+
+    $baseName = sprintf('blog_%s_%s', date('Ymd_His'), bin2hex(random_bytes(6)));
+    $storedOriginal = $baseName . '.' . $extension;
+    $destination = $blogUploadDir . $storedOriginal;
+
+    if (!move_uploaded_file($file['tmp_name'], $destination)) {
+        return ['success' => false, 'error' => 'Could not save file to disk.'];
+    }
+
+    $storedWebp = $baseName . '.webp';
+    $webpDestination = $blogUploadDir . $storedWebp;
+    $webpSuccess = convert_to_webp($destination, $webpDestination, 85);
+
+    $chosenFile = $webpSuccess ? $storedWebp : $storedOriginal;
+    $relativePath = 'uploads/blog/' . $chosenFile;
+
+    return [
+        'success'       => true,
+        'original_name' => $originalName,
+        'stored_name'   => $chosenFile,
+        'file_path'     => $relativePath,
+        'webp_path'     => $webpSuccess ? ('uploads/blog/' . $storedWebp) : null,
+        'original_path' => 'uploads/blog/' . $storedOriginal,
+        'file_size'     => filesize($webpSuccess ? $webpDestination : $destination),
+        'mime_type'     => $webpSuccess ? 'image/webp' : $mimeType
     ];
 }
 

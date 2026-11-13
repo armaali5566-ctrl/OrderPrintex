@@ -87,7 +87,7 @@ $topLinkedIn  = get_setting('social_linkedin', 'https://www.linkedin.com/company
   <div class="nav-container">
     <!-- Brand / Original OrderPrintex Logo -->
     <a href="<?= url('') ?>" class="site-brand" aria-label="OrderPrintex Home">
-      <img src="<?= url('assets/images/logo.png') ?>" alt="OrderPrintex - Manufacturer & Bulk Supplier of DTF and UV DTF in India" class="site-logo-img">
+      <img src="<?= url('assets/images/logo.png') ?>" alt="OrderPrintex - Manufacturer & Bulk Supplier of DTF and UV DTF in India" class="site-logo-img" width="48" height="48">
     </a>
 
     <!-- Main Navigation Menu with Restored Printing Services Dropdown -->
@@ -96,12 +96,12 @@ $topLinkedIn  = get_setting('social_linkedin', 'https://www.linkedin.com/company
         <a href="<?= url('') ?>" class="nav-link <?= ($currentUri === '/' || str_ends_with($trimmedUri ?? '', 'index.php')) ? 'active' : '' ?>">Home</a>
       </div>
       <div class="nav-item">
-        <a href="<?= url('about/') ?>" class="nav-link <?= strpos($currentUri, 'about') !== false ? 'active' : '' ?>">About Us</a>
+        <a href="<?= url('about') ?>" class="nav-link <?= strpos($currentUri, 'about') !== false ? 'active' : '' ?>">About Us</a>
       </div>
       
       <!-- Restored Printing Services Dropdown -->
       <div class="nav-item has-dropdown <?= (strpos($currentUri, 'services') !== false) ? 'active' : '' ?>" id="servicesDropdownItem">
-        <a href="<?= url('services/') ?>" class="nav-link dropdown-toggle <?= (strpos($currentUri, 'services') !== false) ? 'active' : '' ?>" id="servicesDropdownToggle" aria-haspopup="true" aria-expanded="false" role="button">
+        <a href="<?= url('services') ?>" class="nav-link dropdown-toggle <?= (strpos($currentUri, 'services') !== false) ? 'active' : '' ?>" id="servicesDropdownToggle" aria-haspopup="true" aria-expanded="false" role="button">
           <span>Printing Services</span>
           <svg class="dropdown-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -120,28 +120,28 @@ $topLinkedIn  = get_setting('social_linkedin', 'https://www.linkedin.com/company
           <a href="<?= service_url('corporate-printing') ?>" class="dropdown-link <?= (strpos($currentUri, 'corporate-printing') !== false) ? 'active' : '' ?>" role="menuitem">
             <span>Corporate Printing</span>
           </a>
-          <a href="<?= url('services/') ?>" class="dropdown-link dropdown-link-all" role="menuitem">
+          <a href="<?= url('services') ?>" class="dropdown-link dropdown-link-all" role="menuitem">
             <span>All Printing Services &rarr;</span>
           </a>
         </div>
       </div>
 
       <div class="nav-item">
-        <a href="<?= url('products/') ?>" class="nav-link <?= (strpos($currentUri, 'product') !== false) ? 'active' : '' ?>">Products</a>
+        <a href="<?= url('products') ?>" class="nav-link <?= (strpos($currentUri, 'product') !== false) ? 'active' : '' ?>">Products</a>
       </div>
       <div class="nav-item">
-        <a href="<?= url('gallery/') ?>" class="nav-link <?= strpos($currentUri, 'gallery') !== false ? 'active' : '' ?>">Portfolio</a>
+        <a href="<?= url('gallery') ?>" class="nav-link <?= strpos($currentUri, 'gallery') !== false ? 'active' : '' ?>">Portfolio</a>
       </div>
       <!-- Dedicated Blog Page (Replaced FAQ in primary navigation) -->
       <div class="nav-item">
         <a href="<?= blog_url() ?>" class="nav-link <?= strpos($currentUri, 'blog') !== false ? 'active' : '' ?>">Blog</a>
       </div>
       <div class="nav-item">
-        <a href="<?= url('contact/') ?>" class="nav-link <?= strpos($currentUri, 'contact') !== false ? 'active' : '' ?>">Contact</a>
+        <a href="<?= url('contact') ?>" class="nav-link <?= strpos($currentUri, 'contact') !== false ? 'active' : '' ?>">Contact</a>
       </div>
       <!-- Mobile Drawer CTA Button -->
       <div class="nav-item nav-drawer-cta-item">
-        <a href="<?= url('get-quote/') ?>" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:0.75rem; text-decoration:none;">
+        <a href="<?= url('get-quote') ?>" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:0.75rem; text-decoration:none;">
           <span>Upload Your Design</span>
           <svg style="width:14px;height:14px;fill:currentColor;" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
@@ -206,7 +206,7 @@ $topLinkedIn  = get_setting('social_linkedin', 'https://www.linkedin.com/company
         </div>
       </div>
 
-      <a href="<?= url('get-quote/') ?>" class="btn btn-sm btn-primary nav-cta-btn">
+      <a href="<?= url('get-quote') ?>" class="btn btn-sm btn-primary nav-cta-btn">
         <span>Upload Your Design</span>
         <svg style="width:14px;height:14px;fill:currentColor;" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>

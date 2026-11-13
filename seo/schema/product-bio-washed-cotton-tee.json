@@ -1,0 +1,23 @@
+{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://orderprintex.com/product/bio-washed-cotton-tee#product",
+    "name": "Everyday Cotton T-Shirt (180 GSM)",
+    "url": "https://orderprintex.com/product/bio-washed-cotton-tee",
+    "image": "https://orderprintex.com/assets/images/streetwear_tee.jpg",
+    "description": "A breathable combed cotton crewneck with a soft printed design. Easy to wear all day.",
+    "sku": "TEE-001",
+    "category": "Custom T-Shirts",
+    "brand": {
+        "@type": "Brand",
+        "name": "OrderPrintex"
+    },
+    "offers": {
+        "@type": "Offer",
+        "url": "https://orderprintex.com/product/bio-washed-cotton-tee",
+        "priceCurrency": "INR",
+        "price": "0.00",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
+    }
+}

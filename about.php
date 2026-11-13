@@ -9,7 +9,7 @@ require_once __DIR__ . '/includes/functions.php';
 
 $pageTitle = "About Printex | Your Go To DTF & T-Shirt Printing Studio in Delhi Since 2010";
 $pageDesc  = "Printex has been around since 2010, a Delhi printing studio that's been churning out top quality DTF, UV DTF and custom t-shirt prints for brands, shops and businesses in Delhi. You can find us on Pankha Road - come on over and say hi.";
-$canonical = url('about/');
+$canonical = url('about');
 
 // Fetch verified tools and machinery from DB
 $tools = [];
@@ -150,6 +150,7 @@ $techMeta = [
     ]
 ];
 
+$pageSchemaKey = 'about';
 require_once __DIR__ . '/includes/header.php';
 ?>
 

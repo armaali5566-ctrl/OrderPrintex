@@ -3,8 +3,14 @@
  * OrderPrintex - Contact Us Page
  */
 
+require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/includes/database.php';
+require_once __DIR__ . '/includes/functions.php';
+
 $pageTitle = "Contact OrderPrintex — Delhi Printing Studio & Manufacturing Unit";
 $pageDesc  = "Get in touch with OrderPrintex: Delhi production address, direct phone, WhatsApp prepress support, Google Maps directions, and general inquiries.";
+$canonical = url('contact');
+$pageSchemaKey = 'contact';
 
 require_once __DIR__ . '/includes/header.php';
 

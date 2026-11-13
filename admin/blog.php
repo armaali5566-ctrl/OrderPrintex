@@ -72,12 +72,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $slug)));
         }
 
-        // Handle Featured Image upload
+        // Handle Featured Image upload with automatic WebP conversion
         $featuredImage = null;
         if (!empty($_FILES['featured_image_file']['name'])) {
-            $uploadResult = handle_file_upload($_FILES['featured_image_file'], ['jpg', 'jpeg', 'png', 'webp']);
+            $uploadResult = handle_blog_image_upload($_FILES['featured_image_file']);
             if ($uploadResult['success']) {
-                $featuredImage = 'uploads/' . $uploadResult['stored_name'];
+                $featuredImage = $uploadResult['file_path'];
             } else {
                 set_flash('error', 'Image upload failed: ' . $uploadResult['error']);
                 header('Location: ' . url('admin/blog.php' . ($postId ? '?edit_id=' . $postId : '?action=new')));
@@ -168,6 +168,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 'description' => $catDesc
             ]);
             set_flash('success', "Category '{$catName}' created.");
+        }
+        header('Location: ' . url('admin/blog.php'));
+        exit;
+    }
+
+    // 4. Quick Toggle Status (Publish / Unpublish)
+    if ($action === 'toggle_status') {
+        $postId = intval($_POST['post_id'] ?? 0);
+        $post = db_fetch_one("SELECT id, title, status FROM blog_posts WHERE id = :id", ['id' => $postId]);
+        if ($post) {
+            $newStatus = ($post['status'] === 'published') ? 'draft' : 'published';
+            db_update('blog_posts', ['status' => $newStatus, 'updated_at' => date('Y-m-d H:i:s')], 'id = :id', ['id' => $postId]);
+            @seo_sync_all();
+            log_activity($adminUser['id'], 'toggle_blog_status', "Changed status of '{$post['title']}' to {$newStatus}");
+            set_flash('success', "Article '{$post['title']}' status updated to {$newStatus}.");
         }
         header('Location: ' . url('admin/blog.php'));
         exit;
@@ -476,6 +491,14 @@ $posts = db_fetch_all($sql, $params);
                                         <a href="<?= url('admin/blog.php?edit_id=' . $p['id']) ?>" class="btn btn-outline btn-xs">
                                             Edit
                                         </a>
+                                        <form method="POST" action="<?= url('admin/blog.php') ?>" style="display: inline;">
+                                            <?= csrf_field() ?>
+                                            <input type="hidden" name="action" value="toggle_status">
+                                            <input type="hidden" name="post_id" value="<?= $p['id'] ?>">
+                                            <button type="submit" class="btn btn-outline btn-xs" title="<?= $p['status'] === 'published' ? 'Unpublish to draft' : 'Publish live' ?>">
+                                                <?= $p['status'] === 'published' ? 'Unpublish' : 'Publish' ?>
+                                            </button>
+                                        </form>
                                         <form method="POST" action="<?= url('admin/blog.php') ?>" style="display: inline;">
                                             <?= csrf_field() ?>
                                             <input type="hidden" name="action" value="delete_post">

@@ -3,8 +3,14 @@
  * OrderPrintex - All Printing Services Overview
  */
 
+require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/includes/database.php';
+require_once __DIR__ . '/includes/functions.php';
+
 $pageTitle = "Printing Services in Delhi | DTF, UV DTF, T-Shirt | Printex";
 $pageDesc  = "DTF Printing, UV DTF Stickers, T-Shirt, Hoodie, and Mug Printing in Delhi - We've got you covered. Printex is the go to for brands, shops and businesses across India . We'll get you a quote in no time.";
+$canonical = url('services');
+$pageSchemaKey = 'services';
 
 require_once __DIR__ . '/includes/header.php';
 

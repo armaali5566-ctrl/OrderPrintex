@@ -1,0 +1,46 @@
+{
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://orderprintex.com/services#collection",
+    "url": "https://orderprintex.com/services",
+    "name": "Industrial Printing & Manufacturing Services | OrderPrintex",
+    "description": "Explore our end-to-end commercial printing services: DTF fabric transfers, UV DTF rigid decals, custom t-shirts, and corporate swag kits.",
+    "hasPart": [
+        {
+            "@type": "Service",
+            "position": 1,
+            "name": "1.DTF Printing in Delhi",
+            "url": "https://orderprintex.com/services/dtf-printing",
+            "provider": {
+                "@id": "https://orderprintex.com/#organization"
+            }
+        },
+        {
+            "@type": "Service",
+            "position": 2,
+            "name": "2. UV DTF Printing - A Popular Choice",
+            "url": "https://orderprintex.com/services/uv-dtf-printing",
+            "provider": {
+                "@id": "https://orderprintex.com/#organization"
+            }
+        },
+        {
+            "@type": "Service",
+            "position": 3,
+            "name": "Delhi's Custom T-Shirt Printing Studio - Where Art Meets Fabric",
+            "url": "https://orderprintex.com/services/t-shirt-printing",
+            "provider": {
+                "@id": "https://orderprintex.com/#organization"
+            }
+        },
+        {
+            "@type": "Service",
+            "position": 4,
+            "name": "4. Corporate Printing Services for Businesses",
+            "url": "https://orderprintex.com/services/corporate-printing",
+            "provider": {
+                "@id": "https://orderprintex.com/#organization"
+            }
+        }
+    ]
+}

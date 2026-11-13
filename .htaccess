@@ -1,129 +1,156 @@
 # ==========================================================
 # ORDERPRINTEX — Production Apache Configuration (.htaccess)
-# Clean URLs, Security Hardening & Performance Caching
+# Clean URLs, Trailing Slash Removal, Security Hardening & Performance Caching
 # ==========================================================
 
 Options -Indexes +FollowSymLinks
 ServerSignature Off
+DirectorySlash Off
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /OrderPrintex/
+    # RewriteBase is intentionally omitted so mod_rewrite automatically adapts
+    # to both root hosting (https://orderprintex.com/ in public_html) and
+    # subdirectory hosting (http://127.0.0.1/OrderPrintex/ in XAMPP htdocs)
 
     # Custom 404 Error Document
-    ErrorDocument 404 /OrderPrintex/404.php
+    ErrorDocument 404 /404.php
 
-    # 0. Serve existing physical static files directly (assets, images, scripts)
+    # 0. Serve existing physical static files directly (assets, images, scripts, root files like robots.txt, sitemap.xml, llms.txt, ORDERPRINTEX.md, SITE_OVERVIEW.md, schema.json)
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^ - [L]
 
-    # 1. 301 Canonical Redirect: Ugly query parameters -> Clean URLs
+    # 1. 301 Trailing Slash Removal: Redirect /path/ -> /path (preserves query strings, base path, excludes root and /admin/)
+    RewriteCond %{REQUEST_URI} ^(.*?)/+$
+    RewriteCond %{REQUEST_URI} !^(/OrderPrintex)?/?$
+    RewriteCond %{REQUEST_URI} !^(/OrderPrintex)?/admin(/.*)?$ [NC]
+    RewriteRule ^ %1 [R=301,L,QSA]
+
+    # 2. 301 Canonical Redirect: Ugly query parameters -> Clean URLs (no trailing slash)
     RewriteCond %{THE_REQUEST} \s(?:/OrderPrintex)?/products\.php\?category=([a-zA-Z0-9_-]+)\s [NC]
-    RewriteRule ^ product/category/%1/? [R=301,L]
+    RewriteRule ^ product/category/%1 [R=301,L]
 
     RewriteCond %{THE_REQUEST} \s(?:/OrderPrintex)?/product-details\.php\?slug=([a-zA-Z0-9_-]+)\s [NC]
-    RewriteRule ^ product/%1/? [R=301,L]
+    RewriteRule ^ product/%1 [R=301,L]
 
     RewriteCond %{THE_REQUEST} \s(?:/OrderPrintex)?/blog-details\.php\?slug=([a-zA-Z0-9_-]+)\s [NC]
-    RewriteRule ^ blog/%1/? [R=301,L]
+    RewriteRule ^ blog/%1 [R=301,L]
 
-    # 2. 301 Canonical Redirect: Direct .php files to trailing-slash clean routes
+    # 3. 301 Canonical Redirect: Direct .php files to no-trailing-slash clean routes
     RewriteCond %{THE_REQUEST} \s(?:/OrderPrintex)?/products\.php(\s|\?) [NC]
-    RewriteRule ^products\.php$ products/ [R=301,L]
+    RewriteRule ^products\.php$ products [R=301,L,QSA]
 
     RewriteCond %{THE_REQUEST} \s(?:/OrderPrintex)?/pricing\.php(\s|\?) [NC]
-    RewriteRule ^pricing\.php$ pricing/ [R=301,L]
+    RewriteRule ^pricing\.php$ pricing [R=301,L,QSA]
 
     RewriteCond %{THE_REQUEST} \s(?:/OrderPrintex)?/cart\.php(\s|\?) [NC]
-    RewriteRule ^cart\.php$ cart/ [R=301,L]
+    RewriteRule ^cart\.php$ cart [R=301,L,QSA]
 
     RewriteCond %{THE_REQUEST} \s(?:/OrderPrintex)?/checkout\.php(\s|\?) [NC]
-    RewriteRule ^checkout\.php$ checkout/ [R=301,L]
+    RewriteRule ^checkout\.php$ checkout [R=301,L,QSA]
 
     RewriteCond %{THE_REQUEST} \s(?:/OrderPrintex)?/about\.php(\s|\?) [NC]
-    RewriteRule ^about\.php$ about/ [R=301,L]
+    RewriteRule ^about\.php$ about [R=301,L,QSA]
 
     RewriteCond %{THE_REQUEST} \s(?:/OrderPrintex)?/services\.php(\s|\?) [NC]
-    RewriteRule ^services\.php$ services/ [R=301,L]
+    RewriteRule ^services\.php$ services [R=301,L,QSA]
 
     RewriteCond %{THE_REQUEST} \s(?:/OrderPrintex)?/contact\.php(\s|\?) [NC]
-    RewriteRule ^contact\.php$ contact/ [R=301,L]
+    RewriteRule ^contact\.php$ contact [R=301,L,QSA]
 
     RewriteCond %{THE_REQUEST} \s(?:/OrderPrintex)?/blog\.php(\s|\?) [NC]
-    RewriteRule ^blog\.php$ blog/ [R=301,L]
+    RewriteRule ^blog\.php$ blog [R=301,L,QSA]
 
     RewriteCond %{THE_REQUEST} \s(?:/OrderPrintex)?/gallery\.php(\s|\?) [NC]
-    RewriteRule ^gallery\.php$ gallery/ [R=301,L]
+    RewriteRule ^gallery\.php$ gallery [R=301,L,QSA]
 
     RewriteCond %{THE_REQUEST} \s(?:/OrderPrintex)?/faq\.php(\s|\?) [NC]
-    RewriteRule ^faq\.php$ faq/ [R=301,L]
+    RewriteRule ^faq\.php$ faq [R=301,L,QSA]
 
     RewriteCond %{THE_REQUEST} \s(?:/OrderPrintex)?/get-quote\.php(\s|\?) [NC]
-    RewriteRule ^get-quote\.php$ get-quote/ [R=301,L]
+    RewriteRule ^get-quote\.php$ get-quote [R=301,L,QSA]
 
-    # 3. 301 Redirect: Legacy /products/{slug}/ -> /product/{slug}/
-    RewriteRule ^products/([a-zA-Z0-9_-]+)/?$ product/$1/ [R=301,L]
+    # 4. Route Schema JSON: /schema/{name}.json -> seo/schema/{name}.json
+    RewriteRule ^schema/([a-zA-Z0-9_-]+)\.json$ seo/schema/$1.json [L]
 
-    # 4a. 301 Redirect: Legacy /category/{slug}/ -> /product/category/{slug}/
-    RewriteRule ^category/([a-zA-Z0-9_-]+)/?$ product/category/$1/ [R=301,L]
+    # 5. Route Markdown Files: Canonical URL + .md -> seo/markdown/{file}.md
+    RewriteRule ^seo/markdown/([a-zA-Z0-9_.-]+)\.md$ seo/markdown/$1.md [L]
+    RewriteRule ^blog/([a-zA-Z0-9_-]+)\.md$ seo/markdown/blog-$1.md [L]
+    RewriteRule ^blog/category/([a-zA-Z0-9_-]+)\.md$ seo/markdown/blog-category-$1.md [L]
+    RewriteRule ^products?/([a-zA-Z0-9_-]+)\.md$ seo/markdown/product-$1.md [L]
+    RewriteRule ^(?:product/)?category/([a-zA-Z0-9_-]+)\.md$ seo/markdown/category-$1.md [L]
+    RewriteRule ^services/([a-zA-Z0-9_-]+)\.md$ seo/markdown/services-$1.md [L]
+    RewriteRule ^about-us\.md$ seo/markdown/about-us.md [L]
+    RewriteRule ^privacy-policy\.md$ seo/markdown/privacy-policy.md [L]
+    RewriteRule ^terms-and-conditions\.md$ seo/markdown/terms-and-conditions.md [L]
+    RewriteRule ^shipping-policy\.md$ seo/markdown/shipping-policy.md [L]
+    RewriteRule ^([a-zA-Z0-9_-]+)\.md$ seo/markdown/$1.md [L]
 
-    # 4b. Clean Category URL: /product/category/{slug}/ -> products.php?category={slug}
+    # 6. 301 Redirect: Legacy /products/{slug} -> /product/{slug}
+    RewriteRule ^products/([a-zA-Z0-9_-]+)/?$ product/$1 [R=301,L]
+
+    # 7a. 301 Redirect: Legacy /category/{slug} -> /product/category/{slug}
+    RewriteRule ^category/([a-zA-Z0-9_-]+)/?$ product/category/$1 [R=301,L]
+
+    # 7b. Clean Category URL: /product/category/{slug} -> products.php?category={slug}
     RewriteRule ^product/category/([a-zA-Z0-9_-]+)/?$ products.php?category=$1 [L,QSA]
 
-    # 5. Clean Product URL: /product/{slug}/ -> product-details.php?slug={slug}
+    # 8. Clean Product URL: /product/{slug} -> product-details.php?slug={slug}
     RewriteRule ^product/([a-zA-Z0-9_-]+)/?$ product-details.php?slug=$1 [L,QSA]
 
-    # 6. Clean Products Catalog: /products or /products/ -> products.php
+    # 9. Clean Products Catalog: /products -> products.php
     RewriteRule ^products/?$ products.php [L,QSA]
 
-    # 7. Clean Shopping Pages: /pricing/, /cart/, /checkout/
+    # 10. Clean Shopping Pages: /pricing, /cart, /checkout
     RewriteRule ^pricing/?$ pricing.php [L,QSA]
     RewriteRule ^cart/?$ cart.php [L,QSA]
     RewriteRule ^checkout/?$ checkout.php [L,QSA]
 
-    # 8. Clean Customer Account Pages: /account/, /account/orders/, etc.
+    # 11. Clean Customer Account Pages: /account, /account/orders, etc.
     RewriteRule ^account/orders/([0-9]+)/?$ account/order-details.php?id=$1 [L,QSA]
     RewriteRule ^account/orders/?$ account/orders.php [L,QSA]
     RewriteRule ^account/([a-zA-Z0-9_-]+)/?$ account/$1.php [L,QSA]
     RewriteRule ^account/?$ account/dashboard.php [L,QSA]
 
-    # 8b. Admin Panel Routing
+    # 12. Admin Panel Routing
     RewriteRule ^admin/?$ admin/index.php [L,QSA]
 
-    # 9. Clean Services Subpages: /services/{slug}/ -> services/{slug}.php
+    # 13. Clean Services Subpages: /services/{slug} -> services/{slug}.php
     RewriteRule ^services/([a-zA-Z0-9_-]+)/?$ services/$1.php [L,QSA]
 
-    # 10. Clean Services Overview: /services or /services/ -> services.php
+    # 14. Clean Services Overview: /services -> services.php
     RewriteRule ^services/?$ services.php [L,QSA]
 
-    # 11. Clean Blog Category: /blog/category/{slug}/ -> blog.php?category={slug}
+    # 15. Clean Blog Category: /blog/category/{slug} -> blog.php?category={slug}
     RewriteRule ^blog/category/([a-zA-Z0-9_-]+)/?$ blog.php?category=$1 [L,QSA]
 
-    # 12. Clean Blog Details: /blog/{slug}/ -> blog-details.php?slug={slug}
+    # 16. Clean Blog Details: /blog/{slug} -> blog-details.php?slug={slug}
     RewriteRule ^blog/([a-zA-Z0-9_-]+)/?$ blog-details.php?slug=$1 [L,QSA]
 
-    # 13. Clean Blog Listing: /blog or /blog/ -> blog.php
+    # 17. Clean Blog Listing: /blog -> blog.php
     RewriteRule ^blog/?$ blog.php [L,QSA]
 
-    # 13. Clean About Us: /about or /about/ -> about.php
+    # 18. Clean About Us: /about -> about.php
     RewriteRule ^about/?$ about.php [L,QSA]
+    RewriteRule ^about-us/?$ about.php [L,QSA]
 
-    # 14. Clean Contact: /contact or /contact/ -> contact.php
+    # 19. Clean Contact: /contact -> contact.php
     RewriteRule ^contact/?$ contact.php [L,QSA]
 
-    # 15. Clean Gallery: /gallery or /gallery/ -> gallery.php
+    # 20. Clean Gallery: /gallery -> gallery.php
     RewriteRule ^gallery/?$ gallery.php [L,QSA]
 
-    # 16. Clean Get Quote: /get-quote or /get-quote/ -> get-quote.php
+    # 21. Clean Get Quote: /get-quote -> get-quote.php
     RewriteRule ^get-quote/?$ get-quote.php [L,QSA]
 
-    # 17. Clean FAQ: /faq or /faq/ -> faq.php
+    # 22. Clean FAQ: /faq -> faq.php
     RewriteRule ^faq/?$ faq.php [L,QSA]
 </IfModule>
 
 # MIME types and inline disposition for public SEO, TXT, MD, XML and Schema JSON
 <IfModule mod_mime.c>
-    AddType text/plain;charset=UTF-8 .txt .md
+    AddType text/plain;charset=UTF-8 .txt
+    AddType text/markdown;charset=UTF-8 .md
     AddType application/xml;charset=UTF-8 .xml
     AddType application/json;charset=UTF-8 .json
 </IfModule>
@@ -157,4 +184,17 @@ ServerSignature Off
     ExpiresByType image/webp "access plus 1 year"
     ExpiresByType image/svg+xml "access plus 1 year"
     ExpiresByType image/x-icon "access plus 1 year"
+</IfModule>
+
+# Gzip Compression via mod_deflate
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css application/xml application/xhtml+xml application/rss+xml application/javascript application/x-javascript application/json image/svg+xml
+</IfModule>
+
+# Security Headers (Safe for development and production)
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>

@@ -1,0 +1,36 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebPage",
+            "@id": "https://orderprintex.com/shipping-policy#webpage",
+            "url": "https://orderprintex.com/shipping-policy",
+            "name": "Shipping & Delivery Policy | OrderPrintex",
+            "description": "We dispatch gang sheets within 24–48 hours across PAN-India via BlueDart, DTDC, and Delhivery Air. Standard moisture-barrier packaging ensures zero damage dur",
+            "isPartOf": {
+                "@type": "WebSite",
+                "@id": "https://orderprintex.com/#website",
+                "name": "OrderPrintex",
+                "url": "https://orderprintex.com/"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://orderprintex.com/shipping-policy#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://orderprintex.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Shipping & Delivery Policy",
+                    "item": "https://orderprintex.com/shipping-policy"
+                }
+            ]
+        }
+    ]
+}

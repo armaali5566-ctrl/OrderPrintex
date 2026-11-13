@@ -1,0 +1,23 @@
+{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://orderprintex.com/product/custom-dtf-gang-sheet#product",
+    "name": "DTF Gang Sheet (22\" Wide)",
+    "url": "https://orderprintex.com/product/custom-dtf-gang-sheet",
+    "image": "https://orderprintex.com/assets/images/dtf_fabric_print.jpg",
+    "description": "Ready-to-press transfers with bright color and a soft feel. Works on cotton, polyester and blends.",
+    "sku": "OP-PRD-1",
+    "category": "Printing",
+    "brand": {
+        "@type": "Brand",
+        "name": "OrderPrintex"
+    },
+    "offers": {
+        "@type": "Offer",
+        "url": "https://orderprintex.com/product/custom-dtf-gang-sheet",
+        "priceCurrency": "INR",
+        "price": "249.00",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
+    }
+}

@@ -55,9 +55,11 @@ $relatedPosts = db_fetch_all("SELECT p.*, c.name as category_name, c.slug as cat
     'id' => $post['id']
 ]);
 
-$pageTitle = e($post['seo_title'] ?: $post['title'] . ' | OrderPrintex Blog');
-$pageDesc  = e($post['seo_description'] ?: $post['excerpt']);
+$pageTitle = $post['seo_title'] ?: $post['title'] . ' | OrderPrintex Blog';
+$pageDesc  = $post['seo_description'] ?: $post['excerpt'];
 $canonical = blog_url($post['slug']);
+$ogImage   = !empty($post['featured_image']) ? url($post['featured_image']) : url('assets/images/logo.png');
+$ogType    = 'article';
 
 require_once __DIR__ . '/includes/header.php';
 ?>

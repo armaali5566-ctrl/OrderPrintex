@@ -1,0 +1,23 @@
+{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://orderprintex.com/product/holographic-stickers#product",
+    "name": "Custom Die-Cut Sticker Pack",
+    "url": "https://orderprintex.com/product/holographic-stickers",
+    "image": "https://orderprintex.com/assets/images/custom_stickers.jpg",
+    "description": "Stickers cut to your shape, in holographic and UV DTF finishes. Great for brands and giveaways.",
+    "sku": "STK-001",
+    "category": "Custom Stickers",
+    "brand": {
+        "@type": "Brand",
+        "name": "OrderPrintex"
+    },
+    "offers": {
+        "@type": "Offer",
+        "url": "https://orderprintex.com/product/holographic-stickers",
+        "priceCurrency": "INR",
+        "price": "0.00",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
+    }
+}

@@ -3,30 +3,30 @@
     "@graph": [
         {
             "@type": "ProfessionalService",
-            "@id": "http://127.0.0.1:8080/#organization",
+            "@id": "https://orderprintex.com/#organization",
             "name": "OrderPrintex",
             "legalName": "OrderPrintex Commercial Printing Studio",
-            "url": "http://127.0.0.1:8080/",
-            "logo": "http://127.0.0.1:8080/assets/images/logo.png",
-            "image": "http://127.0.0.1:8080/assets/images/logo.png",
+            "url": "https://orderprintex.com/",
+            "logo": "https://orderprintex.com/assets/images/logo.png",
+            "image": "https://orderprintex.com/assets/images/logo.png",
             "description": "OrderPrintex is India's premier bulk manufacturer of DTF apparel transfers, UV DTF decals, custom streetwear t-shirts, and corporate merchandise with pan-India express dispatch.",
-            "email": "contact@orderprintex.com",
+            "email": "sales@orderprintex.com",
             "telephone": "+91 93540 28199",
             "priceRange": "₹₹",
             "currenciesAccepted": "INR",
             "paymentAccepted": "Bank Transfer, UPI, Commercial Invoice, Credit Card",
             "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "Okhla Industrial Area, Phase II, New Delhi - 110020",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh, Delhi, 110059",
                 "addressLocality": "New Delhi",
                 "addressRegion": "Delhi",
-                "postalCode": "110020",
+                "postalCode": "110059",
                 "addressCountry": "IN"
             },
             "geo": {
                 "@type": "GeoCoordinates",
-                "latitude": 28.5355,
-                "longitude": 77.2713
+                "latitude": 28.618,
+                "longitude": 77.0805
             },
             "openingHoursSpecification": [
                 {
@@ -40,7 +40,7 @@
                         "Saturday"
                     ],
                     "opens": "09:30",
-                    "closes": "19:30"
+                    "closes": "20:00"
                 }
             ],
             "areaServed": [
@@ -64,31 +64,32 @@
             "sameAs": [
                 "https://www.facebook.com/orderprintex",
                 "https://www.instagram.com/orderprintex",
+                "https://www.youtube.com/@orderprintex",
                 "https://www.linkedin.com/company/orderprintex"
             ]
         },
         {
             "@type": "WebSite",
-            "@id": "http://127.0.0.1:8080/#website",
+            "@id": "https://orderprintex.com/#website",
             "name": "OrderPrintex",
-            "url": "http://127.0.0.1:8080/",
+            "url": "https://orderprintex.com/",
             "description": "OrderPrintex is India's premier bulk manufacturer of DTF apparel transfers, UV DTF decals, custom streetwear t-shirts, and corporate merchandise with pan-India express dispatch.",
             "publisher": {
-                "@id": "http://127.0.0.1:8080/#organization"
+                "@id": "https://orderprintex.com/#organization"
             },
             "potentialAction": {
                 "@type": "SearchAction",
-                "target": "http://127.0.0.1:8080/products/?search={search_term_string}",
+                "target": "https://orderprintex.com/products?search={search_term_string}",
                 "query-input": "required name=search_term_string"
             }
         },
         {
             "@type": "WebPage",
-            "@id": "http://127.0.0.1:8080/#webpage",
-            "url": "http://127.0.0.1:8080/",
+            "@id": "https://orderprintex.com/#webpage",
+            "url": "https://orderprintex.com/",
             "name": "OrderPrintex",
             "isPartOf": {
-                "@id": "http://127.0.0.1:8080/#website"
+                "@id": "https://orderprintex.com/#website"
             },
             "breadcrumb": {
                 "@type": "BreadcrumbList",
@@ -97,24 +98,24 @@
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "http://127.0.0.1:8080/"
+                        "item": "https://orderprintex.com/"
                     },
                     {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "OrderPrintex",
-                        "item": "http://127.0.0.1:8080/"
+                        "item": "https://orderprintex.com/"
                     }
                 ]
             }
         },
         {
             "@type": "WebPage",
-            "@id": "http://127.0.0.1:8080/products/#webpage",
-            "url": "http://127.0.0.1:8080/products/",
+            "@id": "https://orderprintex.com/products#webpage",
+            "url": "https://orderprintex.com/products",
             "name": "Commercial Print Product Catalog | OrderPrintex",
             "isPartOf": {
-                "@id": "http://127.0.0.1:8080/#website"
+                "@id": "https://orderprintex.com/#website"
             },
             "breadcrumb": {
                 "@type": "BreadcrumbList",
@@ -123,24 +124,24 @@
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "http://127.0.0.1:8080/"
+                        "item": "https://orderprintex.com/"
                     },
                     {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Commercial Print Product Catalog | OrderPrintex",
-                        "item": "http://127.0.0.1:8080/products/"
+                        "item": "https://orderprintex.com/products"
                     }
                 ]
             }
         },
         {
             "@type": "WebPage",
-            "@id": "http://127.0.0.1:8080/services/#webpage",
-            "url": "http://127.0.0.1:8080/services/",
+            "@id": "https://orderprintex.com/services#webpage",
+            "url": "https://orderprintex.com/services",
             "name": "Printing & Manufacturing Services | OrderPrintex",
             "isPartOf": {
-                "@id": "http://127.0.0.1:8080/#website"
+                "@id": "https://orderprintex.com/#website"
             },
             "breadcrumb": {
                 "@type": "BreadcrumbList",
@@ -149,24 +150,24 @@
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "http://127.0.0.1:8080/"
+                        "item": "https://orderprintex.com/"
                     },
                     {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Printing & Manufacturing Services | OrderPrintex",
-                        "item": "http://127.0.0.1:8080/services/"
+                        "item": "https://orderprintex.com/services"
                     }
                 ]
             }
         },
         {
             "@type": "WebPage",
-            "@id": "http://127.0.0.1:8080/pricing/#webpage",
-            "url": "http://127.0.0.1:8080/pricing/",
+            "@id": "https://orderprintex.com/pricing#webpage",
+            "url": "https://orderprintex.com/pricing",
             "name": "Trade Pricing & Volume Discount Tiers | OrderPrintex",
             "isPartOf": {
-                "@id": "http://127.0.0.1:8080/#website"
+                "@id": "https://orderprintex.com/#website"
             },
             "breadcrumb": {
                 "@type": "BreadcrumbList",
@@ -175,24 +176,24 @@
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "http://127.0.0.1:8080/"
+                        "item": "https://orderprintex.com/"
                     },
                     {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Trade Pricing & Volume Discount Tiers | OrderPrintex",
-                        "item": "http://127.0.0.1:8080/pricing/"
+                        "item": "https://orderprintex.com/pricing"
                     }
                 ]
             }
         },
         {
             "@type": "WebPage",
-            "@id": "http://127.0.0.1:8080/get-quote/#webpage",
-            "url": "http://127.0.0.1:8080/get-quote/",
+            "@id": "https://orderprintex.com/get-quote#webpage",
+            "url": "https://orderprintex.com/get-quote",
             "name": "Request a Custom Print Quotation | OrderPrintex",
             "isPartOf": {
-                "@id": "http://127.0.0.1:8080/#website"
+                "@id": "https://orderprintex.com/#website"
             },
             "breadcrumb": {
                 "@type": "BreadcrumbList",
@@ -201,24 +202,24 @@
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "http://127.0.0.1:8080/"
+                        "item": "https://orderprintex.com/"
                     },
                     {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Request a Custom Print Quotation | OrderPrintex",
-                        "item": "http://127.0.0.1:8080/get-quote/"
+                        "item": "https://orderprintex.com/get-quote"
                     }
                 ]
             }
         },
         {
             "@type": "WebPage",
-            "@id": "http://127.0.0.1:8080/gallery/#webpage",
-            "url": "http://127.0.0.1:8080/gallery/",
+            "@id": "https://orderprintex.com/gallery#webpage",
+            "url": "https://orderprintex.com/gallery",
             "name": "Production Portfolio & Showcase | OrderPrintex",
             "isPartOf": {
-                "@id": "http://127.0.0.1:8080/#website"
+                "@id": "https://orderprintex.com/#website"
             },
             "breadcrumb": {
                 "@type": "BreadcrumbList",
@@ -227,24 +228,24 @@
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "http://127.0.0.1:8080/"
+                        "item": "https://orderprintex.com/"
                     },
                     {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Production Portfolio & Showcase | OrderPrintex",
-                        "item": "http://127.0.0.1:8080/gallery/"
+                        "item": "https://orderprintex.com/gallery"
                     }
                 ]
             }
         },
         {
             "@type": "WebPage",
-            "@id": "http://127.0.0.1:8080/blog/#webpage",
-            "url": "http://127.0.0.1:8080/blog/",
+            "@id": "https://orderprintex.com/blog#webpage",
+            "url": "https://orderprintex.com/blog",
             "name": "Printing Knowledge Base & Prepress Guides | OrderPrintex",
             "isPartOf": {
-                "@id": "http://127.0.0.1:8080/#website"
+                "@id": "https://orderprintex.com/#website"
             },
             "breadcrumb": {
                 "@type": "BreadcrumbList",
@@ -253,24 +254,24 @@
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "http://127.0.0.1:8080/"
+                        "item": "https://orderprintex.com/"
                     },
                     {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Printing Knowledge Base & Prepress Guides | OrderPrintex",
-                        "item": "http://127.0.0.1:8080/blog/"
+                        "item": "https://orderprintex.com/blog"
                     }
                 ]
             }
         },
         {
             "@type": "WebPage",
-            "@id": "http://127.0.0.1:8080/about/#webpage",
-            "url": "http://127.0.0.1:8080/about/",
+            "@id": "https://orderprintex.com/about#webpage",
+            "url": "https://orderprintex.com/about",
             "name": "About Our Facility & Printing Studio | OrderPrintex",
             "isPartOf": {
-                "@id": "http://127.0.0.1:8080/#website"
+                "@id": "https://orderprintex.com/#website"
             },
             "breadcrumb": {
                 "@type": "BreadcrumbList",
@@ -279,24 +280,24 @@
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "http://127.0.0.1:8080/"
+                        "item": "https://orderprintex.com/"
                     },
                     {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "About Our Facility & Printing Studio | OrderPrintex",
-                        "item": "http://127.0.0.1:8080/about/"
+                        "item": "https://orderprintex.com/about"
                     }
                 ]
             }
         },
         {
             "@type": "WebPage",
-            "@id": "http://127.0.0.1:8080/faq/#webpage",
-            "url": "http://127.0.0.1:8080/faq/",
+            "@id": "https://orderprintex.com/faq#webpage",
+            "url": "https://orderprintex.com/faq",
             "name": "Frequently Asked Questions | OrderPrintex",
             "isPartOf": {
-                "@id": "http://127.0.0.1:8080/#website"
+                "@id": "https://orderprintex.com/#website"
             },
             "breadcrumb": {
                 "@type": "BreadcrumbList",
@@ -305,24 +306,24 @@
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "http://127.0.0.1:8080/"
+                        "item": "https://orderprintex.com/"
                     },
                     {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Frequently Asked Questions | OrderPrintex",
-                        "item": "http://127.0.0.1:8080/faq/"
+                        "item": "https://orderprintex.com/faq"
                     }
                 ]
             }
         },
         {
             "@type": "WebPage",
-            "@id": "http://127.0.0.1:8080/contact/#webpage",
-            "url": "http://127.0.0.1:8080/contact/",
+            "@id": "https://orderprintex.com/contact#webpage",
+            "url": "https://orderprintex.com/contact",
             "name": "Contact & Factory Location | OrderPrintex",
             "isPartOf": {
-                "@id": "http://127.0.0.1:8080/#website"
+                "@id": "https://orderprintex.com/#website"
             },
             "breadcrumb": {
                 "@type": "BreadcrumbList",
@@ -331,25 +332,25 @@
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "http://127.0.0.1:8080/"
+                        "item": "https://orderprintex.com/"
                     },
                     {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Contact & Factory Location | OrderPrintex",
-                        "item": "http://127.0.0.1:8080/contact/"
+                        "item": "https://orderprintex.com/contact"
                     }
                 ]
             }
         },
         {
             "@type": "Service",
-            "@id": "http://127.0.0.1:8080/services/dtf-printing/#service",
+            "@id": "https://orderprintex.com/services/dtf-printing#service",
             "name": "1.DTF Printing in Delhi",
-            "url": "http://127.0.0.1:8080/services/dtf-printing/",
+            "url": "https://orderprintex.com/services/dtf-printing",
             "serviceType": "Commercial Printing",
             "provider": {
-                "@id": "http://127.0.0.1:8080/#organization"
+                "@id": "https://orderprintex.com/#organization"
             },
             "description": "Industrial printing service.",
             "areaServed": {
@@ -359,12 +360,12 @@
         },
         {
             "@type": "Service",
-            "@id": "http://127.0.0.1:8080/services/uv-dtf-printing/#service",
+            "@id": "https://orderprintex.com/services/uv-dtf-printing#service",
             "name": "2. UV DTF Printing - A Popular Choice",
-            "url": "http://127.0.0.1:8080/services/uv-dtf-printing/",
+            "url": "https://orderprintex.com/services/uv-dtf-printing",
             "serviceType": "Commercial Printing",
             "provider": {
-                "@id": "http://127.0.0.1:8080/#organization"
+                "@id": "https://orderprintex.com/#organization"
             },
             "description": "Industrial printing service.",
             "areaServed": {
@@ -374,12 +375,12 @@
         },
         {
             "@type": "Service",
-            "@id": "http://127.0.0.1:8080/services/t-shirt-printing/#service",
-            "name": "3. T-Shirt Printing for Bulk Orders",
-            "url": "http://127.0.0.1:8080/services/t-shirt-printing/",
+            "@id": "https://orderprintex.com/services/t-shirt-printing#service",
+            "name": "Delhi's Custom T-Shirt Printing Studio - Where Art Meets Fabric",
+            "url": "https://orderprintex.com/services/t-shirt-printing",
             "serviceType": "Commercial Printing",
             "provider": {
-                "@id": "http://127.0.0.1:8080/#organization"
+                "@id": "https://orderprintex.com/#organization"
             },
             "description": "Industrial printing service.",
             "areaServed": {
@@ -389,12 +390,12 @@
         },
         {
             "@type": "Service",
-            "@id": "http://127.0.0.1:8080/services/corporate-printing/#service",
+            "@id": "https://orderprintex.com/services/corporate-printing#service",
             "name": "4. Corporate Printing Services for Businesses",
-            "url": "http://127.0.0.1:8080/services/corporate-printing/",
+            "url": "https://orderprintex.com/services/corporate-printing",
             "serviceType": "Commercial Printing",
             "provider": {
-                "@id": "http://127.0.0.1:8080/#organization"
+                "@id": "https://orderprintex.com/#organization"
             },
             "description": "Industrial printing service.",
             "areaServed": {
@@ -404,10 +405,10 @@
         },
         {
             "@type": "Product",
-            "@id": "http://127.0.0.1:8080/product/custom-dtf-gang-sheet/#product",
+            "@id": "https://orderprintex.com/product/custom-dtf-gang-sheet#product",
             "name": "DTF Gang Sheet (22\" Wide)",
-            "url": "http://127.0.0.1:8080/product/custom-dtf-gang-sheet/",
-            "image": "http://127.0.0.1:8080/assets/images/dtf_fabric_print.jpg",
+            "url": "https://orderprintex.com/product/custom-dtf-gang-sheet",
+            "image": "https://orderprintex.com/assets/images/dtf_fabric_print.jpg",
             "description": "Ready-to-press transfers with bright color and a soft feel. Works on cotton, polyester and blends.",
             "sku": "OP-PRD-1",
             "category": "Printing",
@@ -417,7 +418,7 @@
             },
             "offers": {
                 "@type": "Offer",
-                "url": "http://127.0.0.1:8080/product/custom-dtf-gang-sheet/",
+                "url": "https://orderprintex.com/product/custom-dtf-gang-sheet",
                 "priceCurrency": "INR",
                 "price": "249.00",
                 "availability": "https://schema.org/InStock",
@@ -438,10 +439,10 @@
         },
         {
             "@type": "Product",
-            "@id": "http://127.0.0.1:8080/product/custom-uv-dtf-decal-sheet/#product",
+            "@id": "https://orderprintex.com/product/custom-uv-dtf-decal-sheet#product",
             "name": "3D Gloss UV DTF Decal Sheet",
-            "url": "http://127.0.0.1:8080/product/custom-uv-dtf-decal-sheet/",
-            "image": "http://127.0.0.1:8080/assets/images/uv_dtf_drinkware.jpg",
+            "url": "https://orderprintex.com/product/custom-uv-dtf-decal-sheet",
+            "image": "https://orderprintex.com/assets/images/uv_dtf_drinkware.jpg",
             "description": "Raised, glossy decals that peel and stick on glass, steel, acrylic and plastic. Waterproof once applied.",
             "sku": "UV-001",
             "category": "UV DTF Decals",
@@ -451,7 +452,7 @@
             },
             "offers": {
                 "@type": "Offer",
-                "url": "http://127.0.0.1:8080/product/custom-uv-dtf-decal-sheet/",
+                "url": "https://orderprintex.com/product/custom-uv-dtf-decal-sheet",
                 "priceCurrency": "INR",
                 "price": "0.00",
                 "availability": "https://schema.org/InStock",
@@ -472,10 +473,10 @@
         },
         {
             "@type": "Product",
-            "@id": "http://127.0.0.1:8080/product/streetwear-oversized-tee/#product",
+            "@id": "https://orderprintex.com/product/streetwear-oversized-tee#product",
             "name": "Oversized Streetwear T-Shirt (240 GSM)",
-            "url": "http://127.0.0.1:8080/product/streetwear-oversized-tee/",
-            "image": "http://127.0.0.1:8080/assets/images/custom_tshirt_apparel.jpg",
+            "url": "https://orderprintex.com/product/streetwear-oversized-tee",
+            "image": "https://orderprintex.com/assets/images/custom_tshirt_apparel.jpg",
             "description": "A heavy drop-shoulder tee with your design printed in DTF. Roomy fit and a soft feel.",
             "sku": "STR-001",
             "category": "Custom T-Shirts",
@@ -485,7 +486,7 @@
             },
             "offers": {
                 "@type": "Offer",
-                "url": "http://127.0.0.1:8080/product/streetwear-oversized-tee/",
+                "url": "https://orderprintex.com/product/streetwear-oversized-tee",
                 "priceCurrency": "INR",
                 "price": "0.00",
                 "availability": "https://schema.org/InStock",
@@ -506,10 +507,10 @@
         },
         {
             "@type": "Product",
-            "@id": "http://127.0.0.1:8080/product/thermal-sipper-bottle/#product",
+            "@id": "https://orderprintex.com/product/thermal-sipper-bottle#product",
             "name": "Custom Steel Thermal Bottle (750 ml)",
-            "url": "http://127.0.0.1:8080/product/thermal-sipper-bottle/",
-            "image": "http://127.0.0.1:8080/assets/images/corporate_swag_kit.jpg",
+            "url": "https://orderprintex.com/product/thermal-sipper-bottle",
+            "image": "https://orderprintex.com/assets/images/corporate_swag_kit.jpg",
             "description": "A double-wall steel bottle with your logo printed on it. Good for gifts and team kits.",
             "sku": "BTL-001",
             "category": "Corporate Merchandise",
@@ -519,7 +520,7 @@
             },
             "offers": {
                 "@type": "Offer",
-                "url": "http://127.0.0.1:8080/product/thermal-sipper-bottle/",
+                "url": "https://orderprintex.com/product/thermal-sipper-bottle",
                 "priceCurrency": "INR",
                 "price": "0.00",
                 "availability": "https://schema.org/InStock",
@@ -540,10 +541,10 @@
         },
         {
             "@type": "Product",
-            "@id": "http://127.0.0.1:8080/product/apparel-mailer-box/#product",
+            "@id": "https://orderprintex.com/product/apparel-mailer-box#product",
             "name": "Branded Apparel Mailer Box",
-            "url": "http://127.0.0.1:8080/product/apparel-mailer-box/",
-            "image": "http://127.0.0.1:8080/assets/images/packaging_box.jpg",
+            "url": "https://orderprintex.com/product/apparel-mailer-box",
+            "image": "https://orderprintex.com/assets/images/packaging_box.jpg",
             "description": "A sturdy matte black box with your logo in gold foil and gloss detail. Made for shipping apparel.",
             "sku": "BOX-001",
             "category": "Packaging & Boxes",
@@ -553,7 +554,7 @@
             },
             "offers": {
                 "@type": "Offer",
-                "url": "http://127.0.0.1:8080/product/apparel-mailer-box/",
+                "url": "https://orderprintex.com/product/apparel-mailer-box",
                 "priceCurrency": "INR",
                 "price": "0.00",
                 "availability": "https://schema.org/InStock",
@@ -574,10 +575,10 @@
         },
         {
             "@type": "Product",
-            "@id": "http://127.0.0.1:8080/product/holographic-stickers/#product",
+            "@id": "https://orderprintex.com/product/holographic-stickers#product",
             "name": "Custom Die-Cut Sticker Pack",
-            "url": "http://127.0.0.1:8080/product/holographic-stickers/",
-            "image": "http://127.0.0.1:8080/assets/images/custom_stickers.jpg",
+            "url": "https://orderprintex.com/product/holographic-stickers",
+            "image": "https://orderprintex.com/assets/images/custom_stickers.jpg",
             "description": "Stickers cut to your shape, in holographic and UV DTF finishes. Great for brands and giveaways.",
             "sku": "STK-001",
             "category": "Custom Stickers",
@@ -587,7 +588,7 @@
             },
             "offers": {
                 "@type": "Offer",
-                "url": "http://127.0.0.1:8080/product/holographic-stickers/",
+                "url": "https://orderprintex.com/product/holographic-stickers",
                 "priceCurrency": "INR",
                 "price": "0.00",
                 "availability": "https://schema.org/InStock",
@@ -608,10 +609,10 @@
         },
         {
             "@type": "Product",
-            "@id": "http://127.0.0.1:8080/product/bio-washed-cotton-tee/#product",
+            "@id": "https://orderprintex.com/product/bio-washed-cotton-tee#product",
             "name": "Everyday Cotton T-Shirt (180 GSM)",
-            "url": "http://127.0.0.1:8080/product/bio-washed-cotton-tee/",
-            "image": "http://127.0.0.1:8080/assets/images/streetwear_tee.jpg",
+            "url": "https://orderprintex.com/product/bio-washed-cotton-tee",
+            "image": "https://orderprintex.com/assets/images/streetwear_tee.jpg",
             "description": "A breathable combed cotton crewneck with a soft printed design. Easy to wear all day.",
             "sku": "TEE-001",
             "category": "Custom T-Shirts",
@@ -621,7 +622,7 @@
             },
             "offers": {
                 "@type": "Offer",
-                "url": "http://127.0.0.1:8080/product/bio-washed-cotton-tee/",
+                "url": "https://orderprintex.com/product/bio-washed-cotton-tee",
                 "priceCurrency": "INR",
                 "price": "0.00",
                 "availability": "https://schema.org/InStock",
@@ -642,10 +643,10 @@
         },
         {
             "@type": "Product",
-            "@id": "http://127.0.0.1:8080/product/executive-welcome-hamper/#product",
+            "@id": "https://orderprintex.com/product/executive-welcome-hamper#product",
             "name": "Corporate Welcome Gift Kit",
-            "url": "http://127.0.0.1:8080/product/executive-welcome-hamper/",
-            "image": "http://127.0.0.1:8080/assets/images/branding_stationery.jpg",
+            "url": "https://orderprintex.com/product/executive-welcome-hamper",
+            "image": "https://orderprintex.com/assets/images/branding_stationery.jpg",
             "description": "A ready gift set with branded items for new joiners and clients, packed neatly.",
             "sku": "HMP-001",
             "category": "Custom Stationery",
@@ -655,7 +656,7 @@
             },
             "offers": {
                 "@type": "Offer",
-                "url": "http://127.0.0.1:8080/product/executive-welcome-hamper/",
+                "url": "https://orderprintex.com/product/executive-welcome-hamper",
                 "priceCurrency": "INR",
                 "price": "0.00",
                 "availability": "https://schema.org/InStock",
@@ -676,10 +677,10 @@
         },
         {
             "@type": "Product",
-            "@id": "http://127.0.0.1:8080/product/bookmark-03/#product",
+            "@id": "https://orderprintex.com/product/bookmark-03#product",
             "name": "Custom Printed Bookmarks",
-            "url": "http://127.0.0.1:8080/product/bookmark-03/",
-            "image": "http://127.0.0.1:8080/assets/images/branding_stationery.jpg",
+            "url": "https://orderprintex.com/product/bookmark-03",
+            "image": "https://orderprintex.com/assets/images/branding_stationery.jpg",
             "description": "Double-sided bookmarks on thick card, with a soft-touch finish. Good for brands, bookstores and event giveaways.",
             "sku": "BKM-001",
             "category": "Custom Stationery",
@@ -689,7 +690,7 @@
             },
             "offers": {
                 "@type": "Offer",
-                "url": "http://127.0.0.1:8080/product/bookmark-03/",
+                "url": "https://orderprintex.com/product/bookmark-03",
                 "priceCurrency": "INR",
                 "price": "0.00",
                 "availability": "https://schema.org/InStock",
@@ -731,240 +732,177 @@
         },
         {
             "@type": "BlogPosting",
-            "@id": "http://127.0.0.1:8080/blog/dcd/#article",
-            "headline": "sd",
-            "url": "http://127.0.0.1:8080/blog/dcd/",
-            "image": "http://127.0.0.1:8080/assets/images/branding_stationery.jpg",
-            "description": "cddc",
-            "datePublished": "2026-11-05T05:09:33+05:30",
-            "dateModified": "2026-11-05T11:03:50+05:30",
+            "@id": "https://orderprintex.com/blog/dtf-vs-screen-printing-differences-benefits-applications#article",
+            "headline": "DTF vs Screen Printing: Understanding the Differences, Benefits and Applications",
+            "url": "https://orderprintex.com/blog/dtf-vs-screen-printing-differences-benefits-applications",
+            "image": "https://orderprintex.com/assets/images/dtf_fabric_print.jpg",
+            "description": "Sooner or later, everyone who orders custom T-shirts runs into the same question: DTF vs screen printing, which one should I go for? Both methods can give you a sharp, good-looking print, but they work very differently, cost differently and suit different kinds of orders.",
+            "datePublished": "2026-11-12T13:42:25+05:30",
+            "dateModified": "2026-11-13T12:46:02+05:30",
             "author": {
                 "@type": "Person",
-                "name": "OrderPrintex Editorial Team"
+                "name": "Printex Team"
             },
             "publisher": {
-                "@id": "http://127.0.0.1:8080/#organization"
+                "@id": "https://orderprintex.com/#organization"
             },
             "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "http://127.0.0.1:8080/blog/dcd/"
+                "@id": "https://orderprintex.com/blog/dtf-vs-screen-printing-differences-benefits-applications"
             }
         },
         {
             "@type": "BlogPosting",
-            "@id": "http://127.0.0.1:8080/blog/complete-guide-to-business-card-printing-778/#article",
-            "headline": "Complete Guide to Business Card Printing",
-            "url": "http://127.0.0.1:8080/blog/complete-guide-to-business-card-printing-778/",
-            "image": "http://127.0.0.1:8080/assets/images/branding_stationery.jpg",
-            "description": "Discover the essentials of business card printing, from choosing the right paper and finish to understanding sizes, layouts and design considerations. This beginner-friendly guide will help you prepare artwork for professional-looking business cards.",
-            "datePublished": "2026-11-05T05:07:12+05:30",
-            "dateModified": "2026-11-05T14:09:27+05:30",
-            "author": {
-                "@type": "Person",
-                "name": "OrderPrintex Editorial Team"
-            },
-            "publisher": {
-                "@id": "http://127.0.0.1:8080/#organization"
-            },
-            "mainEntityOfPage": {
-                "@type": "WebPage",
-                "@id": "http://127.0.0.1:8080/blog/complete-guide-to-business-card-printing-778/"
-            }
-        },
-        {
-            "@type": "BlogPosting",
-            "@id": "http://127.0.0.1:8080/blog/dtf-printing-technology-custom-apparel/#article",
-            "headline": "How DTF Printing Technology Is Transforming the Custom Apparel Industry",
-            "url": "http://127.0.0.1:8080/blog/dtf-printing-technology-custom-apparel/",
-            "image": "http://127.0.0.1:8080/assets/images/dtf_fabric_print.jpg",
-            "description": "Ask anyone who has tried to start a small clothing brand a few years back, and you will hear the same story. The designs were ready, the idea was solid, but the printing costs ate everything. Screen printing wanted big quantities, and most other options either looked dull or washed out after a few cycles.",
-            "datePublished": "2026-11-02T08:55:04+05:30",
-            "dateModified": "2026-11-12T13:00:57+05:30",
-            "author": {
-                "@type": "Person",
-                "name": "OrderPrintex Editorial Team"
-            },
-            "publisher": {
-                "@id": "http://127.0.0.1:8080/#organization"
-            },
-            "mainEntityOfPage": {
-                "@type": "WebPage",
-                "@id": "http://127.0.0.1:8080/blog/dtf-printing-technology-custom-apparel/"
-            }
-        },
-        {
-            "@type": "BlogPosting",
-            "@id": "http://127.0.0.1:8080/blog/uv-dtf-printing-product-branding/#article",
-            "headline": "UV DTF Printing: How It Works and Its Applications in Product Branding",
-            "url": "http://127.0.0.1:8080/blog/uv-dtf-printing-product-branding/",
-            "image": "http://127.0.0.1:8080/assets/images/uv_dtf_drinkware.jpg",
-            "description": "Pick up a premium-looking water bottle or a café mug these days and run your thumb over the logo. Chances are it feels slightly raised, glossy, and almost moulded into the surface. Most people assume that kind of finish needs expensive manufacturing. In reality, it is often UV DTF printing, a method that has quietly changed how small and mid-sized brands put their name on products.",
-            "datePublished": "2026-11-02T08:55:04+05:30",
-            "dateModified": "2026-11-12T12:47:00+05:30",
-            "author": {
-                "@type": "Person",
-                "name": "OrderPrintex Editorial Team"
-            },
-            "publisher": {
-                "@id": "http://127.0.0.1:8080/#organization"
-            },
-            "mainEntityOfPage": {
-                "@type": "WebPage",
-                "@id": "http://127.0.0.1:8080/blog/uv-dtf-printing-product-branding/"
-            }
-        },
-        {
-            "@type": "BlogPosting",
-            "@id": "http://127.0.0.1:8080/blog/different-t-shirt-printing-techniques/#article",
-            "headline": "Different T-Shirt Printing Techniques: A Complete Guide for Businesses",
-            "url": "http://127.0.0.1:8080/blog/different-t-shirt-printing-techniques/",
-            "image": "http://127.0.0.1:8080/assets/images/custom_tshirt_apparel.jpg",
-            "description": "If you run a business, sooner or later you will need printed T-shirts. Maybe it is a uniform for your staff, merchandise for a launch, gifts for a corporate event, or a small clothing line of your own. And the moment you start asking for quotes, you run into a confusing list: screen printing, DTF, DTG, heat transfer, sublimation, vinyl, embroidery. Every printer swears by a different one, which makes choosing between T-shirt printing techniques harder than it should be.",
-            "datePublished": "2026-11-02T08:55:04+05:30",
-            "dateModified": "2026-11-12T12:47:00+05:30",
+            "@id": "https://orderprintex.com/blog/how-custom-printed-t-shirts-help-businesses-build-brand-identity#article",
+            "headline": "How Custom Printed T-Shirts Help Businesses Build Brand Identity",
+            "url": "https://orderprintex.com/blog/how-custom-printed-t-shirts-help-businesses-build-brand-identity",
+            "image": "https://orderprintex.com/assets/images/custom_tshirt_apparel.jpg",
+            "description": "Walk into a busy café, an exhibition stall or a corporate office and notice what you remember afterwards. It is rarely the brochure on the counter. It is the person wearing the logo. Custom printed T-shirts for business turn everyday clothing into a small billboard that people see, remember and talk about.",
+            "datePublished": "2026-11-12T13:42:25+05:30",
+            "dateModified": "2026-11-13T11:12:33+05:30",
             "author": {
                 "@type": "Person",
                 "name": "By Printex"
             },
             "publisher": {
-                "@id": "http://127.0.0.1:8080/#organization"
+                "@id": "https://orderprintex.com/#organization"
             },
             "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "http://127.0.0.1:8080/blog/different-t-shirt-printing-techniques/"
+                "@id": "https://orderprintex.com/blog/how-custom-printed-t-shirts-help-businesses-build-brand-identity"
             }
         },
         {
             "@type": "BlogPosting",
-            "@id": "http://127.0.0.1:8080/blog/offset-vs-digital-printing/#article",
-            "headline": "Offset Printing vs Digital Printing: Key Differences, Costs & Turnaround Times",
-            "url": "http://127.0.0.1:8080/blog/offset-vs-digital-printing/",
-            "image": "http://127.0.0.1:8080/assets/images/corporate_swag_kit.jpg",
-            "description": "When should you choose digital printing versus offset lithography? Understand the break-even volume, color consistency, and turnaround advantages of each method.",
+            "@id": "https://orderprintex.com/blog/dtf-printing-technology-custom-apparel#article",
+            "headline": "How DTF Printing Technology Is Transforming the Custom Apparel Industry",
+            "url": "https://orderprintex.com/blog/dtf-printing-technology-custom-apparel",
+            "image": "https://orderprintex.com/assets/images/dtf_fabric_print.jpg",
+            "description": "Ask anyone who has tried to start a small clothing brand a few years back, and you will hear the same story. The designs were ready, the idea was solid, but the printing costs ate everything. Screen printing wanted big quantities, and most other options either looked dull or washed out after a few cycles.",
             "datePublished": "2026-11-02T08:55:04+05:30",
-            "dateModified": "2026-11-05T13:26:55+05:30",
-            "author": {
-                "@type": "Person",
-                "name": "Vikas Verma (Production Manager)"
-            },
-            "publisher": {
-                "@id": "http://127.0.0.1:8080/#organization"
-            },
-            "mainEntityOfPage": {
-                "@type": "WebPage",
-                "@id": "http://127.0.0.1:8080/blog/offset-vs-digital-printing/"
-            }
-        },
-        {
-            "@type": "BlogPosting",
-            "@id": "http://127.0.0.1:8080/blog/custom-stickers-and-labels-guide/#article",
-            "headline": "Custom Stickers and Labels: A Complete Guide to Materials, Adhesives & UV Decals",
-            "url": "http://127.0.0.1:8080/blog/custom-stickers-and-labels-guide/",
-            "image": "http://127.0.0.1:8080/assets/images/custom_stickers.jpg",
-            "description": "From waterproof vinyl decals to prismatic holographic foils and 3D embossed UV DTF transfers — pick the ideal sticker material for your product packaging.",
-            "datePublished": "2026-11-02T08:55:04+05:30",
-            "dateModified": "2026-11-02T08:55:04+05:30",
+            "dateModified": "2026-11-13T13:23:08+05:30",
             "author": {
                 "@type": "Person",
                 "name": "OrderPrintex Editorial Team"
             },
             "publisher": {
-                "@id": "http://127.0.0.1:8080/#organization"
+                "@id": "https://orderprintex.com/#organization"
             },
             "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "http://127.0.0.1:8080/blog/custom-stickers-and-labels-guide/"
+                "@id": "https://orderprintex.com/blog/dtf-printing-technology-custom-apparel"
             }
         },
         {
             "@type": "BlogPosting",
-            "@id": "http://127.0.0.1:8080/blog/packaging-printing-ideas-for-brands/#article",
-            "headline": "Packaging Printing Ideas for Growing E-Commerce & DTC Brands in India",
-            "url": "http://127.0.0.1:8080/blog/packaging-printing-ideas-for-brands/",
-            "image": "http://127.0.0.1:8080/assets/images/packaging_box.jpg",
-            "description": "How custom shipping mailer boxes, branded tissue wrap, and spot-UV thank you cards transform standard package delivery into an unforgettable unboxing event.",
+            "@id": "https://orderprintex.com/blog/uv-dtf-printing-product-branding#article",
+            "headline": "UV DTF Printing: How It Works and Its Applications in Product Branding",
+            "url": "https://orderprintex.com/blog/uv-dtf-printing-product-branding",
+            "image": "https://orderprintex.com/assets/images/uv_dtf_drinkware.jpg",
+            "description": "Pick up a premium-looking water bottle or a café mug these days and run your thumb over the logo. Chances are it feels slightly raised, glossy, and almost moulded into the surface. Most people assume that kind of finish needs expensive manufacturing. In reality, it is often UV DTF printing, a method that has quietly changed how small and mid-sized brands put their name on products.",
             "datePublished": "2026-11-02T08:55:04+05:30",
-            "dateModified": "2026-11-02T08:55:04+05:30",
+            "dateModified": "2026-11-13T11:12:33+05:30",
             "author": {
                 "@type": "Person",
-                "name": "Pooja Mehta (Brand Specialist)"
+                "name": "OrderPrintex Editorial Team"
             },
             "publisher": {
-                "@id": "http://127.0.0.1:8080/#organization"
+                "@id": "https://orderprintex.com/#organization"
             },
             "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "http://127.0.0.1:8080/blog/packaging-printing-ideas-for-brands/"
+                "@id": "https://orderprintex.com/blog/uv-dtf-printing-product-branding"
+            }
+        },
+        {
+            "@type": "BlogPosting",
+            "@id": "https://orderprintex.com/blog/different-t-shirt-printing-techniques#article",
+            "headline": "Different T-Shirt Printing Techniques: A Complete Guide for Businesses",
+            "url": "https://orderprintex.com/blog/different-t-shirt-printing-techniques",
+            "image": "https://orderprintex.com/assets/images/custom_tshirt_apparel.jpg",
+            "description": "If you run a business, sooner or later you will need printed T-shirts. Maybe it is a uniform for your staff, merchandise for a launch, gifts for a corporate event, or a small clothing line of your own. And the moment you start asking for quotes, you run into a confusing list: screen printing, DTF, DTG, heat transfer, sublimation, vinyl, embroidery. Every printer swears by a different one, which makes choosing between T-shirt printing techniques harder than it should be.",
+            "datePublished": "2026-11-02T08:55:04+05:30",
+            "dateModified": "2026-11-13T11:58:23+05:30",
+            "author": {
+                "@type": "Person",
+                "name": "By Printex"
+            },
+            "publisher": {
+                "@id": "https://orderprintex.com/#organization"
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://orderprintex.com/blog/different-t-shirt-printing-techniques"
             }
         },
         {
             "@type": "CreativeWork",
             "name": "Detailed DTF Print on a Dark T-Shirt",
-            "image": "http://127.0.0.1:8080/assets/images/dtf_fabric_print.jpg",
+            "image": "https://orderprintex.com/assets/images/dtf_fabric_print.jpg",
             "description": "A DTF transfer with smooth color blends, a bright white base and a soft, stretchy feel that doesn’t turn stiff.",
             "creator": {
-                "@id": "http://127.0.0.1:8080/#organization"
+                "@id": "https://orderprintex.com/#organization"
             }
         },
         {
             "@type": "CreativeWork",
             "name": "UV DTF Decals on Glass & Tumbler Curved Surfaces",
-            "image": "http://127.0.0.1:8080/assets/images/uv_dtf_drinkware.jpg",
+            "image": "https://orderprintex.com/assets/images/uv_dtf_drinkware.jpg",
             "description": "Industrial-adhesion 3D tactile UV DTF stickers applied seamlessly onto curved stainless steel bottles and glassware with spot gloss varnish.",
             "creator": {
-                "@id": "http://127.0.0.1:8080/#organization"
+                "@id": "https://orderprintex.com/#organization"
             }
         },
         {
             "@type": "CreativeWork",
             "name": "Heavyweight 240 GSM Streetwear Graphic Tee",
-            "image": "http://127.0.0.1:8080/assets/images/streetwear_tee.jpg",
+            "image": "https://orderprintex.com/assets/images/streetwear_tee.jpg",
             "description": "Vintage washed boxy drop-shoulder t-shirt with photographic DTF chest graphic, double-needle stitched seams, and tight retail ribbing.",
             "creator": {
-                "@id": "http://127.0.0.1:8080/#organization"
+                "@id": "https://orderprintex.com/#organization"
             }
         },
         {
             "@type": "CreativeWork",
             "name": "Luxury Apparel Unboxing Mailer Packaging Box",
-            "image": "http://127.0.0.1:8080/assets/images/packaging_box.jpg",
+            "image": "https://orderprintex.com/assets/images/packaging_box.jpg",
             "description": "Custom matte black corrugated mailer box with hot-stamped gold foil logo, spot UV accents, and inner branded tissue wrap.",
             "creator": {
-                "@id": "http://127.0.0.1:8080/#organization"
+                "@id": "https://orderprintex.com/#organization"
             }
         },
         {
             "@type": "CreativeWork",
             "name": "Custom Die-Cut & Holographic Decal Collection",
-            "image": "http://127.0.0.1:8080/assets/images/custom_stickers.jpg",
+            "image": "https://orderprintex.com/assets/images/custom_stickers.jpg",
             "description": "Multi-surface peel-and-stick vinyl decals with embossed gloss spot varnish, iridescent light reflection, and permanent acrylic bond.",
             "creator": {
-                "@id": "http://127.0.0.1:8080/#organization"
+                "@id": "https://orderprintex.com/#organization"
             }
         },
         {
             "@type": "CreativeWork",
             "name": "Executive Corporate Swag & Client Gifting Kit",
-            "image": "http://127.0.0.1:8080/assets/images/corporate_swag_kit.jpg",
+            "image": "https://orderprintex.com/assets/images/corporate_swag_kit.jpg",
             "description": "Turnkey corporate onboarding kit runs featuring customized insulated drinkware, embossed diary, and stylus pen in a bespoke gift hamper.",
             "creator": {
-                "@id": "http://127.0.0.1:8080/#organization"
+                "@id": "https://orderprintex.com/#organization"
             }
         },
         {
             "@type": "CreativeWork",
             "name": "Luxury Embossed Branding Collateral & Stationery",
-            "image": "http://127.0.0.1:8080/assets/images/branding_stationery.jpg",
+            "image": "https://orderprintex.com/assets/images/branding_stationery.jpg",
             "description": "Thick crimson red and warm beige business cards with edge gilding, debossed linen corporate journal, and executive presentation folders.",
             "creator": {
-                "@id": "http://127.0.0.1:8080/#organization"
+                "@id": "https://orderprintex.com/#organization"
             }
         },
         {
             "@type": "FAQPage",
-            "@id": "http://127.0.0.1:8080/faq/#faqpage",
+            "@id": "https://orderprintex.com/faq#faqpage",
             "name": "OrderPrintex Frequently Asked Questions",
-            "url": "http://127.0.0.1:8080/faq/",
+            "url": "https://orderprintex.com/faq",
             "mainEntity": [
                 {
                     "@type": "Question",

@@ -3,6 +3,10 @@
  * OrderPrintex - 404 Page Not Found
  */
 
+require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/includes/database.php';
+require_once __DIR__ . '/includes/functions.php';
+
 http_response_code(404);
 
 $pageTitle = "Page Not Found (404) | OrderPrintex Delhi";
@@ -30,10 +34,10 @@ require_once __DIR__ . '/includes/header.php';
       </p>
 
       <div style="display:flex; justify-content:center; gap:1.25rem; flex-wrap:wrap;">
-        <a href="<?= url('products/') ?>" class="btn btn-primary btn-lg">
+        <a href="<?= url('products') ?>" class="btn btn-primary btn-lg">
           <span>Browse All Products</span> &rarr;
         </a>
-        <a href="<?= url('services/') ?>" class="btn btn-outline-white btn-lg">
+        <a href="<?= url('services') ?>" class="btn btn-outline-white btn-lg">
           <span>Printing Services</span>
         </a>
         <a href="<?= url('') ?>" class="btn btn-navy btn-lg" style="border:1px solid rgba(255,255,255,0.2);">
@@ -56,7 +60,10 @@ require_once __DIR__ . '/includes/header.php';
     <div class="error-nav-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:2rem; margin-top:2rem;">
       <div class="product-card" style="padding:1.5rem; text-align:center;">
         <div style="height:180px; background:#F8F5F0; border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; overflow:hidden;">
-          <img src="<?= url('assets/images/dtf_fabric_print.jpg') ?>" alt="DTF Gang Sheet" style="max-height:160px; max-width:90%; object-fit:contain;">
+          <picture>
+            <source srcset="<?= url('assets/images/dtf_fabric_print.webp') ?>" type="image/webp">
+            <img src="<?= url('assets/images/dtf_fabric_print.jpg') ?>" alt="DTF Gang Sheet" width="1200" height="896" loading="lazy" style="max-height:160px; max-width:90%; object-fit:contain;">
+          </picture>
         </div>
         <h3 style="font-size:1.15rem; margin-bottom:0.5rem; color:var(--navy);">Commercial DTF Gang Sheets</h3>
         <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:1rem;">22-inch roll with high-opacity white ink for dark & light garments.</p>
@@ -65,7 +72,10 @@ require_once __DIR__ . '/includes/header.php';
 
       <div class="product-card" style="padding:1.5rem; text-align:center;">
         <div style="height:180px; background:#F8F5F0; border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; overflow:hidden;">
-          <img src="<?= url('assets/images/uv_dtf_drinkware.jpg') ?>" alt="UV DTF Decals" style="max-height:160px; max-width:90%; object-fit:contain;">
+          <picture>
+            <source srcset="<?= url('assets/images/uv_dtf_drinkware.webp') ?>" type="image/webp">
+            <img src="<?= url('assets/images/uv_dtf_drinkware.jpg') ?>" alt="UV DTF Decals" width="1200" height="896" loading="lazy" style="max-height:160px; max-width:90%; object-fit:contain;">
+          </picture>
         </div>
         <h3 style="font-size:1.15rem; margin-bottom:0.5rem; color:var(--navy);">UV DTF 3D Hard Decals</h3>
         <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:1rem;">Scratchproof, waterproof embossed decals for glass, metal, and plastic.</p>
@@ -74,7 +84,10 @@ require_once __DIR__ . '/includes/header.php';
 
       <div class="product-card" style="padding:1.5rem; text-align:center;">
         <div style="height:180px; background:#F8F5F0; border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; overflow:hidden;">
-          <img src="<?= url('assets/images/custom_tshirt_apparel.jpg') ?>" alt="Streetwear Oversized Tee" style="max-height:160px; max-width:90%; object-fit:contain;">
+          <picture>
+            <source srcset="<?= url('assets/images/custom_tshirt_apparel.webp') ?>" type="image/webp">
+            <img src="<?= url('assets/images/custom_tshirt_apparel.jpg') ?>" alt="Streetwear Oversized Tee" width="1200" height="896" loading="lazy" style="max-height:160px; max-width:90%; object-fit:contain;">
+          </picture>
         </div>
         <h3 style="font-size:1.15rem; margin-bottom:0.5rem; color:var(--navy);">240 GSM Streetwear Tee</h3>
         <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:1rem;">Drop-shoulder relaxed oversized t-shirts with photographic DTF prints.</p>

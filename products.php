@@ -22,7 +22,7 @@ if (strpos($requestUri, 'products.php') !== false) {
         exit;
     } elseif (empty($searchTerm)) {
         header('HTTP/1.1 301 Moved Permanently');
-        header('Location: ' . url('products/'));
+        header('Location: ' . url('products'));
         exit;
     }
 }
@@ -66,9 +66,10 @@ if ($currentCategory) {
 } else {
     $pageTitle = "Commercial Print Products & Transfers Catalog | OrderPrintex Delhi";
     $pageDesc  = "Explore OrderPrintex's commercial catalog: 22-inch DTF gang sheets, UV DTF decal transfers, bio-washed cotton tees, thermal drinkware, and luxury apparel packaging.";
-    $canonical = url('products/');
+    $canonical = url('products');
 }
 
+$pageSchemaKey = 'products';
 require_once __DIR__ . '/includes/header.php';
 
 $products = get_catalog_products($categorySlug, $searchTerm);
