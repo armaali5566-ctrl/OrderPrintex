@@ -626,9 +626,6 @@ section.blog-reading-section,
         <a href="https://api.whatsapp.com/send?text=<?= urlencode($post['title'] . ' ' . $canonical) ?>" target="_blank" rel="noopener" class="btn-outline-share" title="Share on WhatsApp">
           WhatsApp
         </a>
-        <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?= urlencode($canonical) ?>" target="_blank" rel="noopener" class="btn-outline-share" title="Share on LinkedIn">
-          LinkedIn
-        </a>
         <button type="button" onclick="navigator.clipboard.writeText('<?= $canonical ?>'); this.innerText='Copied!'; setTimeout(() => this.innerText='Copy Link', 2000);" class="btn-outline-share" title="Copy Link">
           Copy Link
         </button>
