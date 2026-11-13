@@ -3,6 +3,8 @@
  * OrderPrintex - Corporate Printing Service Page
  */
 
+require_once __DIR__ . '/../includes/functions.php';
+
 $pageTitle = "Corporate Printing in Delhi | Promotional Merchandise & Corporate Gifts – Printex";
 $pageDesc  = "Corporate printing in Delhi: custom corporate merchandise, employee onboarding kits, branded mugs, polos, and promotional gifts with pan-India delivery.";
 $canonical = service_url('corporate-printing');

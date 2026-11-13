@@ -3,6 +3,8 @@
  * OrderPrintex - T-Shirt Printing Service Page
  */
 
+require_once __DIR__ . '/../includes/functions.php';
+
 $pageTitle = "Delhi's Custom T-Shirt Printing Studio | Printex";
 $pageDesc  = "We take your brand from concept to production, printing vibrant high-density graphics onto those comfy 180-240 GSM bio-washed combed cotton tees with the perfect oversized fit, or the sleek athletic wear polyester.";
 $canonical = service_url('t-shirt-printing');

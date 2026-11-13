@@ -3,6 +3,8 @@
  * OrderPrintex - DTF Printing Service Page
  */
 
+require_once __DIR__ . '/../includes/functions.php';
+
 $pageTitle = "DTF Printing in Delhi | Bulk DTF Transfers & Gang Sheets – Printex";
 $pageDesc  = "DTF printing in Delhi by Printex, a DTF printing manufacturer in India. Bulk DTF transfers and gang sheets on 22 & 24 inch rolls. Upload your design for a quote.";
 $canonical = service_url('dtf-printing');

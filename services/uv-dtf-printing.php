@@ -3,6 +3,8 @@
  * OrderPrintex - UV DTF Printing Service Page
  */
 
+require_once __DIR__ . '/../includes/functions.php';
+
 $pageTitle = "Industrial UV DTF Printing in Delhi | Printex";
 $pageDesc  = "Instant transfer stickers with a 3d embossed tactile finish - they stick to glass, acrylic, stainless steel, wood and plastic like glue and don't need a heat press.";
 $canonical = service_url('uv-dtf-printing');
