@@ -89,9 +89,29 @@
 .stagger-4 { transition-delay: 0.32s; }
 .stagger-5 { transition-delay: 0.40s; }
 
-/* Micro-interaction on card hover */
-.service-card, .product-card, .timeline-step {
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+/* Micro-interaction on card hover & Glinto button transitions */
+.service-card, .product-card, .timeline-step, .feature-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  will-change: transform, box-shadow;
+}
+
+.btn {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  will-change: transform, box-shadow;
+}
+
+.btn svg {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.btn:hover svg {
+  transform: translateX(3px);
+}
+
+.btn-primary:hover svg {
+  transform: translate(2px, -2px);
 }
 
 /* Metallic Light Sweep & Shimmer Animations */

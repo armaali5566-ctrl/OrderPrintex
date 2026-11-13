@@ -6,19 +6,8 @@
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  // 1. Sticky Header Transition on Scroll
-  const header = document.querySelector('.site-header');
-  if (header) {
-    const handleScroll = () => {
-      if (window.scrollY > 30) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-  }
+  // 1. Navigation Bar (Normal document flow, non-sticky)
+  // Sticky scroll listener removed to maintain pure document flow behavior.
 
   // 2. Mobile Menu Off-Canvas Toggle
   const mobileToggle = document.querySelector('.mobile-toggle');

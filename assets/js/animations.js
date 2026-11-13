@@ -76,22 +76,17 @@ document.addEventListener('DOMContentLoaded', function () {
     countElements.forEach(el => counterObserver.observe(el));
   }
 
-  // 3. Technology Zigzag Rows: Bidirectional Scroll Animation
+  // 3. Technology Zigzag Rows: Smooth One-Time Entrance (Zero Scroll Flicker)
   const techRows = document.querySelectorAll('.tech-zigzag-row');
   if (techRows.length > 0) {
     if (prefersReducedMotion) {
       techRows.forEach(row => row.classList.add('is-visible'));
     } else if ('IntersectionObserver' in window) {
-      const techObserver = new IntersectionObserver((entries) => {
+      const techObserver = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
-          } else {
-            // Re-arm when element is scrolled completely out of viewport (scrolling up or down)
-            const rect = entry.boundingClientRect;
-            if (rect.top > (window.innerHeight || document.documentElement.clientHeight) || rect.bottom < 0) {
-              entry.target.classList.remove('is-visible');
-            }
+            obs.unobserve(entry.target);
           }
         });
       }, {
@@ -105,21 +100,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // 4. Page Intro Headers: Bidirectional Scroll Entrance Observer
+  // 4. Page Intro Headers: Smooth One-Time Entrance (Zero Scroll Flicker)
   const pageIntroHeaders = document.querySelectorAll('.page-intro-header');
   if (pageIntroHeaders.length > 0) {
     if (prefersReducedMotion) {
       pageIntroHeaders.forEach(el => el.classList.add('is-visible'));
     } else if ('IntersectionObserver' in window) {
-      const introObserver = new IntersectionObserver((entries) => {
+      const introObserver = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
-          } else {
-            const rect = entry.boundingClientRect;
-            if (rect.top > (window.innerHeight || document.documentElement.clientHeight) || rect.bottom < 0) {
-              entry.target.classList.remove('is-visible');
-            }
+            obs.unobserve(entry.target);
           }
         });
       }, {

@@ -1,0 +1,1335 @@
+/* ==========================================================================
+   ORDERPRINTEX — Editorial Homepage Experience & Glinto-Inspired Motion
+   Black & Gold Studio Architecture | Fully Responsive | 100% Native Performance
+   ========================================================================== */
+
+/* Inner Section Container */
+.homepage-information {
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-gold);
+  position: relative;
+}
+
+.print-showcase-inner {
+  width: 92%;
+  max-width: 1480px;
+  margin-inline: auto;
+}
+
+.print-eyebrow {
+  color: var(--primary-gold);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.6;
+  text-transform: uppercase;
+  transition: letter-spacing 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+}
+
+/* ==========================================================================
+   1. MEET PRINTEX (Studio Editorial Introduction)
+   ========================================================================== */
+.studio-editorial {
+  background: var(--bg-primary);
+  padding-block: clamp(3rem, 6vw, 6rem);
+  overflow: clip;
+  position: relative;
+}
+
+.studio-editorial-heading {
+  border-bottom: 1px solid var(--border-gold);
+  padding-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  position: relative;
+}
+
+/* Line Reveal Stroke for Studio Heading */
+.studio-editorial-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--primary-gold) 0%, rgba(212, 175, 55, 0.3) 60%, transparent 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.studio-editorial-heading.line-active::after {
+  transform: scaleX(1);
+}
+
+.homepage-information .studio-editorial h2 {
+  font-size: clamp(2.4rem, 4.8vw, 4.25rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  margin: 1rem 0 0;
+  color: var(--text-primary);
+  text-wrap: balance;
+}
+
+.studio-editorial h2 > span {
+  display: block;
+  font-size: 0.75em;
+  margin-top: 0.35rem;
+  color: var(--text-secondary);
+}
+
+.studio-editorial em,
+.solutions-heading em,
+.print-faq em {
+  color: var(--primary-gold);
+  font-style: normal;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+/* Glinto Visual Collage */
+.studio-composition {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: start;
+  margin-top: clamp(2rem, 4vw, 3.25rem);
+}
+
+.studio-composition figure {
+  margin: 0;
+  min-width: 0;
+}
+
+.studio-main-photo,
+.studio-detail-photo {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #141414;
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(212, 175, 55, 0.1);
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.studio-main-photo:hover,
+.studio-detail-photo:hover {
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 0 26px 60px -10px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(212, 175, 55, 0.25);
+  transform: translateY(-2px);
+}
+
+.studio-main-photo img,
+.studio-detail-photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 896;
+  display: block;
+  object-fit: contain;
+  border-radius: 12px;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.studio-main-photo:hover img,
+.studio-detail-photo:hover img {
+  transform: scale(1.032);
+}
+
+.studio-composition figcaption,
+.solutions-photo figcaption {
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.5;
+  margin-top: 0.85rem;
+}
+
+/* Production Note Badge */
+.studio-production-note {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-left: 3px solid var(--primary-gold);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.studio-production-note:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateY(-1px);
+}
+
+.studio-production-note .print-eyebrow {
+  display: block;
+  font-size: 0.7rem;
+  margin-bottom: 0.35rem;
+}
+
+.studio-production-note p {
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Editorial Intro Grid */
+.studio-editorial-intro {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(2rem, 5vw, 6rem);
+  padding-top: clamp(2.5rem, 5vw, 4.5rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.studio-editorial-intro p {
+  color: var(--text-secondary);
+  line-height: 1.85;
+  margin: 0 0 1rem;
+}
+
+.studio-editorial-intro .studio-lead {
+  font-size: clamp(1.25rem, 2.1vw, 1.85rem);
+  line-height: 1.5;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+  font-weight: 500;
+}
+
+/* Action Bar & Glinto Micro-Interaction Buttons */
+.studio-action-bar {
+  border-block: 1px solid rgba(255, 255, 255, 0.08);
+  padding-block: 1.75rem;
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.studio-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.studio-quote,
+.studio-products {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 48px;
+  padding: 0.85rem 1.6rem;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.studio-quote > span:last-child,
+.studio-products > span:last-child {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
+  line-height: 1;
+}
+
+.studio-quote {
+  background: var(--gradient-gold-btn);
+  color: #080808;
+  font-weight: 700;
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.25);
+  border: 1px solid transparent;
+}
+
+.studio-quote:hover {
+  background: var(--bright-gold);
+  color: #080808;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(212, 175, 55, 0.4);
+}
+
+.studio-quote:hover > span:last-child {
+  transform: translate(3px, -3px);
+}
+
+.studio-products {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+  font-weight: 600;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+.studio-products:hover {
+  color: var(--bright-gold);
+  border-color: var(--primary-gold);
+  background: rgba(212, 175, 55, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.studio-products:hover > span:last-child {
+  transform: translateX(4px);
+}
+
+.studio-actions a:focus-visible {
+  outline: 2px solid var(--primary-gold);
+  outline-offset: 4px;
+}
+
+/* Company Highlights */
+.studio-benefits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.studio-benefits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  border-left: 2px solid var(--border-gold);
+  padding-left: 1rem;
+  transition: border-left-color 0.3s ease;
+}
+
+.studio-benefits li:hover {
+  border-left-color: var(--primary-gold);
+}
+
+.studio-benefits .benefit-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--primary-gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.studio-benefits li:hover .benefit-icon {
+  transform: scale(1.12);
+}
+
+.studio-benefits strong {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.studio-benefits span {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   2. PRINTING SERVICES SHOWCASE
+   ========================================================================== */
+.print-showcase {
+  background: var(--bg-secondary);
+  padding-block: clamp(3.5rem, 7vw, 7rem);
+  overflow: clip;
+}
+
+.print-showcase-heading {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  column-gap: clamp(2rem, 5vw, 5rem);
+  align-items: end;
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.print-showcase-heading .print-eyebrow {
+  grid-column: 1 / -1;
+  margin-bottom: 0.5rem;
+}
+
+.print-showcase-heading h2 {
+  font-size: clamp(2rem, 3.6vw, 3.5rem);
+  line-height: 1.15;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.print-showcase-heading p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin: 0;
+  max-width: 48ch;
+}
+
+/* Service Story Common Elements */
+.print-story {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+
+.print-image-frame {
+  overflow: hidden;
+  border-radius: 12px;
+  background: #141414;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 18px 44px -10px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.print-image-frame:hover {
+  border-color: rgba(212, 175, 55, 0.42);
+  box-shadow: 0 24px 56px -8px rgba(0, 0, 0, 0.68), 0 0 0 1px rgba(212, 175, 55, 0.2);
+  transform: translateY(-2px);
+}
+
+.print-image-frame picture {
+  display: block;
+}
+
+.print-image-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 896;
+  object-fit: contain;
+  border-radius: 12px;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.print-image-frame:hover img {
+  transform: scale(1.035);
+}
+
+.print-image-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.85rem;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.5;
+}
+
+.print-story-kicker {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.print-story-number {
+  font-size: clamp(2.4rem, 3.8vw, 3.8rem);
+  color: var(--primary-gold);
+  opacity: 0.8;
+  font-weight: 400;
+  line-height: 1;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
+}
+
+.print-story:hover .print-story-number {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.print-story-kicker .print-eyebrow {
+  border-left: 1px solid var(--border-gold);
+  padding-left: 1.25rem;
+}
+
+.print-story h3 {
+  font-size: clamp(1.9rem, 3.2vw, 3.2rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin: 0 0 1.25rem;
+  color: var(--text-primary);
+}
+
+.print-story-description {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.85;
+  max-width: 48ch;
+  margin: 0 0 1.75rem;
+}
+
+.print-applications {
+  margin-bottom: 2rem;
+}
+
+.print-applications-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  font-weight: 700;
+  display: block;
+}
+
+.print-applications ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.85rem;
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+}
+
+.print-applications li {
+  color: var(--text-primary);
+  font-size: 0.84rem;
+  line-height: 1.4;
+  padding: 0.35rem 0.85rem;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-radius: 20px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.print-applications li:hover {
+  background: rgba(212, 175, 55, 0.08);
+  border-color: rgba(212, 175, 55, 0.45);
+  transform: translateY(-1px);
+}
+
+.print-applications li::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--primary-gold);
+  margin: 0 0.5rem 0.15rem 0;
+}
+
+/* Glinto Animated Underline Links */
+.print-explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-height: 48px;
+  color: var(--primary-gold);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s ease;
+}
+
+.print-explore::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--primary-gold);
+  transform-origin: left;
+  transform: scaleX(0.28);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.print-explore > span:last-child {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 1.25rem;
+  line-height: 1;
+  display: inline-block;
+}
+
+.print-explore:hover {
+  color: var(--bright-gold);
+}
+
+.print-explore:hover::after,
+.print-explore:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.print-explore:hover > span:last-child {
+  transform: translate(4px, -4px);
+}
+
+.print-explore:focus-visible {
+  outline: 2px solid var(--primary-gold);
+  outline-offset: 6px;
+}
+
+/* Service 1: DTF Feature */
+.print-story-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  padding-block: clamp(3rem, 6vw, 5.5rem);
+}
+
+/* Service 2: UV DTF Wide Showcase */
+.print-story-wide {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: clamp(2rem, 4vw, 3rem);
+  padding-block: clamp(3rem, 6vw, 5.5rem);
+}
+
+.print-story-wide .print-image-frame {
+  padding: 1.5rem;
+}
+
+.print-story-wide .print-image-frame img {
+  max-height: 520px;
+}
+
+.print-story-wide .print-story-copy {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 2rem clamp(2.5rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.print-story-wide .print-story-kicker {
+  grid-column: 1;
+  margin-bottom: 1rem;
+}
+
+.print-story-wide h3 {
+  grid-column: 1;
+}
+
+.print-story-wide .print-story-description {
+  grid-column: 2;
+  margin-bottom: 1.5rem;
+}
+
+.print-story-wide .print-applications {
+  grid-column: 2;
+}
+
+.print-story-wide .print-explore {
+  grid-column: 2;
+  justify-self: start;
+}
+
+/* Services 3 & 4: Symmetrical Editorial Twin Cards */
+.print-service-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2.5rem, 5vw, 5rem);
+  align-items: stretch;
+  padding-top: clamp(3rem, 6vw, 5.5rem);
+}
+
+.print-service-pair .print-story {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2rem;
+  border-top: none;
+  padding-block: 0;
+  height: 100%;
+}
+
+.print-service-pair .print-story-copy {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.print-service-pair .print-story h3 {
+  font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+}
+
+.print-service-pair .print-story-description {
+  max-width: 54ch;
+}
+
+.print-service-pair .print-explore {
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   3. OUR PRINTING PROCESS (Glinto Progressive Timeline)
+   ========================================================================== */
+.printing-process {
+  padding-block: clamp(3.5rem, 6vw, 6rem);
+  background: var(--bg-primary);
+  overflow: clip;
+}
+
+.printing-process-heading {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem 3rem;
+  align-items: end;
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.printing-process-heading h2 {
+  font-size: clamp(2rem, 3.6vw, 3.5rem);
+  margin: 0.75rem 0 0;
+  line-height: 1.15;
+  color: var(--text-primary);
+}
+
+.printing-process-heading p {
+  color: var(--text-secondary);
+  max-width: 48ch;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* Desktop Horizontal Timeline */
+.printing-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.5rem, 2.5vw, 2.5rem);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.printing-stage {
+  min-width: 0;
+  position: relative;
+}
+
+/* Fine Gold Connecting Bar with Progressive Reveal */
+.printing-stage::before {
+  content: '';
+  position: absolute;
+  top: 27px;
+  left: 0;
+  right: - clamp(1.5rem, 2.5vw, 2.5rem);
+  height: 1.5px;
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.45), rgba(212, 175, 55, 0.2));
+  z-index: 1;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.printing-stage.stage-revealed::before {
+  transform: scaleX(1);
+}
+
+.printing-stage:last-child::before {
+  display: none;
+}
+
+.printing-stage-marker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 1.5rem;
+}
+
+.printing-stage-marker .stage-marker-circle,
+.printing-stage-marker svg {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 1.5px solid var(--border-gold);
+  color: var(--primary-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.6);
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease, box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.printing-stage-marker svg {
+  padding: 13px;
+}
+
+.printing-stage-marker span {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--primary-gold);
+  padding: 0.35rem 0.65rem;
+  background: var(--bg-primary);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 4px;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.printing-stage h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0 0 0.85rem;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.printing-stage p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.85;
+  margin: 0;
+}
+
+.printing-stage:hover .printing-stage-marker svg,
+.printing-stage:hover .stage-marker-circle {
+  border-color: var(--primary-gold);
+  background: #141416;
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.4);
+  transform: translateY(-2px);
+}
+
+.printing-stage:hover .printing-stage-marker span {
+  border-color: var(--primary-gold);
+  color: var(--bright-gold);
+}
+
+/* Process Note Footer */
+.printing-process-note {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr;
+  gap: 1.5rem 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding-top: 2rem;
+  align-items: start;
+}
+
+.printing-process-note .print-eyebrow {
+  grid-column: 1;
+}
+
+.printing-process-note p {
+  color: var(--text-secondary);
+  line-height: 1.85;
+  font-size: 0.92rem;
+  margin: 0;
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+
+.printing-process-note > span:last-child {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--primary-gold);
+  grid-column: 1;
+  width: fit-content;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.printing-process-note > span:last-child:hover {
+  background: rgba(212, 175, 55, 0.16);
+  border-color: var(--primary-gold);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   4. PRINTING APPLICATIONS & FAQ
+   ========================================================================== */
+.print-solutions {
+  padding-block: clamp(3.5rem, 7vw, 7rem);
+  background: var(--bg-secondary);
+}
+
+.solutions-heading {
+  max-width: 900px;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.homepage-information .solutions-heading h2 {
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 0.85rem 0 1.25rem;
+  color: var(--text-primary);
+}
+
+.solutions-heading > p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.solutions-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.solutions-photo {
+  margin: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #141414;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 18px 44px -10px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.solutions-photo:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 24px 56px -8px rgba(0, 0, 0, 0.65);
+  transform: translateY(-2px);
+}
+
+.solutions-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.solutions-photo:hover img {
+  transform: scale(1.032);
+}
+
+.solutions-photo figcaption {
+  padding-inline: 1.25rem;
+}
+
+.solutions-photo .print-explore {
+  margin: 0 1.25rem 1.5rem;
+}
+
+.solutions-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.solutions-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.5rem 0;
+  min-width: 0;
+  transition: border-color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.solutions-list li:hover {
+  border-top-color: rgba(212, 175, 55, 0.45);
+  transform: translateY(-1px);
+}
+
+.solutions-list svg {
+  width: 24px;
+  height: 24px;
+  color: var(--primary-gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+}
+
+.solutions-list li:hover svg {
+  transform: scale(1.15) translateY(-2px);
+  color: var(--bright-gold);
+}
+
+.solutions-list h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 0.4rem;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.solutions-list li:hover h3 {
+  color: var(--bright-gold);
+}
+
+.solutions-list p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* FAQ Accordion */
+.print-faq {
+  background: var(--bg-primary);
+  padding-block: clamp(3.5rem, 6vw, 6rem);
+}
+
+.print-faq-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.homepage-information .print-faq h2 {
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  line-height: 1.2;
+  margin: 0.85rem 0 1.25rem;
+  color: var(--text-primary);
+}
+
+.print-faq header p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  max-width: 36ch;
+  margin-bottom: 2rem;
+}
+
+.print-faq .faq-item {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0;
+  margin: 0;
+  box-shadow: none;
+  overflow: visible;
+  transition: border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.35s ease;
+}
+
+.print-faq .faq-item:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.print-faq .faq-item.active {
+  border-bottom-color: rgba(212, 175, 55, 0.4);
+}
+
+.print-faq .faq-item h3 {
+  margin: 0;
+}
+
+.print-faq .faq-trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  padding: 1.5rem 0.5rem;
+  min-height: 60px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: left;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.3s ease, background 0.3s ease;
+}
+
+.print-faq .faq-trigger:hover {
+  color: var(--bright-gold);
+  background: rgba(212, 175, 55, 0.035);
+}
+
+.print-faq .active .faq-trigger {
+  color: var(--primary-gold);
+}
+
+.print-faq .faq-trigger:focus-visible {
+  outline: 2px solid var(--primary-gold);
+  outline-offset: 2px;
+}
+
+.print-faq-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--primary-gold);
+  flex-shrink: 0;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+}
+
+.print-faq .active .print-faq-icon {
+  transform: rotate(45deg);
+  color: var(--bright-gold);
+}
+
+/* CSS Grid Height Animation */
+.print-faq-panel {
+  display: grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  transition: grid-template-rows 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease, visibility 0.38s;
+}
+
+.print-faq-answer {
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 0.5rem 1.25rem;
+}
+
+.print-faq-answer p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.85;
+  margin: 0 0 1.25rem;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.print-faq-answer p:last-child {
+  margin-bottom: 0;
+}
+
+.print-faq-ready .faq-item:not(.active) .print-faq-panel {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.print-faq-ready .faq-item:not(.active) .print-faq-answer p {
+  transform: translate3d(0, -6px, 0);
+  opacity: 0;
+}
+
+/* ==========================================================================
+   5. SEAMLESS INFINITE MARQUEE (Never Gaps, Never Pauses, Constant Velocity)
+   ========================================================================== */
+.home-page .marquee-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  user-select: none;
+  background-color: var(--navy-dark);
+  color: var(--gold);
+  padding: 1.45rem 0;
+  border-top: 1px solid rgba(185, 154, 97, 0.28);
+  border-bottom: 1px solid rgba(185, 154, 97, 0.28);
+  display: flex;
+}
+
+.home-page .marquee-track {
+  animation-duration: 43.077s;
+}
+
+.home-page .home-marquee-belt {
+  display: flex;
+  flex: 0 0 auto;
+  width: max-content;
+  animation: homeMarqueeLoop var(--home-marquee-duration, 43.077s) linear infinite;
+  will-change: transform;
+}
+
+.home-page .home-marquee-belt .marquee-track {
+  animation: none !important;
+  will-change: auto;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Strictly keep running — never pause on hover or mobile tap */
+.home-page .marquee-container:hover .home-marquee-belt,
+.home-page .marquee-container:hover .marquee-track {
+  animation-play-state: running !important;
+}
+
+@keyframes homeMarqueeLoop {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* ==========================================================================
+   6. RESPONSIVE BREAKPOINTS (Zero Overflow, Balanced White Space)
+   ========================================================================== */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .print-image-frame:hover img {
+    transform: scale(1.035);
+  }
+}
+
+@media (max-width: 1050px) {
+  .print-showcase-heading {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .studio-action-bar,
+  .solutions-layout,
+  .print-faq-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .solutions-photo {
+    max-width: 640px;
+  }
+}
+
+@media (max-width: 900px) {
+  /* Timeline Converts to Sleek Vertical Architecture */
+  .printing-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+    position: relative;
+    padding-left: 0;
+  }
+  .printing-timeline::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    bottom: 24px;
+    left: 24px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--primary-gold) 0%, rgba(212, 175, 55, 0.2) 100%);
+    z-index: 1;
+    transform-origin: top;
+    transform: scaleY(0);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .printing-timeline.timeline-revealed::before {
+    transform: scaleY(1);
+  }
+  .printing-stage {
+    padding: 0 0 0 68px;
+    position: relative;
+  }
+  .printing-stage::before {
+    display: none;
+  }
+  .printing-stage-marker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-bottom: 0;
+  }
+  .printing-stage-marker svg,
+  .printing-stage-marker .stage-marker-circle {
+    width: 48px;
+    height: 48px;
+  }
+  .printing-stage-marker span {
+    display: none;
+  }
+  .printing-stage h3 {
+    padding-top: 0.2rem;
+  }
+  .printing-process-heading,
+  .printing-process-note {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .printing-process-note p {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 800px) {
+  .print-showcase-inner {
+    width: 90%;
+  }
+  .studio-editorial-intro {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+  .print-story-feature {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+  .print-story-wide .print-story-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .print-service-pair {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .studio-composition {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+  .studio-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .studio-actions a {
+    width: 100%;
+    text-align: center;
+  }
+  .studio-benefits {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+  .solutions-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .print-showcase-inner {
+    width: 92%;
+  }
+  .print-story h3 {
+    font-size: 1.7rem;
+  }
+}
+
+/* ==========================================================================
+   7. ACCESSIBILITY & PREFERS-REDUCED-MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .home-page .home-marquee-belt {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
+  }
+  .print-image-frame img,
+  .print-explore::after,
+  .print-explore > span:last-child,
+  .print-faq-panel,
+  .print-faq-icon,
+  .studio-quote,
+  .studio-products,
+  .printing-stage::before,
+  .printing-timeline::before,
+  .studio-editorial-heading::after {
+    transition: none !important;
+    transform: none !important;
+  }
+}

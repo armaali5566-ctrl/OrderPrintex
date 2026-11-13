@@ -14,7 +14,7 @@
 }
 
 html, body {
-  overflow-x: hidden !important;
+  overflow-x: clip !important;
   width: 100% !important;
   max-width: 100vw !important;
   margin: 0;
@@ -682,14 +682,17 @@ body.has-sticky-bar {
     padding-bottom: 3rem !important;
   }
 
-  /* Top Contact Bar on Mobile */
+  /* Top Contact Bar on Mobile (Non-sticky) */
   .top-contact-bar {
+    position: relative !important;
+    top: auto !important;
     height: 36px !important;
     font-size: 0.75rem !important;
   }
 
   .site-header {
-    top: 36px !important;
+    position: relative !important;
+    top: auto !important;
   }
 
   .top-social-label {

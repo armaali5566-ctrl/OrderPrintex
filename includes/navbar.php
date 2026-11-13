@@ -16,7 +16,7 @@ $topFacebook  = get_setting('social_facebook', 'https://www.facebook.com/orderpr
 $topYouTube   = get_setting('social_youtube', 'https://www.youtube.com/@orderprintex');
 ?>
 
-<!-- Sticky Top Contact & Social Media Bar -->
+<!-- Public Top Contact & Verified Channels Bar (Non-Sticky) -->
 <div class="top-contact-bar announcement-bar" id="topContactBar" role="region" aria-label="Contact and Social Information">
   <div class="top-contact-container">
     <!-- Left: Direct Contact Information -->
@@ -30,6 +30,8 @@ $topYouTube   = get_setting('social_youtube', 'https://www.youtube.com/@orderpri
         <span class="top-contact-text"><?= e($topEmail) ?></span>
       </a>
 
+      <span class="top-contact-sep" aria-hidden="true">&bull;</span>
+
       <!-- Phone -->
       <a href="tel:<?= e($topPhoneRaw) ?>" class="top-contact-item" title="Call our Delhi studio">
         <svg class="top-contact-icon" viewBox="0 0 20 20" fill="currentColor">
@@ -37,6 +39,8 @@ $topYouTube   = get_setting('social_youtube', 'https://www.youtube.com/@orderpri
         </svg>
         <span class="top-contact-text"><?= e($topPhone) ?></span>
       </a>
+
+      <span class="top-contact-sep" aria-hidden="true">&bull;</span>
 
       <!-- WhatsApp -->
       <a href="https://wa.me/<?= e($topWhatsApp) ?>?text=<?= urlencode('Hello OrderPrintex, I have an enquiry regarding printing services.') ?>" target="_blank" rel="noopener noreferrer" class="top-contact-item top-whatsapp-item" title="Chat on WhatsApp">
@@ -131,15 +135,6 @@ $topYouTube   = get_setting('social_youtube', 'https://www.youtube.com/@orderpri
       <div class="nav-item">
         <a href="<?= url('contact') ?>" class="nav-link <?= strpos($currentUri, 'contact') !== false ? 'active' : '' ?>">Contact</a>
       </div>
-      <!-- Mobile Drawer CTA Button -->
-      <div class="nav-item nav-drawer-cta-item">
-        <a href="<?= url('get-quote') ?>" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:0.75rem; text-decoration:none;">
-          <span>Upload Your Design</span>
-          <svg style="width:14px;height:14px;fill:currentColor;" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-          </svg>
-        </a>
-      </div>
     </nav>
 
     <!-- Nav Actions Group -->
@@ -198,14 +193,7 @@ $topYouTube   = get_setting('social_youtube', 'https://www.youtube.com/@orderpri
         </div>
       </div>
 
-      <a href="<?= url('get-quote') ?>" class="btn btn-sm btn-primary nav-cta-btn">
-        <span>Upload Your Design</span>
-        <svg style="width:14px;height:14px;fill:currentColor;" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-        </svg>
-      </a>
-
-      <!-- Mobile Hamburger Toggle -->
+<!-- Mobile Hamburger Toggle -->
       <button type="button" class="mobile-toggle" id="mobileMenuToggle" aria-label="Toggle mobile navigation menu">
         <svg style="width:26px;height:26px;fill:currentColor;" viewBox="0 0 24 24">
           <path fill-rule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clip-rule="evenodd"/>

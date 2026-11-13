@@ -9,32 +9,33 @@ require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/database.php';
 require_once __DIR__ . '/includes/functions.php';
 
-$pageTitle = "PRINTEX — Industrial DTF & UV DTF Manufacturer & Bulk Supplier in India";
-$pageDesc  = "PRINTEX is India's leading bulk manufacturer of DTF garment transfers, UV DTF 3D decals, custom screen-quality t-shirts, and corporate merchandise. Fast turnaround, prepress checks, and nationwide delivery.";
+$pageTitle = "Printex | DTF & UV DTF Printing, Custom Apparel & Gifts";
+$pageDesc  = "Delhi-based DTF and UV DTF printing for apparel brands and businesses. Explore custom T-shirts, branded gifts and artwork checks, then request a quote.";
 $canonical = url('');
 $pageSchemaKey = 'home';
+$bodyClass = 'home-page';
 
 require_once __DIR__ . '/includes/header.php';
 
-// Fetch dynamic products from database (exactly 3 featured products for Commercial Showcase)
+// Fetch dynamic products from database (four featured products for Commercial Showcase)
 $featuredProducts = db_fetch_all("
-    SELECT p.id, p.sku, p.title, p.slug, p.short_desc, p.image_url, p.badge, 
-           p.starting_price, p.price_unit, p.min_order, c.name as category_name 
-    FROM products p 
-    LEFT JOIN categories c ON p.category_id = c.id 
-    WHERE p.is_active = 1 
-    ORDER BY p.is_featured DESC, p.display_order ASC 
-    LIMIT 3
+    SELECT p.id, p.sku, p.title, p.slug, p.short_desc, p.image_url, p.badge,
+           p.starting_price, p.price_unit, p.min_order, c.name as category_name
+    FROM products p
+    LEFT JOIN categories c ON p.category_id = c.id
+    WHERE p.is_active = 1
+    ORDER BY p.is_featured DESC, p.display_order ASC
+    LIMIT 4
 ");
 
 // Fetch 3 latest published blog posts
 $latestBlogPosts = db_fetch_all("
-    SELECT p.id, p.title, p.slug, p.excerpt, p.featured_image, p.read_time, p.created_at, 
-           c.name as category_name 
-    FROM blog_posts p 
-    LEFT JOIN blog_categories c ON p.category_id = c.id 
-    WHERE p.status = 'published' 
-    ORDER BY p.created_at DESC 
+    SELECT p.id, p.title, p.slug, p.excerpt, p.featured_image, p.read_time, p.created_at,
+           c.name as category_name
+    FROM blog_posts p
+    LEFT JOIN blog_categories c ON p.category_id = c.id
+    WHERE p.status = 'published'
+    ORDER BY p.created_at DESC
     LIMIT 3
 ");
 
@@ -42,6 +43,342 @@ $heroHeading = get_setting('hero_heading', 'Premium DTF & UV DTF Transfers, Made
 $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and UV DTF transfers in bulk, with vivid colors, a soft-hand finish and strong wash durability. Trusted by apparel brands, print shops and promotional studios across India.');
 ?>
 
+<!-- New informational introduction; original homepage follows unchanged. -->
+<link rel="stylesheet" href="<?= url('assets/css/home-information.css?v=' . filemtime(__DIR__ . '/assets/css/home-information.css')) ?>">
+<div class="homepage-information" id="homepage-information">
+<section class="studio-editorial" aria-labelledby="meet-printex-title">
+  <div class="print-showcase-inner">
+    <header class="studio-editorial-heading" data-print-motion>
+      <div class="print-eyebrow">ABOUT PRINTEX &bull; DELHI PRINTING STUDIO</div>
+      <h2 id="meet-printex-title">Meet Printex.<br><span>Printing for <em>your brand.</em></span></h2>
+    </header>
+
+    <!-- Editorial Layered Composition: Image with Tasteful Overlapping Narrative -->
+    <div class="studio-composition">
+      <!-- Hero Printing Visual Showcase -->
+      <div class="studio-visual-wrap" data-print-motion>
+        <figure class="studio-hero-figure studio-main-photo">
+          <span class="studio-photo-badge">STUDIO PRODUCTION</span>
+          <picture>
+            <source srcset="<?= url('assets/images/dtf_fabric_print.webp') ?>" type="image/webp">
+            <img src="<?= url('assets/images/dtf_fabric_print.jpg') ?>" alt="DTF artwork being transferred onto a dark garment at the printing press" width="1200" height="896" fetchpriority="high">
+          </picture>
+          <figcaption>THE PRINT &bull; FROM ARTWORK TO APPLICATION</figcaption>
+        </figure>
+      </div>
+
+      <!-- Overlapping Editorial Narrative Block (No generic box!) -->
+      <div class="studio-narrative-wrap" data-print-motion>
+        <div class="studio-narrative-lead">
+          <span class="studio-kicker-label">STUDIO PHILOSOPHY</span>
+          <p class="studio-lead">Printex is a Delhi-based printing studio specializing in <strong>DTF garment transfers</strong> and <strong>UV DTF decals</strong>.</p>
+        </div>
+
+        <div class="studio-narrative-body">
+          <p>We help apparel brands, print shops, creators and businesses turn artwork into custom clothing, branded products and corporate gifts.</p>
+          <p>From artwork checks to colour and finish checks, we take care of the details that make a print ready for your customers.</p>
+        </div>
+
+        <div class="studio-narrative-footer">
+          <a class="print-explore" href="<?= url('about') ?>"><span>More about Printex</span><span aria-hidden="true">&nearr;</span></a>
+
+          <div class="studio-production-pill">
+            <span class="pill-badge">MADE FOR BULK ORDERS</span>
+            <span class="pill-meta">Soft-hand finish &bull; Strong adhesion &bull; Wash-durable &bull; Consistent batches</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="print-showcase" aria-labelledby="print-showcase-title">
+  <div class="print-showcase-inner">
+    <header class="print-showcase-heading" data-print-motion>
+      <div class="print-eyebrow">OUR SPECIALTIES &bull; WHAT WE DO</div>
+      <h2 id="print-showcase-title">Our DTF, UV DTF and<br>Custom Printing Services</h2>
+      <p>From DTF transfers for apparel to UV DTF decals for hard surfaces, we handle printing, curing and quality checks under one roof in Delhi.</p>
+    </header>
+
+    <div class="services-sticky-showcase">
+      <!-- Left Column: Sticky Featured Image Stage -->
+      <div class="services-sticky-visual-column">
+        <div class="services-sticky-frame">
+          <div class="services-image-deck">
+            <figure class="services-deck-slide active" data-service-index="0">
+              <picture>
+                <source srcset="<?= url('assets/images/dtf_fabric_print.webp') ?>" type="image/webp">
+                <img src="<?= url('assets/images/dtf_fabric_print.jpg') ?>" alt="Custom DTF transfer printed on a dark T-shirt" width="1200" height="896" loading="lazy" decoding="async">
+              </picture>
+              <figcaption><span>PRINTEX &bull; GARMENT TRANSFERS</span><span aria-hidden="true">01</span></figcaption>
+            </figure>
+            <figure class="services-deck-slide" data-service-index="1">
+              <picture>
+                <source srcset="<?= url('assets/images/uv_dtf_drinkware.webp') ?>" type="image/webp">
+                <img src="<?= url('assets/images/uv_dtf_drinkware.jpg') ?>" alt="UV DTF decal applied on a bottle" width="1200" height="896" loading="lazy" decoding="async">
+              </picture>
+              <figcaption><span>PRINTEX &bull; HARD-SURFACE DECALS</span><span aria-hidden="true">02</span></figcaption>
+            </figure>
+            <figure class="services-deck-slide" data-service-index="2">
+              <picture>
+                <source srcset="<?= url('assets/images/streetwear_tee.webp') ?>" type="image/webp">
+                <img src="<?= url('assets/images/streetwear_tee.jpg') ?>" alt="Black custom printed graphic T-shirt" width="1200" height="896" loading="lazy" decoding="async">
+              </picture>
+              <figcaption><span>PRINTEX &bull; CUSTOM APPAREL</span><span aria-hidden="true">03</span></figcaption>
+            </figure>
+            <figure class="services-deck-slide" data-service-index="3">
+              <picture>
+                <source srcset="<?= url('assets/images/corporate_swag_kit.webp') ?>" type="image/webp">
+                <img src="<?= url('assets/images/corporate_swag_kit.jpg') ?>" alt="Corporate welcome kit with printed mug and diary" width="1200" height="896" loading="lazy" decoding="async">
+              </picture>
+              <figcaption><span>PRINTEX &bull; BUSINESS &amp; GIFTING</span><span aria-hidden="true">04</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Scrolling Service Descriptions -->
+      <div class="services-scroll-column">
+        <!-- Service 01: DTF Printing -->
+        <article class="print-story print-story-step active active-service" data-service-step="0" aria-labelledby="print-service-1">
+          <div class="print-mobile-visual">
+            <picture>
+              <source srcset="<?= url('assets/images/dtf_fabric_print.webp') ?>" type="image/webp">
+              <img src="<?= url('assets/images/dtf_fabric_print.jpg') ?>" alt="Custom DTF transfer printed on a dark T-shirt" width="1200" height="896" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="print-story-copy">
+            <div class="print-story-kicker"><span class="print-story-number" aria-hidden="true">01</span><span class="print-eyebrow">GARMENT TRANSFERS</span></div>
+            <h3 id="print-service-1">DTF Printing</h3>
+            <p class="print-story-description">Direct-to-film (DTF) printing puts artwork onto transfer film, ready to heat-press onto garments. Fine detail and vivid colour make it a practical choice for apparel brands and print shops.</p>
+            <div class="print-applications"><span class="print-applications-label">MADE FOR</span><ul><li>T-shirts &amp; hoodies</li><li>Cotton &amp; blends</li></ul></div>
+            <a class="print-explore" href="<?= service_url('dtf-printing') ?>"><span>Explore DTF Printing</span><span aria-hidden="true">&nearr;</span></a>
+          </div>
+        </article>
+
+        <!-- Service 02: UV DTF Printing -->
+        <article class="print-story print-story-step" data-service-step="1" aria-labelledby="print-service-2">
+          <div class="print-mobile-visual">
+            <picture>
+              <source srcset="<?= url('assets/images/uv_dtf_drinkware.webp') ?>" type="image/webp">
+              <img src="<?= url('assets/images/uv_dtf_drinkware.jpg') ?>" alt="UV DTF decal applied on a bottle" width="1200" height="896" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="print-story-copy">
+            <div class="print-story-kicker"><span class="print-story-number" aria-hidden="true">02</span><span class="print-eyebrow">HARD-SURFACE DECALS</span></div>
+            <h3 id="print-service-2">UV DTF Printing</h3>
+            <p class="print-story-description">UV DTF printing creates ready-to-apply decals with a glossy, raised finish. Transfer designs onto bottles, glass, packaging and other suitable hard surfaces without a heat press.</p>
+            <div class="print-applications"><span class="print-applications-label">MADE FOR</span><ul><li>Bottles &amp; glass</li><li>Packaging &amp; promotional products</li></ul></div>
+            <a class="print-explore" href="<?= service_url('uv-dtf-printing') ?>"><span>Explore UV DTF Printing</span><span aria-hidden="true">&nearr;</span></a>
+          </div>
+        </article>
+
+        <!-- Service 03: T-Shirt Printing -->
+        <article class="print-story print-story-step" data-service-step="2" aria-labelledby="print-service-3">
+          <div class="print-mobile-visual">
+            <picture>
+              <source srcset="<?= url('assets/images/streetwear_tee.webp') ?>" type="image/webp">
+              <img src="<?= url('assets/images/streetwear_tee.jpg') ?>" alt="Black custom printed graphic T-shirt" width="1200" height="896" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="print-story-copy">
+            <div class="print-story-kicker"><span class="print-story-number" aria-hidden="true">03</span><span class="print-eyebrow">CUSTOM APPAREL</span></div>
+            <h3 id="print-service-3">T-Shirt Printing</h3>
+            <p class="print-story-description">Custom garment printing for brand merchandise, team clothing and personalized gifts. Bring your logo or illustration to cotton tees, oversized styles and company polos.</p>
+            <div class="print-applications"><span class="print-applications-label">MADE FOR</span><ul><li>Brand merchandise</li><li>Personal gifts</li><li>Team apparel</li></ul></div>
+            <a class="print-explore" href="<?= service_url('t-shirt-printing') ?>"><span>Explore T-Shirt Printing</span><span aria-hidden="true">&nearr;</span></a>
+          </div>
+        </article>
+
+        <!-- Service 04: Corporate Printing -->
+        <article class="print-story print-story-step" data-service-step="3" aria-labelledby="print-service-4">
+          <div class="print-mobile-visual">
+            <picture>
+              <source srcset="<?= url('assets/images/corporate_swag_kit.webp') ?>" type="image/webp">
+              <img src="<?= url('assets/images/corporate_swag_kit.jpg') ?>" alt="Corporate welcome kit with printed mug and diary" width="1200" height="896" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="print-story-copy">
+            <div class="print-story-kicker"><span class="print-story-number" aria-hidden="true">04</span><span class="print-eyebrow">BUSINESS &amp; GIFTING</span></div>
+            <h3 id="print-service-4">Corporate Printing</h3>
+            <p class="print-story-description">Branded welcome kits, mugs, bottles, notebooks and gifts for teams, events and clients, with careful brand-color matching.</p>
+            <div class="print-applications"><span class="print-applications-label">MADE FOR</span><ul><li>Business branding</li><li>Events</li><li>Corporate gifting</li></ul></div>
+            <a class="print-explore" href="<?= service_url('corporate-printing') ?>"><span>Explore Corporate Printing</span><span aria-hidden="true">&nearr;</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="printing-process" aria-labelledby="printing-process-title">
+  <div class="print-showcase-inner">
+    <header class="printing-process-heading" data-print-motion>
+      <div><div class="print-eyebrow">CARE AT EVERY STAGE</div><h2 id="printing-process-title">Our Printing Process</h2></div>
+      <p>From the first file check to the final package, attention to detail runs through every stage of your print.</p>
+    </header>
+    <ol class="printing-timeline">
+      <li class="printing-stage" data-print-motion>
+        <div class="printing-stage-marker">
+          <div class="stage-marker-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16h16V8z"/><path d="M14 2v6h6M8 12h5m-5 4h3"/><path d="m14 15 2 2 4-4"/></svg>
+          </div>
+          <span>01</span>
+        </div>
+        <div class="printing-stage-content">
+          <h3>File Check &amp; Prepress</h3>
+          <p>We review your artwork for resolution, transparency and sheet layout before printing, so problems get fixed before they cost you a reprint.</p>
+        </div>
+      </li>
+      <li class="printing-stage" data-print-motion>
+        <div class="printing-stage-marker">
+          <div class="stage-marker-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3C7 3 3 6.5 3 11a8 8 0 0 0 8 8h2a2 2 0 0 0 1-3.7 1.5 1.5 0 0 1 1-2.8h3c4 0 4-9.5-6-9.5Z"/><path d="M7 9h.01M10 6h.01M15 6h.01M18 9h.01"/></svg>
+          </div>
+          <span>02</span>
+        </div>
+        <div class="printing-stage-content">
+          <h3>Color &amp; Material Selection</h3>
+          <p>Calibrated color profiles and premium inks give you sharp detail, smooth gradients and vivid color that stays consistent from batch to batch.</p>
+        </div>
+      </li>
+      <li class="printing-stage" data-print-motion>
+        <div class="printing-stage-marker">
+          <div class="stage-marker-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 8 3v6c0 4-8 9-8 9s-8-5-8-9V6z"/><path d="m8 11 3 3 5-5"/></svg>
+          </div>
+          <span>03</span>
+        </div>
+        <div class="printing-stage-content">
+          <h3>Production &amp; Quality Control</h3>
+          <p>During production and before packing, we check adhesion, colour accuracy and finish to support consistent results across your order.</p>
+        </div>
+      </li>
+      <li class="printing-stage" data-print-motion>
+        <div class="printing-stage-marker">
+          <div class="stage-marker-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 7 9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10M8 5l9 4"/></svg>
+          </div>
+          <span>04</span>
+        </div>
+        <div class="printing-stage-content">
+          <h3>Pack &amp; Ship</h3>
+          <p>Secure packaging, clear labeling and tracking help your prints arrive ready to use. Courier delivery is available across India.</p>
+        </div>
+      </li>
+    </ol>
+    <div class="printing-process-note" data-print-motion>
+      <span class="print-eyebrow">PRINTING FOR YOUR BUSINESS</span>
+      <p>Gang sheets, branded apparel and corporate merchandise support your product range, team needs and promotional projects. A dependable print partner for apparel brands, designers, print shops and corporate teams who need consistent quality at scale.</p>
+      <span>Free prepress file check</span>
+    </div>
+  </div>
+</section>
+
+<section class="print-solutions" aria-labelledby="print-solutions-title">
+  <div class="print-showcase-inner">
+    <header class="solutions-heading" data-print-motion>
+      <span class="print-eyebrow">PRINTING SOLUTIONS &amp; APPLICATIONS</span>
+      <h2 id="print-solutions-title">Custom Printing for Brands,<br>Businesses &amp; <em>Every Occasion</em></h2>
+      <p>From a personal gift to your next collection, put your design where it belongs.</p>
+    </header>
+    <div class="solutions-layout">
+      <figure class="solutions-photo" data-print-motion>
+        <div class="solutions-photo-visual">
+          <span class="solutions-photo-badge">STUDIO SHOWCASE</span>
+          <picture>
+            <source srcset="<?= url('assets/images/corporate_swag_kit.webp') ?>" type="image/webp">
+            <img src="<?= url('assets/images/corporate_swag_kit.jpg') ?>" alt="Coordinated branded drinkware and stationery gift set" width="1200" height="896" loading="lazy">
+          </picture>
+        </div>
+        <div class="solutions-photo-details">
+          <figcaption>
+            <span class="caption-tag">CURATED SUITE</span>
+            <span class="caption-text">THOUGHTFUL GIFTS. DISTINCTIVE BRANDING.</span>
+          </figcaption>
+          <a class="print-explore" href="<?= url('get-quote') ?>"><span>Tell us what you have in mind</span><span aria-hidden="true">&nearr;</span></a>
+        </div>
+      </figure>
+      <ul class="solutions-list">
+        <li data-print-motion>
+          <div class="solutions-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+            </svg>
+          </div>
+          <div class="solutions-item-content"><h3>Personal Gifts</h3><p>Print a personal design for someone special.</p></div>
+        </li>
+        <li data-print-motion>
+          <div class="solutions-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            </svg>
+          </div>
+          <div class="solutions-item-content"><h3>Couple T-Shirts</h3><p>Matching designs for two.</p></div>
+        </li>
+        <li data-print-motion>
+          <div class="solutions-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/>
+            </svg>
+          </div>
+          <div class="solutions-item-content"><h3>Occasion Gifts</h3><p>Personalized prints for celebrations.</p></div>
+        </li>
+        <li data-print-motion>
+          <div class="solutions-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/>
+            </svg>
+          </div>
+          <div class="solutions-item-content"><h3>Wedding Packages</h3><p>Coordinated printing for your wedding occasion.</p></div>
+        </li>
+        <li data-print-motion>
+          <div class="solutions-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M12 12v2"/>
+            </svg>
+          </div>
+          <div class="solutions-item-content"><h3>Corporate Gifts</h3><p>Branded gifts for clients and teams.</p></div>
+        </li>
+        <li data-print-motion>
+          <div class="solutions-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m8 3-6 4 3 5 3-2v11h8V10l3 2 3-5-6-4c0 4-8 4-8 0Z"/>
+            </svg>
+          </div>
+          <div class="solutions-item-content"><h3>Custom T-Shirts</h3><p>Your artwork on everyday apparel.</p></div>
+        </li>
+        <li data-print-motion>
+          <div class="solutions-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/>
+            </svg>
+          </div>
+          <div class="solutions-item-content"><h3>Printed Mugs</h3><p>Personal messages and logos on drinkware.</p></div>
+        </li>
+        <li data-print-motion>
+          <div class="solutions-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+          <div class="solutions-item-content"><h3>Branded Merchandise</h3><p>Products that carry your business identity.</p></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="print-faq" aria-labelledby="print-faq-title">
+  <div class="print-showcase-inner print-faq-layout">
+    <header data-print-motion><div class="print-eyebrow">BEFORE YOU PRINT</div><h2 id="print-faq-title">A little clarity.<br><em>A better print.</em></h2><p>Artwork, materials and ordering — your questions, answered.</p><a class="print-explore" href="<?= url('faq') ?>"><span>View all FAQs</span><span aria-hidden="true">&nearr;</span></a></header>
+    <div class="print-faq-list"><article class="faq-item active" data-category="all"><h3><button type="button" class="faq-trigger" id="home-faq-question-0" aria-expanded="true" aria-controls="home-faq-answer-0"><span>What's the difference between DTF and UV DTF?</span><span class="print-faq-icon" aria-hidden="true">+</span></button></h3><div class="print-faq-panel" id="home-faq-answer-0" role="region" aria-labelledby="home-faq-question-0"><div class="print-faq-answer"><p><strong>DTF</strong> is used for suitable fabrics and garments: artwork is printed onto film and heat-pressed onto apparel. <strong>UV DTF</strong> creates ready-to-apply decals for compatible hard surfaces such as bottles, glass and promotional products. Share your fabric or surface details so our team can advise on the right option.</p></div></div></article><article class="faq-item active" data-category="all"><h3><button type="button" class="faq-trigger" id="home-faq-question-1" aria-expanded="true" aria-controls="home-faq-answer-1"><span>What file types and specifications should I upload?</span><span class="print-faq-icon" aria-hidden="true">+</span></button></h3><div class="print-faq-panel" id="home-faq-answer-1" role="region" aria-labelledby="home-faq-question-1"><div class="print-faq-answer"><p>The homepage upload form accepts PNG, JPG/JPEG, PDF, AI, PSD and SVG files, up to 25 MB. Use high-resolution artwork; 300 DPI is recommended, with a transparent background for DTF. Outline fonts in vector files or embed them in print-ready PDFs. Our team checks resolution, transparency and layout before printing.</p></div></div></article><article class="faq-item active" data-category="all"><h3><button type="button" class="faq-trigger" id="home-faq-question-2" aria-expanded="true" aria-controls="home-faq-answer-2"><span>How fast is turnaround and do you offer bulk pricing?</span><span class="print-faq-icon" aria-hidden="true">+</span></button></h3><div class="print-faq-panel" id="home-faq-answer-2" role="region" aria-labelledby="home-faq-question-2"><div class="print-faq-answer"><p>Published production estimates are typically 24–48 hours for approved DTF gang sheets and UV DTF decals, and 3–5 business days for custom T-shirts and bulk merchandise, depending on quantity. These are production estimates, not guaranteed delivery dates; confirm timing with your quotation.</p><p>Bulk and recurring-volume pricing is available. Share your artwork, sizes and quantities for a detailed quote.</p></div></div></article></div>
+  </div>
+</section>
+</div>
+<script src="<?= url('assets/js/home-services.js?v=' . filemtime(__DIR__ . '/assets/js/home-services.js')) ?>" defer></script>
+
+<!-- Original homepage: preserved from project history. -->
 <!-- ========================================================================
      SECTION 1: FULL-WIDTH EDITORIAL HERO SECTION
      ======================================================================== -->
