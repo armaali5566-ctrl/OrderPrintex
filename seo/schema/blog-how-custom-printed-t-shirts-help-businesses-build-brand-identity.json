@@ -1,46 +1,145 @@
 {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "@id": "https://orderprintex.com/blog/how-custom-printed-t-shirts-help-businesses-build-brand-identity#article",
-    "headline": "How Custom Printed T-Shirts Help Businesses Build Brand Identity",
-    "url": "https://orderprintex.com/blog/how-custom-printed-t-shirts-help-businesses-build-brand-identity",
-    "image": "https://orderprintex.com/assets/images/custom_tshirt_apparel.jpg",
-    "description": "Walk into a busy café, an exhibition stall or a corporate office and notice what you remember afterwards. It is rarely the brochure on the counter. It is the person wearing the logo. Custom printed T-shirts for business turn everyday clothing into a small billboard that people see, remember and talk about.",
-    "datePublished": "2026-11-12T13:42:25+05:30",
-    "dateModified": "2026-11-13T11:12:33+05:30",
-    "author": {
-        "@type": "Person",
-        "name": "By Printex"
-    },
-    "publisher": {
-        "@type": "ProfessionalService",
-        "@id": "https://orderprintex.com/#organization",
-        "name": "OrderPrintex",
-        "url": "https://orderprintex.com/",
-        "telephone": "+91 93540 28199",
-        "email": "sales@orderprintex.com",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh, Delhi, 110059",
-            "addressLocality": "New Delhi",
-            "addressRegion": "Delhi",
-            "postalCode": "110059",
-            "addressCountry": "IN"
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "http://localhost/OrderPrintex/#organization",
+            "name": "OrderPrintex",
+            "alternateName": "PRINTEX Delhi",
+            "url": "http://localhost/OrderPrintex/",
+            "logo": {
+                "@type": "ImageObject",
+                "@id": "http://localhost/OrderPrintex/#logo",
+                "url": "http://localhost/OrderPrintex/assets/images/logo.png",
+                "caption": "OrderPrintex Logo"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "sameAs": [
+                "https://www.instagram.com/order_printex",
+                "https://www.facebook.com/orderprintex",
+                "https://www.youtube.com/@orderprintex",
+                "https://www.linkedin.com/company/orderprintex"
+            ]
         },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 28.618,
-            "longitude": 77.0805
+        {
+            "@type": "LocalBusiness",
+            "@id": "http://localhost/OrderPrintex/#localbusiness",
+            "name": "OrderPrintex Delhi Printing Facility",
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "url": "http://localhost/OrderPrintex/",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "priceRange": "₹₹",
+            "parentOrganization": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 28.618,
+                "longitude": 77.0805
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
+                    ],
+                    "opens": "09:30",
+                    "closes": "20:00"
+                }
+            ]
         },
-        "sameAs": [
-            "https://www.facebook.com/orderprintex",
-            "https://www.instagram.com/orderprintex",
-            "https://www.youtube.com/@orderprintex",
-            "https://www.linkedin.com/company/orderprintex"
-        ]
-    },
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://orderprintex.com/blog/how-custom-printed-t-shirts-help-businesses-build-brand-identity"
-    }
+        {
+            "@type": "WebSite",
+            "@id": "http://localhost/OrderPrintex/#website",
+            "name": "OrderPrintex",
+            "url": "http://localhost/OrderPrintex/",
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "http://localhost/OrderPrintex/products.php?search={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "BlogPosting",
+            "@id": "http://localhost/OrderPrintex/blog/how-custom-printed-t-shirts-help-businesses-build-brand-identity#article",
+            "headline": "How Custom Printed T-Shirts Help Businesses Build Brand Identity",
+            "description": "Walk into a busy café, an exhibition stall or a corporate office and notice what you remember afterwards. It is rarely the brochure on the counter. It is the person wearing the logo. Custom printed T-shirts for business turn everyday clothing into a small billboard that people see, remember and talk about.",
+            "image": [
+                "http://localhost/OrderPrintex/assets/images/custom_tshirt_apparel.jpg"
+            ],
+            "datePublished": "2026-11-12T13:42:25+05:30",
+            "dateModified": "2026-11-13T11:12:33+05:30",
+            "author": {
+                "@type": "Person",
+                "name": "By Printex"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "http://localhost/OrderPrintex/#organization",
+                "name": "OrderPrintex",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "http://localhost/OrderPrintex/assets/images/logo.png"
+                }
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://localhost/OrderPrintex/blog/how-custom-printed-t-shirts-help-businesses-build-brand-identity"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "http://localhost/OrderPrintex/blog/how-custom-printed-t-shirts-help-businesses-build-brand-identity#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "http://localhost/OrderPrintex/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Blog",
+                    "item": "http://localhost/OrderPrintex/blog"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "How Custom Printed T-Shirts Help Businesses Build Brand Identity",
+                    "item": "http://localhost/OrderPrintex/blog/how-custom-printed-t-shirts-help-businesses-build-brand-identity"
+                }
+            ]
+        }
+    ]
 }

@@ -1,46 +1,145 @@
 {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "@id": "https://orderprintex.com/blog/uv-dtf-printing-product-branding#article",
-    "headline": "UV DTF Printing: How It Works and Its Applications in Product Branding",
-    "url": "https://orderprintex.com/blog/uv-dtf-printing-product-branding",
-    "image": "https://orderprintex.com/assets/images/uv_dtf_drinkware.jpg",
-    "description": "Pick up a premium-looking water bottle or a café mug these days and run your thumb over the logo. Chances are it feels slightly raised, glossy, and almost moulded into the surface. Most people assume that kind of finish needs expensive manufacturing. In reality, it is often UV DTF printing, a method that has quietly changed how small and mid-sized brands put their name on products.",
-    "datePublished": "2026-11-02T08:55:04+05:30",
-    "dateModified": "2026-11-13T11:12:33+05:30",
-    "author": {
-        "@type": "Person",
-        "name": "OrderPrintex Editorial Team"
-    },
-    "publisher": {
-        "@type": "ProfessionalService",
-        "@id": "https://orderprintex.com/#organization",
-        "name": "OrderPrintex",
-        "url": "https://orderprintex.com/",
-        "telephone": "+91 93540 28199",
-        "email": "sales@orderprintex.com",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh, Delhi, 110059",
-            "addressLocality": "New Delhi",
-            "addressRegion": "Delhi",
-            "postalCode": "110059",
-            "addressCountry": "IN"
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "http://localhost/OrderPrintex/#organization",
+            "name": "OrderPrintex",
+            "alternateName": "PRINTEX Delhi",
+            "url": "http://localhost/OrderPrintex/",
+            "logo": {
+                "@type": "ImageObject",
+                "@id": "http://localhost/OrderPrintex/#logo",
+                "url": "http://localhost/OrderPrintex/assets/images/logo.png",
+                "caption": "OrderPrintex Logo"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "sameAs": [
+                "https://www.instagram.com/order_printex",
+                "https://www.facebook.com/orderprintex",
+                "https://www.youtube.com/@orderprintex",
+                "https://www.linkedin.com/company/orderprintex"
+            ]
         },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 28.618,
-            "longitude": 77.0805
+        {
+            "@type": "LocalBusiness",
+            "@id": "http://localhost/OrderPrintex/#localbusiness",
+            "name": "OrderPrintex Delhi Printing Facility",
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "url": "http://localhost/OrderPrintex/",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "priceRange": "₹₹",
+            "parentOrganization": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 28.618,
+                "longitude": 77.0805
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
+                    ],
+                    "opens": "09:30",
+                    "closes": "20:00"
+                }
+            ]
         },
-        "sameAs": [
-            "https://www.facebook.com/orderprintex",
-            "https://www.instagram.com/orderprintex",
-            "https://www.youtube.com/@orderprintex",
-            "https://www.linkedin.com/company/orderprintex"
-        ]
-    },
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://orderprintex.com/blog/uv-dtf-printing-product-branding"
-    }
+        {
+            "@type": "WebSite",
+            "@id": "http://localhost/OrderPrintex/#website",
+            "name": "OrderPrintex",
+            "url": "http://localhost/OrderPrintex/",
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "http://localhost/OrderPrintex/products.php?search={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "BlogPosting",
+            "@id": "http://localhost/OrderPrintex/blog/uv-dtf-printing-product-branding#article",
+            "headline": "UV DTF Printing: How It Works and Its Applications in Product Branding",
+            "description": "Pick up a premium-looking water bottle or a café mug these days and run your thumb over the logo. Chances are it feels slightly raised, glossy, and almost moulded into the surface. Most people assume that kind of finish needs expensive manufacturing. In reality, it is often UV DTF printing, a method that has quietly changed how small and mid-sized brands put their name on products.",
+            "image": [
+                "http://localhost/OrderPrintex/assets/images/uv_dtf_drinkware.jpg"
+            ],
+            "datePublished": "2026-11-02T08:55:04+05:30",
+            "dateModified": "2026-11-14T13:35:00+05:30",
+            "author": {
+                "@type": "Person",
+                "name": "OrderPrintex Editorial Team"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "http://localhost/OrderPrintex/#organization",
+                "name": "OrderPrintex",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "http://localhost/OrderPrintex/assets/images/logo.png"
+                }
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://localhost/OrderPrintex/blog/uv-dtf-printing-product-branding"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "http://localhost/OrderPrintex/blog/uv-dtf-printing-product-branding#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "http://localhost/OrderPrintex/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Blog",
+                    "item": "http://localhost/OrderPrintex/blog"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "UV DTF Printing: How It Works and Its Applications in Product Branding",
+                    "item": "http://localhost/OrderPrintex/blog/uv-dtf-printing-product-branding"
+                }
+            ]
+        }
+    ]
 }

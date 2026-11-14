@@ -1,23 +1,152 @@
 {
     "@context": "https://schema.org",
-    "@type": "Product",
-    "@id": "https://orderprintex.com/product/streetwear-oversized-tee#product",
-    "name": "Oversized Streetwear T-Shirt (240 GSM)",
-    "url": "https://orderprintex.com/product/streetwear-oversized-tee",
-    "image": "https://orderprintex.com/assets/images/custom_tshirt_apparel.jpg",
-    "description": "A heavy drop-shoulder tee with your design printed in DTF. Roomy fit and a soft feel.",
-    "sku": "STR-001",
-    "category": "Custom T-Shirts",
-    "brand": {
-        "@type": "Brand",
-        "name": "OrderPrintex"
-    },
-    "offers": {
-        "@type": "Offer",
-        "url": "https://orderprintex.com/product/streetwear-oversized-tee",
-        "priceCurrency": "INR",
-        "price": "0.00",
-        "availability": "https://schema.org/InStock",
-        "itemCondition": "https://schema.org/NewCondition"
-    }
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "http://localhost/OrderPrintex/#organization",
+            "name": "OrderPrintex",
+            "alternateName": "PRINTEX Delhi",
+            "url": "http://localhost/OrderPrintex/",
+            "logo": {
+                "@type": "ImageObject",
+                "@id": "http://localhost/OrderPrintex/#logo",
+                "url": "http://localhost/OrderPrintex/assets/images/logo.png",
+                "caption": "OrderPrintex Logo"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "sameAs": [
+                "https://www.instagram.com/order_printex",
+                "https://www.facebook.com/orderprintex",
+                "https://www.youtube.com/@orderprintex",
+                "https://www.linkedin.com/company/orderprintex"
+            ]
+        },
+        {
+            "@type": "LocalBusiness",
+            "@id": "http://localhost/OrderPrintex/#localbusiness",
+            "name": "OrderPrintex Delhi Printing Facility",
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "url": "http://localhost/OrderPrintex/",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "priceRange": "₹₹",
+            "parentOrganization": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 28.618,
+                "longitude": 77.0805
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
+                    ],
+                    "opens": "09:30",
+                    "closes": "20:00"
+                }
+            ]
+        },
+        {
+            "@type": "WebSite",
+            "@id": "http://localhost/OrderPrintex/#website",
+            "name": "OrderPrintex",
+            "url": "http://localhost/OrderPrintex/",
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "http://localhost/OrderPrintex/products.php?search={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/streetwear-oversized-tee#product",
+            "name": "Oversized Streetwear T-Shirt (240 GSM)",
+            "image": [
+                "http://localhost/OrderPrintex/assets/images/custom_tshirt_apparel.jpg"
+            ],
+            "description": "A heavy drop-shoulder tee with your design printed in DTF. Roomy fit and a soft feel.",
+            "sku": "STR-001",
+            "brand": {
+                "@type": "Brand",
+                "name": "OrderPrintex"
+            },
+            "manufacturer": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/streetwear-oversized-tee",
+                "priceCurrency": "INR",
+                "price": 449,
+                "priceValidUntil": "2027-12-31",
+                "availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition",
+                "seller": {
+                    "@id": "http://localhost/OrderPrintex/#organization"
+                }
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "http://localhost/OrderPrintex/product/streetwear-oversized-tee#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "http://localhost/OrderPrintex/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Products",
+                    "item": "http://localhost/OrderPrintex/products"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Custom T-Shirts",
+                    "item": "http://localhost/OrderPrintex/product/category/custom-tshirts"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "name": "Oversized Streetwear T-Shirt (240 GSM)",
+                    "item": "http://localhost/OrderPrintex/product/streetwear-oversized-tee"
+                }
+            ]
+        }
+    ]
 }

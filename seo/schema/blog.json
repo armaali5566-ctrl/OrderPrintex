@@ -1,55 +1,208 @@
 {
     "@context": "https://schema.org",
-    "@type": "Blog",
-    "@id": "https://orderprintex.com/blog#blogpage",
-    "url": "https://orderprintex.com/blog",
-    "name": "Printing Industry Knowledge Base & Prepress Guides | OrderPrintex",
-    "description": "Educational guides, heat press charts, DTF vs UV DTF comparisons, and commercial printing insights.",
-    "blogPost": [
+    "@graph": [
         {
-            "@type": "BlogPosting",
-            "headline": "DTF vs Screen Printing: Understanding the Differences, Benefits and Applications",
-            "url": "https://orderprintex.com/blog/dtf-vs-screen-printing-differences-benefits-applications",
-            "author": {
-                "@type": "Person",
-                "name": "Printex Team"
+            "@type": "Organization",
+            "@id": "http://localhost/OrderPrintex/#organization",
+            "name": "OrderPrintex",
+            "alternateName": "PRINTEX Delhi",
+            "url": "http://localhost/OrderPrintex/",
+            "logo": {
+                "@type": "ImageObject",
+                "@id": "http://localhost/OrderPrintex/#logo",
+                "url": "http://localhost/OrderPrintex/assets/images/logo.png",
+                "caption": "OrderPrintex Logo"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "sameAs": [
+                "https://www.instagram.com/order_printex",
+                "https://www.facebook.com/orderprintex",
+                "https://www.youtube.com/@orderprintex",
+                "https://www.linkedin.com/company/orderprintex"
+            ]
+        },
+        {
+            "@type": "LocalBusiness",
+            "@id": "http://localhost/OrderPrintex/#localbusiness",
+            "name": "OrderPrintex Delhi Printing Facility",
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "url": "http://localhost/OrderPrintex/",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "priceRange": "₹₹",
+            "parentOrganization": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 28.618,
+                "longitude": 77.0805
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
+                    ],
+                    "opens": "09:30",
+                    "closes": "20:00"
+                }
+            ]
+        },
+        {
+            "@type": "WebSite",
+            "@id": "http://localhost/OrderPrintex/#website",
+            "name": "OrderPrintex",
+            "url": "http://localhost/OrderPrintex/",
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "http://localhost/OrderPrintex/products.php?search={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
             }
         },
         {
-            "@type": "BlogPosting",
-            "headline": "How Custom Printed T-Shirts Help Businesses Build Brand Identity",
-            "url": "https://orderprintex.com/blog/how-custom-printed-t-shirts-help-businesses-build-brand-identity",
-            "author": {
-                "@type": "Person",
-                "name": "By Printex"
-            }
+            "@type": "Blog",
+            "@id": "http://localhost/OrderPrintex/blog#blog",
+            "url": "http://localhost/OrderPrintex/blog",
+            "name": "Printing Industry Knowledge Base & Prepress Guides | OrderPrintex",
+            "description": "Educational guides, heat press charts, DTF vs UV DTF comparisons, and commercial printing insights.",
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "blogPost": [
+                {
+                    "@type": "BlogPosting",
+                    "@id": "http://localhost/OrderPrintex/blog/dtf-vs-screen-printing-differences-benefits-applications#article",
+                    "headline": "DTF vs Screen Printing: Understanding the Differences, Benefits and Applications",
+                    "url": "http://localhost/OrderPrintex/blog/dtf-vs-screen-printing-differences-benefits-applications",
+                    "description": "Sooner or later, everyone who orders custom T-shirts runs into the same question: DTF vs screen printing, which one should I go for? Both methods can give you a sharp, good-looking print, but they work very differently, cost differently and suit different kinds of orders.",
+                    "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+                    "datePublished": "2026-11-12T13:42:25+05:30",
+                    "dateModified": "2026-11-13T12:46:02+05:30",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Printex Team"
+                    },
+                    "publisher": {
+                        "@id": "http://localhost/OrderPrintex/#organization"
+                    }
+                },
+                {
+                    "@type": "BlogPosting",
+                    "@id": "http://localhost/OrderPrintex/blog/how-custom-printed-t-shirts-help-businesses-build-brand-identity#article",
+                    "headline": "How Custom Printed T-Shirts Help Businesses Build Brand Identity",
+                    "url": "http://localhost/OrderPrintex/blog/how-custom-printed-t-shirts-help-businesses-build-brand-identity",
+                    "description": "Walk into a busy café, an exhibition stall or a corporate office and notice what you remember afterwards. It is rarely the brochure on the counter. It is the person wearing the logo. Custom printed T-shirts for business turn everyday clothing into a small billboard that people see, remember and talk about.",
+                    "image": "http://localhost/OrderPrintex/assets/images/custom_tshirt_apparel.jpg",
+                    "datePublished": "2026-11-12T13:42:25+05:30",
+                    "dateModified": "2026-11-13T11:12:33+05:30",
+                    "author": {
+                        "@type": "Person",
+                        "name": "By Printex"
+                    },
+                    "publisher": {
+                        "@id": "http://localhost/OrderPrintex/#organization"
+                    }
+                },
+                {
+                    "@type": "BlogPosting",
+                    "@id": "http://localhost/OrderPrintex/blog/dtf-printing-technology-custom-apparel#article",
+                    "headline": "How DTF Printing Technology Is Transforming the Custom Apparel Industry",
+                    "url": "http://localhost/OrderPrintex/blog/dtf-printing-technology-custom-apparel",
+                    "description": "Ask anyone who has tried to start a small clothing brand a few years back, and you will hear the same story. The designs were ready, the idea was solid, but the printing costs ate everything. Screen printing wanted big quantities, and most other options either looked dull or washed out after a few cycles.",
+                    "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+                    "datePublished": "2026-11-02T08:55:04+05:30",
+                    "dateModified": "2026-11-14T13:37:27+05:30",
+                    "author": {
+                        "@type": "Person",
+                        "name": "OrderPrintex Editorial Team"
+                    },
+                    "publisher": {
+                        "@id": "http://localhost/OrderPrintex/#organization"
+                    }
+                },
+                {
+                    "@type": "BlogPosting",
+                    "@id": "http://localhost/OrderPrintex/blog/uv-dtf-printing-product-branding#article",
+                    "headline": "UV DTF Printing: How It Works and Its Applications in Product Branding",
+                    "url": "http://localhost/OrderPrintex/blog/uv-dtf-printing-product-branding",
+                    "description": "Pick up a premium-looking water bottle or a café mug these days and run your thumb over the logo. Chances are it feels slightly raised, glossy, and almost moulded into the surface. Most people assume that kind of finish needs expensive manufacturing. In reality, it is often UV DTF printing, a method that has quietly changed how small and mid-sized brands put their name on products.",
+                    "image": "http://localhost/OrderPrintex/assets/images/uv_dtf_drinkware.jpg",
+                    "datePublished": "2026-11-02T08:55:04+05:30",
+                    "dateModified": "2026-11-14T13:35:00+05:30",
+                    "author": {
+                        "@type": "Person",
+                        "name": "OrderPrintex Editorial Team"
+                    },
+                    "publisher": {
+                        "@id": "http://localhost/OrderPrintex/#organization"
+                    }
+                },
+                {
+                    "@type": "BlogPosting",
+                    "@id": "http://localhost/OrderPrintex/blog/different-t-shirt-printing-techniques#article",
+                    "headline": "Different T-Shirt Printing Techniques: A Complete Guide for Businesses",
+                    "url": "http://localhost/OrderPrintex/blog/different-t-shirt-printing-techniques",
+                    "description": "If you run a business, sooner or later you will need printed T-shirts. Maybe it is a uniform for your staff, merchandise for a launch, gifts for a corporate event, or a small clothing line of your own. And the moment you start asking for quotes, you run into a confusing list: screen printing, DTF, DTG, heat transfer, sublimation, vinyl, embroidery. Every printer swears by a different one, which makes choosing between T-shirt printing techniques harder than it should be.",
+                    "image": "http://localhost/OrderPrintex/assets/images/custom_tshirt_apparel.jpg",
+                    "datePublished": "2026-11-02T08:55:04+05:30",
+                    "dateModified": "2026-11-13T11:58:23+05:30",
+                    "author": {
+                        "@type": "Person",
+                        "name": "By Printex"
+                    },
+                    "publisher": {
+                        "@id": "http://localhost/OrderPrintex/#organization"
+                    }
+                }
+            ]
         },
         {
-            "@type": "BlogPosting",
-            "headline": "How DTF Printing Technology Is Transforming the Custom Apparel Industry",
-            "url": "https://orderprintex.com/blog/dtf-printing-technology-custom-apparel",
-            "author": {
-                "@type": "Person",
-                "name": "OrderPrintex Editorial Team"
-            }
-        },
-        {
-            "@type": "BlogPosting",
-            "headline": "UV DTF Printing: How It Works and Its Applications in Product Branding",
-            "url": "https://orderprintex.com/blog/uv-dtf-printing-product-branding",
-            "author": {
-                "@type": "Person",
-                "name": "OrderPrintex Editorial Team"
-            }
-        },
-        {
-            "@type": "BlogPosting",
-            "headline": "Different T-Shirt Printing Techniques: A Complete Guide for Businesses",
-            "url": "https://orderprintex.com/blog/different-t-shirt-printing-techniques",
-            "author": {
-                "@type": "Person",
-                "name": "By Printex"
-            }
+            "@type": "BreadcrumbList",
+            "@id": "http://localhost/OrderPrintex/blog#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "http://localhost/OrderPrintex/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Blog",
+                    "item": "http://localhost/OrderPrintex/blog"
+                }
+            ]
         }
     ]
 }

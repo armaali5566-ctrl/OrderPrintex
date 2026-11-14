@@ -1,52 +1,171 @@
 {
     "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "@id": "https://orderprintex.com/gallery#portfolio",
-    "url": "https://orderprintex.com/gallery",
-    "name": "Production Portfolio & Specimen Gallery | OrderPrintex",
-    "description": "High-resolution photographs of commercial production runs manufactured at our New Delhi printing facility.",
-    "hasPart": [
+    "@graph": [
         {
-            "@type": "CreativeWork",
-            "name": "Detailed DTF Print on a Dark T-Shirt",
-            "image": "https://orderprintex.com/assets/images/dtf_fabric_print.jpg",
-            "description": "A DTF transfer with smooth color blends, a bright white base and a soft, stretchy feel that doesn’t turn stiff."
+            "@type": "Organization",
+            "@id": "http://localhost/OrderPrintex/#organization",
+            "name": "OrderPrintex",
+            "alternateName": "PRINTEX Delhi",
+            "url": "http://localhost/OrderPrintex/",
+            "logo": {
+                "@type": "ImageObject",
+                "@id": "http://localhost/OrderPrintex/#logo",
+                "url": "http://localhost/OrderPrintex/assets/images/logo.png",
+                "caption": "OrderPrintex Logo"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "sameAs": [
+                "https://www.instagram.com/order_printex",
+                "https://www.facebook.com/orderprintex",
+                "https://www.youtube.com/@orderprintex",
+                "https://www.linkedin.com/company/orderprintex"
+            ]
         },
         {
-            "@type": "CreativeWork",
-            "name": "UV DTF Decals on Glass & Tumbler Curved Surfaces",
-            "image": "https://orderprintex.com/assets/images/uv_dtf_drinkware.jpg",
-            "description": "Industrial-adhesion 3D tactile UV DTF stickers applied seamlessly onto curved stainless steel bottles and glassware with spot gloss varnish."
+            "@type": "LocalBusiness",
+            "@id": "http://localhost/OrderPrintex/#localbusiness",
+            "name": "OrderPrintex Delhi Printing Facility",
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "url": "http://localhost/OrderPrintex/",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "priceRange": "₹₹",
+            "parentOrganization": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 28.618,
+                "longitude": 77.0805
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
+                    ],
+                    "opens": "09:30",
+                    "closes": "20:00"
+                }
+            ]
         },
         {
-            "@type": "CreativeWork",
-            "name": "Heavyweight 240 GSM Streetwear Graphic Tee",
-            "image": "https://orderprintex.com/assets/images/streetwear_tee.jpg",
-            "description": "Vintage washed boxy drop-shoulder t-shirt with photographic DTF chest graphic, double-needle stitched seams, and tight retail ribbing."
+            "@type": "WebSite",
+            "@id": "http://localhost/OrderPrintex/#website",
+            "name": "OrderPrintex",
+            "url": "http://localhost/OrderPrintex/",
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "http://localhost/OrderPrintex/products.php?search={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+            }
         },
         {
-            "@type": "CreativeWork",
-            "name": "Luxury Apparel Unboxing Mailer Packaging Box",
-            "image": "https://orderprintex.com/assets/images/packaging_box.jpg",
-            "description": "Custom matte black corrugated mailer box with hot-stamped gold foil logo, spot UV accents, and inner branded tissue wrap."
+            "@type": "CollectionPage",
+            "@id": "http://localhost/OrderPrintex/gallery#portfolio",
+            "url": "http://localhost/OrderPrintex/gallery",
+            "name": "Production Portfolio & Specimen Gallery | OrderPrintex",
+            "description": "High-resolution photographs of commercial production runs manufactured at our New Delhi printing facility.",
+            "mainEntity": {
+                "@id": "http://localhost/OrderPrintex/gallery#imagegallery"
+            }
         },
         {
-            "@type": "CreativeWork",
-            "name": "Custom Die-Cut & Holographic Decal Collection",
-            "image": "https://orderprintex.com/assets/images/custom_stickers.jpg",
-            "description": "Multi-surface peel-and-stick vinyl decals with embossed gloss spot varnish, iridescent light reflection, and permanent acrylic bond."
+            "@type": "ImageGallery",
+            "@id": "http://localhost/OrderPrintex/gallery#imagegallery",
+            "name": "OrderPrintex Commercial Print Showcase",
+            "description": "Specimens of DTF fabric transfers, UV DTF decals, and promotional items.",
+            "image": [
+                {
+                    "@type": "ImageObject",
+                    "contentUrl": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+                    "name": "Detailed DTF Print on a Dark T-Shirt",
+                    "caption": "A DTF transfer with smooth color blends, a bright white base and a soft, stretchy feel that doesn’t turn stiff."
+                },
+                {
+                    "@type": "ImageObject",
+                    "contentUrl": "http://localhost/OrderPrintex/assets/images/uv_dtf_drinkware.jpg",
+                    "name": "UV DTF Decals on Glass & Tumbler Curved Surfaces",
+                    "caption": "Industrial-adhesion 3D tactile UV DTF stickers applied seamlessly onto curved stainless steel bottles and glassware with spot gloss varnish."
+                },
+                {
+                    "@type": "ImageObject",
+                    "contentUrl": "http://localhost/OrderPrintex/assets/images/streetwear_tee.jpg",
+                    "name": "Heavyweight 240 GSM Streetwear Graphic Tee",
+                    "caption": "Vintage washed boxy drop-shoulder t-shirt with photographic DTF chest graphic, double-needle stitched seams, and tight retail ribbing."
+                },
+                {
+                    "@type": "ImageObject",
+                    "contentUrl": "http://localhost/OrderPrintex/assets/images/packaging_box.jpg",
+                    "name": "Luxury Apparel Unboxing Mailer Packaging Box",
+                    "caption": "Custom matte black corrugated mailer box with hot-stamped gold foil logo, spot UV accents, and inner branded tissue wrap."
+                },
+                {
+                    "@type": "ImageObject",
+                    "contentUrl": "http://localhost/OrderPrintex/assets/images/custom_stickers.jpg",
+                    "name": "Custom Die-Cut & Holographic Decal Collection",
+                    "caption": "Multi-surface peel-and-stick vinyl decals with embossed gloss spot varnish, iridescent light reflection, and permanent acrylic bond."
+                },
+                {
+                    "@type": "ImageObject",
+                    "contentUrl": "http://localhost/OrderPrintex/assets/images/corporate_swag_kit.jpg",
+                    "name": "Executive Corporate Swag & Client Gifting Kit",
+                    "caption": "Turnkey corporate onboarding kit runs featuring customized insulated drinkware, embossed diary, and stylus pen in a bespoke gift hamper."
+                },
+                {
+                    "@type": "ImageObject",
+                    "contentUrl": "http://localhost/OrderPrintex/assets/images/branding_stationery.jpg",
+                    "name": "Luxury Embossed Branding Collateral & Stationery",
+                    "caption": "Thick crimson red and warm beige business cards with edge gilding, debossed linen corporate journal, and executive presentation folders."
+                }
+            ]
         },
         {
-            "@type": "CreativeWork",
-            "name": "Executive Corporate Swag & Client Gifting Kit",
-            "image": "https://orderprintex.com/assets/images/corporate_swag_kit.jpg",
-            "description": "Turnkey corporate onboarding kit runs featuring customized insulated drinkware, embossed diary, and stylus pen in a bespoke gift hamper."
-        },
-        {
-            "@type": "CreativeWork",
-            "name": "Luxury Embossed Branding Collateral & Stationery",
-            "image": "https://orderprintex.com/assets/images/branding_stationery.jpg",
-            "description": "Thick crimson red and warm beige business cards with edge gilding, debossed linen corporate journal, and executive presentation folders."
+            "@type": "BreadcrumbList",
+            "@id": "http://localhost/OrderPrintex/gallery#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "http://localhost/OrderPrintex/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Portfolio",
+                    "item": "http://localhost/OrderPrintex/gallery"
+                }
+            ]
         }
     ]
 }

@@ -6,6 +6,7 @@ require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/database.php';
 require_once __DIR__ . '/functions.php';
 require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/seo_helper.php';
 
 $pageTitle = $pageTitle ?? get_setting('site_name', 'OrderPrintex') . ' — Manufacturer & Bulk Supplier of DTF and UV DTF in India';
 $pageDesc  = $pageDesc ?? 'PRINTEX – Top Manufacturer & Bulk Supplier of DTF and UV DTF in India. Premium-quality garment transfers, UV decals, custom t-shirts, and corporate printing.';
@@ -92,65 +93,9 @@ $robotsMeta = $isPrivatePage ? 'noindex, follow' : 'index, follow';
   <link rel="alternate" type="application/json" href="<?= url('schema.json') ?>" title="Structured Data Graph">
   <link rel="alternate" type="text/markdown" href="<?= url('ORDERPRINTEX.md') ?>" title="Technical Documentation">
 
-  <!-- Schema.org Organization Structured Data -->
+  <!-- Unified Schema.org Structured Data Graph (Single Validated Script) -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "OrderPrintex",
-    "alternateName": "PRINTEX Delhi",
-    "url": <?= json_encode(url('')) ?>,
-    "logo": <?= json_encode(url('assets/images/logo.png')) ?>,
-    "image": <?= json_encode(url('assets/images/dtf_fabric_print.jpg')) ?>,
-    "telephone": "+919354028199",
-    "email": "sales@orderprintex.com",
-    "priceRange": "₹₹",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
-      "addressLocality": "New Delhi",
-      "addressRegion": "Delhi",
-      "postalCode": "110059",
-      "addressCountry": "IN"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 28.6180,
-      "longitude": 77.0805
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        "opens": "09:30",
-        "closes": "20:00"
-      }
-    ],
-    "sameAs": [
-      "https://www.instagram.com/order_printex",
-      "https://www.facebook.com/orderprintex",
-      "https://www.youtube.com/@orderprintex",
-      "https://www.linkedin.com/company/orderprintex"
-    ]
-  }
-  </script>
-
-  <!-- Schema.org WebSite Structured Data with SearchAction -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "OrderPrintex",
-    "url": <?= json_encode(url('')) ?>,
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": <?= json_encode(url('products.php?search={search_term_string}')) ?>
-      },
-      "query-input": "required name=search_term_string"
-    }
-  }
+  <?= json_encode(seo_get_unified_page_graph($pageSchemaKey ?? '', $pageSchemaData ?? []), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
   </script>
 </head>
 <body<?= !empty($bodyClass) ? ' class="' . e($bodyClass) . '"' : '' ?>>

@@ -1,46 +1,145 @@
 {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "@id": "https://orderprintex.com/blog/dtf-vs-screen-printing-differences-benefits-applications#article",
-    "headline": "DTF vs Screen Printing: Understanding the Differences, Benefits and Applications",
-    "url": "https://orderprintex.com/blog/dtf-vs-screen-printing-differences-benefits-applications",
-    "image": "https://orderprintex.com/assets/images/dtf_fabric_print.jpg",
-    "description": "Sooner or later, everyone who orders custom T-shirts runs into the same question: DTF vs screen printing, which one should I go for? Both methods can give you a sharp, good-looking print, but they work very differently, cost differently and suit different kinds of orders.",
-    "datePublished": "2026-11-12T13:42:25+05:30",
-    "dateModified": "2026-11-13T12:46:02+05:30",
-    "author": {
-        "@type": "Person",
-        "name": "Printex Team"
-    },
-    "publisher": {
-        "@type": "ProfessionalService",
-        "@id": "https://orderprintex.com/#organization",
-        "name": "OrderPrintex",
-        "url": "https://orderprintex.com/",
-        "telephone": "+91 93540 28199",
-        "email": "sales@orderprintex.com",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh, Delhi, 110059",
-            "addressLocality": "New Delhi",
-            "addressRegion": "Delhi",
-            "postalCode": "110059",
-            "addressCountry": "IN"
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "http://localhost/OrderPrintex/#organization",
+            "name": "OrderPrintex",
+            "alternateName": "PRINTEX Delhi",
+            "url": "http://localhost/OrderPrintex/",
+            "logo": {
+                "@type": "ImageObject",
+                "@id": "http://localhost/OrderPrintex/#logo",
+                "url": "http://localhost/OrderPrintex/assets/images/logo.png",
+                "caption": "OrderPrintex Logo"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "sameAs": [
+                "https://www.instagram.com/order_printex",
+                "https://www.facebook.com/orderprintex",
+                "https://www.youtube.com/@orderprintex",
+                "https://www.linkedin.com/company/orderprintex"
+            ]
         },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 28.618,
-            "longitude": 77.0805
+        {
+            "@type": "LocalBusiness",
+            "@id": "http://localhost/OrderPrintex/#localbusiness",
+            "name": "OrderPrintex Delhi Printing Facility",
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "url": "http://localhost/OrderPrintex/",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "priceRange": "₹₹",
+            "parentOrganization": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 28.618,
+                "longitude": 77.0805
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
+                    ],
+                    "opens": "09:30",
+                    "closes": "20:00"
+                }
+            ]
         },
-        "sameAs": [
-            "https://www.facebook.com/orderprintex",
-            "https://www.instagram.com/orderprintex",
-            "https://www.youtube.com/@orderprintex",
-            "https://www.linkedin.com/company/orderprintex"
-        ]
-    },
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://orderprintex.com/blog/dtf-vs-screen-printing-differences-benefits-applications"
-    }
+        {
+            "@type": "WebSite",
+            "@id": "http://localhost/OrderPrintex/#website",
+            "name": "OrderPrintex",
+            "url": "http://localhost/OrderPrintex/",
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "http://localhost/OrderPrintex/products.php?search={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "BlogPosting",
+            "@id": "http://localhost/OrderPrintex/blog/dtf-vs-screen-printing-differences-benefits-applications#article",
+            "headline": "DTF vs Screen Printing: Understanding the Differences, Benefits and Applications",
+            "description": "Sooner or later, everyone who orders custom T-shirts runs into the same question: DTF vs screen printing, which one should I go for? Both methods can give you a sharp, good-looking print, but they work very differently, cost differently and suit different kinds of orders.",
+            "image": [
+                "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg"
+            ],
+            "datePublished": "2026-11-12T13:42:25+05:30",
+            "dateModified": "2026-11-13T12:46:02+05:30",
+            "author": {
+                "@type": "Person",
+                "name": "Printex Team"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "http://localhost/OrderPrintex/#organization",
+                "name": "OrderPrintex",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "http://localhost/OrderPrintex/assets/images/logo.png"
+                }
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://localhost/OrderPrintex/blog/dtf-vs-screen-printing-differences-benefits-applications"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "http://localhost/OrderPrintex/blog/dtf-vs-screen-printing-differences-benefits-applications#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "http://localhost/OrderPrintex/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Blog",
+                    "item": "http://localhost/OrderPrintex/blog"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "DTF vs Screen Printing: Understanding the Differences, Benefits and Applications",
+                    "item": "http://localhost/OrderPrintex/blog/dtf-vs-screen-printing-differences-benefits-applications"
+                }
+            ]
+        }
+    ]
 }

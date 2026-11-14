@@ -1,41 +1,197 @@
 {
     "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": "https://orderprintex.com/#webpage",
-    "url": "https://orderprintex.com/",
-    "name": "OrderPrintex — Commercial DTF & UV DTF Printing Studio Delhi",
-    "description": "OrderPrintex is India's premier bulk manufacturer of DTF apparel transfers, UV DTF decals, custom streetwear t-shirts, and corporate merchandise with pan-India express dispatch.",
-    "isPartOf": {
-        "@type": "WebSite",
-        "@id": "https://orderprintex.com/#website",
-        "name": "OrderPrintex",
-        "url": "https://orderprintex.com/"
-    },
-    "about": {
-        "@type": "ProfessionalService",
-        "@id": "https://orderprintex.com/#organization",
-        "name": "OrderPrintex",
-        "url": "https://orderprintex.com/",
-        "telephone": "+91 93540 28199",
-        "email": "sales@orderprintex.com",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh, Delhi, 110059",
-            "addressLocality": "New Delhi",
-            "addressRegion": "Delhi",
-            "postalCode": "110059",
-            "addressCountry": "IN"
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "http://localhost/OrderPrintex/#organization",
+            "name": "OrderPrintex",
+            "alternateName": "PRINTEX Delhi",
+            "url": "http://localhost/OrderPrintex/",
+            "logo": {
+                "@type": "ImageObject",
+                "@id": "http://localhost/OrderPrintex/#logo",
+                "url": "http://localhost/OrderPrintex/assets/images/logo.png",
+                "caption": "OrderPrintex Logo"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "sameAs": [
+                "https://www.instagram.com/order_printex",
+                "https://www.facebook.com/orderprintex",
+                "https://www.youtube.com/@orderprintex",
+                "https://www.linkedin.com/company/orderprintex"
+            ]
         },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 28.618,
-            "longitude": 77.0805
+        {
+            "@type": "LocalBusiness",
+            "@id": "http://localhost/OrderPrintex/#localbusiness",
+            "name": "OrderPrintex Delhi Printing Facility",
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "url": "http://localhost/OrderPrintex/",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "priceRange": "₹₹",
+            "parentOrganization": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 28.618,
+                "longitude": 77.0805
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
+                    ],
+                    "opens": "09:30",
+                    "closes": "20:00"
+                }
+            ]
         },
-        "sameAs": [
-            "https://www.facebook.com/orderprintex",
-            "https://www.instagram.com/orderprintex",
-            "https://www.youtube.com/@orderprintex",
-            "https://www.linkedin.com/company/orderprintex"
-        ]
-    }
+        {
+            "@type": "WebSite",
+            "@id": "http://localhost/OrderPrintex/#website",
+            "name": "OrderPrintex",
+            "url": "http://localhost/OrderPrintex/",
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "http://localhost/OrderPrintex/products.php?search={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "Service",
+            "@id": "http://localhost/OrderPrintex/services/dtf-printing#service",
+            "name": "1.DTF Printing in Delhi",
+            "url": "http://localhost/OrderPrintex/services/dtf-printing",
+            "serviceType": "Direct-to-Film Transfer Printing",
+            "description": "Direct-to-Film transfer printing with ultra soft-hand feel and 50+ wash cycles.",
+            "provider": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "areaServed": {
+                "@type": "Country",
+                "name": "India"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg"
+        },
+        {
+            "@type": "Service",
+            "@id": "http://localhost/OrderPrintex/services/uv-dtf-printing#service",
+            "name": "2. UV DTF Printing - A Popular Choice",
+            "url": "http://localhost/OrderPrintex/services/uv-dtf-printing",
+            "serviceType": "UV DTF Decal & Sticker Printing",
+            "description": "Industrial-grade UV-cured transfer decals for glass, metal, wood, and acrylic.",
+            "provider": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "areaServed": {
+                "@type": "Country",
+                "name": "India"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/uv_dtf_drinkware.jpg"
+        },
+        {
+            "@type": "Service",
+            "@id": "http://localhost/OrderPrintex/services/t-shirt-printing#service",
+            "name": "Delhi's Custom T-Shirt Printing Studio - Where Art Meets Fabric",
+            "url": "http://localhost/OrderPrintex/services/t-shirt-printing",
+            "serviceType": "Custom Apparel & T-Shirt Printing",
+            "description": "We take your brand from concept to production, printing vibrant high-density graphics onto those comfy 180-240 GSM bio-washed combed cotton tees with the perfect oversized fit, or the sleek athletic wear polyester. Whether you're just starting out or producing in bulk for your company, we've got you covered.",
+            "provider": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "areaServed": {
+                "@type": "Country",
+                "name": "India"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/custom_tshirt_apparel.jpg"
+        },
+        {
+            "@type": "Service",
+            "@id": "http://localhost/OrderPrintex/services/corporate-printing#service",
+            "name": "4. Corporate Printing Services for Businesses",
+            "url": "http://localhost/OrderPrintex/services/corporate-printing",
+            "serviceType": "Corporate Merchandise & Kits",
+            "description": "End-to-end branded merchandise, drinkware, and executive employee welcome kits.",
+            "provider": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "areaServed": {
+                "@type": "Country",
+                "name": "India"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/corporate_swag_kit.jpg"
+        },
+        {
+            "@type": "ItemList",
+            "@id": "http://localhost/OrderPrintex/#services-list",
+            "name": "OrderPrintex Commercial Printing Capabilities",
+            "description": "Commercial printing services, DTF transfers, UV decals, and custom apparel manufactured in Delhi.",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "1.DTF Printing in Delhi",
+                    "item": {
+                        "@id": "http://localhost/OrderPrintex/services/dtf-printing#service"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "2. UV DTF Printing - A Popular Choice",
+                    "item": {
+                        "@id": "http://localhost/OrderPrintex/services/uv-dtf-printing#service"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Delhi's Custom T-Shirt Printing Studio - Where Art Meets Fabric",
+                    "item": {
+                        "@id": "http://localhost/OrderPrintex/services/t-shirt-printing#service"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "name": "4. Corporate Printing Services for Businesses",
+                    "item": {
+                        "@id": "http://localhost/OrderPrintex/services/corporate-printing#service"
+                    }
+                }
+            ]
+        }
+    ]
 }

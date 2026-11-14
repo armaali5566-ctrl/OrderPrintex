@@ -158,12 +158,22 @@ if ($reviewCount > 0) {
 }
 
 // SEO Metadata
-$pageTitle = (!empty($product['meta_title']) ? $product['meta_title'] : ($product['title'] . " (SKU: " . $product['sku'] . ")")) . " | OrderPrintex";
+$skuVal = $product['sku'] ?? ('OPX-' . str_pad($productId, 4, '0', STR_PAD_LEFT));
+$pageTitle = (!empty($product['meta_title']) ? $product['meta_title'] : ($product['title'] . " (SKU: " . $skuVal . ")")) . " | OrderPrintex";
 $pageDesc  = !empty($product['meta_description']) ? $product['meta_description'] : $product['short_desc'];
 $canonical = product_url($product['slug']);
 $ogImage   = !empty($product['image_url']) ? url($product['image_url']) : url('assets/images/logo.png');
 $ogType    = 'product';
 $bodyClass = 'product-detail-page has-sticky-cart-page';
+
+$pageSchemaKey = 'product-details';
+$pageSchemaData = [
+    'product' => $product,
+    'reviews' => $reviews,
+    'avgRating' => $avgRating,
+    'reviewCount' => $reviewCount,
+    'canonical' => $canonical
+];
 
 require_once __DIR__ . '/includes/header.php';
 
@@ -176,75 +186,6 @@ $relatedProducts = array_slice($relatedProducts, 0, 4);
 
 $hasVariations = !empty($variationData) && !empty($productAttributes);
 ?>
-
-<!-- Schema.org Product Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org/",
-  "@type": "Product",
-  "name": <?= json_encode($product['title']) ?>,
-  "image": [
-    <?= json_encode(url($product['image_url'])) ?>
-  ],
-  "description": <?= json_encode($product['short_desc']) ?>,
-  "sku": <?= json_encode($product['sku'] ?? ('OPX-' . str_pad($product['id'], 4, '0', STR_PAD_LEFT))) ?>,
-  "brand": {
-    "@type": "Brand",
-    "name": "OrderPrintex"
-  },
-  "offers": {
-    "@type": "Offer",
-    "url": <?= json_encode($canonical) ?>,
-    "priceCurrency": "INR",
-    "price": <?= json_encode((float)preg_replace('/[^0-9.]/', '', $product['starting_price'] ?? '249')) ?>,
-    "priceValidUntil": "2027-12-31",
-    "availability": "https://schema.org/InStock",
-    "itemCondition": "https://schema.org/NewCondition"
-  }
-  <?php if ($reviewCount > 0): ?>
-  ,
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "<?= $avgRating ?>",
-    "reviewCount": "<?= $reviewCount ?>"
-  }
-  <?php endif; ?>
-}
-</script>
-
-<!-- Schema.org Breadcrumbs Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": <?= json_encode(url('')) ?>
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Products",
-      "item": <?= json_encode(url('products')) ?>
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": <?= json_encode($product['category_name']) ?>,
-      "item": <?= json_encode(category_url($product['category_slug'] ?? '')) ?>
-    },
-    {
-      "@type": "ListItem",
-      "position": 4,
-      "name": <?= json_encode($product['title']) ?>,
-      "item": <?= json_encode($canonical) ?>
-    }
-  ]
-}
-</script>
 
 <!-- Breadcrumb Navigation -->
 <nav class="breadcrumb-bar" style="background-color:#121212; border-bottom:1px solid #40351E; padding:0.9rem 0;" aria-label="Breadcrumb">

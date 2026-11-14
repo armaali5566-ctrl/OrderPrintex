@@ -227,4 +227,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
   </iframe>
 </section>
 
+<!-- Automatic Prefill from Expanding Hover Gallery Inquiry -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  try {
+    var raw = sessionStorage.getItem('op_gallery_enquiry');
+    if (!raw) return;
+    window.opGalleryEnquiryTransferred = true;
+    try { sessionStorage.setItem('op_gallery_enquiry_transferred', '1'); } catch (e) {}
+    var data = JSON.parse(raw);
+    var nameField = document.getElementById('contactName');
+    var emailField = document.getElementById('contactEmail');
+    var phoneField = document.getElementById('contactPhone');
+    var subjectField = document.getElementById('contactSubject');
+    var messageField = document.getElementById('contactMessage');
+
+    if (nameField && data.name) nameField.value = data.name;
+    if (emailField && data.email) emailField.value = data.email;
+    if (phoneField && data.phone) phoneField.value = data.phone;
+    if (subjectField && data.service) {
+      subjectField.value = data.service + ' - Order Inquiry';
+    }
+    if (messageField) {
+      var note = '';
+      if (data.service) {
+        note += 'Interested Application: ' + data.service + '\n';
+      }
+      if (data.message && data.message.trim()) {
+        note += 'Requirements: ' + data.message.trim();
+      } else if (data.service) {
+        note += 'I am interested in ordering ' + data.service + '. Please provide pricing, turnaround times and gang sheet details.';
+      }
+      messageField.value = note;
+    }
+
+    // Clear temporary stored data after successful prefill as required:
+    sessionStorage.removeItem('op_gallery_enquiry');
+
+    // Smoothly scroll to the form card so the user sees their details ready
+    var formCard = document.querySelector('.upload-card');
+    if (formCard) {
+      formCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (messageField) {
+        setTimeout(function() { messageField.focus(); }, 350);
+      }
+    }
+  } catch (err) {
+    console.warn('Prefill error:', err);
+  }
+});
+</script>
+
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

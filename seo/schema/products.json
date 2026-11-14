@@ -1,67 +1,371 @@
 {
     "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "@id": "https://orderprintex.com/products#catalog",
-    "url": "https://orderprintex.com/products",
-    "name": "Commercial Print Product Catalog | OrderPrintex",
-    "description": "Browse all OrderPrintex manufactured products: DTF gang rolls, UV DTF decals, apparel, and corporate swag kits.",
-    "mainEntity": {
-        "@type": "ItemList",
-        "itemListElement": [
-            {
-                "@type": "Product",
-                "position": 1,
-                "name": "DTF Gang Sheet (22\" Wide)",
-                "url": "https://orderprintex.com/product/custom-dtf-gang-sheet"
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "http://localhost/OrderPrintex/#organization",
+            "name": "OrderPrintex",
+            "alternateName": "PRINTEX Delhi",
+            "url": "http://localhost/OrderPrintex/",
+            "logo": {
+                "@type": "ImageObject",
+                "@id": "http://localhost/OrderPrintex/#logo",
+                "url": "http://localhost/OrderPrintex/assets/images/logo.png",
+                "caption": "OrderPrintex Logo"
             },
-            {
-                "@type": "Product",
-                "position": 2,
-                "name": "3D Gloss UV DTF Decal Sheet",
-                "url": "https://orderprintex.com/product/custom-uv-dtf-decal-sheet"
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
             },
-            {
-                "@type": "Product",
-                "position": 3,
-                "name": "Oversized Streetwear T-Shirt (240 GSM)",
-                "url": "https://orderprintex.com/product/streetwear-oversized-tee"
+            "sameAs": [
+                "https://www.instagram.com/order_printex",
+                "https://www.facebook.com/orderprintex",
+                "https://www.youtube.com/@orderprintex",
+                "https://www.linkedin.com/company/orderprintex"
+            ]
+        },
+        {
+            "@type": "LocalBusiness",
+            "@id": "http://localhost/OrderPrintex/#localbusiness",
+            "name": "OrderPrintex Delhi Printing Facility",
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "url": "http://localhost/OrderPrintex/",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "priceRange": "₹₹",
+            "parentOrganization": {
+                "@id": "http://localhost/OrderPrintex/#organization"
             },
-            {
-                "@type": "Product",
-                "position": 4,
-                "name": "Custom Steel Thermal Bottle (750 ml)",
-                "url": "https://orderprintex.com/product/thermal-sipper-bottle"
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
             },
-            {
-                "@type": "Product",
-                "position": 5,
-                "name": "Branded Apparel Mailer Box",
-                "url": "https://orderprintex.com/product/apparel-mailer-box"
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 28.618,
+                "longitude": 77.0805
             },
-            {
-                "@type": "Product",
-                "position": 6,
-                "name": "Custom Die-Cut Sticker Pack",
-                "url": "https://orderprintex.com/product/holographic-stickers"
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
+                    ],
+                    "opens": "09:30",
+                    "closes": "20:00"
+                }
+            ]
+        },
+        {
+            "@type": "WebSite",
+            "@id": "http://localhost/OrderPrintex/#website",
+            "name": "OrderPrintex",
+            "url": "http://localhost/OrderPrintex/",
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
             },
-            {
-                "@type": "Product",
-                "position": 7,
-                "name": "Everyday Cotton T-Shirt (180 GSM)",
-                "url": "https://orderprintex.com/product/bio-washed-cotton-tee"
-            },
-            {
-                "@type": "Product",
-                "position": 8,
-                "name": "Corporate Welcome Gift Kit",
-                "url": "https://orderprintex.com/product/executive-welcome-hamper"
-            },
-            {
-                "@type": "Product",
-                "position": 9,
-                "name": "Custom Printed Bookmarks",
-                "url": "https://orderprintex.com/product/bookmark-03"
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "http://localhost/OrderPrintex/products.php?search={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
             }
-        ]
-    }
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/custom-dtf-gang-sheet#product",
+            "name": "DTF Gang Sheet (22\" Wide)",
+            "url": "http://localhost/OrderPrintex/product/custom-dtf-gang-sheet",
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "description": "Ready-to-press transfers with bright color and a soft feel. Works on cotton, polyester and blends.",
+            "sku": "OPX-0001",
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/custom-dtf-gang-sheet",
+                "priceCurrency": "INR",
+                "price": "249.00",
+                "availability": "https://schema.org/InStock",
+                "seller": {
+                    "@id": "http://localhost/OrderPrintex/#organization"
+                }
+            }
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/custom-uv-dtf-decal-sheet#product",
+            "name": "3D Gloss UV DTF Decal Sheet",
+            "url": "http://localhost/OrderPrintex/product/custom-uv-dtf-decal-sheet",
+            "image": "http://localhost/OrderPrintex/assets/images/uv_dtf_drinkware.jpg",
+            "description": "Raised, glossy decals that peel and stick on glass, steel, acrylic and plastic. Waterproof once applied.",
+            "sku": "UV-001",
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/custom-uv-dtf-decal-sheet",
+                "priceCurrency": "INR",
+                "price": "349.00",
+                "availability": "https://schema.org/InStock",
+                "seller": {
+                    "@id": "http://localhost/OrderPrintex/#organization"
+                }
+            }
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/streetwear-oversized-tee#product",
+            "name": "Oversized Streetwear T-Shirt (240 GSM)",
+            "url": "http://localhost/OrderPrintex/product/streetwear-oversized-tee",
+            "image": "http://localhost/OrderPrintex/assets/images/custom_tshirt_apparel.jpg",
+            "description": "A heavy drop-shoulder tee with your design printed in DTF. Roomy fit and a soft feel.",
+            "sku": "STR-001",
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/streetwear-oversized-tee",
+                "priceCurrency": "INR",
+                "price": "449.00",
+                "availability": "https://schema.org/InStock",
+                "seller": {
+                    "@id": "http://localhost/OrderPrintex/#organization"
+                }
+            }
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/thermal-sipper-bottle#product",
+            "name": "Custom Steel Thermal Bottle (750 ml)",
+            "url": "http://localhost/OrderPrintex/product/thermal-sipper-bottle",
+            "image": "http://localhost/OrderPrintex/assets/images/corporate_swag_kit.jpg",
+            "description": "A double-wall steel bottle with your logo printed on it. Good for gifts and team kits.",
+            "sku": "BTL-001",
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/thermal-sipper-bottle",
+                "priceCurrency": "INR",
+                "price": "599.00",
+                "availability": "https://schema.org/InStock",
+                "seller": {
+                    "@id": "http://localhost/OrderPrintex/#organization"
+                }
+            }
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/apparel-mailer-box#product",
+            "name": "Branded Apparel Mailer Box",
+            "url": "http://localhost/OrderPrintex/product/apparel-mailer-box",
+            "image": "http://localhost/OrderPrintex/assets/images/packaging_box.jpg",
+            "description": "A sturdy matte black box with your logo in gold foil and gloss detail. Made for shipping apparel.",
+            "sku": "BOX-001",
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/apparel-mailer-box",
+                "priceCurrency": "INR",
+                "price": "65.00",
+                "availability": "https://schema.org/InStock",
+                "seller": {
+                    "@id": "http://localhost/OrderPrintex/#organization"
+                }
+            }
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/holographic-stickers#product",
+            "name": "Custom Die-Cut Sticker Pack",
+            "url": "http://localhost/OrderPrintex/product/holographic-stickers",
+            "image": "http://localhost/OrderPrintex/assets/images/custom_stickers.jpg",
+            "description": "Stickers cut to your shape, in holographic and UV DTF finishes. Great for brands and giveaways.",
+            "sku": "STK-001",
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/holographic-stickers",
+                "priceCurrency": "INR",
+                "price": "299.00",
+                "availability": "https://schema.org/InStock",
+                "seller": {
+                    "@id": "http://localhost/OrderPrintex/#organization"
+                }
+            }
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/bio-washed-cotton-tee#product",
+            "name": "Everyday Cotton T-Shirt (180 GSM)",
+            "url": "http://localhost/OrderPrintex/product/bio-washed-cotton-tee",
+            "image": "http://localhost/OrderPrintex/assets/images/streetwear_tee.jpg",
+            "description": "A breathable combed cotton crewneck with a soft printed design. Easy to wear all day.",
+            "sku": "TEE-001",
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/bio-washed-cotton-tee",
+                "priceCurrency": "INR",
+                "price": "299.00",
+                "availability": "https://schema.org/InStock",
+                "seller": {
+                    "@id": "http://localhost/OrderPrintex/#organization"
+                }
+            }
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/executive-welcome-hamper#product",
+            "name": "Corporate Welcome Gift Kit",
+            "url": "http://localhost/OrderPrintex/product/executive-welcome-hamper",
+            "image": "http://localhost/OrderPrintex/assets/images/branding_stationery.jpg",
+            "description": "A ready gift set with branded items for new joiners and clients, packed neatly.",
+            "sku": "HMP-001",
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/executive-welcome-hamper",
+                "priceCurrency": "INR",
+                "price": "599.00",
+                "availability": "https://schema.org/InStock",
+                "seller": {
+                    "@id": "http://localhost/OrderPrintex/#organization"
+                }
+            }
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/bookmark-03#product",
+            "name": "Custom Printed Bookmarks",
+            "url": "http://localhost/OrderPrintex/product/bookmark-03",
+            "image": "http://localhost/OrderPrintex/assets/images/branding_stationery.jpg",
+            "description": "Double-sided bookmarks on thick card, with a soft-touch finish. Good for brands, bookstores and event giveaways.",
+            "sku": "BKM-001",
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/bookmark-03",
+                "priceCurrency": "INR",
+                "price": "1.50",
+                "availability": "https://schema.org/InStock",
+                "seller": {
+                    "@id": "http://localhost/OrderPrintex/#organization"
+                }
+            }
+        },
+        {
+            "@type": "CollectionPage",
+            "@id": "http://localhost/OrderPrintex/products#catalog",
+            "url": "http://localhost/OrderPrintex/products",
+            "name": "Commercial Print Product Catalog | OrderPrintex",
+            "description": "Browse all OrderPrintex manufactured products: DTF gang rolls, UV DTF decals, apparel, and corporate swag kits.",
+            "mainEntity": {
+                "@id": "http://localhost/OrderPrintex/products#itemlist"
+            }
+        },
+        {
+            "@type": "ItemList",
+            "@id": "http://localhost/OrderPrintex/products#itemlist",
+            "name": "OrderPrintex Print Products Catalog",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "DTF Gang Sheet (22\" Wide)",
+                    "item": {
+                        "@id": "http://localhost/OrderPrintex/product/custom-dtf-gang-sheet#product"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "3D Gloss UV DTF Decal Sheet",
+                    "item": {
+                        "@id": "http://localhost/OrderPrintex/product/custom-uv-dtf-decal-sheet#product"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Oversized Streetwear T-Shirt (240 GSM)",
+                    "item": {
+                        "@id": "http://localhost/OrderPrintex/product/streetwear-oversized-tee#product"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "name": "Custom Steel Thermal Bottle (750 ml)",
+                    "item": {
+                        "@id": "http://localhost/OrderPrintex/product/thermal-sipper-bottle#product"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 5,
+                    "name": "Branded Apparel Mailer Box",
+                    "item": {
+                        "@id": "http://localhost/OrderPrintex/product/apparel-mailer-box#product"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 6,
+                    "name": "Custom Die-Cut Sticker Pack",
+                    "item": {
+                        "@id": "http://localhost/OrderPrintex/product/holographic-stickers#product"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 7,
+                    "name": "Everyday Cotton T-Shirt (180 GSM)",
+                    "item": {
+                        "@id": "http://localhost/OrderPrintex/product/bio-washed-cotton-tee#product"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 8,
+                    "name": "Corporate Welcome Gift Kit",
+                    "item": {
+                        "@id": "http://localhost/OrderPrintex/product/executive-welcome-hamper#product"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 9,
+                    "name": "Custom Printed Bookmarks",
+                    "item": {
+                        "@id": "http://localhost/OrderPrintex/product/bookmark-03#product"
+                    }
+                }
+            ]
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "http://localhost/OrderPrintex/products#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "http://localhost/OrderPrintex/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Products",
+                    "item": "http://localhost/OrderPrintex/products"
+                }
+            ]
+        }
+    ]
 }

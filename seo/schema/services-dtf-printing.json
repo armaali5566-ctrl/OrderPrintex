@@ -1,40 +1,133 @@
 {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": "https://orderprintex.com/services/dtf-printing#service",
-    "name": "1.DTF Printing in Delhi",
-    "url": "https://orderprintex.com/services/dtf-printing",
-    "serviceType": "Commercial Printing",
-    "description": "Commercial printing service.",
-    "provider": {
-        "@type": "ProfessionalService",
-        "@id": "https://orderprintex.com/#organization",
-        "name": "OrderPrintex",
-        "url": "https://orderprintex.com/",
-        "telephone": "+91 93540 28199",
-        "email": "sales@orderprintex.com",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh, Delhi, 110059",
-            "addressLocality": "New Delhi",
-            "addressRegion": "Delhi",
-            "postalCode": "110059",
-            "addressCountry": "IN"
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "http://localhost/OrderPrintex/#organization",
+            "name": "OrderPrintex",
+            "alternateName": "PRINTEX Delhi",
+            "url": "http://localhost/OrderPrintex/",
+            "logo": {
+                "@type": "ImageObject",
+                "@id": "http://localhost/OrderPrintex/#logo",
+                "url": "http://localhost/OrderPrintex/assets/images/logo.png",
+                "caption": "OrderPrintex Logo"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "sameAs": [
+                "https://www.instagram.com/order_printex",
+                "https://www.facebook.com/orderprintex",
+                "https://www.youtube.com/@orderprintex",
+                "https://www.linkedin.com/company/orderprintex"
+            ]
         },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 28.618,
-            "longitude": 77.0805
+        {
+            "@type": "LocalBusiness",
+            "@id": "http://localhost/OrderPrintex/#localbusiness",
+            "name": "OrderPrintex Delhi Printing Facility",
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "url": "http://localhost/OrderPrintex/",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "priceRange": "₹₹",
+            "parentOrganization": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 28.618,
+                "longitude": 77.0805
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
+                    ],
+                    "opens": "09:30",
+                    "closes": "20:00"
+                }
+            ]
         },
-        "sameAs": [
-            "https://www.facebook.com/orderprintex",
-            "https://www.instagram.com/orderprintex",
-            "https://www.youtube.com/@orderprintex",
-            "https://www.linkedin.com/company/orderprintex"
-        ]
-    },
-    "areaServed": {
-        "@type": "Country",
-        "name": "India"
-    }
+        {
+            "@type": "WebSite",
+            "@id": "http://localhost/OrderPrintex/#website",
+            "name": "OrderPrintex",
+            "url": "http://localhost/OrderPrintex/",
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "http://localhost/OrderPrintex/products.php?search={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "Service",
+            "@id": "http://localhost/OrderPrintex/services/dtf-printing#service",
+            "name": "1.DTF Printing in Delhi",
+            "url": "http://localhost/OrderPrintex/services/dtf-printing",
+            "serviceType": "Commercial Printing",
+            "description": "Direct-to-Film transfer printing with ultra soft-hand feel and 50+ wash cycles.",
+            "provider": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "areaServed": {
+                "@type": "Country",
+                "name": "India"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg"
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "http://localhost/OrderPrintex/services/dtf-printing#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "http://localhost/OrderPrintex/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Printing Services",
+                    "item": "http://localhost/OrderPrintex/services"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "1.DTF Printing in Delhi",
+                    "item": "http://localhost/OrderPrintex/services/dtf-printing"
+                }
+            ]
+        }
+    ]
 }

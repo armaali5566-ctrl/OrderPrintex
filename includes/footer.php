@@ -113,6 +113,8 @@ $ytUrl = get_setting('youtube_url', 'https://www.youtube.com/@orderprintex');
   </div>
 </footer>
 
+<?php require_once __DIR__ . '/contact-modal.php'; ?>
+
 <!-- Floating Contact Actions: Call & WhatsApp (Bottom-Right Corner) -->
 <div class="floating-contact-actions" id="floatingContactActions" aria-label="Quick Contact Options">
   <!-- Call Us Floating Button -->

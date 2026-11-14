@@ -85,6 +85,8 @@ if ($activeCategory) {
     $canonical = blog_url();
 }
 
+$pageSchemaKey = 'blog';
+
 require_once __DIR__ . '/includes/header.php';
 ?>
 

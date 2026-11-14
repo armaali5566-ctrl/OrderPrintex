@@ -361,5 +361,362 @@ document.addEventListener('DOMContentLoaded', function () {
   window.clearCompareList = function() {};
   window.openCompareModal = function() {};
   window.closeCompareModal = function() {};
+
+  // ==============================================================
+  // 9. UNIVERSAL STUDIO CONTACT POPUP & 5s AUTO-POPUP (SHOW ONCE)
+  // Shared across public pages & Expanding Hover Gallery
+  // ==============================================================
+  (function initUniversalContactPopup() {
+    // 1. Never execute on admin pages or dashboard layouts
+    if (window.location.pathname.indexOf('/admin') !== -1 ||
+        document.querySelector('.dashboard-layout') ||
+        document.body.classList.contains('admin-body')) {
+      return;
+    }
+
+    const modal = document.getElementById('galleryContactModal');
+    const form = document.getElementById('galleryContactForm');
+    if (!modal || !form) return;
+
+    const modalServiceTitle = document.getElementById('galleryModalServiceTitle');
+    const serviceSelect = document.getElementById('popupService');
+    const fullNameInput = document.getElementById('popupFullName');
+    const mobileInput = document.getElementById('popupMobile');
+    const emailInput = document.getElementById('popupEmail');
+    const messageInput = document.getElementById('popupMessage');
+
+    const errorFullName = document.getElementById('errorFullName');
+    const errorMobile = document.getElementById('errorMobile');
+    const errorEmail = document.getElementById('errorEmail');
+    const errorService = document.getElementById('errorService');
+
+    // Remove legacy permanent localStorage restriction so popup triggers after every refresh/page load
+    try {
+      localStorage.removeItem('orderprintex_auto_popup_shown');
+    } catch (e) {}
+
+    // Page-load scoped timer and state (resets on every refresh or navigation)
+    let autoPopupTriggeredThisPage = false;
+    let autoPopupTimer = null;
+    let lastActiveElement = null;
+    let isUserTypingActive = false;
+    let typingDebounceTimer = null;
+
+    // Clear validation error messages & styles
+    function clearErrors() {
+      [errorFullName, errorMobile, errorEmail, errorService].forEach(function(el) {
+        if (el) el.textContent = '';
+      });
+      [fullNameInput, mobileInput, emailInput, serviceSelect].forEach(function(el) {
+        if (el) el.classList.remove('has-error');
+      });
+    }
+
+    // Open modal function
+    function openContactModal(appName, triggerEl, isAuto) {
+      // Cancel pending auto timer if open triggered manually or automatically
+      if (autoPopupTimer) {
+        clearTimeout(autoPopupTimer);
+        autoPopupTimer = null;
+      }
+
+      // Mark as triggered so auto popup never triggers multiple times during this page load
+      autoPopupTriggeredThisPage = true;
+
+      lastActiveElement = triggerEl || document.activeElement;
+      clearErrors();
+
+      // Configure service selection and title
+      if (appName) {
+        if (modalServiceTitle) modalServiceTitle.textContent = appName;
+        if (serviceSelect) {
+          let found = false;
+          for (let i = 0; i < serviceSelect.options.length; i++) {
+            if (serviceSelect.options[i].value.toLowerCase() === appName.toLowerCase()) {
+              serviceSelect.selectedIndex = i;
+              found = true;
+              break;
+            }
+          }
+          if (!found) {
+            const opt = new Option(appName, appName, true, true);
+            serviceSelect.add(opt);
+          }
+        }
+      } else {
+        // Auto-popup or generic inquiry: neutral default state
+        if (modalServiceTitle) modalServiceTitle.textContent = 'Custom Printing';
+        if (serviceSelect) {
+          serviceSelect.value = '';
+        }
+      }
+
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      // Focus first input for keyboard accessibility
+      setTimeout(function() {
+        if (fullNameInput) fullNameInput.focus();
+      }, 70);
+    }
+
+    // Close modal function (does not alter localStorage flag)
+    function closeContactModal() {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+
+      if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
+        try { lastActiveElement.focus(); } catch (e) {}
+      }
+    }
+
+    // Close buttons & backdrop click
+    modal.querySelectorAll('[data-close-modal]').forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        closeContactModal();
+      });
+    });
+
+    // Keyboard navigation & Focus Trapping
+    document.addEventListener('keydown', function(e) {
+      if (!modal.classList.contains('is-open')) return;
+
+      if (e.key === 'Escape' || e.code === 'Escape') {
+        e.preventDefault();
+        closeContactModal();
+        return;
+      }
+
+      if (e.key === 'Tab' || e.code === 'Tab') {
+        const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const focusableEls = Array.prototype.filter.call(focusable, function(el) {
+          return !el.disabled && el.offsetParent !== null;
+        });
+        if (!focusableEls.length) return;
+
+        const firstEl = focusableEls[0];
+        const lastEl = focusableEls[focusableEls.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstEl) {
+            e.preventDefault();
+            lastEl.focus();
+          }
+        } else {
+          if (document.activeElement === lastEl) {
+            e.preventDefault();
+            firstEl.focus();
+          }
+        }
+      }
+    });
+
+    // Delegated click listener for gallery links and external open buttons
+    document.addEventListener('click', function(e) {
+      const trigger = e.target.closest('.gallery-panel-link, [data-open-contact-modal]');
+      if (trigger) {
+        e.preventDefault();
+        e.stopPropagation();
+        const appName = trigger.getAttribute('data-app-name') ||
+                        trigger.closest('.gallery-panel')?.querySelector('.gallery-panel-title')?.textContent.trim() ||
+                        null;
+        openContactModal(appName, trigger, false);
+      }
+    });
+
+    // Update title when user changes service select
+    if (serviceSelect && modalServiceTitle) {
+      serviceSelect.addEventListener('change', function() {
+        modalServiceTitle.textContent = serviceSelect.value || 'Custom Printing';
+      });
+    }
+
+    // Clear field errors as user types
+    if (fullNameInput) fullNameInput.addEventListener('input', function() {
+      fullNameInput.classList.remove('has-error');
+      if (errorFullName) errorFullName.textContent = '';
+    });
+    if (mobileInput) mobileInput.addEventListener('input', function() {
+      mobileInput.classList.remove('has-error');
+      if (errorMobile) errorMobile.textContent = '';
+    });
+    if (emailInput) emailInput.addEventListener('input', function() {
+      emailInput.classList.remove('has-error');
+      if (errorEmail) errorEmail.textContent = '';
+    });
+    if (serviceSelect) serviceSelect.addEventListener('change', function() {
+      serviceSelect.classList.remove('has-error');
+      if (errorService) errorService.textContent = '';
+    });
+
+    // Form submission & validation
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      clearErrors();
+
+      const fullName = fullNameInput ? fullNameInput.value.trim() : '';
+      const mobile = mobileInput ? mobileInput.value.trim() : '';
+      const email = emailInput ? emailInput.value.trim() : '';
+      const service = serviceSelect ? serviceSelect.value.trim() : '';
+      const message = messageInput ? messageInput.value.trim() : '';
+
+      let hasError = false;
+      let firstErrorField = null;
+
+      // Full Name validation
+      if (!fullName || fullName.length < 2) {
+        if (errorFullName) errorFullName.textContent = 'Please enter your full name.';
+        if (fullNameInput) fullNameInput.classList.add('has-error');
+        hasError = true;
+        if (!firstErrorField) firstErrorField = fullNameInput;
+      }
+
+      // Mobile Number validation (10-digit Indian phone or international 10-14 digits)
+      const phoneClean = mobile.replace(/[\s\-\(\)]/g, '');
+      const phoneRegex = /^(\+?\d{1,4})?[6-9]\d{9}$/;
+      const generalPhoneRegex = /^\+?[0-9]{10,14}$/;
+      if (!mobile || (!phoneRegex.test(phoneClean) && !generalPhoneRegex.test(phoneClean))) {
+        if (errorMobile) errorMobile.textContent = 'Please enter a valid 10-digit mobile number.';
+        if (mobileInput) mobileInput.classList.add('has-error');
+        hasError = true;
+        if (!firstErrorField) firstErrorField = mobileInput;
+      }
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      if (!email || !emailRegex.test(email)) {
+        if (errorEmail) errorEmail.textContent = 'Please enter a valid email address.';
+        if (emailInput) emailInput.classList.add('has-error');
+        hasError = true;
+        if (!firstErrorField) firstErrorField = emailInput;
+      }
+
+      // Service selection validation
+      if (!service) {
+        if (errorService) errorService.textContent = 'Please select an application or service.';
+        if (serviceSelect) serviceSelect.classList.add('has-error');
+        hasError = true;
+        if (!firstErrorField) firstErrorField = serviceSelect;
+      }
+
+      // If validation fails, preserve entered data and focus first error field
+      if (hasError) {
+        if (firstErrorField) firstErrorField.focus();
+        return;
+      }
+
+      // Valid: transfer inquiry details to sessionStorage for Contact page prefill
+      try {
+        sessionStorage.setItem('op_gallery_enquiry', JSON.stringify({
+          name: fullName,
+          phone: mobile,
+          email: email,
+          service: service,
+          message: message,
+          timestamp: Date.now()
+        }));
+      } catch (err) {
+        console.warn('Storage error:', err);
+      }
+
+      // Redirect to contact page
+      const contactUrl = modal.getAttribute('data-contact-url') || 'contact.php';
+      window.location.href = contactUrl;
+    });
+
+    // Track user active typing outside of modal
+    document.addEventListener('keydown', function(e) {
+      const target = e.target;
+      if (!target || !target.tagName) return;
+      const tag = target.tagName.toLowerCase();
+      if (tag === 'input' || tag === 'textarea' || target.isContentEditable) {
+        if (modal.contains(target)) return;
+        isUserTypingActive = true;
+        clearTimeout(typingDebounceTimer);
+        typingDebounceTimer = setTimeout(function() {
+          isUserTypingActive = false;
+        }, 2500);
+      }
+    }, true);
+
+    // Helper: is user currently typing or focused in a form control?
+    function isUserInteractingWithForm() {
+      if (isUserTypingActive) return true;
+      const active = document.activeElement;
+      if (!active || active === document.body || modal.contains(active)) return false;
+      const tag = active.tagName ? active.tagName.toLowerCase() : '';
+      return tag === 'input' || tag === 'textarea' || tag === 'select' || active.isContentEditable;
+    }
+
+    // Helper: is another modal or drawer open?
+    function isAnotherModalOpen() {
+      const openModals = document.querySelectorAll(
+        '.modal.show, .modal.open, .modal.is-open:not(#galleryContactModal), [role="dialog"][aria-hidden="false"]:not(#galleryContactModal)'
+      );
+      return openModals.length > 0 || document.body.classList.contains('mobile-menu-open');
+    }
+
+    // Helper: has enquiry details just been transferred to Contact Us page?
+    function isContactPageWithTransferredEnquiry() {
+      const isContactPage = window.location.pathname.indexOf('contact') !== -1;
+      if (!isContactPage) {
+        try { sessionStorage.removeItem('op_gallery_enquiry_transferred'); } catch (e) {}
+        return false;
+      }
+      try {
+        return !!(sessionStorage.getItem('op_gallery_enquiry') ||
+                  sessionStorage.getItem('op_gallery_enquiry_transferred') ||
+                  window.opGalleryEnquiryTransferred);
+      } catch (e) {
+        return false;
+      }
+    }
+
+    // Attempt to trigger auto popup after 5 seconds with interaction deferral
+    function attemptAutoPopup() {
+      if (autoPopupTriggeredThisPage) return;
+      if (modal.classList.contains('is-open')) return;
+      if (isAnotherModalOpen()) return;
+      if (isContactPageWithTransferredEnquiry()) return;
+
+      // If user is actively typing, defer until they finish their interaction
+      if (isUserInteractingWithForm()) {
+        const active = document.activeElement;
+        const deferCheck = function() {
+          if (active) {
+            active.removeEventListener('blur', deferCheck);
+            active.removeEventListener('change', deferCheck);
+          }
+          // Wait 1.5s after blur to verify user didn't just tab to next field
+          setTimeout(function() {
+            if (!isUserInteractingWithForm()) {
+              attemptAutoPopup();
+            } else {
+              deferCheck();
+            }
+          }, 1500);
+        };
+
+        if (active) {
+          active.addEventListener('blur', deferCheck, { once: true });
+          active.addEventListener('change', deferCheck, { once: true });
+        } else {
+          setTimeout(attemptAutoPopup, 2000);
+        }
+        return;
+      }
+
+      // Display the automatic contact popup (resets on next page load/refresh)
+      openContactModal(null, null, true);
+    }
+
+    // Schedule 5-second timer on every public page load or refresh
+    if (!isContactPageWithTransferredEnquiry()) {
+      autoPopupTimer = setTimeout(attemptAutoPopup, 5000);
+    }
+  })();
 });
 

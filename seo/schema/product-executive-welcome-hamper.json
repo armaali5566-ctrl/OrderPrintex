@@ -1,23 +1,152 @@
 {
     "@context": "https://schema.org",
-    "@type": "Product",
-    "@id": "https://orderprintex.com/product/executive-welcome-hamper#product",
-    "name": "Corporate Welcome Gift Kit",
-    "url": "https://orderprintex.com/product/executive-welcome-hamper",
-    "image": "https://orderprintex.com/assets/images/branding_stationery.jpg",
-    "description": "A ready gift set with branded items for new joiners and clients, packed neatly.",
-    "sku": "HMP-001",
-    "category": "Custom Stationery",
-    "brand": {
-        "@type": "Brand",
-        "name": "OrderPrintex"
-    },
-    "offers": {
-        "@type": "Offer",
-        "url": "https://orderprintex.com/product/executive-welcome-hamper",
-        "priceCurrency": "INR",
-        "price": "0.00",
-        "availability": "https://schema.org/InStock",
-        "itemCondition": "https://schema.org/NewCondition"
-    }
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "http://localhost/OrderPrintex/#organization",
+            "name": "OrderPrintex",
+            "alternateName": "PRINTEX Delhi",
+            "url": "http://localhost/OrderPrintex/",
+            "logo": {
+                "@type": "ImageObject",
+                "@id": "http://localhost/OrderPrintex/#logo",
+                "url": "http://localhost/OrderPrintex/assets/images/logo.png",
+                "caption": "OrderPrintex Logo"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "sameAs": [
+                "https://www.instagram.com/order_printex",
+                "https://www.facebook.com/orderprintex",
+                "https://www.youtube.com/@orderprintex",
+                "https://www.linkedin.com/company/orderprintex"
+            ]
+        },
+        {
+            "@type": "LocalBusiness",
+            "@id": "http://localhost/OrderPrintex/#localbusiness",
+            "name": "OrderPrintex Delhi Printing Facility",
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "url": "http://localhost/OrderPrintex/",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "priceRange": "₹₹",
+            "parentOrganization": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 28.618,
+                "longitude": 77.0805
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
+                    ],
+                    "opens": "09:30",
+                    "closes": "20:00"
+                }
+            ]
+        },
+        {
+            "@type": "WebSite",
+            "@id": "http://localhost/OrderPrintex/#website",
+            "name": "OrderPrintex",
+            "url": "http://localhost/OrderPrintex/",
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "http://localhost/OrderPrintex/products.php?search={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/executive-welcome-hamper#product",
+            "name": "Corporate Welcome Gift Kit",
+            "image": [
+                "http://localhost/OrderPrintex/assets/images/branding_stationery.jpg"
+            ],
+            "description": "A ready gift set with branded items for new joiners and clients, packed neatly.",
+            "sku": "HMP-001",
+            "brand": {
+                "@type": "Brand",
+                "name": "OrderPrintex"
+            },
+            "manufacturer": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/executive-welcome-hamper",
+                "priceCurrency": "INR",
+                "price": 599,
+                "priceValidUntil": "2027-12-31",
+                "availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition",
+                "seller": {
+                    "@id": "http://localhost/OrderPrintex/#organization"
+                }
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "http://localhost/OrderPrintex/product/executive-welcome-hamper#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "http://localhost/OrderPrintex/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Products",
+                    "item": "http://localhost/OrderPrintex/products"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Custom Stationery",
+                    "item": "http://localhost/OrderPrintex/product/category/custom-stationery"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "name": "Corporate Welcome Gift Kit",
+                    "item": "http://localhost/OrderPrintex/product/executive-welcome-hamper"
+                }
+            ]
+        }
+    ]
 }

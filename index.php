@@ -320,6 +320,9 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
             </div>
             <h3 class="gallery-panel-title">Personal Gifts</h3>
             <p class="gallery-panel-desc">Print a personal design for someone special.</p>
+            <div class="gallery-panel-footer">
+              <a class="gallery-panel-link" href="<?= url('contact.php') ?>" data-app-name="Personal Gifts"><span>Inquire About Personal Gifts</span><span aria-hidden="true">&nearr;</span></a>
+            </div>
           </div>
         </article>
 
@@ -342,7 +345,7 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
             <h3 class="gallery-panel-title">Couple T-Shirts</h3>
             <p class="gallery-panel-desc">Matching designs for two.</p>
             <div class="gallery-panel-footer">
-              <a class="gallery-panel-link" href="<?= service_url('t-shirt-printing') ?>"><span>Explore T-Shirt Printing</span><span aria-hidden="true">&nearr;</span></a>
+              <a class="gallery-panel-link" href="<?= service_url('t-shirt-printing') ?>" data-app-name="Couple T-Shirts"><span>Explore Couple T-Shirts</span><span aria-hidden="true">&nearr;</span></a>
             </div>
           </div>
         </article>
@@ -365,6 +368,9 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
             </div>
             <h3 class="gallery-panel-title">Occasion Gifts</h3>
             <p class="gallery-panel-desc">Personalized prints for celebrations.</p>
+            <div class="gallery-panel-footer">
+              <a class="gallery-panel-link" href="<?= url('contact.php') ?>" data-app-name="Occasion Gifts"><span>Inquire About Occasion Gifts</span><span aria-hidden="true">&nearr;</span></a>
+            </div>
           </div>
         </article>
 
@@ -386,6 +392,9 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
             </div>
             <h3 class="gallery-panel-title">Wedding Packages</h3>
             <p class="gallery-panel-desc">Coordinated printing for your wedding occasion.</p>
+            <div class="gallery-panel-footer">
+              <a class="gallery-panel-link" href="<?= url('contact.php') ?>" data-app-name="Wedding Packages"><span>Inquire About Wedding Packages</span><span aria-hidden="true">&nearr;</span></a>
+            </div>
           </div>
         </article>
       </div>
@@ -411,7 +420,7 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
             <h3 class="gallery-panel-title">Corporate Gifts</h3>
             <p class="gallery-panel-desc">Branded gifts for clients and teams.</p>
             <div class="gallery-panel-footer">
-              <a class="gallery-panel-link" href="<?= service_url('corporate-printing') ?>"><span>Explore Corporate Printing</span><span aria-hidden="true">&nearr;</span></a>
+              <a class="gallery-panel-link" href="<?= service_url('corporate-printing') ?>" data-app-name="Corporate Gifts"><span>Explore Corporate Printing</span><span aria-hidden="true">&nearr;</span></a>
             </div>
           </div>
         </article>
@@ -435,7 +444,7 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
             <h3 class="gallery-panel-title">Custom T-Shirts</h3>
             <p class="gallery-panel-desc">Your artwork on everyday apparel.</p>
             <div class="gallery-panel-footer">
-              <a class="gallery-panel-link" href="<?= service_url('t-shirt-printing') ?>"><span>Explore T-Shirt Printing</span><span aria-hidden="true">&nearr;</span></a>
+              <a class="gallery-panel-link" href="<?= service_url('t-shirt-printing') ?>" data-app-name="Custom T-Shirts"><span>Explore T-Shirt Printing</span><span aria-hidden="true">&nearr;</span></a>
             </div>
           </div>
         </article>
@@ -459,7 +468,7 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
             <h3 class="gallery-panel-title">Printed Mugs</h3>
             <p class="gallery-panel-desc">Personal messages and logos on drinkware.</p>
             <div class="gallery-panel-footer">
-              <a class="gallery-panel-link" href="<?= service_url('uv-dtf-printing') ?>"><span>Explore UV DTF Printing</span><span aria-hidden="true">&nearr;</span></a>
+              <a class="gallery-panel-link" href="<?= service_url('uv-dtf-printing') ?>" data-app-name="Printed Mugs"><span>Explore UV DTF Printing</span><span aria-hidden="true">&nearr;</span></a>
             </div>
           </div>
         </article>
@@ -483,7 +492,7 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
             <h3 class="gallery-panel-title">Branded Merchandise</h3>
             <p class="gallery-panel-desc">Products that carry your business identity.</p>
             <div class="gallery-panel-footer">
-              <a class="gallery-panel-link" href="<?= service_url('corporate-printing') ?>"><span>Explore Corporate Merchandise</span><span aria-hidden="true">&nearr;</span></a>
+              <a class="gallery-panel-link" href="<?= service_url('corporate-printing') ?>" data-app-name="Branded Merchandise"><span>Explore Corporate Merchandise</span><span aria-hidden="true">&nearr;</span></a>
             </div>
           </div>
         </article>
@@ -498,6 +507,7 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
     <div class="print-faq-list"><article class="faq-item active" data-category="all"><h3><button type="button" class="faq-trigger" id="home-faq-question-0" aria-expanded="true" aria-controls="home-faq-answer-0"><span>What's the difference between DTF and UV DTF?</span><span class="print-faq-icon" aria-hidden="true">+</span></button></h3><div class="print-faq-panel" id="home-faq-answer-0" role="region" aria-labelledby="home-faq-question-0"><div class="print-faq-answer"><p><strong>DTF</strong> is used for suitable fabrics and garments: artwork is printed onto film and heat-pressed onto apparel. <strong>UV DTF</strong> creates ready-to-apply decals for compatible hard surfaces such as bottles, glass and promotional products. Share your fabric or surface details so our team can advise on the right option.</p></div></div></article><article class="faq-item active" data-category="all"><h3><button type="button" class="faq-trigger" id="home-faq-question-1" aria-expanded="true" aria-controls="home-faq-answer-1"><span>What file types and specifications should I upload?</span><span class="print-faq-icon" aria-hidden="true">+</span></button></h3><div class="print-faq-panel" id="home-faq-answer-1" role="region" aria-labelledby="home-faq-question-1"><div class="print-faq-answer"><p>The homepage upload form accepts PNG, JPG/JPEG, PDF, AI, PSD and SVG files, up to 25 MB. Use high-resolution artwork; 300 DPI is recommended, with a transparent background for DTF. Outline fonts in vector files or embed them in print-ready PDFs. Our team checks resolution, transparency and layout before printing.</p></div></div></article><article class="faq-item active" data-category="all"><h3><button type="button" class="faq-trigger" id="home-faq-question-2" aria-expanded="true" aria-controls="home-faq-answer-2"><span>How fast is turnaround and do you offer bulk pricing?</span><span class="print-faq-icon" aria-hidden="true">+</span></button></h3><div class="print-faq-panel" id="home-faq-answer-2" role="region" aria-labelledby="home-faq-question-2"><div class="print-faq-answer"><p>Published production estimates are typically 24–48 hours for approved DTF gang sheets and UV DTF decals, and 3–5 business days for custom T-shirts and bulk merchandise, depending on quantity. These are production estimates, not guaranteed delivery dates; confirm timing with your quotation.</p><p>Bulk and recurring-volume pricing is available. Share your artwork, sizes and quantities for a detailed quote.</p></div></div></article></div>
   </div>
 </section>
+
 </div>
 <script src="<?= url('assets/js/home-services.js?v=' . filemtime(__DIR__ . '/assets/js/home-services.js')) ?>" defer></script>
 

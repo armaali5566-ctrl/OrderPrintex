@@ -1,0 +1,498 @@
+[
+  {
+    "name": "Homepage",
+    "url": "http://127.0.0.1:8080/",
+    "status": "PASS",
+    "script_count": 1,
+    "expected": [
+      "ItemList",
+      "LocalBusiness",
+      "Organization",
+      "Service",
+      "WebSite"
+    ],
+    "detected": [
+      "ItemList",
+      "LocalBusiness",
+      "Organization",
+      "Service",
+      "WebSite"
+    ],
+    "top_level_types": [
+      "Organization",
+      "LocalBusiness",
+      "WebSite",
+      "Service",
+      "Service",
+      "Service",
+      "Service",
+      "ItemList"
+    ],
+    "missing": [],
+    "errors": []
+  },
+  {
+    "name": "About Us",
+    "url": "http://127.0.0.1:8080/about",
+    "status": "PASS",
+    "script_count": 1,
+    "expected": [
+      "AboutPage",
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "Service",
+      "WebSite"
+    ],
+    "detected": [
+      "AboutPage",
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "Service",
+      "WebSite"
+    ],
+    "top_level_types": [
+      "Organization",
+      "LocalBusiness",
+      "WebSite",
+      "AboutPage",
+      "BreadcrumbList",
+      "Service"
+    ],
+    "missing": [],
+    "errors": []
+  },
+  {
+    "name": "Services Listing",
+    "url": "http://127.0.0.1:8080/services",
+    "status": "PASS",
+    "script_count": 1,
+    "expected": [
+      "BreadcrumbList",
+      "CollectionPage",
+      "ItemList",
+      "LocalBusiness",
+      "Organization",
+      "Service",
+      "WebSite"
+    ],
+    "detected": [
+      "BreadcrumbList",
+      "CollectionPage",
+      "ItemList",
+      "LocalBusiness",
+      "Organization",
+      "Service",
+      "WebSite"
+    ],
+    "top_level_types": [
+      "Organization",
+      "LocalBusiness",
+      "WebSite",
+      "Service",
+      "Service",
+      "Service",
+      "Service",
+      "CollectionPage",
+      "ItemList",
+      "BreadcrumbList"
+    ],
+    "missing": [],
+    "errors": []
+  },
+  {
+    "name": "DTF Printing (Service)",
+    "url": "http://127.0.0.1:8080/services/dtf-printing",
+    "status": "PASS",
+    "script_count": 1,
+    "expected": [
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "Service",
+      "WebSite"
+    ],
+    "detected": [
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "Service",
+      "WebSite"
+    ],
+    "top_level_types": [
+      "Organization",
+      "LocalBusiness",
+      "WebSite",
+      "Service",
+      "BreadcrumbList"
+    ],
+    "missing": [],
+    "errors": []
+  },
+  {
+    "name": "UV DTF Printing (Service)",
+    "url": "http://127.0.0.1:8080/services/uv-dtf-printing",
+    "status": "PASS",
+    "script_count": 1,
+    "expected": [
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "Service",
+      "WebSite"
+    ],
+    "detected": [
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "Service",
+      "WebSite"
+    ],
+    "top_level_types": [
+      "Organization",
+      "LocalBusiness",
+      "WebSite",
+      "Service",
+      "BreadcrumbList"
+    ],
+    "missing": [],
+    "errors": []
+  },
+  {
+    "name": "T-Shirt Printing (Service)",
+    "url": "http://127.0.0.1:8080/services/t-shirt-printing",
+    "status": "PASS",
+    "script_count": 1,
+    "expected": [
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "Service",
+      "WebSite"
+    ],
+    "detected": [
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "Service",
+      "WebSite"
+    ],
+    "top_level_types": [
+      "Organization",
+      "LocalBusiness",
+      "WebSite",
+      "Service",
+      "BreadcrumbList"
+    ],
+    "missing": [],
+    "errors": []
+  },
+  {
+    "name": "Corporate Printing (Service)",
+    "url": "http://127.0.0.1:8080/services/corporate-printing",
+    "status": "PASS",
+    "script_count": 1,
+    "expected": [
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "Service",
+      "WebSite"
+    ],
+    "detected": [
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "Service",
+      "WebSite"
+    ],
+    "top_level_types": [
+      "Organization",
+      "LocalBusiness",
+      "WebSite",
+      "Service",
+      "BreadcrumbList"
+    ],
+    "missing": [],
+    "errors": []
+  },
+  {
+    "name": "Products Listing",
+    "url": "http://127.0.0.1:8080/products",
+    "status": "PASS",
+    "script_count": 1,
+    "expected": [
+      "BreadcrumbList",
+      "CollectionPage",
+      "ItemList",
+      "LocalBusiness",
+      "Organization",
+      "Product",
+      "WebSite"
+    ],
+    "detected": [
+      "BreadcrumbList",
+      "CollectionPage",
+      "ItemList",
+      "LocalBusiness",
+      "Organization",
+      "Product",
+      "WebSite"
+    ],
+    "top_level_types": [
+      "Organization",
+      "LocalBusiness",
+      "WebSite",
+      "Product",
+      "Product",
+      "Product",
+      "Product",
+      "Product",
+      "Product",
+      "Product",
+      "Product",
+      "Product",
+      "CollectionPage",
+      "ItemList",
+      "BreadcrumbList"
+    ],
+    "missing": [],
+    "errors": []
+  },
+  {
+    "name": "Individual Product (custom-dtf-gang-sheet)",
+    "url": "http://127.0.0.1:8080/products/custom-dtf-gang-sheet",
+    "status": "PASS",
+    "script_count": 1,
+    "expected": [
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "Product",
+      "WebSite"
+    ],
+    "detected": [
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "Product",
+      "WebSite"
+    ],
+    "top_level_types": [
+      "Organization",
+      "LocalBusiness",
+      "WebSite",
+      "Product",
+      "BreadcrumbList"
+    ],
+    "missing": [],
+    "errors": []
+  },
+  {
+    "name": "Portfolio / Gallery",
+    "url": "http://127.0.0.1:8080/gallery",
+    "status": "PASS",
+    "script_count": 1,
+    "expected": [
+      "BreadcrumbList",
+      "CollectionPage",
+      "ImageGallery",
+      "LocalBusiness",
+      "Organization",
+      "WebSite"
+    ],
+    "detected": [
+      "BreadcrumbList",
+      "CollectionPage",
+      "ImageGallery",
+      "LocalBusiness",
+      "Organization",
+      "WebSite"
+    ],
+    "top_level_types": [
+      "Organization",
+      "LocalBusiness",
+      "WebSite",
+      "CollectionPage",
+      "ImageGallery",
+      "BreadcrumbList"
+    ],
+    "missing": [],
+    "errors": []
+  },
+  {
+    "name": "Blog Listing",
+    "url": "http://127.0.0.1:8080/blog",
+    "status": "PASS",
+    "script_count": 1,
+    "expected": [
+      "Blog",
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "WebSite"
+    ],
+    "detected": [
+      "Blog",
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "WebSite"
+    ],
+    "top_level_types": [
+      "Organization",
+      "LocalBusiness",
+      "WebSite",
+      "Blog",
+      "BreadcrumbList"
+    ],
+    "missing": [],
+    "errors": []
+  },
+  {
+    "name": "Individual Blog Article (dtf-printing-technology-custom-apparel)",
+    "url": "http://127.0.0.1:8080/blog/dtf-printing-technology-custom-apparel",
+    "status": "PASS",
+    "script_count": 1,
+    "expected": [
+      "BlogPosting",
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "WebSite"
+    ],
+    "detected": [
+      "BlogPosting",
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "WebSite"
+    ],
+    "top_level_types": [
+      "Organization",
+      "LocalBusiness",
+      "WebSite",
+      "BlogPosting",
+      "BreadcrumbList"
+    ],
+    "missing": [],
+    "errors": []
+  },
+  {
+    "name": "Contact Us",
+    "url": "http://127.0.0.1:8080/contact",
+    "status": "PASS",
+    "script_count": 1,
+    "expected": [
+      "BreadcrumbList",
+      "ContactPage",
+      "LocalBusiness",
+      "Organization",
+      "WebSite"
+    ],
+    "detected": [
+      "BreadcrumbList",
+      "ContactPage",
+      "LocalBusiness",
+      "Organization",
+      "WebSite"
+    ],
+    "top_level_types": [
+      "Organization",
+      "LocalBusiness",
+      "WebSite",
+      "ContactPage",
+      "BreadcrumbList"
+    ],
+    "missing": [],
+    "errors": []
+  },
+  {
+    "name": "FAQ",
+    "url": "http://127.0.0.1:8080/faq",
+    "status": "PASS",
+    "script_count": 1,
+    "expected": [
+      "BreadcrumbList",
+      "FAQPage",
+      "LocalBusiness",
+      "Organization",
+      "WebSite"
+    ],
+    "detected": [
+      "BreadcrumbList",
+      "FAQPage",
+      "LocalBusiness",
+      "Organization",
+      "WebSite"
+    ],
+    "top_level_types": [
+      "Organization",
+      "LocalBusiness",
+      "WebSite",
+      "FAQPage",
+      "BreadcrumbList"
+    ],
+    "missing": [],
+    "errors": []
+  },
+  {
+    "name": "Pricing",
+    "url": "http://127.0.0.1:8080/pricing",
+    "status": "PASS",
+    "script_count": 1,
+    "expected": [
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "detected": [
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "top_level_types": [
+      "Organization",
+      "LocalBusiness",
+      "WebSite",
+      "WebPage",
+      "BreadcrumbList"
+    ],
+    "missing": [],
+    "errors": []
+  },
+  {
+    "name": "Get a Quote",
+    "url": "http://127.0.0.1:8080/get-quote",
+    "status": "PASS",
+    "script_count": 1,
+    "expected": [
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "detected": [
+      "BreadcrumbList",
+      "LocalBusiness",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "top_level_types": [
+      "Organization",
+      "LocalBusiness",
+      "WebSite",
+      "WebPage",
+      "BreadcrumbList"
+    ],
+    "missing": [],
+    "errors": []
+  }
+]

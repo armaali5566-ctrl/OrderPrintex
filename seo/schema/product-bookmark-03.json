@@ -1,44 +1,157 @@
 {
     "@context": "https://schema.org",
-    "@type": "Product",
-    "@id": "https://orderprintex.com/product/bookmark-03#product",
-    "name": "Custom Printed Bookmarks",
-    "url": "https://orderprintex.com/product/bookmark-03",
-    "image": "https://orderprintex.com/assets/images/branding_stationery.jpg",
-    "description": "Double-sided bookmarks on thick card, with a soft-touch finish. Good for brands, bookstores and event giveaways.",
-    "sku": "BKM-001",
-    "category": "Custom Stationery",
-    "brand": {
-        "@type": "Brand",
-        "name": "OrderPrintex"
-    },
-    "offers": {
-        "@type": "Offer",
-        "url": "https://orderprintex.com/product/bookmark-03",
-        "priceCurrency": "INR",
-        "price": "0.00",
-        "availability": "https://schema.org/InStock",
-        "itemCondition": "https://schema.org/NewCondition"
-    },
-    "review": [
+    "@graph": [
         {
-            "@type": "Review",
-            "reviewRating": {
-                "@type": "Rating",
+            "@type": "Organization",
+            "@id": "http://localhost/OrderPrintex/#organization",
+            "name": "OrderPrintex",
+            "alternateName": "PRINTEX Delhi",
+            "url": "http://localhost/OrderPrintex/",
+            "logo": {
+                "@type": "ImageObject",
+                "@id": "http://localhost/OrderPrintex/#logo",
+                "url": "http://localhost/OrderPrintex/assets/images/logo.png",
+                "caption": "OrderPrintex Logo"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "sameAs": [
+                "https://www.instagram.com/order_printex",
+                "https://www.facebook.com/orderprintex",
+                "https://www.youtube.com/@orderprintex",
+                "https://www.linkedin.com/company/orderprintex"
+            ]
+        },
+        {
+            "@type": "LocalBusiness",
+            "@id": "http://localhost/OrderPrintex/#localbusiness",
+            "name": "OrderPrintex Delhi Printing Facility",
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "url": "http://localhost/OrderPrintex/",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "priceRange": "₹₹",
+            "parentOrganization": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 28.618,
+                "longitude": 77.0805
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
+                    ],
+                    "opens": "09:30",
+                    "closes": "20:00"
+                }
+            ]
+        },
+        {
+            "@type": "WebSite",
+            "@id": "http://localhost/OrderPrintex/#website",
+            "name": "OrderPrintex",
+            "url": "http://localhost/OrderPrintex/",
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "http://localhost/OrderPrintex/products.php?search={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "Product",
+            "@id": "http://localhost/OrderPrintex/product/bookmark-03#product",
+            "name": "Custom Printed Bookmarks",
+            "image": [
+                "http://localhost/OrderPrintex/assets/images/branding_stationery.jpg"
+            ],
+            "description": "Double-sided bookmarks on thick card, with a soft-touch finish. Good for brands, bookstores and event giveaways.",
+            "sku": "BKM-001",
+            "brand": {
+                "@type": "Brand",
+                "name": "OrderPrintex"
+            },
+            "manufacturer": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "http://localhost/OrderPrintex/product/bookmark-03",
+                "priceCurrency": "INR",
+                "price": 1.5,
+                "priceValidUntil": "2027-12-31",
+                "availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition",
+                "seller": {
+                    "@id": "http://localhost/OrderPrintex/#organization"
+                }
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating",
                 "ratingValue": "5",
-                "bestRating": "5"
-            },
-            "author": {
-                "@type": "Person",
-                "name": "Aarav Mehta"
-            },
-            "reviewBody": "The 350 GSM cardstock with matte lamination feels ultra premium. Fast delivery to Mumbai."
+                "reviewCount": "1"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "http://localhost/OrderPrintex/product/bookmark-03#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "http://localhost/OrderPrintex/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Products",
+                    "item": "http://localhost/OrderPrintex/products"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Custom Stationery",
+                    "item": "http://localhost/OrderPrintex/product/category/custom-stationery"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "name": "Custom Printed Bookmarks",
+                    "item": "http://localhost/OrderPrintex/product/bookmark-03"
+                }
+            ]
         }
-    ],
-    "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5",
-        "reviewCount": "1",
-        "bestRating": "5"
-    }
+    ]
 }

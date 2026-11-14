@@ -61,39 +61,14 @@ $canonical = blog_url($post['slug']);
 $ogImage   = !empty($post['featured_image']) ? url($post['featured_image']) : url('assets/images/logo.png');
 $ogType    = 'article';
 
+$pageSchemaKey = 'blog-details';
+$pageSchemaData = [
+    'post' => $post,
+    'canonical' => $canonical
+];
+
 require_once __DIR__ . '/includes/header.php';
 ?>
-
-<!-- Schema.org BlogPosting Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": <?= json_encode($post['title']) ?>,
-  "description": <?= json_encode($post['excerpt']) ?>,
-  "image": [
-    <?= json_encode(url($post['featured_image'])) ?>
-  ],
-  "datePublished": <?= json_encode(date('c', strtotime($post['created_at']))) ?>,
-  "dateModified": <?= json_encode(date('c', strtotime($post['updated_at'] ?? $post['created_at']))) ?>,
-  "author": {
-    "@type": "Person",
-    "name": <?= json_encode($post['author']) ?>
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "OrderPrintex",
-    "logo": {
-      "@type": "ImageObject",
-      "url": <?= json_encode(url('assets/images/logo.png')) ?>
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": <?= json_encode($canonical) ?>
-  }
-}
-</script>
 
 <style>
 /* ==========================================================================
