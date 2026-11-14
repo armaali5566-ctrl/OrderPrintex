@@ -621,8 +621,8 @@ p:last-child {
    FULL-WIDTH LAYOUT & SPATIAL CONTAINERS
    -------------------------------------------------------------------------- */
 .container {
-  width: 95%;
-  max-width: 1800px;
+  width: 94%;
+  max-width: 1560px;
   padding-left: clamp(0.75rem, 1.5vw, 2rem);
   padding-right: clamp(0.75rem, 1.5vw, 2rem);
   margin-left: auto;
@@ -639,8 +639,8 @@ p:last-child {
 }
 
 .container-wide {
-  width: 96%;
-  max-width: 1880px;
+  width: 95%;
+  max-width: 1680px;
   padding-left: clamp(0.75rem, 1.5vw, 2rem);
   padding-right: clamp(0.75rem, 1.5vw, 2rem);
   margin-left: auto;
@@ -648,8 +648,8 @@ p:last-child {
 }
 
 .container-readable {
-  width: 95%;
-  max-width: 1400px;
+  width: 94%;
+  max-width: 1480px;
   padding-left: clamp(0.75rem, 1.5vw, 2rem);
   padding-right: clamp(0.75rem, 1.5vw, 2rem);
   margin-left: auto;
@@ -893,8 +893,8 @@ p:last-child {
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  width: 95%;
-  max-width: 1800px;
+  width: 94%;
+  max-width: 1560px;
   padding-left: clamp(0.75rem, 1.5vw, 2rem);
   padding-right: clamp(0.75rem, 1.5vw, 2rem);
   margin: 0 auto;
@@ -1038,8 +1038,8 @@ p:last-child {
 }
 
 .nav-container {
-  width: 95%;
-  max-width: 1800px;
+  width: 94%;
+  max-width: 1560px;
   padding-left: clamp(0.75rem, 1.5vw, 2rem);
   padding-right: clamp(0.75rem, 1.5vw, 2rem);
   display: flex;

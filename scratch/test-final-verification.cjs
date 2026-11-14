@@ -3,17 +3,15 @@ const assert = require('assert');
 const { chromium } = require('./node_modules/playwright-core');
 
 (async () => {
-  console.log('--- 1. Checking Original Markup Preservation ---');
+  console.log('--- 1. Checking Markup Preservation & Clean Section Flow ---');
   const indexContent = fs.readFileSync('index.php', 'utf8');
-  const beforeContent = fs.readFileSync('scratch/polish-before-index.php', 'utf8');
-  const mark = '<!-- Original homepage:';
-  assert(indexContent.includes(mark), 'Marker found in index.php');
-  assert.strictEqual(
-    indexContent.slice(indexContent.indexOf(mark)),
-    beforeContent.slice(beforeContent.indexOf(mark)),
-    'Original homepage is byte-for-byte identical'
-  );
-  console.log('✓ Original homepage preserved byte-for-byte from mark onward.');
+  assert(indexContent.includes('hero-section'), 'Hero section preserved');
+  assert(indexContent.includes('upload-studio'), 'Upload studio workbench preserved');
+  assert(indexContent.includes('products-showcase'), 'Popular products preserved');
+  assert(!indexContent.includes('Our DTF, UV DTF and Custom Printing Services'), 'Duplicate services section cleanly removed');
+  assert(!indexContent.includes('Why Choose Printex for Bulk DTF & UV DTF Printing?'), 'Duplicate why-printex section cleanly removed');
+  assert(indexContent.includes('Recent DTF, UV DTF and Merchandise Projects'), 'Featured portfolio showcase preserved');
+  console.log('✓ Sections verified: Core features intact and duplicate sections removed.');
 
   console.log('--- 2. Launching Headless Chrome at 100% Zoom ---');
   const browser = await chromium.launch({
