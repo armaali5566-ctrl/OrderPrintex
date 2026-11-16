@@ -55,7 +55,7 @@
 
       <div class="modal-form-row">
         <label for="popupMessage" class="modal-label">Message / Requirements <span class="modal-optional">(Optional)</span></label>
-        <textarea id="popupMessage" name="message" class="modal-textarea" rows="3" placeholder="Brief details: estimated quantity, product sizes, or questions..."></textarea>
+        <textarea id="popupMessage" name="message" class="modal-textarea" rows="2" placeholder="Brief details: estimated quantity, product sizes, or questions..."></textarea>
       </div>
 
       <div class="modal-form-actions">

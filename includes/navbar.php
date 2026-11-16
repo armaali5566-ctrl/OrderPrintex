@@ -16,8 +16,10 @@ $topFacebook  = get_setting('social_facebook', 'https://www.facebook.com/orderpr
 $topYouTube   = get_setting('social_youtube', 'https://www.youtube.com/@orderprintex');
 ?>
 
-<!-- Public Top Contact & Verified Channels Bar (Non-Sticky) -->
-<div class="top-contact-bar announcement-bar" id="topContactBar" role="region" aria-label="Contact and Social Information">
+<!-- Sticky Header Wrapper (Top Contact Bar + Main Navigation Bar Sticky Together) -->
+<div class="site-header-wrapper" id="siteHeaderWrapper">
+  <!-- Public Top Contact & Verified Channels Bar -->
+  <div class="top-contact-bar announcement-bar" id="topContactBar" role="region" aria-label="Contact and Social Information">
   <div class="top-contact-container">
     <!-- Left: Direct Contact Information -->
     <div class="top-contact-left">
@@ -202,3 +204,4 @@ $topYouTube   = get_setting('social_youtube', 'https://www.youtube.com/@orderpri
     </div>
   </div>
 </header>
+</div>
