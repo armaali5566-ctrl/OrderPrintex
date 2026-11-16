@@ -72,7 +72,7 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'corporate-printing
           <a href="#upload-corporate" class="btn btn-primary btn-lg">
             <span>Send us a Request Corporate Proposal</span> &rarr;
           </a>
-          <a href="<?= url('contact.php') ?>" class="btn btn-outline btn-lg" style="border-color:rgba(212,175,55,0.4); color:#D4AF37;">
+          <a href="<?= url('contact') ?>" class="btn btn-outline btn-lg" style="border-color:rgba(212,175,55,0.4); color:#D4AF37;">
             <span>Schedule a Consultation with our team</span>
           </a>
         </div>
@@ -759,7 +759,7 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'corporate-printing
       </p>
     </div>
     <div style="margin-top:2rem;">
-      <a href="<?= url('contact.php') ?>" class="btn btn-primary btn-lg">
+      <a href="<?= url('contact') ?>" class="btn btn-primary btn-lg">
         <span>Contact Printex Studio</span> &rarr;
       </a>
     </div>

@@ -90,11 +90,24 @@
             }
         },
         {
+            "@type": "WebPage",
+            "@id": "http://localhost/OrderPrintex/services/uv-dtf-printing#webpage",
+            "url": "http://localhost/OrderPrintex/services/uv-dtf-printing",
+            "name": "2. UV DTF Printing - A Popular Choice | OrderPrintex",
+            "description": "Industrial-grade UV-cured transfer decals for glass, metal, wood, and acrylic.",
+            "isPartOf": {
+                "@id": "http://localhost/OrderPrintex/#website"
+            },
+            "breadcrumb": {
+                "@id": "http://localhost/OrderPrintex/services/uv-dtf-printing#breadcrumb"
+            }
+        },
+        {
             "@type": "Service",
             "@id": "http://localhost/OrderPrintex/services/uv-dtf-printing#service",
             "name": "2. UV DTF Printing - A Popular Choice",
             "url": "http://localhost/OrderPrintex/services/uv-dtf-printing",
-            "serviceType": "Commercial Printing",
+            "serviceType": "UV DTF Decal & Sticker Printing",
             "description": "Industrial-grade UV-cured transfer decals for glass, metal, wood, and acrylic.",
             "provider": {
                 "@id": "http://localhost/OrderPrintex/#organization"
@@ -126,6 +139,38 @@
                     "position": 3,
                     "name": "2. UV DTF Printing - A Popular Choice",
                     "item": "http://localhost/OrderPrintex/services/uv-dtf-printing"
+                }
+            ]
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "http://localhost/OrderPrintex/services/uv-dtf-printing#faqpage",
+            "url": "http://localhost/OrderPrintex/services/uv-dtf-printing",
+            "name": "2. UV DTF Printing - A Popular Choice FAQs",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Do UV DTF stickers need a heat press to apply?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "No heat press is required. UV DTF decals are pressure-sensitive cold transfer stickers that peel and stick permanently onto any hard surface."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What surfaces do UV DTF decals stick to?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "They bond permanently to glass, stainless steel, ceramic, acrylic, wood, hard plastics, and coated metal."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Are UV DTF stickers waterproof and dishwasher safe?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, our UV cured ink and protective varnish layer make the decals scratch-resistant, waterproof, and durable for everyday hand washing."
+                    }
                 }
             ]
         }

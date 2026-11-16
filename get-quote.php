@@ -16,7 +16,6 @@ $pageSchemaKey = 'get-quote';
 
 require_once __DIR__ . '/includes/header.php';
 
-$selectedServiceId = intval($_GET['service_id'] ?? 0);
 $services = db_fetch_all("SELECT id, title, slug FROM services WHERE is_active = 1 ORDER BY display_order ASC");
 if (empty($services)) {
     $services = [
@@ -24,7 +23,31 @@ if (empty($services)) {
         ['id' => 2, 'title' => 'UV DTF Printing', 'slug' => 'uv-dtf-printing'],
         ['id' => 3, 'title' => 'T-Shirt Printing', 'slug' => 't-shirt-printing'],
         ['id' => 4, 'title' => 'Corporate Printing', 'slug' => 'corporate-printing'],
+        ['id' => 5, 'title' => 'Custom Hoodie Printing', 'slug' => 'custom-hoodie-printing'],
+        ['id' => 6, 'title' => 'Direct UV Flatbed Printing', 'slug' => 'uv-printing'],
+        ['id' => 7, 'title' => 'Custom Mug & Cup Printing', 'slug' => 'mug-cup-printing'],
     ];
+}
+
+$selectedServiceId = intval($_GET['service_id'] ?? 0);
+$serviceSlugParam  = trim($_GET['service_slug'] ?? $_GET['service'] ?? '');
+$serviceNameParam  = trim($_GET['service_name'] ?? '');
+
+if ($selectedServiceId === 0 && !empty($serviceSlugParam)) {
+    foreach ($services as $svc) {
+        if ($svc['slug'] === $serviceSlugParam) {
+            $selectedServiceId = (int)$svc['id'];
+            break;
+        }
+    }
+}
+if ($selectedServiceId === 0 && !empty($serviceNameParam)) {
+    foreach ($services as $svc) {
+        if (strcasecmp($svc['title'], $serviceNameParam) === 0 || stripos($svc['title'], $serviceNameParam) !== false) {
+            $selectedServiceId = (int)$svc['id'];
+            break;
+        }
+    }
 }
 $currentUser = auth_user();
 ?>

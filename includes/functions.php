@@ -583,3 +583,52 @@ function is_valid_email_strict(string $email): bool {
     return true;
 }
 
+/**
+ * Safe HTML Sanitizer for Blog Content
+ * Preserves standard rich-text typography, headings, tables, lists, links, images and blockquotes
+ * Strips executable scripts, event handlers, and dangerous iframe/object tags
+ */
+function sanitize_blog_content(string $html): string {
+    if (trim($html) === '') {
+        return '';
+    }
+
+    // Strip dangerous tags completely including their content
+    $html = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $html);
+    $html = preg_replace('#<style(.*?)>(.*?)</style>#is', '', $html);
+    $html = preg_replace('#<iframe(.*?)>(.*?)</iframe>#is', '', $html);
+    $html = preg_replace('#<object(.*?)>(.*?)</object>#is', '', $html);
+    $html = preg_replace('#<embed(.*?)>(.*?)</embed>#is', '', $html);
+    $html = preg_replace('#<applet(.*?)>(.*?)</applet>#is', '', $html);
+
+    // List of allowed tags for rich publishing
+    $allowedTags = '<h1><h2><h3><h4><h5><h6><p><a><strong><b><em><i><u><s><ul><ol><li><blockquote><table><thead><tbody><tfoot><tr><th><td><img><code><pre><hr><br><span><div><figure><figcaption>';
+    $clean = strip_tags($html, $allowedTags);
+
+    // Strip evil inline javascript event handlers (onclick, onload, onerror, onmouseover, etc.)
+    $clean = preg_replace('/\s*on[a-z]+\s*=\s*("[^"]*"|\'[^\']*\'|[^\s>]+)/i', '', $clean);
+
+    // Strip javascript: and vbscript: URIs
+    $clean = preg_replace('/href\s*=\s*("|\')\s*(javascript|vbscript|data):/i', 'href=$1#', $clean);
+    $clean = preg_replace('/src\s*=\s*("|\')\s*(javascript|vbscript):/i', 'src=$1#', $clean);
+
+    // Ensure external links have target="_blank" and rel="noopener"
+    $clean = preg_replace_callback('/<a\s+([^>]*?)>/i', function ($matches) {
+        $attrs = $matches[1];
+        if (preg_match('/href=["\'](https?:\/\/[^"\']+)["\']/i', $attrs, $urlMatch)) {
+            $url = $urlMatch[1];
+            if (!str_contains($url, 'orderprintex.com') && !str_contains($url, 'localhost') && !str_starts_with($url, '/')) {
+                if (!str_contains($attrs, 'target=')) {
+                    $attrs .= ' target="_blank"';
+                }
+                if (!str_contains($attrs, 'rel=')) {
+                    $attrs .= ' rel="noopener"';
+                }
+            }
+        }
+        return '<a ' . trim($attrs) . '>';
+    }, $clean);
+
+    return $clean;
+}
+

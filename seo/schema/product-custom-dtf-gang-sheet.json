@@ -97,7 +97,7 @@
                 "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg"
             ],
             "description": "Ready-to-press transfers with bright color and a soft feel. Works on cotton, polyester and blends.",
-            "sku": "OPX-0001",
+            "sku": "DTF-001",
             "brand": {
                 "@type": "Brand",
                 "name": "OrderPrintex"

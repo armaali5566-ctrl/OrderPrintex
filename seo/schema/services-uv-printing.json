@@ -1,0 +1,178 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "http://localhost/OrderPrintex/#organization",
+            "name": "OrderPrintex",
+            "alternateName": "PRINTEX Delhi",
+            "url": "http://localhost/OrderPrintex/",
+            "logo": {
+                "@type": "ImageObject",
+                "@id": "http://localhost/OrderPrintex/#logo",
+                "url": "http://localhost/OrderPrintex/assets/images/logo.png",
+                "caption": "OrderPrintex Logo"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "sameAs": [
+                "https://www.instagram.com/order_printex",
+                "https://www.facebook.com/orderprintex",
+                "https://www.youtube.com/@orderprintex",
+                "https://www.linkedin.com/company/orderprintex"
+            ]
+        },
+        {
+            "@type": "LocalBusiness",
+            "@id": "http://localhost/OrderPrintex/#localbusiness",
+            "name": "OrderPrintex Delhi Printing Facility",
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "url": "http://localhost/OrderPrintex/",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "priceRange": "₹₹",
+            "parentOrganization": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 28.618,
+                "longitude": 77.0805
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
+                    ],
+                    "opens": "09:30",
+                    "closes": "20:00"
+                }
+            ]
+        },
+        {
+            "@type": "WebSite",
+            "@id": "http://localhost/OrderPrintex/#website",
+            "name": "OrderPrintex",
+            "url": "http://localhost/OrderPrintex/",
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "http://localhost/OrderPrintex/products.php?search={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "http://localhost/OrderPrintex/services/uv-printing#webpage",
+            "url": "http://localhost/OrderPrintex/services/uv-printing",
+            "name": "Direct UV Flatbed Printing Services | OrderPrintex",
+            "description": "Industrial direct UV flatbed printing on rigid surfaces including acrylic, wood, glass, metal, leather, and foam boards. High-precision CMYK + White + Varnish printing with instant UV LED curing and tactile embossed textures.",
+            "isPartOf": {
+                "@id": "http://localhost/OrderPrintex/#website"
+            },
+            "breadcrumb": {
+                "@id": "http://localhost/OrderPrintex/services/uv-printing#breadcrumb"
+            }
+        },
+        {
+            "@type": "Service",
+            "@id": "http://localhost/OrderPrintex/services/uv-printing#service",
+            "name": "Direct UV Flatbed Printing Services",
+            "url": "http://localhost/OrderPrintex/services/uv-printing",
+            "serviceType": "Direct UV Flatbed Printing",
+            "description": "Industrial direct UV flatbed printing on rigid surfaces including acrylic, wood, glass, metal, leather, and foam boards. High-precision CMYK + White + Varnish printing with instant UV LED curing and tactile embossed textures.",
+            "provider": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "areaServed": {
+                "@type": "Country",
+                "name": "India"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/uv_dtf_drinkware.jpg"
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "http://localhost/OrderPrintex/services/uv-printing#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "http://localhost/OrderPrintex/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Printing Services",
+                    "item": "http://localhost/OrderPrintex/services"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Direct UV Flatbed Printing Services",
+                    "item": "http://localhost/OrderPrintex/services/uv-printing"
+                }
+            ]
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "http://localhost/OrderPrintex/services/uv-printing#faqpage",
+            "url": "http://localhost/OrderPrintex/services/uv-printing",
+            "name": "Direct UV Flatbed Printing Services FAQs",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is the difference between Direct UV printing and UV DTF?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Direct UV printing prints ink straight onto the rigid object placed on our flatbed vacuum table with instant UV LED lamp curing and zero sticker borders. UV DTF prints onto a transfer film for application onto curved objects."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is the maximum object size and thickness for flatbed UV printing?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Our flatbed machines accommodate sheets and objects up to 600mm x 900mm in area and up to 100mm in thickness."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is the direct flatbed print scratch-resistant and waterproof?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, UV LED curing creates an instantly cross-linked polymer shell that bonds permanently to acrylic, wood, glass, metal, and leather with specialized primers."
+                    }
+                }
+            ]
+        }
+    ]
+}

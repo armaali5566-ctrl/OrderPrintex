@@ -57,6 +57,36 @@ if (empty($services)) {
             'full_description' => 'Need branded merchandise for your company or event ? Printex is here to help. We print uniform t-shirts, branded mugs and bottles, and giveaways with your logo, in the same colours across the whole batch. GST invoice available on request.',
             'image_url' => 'assets/images/corporate_swag_kit.jpg',
             'specifications' => 'Products: T-Shirts, Mugs, Bottles, Giveaways | Invoice: GST on request | Delivery: Delhi and pan-India'
+        ],
+        [
+            'id' => 5,
+            'slug' => 'custom-hoodie-printing',
+            'title' => '5. Custom Hoodie Printing in Delhi',
+            'badge' => '5. Custom Hoodie Printing in Delhi',
+            'hero_tagline' => 'Heavyweight Fleece & Streetwear Hoodie Printing in Delhi',
+            'full_description' => 'Premium 280 to 450 GSM fleece and French terry hoodies printed with high-stretch DTF transfers and screen printing. Engineered for streetwear brands, universities, and corporate winter uniforms with crack-resistant, vibrant graphics.',
+            'image_url' => 'assets/images/custom_tshirt_apparel.jpg',
+            'specifications' => 'Fabrics: 280-450 GSM Cotton, Fleece, French Terry | Stretch: High-stretch TPU | Orders: Low minimums to bulk'
+        ],
+        [
+            'id' => 6,
+            'slug' => 'uv-printing',
+            'title' => '6. Direct UV Flatbed Printing Services',
+            'badge' => '6. Direct UV Flatbed Printing Services',
+            'hero_tagline' => 'Direct-to-Substrate Industrial UV Flatbed Printing on Rigid Materials',
+            'full_description' => 'Industrial flatbed UV printing directly onto cast acrylic, natural wood, tempered glass, aluminum, and leather. High-precision CMYK + White + Spot Gloss Varnish with tactile 3D embossed textures and instant UV LED curing.',
+            'image_url' => 'assets/images/uv_dtf_drinkware.jpg',
+            'specifications' => 'Surfaces: Acrylic, Wood, Glass, Metal, Leather | Area: Up to 60x90cm | Finishes: Matte, Gloss, 3D Braille'
+        ],
+        [
+            'id' => 7,
+            'slug' => 'mug-cup-printing',
+            'title' => '7. Custom Mug & Cup Printing Studio',
+            'badge' => '7. Custom Mug & Cup Printing Studio',
+            'hero_tagline' => 'Full-Color Ceramic Mugs, Tumblers & Drinkware Printing in Delhi',
+            'full_description' => 'Custom coffee mugs, insulated stainless steel tumblers, and glassware produced with 360-degree wrap dye-sublimation and cylindrical rotary UV. Microwave and dishwasher safe with individual crash-lock thermocol packaging.',
+            'image_url' => 'assets/images/corporate_merch_box.jpg',
+            'specifications' => 'Styles: 11oz/15oz Ceramic Mugs, Steel Tumblers, Enamel Cups | Methods: 360° Sublimation & Rotary UV | Packaging: Crash-lock thermocol'
         ]
     ];
 }
@@ -105,14 +135,14 @@ if (empty($services)) {
                 <a href="<?= service_url($svc['slug']) ?>" class="btn service-btn-secondary">
                   <span>Know More &rarr;</span>
                 </a>
-                <a href="<?= url('get-quote.php?service_id=' . e($svc['id'])) ?>" class="btn service-btn-primary">
+                <a href="<?= url('get-quote?service_id=' . e($svc['id'])) ?>" class="btn service-btn-primary">
                   <span>Get a Quote</span>
                 </a>
               </div>
             </div>
 
             <div class="service-showcase-media">
-              <img src="<?= url(e($svc['image_url'])) ?>" alt="<?= e($svc['title']) ?>" loading="lazy" style="width:100%; height:100%; object-fit:contain; display:block; padding:0.75rem;">
+              <img src="<?= url(e($svc['image_url'])) ?>" alt="<?= e($svc['title']) ?>" width="1200" height="896" loading="lazy" style="width:100%; height:100%; object-fit:contain; display:block; padding:0.75rem;">
             </div>
           </div>
         <?php endforeach; ?>
@@ -129,7 +159,7 @@ if (empty($services)) {
     <p style="margin-bottom:2rem;">
       Upload your artwork now. Our prepress team will check color trapping, resolution, and transparency, then deliver an itemized quote within hours.
     </p>
-    <a href="<?= url('get-quote.php') ?>" class="btn btn-primary btn-lg">
+    <a href="<?= url('get-quote') ?>" class="btn btn-primary btn-lg">
       <span>Upload Artwork for Instant Quote</span> &rarr;
     </a>
   </div>

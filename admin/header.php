@@ -34,7 +34,7 @@ $pendingReviewsCount = (int) (db_fetch_one("SELECT COUNT(*) as cnt FROM product_
   <title><?= e($adminTitle ?? 'Admin Console') ?> | OrderPrintex</title>
   <link rel="stylesheet" href="<?= url('assets/css/style.css') ?>">
   <link rel="stylesheet" href="<?= url('assets/css/animations.css') ?>">
-  <link rel="stylesheet" href="<?= url('assets/css/admin.css') ?>">
+  <link rel="stylesheet" href="<?= url('assets/css/admin.css?v=' . (file_exists(__DIR__ . '/../assets/css/admin.css') ? filemtime(__DIR__ . '/../assets/css/admin.css') : '1')) ?>">
   <link rel="stylesheet" href="<?= url('assets/css/admin-notifications.css') ?>">
   <link rel="stylesheet" href="<?= url('assets/css/responsive.css') ?>">
 </head>

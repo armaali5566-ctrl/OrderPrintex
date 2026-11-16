@@ -1,6 +1,6 @@
 # ORDERPRINTEX — Complete Commercial Printing, Technical Specifications & Website Documentation
 
-*Generated Automatically on 14 November 2026, 13:55:23 IST | Production Version: 2.5.0*
+*Generated Automatically on 16 November 2026, 16:08:51 IST | Production Version: 2.5.0*
 
 ---
 
@@ -98,6 +98,27 @@ Unlike standard consumer retail e-commerce stores with automated shopping carts 
 - **Turnaround & Dispatch**: 24-48 hours standard. Express same-day production available on pre-approved artwork.
 - **Substrate Compatibility**: 100% Cotton, Poly-Blends, Canvas, Denim, Leather, Stainless Steel, Glass, Acrylic, Ceramics, and Rigid Paperboard.
 
+### [Custom Hoodie Printing in Delhi](https://orderprintex.com/services/custom-hoodie-printing)
+
+- **Canonical URL**: <https://orderprintex.com/services/custom-hoodie-printing>
+- **Overview**: High-definition industrial printing service.
+- **Turnaround & Dispatch**: 24-48 hours standard. Express same-day production available on pre-approved artwork.
+- **Substrate Compatibility**: 100% Cotton, Poly-Blends, Canvas, Denim, Leather, Stainless Steel, Glass, Acrylic, Ceramics, and Rigid Paperboard.
+
+### [Direct UV Flatbed Printing Services](https://orderprintex.com/services/uv-printing)
+
+- **Canonical URL**: <https://orderprintex.com/services/uv-printing>
+- **Overview**: High-definition industrial printing service.
+- **Turnaround & Dispatch**: 24-48 hours standard. Express same-day production available on pre-approved artwork.
+- **Substrate Compatibility**: 100% Cotton, Poly-Blends, Canvas, Denim, Leather, Stainless Steel, Glass, Acrylic, Ceramics, and Rigid Paperboard.
+
+### [Custom Mug & Cup Printing Studio](https://orderprintex.com/services/mug-cup-printing)
+
+- **Canonical URL**: <https://orderprintex.com/services/mug-cup-printing>
+- **Overview**: High-definition industrial printing service.
+- **Turnaround & Dispatch**: 24-48 hours standard. Express same-day production available on pre-approved artwork.
+- **Substrate Compatibility**: 100% Cotton, Poly-Blends, Canvas, Denim, Leather, Stainless Steel, Glass, Acrylic, Ceramics, and Rigid Paperboard.
+
 ## 5. Exhaustive Product Catalog by Category
 
 ### Category: General Printing
@@ -105,7 +126,7 @@ Unlike standard consumer retail e-commerce stores with automated shopping carts 
 #### [DTF Gang Sheet (22" Wide)](https://orderprintex.com/product/custom-dtf-gang-sheet)
 
 - **Direct URL**: <https://orderprintex.com/product/custom-dtf-gang-sheet>
-- **SKU**: `OP-PRD-1`
+- **SKU**: `DTF-001`
 - **Base Pricing**: ₹249.00 (/ sheet)
 - **Minimum Order Quantity (MOQ)**: 1
 - **Lead Time**: 24-48 Hours
@@ -430,6 +451,9 @@ Standard production for approved DTF gang sheets and UV DTF decals is typically 
 | <https://orderprintex.com/services/uv-dtf-printing> | Printing Service | weekly | 0.90 |
 | <https://orderprintex.com/services/t-shirt-printing> | Printing Service | weekly | 0.90 |
 | <https://orderprintex.com/services/corporate-printing> | Printing Service | weekly | 0.90 |
+| <https://orderprintex.com/services/custom-hoodie-printing> | Printing Service | weekly | 0.90 |
+| <https://orderprintex.com/services/uv-printing> | Printing Service | weekly | 0.90 |
+| <https://orderprintex.com/services/mug-cup-printing> | Printing Service | weekly | 0.90 |
 | <https://orderprintex.com/product/category/uv-dtf-decals> | Product Category | weekly | 0.85 |
 | <https://orderprintex.com/product/category/custom-tshirts> | Product Category | weekly | 0.85 |
 | <https://orderprintex.com/product/category/corporate-merchandise> | Product Category | weekly | 0.85 |

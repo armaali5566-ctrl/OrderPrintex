@@ -270,7 +270,7 @@ $firstItem = $galleryList[0];
              data-id="<?= $item['id'] ?>"
              onclick="selectSpotlight(<?= $item['id'] ?>, true)"
              title="Click to inspect this specimen in full preview below">
-          <img src="<?= e($item['full_image_url']) ?>" alt="<?= e($item['title']) ?>" loading="lazy" onerror="this.onerror=null; this.src=PORTFOLIO_FALLBACK_SVG;">
+          <img src="<?= e($item['full_image_url']) ?>" alt="<?= e($item['title']) ?>" width="1200" height="896" loading="lazy" onerror="this.onerror=null; this.src=PORTFOLIO_FALLBACK_SVG;">
           <div class="gallery-item-overlay">
             <span class="gallery-item-category"><?= e($item['category_name']) ?></span>
             <h4 class="gallery-item-title"><?= e($item['title']) ?></h4>
@@ -319,7 +319,7 @@ $firstItem = $galleryList[0];
       <!-- Left Column: Large Interactive Specimen Media -->
       <div class="spotlight-media" id="spotlightMediaBox" onclick="openActiveModal()" title="Click to view full-resolution lightbox">
         <span class="spotlight-media-badge" id="spotlightBadge"><?= e($firstItem['category_name']) ?></span>
-        <img src="<?= e($firstItem['full_image_url']) ?>" id="spotlightImage" alt="<?= e($firstItem['title']) ?>" onerror="this.onerror=null; this.src=PORTFOLIO_FALLBACK_SVG;">
+        <img src="<?= e($firstItem['full_image_url']) ?>" id="spotlightImage" alt="<?= e($firstItem['title']) ?>" width="1200" height="896" onerror="this.onerror=null; this.src=PORTFOLIO_FALLBACK_SVG;">
         <div style="position:absolute; bottom:1rem; right:1rem; background:rgba(10,14,22,0.88); color:#D4AF37; font-size:0.75rem; font-weight:700; padding:0.4rem 0.85rem; border-radius:9999px; backdrop-filter:blur(6px); border:1px solid rgba(212,175,55,0.3); pointer-events:none; display:flex; align-items:center; gap:6px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
           Tap to enlarge
@@ -356,7 +356,7 @@ $firstItem = $galleryList[0];
 
         <!-- Action CTAs -->
         <div class="spotlight-actions">
-          <a href="<?= url('get-quote/') ?>?specimen=<?= urlencode($firstItem['title']) ?>" class="btn btn-primary" id="spotlightQuoteBtn">
+          <a href="<?= url('get-quote') ?>?specimen=<?= urlencode($firstItem['title']) ?>" class="btn btn-primary" id="spotlightQuoteBtn">
             Get a Similar Print &rarr;
           </a>
           <button type="button" class="btn btn-outline" style="border-color:rgba(212,175,55,0.4); color:#D4AF37; background:#181818;" onclick="openActiveModal()">
@@ -377,7 +377,7 @@ $firstItem = $galleryList[0];
                   class="spotlight-thumb-btn <?= $idx === 0 ? 'active' : '' ?>" 
                   id="thumbBtn-<?= $item['id'] ?>"
                   onclick="selectSpotlight(<?= $item['id'] ?>, false)">
-            <img src="<?= e($item['full_image_url']) ?>" alt="<?= e($item['title']) ?>" onerror="this.onerror=null; this.src=PORTFOLIO_FALLBACK_SVG;">
+            <img src="<?= e($item['full_image_url']) ?>" alt="<?= e($item['title']) ?>" width="1200" height="896" onerror="this.onerror=null; this.src=PORTFOLIO_FALLBACK_SVG;">
             <span class="spotlight-thumb-label">
               <?= e($item['category_name']) ?>
             </span>
@@ -407,7 +407,7 @@ $firstItem = $galleryList[0];
       <p id="modalImageDesc" style="margin-top:1.25rem; color:#CBD5E1; font-size:0.925rem; max-width:720px; margin-left:auto; margin-right:auto; line-height:1.6;"></p>
     </div>
     <div class="modal-footer">
-      <a href="<?= url('get-quote/') ?>" class="btn btn-primary btn-sm" id="modalQuoteBtn">
+      <a href="<?= url('get-quote') ?>" class="btn btn-primary btn-sm" id="modalQuoteBtn">
         Request Similar Custom Print &rarr;
       </a>
       <button type="button" class="btn btn-outline btn-sm" style="border-color:rgba(212,175,55,0.4); color:#F5F1E8; background:#181818;" onclick="closeImageModal()">
@@ -470,7 +470,7 @@ function selectSpotlight(id, shouldScroll) {
 
   const quoteBtn = document.getElementById('spotlightQuoteBtn');
   if (quoteBtn) {
-    quoteBtn.href = <?= json_encode(url('get-quote/')) ?> + '?specimen=' + encodeURIComponent(item.title);
+    quoteBtn.href = <?= json_encode(url('get-quote')) ?> + '?specimen=' + encodeURIComponent(item.title);
   }
 
   if (shouldScroll) {
@@ -499,7 +499,7 @@ function openImageModal(src, title, desc, category) {
 
   const modalQuote = document.getElementById('modalQuoteBtn');
   if (modalQuote) {
-    modalQuote.href = <?= json_encode(url('get-quote/')) ?> + '?specimen=' + encodeURIComponent(title);
+    modalQuote.href = <?= json_encode(url('get-quote')) ?> + '?specimen=' + encodeURIComponent(title);
   }
 
   document.getElementById('galleryModal').classList.add('open');

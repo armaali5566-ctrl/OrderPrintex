@@ -1,7 +1,7 @@
 # DTF Gang Sheet (22" Wide) | OrderPrintex
 
 - **Canonical URL**: <https://orderprintex.com/product/custom-dtf-gang-sheet>
-- **SKU**: `OP-PRD-1`
+- **SKU**: `DTF-001`
 - **Category**: Printing
 - **Base Price**: ₹249.00 (/ sheet)
 - **Lead Time**: 24-48 Hours

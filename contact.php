@@ -18,7 +18,7 @@ $phone = get_setting('phone', '+91 93540 28199');
 $phoneRaw = get_setting('phone_raw', '919354028199');
 $email = get_setting('email', 'sales@orderprintex.com');
 $address = get_setting('address', 'Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh, Delhi, 110059');
-$mapsUrl = get_setting('google_maps_url', 'https://share.google/MWOVYne70asGLsYXn');
+$mapsUrl = get_setting('google_maps_url', 'https://www.google.com/maps/dir/?api=1&destination=Shop+E-6%2C+Chanakya+Palace%2C+Street+No.+21%2C+Pankha+Road%2C+near+40+Feet+Road%2C+Block+C%2C+Sitapuri+Part+1%2C+Delhi%2C+110059%2C+India&travelmode=driving');
 $waUrl = get_setting('whatsapp_url', 'https://wa.me/919354028199');
 
 // Handle Contact Form Submission
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
               <h4 style="font-size:1.05rem; margin-bottom:0.25rem;">Studio &amp; Works Address</h4>
               <p style="font-size:0.9rem; margin:0;"><?= e($address) ?></p>
               <div style="margin-top:0.5rem;">
-                <a href="<?= e($mapsUrl) ?>" target="_blank" rel="noopener" class="text-gold" style="font-weight:600; font-size:0.85rem;">
+                <a href="<?= e($mapsUrl) ?>" target="_blank" rel="noopener noreferrer" class="text-gold" style="font-weight:600; font-size:0.85rem;">
                   Open Direction on Google Maps &rarr;
                 </a>
               </div>
@@ -171,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             Have a question about gang sheet specifications, custom sizes, or delivery schedules? Send a message directly to our desk.
           </p>
 
-          <form action="<?= url('contact.php') ?>" method="POST">
+          <form action="<?= url('contact') ?>" method="POST">
             <?= csrf_field() ?>
             <input type="hidden" name="action" value="contact_submit">
 

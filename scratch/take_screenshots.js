@@ -1,25 +1,28 @@
 const { chromium } = require('./node_modules/playwright-core');
 
 (async () => {
+  try {
     const browser = await chromium.launch({
-        executablePath: 'C:\\Users\\Arman\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe',
-        headless: true
+      channel: 'chrome',
+      headless: true
     });
-    const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+    console.log('Chrome launched successfully via playwright-core!');
+    const page = await browser.newPage();
+    await page.goto('http://127.0.0.1:8080/blog/dtf-printing-technology-custom-apparel');
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.screenshot({ path: 'scratch/verified_blog_1440.png' });
+    
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.screenshot({ path: 'scratch/verified_blog_375.png' });
 
-    console.log('Capturing homepage...');
-    await page.goto('http://127.0.0.1:8080/', { waitUntil: 'networkidle' });
-    await page.screenshot({ path: 'scratch/current_home.png', fullPage: false });
-
-    console.log('Capturing services page...');
-    await page.goto('http://127.0.0.1:8080/services/dtf-printing.php', { waitUntil: 'networkidle' });
-    await page.screenshot({ path: 'scratch/current_services.png', fullPage: false });
-
-    console.log('Capturing admin login...');
-    await page.goto('http://127.0.0.1:8080/admin/login.php', { waitUntil: 'networkidle' });
-    await page.screenshot({ path: 'scratch/current_admin_login.png', fullPage: false });
+    // Test Product Details
+    await page.goto('http://127.0.0.1:8080/products/custom-dtf-gang-sheet');
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.screenshot({ path: 'scratch/verified_product_1440.png' });
 
     await browser.close();
-    console.log('Done!');
+    console.log('Screenshots saved successfully!');
+  } catch (err) {
+    console.error('Playwright error:', err.message);
+  }
 })();
-

@@ -156,84 +156,113 @@ require_once __DIR__ . '/includes/header.php';
 
 <style>
 /* ==============================================================
-   COMPACT & SLEEK METRICS STRIP STYLING
+   FOUR-COLUMN HIGHLIGHTS / METRICS STRIP STYLING
    ============================================================== */
 .metrics-strip {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  gap: 0;
   align-items: stretch;
-  padding: 1.5rem 1.75rem;
-  max-width: 1080px;
+  width: 100%;
+  max-width: 1120px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: var(--radius-lg, 16px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+  background: linear-gradient(180deg, #161616 0%, #111111 100%);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-radius: 16px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .metrics-item {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
   text-align: center;
-  padding: 0.25rem 0.75rem;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: clamp(1.6rem, 2.2vw, 2.25rem) clamp(1rem, 1.5vw, 1.5rem);
+  border-right: 1px solid rgba(212, 175, 55, 0.16);
+  box-sizing: border-box;
+  transition: background-color 0.25s ease;
 }
 
-.metrics-item:last-child,
-.metrics-item:nth-child(4) {
+.metrics-item:last-child {
   border-right: none;
 }
 
+.metrics-item:hover {
+  background-color: rgba(212, 175, 55, 0.04);
+}
+
 .metrics-item-value {
-  font-size: clamp(1.1rem, 1.55vw, 1.35rem);
-  line-height: 1.25;
-  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  min-height: 2.85rem;
+  font-size: clamp(1.05rem, 1.22vw, 1.25rem);
+  line-height: 1.35;
+  font-weight: 700;
   color: var(--gold, #D4AF37);
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.65rem;
   letter-spacing: -0.01em;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.metrics-item:hover .metrics-item-value {
+  color: #FFDF79;
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
 }
 
 .metrics-item-label {
-  font-size: 0.72rem;
-  line-height: 1.45;
-  letter-spacing: 0.06em;
-  max-width: 210px;
+  font-size: clamp(0.85rem, 0.92vw, 0.92rem);
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  width: 100%;
+  max-width: 250px;
   margin: 0 auto;
-  opacity: 0.82;
-  color: rgba(255, 255, 255, 0.85);
-  text-transform: uppercase;
-  font-weight: 600;
+  color: #94A3B8;
+  text-transform: none;
+  font-weight: 400;
+  text-align: center;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .metrics-strip {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem 1rem;
-    padding: 1.35rem 1.25rem;
   }
-  .metrics-item:nth-child(2) {
+  .metrics-item {
+    border-right: 1px solid rgba(212, 175, 55, 0.14);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.14);
+    padding: 1.5rem 1.25rem;
+  }
+  .metrics-item:nth-child(2n) {
     border-right: none;
+  }
+  .metrics-item:nth-child(3),
+  .metrics-item:nth-child(4) {
+    border-bottom: none;
   }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 580px) {
   .metrics-strip {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
-    padding: 1.25rem 1rem;
+    border-radius: 14px;
   }
   .metrics-item {
     border-right: none !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 0 0 1rem;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.14);
+    padding: 1.25rem 1rem;
   }
   .metrics-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+    border-bottom: none !important;
+  }
+  .metrics-item-value {
+    min-height: auto;
+    margin-bottom: 0.4rem;
   }
 }
 </style>
@@ -252,19 +281,19 @@ require_once __DIR__ . '/includes/header.php';
 
       <!-- Required Large Headline -->
       <h1 class="page-intro-title" style="max-width:920px;">
-        DTF &amp; T-Shirt Printing in Delhi Done Properly.
+        About Us
       </h1>
 
       <div class="page-intro-divider"></div>
 
       <!-- Required Short Supporting Text (1-2 sentences) -->
       <p class="page-intro-desc" style="max-width:780px; margin-bottom:2.5rem;">
-        We're Printex, a printing studio based out of Pankha Road, Delhi. We specialise in making DTF transfers, UV DTF stickers and custom tees, hoodies and mugs for brands, print shops and businesses all over India. We're pretty proud of our work.
+        DTF &amp; T-Shirt Printing in Delhi Done Properly. We're Printex, a printing studio based out of Pankha Road, Delhi. We specialise in making DTF transfers, UV DTF stickers and custom tees, hoodies and mugs for brands, print shops and businesses all over India.
       </p>
 
       <!-- Action Buttons -->
       <div style="display:flex; justify-content:center; align-items:center; gap:1.15rem; flex-wrap:wrap; margin-bottom:3.5rem;">
-        <a href="<?= url('get-quote/') ?>" class="btn btn-primary btn-lg">
+        <a href="<?= url('get-quote') ?>" class="btn btn-primary btn-lg">
           <span>Get a Quote</span> &rarr;
         </a>
         <a href="#what-we-do" class="btn btn-outline" style="border-color:rgba(255,255,255,0.35); color:#FFFFFF;">
@@ -275,19 +304,19 @@ require_once __DIR__ . '/includes/header.php';
     <!-- Metrics Strip -->
     <div class="metrics-strip">
       <div class="metrics-item">
-        <div class="metrics-item-value">Since 10 years ago</div>
-        <div class="metrics-item-label">We're Still Going Strong on Pankha Road</div>
+        <div class="metrics-item-value">10 Years of Experience</div>
+        <div class="metrics-item-label">We're still going strong on Pankha Road</div>
       </div>
       <div class="metrics-item">
-        <div class="metrics-item-value">DTF + UV DTF</div>
-        <div class="metrics-item-label">Transfers, stickers, t-shirts - all our speciality</div>
+        <div class="metrics-item-value">DTF &amp; UV DTF</div>
+        <div class="metrics-item-label">Transfers, stickers, t-shirts — all our specialty</div>
       </div>
       <div class="metrics-item">
-        <div class="metrics-item-value">We Check Your Files</div>
+        <div class="metrics-item-value">Artwork Quality Check</div>
         <div class="metrics-item-label">To make sure everything runs smoothly before we print</div>
       </div>
       <div class="metrics-item">
-        <div class="metrics-item-value">All Over India</div>
+        <div class="metrics-item-value">Pan-India Delivery</div>
         <div class="metrics-item-label">We deliver our prints via courier with tracking</div>
       </div>
     </div>
@@ -603,7 +632,7 @@ require_once __DIR__ . '/includes/header.php';
 
       <!-- Required Get a Quote Button & Secondary CTAs -->
       <div style="display:flex; justify-content:center; align-items:center; gap:1.25rem; flex-wrap:wrap;">
-        <a href="<?= url('get-quote/') ?>" class="btn btn-primary btn-lg cta-wide-btn">
+        <a href="<?= url('get-quote') ?>" class="btn btn-primary btn-lg cta-wide-btn">
           <span>Get a Quote</span> &rarr;
         </a>
         <a href="<?= url('services/') ?>" class="btn btn-navy btn-lg cta-wide-btn">

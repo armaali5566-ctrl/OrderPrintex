@@ -154,6 +154,54 @@
             "image": "http://localhost/OrderPrintex/assets/images/corporate_swag_kit.jpg"
         },
         {
+            "@type": "Service",
+            "@id": "http://localhost/OrderPrintex/services/custom-hoodie-printing#service",
+            "name": "Custom Hoodie Printing in Delhi",
+            "url": "http://localhost/OrderPrintex/services/custom-hoodie-printing",
+            "serviceType": "Corporate Merchandise & Kits",
+            "description": "Premium heavyweight hoodie and sweatshirt printing using high-stretch DTF transfers and screen printing. Custom pullover, zip-up, and oversized fleece printing with vibrant, crack-resistant finishes for streetwear brands, colleges, and corporate winterwear.",
+            "provider": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "areaServed": {
+                "@type": "Country",
+                "name": "India"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/custom_tshirt_apparel.jpg"
+        },
+        {
+            "@type": "Service",
+            "@id": "http://localhost/OrderPrintex/services/uv-printing#service",
+            "name": "Direct UV Flatbed Printing Services",
+            "url": "http://localhost/OrderPrintex/services/uv-printing",
+            "serviceType": "Corporate Merchandise & Kits",
+            "description": "Industrial direct UV flatbed printing on rigid surfaces including acrylic, wood, glass, metal, leather, and foam boards. High-precision CMYK + White + Varnish printing with instant UV LED curing and tactile embossed textures.",
+            "provider": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "areaServed": {
+                "@type": "Country",
+                "name": "India"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/uv_dtf_drinkware.jpg"
+        },
+        {
+            "@type": "Service",
+            "@id": "http://localhost/OrderPrintex/services/mug-cup-printing#service",
+            "name": "Custom Mug & Cup Printing Studio",
+            "url": "http://localhost/OrderPrintex/services/mug-cup-printing",
+            "serviceType": "Corporate Merchandise & Kits",
+            "description": "Full-color ceramic coffee mugs, stainless steel tumblers, travel cups, and enamel mugs with high-gloss sublimation and rotary UV printing. Microwave safe, dishwasher safe, and ideal for corporate gifting.",
+            "provider": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "areaServed": {
+                "@type": "Country",
+                "name": "India"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/corporate_merch_box.jpg"
+        },
+        {
             "@type": "ItemList",
             "@id": "http://localhost/OrderPrintex/#services-list",
             "name": "OrderPrintex Commercial Printing Capabilities",
@@ -189,6 +237,30 @@
                     "name": "4. Corporate Printing Services for Businesses",
                     "item": {
                         "@id": "http://localhost/OrderPrintex/services/corporate-printing#service"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 5,
+                    "name": "Custom Hoodie Printing in Delhi",
+                    "item": {
+                        "@id": "http://localhost/OrderPrintex/services/custom-hoodie-printing#service"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 6,
+                    "name": "Direct UV Flatbed Printing Services",
+                    "item": {
+                        "@id": "http://localhost/OrderPrintex/services/uv-printing#service"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 7,
+                    "name": "Custom Mug & Cup Printing Studio",
+                    "item": {
+                        "@id": "http://localhost/OrderPrintex/services/mug-cup-printing#service"
                     }
                 }
             ]

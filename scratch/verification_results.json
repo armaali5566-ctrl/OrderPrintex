@@ -1,0 +1,281 @@
+[
+    {
+        "page": "Home",
+        "url": "\/",
+        "count": 5,
+        "types": "WebPage, Organization, LocalBusiness, WebSite, ItemList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "About Us",
+        "url": "\/about",
+        "count": 5,
+        "types": "AboutPage, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Services Overview",
+        "url": "\/services",
+        "count": 6,
+        "types": "CollectionPage, ItemList, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Service: DTF Printing",
+        "url": "\/services\/dtf-printing",
+        "count": 7,
+        "types": "WebPage, Service, Organization, LocalBusiness, WebSite, BreadcrumbList, FAQPage",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Service: UV DTF Printing",
+        "url": "\/services\/uv-dtf-printing",
+        "count": 7,
+        "types": "WebPage, Service, Organization, LocalBusiness, WebSite, BreadcrumbList, FAQPage",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Service: T-Shirt Printing",
+        "url": "\/services\/t-shirt-printing",
+        "count": 7,
+        "types": "WebPage, Service, Organization, LocalBusiness, WebSite, BreadcrumbList, FAQPage",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Service: Corporate Printing",
+        "url": "\/services\/corporate-printing",
+        "count": 7,
+        "types": "WebPage, Service, Organization, LocalBusiness, WebSite, BreadcrumbList, FAQPage",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Service: Custom Hoodie Printing",
+        "url": "\/services\/custom-hoodie-printing",
+        "count": 7,
+        "types": "WebPage, Service, Organization, LocalBusiness, WebSite, BreadcrumbList, FAQPage",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Service: UV Printing",
+        "url": "\/services\/uv-printing",
+        "count": 7,
+        "types": "WebPage, Service, Organization, LocalBusiness, WebSite, BreadcrumbList, FAQPage",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Service: Mug & Cup Printing",
+        "url": "\/services\/mug-cup-printing",
+        "count": 7,
+        "types": "WebPage, Service, Organization, LocalBusiness, WebSite, BreadcrumbList, FAQPage",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Products Catalog",
+        "url": "\/products",
+        "count": 6,
+        "types": "CollectionPage, ItemList, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Product: DTF Gang Sheet (22\" Wide)",
+        "url": "\/products\/custom-dtf-gang-sheet",
+        "count": 6,
+        "types": "WebPage, Product, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Product: 3D Gloss UV DTF Decal Sheet",
+        "url": "\/products\/custom-uv-dtf-decal-sheet",
+        "count": 6,
+        "types": "WebPage, Product, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Product: Oversized Streetwear T-Shirt (240 GSM)",
+        "url": "\/products\/streetwear-oversized-tee",
+        "count": 6,
+        "types": "WebPage, Product, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Product: Custom Steel Thermal Bottle (750 ml)",
+        "url": "\/products\/thermal-sipper-bottle",
+        "count": 6,
+        "types": "WebPage, Product, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Product: Branded Apparel Mailer Box",
+        "url": "\/products\/apparel-mailer-box",
+        "count": 6,
+        "types": "WebPage, Product, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Product: Custom Die-Cut Sticker Pack",
+        "url": "\/products\/holographic-stickers",
+        "count": 6,
+        "types": "WebPage, Product, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Product: Everyday Cotton T-Shirt (180 GSM)",
+        "url": "\/products\/bio-washed-cotton-tee",
+        "count": 6,
+        "types": "WebPage, Product, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Product: Corporate Welcome Gift Kit",
+        "url": "\/products\/executive-welcome-hamper",
+        "count": 6,
+        "types": "WebPage, Product, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Product: Custom Printed Bookmarks",
+        "url": "\/products\/bookmark-03",
+        "count": 6,
+        "types": "WebPage, Product, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Portfolio Gallery",
+        "url": "\/gallery",
+        "count": 6,
+        "types": "CollectionPage, ImageGallery, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Blog Index",
+        "url": "\/blog",
+        "count": 5,
+        "types": "Blog, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Blog: DTF vs Screen Printing: Unders",
+        "url": "\/blog\/dtf-vs-screen-printing-differences-benefits-applications",
+        "count": 6,
+        "types": "WebPage, BlogPosting, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Blog: How Custom Printed T-Shirts He",
+        "url": "\/blog\/how-custom-printed-t-shirts-help-businesses-build-brand-identity",
+        "count": 6,
+        "types": "WebPage, BlogPosting, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Blog: How DTF Printing Technology Is",
+        "url": "\/blog\/dtf-printing-technology-custom-apparel",
+        "count": 6,
+        "types": "WebPage, BlogPosting, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Blog: UV DTF Printing: How It Works ",
+        "url": "\/blog\/uv-dtf-printing-product-branding",
+        "count": 6,
+        "types": "WebPage, BlogPosting, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Blog: Different T-Shirt Printing Tec",
+        "url": "\/blog\/different-t-shirt-printing-techniques",
+        "count": 6,
+        "types": "WebPage, BlogPosting, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Contact Us",
+        "url": "\/contact",
+        "count": 5,
+        "types": "ContactPage, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "FAQ",
+        "url": "\/faq",
+        "count": 5,
+        "types": "FAQPage, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Pricing",
+        "url": "\/pricing",
+        "count": 5,
+        "types": "WebPage, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    },
+    {
+        "page": "Get Quote",
+        "url": "\/get-quote",
+        "count": 5,
+        "types": "WebPage, Organization, LocalBusiness, WebSite, BreadcrumbList",
+        "nested_violations": 0,
+        "errors": 0,
+        "status": "PASS"
+    }
+]

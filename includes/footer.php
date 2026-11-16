@@ -6,7 +6,7 @@ $phone = get_setting('phone', '+91 93540 28199');
 $phoneRaw = get_setting('phone_raw', '919354028199');
 $email = get_setting('email', 'sales@orderprintex.com');
 $address = get_setting('address', 'Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh, Delhi, 110059');
-$mapsUrl = get_setting('google_maps_url', 'https://share.google/MWOVYne70asGLsYXn');
+$mapsUrl = get_setting('google_maps_url', 'https://www.google.com/maps/dir/?api=1&destination=Shop+E-6%2C+Chanakya+Palace%2C+Street+No.+21%2C+Pankha+Road%2C+near+40+Feet+Road%2C+Block+C%2C+Sitapuri+Part+1%2C+Delhi%2C+110059%2C+India&travelmode=driving');
 $waUrl = get_setting('whatsapp_url', 'https://wa.me/919354028199');
 $igUrl = get_setting('instagram_url', 'https://www.instagram.com/order_printex');
 $ytUrl = get_setting('youtube_url', 'https://www.youtube.com/@orderprintex');
@@ -47,11 +47,14 @@ $ytUrl = get_setting('youtube_url', 'https://www.youtube.com/@orderprintex');
       <div>
         <h4 class="footer-title">Printing Services</h4>
         <div class="footer-links">
-          <a href="<?= service_url('dtf-printing') ?>">DTF Garment Transfers</a>
-          <a href="<?= service_url('uv-dtf-printing') ?>">UV DTF Hard Decals</a>
+          <a href="<?= service_url('dtf-printing') ?>">DTF Printing</a>
+          <a href="<?= service_url('uv-dtf-printing') ?>">UV DTF Printing</a>
           <a href="<?= service_url('t-shirt-printing') ?>">T-Shirt Printing</a>
-          <a href="<?= service_url('corporate-printing') ?>">Corporate Kits &amp; Merch</a>
-          <a href="<?= url('services') ?>">All Printing Capabilities</a>
+          <a href="<?= service_url('corporate-printing') ?>">Corporate Printing</a>
+          <a href="<?= service_url('custom-hoodie-printing') ?>">Custom Hoodie Printing</a>
+          <a href="<?= service_url('uv-printing') ?>">UV Printing Services</a>
+          <a href="<?= service_url('mug-cup-printing') ?>">Mug &amp; Cup Printing</a>
+          <a href="<?= url('services') ?>">All Printing Services</a>
           <a href="<?= url('get-quote') ?>">Custom Quotation Studio</a>
         </div>
       </div>
@@ -60,13 +63,11 @@ $ytUrl = get_setting('youtube_url', 'https://www.youtube.com/@orderprintex');
       <div>
         <h4 class="footer-title">Explore Printex</h4>
         <div class="footer-links">
-          <a href="<?= url('about') ?>">About Delhi Studio</a>
-          <a href="<?= url('products') ?>">Catalog &amp; Gang Sheets</a>
-          <a href="<?= pricing_url() ?>">Volume Pricing</a>
-          <a href="<?= blog_url() ?>">Printing Knowledge Base</a>
-          <a href="<?= url('gallery') ?>">Production Showcase</a>
-          <a href="<?= url('faq') ?>">Prepress &amp; FAQs</a>
-          <a href="<?= url('contact') ?>">Workshop Directions</a>
+          <a href="<?= url('about') ?>">About Us</a>
+          <a href="<?= url('products') ?>">Products</a>
+          <a href="<?= pricing_url() ?>">Commercial Printing &amp; Volume Pricing</a>
+          <a href="<?= blog_url() ?>">Printing Guides &amp; Tips</a>
+          <a href="<?= url('gallery') ?>">Print Gallery</a>
           <a href="<?= account_url() ?>">Client Portal</a>
         </div>
       </div>
@@ -94,7 +95,7 @@ $ytUrl = get_setting('youtube_url', 'https://www.youtube.com/@orderprintex');
           <a href="mailto:<?= e($email) ?>"><?= e($email) ?></a>
         </div>
         <div style="margin-top:1.25rem;">
-          <a href="<?= e($mapsUrl) ?>" target="_blank" rel="noopener" class="btn btn-sm btn-outline-gold">
+          <a href="<?= e($mapsUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-gold">
             <span>Get Directions on Map</span> &rarr;
           </a>
         </div>

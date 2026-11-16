@@ -90,11 +90,24 @@
             }
         },
         {
+            "@type": "WebPage",
+            "@id": "http://localhost/OrderPrintex/services/corporate-printing#webpage",
+            "url": "http://localhost/OrderPrintex/services/corporate-printing",
+            "name": "4. Corporate Printing Services for Businesses | OrderPrintex",
+            "description": "End-to-end branded merchandise, drinkware, and executive employee welcome kits.",
+            "isPartOf": {
+                "@id": "http://localhost/OrderPrintex/#website"
+            },
+            "breadcrumb": {
+                "@id": "http://localhost/OrderPrintex/services/corporate-printing#breadcrumb"
+            }
+        },
+        {
             "@type": "Service",
             "@id": "http://localhost/OrderPrintex/services/corporate-printing#service",
             "name": "4. Corporate Printing Services for Businesses",
             "url": "http://localhost/OrderPrintex/services/corporate-printing",
-            "serviceType": "Commercial Printing",
+            "serviceType": "Corporate Merchandise & Kits",
             "description": "End-to-end branded merchandise, drinkware, and executive employee welcome kits.",
             "provider": {
                 "@id": "http://localhost/OrderPrintex/#organization"
@@ -126,6 +139,30 @@
                     "position": 3,
                     "name": "4. Corporate Printing Services for Businesses",
                     "item": "http://localhost/OrderPrintex/services/corporate-printing"
+                }
+            ]
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "http://localhost/OrderPrintex/services/corporate-printing#faqpage",
+            "url": "http://localhost/OrderPrintex/services/corporate-printing",
+            "name": "4. Corporate Printing Services for Businesses FAQs",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Can you match exact corporate Pantone brand colors?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, our prepress spectrophotometers calibrate ink outputs against physical Pantone Solid Coated swatch guides."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Do you provide GST commercial invoices?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, official 18% GST tax invoices with input credit eligibility are provided for every business order."
+                    }
                 }
             ]
         }

@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
   dropdownItems.forEach(item => {
     const toggle = item.querySelector('.dropdown-toggle, .nav-link');
     const menu = item.querySelector('.dropdown-menu');
+    let hoverTimeout = null;
 
     if (toggle) {
       // Click handler: on mobile, prevents navigation and toggles dropdown.
@@ -60,23 +61,43 @@ document.addEventListener('DOMContentLoaded', function () {
           const isOpen = item.classList.toggle('dropdown-open');
           toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         } else {
-          // On desktop, allow click to toggle open state
+          // On desktop, click toggles the open state
           e.preventDefault();
+          clearTimeout(hoverTimeout);
           const isOpen = item.classList.toggle('dropdown-open');
           toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         }
       });
     }
 
-    // Desktop hover management for accessibility & smooth hover
+    // Desktop hover management with grace period to prevent flickering
     item.addEventListener('mouseenter', function () {
-      if (window.innerWidth > 992 && toggle) {
-        toggle.setAttribute('aria-expanded', 'true');
+      if (window.innerWidth > 1120) {
+        clearTimeout(hoverTimeout);
+        item.classList.add('dropdown-open');
+        if (toggle) toggle.setAttribute('aria-expanded', 'true');
       }
     });
 
     item.addEventListener('mouseleave', function () {
-      if (window.innerWidth > 992) {
+      if (window.innerWidth > 1120) {
+        clearTimeout(hoverTimeout);
+        hoverTimeout = setTimeout(function () {
+          item.classList.remove('dropdown-open');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        }, 180);
+      }
+    });
+
+    // Keyboard support: focus within keeps open, blur closes
+    item.addEventListener('focusin', function () {
+      clearTimeout(hoverTimeout);
+      item.classList.add('dropdown-open');
+      if (toggle) toggle.setAttribute('aria-expanded', 'true');
+    });
+
+    item.addEventListener('focusout', function (e) {
+      if (!item.contains(e.relatedTarget)) {
         item.classList.remove('dropdown-open');
         if (toggle) toggle.setAttribute('aria-expanded', 'false');
       }

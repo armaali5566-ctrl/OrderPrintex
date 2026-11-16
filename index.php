@@ -321,7 +321,7 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
             <h3 class="gallery-panel-title">Personal Gifts</h3>
             <p class="gallery-panel-desc">Print a personal design for someone special.</p>
             <div class="gallery-panel-footer">
-              <a class="gallery-panel-link" href="<?= url('contact.php') ?>" data-app-name="Personal Gifts"><span>Inquire About Personal Gifts</span><span aria-hidden="true">&nearr;</span></a>
+              <a class="gallery-panel-link" href="<?= url('contact') ?>" data-app-name="Personal Gifts"><span>Inquire About Personal Gifts</span><span aria-hidden="true">&nearr;</span></a>
             </div>
           </div>
         </article>
@@ -369,7 +369,7 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
             <h3 class="gallery-panel-title">Occasion Gifts</h3>
             <p class="gallery-panel-desc">Personalized prints for celebrations.</p>
             <div class="gallery-panel-footer">
-              <a class="gallery-panel-link" href="<?= url('contact.php') ?>" data-app-name="Occasion Gifts"><span>Inquire About Occasion Gifts</span><span aria-hidden="true">&nearr;</span></a>
+              <a class="gallery-panel-link" href="<?= url('contact') ?>" data-app-name="Occasion Gifts"><span>Inquire About Occasion Gifts</span><span aria-hidden="true">&nearr;</span></a>
             </div>
           </div>
         </article>
@@ -393,7 +393,7 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
             <h3 class="gallery-panel-title">Wedding Packages</h3>
             <p class="gallery-panel-desc">Coordinated printing for your wedding occasion.</p>
             <div class="gallery-panel-footer">
-              <a class="gallery-panel-link" href="<?= url('contact.php') ?>" data-app-name="Wedding Packages"><span>Inquire About Wedding Packages</span><span aria-hidden="true">&nearr;</span></a>
+              <a class="gallery-panel-link" href="<?= url('contact') ?>" data-app-name="Wedding Packages"><span>Inquire About Wedding Packages</span><span aria-hidden="true">&nearr;</span></a>
             </div>
           </div>
         </article>
@@ -810,25 +810,24 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
 
     <div class="products-grid products-grid-3">
       <?php foreach ($showcaseProducts as $idx => $prod): ?>
-        <article class="product-card reveal slide-up stagger-<?= ($idx % 3) + 1 ?>">
+        <article class="product-card opx-product-card reveal slide-up stagger-<?= ($idx % 3) + 1 ?>">
           <div class="product-media" style="background:#121212; border-bottom:1px solid var(--border-color); display:flex; align-items:center; justify-content:center; padding:1.25rem; height:280px;">
             <?php if (!empty($prod['badge'])): ?>
               <span class="product-badge-tag"><?= e($prod['badge']) ?></span>
             <?php endif; ?>
             <img src="<?= url($prod['image_url']) ?>" 
                  alt="<?= e($prod['alt']) ?>" 
+                 width="1200" 
+                 height="896" 
                  loading="lazy" 
                  style="max-width:100%; max-height:100%; object-fit:contain;">
           </div>
           <div class="product-body">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <div class="opx-product-card__meta">
               <span class="product-category-label"><?= e($prod['category_name']) ?></span>
-              <span class="sku-badge">
-                SKU: <?= e($prod['sku']) ?>
-              </span>
             </div>
             
-            <h3 class="product-title" style="min-height:2.6rem;">
+            <h3 class="product-title">
               <a href="<?= product_url($prod['slug']) ?>" title="View details for <?= e($prod['title']) ?>">
                 <?= e($prod['title']) ?>
               </a>
@@ -841,7 +840,7 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
             <!-- Starting Price Row -->
             <div class="product-pricing-row">
               <div class="product-price-box">
-                <span class="price-label">From</span>
+                <span class="price-label">Starting at</span>
                 <span class="price-val"><?= e($prod['starting_price']) ?></span>
                 <span class="price-unit"><?= e($prod['price_unit']) ?></span>
               </div>
@@ -852,8 +851,8 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
               <a href="<?= product_url($prod['slug']) ?>" class="btn btn-outline" aria-label="View details for <?= e($prod['title']) ?>">
                 View Details
               </a>
-              <a href="<?= url('get-quote/?service_name=' . urlencode($prod['quote_service'])) ?>" class="btn btn-primary" aria-label="Get a Quote for <?= e($prod['title']) ?>">
-                Get a Quote
+              <a href="<?= url('get-quote?service_name=' . urlencode($prod['quote_service'])) ?>" class="btn btn-primary" aria-label="Get a Quote for <?= e($prod['title']) ?>">
+                Request Quote
               </a>
             </div>
           </div>
@@ -923,7 +922,7 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
     <div class="gallery-grid">
       <?php foreach ($homepagePortfolio as $idx => $item): ?>
         <div class="gallery-item reveal scale-in stagger-<?= $idx + 1 ?>" style="height:300px; border-radius:var(--radius-md);">
-          <img src="<?= url($item['image']) ?>" alt="<?= e($item['title']) ?>" loading="lazy">
+          <img src="<?= url($item['image']) ?>" alt="<?= e($item['title']) ?>" width="1200" height="896" loading="lazy" style="width:100%; height:100%; object-fit:cover;">
           <div class="gallery-overlay">
             <div class="gallery-category" style="color:var(--beige);"><?= e($item['category']) ?></div>
             <h4 class="gallery-title" style="font-size:1.05rem;"><?= e($item['title']) ?></h4>
@@ -1049,7 +1048,7 @@ $heroDesc = get_setting('hero_description', 'Printex prints press-ready DTF and 
       <?php foreach ($guidePosts as $idx => $post): ?>
         <article class="blog-card reveal slide-up stagger-<?= $idx + 1 ?>">
           <div style="position:relative; height:200px; overflow:hidden; background:#121212;">
-            <img src="<?= url($post['featured_image']) ?>" alt="<?= e($post['alt']) ?>" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" loading="lazy">
+            <img src="<?= url($post['featured_image']) ?>" alt="<?= e($post['alt']) ?>" width="1200" height="896" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" loading="lazy">
             <span style="position:absolute; top:12px; left:12px; background:var(--bg-card); color:var(--primary-gold); border:1px solid rgba(212,175,55,0.4); font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:4px; text-transform:uppercase; letter-spacing:0.04em;">
               <?= e($post['category_name']) ?>
             </span>

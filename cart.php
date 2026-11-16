@@ -56,7 +56,7 @@ $cartItems = $_SESSION['cart'] ?? [];
           <a href="<?= url('products/') ?>" class="btn btn-primary btn-lg">
             <span>Browse Products</span> &rarr;
           </a>
-          <a href="<?= url('get-quote/') ?>" class="btn btn-outline btn-lg">
+          <a href="<?= url('get-quote') ?>" class="btn btn-outline btn-lg">
             Upload Your Design
           </a>
         </div>

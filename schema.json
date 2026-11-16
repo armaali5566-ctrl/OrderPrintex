@@ -404,13 +404,58 @@
             }
         },
         {
+            "@type": "Service",
+            "@id": "https://orderprintex.com/services/custom-hoodie-printing#service",
+            "name": "Custom Hoodie Printing in Delhi",
+            "url": "https://orderprintex.com/services/custom-hoodie-printing",
+            "serviceType": "Commercial Printing",
+            "provider": {
+                "@id": "https://orderprintex.com/#organization"
+            },
+            "description": "Industrial printing service.",
+            "areaServed": {
+                "@type": "Country",
+                "name": "India"
+            }
+        },
+        {
+            "@type": "Service",
+            "@id": "https://orderprintex.com/services/uv-printing#service",
+            "name": "Direct UV Flatbed Printing Services",
+            "url": "https://orderprintex.com/services/uv-printing",
+            "serviceType": "Commercial Printing",
+            "provider": {
+                "@id": "https://orderprintex.com/#organization"
+            },
+            "description": "Industrial printing service.",
+            "areaServed": {
+                "@type": "Country",
+                "name": "India"
+            }
+        },
+        {
+            "@type": "Service",
+            "@id": "https://orderprintex.com/services/mug-cup-printing#service",
+            "name": "Custom Mug & Cup Printing Studio",
+            "url": "https://orderprintex.com/services/mug-cup-printing",
+            "serviceType": "Commercial Printing",
+            "provider": {
+                "@id": "https://orderprintex.com/#organization"
+            },
+            "description": "Industrial printing service.",
+            "areaServed": {
+                "@type": "Country",
+                "name": "India"
+            }
+        },
+        {
             "@type": "Product",
             "@id": "https://orderprintex.com/product/custom-dtf-gang-sheet#product",
             "name": "DTF Gang Sheet (22\" Wide)",
             "url": "https://orderprintex.com/product/custom-dtf-gang-sheet",
             "image": "https://orderprintex.com/assets/images/dtf_fabric_print.jpg",
             "description": "Ready-to-press transfers with bright color and a soft feel. Works on cotton, polyester and blends.",
-            "sku": "OP-PRD-1",
+            "sku": "DTF-001",
             "category": "Printing",
             "brand": {
                 "@type": "Brand",
@@ -738,7 +783,7 @@
             "image": "https://orderprintex.com/assets/images/dtf_fabric_print.jpg",
             "description": "Sooner or later, everyone who orders custom T-shirts runs into the same question: DTF vs screen printing, which one should I go for? Both methods can give you a sharp, good-looking print, but they work very differently, cost differently and suit different kinds of orders.",
             "datePublished": "2026-11-12T13:42:25+05:30",
-            "dateModified": "2026-11-13T12:46:02+05:30",
+            "dateModified": "2026-11-16T15:29:08+05:30",
             "author": {
                 "@type": "Person",
                 "name": "Printex Team"
@@ -759,7 +804,7 @@
             "image": "https://orderprintex.com/assets/images/custom_tshirt_apparel.jpg",
             "description": "Walk into a busy café, an exhibition stall or a corporate office and notice what you remember afterwards. It is rarely the brochure on the counter. It is the person wearing the logo. Custom printed T-shirts for business turn everyday clothing into a small billboard that people see, remember and talk about.",
             "datePublished": "2026-11-12T13:42:25+05:30",
-            "dateModified": "2026-11-13T11:12:33+05:30",
+            "dateModified": "2026-11-16T15:31:54+05:30",
             "author": {
                 "@type": "Person",
                 "name": "By Printex"
@@ -780,7 +825,7 @@
             "image": "https://orderprintex.com/assets/images/dtf_fabric_print.jpg",
             "description": "Ask anyone who has tried to start a small clothing brand a few years back, and you will hear the same story. The designs were ready, the idea was solid, but the printing costs ate everything. Screen printing wanted big quantities, and most other options either looked dull or washed out after a few cycles.",
             "datePublished": "2026-11-02T08:55:04+05:30",
-            "dateModified": "2026-11-14T13:37:27+05:30",
+            "dateModified": "2026-11-16T15:54:31+05:30",
             "author": {
                 "@type": "Person",
                 "name": "OrderPrintex Editorial Team"
@@ -801,7 +846,7 @@
             "image": "https://orderprintex.com/assets/images/uv_dtf_drinkware.jpg",
             "description": "Pick up a premium-looking water bottle or a café mug these days and run your thumb over the logo. Chances are it feels slightly raised, glossy, and almost moulded into the surface. Most people assume that kind of finish needs expensive manufacturing. In reality, it is often UV DTF printing, a method that has quietly changed how small and mid-sized brands put their name on products.",
             "datePublished": "2026-11-02T08:55:04+05:30",
-            "dateModified": "2026-11-14T13:35:00+05:30",
+            "dateModified": "2026-11-16T15:29:08+05:30",
             "author": {
                 "@type": "Person",
                 "name": "OrderPrintex Editorial Team"
@@ -822,7 +867,7 @@
             "image": "https://orderprintex.com/assets/images/custom_tshirt_apparel.jpg",
             "description": "If you run a business, sooner or later you will need printed T-shirts. Maybe it is a uniform for your staff, merchandise for a launch, gifts for a corporate event, or a small clothing line of your own. And the moment you start asking for quotes, you run into a confusing list: screen printing, DTF, DTG, heat transfer, sublimation, vinyl, embroidery. Every printer swears by a different one, which makes choosing between T-shirt printing techniques harder than it should be.",
             "datePublished": "2026-11-02T08:55:04+05:30",
-            "dateModified": "2026-11-13T11:58:23+05:30",
+            "dateModified": "2026-11-16T15:29:08+05:30",
             "author": {
                 "@type": "Person",
                 "name": "By Printex"

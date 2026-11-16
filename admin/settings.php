@@ -242,7 +242,7 @@ require_once __DIR__ . '/header.php';
       <div class="admin-form-2col">
         <div>
           <label style="display:block; font-size:0.85rem; font-weight:700; color:var(--navy); margin-bottom:0.35rem;">Google Maps Location URL</label>
-          <input type="url" name="google_maps_url" class="form-control" value="<?= e(get_setting('google_maps_url', 'https://share.google/MWOVYne70asGLsYXn')) ?>">
+          <input type="url" name="google_maps_url" class="form-control" value="<?= e(get_setting('google_maps_url', 'https://www.google.com/maps/dir/?api=1&destination=Shop+E-6%2C+Chanakya+Palace%2C+Street+No.+21%2C+Pankha+Road%2C+near+40+Feet+Road%2C+Block+C%2C+Sitapuri+Part+1%2C+Delhi%2C+110059%2C+India&travelmode=driving')) ?>">
         </div>
 
         <div>

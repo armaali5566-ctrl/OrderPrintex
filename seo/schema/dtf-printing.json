@@ -90,11 +90,24 @@
             }
         },
         {
+            "@type": "WebPage",
+            "@id": "http://localhost/OrderPrintex/services/dtf-printing#webpage",
+            "url": "http://localhost/OrderPrintex/services/dtf-printing",
+            "name": "1.DTF Printing in Delhi | OrderPrintex",
+            "description": "Direct-to-Film transfer printing with ultra soft-hand feel and 50+ wash cycles.",
+            "isPartOf": {
+                "@id": "http://localhost/OrderPrintex/#website"
+            },
+            "breadcrumb": {
+                "@id": "http://localhost/OrderPrintex/services/dtf-printing#breadcrumb"
+            }
+        },
+        {
             "@type": "Service",
             "@id": "http://localhost/OrderPrintex/services/dtf-printing#service",
             "name": "1.DTF Printing in Delhi",
             "url": "http://localhost/OrderPrintex/services/dtf-printing",
-            "serviceType": "Commercial Printing",
+            "serviceType": "Direct-to-Film Transfer Printing",
             "description": "Direct-to-Film transfer printing with ultra soft-hand feel and 50+ wash cycles.",
             "provider": {
                 "@id": "http://localhost/OrderPrintex/#organization"
@@ -126,6 +139,38 @@
                     "position": 3,
                     "name": "1.DTF Printing in Delhi",
                     "item": "http://localhost/OrderPrintex/services/dtf-printing"
+                }
+            ]
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "http://localhost/OrderPrintex/services/dtf-printing#faqpage",
+            "url": "http://localhost/OrderPrintex/services/dtf-printing",
+            "name": "1.DTF Printing in Delhi FAQs",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "How long do DTF prints last on clothes?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Our DTF prints withstand 50+ commercial wash cycles without cracking, peeling, or fading when properly cured with European hot-melt adhesive."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What fabrics can DTF transfers be applied to?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "DTF transfers adhere perfectly to 100% cotton, polyester, poly-cotton blends, denim, canvas, nylon, and performance sportswear."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What file formats are accepted for DTF gang sheets?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "We accept 300 DPI transparent PNG files, vector PDF, AI, and EPS with CMYK color profiles."
+                    }
                 }
             ]
         }

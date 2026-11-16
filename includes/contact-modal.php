@@ -1,11 +1,11 @@
-<?php
+  <?php
 /**
  * OrderPrintex - Universal Contact Popup Modal
  * Reused across all public pages and the Expanding Hover Gallery.
  */
 ?>
 <!-- Universal Studio Contact Popup Modal -->
-<div class="gallery-contact-modal" id="galleryContactModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="galleryModalTitle" data-contact-url="<?= url('contact.php') ?>">
+<div class="gallery-contact-modal" id="galleryContactModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="galleryModalTitle" data-contact-url="<?= url('contact') ?>">
   <div class="gallery-modal-backdrop" data-close-modal></div>
   <div class="gallery-modal-dialog">
     <button type="button" class="gallery-modal-close" data-close-modal aria-label="Close dialog">&times;</button>
@@ -40,14 +40,15 @@
         <div class="modal-select-wrap">
           <select id="popupService" name="service" class="modal-select" required>
             <option value="" disabled selected>Select a Service</option>
-            <option value="Personal Gifts">Personal Gifts</option>
-            <option value="Couple T-Shirts">Couple T-Shirts</option>
-            <option value="Occasion Gifts">Occasion Gifts</option>
-            <option value="Wedding Packages">Wedding Packages</option>
-            <option value="Corporate Gifts">Corporate Gifts</option>
-            <option value="Custom T-Shirts">Custom T-Shirts</option>
-            <option value="Printed Mugs">Printed Mugs</option>
-            <option value="Branded Merchandise">Branded Merchandise</option>
+            <option value="DTF Printing">DTF Printing</option>
+            <option value="UV DTF Printing">UV DTF Printing</option>
+            <option value="T-Shirt Printing">T-Shirt Printing</option>
+            <option value="Corporate Printing">Corporate Printing</option>
+            <option value="Custom Hoodie Printing">Custom Hoodie Printing</option>
+            <option value="UV Printing Services">UV Printing Services</option>
+            <option value="Mug &amp; Cup Printing">Mug &amp; Cup Printing</option>
+            <option value="Personal &amp; Corporate Gifting">Personal &amp; Corporate Gifting</option>
+            <option value="Other">Other / Custom Requirement</option>
           </select>
         </div>
         <span class="modal-error" id="errorService" aria-live="polite"></span>

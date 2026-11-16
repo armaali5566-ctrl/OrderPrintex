@@ -173,7 +173,7 @@ $products = get_catalog_products();
         </p>
       </div>
       <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-        <a href="<?= url('get-quote/') ?>" class="btn btn-gold btn-lg">
+        <a href="<?= url('get-quote') ?>" class="btn btn-gold btn-lg">
           Upload Artwork &rarr;
         </a>
         <a href="<?= url('contact/') ?>" class="btn btn-outline-white btn-lg">

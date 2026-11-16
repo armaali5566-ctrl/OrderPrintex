@@ -39,12 +39,25 @@ if ($uri !== '/' && substr($uri, -1) === '/') {
     exit;
 }
 
-// 1. Robots.txt
+// Security: Block direct public access to customer uploads & proofs
+if (preg_match('#^/uploads/(?:artwork|proofs)/#i', $uri) || preg_match('#^/api/?$#i', $uri)) {
+    http_response_code(403);
+    header('Content-Type: text/plain; charset=utf-8');
+    echo "403 Forbidden: Direct access to this resource is prohibited.";
+    exit;
+}
+
+// 1. Robots.txt (Environment-Aware: Disallow / on demo staging)
 if ($uri === '/robots.txt') {
+    header('Content-Type: text/plain; charset=utf-8');
+    header('Content-Disposition: inline');
+    $host = $_SERVER['HTTP_HOST'] ?? '';
+    if (strpos($host, 'demo.orderprintex.com') !== false) {
+        echo "User-agent: *\nDisallow: /\n";
+        exit;
+    }
     $file = __DIR__ . '/robots.txt';
     if (file_exists($file)) {
-        header('Content-Type: text/plain; charset=utf-8');
-        header('Content-Disposition: inline');
         readfile($file);
         exit;
     }

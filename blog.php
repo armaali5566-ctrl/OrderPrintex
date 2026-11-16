@@ -150,7 +150,7 @@ require_once __DIR__ . '/includes/header.php';
       <?php if (empty($categorySlug) && empty($searchQuery) && $featuredPost): ?>
         <article class="reveal slide-up blog-featured-article">
           <div class="blog-featured-media">
-            <img src="<?= url(e($featuredPost['featured_image'])) ?>" alt="<?= e($featuredPost['title']) ?>" loading="lazy">
+            <img src="<?= url(e($featuredPost['featured_image'])) ?>" alt="<?= e(!empty($featuredPost['featured_image_alt']) ? $featuredPost['featured_image_alt'] : $featuredPost['title']) ?>" width="1200" height="896" loading="lazy">
             <span class="blog-featured-badge">
               Featured Editorial
             </span>
@@ -197,7 +197,7 @@ require_once __DIR__ . '/includes/header.php';
         ?>
           <article class="blog-card reveal slide-up">
             <div class="blog-card-media">
-              <img src="<?= url(e($post['featured_image'])) ?>" alt="<?= e($post['title']) ?>" loading="lazy">
+              <img src="<?= url(e($post['featured_image'])) ?>" alt="<?= e(!empty($post['featured_image_alt']) ? $post['featured_image_alt'] : $post['title']) ?>" width="1200" height="896" loading="lazy">
               <span class="blog-card-badge">
                 <?= e($post['category_name']) ?>
               </span>
@@ -245,7 +245,7 @@ require_once __DIR__ . '/includes/header.php';
       Send us your design and our team will check the lines, colors and background for free. There’s no obligation to order.
     </p>
     <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
-      <a href="<?= url('get-quote/') ?>" class="btn btn-primary btn-lg">
+      <a href="<?= url('get-quote') ?>" class="btn btn-primary btn-lg">
         <span>Upload Your Design</span> &rarr;
       </a>
       <a href="<?= url('products/') ?>" class="btn btn-navy btn-lg">

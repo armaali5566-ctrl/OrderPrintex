@@ -752,7 +752,7 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 't-shirt-printing'"
       </p>
     </div>
     <div style="margin-top:2rem;">
-      <a href="<?= url('contact.php') ?>" class="btn btn-primary btn-lg">
+      <a href="<?= url('contact') ?>" class="btn btn-primary btn-lg">
         <span>Contact Printex Studio</span> &rarr;
       </a>
     </div>

@@ -1,0 +1,178 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "http://localhost/OrderPrintex/#organization",
+            "name": "OrderPrintex",
+            "alternateName": "PRINTEX Delhi",
+            "url": "http://localhost/OrderPrintex/",
+            "logo": {
+                "@type": "ImageObject",
+                "@id": "http://localhost/OrderPrintex/#logo",
+                "url": "http://localhost/OrderPrintex/assets/images/logo.png",
+                "caption": "OrderPrintex Logo"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "sameAs": [
+                "https://www.instagram.com/order_printex",
+                "https://www.facebook.com/orderprintex",
+                "https://www.youtube.com/@orderprintex",
+                "https://www.linkedin.com/company/orderprintex"
+            ]
+        },
+        {
+            "@type": "LocalBusiness",
+            "@id": "http://localhost/OrderPrintex/#localbusiness",
+            "name": "OrderPrintex Delhi Printing Facility",
+            "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
+            "url": "http://localhost/OrderPrintex/",
+            "telephone": "+919354028199",
+            "email": "sales@orderprintex.com",
+            "priceRange": "₹₹",
+            "parentOrganization": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Shop E-6, Chanakya Palace, Street No 21, Pankha Rd, near 40 Feet Road, Block C, Sitapuri Part 1, Rani Bagh",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110059",
+                "addressCountry": "IN"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 28.618,
+                "longitude": 77.0805
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
+                    ],
+                    "opens": "09:30",
+                    "closes": "20:00"
+                }
+            ]
+        },
+        {
+            "@type": "WebSite",
+            "@id": "http://localhost/OrderPrintex/#website",
+            "name": "OrderPrintex",
+            "url": "http://localhost/OrderPrintex/",
+            "publisher": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "http://localhost/OrderPrintex/products.php?search={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "http://localhost/OrderPrintex/services/mug-cup-printing#webpage",
+            "url": "http://localhost/OrderPrintex/services/mug-cup-printing",
+            "name": "Custom Mug & Cup Printing Studio | OrderPrintex",
+            "description": "Full-color ceramic coffee mugs, stainless steel tumblers, travel cups, and enamel mugs with high-gloss sublimation and rotary UV printing. Microwave safe, dishwasher safe, and ideal for corporate gifting.",
+            "isPartOf": {
+                "@id": "http://localhost/OrderPrintex/#website"
+            },
+            "breadcrumb": {
+                "@id": "http://localhost/OrderPrintex/services/mug-cup-printing#breadcrumb"
+            }
+        },
+        {
+            "@type": "Service",
+            "@id": "http://localhost/OrderPrintex/services/mug-cup-printing#service",
+            "name": "Custom Mug & Cup Printing Studio",
+            "url": "http://localhost/OrderPrintex/services/mug-cup-printing",
+            "serviceType": "Custom Mug & Drinkware Printing",
+            "description": "Full-color ceramic coffee mugs, stainless steel tumblers, travel cups, and enamel mugs with high-gloss sublimation and rotary UV printing. Microwave safe, dishwasher safe, and ideal for corporate gifting.",
+            "provider": {
+                "@id": "http://localhost/OrderPrintex/#organization"
+            },
+            "areaServed": {
+                "@type": "Country",
+                "name": "India"
+            },
+            "image": "http://localhost/OrderPrintex/assets/images/corporate_merch_box.jpg"
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "http://localhost/OrderPrintex/services/mug-cup-printing#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "http://localhost/OrderPrintex/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Printing Services",
+                    "item": "http://localhost/OrderPrintex/services"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Custom Mug & Cup Printing Studio",
+                    "item": "http://localhost/OrderPrintex/services/mug-cup-printing"
+                }
+            ]
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "http://localhost/OrderPrintex/services/mug-cup-printing#faqpage",
+            "url": "http://localhost/OrderPrintex/services/mug-cup-printing",
+            "name": "Custom Mug & Cup Printing Studio FAQs",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Are custom printed ceramic mugs safe for microwaves and dishwashers?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, our dye-sublimation process infuses ink into genuine Orca polymer coatings inside the ceramic glaze, rated for 1,000+ dishwasher cycles."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is the minimum order quantity for custom mugs?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "We accept short runs from 12 mugs for cafes and startups, and fulfill volume runs of 10,000+ units for corporate swag."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What happens if any mugs break during delivery?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Every mug is packaged in high-density thermocol clam-shells with a zero-breakage guarantee; any damaged units are reprinted and dispatched immediately."
+                    }
+                }
+            ]
+        }
+    ]
+}

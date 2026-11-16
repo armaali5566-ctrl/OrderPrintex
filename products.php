@@ -84,13 +84,13 @@ $products = get_catalog_products($categorySlug, $searchTerm);
         <span><?= $currentCategory ? e($currentCategory['name']) : 'OUR PRODUCTS' ?></span>
       </div>
       <h1 class="page-intro-title">
-        <?= $currentCategory ? e($currentCategory['name']) : 'DTF Transfers, UV Decals &amp; Custom Merchandise' ?>
+        <?= $currentCategory ? e($currentCategory['name']) : 'Products' ?>
       </h1>
       <div class="page-intro-divider"></div>
       <p class="page-intro-desc">
         <?= $currentCategory && !empty($currentCategory['description']) 
             ? e($currentCategory['description']) 
-            : 'Browse ready-to-order prints, tees and branded gifts made in our Delhi workshop. Pick a product, or ask us for a custom quote.' ?>
+            : 'DTF Transfers, UV Decals &amp; Custom Merchandise. Browse ready-to-order prints, tees and branded gifts made in our Delhi workshop. Pick a product, or ask us for a custom quote.' ?>
       </p>
     </div>
   </div>
@@ -155,15 +155,15 @@ $products = get_catalog_products($categorySlug, $searchTerm);
           $badgeClass = $prod['badge_class'] ?? 'badge-gold';
           $badgeText = $prod['badge'] ?? $prod['category_name'];
         ?>
-          <article class="product-card reveal slide-up stagger-<?= ($idx % 4) + 1 ?>">
+          <article class="product-card opx-product-card reveal slide-up stagger-<?= ($idx % 4) + 1 ?>">
             <div class="product-media" style="position:relative;">
               <span class="product-badge-tag <?= e($badgeClass) ?>">
                 <?= e($badgeText) ?>
               </span>
-              <img src="<?= url(e($prod['image_url'])) ?>" alt="<?= e($prod['title']) ?> - Industrial Commercial Printing" loading="lazy">
+              <img src="<?= url(e($prod['image_url'])) ?>" alt="<?= e($prod['title']) ?> - Industrial Commercial Printing" width="1200" height="896" loading="lazy">
             </div>
             <div class="product-body">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.35rem;">
+              <div class="opx-product-card__meta">
                 <span class="product-category-label"><?= e($prod['category_name']) ?></span>
               </div>
               <h3 class="product-title">
@@ -182,7 +182,7 @@ $products = get_catalog_products($categorySlug, $searchTerm);
               <!-- Pricing Row -->
               <div class="product-pricing-row">
                 <div class="product-price-box">
-                  <span class="price-label">From</span>
+                  <span class="price-label">Starting at</span>
                   <span class="price-val"><?= e($prod['starting_price'] ?? '₹249') ?></span>
                   <span class="price-unit"><?= e($prod['price_unit'] ?? '') ?></span>
                 </div>
@@ -191,12 +191,12 @@ $products = get_catalog_products($categorySlug, $searchTerm);
                 <?php endif; ?>
               </div>
 
-              <div class="product-card-actions" style="margin-top:0.75rem;">
+              <div class="product-card-actions">
                 <a href="<?= product_url($prod['slug']) ?>" class="btn btn-outline" aria-label="View details for <?= e($prod['title']) ?>">
                   View Details
                 </a>
-                <a href="<?= url('get-quote/?service_slug=' . urlencode($prod['service_slug'] ?? '')) ?>" class="btn btn-primary" aria-label="Request quote for <?= e($prod['title']) ?>">
-                  Get Quote
+                <a href="<?= url('get-quote?service_slug=' . urlencode($prod['service_slug'] ?? '')) ?>" class="btn btn-primary" aria-label="Request quote for <?= e($prod['title']) ?>">
+                  Request Quote
                 </a>
               </div>
             </div>

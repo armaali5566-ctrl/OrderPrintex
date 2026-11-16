@@ -16,6 +16,14 @@ DirectorySlash Off
     # Custom 404 Error Document
     ErrorDocument 404 /404.php
 
+    # Security: Deny direct public access to private customer uploads & api directory browsing
+    RewriteRule ^uploads/(?:artwork|proofs)/ - [F,L,NC]
+    RewriteRule ^api/?$ - [F,L,NC]
+
+    # Staging: Serve Disallow / for demo.orderprintex.com robots.txt
+    RewriteCond %{HTTP_HOST} demo\.orderprintex\.com [NC]
+    RewriteRule ^robots\.txt$ robots-demo.txt [L]
+
     # 0. Serve existing physical static files directly (assets, images, scripts, root files like robots.txt, sitemap.xml, llms.txt, ORDERPRINTEX.md, SITE_OVERVIEW.md, schema.json)
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^ - [L]

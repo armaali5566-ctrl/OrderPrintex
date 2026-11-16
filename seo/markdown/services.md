@@ -25,3 +25,18 @@
 - **Overview**: Need branded merchandise for your company or event ? Printex is here to help. We print uniform t-shirts, branded mugs and bottles, and giveaways with your logo, in the same colours across the whole batch. GST invoice available on request.
 - **Turnaround**: 24-48 Hours | **Pan-India Dispatch**
 
+### [Custom Hoodie Printing in Delhi](<https://orderprintex.com/services/custom-hoodie-printing>)
+- **Service URL**: <https://orderprintex.com/services/custom-hoodie-printing>
+- **Overview**: OrderPrintex provides industrial-grade custom hoodie printing engineered for fleece, French terry, and poly-cotton blends. Our high-elasticity DTF transfers and precision screen printing withstand repeated machine washes without cracking, peeling, or fading. Whether you need front chest prints, oversized back artwork, kangaroo pocket graphics, or sleeve designs, we deliver flawless results across all hoodie weights (280 to 450 GSM). Low minimums, express turnaround, and pan-India doorstep delivery.
+- **Turnaround**: 24-48 Hours | **Pan-India Dispatch**
+
+### [Direct UV Flatbed Printing Services](<https://orderprintex.com/services/uv-printing>)
+- **Service URL**: <https://orderprintex.com/services/uv-printing>
+- **Overview**: Our direct UV printing service utilizes advanced flatbed printers to apply UV-curable inks directly onto rigid substrates. Unlike UV DTF stickers that are transferred via carrier film, flatbed UV printing deposits ink droplets directly onto the substrate, instantly cured by high-intensity UV LED lamps. Ideal for corporate awards, acrylic plaques, metal signage, wooden coasters, phone cases, promotional gifting, and industrial instrument panels with optional raised gloss varnish.
+- **Turnaround**: 24-48 Hours | **Pan-India Dispatch**
+
+### [Custom Mug & Cup Printing Studio](<https://orderprintex.com/services/mug-cup-printing>)
+- **Service URL**: <https://orderprintex.com/services/mug-cup-printing>
+- **Overview**: OrderPrintex produces custom printed mugs, insulated tumblers, ceramic coffee cups, and glassware for corporate kits, cafe merchandise, and promotional campaigns. We use 360-degree wrap sublimation and cylindrical rotary UV printing to achieve photorealistic full-color prints, metallic accents, and embossed gloss finishes. All drinkware prints are scratch-resistant, heat-resistant, and microwave/dishwasher safe.
+- **Turnaround**: 24-48 Hours | **Pan-India Dispatch**
+

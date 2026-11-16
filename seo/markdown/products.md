@@ -15,7 +15,7 @@
 ## Products Directory
 
 ### [DTF Gang Sheet (22" Wide)](<https://orderprintex.com/product/custom-dtf-gang-sheet>)
-- **SKU**: `OP-PRD-1` | **Category**: Printing | **Base Price**: ₹249.00
+- **SKU**: `DTF-001` | **Category**: Printing | **Base Price**: ₹249.00
 - **Summary**: Ready-to-press transfers with bright color and a soft feel. Works on cotton, polyester and blends.
 
 ### [3D Gloss UV DTF Decal Sheet](<https://orderprintex.com/product/custom-uv-dtf-decal-sheet>)

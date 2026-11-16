@@ -55,15 +55,21 @@ $relatedPosts = db_fetch_all("SELECT p.*, c.name as category_name, c.slug as cat
     'id' => $post['id']
 ]);
 
+// Fetch Structured FAQs for this article
+$postFaqs = db_fetch_all("SELECT * FROM blog_post_faqs WHERE post_id = :pid ORDER BY display_order ASC, id ASC", [
+    'pid' => $post['id']
+]);
+
 $pageTitle = $post['seo_title'] ?: $post['title'] . ' | OrderPrintex Blog';
 $pageDesc  = $post['seo_description'] ?: $post['excerpt'];
-$canonical = blog_url($post['slug']);
-$ogImage   = !empty($post['featured_image']) ? url($post['featured_image']) : url('assets/images/logo.png');
+$canonical = !empty($post['canonical_url']) ? $post['canonical_url'] : blog_url($post['slug']);
+$ogImage   = !empty($post['og_image']) ? url($post['og_image']) : (!empty($post['featured_image']) ? url($post['featured_image']) : url('assets/images/logo.png'));
 $ogType    = 'article';
 
 $pageSchemaKey = 'blog-details';
 $pageSchemaData = [
     'post' => $post,
+    'faqs' => $postFaqs,
     'canonical' => $canonical
 ];
 
@@ -299,8 +305,8 @@ section.blog-reading-section,
 }
 
 .article-body-content {
-  font-size: 1.0625rem;
-  line-height: 1.8;
+  font-size: 1.125rem;
+  line-height: 1.85;
   color: var(--text-primary, #F5F1E8);
 }
 
@@ -338,9 +344,9 @@ section.blog-reading-section,
 }
 
 .article-body-content p {
-  margin-bottom: 1.35rem;
-  color: #CBD5E1;
-  line-height: 1.8;
+  margin-bottom: 1.45rem;
+  color: #E2E8F0;
+  line-height: 1.85;
 }
 
 .article-body-content ul {
@@ -619,13 +625,54 @@ section.blog-reading-section,
         <!-- Featured Blog Image Frame -->
         <?php if (!empty($post['featured_image'])): ?>
           <div class="blog-featured-image-container" style="width: 100%; max-height: 440px; border-radius: 14px; overflow: hidden; margin-bottom: 2rem; border: 1px solid rgba(185, 154, 97, 0.25); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12); background: #12151C;">
-            <img src="<?= url(e($post['featured_image'])) ?>" alt="<?= e($post['title']) ?>" style="width: 100%; height: 100%; max-height: 440px; object-fit: cover; object-position: center; display: block;">
+            <img src="<?= url(e($post['featured_image'])) ?>" alt="<?= e(!empty($post['featured_image_alt']) ? $post['featured_image_alt'] : $post['title']) ?>" width="1200" height="896" style="width: 100%; height: 100%; max-height: 440px; object-fit: cover; object-position: center; display: block;">
           </div>
         <?php endif; ?>
 
         <div class="article-body-content" id="articleBody">
           <?= $post['content'] ?>
         </div>
+
+        <!-- Article Tags -->
+        <?php if (!empty($post['tags'])): 
+          $tagsArr = array_filter(array_map('trim', explode(',', $post['tags'])));
+          if (!empty($tagsArr)):
+        ?>
+          <div class="blog-tags-container" style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid rgba(212,175,55,0.2);">
+            <span style="font-size:0.85rem; font-weight:700; color:var(--primary-gold, #D4AF37); text-transform:uppercase; letter-spacing:0.05em;">Related Topics:</span>
+            <?php foreach ($tagsArr as $tagItem): ?>
+              <span class="blog-tag-pill" style="font-size:0.82rem; background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.25); color:#F5F1E8; padding:0.35rem 0.75rem; border-radius:20px;">
+                #<?= e($tagItem) ?>
+              </span>
+            <?php endforeach; ?>
+          </div>
+        <?php endif; endif; ?>
+
+        <!-- Structured Article FAQs (Accordion) -->
+        <?php if (!empty($postFaqs)): ?>
+          <section class="blog-faqs-wrapper" style="margin-top:3rem; margin-bottom:2.5rem;">
+            <div style="font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:var(--primary-gold, #D4AF37); margin-bottom:0.5rem;">
+              Expert Knowledge Base &amp; Prepress QA
+            </div>
+            <h2 style="font-size:clamp(1.4rem, 2.2vw, 1.85rem); color:#F5F1E8; margin-bottom:1.5rem; font-weight:800; line-height:1.3;">
+              Frequently Asked Questions About This Guide
+            </h2>
+
+            <div class="faq-accordion" id="blogFaqAccordion">
+              <?php foreach ($postFaqs as $idx => $faqItem): ?>
+                <div class="faq-item <?= $idx === 0 ? 'active' : '' ?>">
+                  <div class="faq-question">
+                    <span><?= e($faqItem['question']) ?></span>
+                    <span class="faq-icon"><?= $idx === 0 ? '−' : '+' ?></span>
+                  </div>
+                  <div class="faq-answer">
+                    <p style="margin:0;"><?= nl2br(e($faqItem['answer'])) ?></p>
+                  </div>
+                </div>
+              <?php endforeach; ?>
+            </div>
+          </section>
+        <?php endif; ?>
 
         <!-- Author Box -->
         <div class="blog-author-box">
@@ -639,7 +686,7 @@ section.blog-reading-section,
             <p style="font-size:0.92rem; color:#94A3B8; margin:0 0 0.75rem; line-height:1.6;">
               Technical prepress specialists at OrderPrintex managing industrial direct-to-film, UV decal technology, and premium custom garment production in Delhi.
             </p>
-            <a href="<?= url('get-quote/') ?>" style="font-weight:700; color:#D4AF37; font-size:0.92rem; text-decoration:none; display:inline-flex; align-items:center; gap:5px;">
+            <a href="<?= url('get-quote') ?>" style="font-weight:700; color:#D4AF37; font-size:0.92rem; text-decoration:none; display:inline-flex; align-items:center; gap:5px;">
               Request a free prepress file inspection &rarr;
             </a>
           </div>
@@ -657,10 +704,10 @@ section.blog-reading-section,
             Upload your design file or discuss fabric specifications, gang sheets, and custom merchandise runs with our Delhi prepress team.
           </p>
           <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
-            <a href="<?= url('get-quote/') ?>" class="btn btn-primary btn-lg">
+            <a href="<?= url('get-quote') ?>" class="btn btn-primary btn-lg">
               <span>Get Instant Quote</span> &rarr;
             </a>
-            <a href="<?= url('services.php') ?>" class="btn btn-outline btn-lg" style="border-color:rgba(212,175,55,0.4); color:#F5F1E8; background:#12151C;">
+            <a href="<?= url('services') ?>" class="btn btn-outline btn-lg" style="border-color:rgba(212,175,55,0.4); color:#F5F1E8; background:#12151C;">
               <span>Explore All Services</span> &rarr;
             </a>
           </div>
@@ -706,7 +753,7 @@ section.blog-reading-section,
       <?php foreach ($relatedPosts as $rel): ?>
         <article class="blog-card">
           <div class="blog-card-media" style="height:190px;">
-            <img src="<?= url(e($rel['featured_image'])) ?>" alt="<?= e($rel['title']) ?>" loading="lazy">
+            <img src="<?= url(e($rel['featured_image'])) ?>" alt="<?= e($rel['title']) ?>" width="1200" height="896" loading="lazy">
             <span class="blog-card-badge">
               <?= e($rel['category_name']) ?>
             </span>
@@ -884,7 +931,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // 3. Universal Interactive FAQ Accordion Click Handler
-  article.addEventListener('click', function(e) {
+  document.addEventListener('click', function(e) {
     const q = e.target.closest('.faq-question');
     if (!q) return;
 

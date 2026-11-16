@@ -76,7 +76,7 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'uv-dtf-printing'")
           <a href="#upload-uv" class="btn btn-primary btn-lg">
             <span>Upload Design for UV DTF Quote</span> &rarr;
           </a>
-          <a href="<?= url('contact.php') ?>" class="btn btn-outline btn-lg" style="border-color:rgba(212,175,55,0.4); color:#D4AF37;">
+          <a href="<?= url('contact') ?>" class="btn btn-outline btn-lg" style="border-color:rgba(212,175,55,0.4); color:#D4AF37;">
             <span>Contact Printex Team</span>
           </a>
         </div>
@@ -777,7 +777,7 @@ $service = db_fetch_one("SELECT * FROM services WHERE slug = 'uv-dtf-printing'")
       </p>
     </div>
     <div style="margin-top:2rem;">
-      <a href="<?= url('contact.php') ?>" class="btn btn-primary btn-lg">
+      <a href="<?= url('contact') ?>" class="btn btn-primary btn-lg">
         <span>Contact Printex Studio</span> &rarr;
       </a>
     </div>

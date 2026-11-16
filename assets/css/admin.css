@@ -2001,3 +2001,19 @@ body.viewer-scroll-locked {
   color: var(--admin-text-muted, #94A3B8);
 }
 
+/* One deliberate chevron per admin select; avoids repeated SVG backgrounds. */
+.dashboard-main select,
+.dashboard-content select,
+select.form-control,
+select.form-select,
+.form-select {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background-color: var(--admin-bg-card, #131722) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23D4AF37' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 7 5 5 5-5'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0.85rem center !important;
+  background-size: 15px 15px !important;
+  padding-right: 2.7rem !important;
+}
+

@@ -90,11 +90,24 @@
             }
         },
         {
+            "@type": "WebPage",
+            "@id": "http://localhost/OrderPrintex/services/t-shirt-printing#webpage",
+            "url": "http://localhost/OrderPrintex/services/t-shirt-printing",
+            "name": "Delhi's Custom T-Shirt Printing Studio - Where Art Meets Fabric | OrderPrintex",
+            "description": "We take your brand from concept to production, printing vibrant high-density graphics onto those comfy 180-240 GSM bio-washed combed cotton tees with the perfect oversized fit, or the sleek athletic wear polyester. Whether you're just starting out or producing in bulk for your company, we've got you covered.",
+            "isPartOf": {
+                "@id": "http://localhost/OrderPrintex/#website"
+            },
+            "breadcrumb": {
+                "@id": "http://localhost/OrderPrintex/services/t-shirt-printing#breadcrumb"
+            }
+        },
+        {
             "@type": "Service",
             "@id": "http://localhost/OrderPrintex/services/t-shirt-printing#service",
             "name": "Delhi's Custom T-Shirt Printing Studio - Where Art Meets Fabric",
             "url": "http://localhost/OrderPrintex/services/t-shirt-printing",
-            "serviceType": "Commercial Printing",
+            "serviceType": "Custom Apparel & T-Shirt Printing",
             "description": "We take your brand from concept to production, printing vibrant high-density graphics onto those comfy 180-240 GSM bio-washed combed cotton tees with the perfect oversized fit, or the sleek athletic wear polyester. Whether you're just starting out or producing in bulk for your company, we've got you covered.",
             "provider": {
                 "@id": "http://localhost/OrderPrintex/#organization"
@@ -126,6 +139,30 @@
                     "position": 3,
                     "name": "Delhi's Custom T-Shirt Printing Studio - Where Art Meets Fabric",
                     "item": "http://localhost/OrderPrintex/services/t-shirt-printing"
+                }
+            ]
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "http://localhost/OrderPrintex/services/t-shirt-printing#faqpage",
+            "url": "http://localhost/OrderPrintex/services/t-shirt-printing",
+            "name": "Delhi's Custom T-Shirt Printing Studio - Where Art Meets Fabric FAQs",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What fabrics and GSM do you offer for custom t-shirts?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "We stock 180 to 240 GSM bio-washed 100% combed cotton, oversized heavyweights, and moisture-wicking poly-spandex blends."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is the minimum order quantity for t-shirt printing?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Orders start from just 5 pieces for sample drops up to 10,000+ units for corporate events and brand merchandise."
+                    }
                 }
             ]
         }

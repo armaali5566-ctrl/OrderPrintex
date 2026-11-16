@@ -96,7 +96,7 @@
             "url": "http://localhost/OrderPrintex/product/custom-dtf-gang-sheet",
             "image": "http://localhost/OrderPrintex/assets/images/dtf_fabric_print.jpg",
             "description": "Ready-to-press transfers with bright color and a soft feel. Works on cotton, polyester and blends.",
-            "sku": "OPX-0001",
+            "sku": "DTF-001",
             "offers": {
                 "@type": "Offer",
                 "url": "http://localhost/OrderPrintex/product/custom-dtf-gang-sheet",

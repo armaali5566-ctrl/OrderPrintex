@@ -1300,6 +1300,7 @@ body.has-sticky-bar {
 
   body.has-sticky-cart-page .floating-contact-actions,
   body.has-sticky-bar-active .floating-contact-actions,
+  body.has-sticky-bar-active .floating-contact-actions,
   body:has(.sticky-cart-bar.is-visible) .floating-contact-actions {
     bottom: calc(75px + env(safe-area-inset-bottom, 0px)) !important;
   }
@@ -1786,5 +1787,115 @@ body.has-sticky-bar {
   .gallery-filter-btn {
     padding: 0.4rem 0.65rem !important;
     font-size: 0.75rem !important;
+  }
+}
+
+/* Scoped product-card reflow: preserve readable product data and full-width CTAs. */
+@media (max-width: 768px) {
+  .opx-product-card .product-media {
+    height: clamp(195px, 52vw, 240px) !important;
+    padding: 0.9rem !important;
+  }
+
+  .opx-product-card .product-body { padding: 1rem !important; }
+
+  .opx-product-card .product-title {
+    min-height: 0 !important;
+    font-size: 1.06rem !important;
+  }
+
+  .opx-product-card .product-card-actions {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) !important;
+    margin-top: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .opx-product-card__meta { align-items: flex-start; }
+
+  .opx-product-card .sku-badge { max-width: 55%; }
+
+  .opx-product-card .product-desc {
+    min-height: 0;
+    margin-bottom: 0.85rem !important;
+  }
+
+  .opx-product-card .product-card-actions {
+    grid-template-columns: 1fr !important;
+    gap: 0.55rem !important;
+  }
+
+  .opx-product-card .product-card-actions .btn { min-height: 44px !important; }
+}
+
+@media (max-width: 480px) {
+  .service-faq-accordion .faq-question {
+    min-height: 54px;
+    padding: 0.9rem 1rem;
+    font-size: 0.94rem;
+  }
+
+  .service-upload-studio .dropzone-container {
+    min-height: 230px;
+  }
+
+  .service-upload-submit-row {
+    align-items: stretch;
+  }
+
+  .service-upload-submit-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Product detail: the sticky purchase summary gets its own mobile layout.
+   Keeping contact controls hidden while it is open prevents them covering the
+   trust badges, price, or quotation CTA. */
+@media (max-width: 480px) {
+  .sticky-cart-bar.is-visible {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.55rem !important;
+    padding: 0.75rem 1rem max(0.75rem, env(safe-area-inset-bottom)) !important;
+  }
+
+  .sticky-cart-bar.is-visible .sticky-cart-info,
+  .sticky-cart-bar.is-visible .sticky-cart-actions {
+    width: 100% !important;
+  }
+
+  .sticky-cart-bar.is-visible .sticky-cart-thumb {
+    display: none !important;
+  }
+
+  .sticky-cart-bar.is-visible .sticky-cart-title {
+    max-width: none !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
+    line-height: 1.3 !important;
+  }
+
+  .sticky-cart-bar.is-visible .sticky-cart-meta {
+    flex-wrap: wrap !important;
+    gap: 0.35rem 0.55rem !important;
+    margin-top: 0.2rem;
+  }
+
+  .sticky-cart-bar.is-visible .sticky-cart-actions {
+    justify-content: space-between !important;
+    gap: 0.75rem !important;
+  }
+
+  .sticky-cart-bar.is-visible .sticky-cart-actions .btn {
+    min-width: 142px;
+    min-height: 44px !important;
+  }
+
+  body:has(.sticky-cart-bar.is-visible) .floating-contact-actions {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
   }
 }

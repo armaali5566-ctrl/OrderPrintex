@@ -45,7 +45,12 @@ $isPrivatePage = !empty($noindex) ||
     strpos($reqUri, '404') !== false || 
     !empty($_GET['search']);
 
-$robotsMeta = $isPrivatePage ? 'noindex, follow' : 'index, follow';
+$isDemoHost = (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'demo.orderprintex.com') !== false);
+if ($isDemoHost) {
+    $robotsMeta = 'noindex, nofollow';
+} else {
+    $robotsMeta = $isPrivatePage ? 'noindex, follow' : 'index, follow';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,7 +90,7 @@ $robotsMeta = $isPrivatePage ? 'noindex, follow' : 'index, follow';
   <!-- Core Native Stylesheets (No External CDNs) -->
   <link rel="stylesheet" href="<?= url('assets/css/style.css?v=' . (file_exists(__DIR__ . '/../assets/css/style.css') ? filemtime(__DIR__ . '/../assets/css/style.css') : '2.2')) ?>">
   <link rel="stylesheet" href="<?= url('assets/css/animations.css') ?>">
-  <link rel="stylesheet" href="<?= url('assets/css/responsive.css') ?>">
+  <link rel="stylesheet" href="<?= url('assets/css/responsive.css?v=' . (file_exists(__DIR__ . '/../assets/css/responsive.css') ? filemtime(__DIR__ . '/../assets/css/responsive.css') : '1')) ?>">
 
   <!-- AI Discovery, Sitemaps & Structured Graph Links -->
   <link rel="sitemap" type="application/xml" title="Sitemap" href="<?= url('sitemap.xml') ?>">
@@ -93,10 +98,17 @@ $robotsMeta = $isPrivatePage ? 'noindex, follow' : 'index, follow';
   <link rel="alternate" type="application/json" href="<?= url('schema.json') ?>" title="Structured Data Graph">
   <link rel="alternate" type="text/markdown" href="<?= url('ORDERPRINTEX.md') ?>" title="Technical Documentation">
 
-  <!-- Unified Schema.org Structured Data Graph (Single Validated Script) -->
-  <script type="application/ld+json">
-  <?= json_encode(seo_get_unified_page_graph($pageSchemaKey ?? '', $pageSchemaData ?? []), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
-  </script>
+  <!-- Independent Schema.org JSON-LD Blocks -->
+<?php
+// Keep headers compatible with an older cached SEO helper during deployments.
+// Current helpers expose seo_render_page_schemas(); older deployed helpers use
+// seo_render_schema(). Both emit the same page-specific JSON-LD payload.
+if (function_exists('seo_render_page_schemas')) {
+    echo seo_render_page_schemas($pageSchemaKey ?? '', $pageSchemaData ?? []);
+} elseif (function_exists('seo_render_schema')) {
+    echo seo_render_schema($pageSchemaKey ?? '', $pageSchemaData ?? []);
+}
+?>
 </head>
 <body<?= !empty($bodyClass) ? ' class="' . e($bodyClass) . '"' : '' ?>>
 <?php require __DIR__ . '/navbar.php'; ?>

@@ -118,6 +118,15 @@ $topYouTube   = get_setting('social_youtube', 'https://www.youtube.com/@orderpri
           <a href="<?= service_url('corporate-printing') ?>" class="dropdown-link <?= (strpos($currentUri, 'corporate-printing') !== false) ? 'active' : '' ?>" role="menuitem">
             <span>Corporate Printing</span>
           </a>
+          <a href="<?= service_url('custom-hoodie-printing') ?>" class="dropdown-link <?= (strpos($currentUri, 'custom-hoodie-printing') !== false) ? 'active' : '' ?>" role="menuitem">
+            <span>Custom Hoodie Printing</span>
+          </a>
+          <a href="<?= service_url('uv-printing') ?>" class="dropdown-link <?= (strpos($currentUri, 'uv-printing') !== false && strpos($currentUri, 'uv-dtf-printing') === false) ? 'active' : '' ?>" role="menuitem">
+            <span>UV Printing Services</span>
+          </a>
+          <a href="<?= service_url('mug-cup-printing') ?>" class="dropdown-link <?= (strpos($currentUri, 'mug-cup-printing') !== false) ? 'active' : '' ?>" role="menuitem">
+            <span>Mug &amp; Cup Printing</span>
+          </a>
           <a href="<?= url('services') ?>" class="dropdown-link dropdown-link-all" role="menuitem">
             <span>All Printing Services &rarr;</span>
           </a>

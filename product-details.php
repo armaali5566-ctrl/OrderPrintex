@@ -49,6 +49,16 @@ if (!$product) {
 
 $productId = (int)($product['id'] ?? 1);
 
+// Standardize SKU safely to prevent undefined array key warnings
+$productSku = trim($product['sku'] ?? '');
+if ($productSku === '') {
+    $productSku = 'OPX-' . str_pad($productId, 4, '0', STR_PAD_LEFT);
+}
+$product['sku'] = $productSku;
+
+$waQuoteMessage = 'Hi OrderPrintex, I am inquiring about ' . ($product['title'] ?? 'Printing Service') . (!empty($productSku) ? ' (SKU: ' . $productSku . ')' : '') . '. Please provide a customized volume quote.';
+$waQuoteUrl = 'https://wa.me/919354028199?text=' . rawurlencode($waQuoteMessage);
+
 // Fetch variations for this product
 $variations = db_fetch_all("
     SELECT * FROM product_variations
@@ -239,7 +249,7 @@ foreach ($supplementalImages as $sImg) {
               <?= e($product['badge'] ?? 'Commercial Grade') ?>
             </span>
 
-            <img id="mainProductImage" src="<?= $galleryImages[0] ?>" alt="<?= e($product['title']) ?> - Full Product View" style="max-width:100%; max-height:420px; object-fit:contain; display:block; margin:0 auto; transition:opacity 0.25s ease;" loading="eager">
+            <img id="mainProductImage" src="<?= $galleryImages[0] ?>" alt="<?= e($product['title']) ?> - Full Product View" width="1200" height="896" style="max-width:100%; max-height:420px; object-fit:contain; display:block; margin:0 auto; transition:opacity 0.25s ease;" loading="eager">
 
             <div class="gallery-zoom-badge">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -253,7 +263,7 @@ foreach ($supplementalImages as $sImg) {
           <div class="product-thumbnails-strip">
             <?php foreach ($galleryImages as $gIdx => $gImg): ?>
               <button type="button" class="gallery-thumb-btn <?= $gIdx === 0 ? 'is-active' : '' ?>" onclick="switchGalleryImage(<?= $gIdx ?>, '<?= $gImg ?>', this)" aria-label="View product angle <?= $gIdx + 1 ?>">
-                <img src="<?= $gImg ?>" alt="Angle <?= $gIdx + 1 ?>" loading="lazy">
+                <img src="<?= $gImg ?>" alt="Angle <?= $gIdx + 1 ?>" width="120" height="120" loading="lazy">
               </button>
             <?php endforeach; ?>
           </div>
@@ -276,14 +286,11 @@ foreach ($supplementalImages as $sImg) {
         </div>
       </div>
 
-      <!-- Right Column: Product Title, Dynamic SKU, Variation & Pricing Workbench -->
+      <!-- Right Column: Product Title, Variation & Pricing Workbench -->
       <div class="reveal slide-left">
-        <!-- Header Meta Row: Category, SKU, and Rating -->
+        <!-- Header Meta Row: Category and Rating -->
         <div class="product-heading-meta" style="display:flex; align-items:center; gap:0.65rem; flex-wrap:wrap; margin-bottom:0.85rem;">
           <span class="product-category-pill"><?= e($product['category_name']) ?></span>
-          <span id="productSkuBadge" class="sku-badge">
-            SKU: <span id="displaySku"><?= e($product['sku']) ?></span>
-          </span>
           <?php if (!empty($product['min_order'])): ?>
             <span class="product-min-order" style="background:rgba(212,175,55,0.15); color:#D4AF37; border:1px solid #40351E; font-size:0.75rem; font-weight:700; padding:0.25rem 0.65rem; border-radius:4px;">
               <?= e($product['min_order']) ?>
@@ -325,7 +332,7 @@ foreach ($supplementalImages as $sImg) {
           <form id="priceCalculatorForm">
             <input type="hidden" id="calcProductId" value="<?= $productId ?>">
             <input type="hidden" id="selectedVariationId" value="">
-            <input type="hidden" id="selectedVariationSku" value="<?= e($product['sku']) ?>">
+            <input type="hidden" id="selectedVariationSku" value="<?= e($productSku) ?>">
 
             <?php if ($hasVariations): ?>
               <!-- DYNAMIC ATTRIBUTE VARIATION SELECTORS -->
@@ -475,7 +482,7 @@ foreach ($supplementalImages as $sImg) {
           <a href="#quote-form" class="btn btn-primary btn-lg" style="flex:1; min-width:240px;" onclick="syncQuoteForm()">
             <span>Upload Artwork &amp; Order Now</span> &darr;
           </a>
-          <a href="https://wa.me/919354028199?text=<?= urlencode('Hi OrderPrintex, I am inquiring about ' . $product['title'] . ' (SKU: ' . $product['sku'] . '). Please provide a customized volume quote.') ?>" target="_blank" rel="noopener" class="btn btn-navy btn-lg">
+          <a href="<?= $waQuoteUrl ?>" target="_blank" rel="noopener" class="btn btn-navy btn-lg">
             <span>WhatsApp Prepress Desk</span>
           </a>
         </div>
@@ -914,19 +921,16 @@ foreach ($supplementalImages as $sImg) {
 
     <div class="products-grid">
       <?php foreach ($relatedProducts as $idx => $relProd): ?>
-        <article class="product-card reveal slide-up stagger-<?= ($idx % 4) + 1 ?>">
+        <article class="product-card opx-product-card reveal slide-up stagger-<?= ($idx % 4) + 1 ?>">
           <div class="product-media" style="position:relative;">
             <span class="product-badge-tag <?= e($relProd['badge_class'] ?? 'badge-gold') ?>">
               <?= e($relProd['badge'] ?? $relProd['category_name']) ?>
             </span>
-            <img src="<?= url(e($relProd['image_url'])) ?>" alt="<?= e($relProd['title']) ?> - Commercial Specimen" loading="lazy">
+            <img src="<?= url(e($relProd['image_url'])) ?>" alt="<?= e($relProd['title']) ?> - Commercial Specimen" width="1200" height="896" loading="lazy">
           </div>
           <div class="product-body">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.35rem;">
+            <div class="opx-product-card__meta">
               <span class="product-category-label"><?= e($relProd['category_name']) ?></span>
-              <?php if (!empty($relProd['sku'])): ?>
-                <span class="sku-badge">SKU: <?= e($relProd['sku']) ?></span>
-              <?php endif; ?>
             </div>
             <h3 class="product-title">
               <a href="<?= product_url($relProd['slug']) ?>" title="View details for <?= e($relProd['title']) ?>">
@@ -937,7 +941,7 @@ foreach ($supplementalImages as $sImg) {
             
             <div class="product-pricing-row">
               <div class="product-price-box">
-                <span class="price-label">From</span>
+                <span class="price-label">Starting at</span>
                 <span class="price-val"><?= e($relProd['starting_price'] ?? '₹249') ?></span>
                 <span class="price-unit"><?= e($relProd['price_unit'] ?? '') ?></span>
               </div>
@@ -950,7 +954,7 @@ foreach ($supplementalImages as $sImg) {
               <a href="<?= product_url($relProd['slug']) ?>" class="btn btn-outline" aria-label="View details for <?= e($relProd['title']) ?>">
                 View Details
               </a>
-              <a href="<?= url('get-quote/?service_slug=' . urlencode($relProd['service_slug'] ?? '')) ?>" class="btn btn-primary" aria-label="Order or request quote for <?= e($relProd['title']) ?>">
+              <a href="<?= url('get-quote?service_slug=' . urlencode($relProd['service_slug'] ?? '')) ?>" class="btn btn-primary" aria-label="Order or request quote for <?= e($relProd['title']) ?>">
                 Request Quote
               </a>
             </div>
@@ -976,11 +980,10 @@ foreach ($supplementalImages as $sImg) {
 <!-- Sticky Add to Cart Bar (Desktop & Mobile) -->
 <div class="sticky-cart-bar" id="stickyCartBar">
   <div class="sticky-cart-info">
-    <img src="<?= $galleryImages[0] ?>" alt="<?= e($product['title']) ?>" class="sticky-cart-thumb">
+    <img src="<?= $galleryImages[0] ?>" alt="<?= e($product['title']) ?>" class="sticky-cart-thumb" width="64" height="64">
     <div class="sticky-cart-details">
       <div class="sticky-cart-title"><?= e($product['title']) ?></div>
       <div class="sticky-cart-meta">
-        <span class="sku-badge">SKU: <span id="stickySku"><?= e($product['sku']) ?></span></span>
         <span id="stickyVariantLabel" style="color:#B8B1A3;">Standard</span>
       </div>
     </div>
@@ -1018,7 +1021,7 @@ const HAS_VARIATIONS = <?= json_encode($hasVariations) ?>;
 const VARIATIONS_DATA = <?= json_encode($variationData) ?>;
 const PRODUCT_ATTRIBUTES = <?= json_encode($productAttributes) ?>;
 const PRICING_TIERS = <?= json_encode($tiers) ?>;
-const BASE_PRODUCT_SKU = <?= json_encode($product['sku']) ?>;
+const BASE_PRODUCT_SKU = <?= json_encode($productSku) ?>;
 const BASE_STARTING_PRICE = <?= (float)preg_replace('/[^0-9.]/', '', $product['starting_price'] ?? '249') ?>;
 
 let currentMatchedVariation = null;
@@ -1085,11 +1088,7 @@ function handleVariationChange() {
   currentMatchedVariation = matched;
 
   if (matched) {
-    // 1. Update SKU Badge
-    const displaySku = document.getElementById('displaySku');
-    if (displaySku) displaySku.textContent = matched.sku;
-    const stickySku = document.getElementById('stickySku');
-    if (stickySku) stickySku.textContent = matched.sku;
+    // Keep the selected SKU in the hidden quote input without displaying it.
     const stickyVarLabel = document.getElementById('stickyVariantLabel');
     if (stickyVarLabel) stickyVarLabel.textContent = matched.combination_summary || matched.combination_key || 'Custom';
     const selectedVarSku = document.getElementById('selectedVariationSku');
@@ -1385,7 +1384,7 @@ document.addEventListener('DOMContentLoaded', () => {
   try {
     const curProduct = {
       id: <?= (int)$product['id'] ?>,
-      sku: <?= json_encode($product['sku']) ?>,
+      sku: <?= json_encode($productSku) ?>,
       title: <?= json_encode($product['title']) ?>,
       slug: <?= json_encode($product['slug']) ?>,
       url: <?= json_encode(product_url($product['slug'])) ?>,
@@ -1415,9 +1414,8 @@ document.addEventListener('DOMContentLoaded', () => {
               <img src="${item.image_url}" alt="${item.title}" style="max-height:100%; max-width:100%; object-fit:contain;">
             </div>
             <div class="product-body" style="padding:1rem; display:flex; flex-direction:column; flex:1;">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+              <div style="display:flex; align-items:center; margin-bottom:0.4rem;">
                 <span class="product-category-label">${item.category}</span>
-                <span class="sku-badge">SKU: ${item.sku}</span>
               </div>
               <h4 style="font-size:0.95rem; margin-bottom:0.4rem; font-weight:700;">
                 <a href="${item.url}" style="color:#F5F1E8; text-decoration:none;">${item.title}</a>
