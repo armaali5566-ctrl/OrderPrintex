@@ -659,6 +659,75 @@ document.addEventListener('DOMContentLoaded', function () {
       return openModals.length > 0 || document.body.classList.contains('mobile-menu-open');
     }
 
+    // Helper: is current page one of the allowed public pages (Home, About, Services, Products, Portfolio, Blog)?
+    // Never on Contact Us page, admin pages, or other unnecessary pages
+    function isRelevantAutoPopupPage() {
+      const pathname = (window.location.pathname || '').toLowerCase();
+
+      // 1. Strict Exclusions: Admin, Dashboard, Account, Auth, Cart, Checkout, Legal, FAQ
+      if (pathname.indexOf('/admin') !== -1 ||
+          document.querySelector('.dashboard-layout') ||
+          document.body.classList.contains('admin-body') ||
+          pathname.indexOf('/account') !== -1 ||
+          pathname.indexOf('/cart') !== -1 ||
+          pathname.indexOf('/checkout') !== -1 ||
+          pathname.indexOf('/login') !== -1 ||
+          pathname.indexOf('/register') !== -1 ||
+          pathname.indexOf('/faq') !== -1 ||
+          pathname.indexOf('/terms') !== -1 ||
+          pathname.indexOf('/privacy') !== -1 ||
+          pathname.indexOf('/shipping') !== -1 ||
+          pathname.indexOf('/refund') !== -1 ||
+          pathname.indexOf('/404') !== -1) {
+        return false;
+      }
+
+      // 2. Strict Exclusion: NEVER show auto popup on Contact Us page
+      if (pathname.indexOf('contact') !== -1 ||
+          document.body.classList.contains('page-contact') ||
+          document.getElementById('contactForm') !== null) {
+        return false;
+      }
+
+      // 3. Strict Inclusions: Home, About, Services, Products, Portfolio, Blog
+      const cleanPath = pathname.replace(/\/+$/, '') || '/';
+
+      // Home: root '/', '/index.php', or subpath root (e.g. '/orderprintex' or '/orderprintex/index.php')
+      if (cleanPath === '' || cleanPath === '/' || cleanPath.endsWith('/index.php') ||
+          cleanPath.endsWith('/orderprintex') ||
+          document.body.classList.contains('home-page') ||
+          document.getElementById('homepage-information') !== null) {
+        return true;
+      }
+
+      // About: '/about', '/about.php'
+      if (pathname.indexOf('/about') !== -1 || pathname.indexOf('about.php') !== -1) {
+        return true;
+      }
+
+      // Services: listing ('/services', '/services.php') or individual service ('/services/dtf-printing', etc.)
+      if (pathname.indexOf('/services') !== -1 || pathname.indexOf('/service') !== -1) {
+        return true;
+      }
+
+      // Products: listing ('/products', '/products.php') or individual product ('/products/custom-uv-dtf-decal-sheet', etc.)
+      if (pathname.indexOf('/products') !== -1 || pathname.indexOf('/product') !== -1) {
+        return true;
+      }
+
+      // Portfolio: '/gallery', '/gallery.php', '/portfolio', '/portfolio.php'
+      if (pathname.indexOf('/gallery') !== -1 || pathname.indexOf('/portfolio') !== -1) {
+        return true;
+      }
+
+      // Blog: listing ('/blog', '/blog.php') or individual article ('/blog/uv-dtf-printing-product-branding', etc.)
+      if (pathname.indexOf('/blog') !== -1) {
+        return true;
+      }
+
+      return false;
+    }
+
     // Helper: has enquiry details just been transferred to Contact Us page?
     function isContactPageWithTransferredEnquiry() {
       const isContactPage = window.location.pathname.indexOf('contact') !== -1;
@@ -677,6 +746,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Attempt to trigger auto popup after 5 seconds with interaction deferral
     function attemptAutoPopup() {
+      if (!isRelevantAutoPopupPage()) return;
       if (autoPopupTriggeredThisPage) return;
       if (modal.classList.contains('is-open')) return;
       if (isAnotherModalOpen()) return;
@@ -713,8 +783,9 @@ document.addEventListener('DOMContentLoaded', function () {
       openContactModal(null, null, true);
     }
 
-    // Schedule 5-second timer on every public page load or refresh
-    if (!isContactPageWithTransferredEnquiry()) {
+    // Schedule 5-second timer ONLY on relevant public pages (Home, About, Services, Products, Portfolio, Blog)
+    // Never on Contact Us, admin, or other unnecessary pages
+    if (isRelevantAutoPopupPage() && !isContactPageWithTransferredEnquiry()) {
       autoPopupTimer = setTimeout(attemptAutoPopup, 5000);
     }
   })();
